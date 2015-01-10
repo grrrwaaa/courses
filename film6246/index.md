@@ -1,0 +1,48 @@
+# Future Cinema IIThis hands-on course gives you an opportunity to learn about new screen technologies, approaches and techniques in a lab environment, and participate in the evolution of emerging media. In 2015, the course will give you the opportunity to engage with wearable immersive VR technology (the Oculus Rift headset) on both practical and theoretical levels to understand, create and imagine new kinds of worlds. What does the imminent explosion of virtual reality (VR), soon to be available as consumer technology, mean for the future of cinema? Theories, methods, and unique modes of expression have yet to be established by the collision of gaming technology with cinema. As with any emerging medium, a willingness to break rules, abandon habits and re-learn is necessary. You will work in the lab to build prototypes that will function as a testing ground for both new technology and future cinema theory. Our method is iterative: you are encouraged to be both theorists and practical experimenters, to research while doing, understanding that the process of exploring firsthand is an important step toward knowing what kinds of knowledge and what ways of understanding these new digital tools and artefacts demand, encourage or make possible. The course will expose you to flexible software solutions and encourage you to think about the limits of current technology, and to think beyond those limits. These evocative technologies suggest new ways to think about future forms of the moving image, from new literacies to new audiences. Throughout the course we will be reading theoretical texts to help us think with the objects we create in the lab and put these new technologies into historical and theoretical context even as we try, collectively, to imagine moving images and screens of the future, through discussions interwoven with individual and group projects.Students with backgrounds in film, digital media, design, theatre, music, architecture, video production, and visual storytelling are welcome, as are students with programming, HCI or computer graphics backgrounds. Knowledge of Max/MSP/Jitter, Unity or related software will be a distinct advantage, but don’t worry if you don’t have this kind of technical background, as simple pre-made architectures will be provided. Above all, creative thinking with and through technology is the most important asset that you can bring to this course. This seminar and its associated lab component are understood to be very much an experimental think tank whose success very much depends on your collective enthusiasm and active engagement.> "The future of VR lies in the unique experiences that get created in software, and if I knew what those would be, even in broad outline, I would be very happy." Michael Abrash, Chief Scientist, Oculus VR 
+
+## Why
+
+At the end of 2014, tech giants Sony, Facebook, Google, Samsung, Apple, and Microsoft all have a hand in VR. Since the beginning, the Rift has been seen as a tremendous opportunity for gamers and game designers, but Oculus has consistently articulated a broader vision for virtual reality that reaches beyond games.
+
+[Hollywood Reporter: Fox Is Bullish on Virtual Reality, But Is It the "Real Deal" for Hollywood?](http://www.hollywoodreporter.com/behind-screen/ces-fox-is-bullish-virtual-760925) - Fox Home Entertainment worldwide president Mike Dunn projects that virtual-reality technology will go mainstream, potentially reaching 25 million households by 2017.
+
+[Filmmakers Look to Virtual Reality and Oculus as the Future of Storytelling](http://www.hollywoodreporter.com/news/filmmakers-look-virtual-reality-oculus-734500) - “I think the next step for us as filmmakers is to figure out what narrative filmmaking looks like in virtual reality,” said music video director Chris Milk... Now is the time to figure out how to tell human stories — and that involves questioning fundamental concepts... "I don’t think this is cinema," he said. "I think this is something completely new."
+
+![L'Arrivée d'un train en gare de La Ciotat.jpg](http://upload.wikimedia.org/wikipedia/en/3/33/L%27Arriv%C3%A9e_d%27un_train_en_gare_de_La_Ciotat.jpg)
+
+[L'Arrivée d'un train en gare de La Ciotat, 1895](http://en.wikipedia.org/wiki/L'Arrivée_d'un_train_en_gare_de_La_Ciotat) The train moving directly towards the camera was said to have terrified spectators at the first screening, a claim that has been called an urban legend. What most film histories leave out is that the Lumière Brothers were trying to achieve a 3D image even prior to this first-ever public exhibition of motion pictures, and later re-shot the film in stereoscopic 3D, first screened in 1935. Given the contradictory accounts that plague early cinema and pre-cinema accounts, it's plausible that early cinema historians conflated the audience reactions of the 2D and 3D screenings of L'Arrivée d'un Train. [Both 2D and 3D versions on vimeo](http://vimeo.com/55906895).
+
+![Sword of Damocles](http://blog.modernmechanix.com/mags/qf/c/PopularScience/4-1971/med_vr_goggles.jpg)
+
+The Sword of Damocles is widely considered to be the first virtual reality (VR) and augmented reality (AR) head-mounted display (HMD) system. Ivan Sutherland, 1968, DARPA. Also read: [The Ultimate Display. Ivan E Sutherland, 1965](http://worrydream.com/refs/Sutherland%20-%20The%20Ultimate%20Display.pdf)
+![The Future in the early 1990's: Virtuality 1000CS](http://vrfocus.com/wp-content/uploads/2014/02/dactylnightmare_header-638x300.jpg)
+
+[![Osmose](http://www.immersence.com/centralizedImages/osmose/Osm_Tree_Pond_600@2x.jpg)](https://www.youtube.com/watch?v=54O4VP3tCoY#action=share)
+
+Soon after: [Osmose](http://www.immersence.com/osmose/), Char Davies, 1995. 
+
+For the next two decades, VR develops in research labs. Only with advances in GPU technology (largely driven by game industry) and portable displays (largely driven by smartphone industry) do devices such as the [Oculus Rift](oculus.html) become feasible. 
+
+## Cinematic VR
+
+[Felix & Paul on 360 cinema](http://www.roadtovr.com/vr-cinema-exploding-filmmakers-felix-paul-talk-pioneering-3d-360-venture/)
+
+[Jaunt VR](http://www.jauntvr.com/#about)
+
+![3D omni-directional camera](http://tctechcrunch2011.files.wordpress.com/2014/04/jaunt-camera.jpg?w=680&h=497) A cluster of lenses + omni mic. Image analysis converts the cluster into a 3D image (panorama + depth), editing and post tools and display on oculus etc. 
+
+"Writing about the mindshock of live action VR is quite like trying to share a photograph of your favorite song... words simply cannot do it justice." Aaron Frank, Singularity University
+
+Jaunt is a total sensory experience unlike anything I've ever seen.
+The creative community is going to blow our minds with this technology over the coming years.
+ Peter Gotcher, Chairman of Dolby
+
+Jaunt has created an astonishing way to experience media.
+For creators, it marks the beginning of an entirely new form of expression.
+ Mark Romanek, Award-Winning Film Director
+
+The confluence of various tech trends have positioned us at a point where it may become possible to truly create the experience of being in another location. Jaunt is leading the charge here.
+ Babak Parviz, Creator of Google Glass
+
+I am a huge believer in Virtual Reality. The experience is amazing. VR is going to have a huge impact on everything from entertainment to communications.
+ John Riccitiello,  Board of Unity, Former CEO of Electronic Arts
