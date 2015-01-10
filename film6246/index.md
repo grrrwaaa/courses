@@ -2,7 +2,7 @@
 
 ## Why
 
-At the end of 2014, tech giants Sony, Facebook, Google, Samsung, Apple, and Microsoft all have a hand in VR. Since the beginning, the Rift has been seen as a tremendous opportunity for gamers and game designers, but Oculus has consistently articulated a broader vision for virtual reality that reaches beyond games.
+At the end of 2014, tech giants Sony, Facebook, Google, Samsung, Apple, and Microsoft all have a hand in VR. Since the beginning, the Rift has been seen as a tremendous opportunity for gamers and game designers, but Oculus has consistently articulated a broader vision for virtual reality that reaches beyond games.[The Future is Here](http://www.hollywoodreporter.com/behind-screen/siggraph-oculus-rift-creator-says-724481) "I think it will be VR content and software that will drive the industry long term" - Palmer Luckey, Oculus CEO... Content is king... AR pioneer Steven Feiner of Columbia University emphasized that "entertainment is the next big thing in VR." ... those who are starting to create VR content "will be so far ahead when the hardware is ready." ... Calling this time the "Wild West" for VR, senior director at the Sony Magic Lab, Richard Marks agreed, saying "there are no established genres. You don't get that opportunity very often."
 
 [Hollywood Reporter: Fox Is Bullish on Virtual Reality, But Is It the "Real Deal" for Hollywood?](http://www.hollywoodreporter.com/behind-screen/ces-fox-is-bullish-virtual-760925) - Fox Home Entertainment worldwide president Mike Dunn projects that virtual-reality technology will go mainstream, potentially reaching 25 million households by 2017.
 
