@@ -46,3 +46,4 @@ For creators, it marks the beginning of an entirely new form of expression.
 
 I am a huge believer in Virtual Reality. The experience is amazing. VR is going to have a huge impact on everything from entertainment to communications.
  John Riccitiello,  Board of Unity, Former CEO of Electronic Arts
+[Two young filmmakers are building whatthey hope will become the first majorproduction studio for virtual reality](https://medium.com/backchannel/vr-goes-to-the-movies-39270f7164c6)“I realized I didn’t want to make art movies on celluloid. I want to make art movies on VR.”"Total Cinema" in the company title refers to: [The Myth of Total Cinema. Andr&eacute Bazin](https://www2.southeastern.edu/Academics/Faculty/jbell/mythtotalcinema.pdf)

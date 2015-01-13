@@ -29,6 +29,11 @@ The consumer version of the product is expected to become available sometime in 
 - [Radial-G](http://www.roadtovr.com/radial-g-just-earned-spot-oculus-rift-demo-folder/) - cockpit-based pipe track sci-fi racing
 - Minecrift (Minecraft mod)
 
+#### + LEAP
+
+- [Leap collection](https://developer.leapmotion.com/gallery/tags/vr)
+- [Collider](http://stv.re/collider/)
+
 ### Horror
 
 - Affected - Indie horror.
