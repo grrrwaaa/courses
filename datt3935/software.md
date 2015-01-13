@@ -98,25 +98,25 @@ IDs and classes are often used in combination with [CSS](http://www.w3schools.co
 CSS (Cascading Stylesheets) is a language for styling HTML pages. CSS styles (also know as selectors) are typically applied to HTML tags based on their name, class, or ID.
 
 ```css
-/* Applied to all <p> tags */
-p {
-  color: blue;
-}
+	/* Applied to all <p> tags */
+	p {
+	  color: blue;
+	}
 
-/* Applied to all tags with the class "red" */
-.red {
-  background: red;
-}
+	/* Applied to all tags with the class "red" */
+	.red {
+	  background: red;
+	}
 
-/* Applied to the tag with the id "some-id" */
-#some-id {
-  font-style: italic;
-}
+	/* Applied to the tag with the id "some-id" */
+	#some-id {
+	  font-style: italic;
+	}
 
-/* Applied only to <p> tags that are inside <li> tags */
-li p {
-  color: #0C0;
-}
+	/* Applied only to <p> tags that are inside <li> tags */
+	li p {
+	  color: #0C0;
+	}
 ```
 
 There are endless sources of libraries, scripts, examples etc. online, but there are also dangers in relying on unstable technology. 
@@ -177,5 +177,44 @@ For server-side programming, we can use the [Cloud 9 IDE](https://c9.io). You ca
 
 Performance, bandwidth, backup, security, DoS etc. 
 
+## XMLHttpRequest
 
+> XMLHttpRequest is a JavaScript object that was designed by Microsoft and adopted by Mozilla, Apple, and Google. It's now being standardized in the W3C. It provides an easy way to retrieve data from a URL without having to do a full page refresh. 
+
+The XMLHttpRequest object is available both in [client browser JavaScript](https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest), and in Max/MSP/Jitter JavaScript (with some small differences -- see the maxurl help file). 
+
+A typical example looks like this:
+
+```javascript
+	function reqListener () {
+		console.log(this.responseText);	// Browser
+		post(this.responseText);		// Max
+	}
+
+	var req = new XMLHttpRequest();
+	req.onreadystatechange = reqListener;
+	req.open("get", "http://myttc.ca/york_university_common.json");
+	req.setRequestHeader("Content-Type" , "application/json");
+	req.send();
+```
+
+### Handling the response in Max:
+
+If the response is JSON formatted, we can convert this into a regular JavaScript object:
+	
+	// convert JSON response into a javascript object:
+	
+	var body = JSON.parse(this.responseText);
+	
+	post(body);
+
+Alternatively, in Max we could copy it into an existing [dict] object, so long as the names match:
+
+	// copy JSON response into a dict:
+	var d = new Dict("mydict");		// assumes the Max patch has a [dict mydict] object
+	d.parse(this.responseText);
+
+### Handling the response in a browser:
+
+[See the MDN tutorial](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest)
 

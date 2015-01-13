@@ -12,7 +12,9 @@
 
 Open Data may come in the form of a whole static database (CSV, EXCEL, TXT etc.), or it may be served as an API. An API will require some kind of request structure, such as location for a weather report, and should describe the structure of the response to expect. The open data documentation should also explain whether it includes geospatial information, and how frequently it is refreshed (if appropriate).
 
-## Mashups, Harvesting, ... 
+## Mashups, Web Mining, Harvesting, ... 
+
+Web mining is defined as the use of data mining, text mining, and information retrieval techniques to extract useful patterns and knowledge from the Web.
 
 A [mashup](http://en.wikipedia.org/wiki/Mashup_(web_application_hybrid), in web development, is a web page, or web application, that uses content from more than one source to create a single new service displayed in a single graphical interface. The term implies easy, fast integration, frequently using open application programming interfaces (open API) and data sources to produce enriched results that were not necessarily the original reason for producing the raw source data. The main characteristics of a mashup are combination, visualization, and aggregation. 
 

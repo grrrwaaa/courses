@@ -22,3 +22,5 @@ Explores the database as a form in digital media and computational arts. As a na
 [Aaron Koblin @ TED](http://www.ted.com/talks/aaron_koblin?language=en)
 
 [Creative Data Leonardo special issue](http://www.leonardo.info/LEA/CreativeData/CreativeData.html)
+
+[Jer Thorp: Art and the API](http://blog.blprnt.com/blog/blprnt/art-and-the-api)
