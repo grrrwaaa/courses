@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>D3 example</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="github.css" type="text/css" />
+	<style>
+div.bar {
+    display: inline-block;
+    width: 20px;
+    height: 75px;   /* We'll override this later */
+    background-color: teal;
+}
+	</style>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+  <div id="main">
+  <script type="text/javascript">
+// Your beautiful D3 code will go here
+    
+var dataset = [ 5, 10, 15, 20, 25 ];
+
+d3.select("body").selectAll("p")
+	.data(dataset)
+	.enter()
+	.append("div")
+    .attr("class", "bar")
+    .style("height", function(d) {
+		return d + "px";
+	});
+/*.append("p")
+.text(function(d) { return d; })
+.style("color", "red");
+*/
+ </script>  
+  </div>
+	<footer>
+		&copy; 2015 Graham Wakefield
+	</footer>
+  </body>
+</html>

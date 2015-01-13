@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>software</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="github.css" type="text/css" />
+  </head>
+  <body>
+  	<nav>
+	<ul>
+	<li><a href="README.html" alt="README">README</a></li>
+<li><a href="assignments.html" alt="assignments">assignments</a></li>
+<li><a href="database.html" alt="database">database</a></li>
+<li><a href="index.html" alt="index">index</a></li>
+<li><a href="js.html" alt="js">js</a></li>
+<li><a href="software.html" alt="software">software</a></li>
+<li><a href="opendata.html" alt="opendata">opendata</a></li>
+	</ul></nav>	
+	<div id="main">
+	<h1 id="software">Software</h1>
+<p>The course will make use of two main technologies: the <a href="http://www.cycling74.com">Max/MSP/Jitter</a> visual data flow software environment, and modern web technologies. JavaScript is the primary language of client-side web today, and we will also use it server-side through <a href="http://nodejs.org">node.js</a>. (Moreover, JavaScript is supported in Max through the [js] object. </p>
+<h2 id="max-msp-jitter">Max/MSP/Jitter</h2>
+<blockquote>
+<p>A full kit of creative tools for sound, graphics, music and interactivity in a visual environment.</p>
+</blockquote>
+<p>Max is installed on the Art &amp; Technology lab machines and licenses are available for DM students. Download an installer from <a href="https://cycling74.com/downloads/">Cycling74</a>. (Max 7 licensing for York DM will be arranged in January 2015). </p>
+<h3 id="getting-static-data-into-max">Getting static data into Max</h3>
+<p>[jit.fprint] will import delimited text files. The @planedelim, @coldelim and @rowdelim attributes can be used to define the format of the data expected. Note that this will only work well for data that is purely numeric and tabular. This is true for many scientific data sources. For <a href="http://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> files (comma separated values):</p>
+<pre><code>[jit.fprint <span class="hljs-property">@type</span> float32 <span class="hljs-property">@planedelim</span> space <span class="hljs-property">@coldelim</span> <span class="hljs-string">\,</span> <span class="hljs-property">@rowdelim</span> cr]
+</code></pre><p>[dict] will import (and export) JSON and YAML files directly. Note that you can set <code>@embed 1</code> to ensure that a dict remembers its data between Max sessions. As with other objects in Max, a named dict is globally shared. And [dict] is well integrated with the [js] Javascript object:</p>
+<pre><code><span class="hljs-comment">// import</span>
+<span class="hljs-keyword">var</span> x = new Dict;
+x.import_json(<span class="hljs-string">"dict_file.json"</span>);
+<span class="hljs-keyword">post</span>(x.name, x.getkeys());
+
+<span class="hljs-comment">// global reference:</span>
+<span class="hljs-keyword">var</span> <span class="hljs-keyword">d</span> = new Dict(<span class="hljs-string">"outside"</span>);
+<span class="hljs-keyword">var</span> name = <span class="hljs-keyword">d</span>.name;    <span class="hljs-comment">// "outside"</span>
+<span class="hljs-keyword">var</span> names = <span class="hljs-keyword">d</span>.getnames();
+<span class="hljs-keyword">var</span> keys = <span class="hljs-keyword">d</span>.getkeys();
+
+<span class="hljs-keyword">d</span>.<span class="hljs-keyword">set</span>(<span class="hljs-string">"bologna"</span>, 1.99);
+<span class="hljs-keyword">var</span> price = <span class="hljs-keyword">d</span>.<span class="hljs-literal">get</span>(<span class="hljs-string">"bologna"</span>);
+
+<span class="hljs-keyword">var</span> there_is_coffee = <span class="hljs-keyword">d</span>.contains(<span class="hljs-string">"drink::hot::coffee"</span>);
+
+<span class="hljs-keyword">d</span>.<span class="hljs-keyword">replace</span>(<span class="hljs-string">"drink::hot::coffee::origin", "sumatra"</span>);
+<span class="hljs-keyword">d</span>.<span class="hljs-keyword">set</span>(<span class="hljs-string">"drink::hot::coffee::sizes", "small", "medium", "large"</span>);    <span class="hljs-comment">// creates array</span>
+<span class="hljs-keyword">d</span>.<span class="hljs-keyword">append</span>(<span class="hljs-string">"drink::hot::coffee::sizes", "mega-grande"</span>);    <span class="hljs-comment">// extends array</span>
+
+<span class="hljs-comment">// convert to json string:</span>
+<span class="hljs-keyword">var</span> j = x.stringify();
+</code></pre><p>Alternatively, using the [js] object you can just parse JSON text directly:</p>
+<pre><code><span class="hljs-keyword">var</span> obj = <span class="hljs-built_in">JSON</span>.parse(jsontext);
+</code></pre><p><a href="http://max-javascript-reference.tim-schenk.de/#gsc.tab=0">See the Max JavaScript Reference</a></p>
+<blockquote>
+<p>Note: Max contains an implementation of the SQLite database engine (more info available @ <a href="http://sqlite.org">http://sqlite.org</a>). This database engine is accessible through both the C-API and directly in Max through the JavaScript interface. </p>
+</blockquote>
+<h3 id="getting-dynamic-web-data-into-max-maxurl">Getting dynamic web data into Max: maxurl</h3>
+<p>The maxurl object allows you to make HTTP requests with Max. See the maxurl help file for examples and explanation.</p>
+<p>Simple GET/POST requests can be made with messages to maxurl, which will output a dict containing the response, as well as other network status updates. More structured requests can be made by sending a dict to maxurl, for the ability to parse specific response types, add arguments, proxy servers, or even save the results to disk. For more complex needs, it is possible to use JavaScript directly: the [js] object in Max supports a similar interface to maxurl (and browser-based JavaScript) through the <strong>XMLHttpRequest</strong> object. <a href="https://cycling74.com/2014/06/09/use-maxurl-to-create-a-realtime-instagram-collage/">Here&#39;s a fun example making instagram collages.</a></p>
+<h3 id="examples">Examples</h3>
+<ul>
+<li><a href="https://cycling74.com/wiki/index.php?title=MaxURL_Weather_Report">Max + OpenWeatherMap</a></li>
+<li><a href="https://cycling74.com/2014/06/09/use-maxurl-to-create-a-realtime-instagram-collage/">Max realtime instagram collage</a></li>
+<li><a href="http://reactivemusic.net/?p=5859">Tom Zicarelli</a></li>
+<li><a href="https://cycling74.com/2014/12/19/music-hack-for-max-7-elevator-music-generator/">Elevator Music</a></li>
+</ul>
+<hr>
+<h2 id="web-technology">Web technology</h2>
+<p><strong>Clients</strong> (browsers) make requests to <strong>servers</strong>, that respond with renderable content (mainly HTML, with embedded media and scripts). Servers (sites, services and applications) are addressable at <a href="http://en.wikipedia.org/wiki/Uniform_resource_locator">URLs</a>.</p>
+<h3 id="client-side-programming-html-css-js-">Client-side programming (HTML, CSS, JS)</h3>
+<p>Modern client-side web technology is a trio of HTML, CSS and <a href="js.html">JavaScript</a>, making extensive use of the new audiovisual capabilities of HTML5 including Canvas, SVG, WebGL etc. A great way to play with how it all fits together is using an online test-bed such as <a href="http://jsfiddle.net">JS Fiddle</a>.</p>
+<p><a href="http://www.w3schools.com/html/">HTML</a> (HyperText Markup Language) is the standard markup language for the web. It is not a programming language, but a formatting language; the browser reads this language and uses it to render the web page. The basic document syntax:</p>
+<pre><code class="lang-html"><span class="hljs-doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>This is a title<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- more metadata here --&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Hello world!<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"http://www.google.com/"</span>&gt;</span>A Link to Google!<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- more content here --&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
+</code></pre>
+<p>The indentation helps us to see that HTML has the abstract structure of a hierarchical tree. This structure is called the <a href="http://en.wikipedia.org/wiki/Document_Object_Model">DOM</a> (Document Object Model). Nodes within the tree can also be uniquely named via the <code>id</code> attribute, and classified by the <code>class</code> attribute: </p>
+<pre><code class="lang-html">&lt;p <span class="hljs-property">id</span>=<span class="hljs-string">"intro"</span> <span class="hljs-type">class</span>=<span class="hljs-string">"normal"</span>&gt;Welcome <span class="hljs-keyword">to</span> HTML&lt;/p&gt;
+</code></pre>
+<p>IDs and classes are often used in combination with <a href="http://www.w3schools.com/css/">CSS</a> to automatically define visual styles independently of the content. The DOM, including id and class attributes, are also available to JavaScript in the browser.  </p>
+<p>CSS (Cascading Stylesheets) is a language for styling HTML pages. CSS styles (also know as selectors) are typically applied to HTML tags based on their name, class, or ID.</p>
+<pre><code class="lang-css"><span class="hljs-comment">/* Applied to all &lt;p&gt; tags */</span>
+<span class="hljs-tag">p</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> blue</span></span>;
+<span class="hljs-rule">}</span></span>
+
+<span class="hljs-comment">/* Applied to all tags with the class "red" */</span>
+<span class="hljs-class">.red</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">background</span>:<span class="hljs-value"> red</span></span>;
+<span class="hljs-rule">}</span></span>
+
+<span class="hljs-comment">/* Applied to the tag with the id "some-id" */</span>
+<span class="hljs-id">#some-id</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">font-style</span>:<span class="hljs-value"> italic</span></span>;
+<span class="hljs-rule">}</span></span>
+
+<span class="hljs-comment">/* Applied only to &lt;p&gt; tags that are inside &lt;li&gt; tags */</span>
+<span class="hljs-tag">li</span> <span class="hljs-tag">p</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#0C0</span></span></span>;
+<span class="hljs-rule">}</span></span>
+</code></pre>
+<p>There are endless sources of libraries, scripts, examples etc. online, but there are also dangers in relying on unstable technology. </p>
+<ul>
+<li><a href="http://d3js.org">D3.js</a> is a JavaScript library for manipulating documents based on data.<br><a href="http://chimera.labs.oreilly.com/books/1230000000345/index.html"><img src="http://alignedleft.com/assets/images/idvftw_cover.gif" alt="Interactive Data Visualization for the Web, Scott Murray"></a></li>
+<li><a href="https://developers.google.com/chart/interactive/docs/reference">The Google Visualization API</a></li>
+<li><a href="http://sigmajs.org">Sigma graph drawing</a></li>
+</ul>
+<h3 id="the-client-side-nightmare">The client-side nightmare</h3>
+<p>Web technologies evolve at a remarkably fast rate. <a href="http://www.w3.org">Standards for web technologies are defined</a>, but are often only partially and sometimes incorrectly implemented by browser developers. Clients use a wide variety of platforms with different screen resolutions and capabilities, and different browsers, browser settings, plugins, and often quite old browser versions, making it very hard to predict what a page will look like or even whether it will even work. The situation today isn&#39;t much better than it was a decade ago (standards are clearer but vaster, and platforms are more diverse). Best practice is to keep things simple, detect failure and have fallback solutions, assume last year&#39;s technology at best, and test widely. </p>
+<h2 id="server-side-programming">Server-side programming</h2>
+<p>Sites can be <strong>static</strong> or <strong>dynamic</strong>. A dynamic site generates files in response to requests from a client. A static site just returns pre-existing files. Note that static files can still embed JavaScript for dynamic content generated or accessed from the client. </p>
+<p>HTML is human-readable, but not very pleasantly so; and writing it by hand is laborious, error-prone and inefficient. Since page content is often repetitive, most sites are generated by combining database records or document-based stores with modular templates. A fully dynamic site generates the pages as needed, however there is also an increasing interest in <strong>static site generators</strong>: programs that convert simple human-readable text (such as markdown) into full HTML static sites, which can then be published. After all, most of the essentially dynamic parts (page stats, comments, twitter/facebook integration, etc.) can be provided by embedding external cloud services on the client-side. Two easy and free ways to serve static sites are Dropbox public folders and Github pages. </p>
+<h3 id="node-js">Node.js</h3>
+<p>Dynamic sites, web apps and services can use any technology capable of TCP sockets and HTTP parsing, but we will concentrate on using <strong>node.js</strong> (AKA Node), which is also JavaScript based and runs on Mac/Linux/Windows. We can also use Node for general programming tasks, including static site generation.</p>
+<blockquote>
+<p>Node.js® is a platform built on Chrome&#39;s JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.</p>
+</blockquote>
+<p><strong>Windows</strong>: download the installer from <a href="http://nodejs.org/download/">node.js</a></p>
+<p>To run, open a command prompt (Start Menu / Accessories / Command Prompt or Start Menu / &quot;cmd&quot; / enter), and type &quot;node&quot; (followed by enter). </p>
+<p><strong>Mac</strong>: download the installer from <a href="http://nodejs.org/download/">node.js</a> or install via brew: </p>
+<pre><code>brew <span class="hljs-keyword">install</span> node
+</code></pre><p>To run from a console (Applications / Utilities / Console) type &quot;node&quot; followed by enter. </p>
+<p>Mostly node is used from a console (AKA terminal, AKA command prompt). On mac, the terminal is in Applications / Utilities. To issue commands as a superuser, type &quot;sudo&quot; before the command. On Windows, it is in Start / Accessories / Command Prompt, however you can also open it by pressing the Windows key, typing &quot;cmd&quot;, and enter. To open as an administrator, press the Windows key, type &quot;cmd&quot;, then ctrl-shift-enter. </p>
+<h4 id="packages">Packages</h4>
+<p>Node can be extended with additional modules through <a href="https://www.npmjs.com">NPM</a>, the node package manager. There are more than 100,000 packages available!</p>
+<p>On Windows, open a command prompt <strong>as administrator</strong> and type npm. If you have an error &quot;ENOENT, stat &#39;C:\Users\RT\AppData\Roaming\npm&#39;&quot;, then manually create the folder at this path and try again. </p>
+<p>On Mac, type &quot;npm&quot; in the console. To install a package globally (for all node apps):</p>
+<pre><code>sudo npm install -g <span class="hljs-tag">&lt;<span class="hljs-title">packagename</span>&gt;</span>
+</code></pre><h4 id="cloud-9-ide">Cloud 9 IDE</h4>
+<p>For server-side programming, we can use the <a href="https://c9.io">Cloud 9 IDE</a>. You can sign up for a free account using your Github/Bitbucket ID. Cloud 9 gives you a Ubuntu Linux based server, and a browser-based IDE including multi-user live programming. </p>
+<p><em>If you have trouble with Error: EADDRINUSE, it may be that you already have a server running. Switch to the terminal tab in Cloud 9 and try the following, then restart your server script:</em></p>
+<pre><code><span class="hljs-title">kill</span> $(ps ax | grep <span class="hljs-string">'[j]s'</span> | awk <span class="hljs-string">'{ print <span class="hljs-variable">$1</span> }'</span>)
+killall -<span class="hljs-number">9</span> apache2
+</code></pre><h3 id="the-server-side-nightmare">The server-side nightmare</h3>
+<p>Performance, bandwidth, backup, security, DoS etc. </p>
+
+	</div>
+	<footer>
+		&copy; 2015 Graham Wakefield
+	</footer>
+  </body>
+</html>
