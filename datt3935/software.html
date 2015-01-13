@@ -10,8 +10,8 @@
 	<ul>
 	<li><a href="README.html" alt="README">README</a></li>
 <li><a href="assignments.html" alt="assignments">assignments</a></li>
-<li><a href="index.html" alt="index">index</a></li>
 <li><a href="database.html" alt="database">database</a></li>
+<li><a href="index.html" alt="index">index</a></li>
 <li><a href="js.html" alt="js">js</a></li>
 <li><a href="opendata.html" alt="opendata">opendata</a></li>
 <li><a href="software.html" alt="software">software</a></li>
@@ -90,25 +90,25 @@ x.import_json(<span class="hljs-string">"dict_file.json"</span>);
 </code></pre>
 <p>IDs and classes are often used in combination with <a href="http://www.w3schools.com/css/">CSS</a> to automatically define visual styles independently of the content. The DOM, including id and class attributes, are also available to JavaScript in the browser.  </p>
 <p>CSS (Cascading Stylesheets) is a language for styling HTML pages. CSS styles (also know as selectors) are typically applied to HTML tags based on their name, class, or ID.</p>
-<pre><code class="lang-css"><span class="hljs-comment">/* Applied to all &lt;p&gt; tags */</span>
-<span class="hljs-tag">p</span> <span class="hljs-rules">{
-  <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> blue</span></span>;
-<span class="hljs-rule">}</span></span>
+<pre><code class="lang-css">    <span class="hljs-comment">/* Applied to all &lt;p&gt; tags */</span>
+    <span class="hljs-tag">p</span> <span class="hljs-rules">{
+      <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> blue</span></span>;
+    <span class="hljs-rule">}</span></span>
 
-<span class="hljs-comment">/* Applied to all tags with the class "red" */</span>
-<span class="hljs-class">.red</span> <span class="hljs-rules">{
-  <span class="hljs-rule"><span class="hljs-attribute">background</span>:<span class="hljs-value"> red</span></span>;
-<span class="hljs-rule">}</span></span>
+    <span class="hljs-comment">/* Applied to all tags with the class "red" */</span>
+    <span class="hljs-class">.red</span> <span class="hljs-rules">{
+      <span class="hljs-rule"><span class="hljs-attribute">background</span>:<span class="hljs-value"> red</span></span>;
+    <span class="hljs-rule">}</span></span>
 
-<span class="hljs-comment">/* Applied to the tag with the id "some-id" */</span>
-<span class="hljs-id">#some-id</span> <span class="hljs-rules">{
-  <span class="hljs-rule"><span class="hljs-attribute">font-style</span>:<span class="hljs-value"> italic</span></span>;
-<span class="hljs-rule">}</span></span>
+    <span class="hljs-comment">/* Applied to the tag with the id "some-id" */</span>
+    <span class="hljs-id">#some-id</span> <span class="hljs-rules">{
+      <span class="hljs-rule"><span class="hljs-attribute">font-style</span>:<span class="hljs-value"> italic</span></span>;
+    <span class="hljs-rule">}</span></span>
 
-<span class="hljs-comment">/* Applied only to &lt;p&gt; tags that are inside &lt;li&gt; tags */</span>
-<span class="hljs-tag">li</span> <span class="hljs-tag">p</span> <span class="hljs-rules">{
-  <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#0C0</span></span></span>;
-<span class="hljs-rule">}</span></span>
+    <span class="hljs-comment">/* Applied only to &lt;p&gt; tags that are inside &lt;li&gt; tags */</span>
+    <span class="hljs-tag">li</span> <span class="hljs-tag">p</span> <span class="hljs-rules">{
+      <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#0C0</span></span></span>;
+    <span class="hljs-rule">}</span></span>
 </code></pre>
 <p>There are endless sources of libraries, scripts, examples etc. online, but there are also dangers in relying on unstable technology. </p>
 <ul>
@@ -144,6 +144,36 @@ x.import_json(<span class="hljs-string">"dict_file.json"</span>);
 killall -<span class="hljs-number">9</span> apache2
 </code></pre><h3 id="the-server-side-nightmare">The server-side nightmare</h3>
 <p>Performance, bandwidth, backup, security, DoS etc. </p>
+<h2 id="xmlhttprequest">XMLHttpRequest</h2>
+<blockquote>
+<p>XMLHttpRequest is a JavaScript object that was designed by Microsoft and adopted by Mozilla, Apple, and Google. It&#39;s now being standardized in the W3C. It provides an easy way to retrieve data from a URL without having to do a full page refresh. </p>
+</blockquote>
+<p>The XMLHttpRequest object is available both in <a href="https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest">client browser JavaScript</a>, and in Max/MSP/Jitter JavaScript (with some small differences -- see the maxurl help file). </p>
+<p>A typical example looks like this:</p>
+<pre><code class="lang-javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reqListener</span> <span class="hljs-params">()</span> </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.responseText);    <span class="hljs-comment">// Browser</span>
+        post(<span class="hljs-keyword">this</span>.responseText);        <span class="hljs-comment">// Max</span>
+    }
+
+    <span class="hljs-keyword">var</span> req = <span class="hljs-keyword">new</span> XMLHttpRequest();
+    req.onreadystatechange = reqListener;
+    req.open(<span class="hljs-string">"get"</span>, <span class="hljs-string">"http://myttc.ca/york_university_common.json"</span>);
+    req.setRequestHeader(<span class="hljs-string">"Content-Type"</span> , <span class="hljs-string">"application/json"</span>);
+    req.send();
+</code></pre>
+<h3 id="handling-the-response-in-max-">Handling the response in Max:</h3>
+<p>If the response is JSON formatted, we can convert this into a regular JavaScript object:</p>
+<pre><code><span class="hljs-comment">// convert JSON response into a javascript object:</span>
+
+var <span class="hljs-keyword">body</span> = JSON.parse(<span class="hljs-keyword">this</span>.responseText);
+
+post(<span class="hljs-keyword">body</span>);
+</code></pre><p>Alternatively, in Max we could copy it into an existing [dict] object, so long as the names match:</p>
+<pre><code><span class="hljs-comment">// copy JSON response into a dict:</span>
+<span class="hljs-keyword">var</span> <span class="hljs-keyword">d</span> = new Dict(<span class="hljs-string">"mydict"</span>);        <span class="hljs-comment">// assumes the Max patch has a [dict mydict] object</span>
+<span class="hljs-keyword">d</span>.<span class="hljs-keyword">parse</span>(this.responseText);
+</code></pre><h3 id="handling-the-response-in-a-browser-">Handling the response in a browser:</h3>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest">See the MDN tutorial</a></p>
 
 	</div>
 	<footer>
