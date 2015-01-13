@@ -6,4 +6,4 @@
 **Instructor:** Graham Wakefield    
 **Language:** English   
 **Prerequisite:** FA/FACS 2930 6.00 or FA/DATT 1000 6.00 or permission of course director.   
-**Website:** [http://grrrwaaa.github.io/DATT3935/](http://grrrwaaa.github.io/DATT3935/)   
+**Website:** [http://grrrwaaa.github.io/courses/datt3935/](http://grrrwaaa.github.io/courses/datt3935/)   
