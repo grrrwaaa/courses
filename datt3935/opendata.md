@@ -76,10 +76,10 @@ Example maxurl  request for openweathermap:
 
 ### Aggregators
 
+[ProgrammableWeb: "The world's largest API repository"](http://www.programmableweb.com/apis/directory)
+
 [Datahub, the free, powerful data management platform from the Open Knowledge Foundation](http://datahub.io)
 
 [DataLook is all about finding and sharing data-driven projects for social good](http://datalook.io)
-
-["The world's largest API repository"](http://www.programmableweb.com/apis/directory)
 
 [Many more examples from this blog post](http://blog.visual.ly/data-sources/)
