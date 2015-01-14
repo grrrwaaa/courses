@@ -121,14 +121,91 @@ CSS (Cascading Stylesheets) is a language for styling HTML pages. CSS styles (al
 
 There are endless sources of libraries, scripts, examples etc. online, but there are also dangers in relying on unstable technology. 
 
+### The client-side nightmare
+
+Web technologies evolve at a remarkably fast rate. [Standards for web technologies are defined](http://www.w3.org), but are often only partially and sometimes incorrectly implemented by browser developers. Clients use a wide variety of platforms with different screen resolutions and capabilities, and different browsers, browser settings, plugins, and often quite old browser versions, making it very hard to predict what a page will look like or even whether it will even work. The situation today isn't much better than it was a decade ago (standards are clearer but vaster, and platforms are more diverse). Best practice is to keep things simple, detect failure and have fallback solutions, assume last year's technology at best, and test widely. 
+
+### JQuery
+
+[JQuery](http://jquery.com/) helps navigate and control the DOM, for finding, manipulating and even generating the page. It also helps smooth over the differences between browsers.
+
+You can [download jquery](http://jquery.com/download/) and link it to your page by adding this to the HTML header (make sure the src name matches the filename):
+
+	<script src="jquery-1.11.2.min.js"></script>
+
+Now you can access jquery from within your JavaScript code, using the ```$``` symbol. For example, to run code as soon as the document is ready to be manipulated, jQuery has a statement known as the ready event:
+
+	$( document ).ready(function() {
+ 
+		// Your code here.
+ 
+	});
+	
+[JQuery tutorial](http://learn.jquery.com/about-jquery/how-jquery-works/)
+
+Most JQuery operations begin with a **selector**, which is a query into the DOM that returns one or more document elements. Examples: 
+
+	$()		// the whole document
+	$( "#myId" );	
+	$( ".myClass" );
+	$( "#contents ul.people li" );	// complex CSS selector
+	$( "a.external:first" );	
+	$( "tr:odd" );
+	$( "#myForm :input" );	// all form input nodes
+	$( "div:visible" );
+	$( "div:gt(2)" ); // all but first 3 divs
+	$( "div:animated" ); // all animated divs
+	
+Selections can be further refined with filters:
+
+	$( "div.foo" ).has( "p" );         // div.foo elements that contain <p> tags
+	$( "h1" ).not( ".bar" );           // h1 elements that don't have a class of bar
+	$( "ul li" ).filter( ".current" ); // unordered list items with class of current
+	$( "ul li" ).first();              // just the first unordered list item
+	$( "ul li" ).eq( 5 );              // the sixth
+	
+Ensure a selection is not empty:
+
+	if ( $( "div.foo" ).length ) {
+		...
+	}
+
+With the selection you can set attributes:
+
+	$( "h1" ).html( "hello world" );
+	$( "h1" ).text( "hello world" );	// HTML will be stripped
+	$( "a" ).attr( "href", "allMyHrefsAreTheSameNow.html" );
+	$( "a" ).attr({
+		title: "all titles are the same too!",
+		href: "somethingNew.html"
+	});
+	// also .css, .width, .height, .position, etc.
+	
+Moving elements:
+
+	$( "#myList li:first" ).appendTo( "#myList" );
+	// also .insert, insertTo, remove, detach, etc.
+	
+Adding elements:
+	
+	var myNewElement = $( "<p>New element</p>" );
+	myNewElement.appendTo( "#content" );
+	$( "#myList li:first" ).clone(true).appendTo( "#myList" );
+ 
+myNewElement.appendTo( "#content" );
+	
+Usually the same function can also work as a getter (this is not the same as a query filter):
+
+	$( "a" ).attr( "href" ); // Returns the href for the first a element in the document
+	
+
+### Visualization
+
 - [D3.js](http://d3js.org) is a JavaScript library for manipulating documents based on data.   
 [![Interactive Data Visualization for the Web, Scott Murray](http://alignedleft.com/assets/images/idvftw_cover.gif)](http://chimera.labs.oreilly.com/books/1230000000345/index.html)
 - [The Google Visualization API](https://developers.google.com/chart/interactive/docs/reference)
 - [Sigma graph drawing](http://sigmajs.org)
 
-### The client-side nightmare
-
-Web technologies evolve at a remarkably fast rate. [Standards for web technologies are defined](http://www.w3.org), but are often only partially and sometimes incorrectly implemented by browser developers. Clients use a wide variety of platforms with different screen resolutions and capabilities, and different browsers, browser settings, plugins, and often quite old browser versions, making it very hard to predict what a page will look like or even whether it will even work. The situation today isn't much better than it was a decade ago (standards are clearer but vaster, and platforms are more diverse). Best practice is to keep things simple, detect failure and have fallback solutions, assume last year's technology at best, and test widely. 
 
 ## Server-side programming
 
@@ -217,4 +294,3 @@ Alternatively, in Max we could copy it into an existing [dict] object, so long a
 ### Handling the response in a browser:
 
 [See the MDN tutorial](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest)
-
