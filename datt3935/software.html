@@ -9,9 +9,9 @@
   	<nav>
 	<ul>
 	<li><a href="README.html" alt="README">README</a></li>
-<li><a href="assignments.html" alt="assignments">assignments</a></li>
 <li><a href="database.html" alt="database">database</a></li>
 <li><a href="index.html" alt="index">index</a></li>
+<li><a href="assignments.html" alt="assignments">assignments</a></li>
 <li><a href="js.html" alt="js">js</a></li>
 <li><a href="opendata.html" alt="opendata">opendata</a></li>
 <li><a href="software.html" alt="software">software</a></li>
@@ -111,13 +111,65 @@ x.import_json(<span class="hljs-string">"dict_file.json"</span>);
     <span class="hljs-rule">}</span></span>
 </code></pre>
 <p>There are endless sources of libraries, scripts, examples etc. online, but there are also dangers in relying on unstable technology. </p>
+<h3 id="the-client-side-nightmare">The client-side nightmare</h3>
+<p>Web technologies evolve at a remarkably fast rate. <a href="http://www.w3.org">Standards for web technologies are defined</a>, but are often only partially and sometimes incorrectly implemented by browser developers. Clients use a wide variety of platforms with different screen resolutions and capabilities, and different browsers, browser settings, plugins, and often quite old browser versions, making it very hard to predict what a page will look like or even whether it will even work. The situation today isn&#39;t much better than it was a decade ago (standards are clearer but vaster, and platforms are more diverse). Best practice is to keep things simple, detect failure and have fallback solutions, assume last year&#39;s technology at best, and test widely. </p>
+<h3 id="jquery">JQuery</h3>
+<p><a href="http://jquery.com/">JQuery</a> helps navigate and control the DOM, for finding, manipulating and even generating the page. It also helps smooth over the differences between browsers.</p>
+<p>You can <a href="http://jquery.com/download/">download jquery</a> and link it to your page by adding this to the HTML header (make sure the src name matches the filename):</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"jquery-1.11.2.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+</code></pre><p>Now you can access jquery from within your JavaScript code, using the <code>$</code> symbol. For example, to run code as soon as the document is ready to be manipulated, jQuery has a statement known as the ready event:</p>
+<pre><code>$( <span class="hljs-built_in">document</span> ).ready(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+
+    <span class="hljs-comment">// Your code here.</span>
+
+});
+</code></pre><p><a href="http://learn.jquery.com/about-jquery/how-jquery-works/">JQuery tutorial</a></p>
+<p>Most JQuery operations begin with a <strong>selector</strong>, which is a query into the DOM that returns one or more document elements. Examples: </p>
+<pre><code>$()        <span class="hljs-comment">// the whole document</span>
+$( <span class="hljs-string">"#myId"</span> );    
+$( <span class="hljs-string">".myClass"</span> );
+$( <span class="hljs-string">"#contents ul.people li"</span> );    <span class="hljs-comment">// complex CSS selector</span>
+$( <span class="hljs-string">"a.external:first"</span> );    
+$( <span class="hljs-string">"tr:odd"</span> );
+$( <span class="hljs-string">"#myForm :input"</span> );    <span class="hljs-comment">// all form input nodes</span>
+$( <span class="hljs-string">"div:visible"</span> );
+$( <span class="hljs-string">"div:gt(2)"</span> ); <span class="hljs-comment">// all but first 3 divs</span>
+$( <span class="hljs-string">"div:animated"</span> ); <span class="hljs-comment">// all animated divs</span>
+</code></pre><p>Selections can be further refined with filters:</p>
+<pre><code><span class="hljs-variable">$(</span> <span class="hljs-string">"div.foo"</span> ).has( <span class="hljs-string">"p"</span> );         <span class="hljs-comment">// div.foo elements that contain &lt;p&gt; tags</span>
+<span class="hljs-variable">$(</span> <span class="hljs-string">"h1"</span> ).not( <span class="hljs-string">".bar"</span> );           <span class="hljs-comment">// h1 elements that don't have a class of bar</span>
+<span class="hljs-variable">$(</span> <span class="hljs-string">"ul li"</span> ).<span class="hljs-keyword">filter</span>( <span class="hljs-string">".current"</span> ); <span class="hljs-comment">// unordered list items with class of current</span>
+<span class="hljs-variable">$(</span> <span class="hljs-string">"ul li"</span> ).first();              <span class="hljs-comment">// just the first unordered list item</span>
+<span class="hljs-variable">$(</span> <span class="hljs-string">"ul li"</span> ).eq( <span class="hljs-number">5</span> );              <span class="hljs-comment">// the sixth</span>
+</code></pre><p>Ensure a selection is not empty:</p>
+<pre><code><span class="hljs-keyword">if</span> ( $( <span class="hljs-string">"div.foo"</span> ).length ) {
+    <span class="hljs-keyword">...</span>
+}
+</code></pre><p>With the selection you can set attributes:</p>
+<pre><code><span class="hljs-variable">$(</span> <span class="hljs-string">"h1"</span> ).html( <span class="hljs-string">"hello world"</span> );
+<span class="hljs-variable">$(</span> <span class="hljs-string">"h1"</span> ).<span class="hljs-keyword">text</span>( <span class="hljs-string">"hello world"</span> );    <span class="hljs-comment">// HTML will be stripped</span>
+<span class="hljs-variable">$(</span> <span class="hljs-string">"a"</span> ).attr( <span class="hljs-string">"href"</span>, <span class="hljs-string">"allMyHrefsAreTheSameNow.html"</span> );
+<span class="hljs-variable">$(</span> <span class="hljs-string">"a"</span> ).attr({
+    title: <span class="hljs-string">"all titles are the same too!"</span>,
+    href: <span class="hljs-string">"somethingNew.html"</span>
+});
+<span class="hljs-comment">// also .css, .width, .height, .position, etc.</span>
+</code></pre><p>Moving elements:</p>
+<pre><code><span class="hljs-variable">$(</span> <span class="hljs-string">"#myList li:first"</span> ).appendTo( <span class="hljs-string">"#myList"</span> );
+<span class="hljs-regexp">//</span> also .insert, insertTo, remove, detach, etc.
+</code></pre><p>Adding elements:</p>
+<pre><code><span class="hljs-keyword">var</span> myNewElement = $( <span class="hljs-string">"&lt;p&gt;New element&lt;/p&gt;"</span> );
+myNewElement.appendTo( <span class="hljs-string">"<span class="hljs-subst">#content</span>"</span> );
+$( <span class="hljs-string">"<span class="hljs-subst">#myList</span> li:first"</span> ).clone(<span class="hljs-literal">true</span>).appendTo( <span class="hljs-string">"<span class="hljs-subst">#myList</span>"</span> );
+</code></pre><p>myNewElement.appendTo( &quot;#content&quot; );</p>
+<p>Usually the same function can also work as a getter (this is not the same as a query filter):</p>
+<pre><code>$<span class="hljs-comment">( "a" )</span>.attr<span class="hljs-comment">( "href" )</span>; <span class="hljs-comment">// Returns the href for the first a element in the document</span>
+</code></pre><h3 id="visualization">Visualization</h3>
 <ul>
 <li><a href="http://d3js.org">D3.js</a> is a JavaScript library for manipulating documents based on data.<br><a href="http://chimera.labs.oreilly.com/books/1230000000345/index.html"><img src="http://alignedleft.com/assets/images/idvftw_cover.gif" alt="Interactive Data Visualization for the Web, Scott Murray"></a></li>
 <li><a href="https://developers.google.com/chart/interactive/docs/reference">The Google Visualization API</a></li>
 <li><a href="http://sigmajs.org">Sigma graph drawing</a></li>
 </ul>
-<h3 id="the-client-side-nightmare">The client-side nightmare</h3>
-<p>Web technologies evolve at a remarkably fast rate. <a href="http://www.w3.org">Standards for web technologies are defined</a>, but are often only partially and sometimes incorrectly implemented by browser developers. Clients use a wide variety of platforms with different screen resolutions and capabilities, and different browsers, browser settings, plugins, and often quite old browser versions, making it very hard to predict what a page will look like or even whether it will even work. The situation today isn&#39;t much better than it was a decade ago (standards are clearer but vaster, and platforms are more diverse). Best practice is to keep things simple, detect failure and have fallback solutions, assume last year&#39;s technology at best, and test widely. </p>
 <h2 id="server-side-programming">Server-side programming</h2>
 <p>Sites can be <strong>static</strong> or <strong>dynamic</strong>. A dynamic site generates files in response to requests from a client. A static site just returns pre-existing files. Note that static files can still embed JavaScript for dynamic content generated or accessed from the client. </p>
 <p>HTML is human-readable, but not very pleasantly so; and writing it by hand is laborious, error-prone and inefficient. Since page content is often repetitive, most sites are generated by combining database records or document-based stores with modular templates. A fully dynamic site generates the pages as needed, however there is also an increasing interest in <strong>static site generators</strong>: programs that convert simple human-readable text (such as markdown) into full HTML static sites, which can then be published. After all, most of the essentially dynamic parts (page stats, comments, twitter/facebook integration, etc.) can be provided by embedding external cloud services on the client-side. Two easy and free ways to serve static sites are Dropbox public folders and Github pages. </p>
