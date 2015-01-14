@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Demo</title>
+</head>
+<body>
+    <a href="http://jquery.com/">jQuery</a>
+    <script src="jquery-1.11.2.min.js"></script>
+    <script>
+
+$(document).ready(function() {
+	// make a new request:
+	var req = new XMLHttpRequest();
+	req.open("GET","http://myttc.ca/york_university_common.json");
+	req.onreadystatechange = readystatechange;
+	req.send();
+});
+
+function readystatechange()
+{
+	// is it ok?
+	if (this.readyState != 4){
+	
+		$(document).append( $( "<p>" + this.responseText + "</p>" ) );
+		
+		// copy JSON response into a dict:
+		var body = JSON.parse(this.responseText);
+
+		var firstroute = body.stops[0].routes[0];
+
+		// now iterate the due busses until we find one in the future:
+		for (var i=0; i<firstroute.stop_times.length; i++) {
+			
+			$(document).append( $( "<p>New element</p>" ) );
+			
+			/*
+			var bus = firstroute.stop_times[i];
+			var due = bus.departure_timestamp*1000;	// convert to ms
+			if (due > Date.now()) {
+				nextbus = due;
+				outlet(0, "route", bus.shape, "\n");
+				var date = new Date(due);
+				//outlet(0, "msg", "The next bus will be at " + date.getHours() + ":" + date.getMinutes(), "\n");
+				break;
+			}*/
+		}
+	}
+}
+ 
+    </script>
+</body>
+</html>
