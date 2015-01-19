@@ -27,7 +27,7 @@ Soon after: [Osmose](http://www.immersence.com/osmose/), Char Davies, 1995.
 
 [Felix & Paul on 360 cinema](http://www.roadtovr.com/vr-cinema-exploding-filmmakers-felix-paul-talk-pioneering-3d-360-venture/)
 
-[Jaunt VR](http://www.jauntvr.com/#about)
+[Here Come Immersive Movies](http://creativedisturbance.org/podcast/here-come-immersive-movies/)"Yes you are able to bring them into the space, but what's your reason for doing this -- what are you gaining out of that and how to use that for your own purposes?"- Is it even possible to record footage in full surround?[Jaunt VR](http://www.jauntvr.com/#about)
 
 ![3D omni-directional camera](http://tctechcrunch2011.files.wordpress.com/2014/04/jaunt-camera.jpg?w=680&h=497) A cluster of lenses + omni mic. Image analysis converts the cluster into a 3D image (panorama + depth), editing and post tools and display on oculus etc. 
 
