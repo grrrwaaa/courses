@@ -1,4 +1,4 @@
-# Unity
+# ![Unity](http://upload.wikimedia.org/wikipedia/en/4/4a/Unity_3D_logo.png)
 
 Unity is a cross-platform game creation system developed by Unity Technologies, including a game engine and integrated development environment (IDE). It is used to develop video games for web sites, desktop platforms, consoles, and mobile devices. 
 
