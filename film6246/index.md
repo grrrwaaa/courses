@@ -15,13 +15,11 @@
 ![Sword of Damocles](http://blog.modernmechanix.com/mags/qf/c/PopularScience/4-1971/med_vr_goggles.jpg)
 
 The Sword of Damocles is widely considered to be the first virtual reality (VR) and augmented reality (AR) head-mounted display (HMD) system. Ivan Sutherland, 1968, DARPA. Also read: [The Ultimate Display. Ivan E Sutherland, 1965](http://worrydream.com/refs/Sutherland%20-%20The%20Ultimate%20Display.pdf)
-![The Future in the early 1990's: Virtuality 1000CS](http://vrfocus.com/wp-content/uploads/2014/02/dactylnightmare_header-638x300.jpg)
-
-[![Osmose](http://www.immersence.com/centralizedImages/osmose/Osm_Tree_Pond_600@2x.jpg)](https://www.youtube.com/watch?v=54O4VP3tCoY#action=share)
+![The Future in the early 1990's: Virtuality 1000CS](http://vrfocus.com/wp-content/uploads/2014/02/dactylnightmare_header-638x300.jpg)
 
 Soon after: [Osmose](http://www.immersence.com/osmose/), Char Davies, 1995. 
 
-For the next two decades, VR develops in research labs. Only with advances in GPU technology (largely driven by game industry) and portable displays (largely driven by smartphone industry) do devices such as the [Oculus Rift](oculus.html) become feasible. 
+<iframe width="640" height="480" src="//www.youtube.com/embed/54O4VP3tCoY?rel=0" frameborder="0" allowfullscreen></iframe>For the next two decades, VR develops in research labs. Only with advances in GPU technology (largely driven by game industry) and portable displays (largely driven by smartphone industry) do devices such as the [Oculus Rift](oculus.html) become feasible. 
 
 ## Cinematic VR
 

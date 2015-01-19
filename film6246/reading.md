@@ -10,3 +10,7 @@ Carse, J. Finite and Infinite Games, Chapter 1. [Seen here](http://wtf.tw/ref/ca
 ... and [Ian Bogost. Winning isn't everything.](https://medium.com/matter/winning-isnt-everything-255b3a26d1cf)
 
 [Michael Samyn. Not a Manifesto](http://notgames.org/blog/2010/03/19/not-a-manifesto/)
+
+---
+
+[Char Davies. Virtual Space.](http://www.immersence.com) 
