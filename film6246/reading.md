@@ -13,7 +13,19 @@ Carse, J. Finite and Infinite Games, Chapter 1. [Seen here](http://wtf.tw/ref/ca
 
 [Michael Samyn. Not a Manifesto](http://notgames.org/blog/2010/03/19/not-a-manifesto/)
 
+## Fiction
+
+> Perhaps the three best-known VR/cyberspace novels?
+
+Neal Stephenson. Snow Crash.
+
+William Gibson. Neuromancer.
+
+Ernest Cline. Ready Player One.
+
 ---
+
+## Ungrouped
 
 [Gene Youngblood. Expanded Cinema (almost any chapter could have inspirational relevance...)](http://www.vasulka.org/Kitchen/PDF_ExpandedCinema/book.pdf)
 
