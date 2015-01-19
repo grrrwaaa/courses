@@ -13,4 +13,8 @@ Carse, J. Finite and Infinite Games, Chapter 1. [Seen here](http://wtf.tw/ref/ca
 
 ---
 
+[Gene Youngblood. Expanded Cinema (almost any chapter could have inspirational relevance...)](http://www.vasulka.org/Kitchen/PDF_ExpandedCinema/book.pdf)
+
 [Char Davies. Virtual Space.](http://www.immersence.com) 
+
+[Mitchell Whitelaw. System Stories and Model Worlds](http://art.runme.org/1140026085-5226-0/system_stories.pdf)
