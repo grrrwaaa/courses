@@ -3,23 +3,22 @@
 <head>
     <meta charset="utf-8">
     <title>Demo</title>
+    <script src="jquery-1.11.2.min.js"></script>
 </head>
 <body>
-    <a href="http://jquery.com/">jQuery</a>
-    <script src="jquery-1.11.2.min.js"></script>
     <script>
+
+
+function gotdata(data) {
+	console.log(data);
+	$("body").append( $("<p>" + data + "</p>") );
+}
 
 $(document).ready(function() {
 	
-	$.getJSON("http://myttc.ca/Union_station.json?callback=?", readystatechange);
-	
+	$("body").append( $("<p>hello</p>") );
+	$.getJSON("http://myttc.ca/Union_station.json?callback=?", gotdata);	
 });
-
-function readystatechange()
-{
-	$(document).append( $( "<p>" + this.responseText + "</p>" ) );
-		
-}
  
     </script>
 </body>

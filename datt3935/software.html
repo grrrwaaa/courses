@@ -10,8 +10,8 @@
 	<ul>
 	<li><a href="README.html" alt="README">README</a></li>
 <li><a href="assignments.html" alt="assignments">assignments</a></li>
-<li><a href="database.html" alt="database">database</a></li>
 <li><a href="index.html" alt="index">index</a></li>
+<li><a href="database.html" alt="database">database</a></li>
 <li><a href="js.html" alt="js">js</a></li>
 <li><a href="opendata.html" alt="opendata">opendata</a></li>
 <li><a href="software.html" alt="software">software</a></li>
@@ -111,10 +111,22 @@ x.import_json(<span class="hljs-string">"dict_file.json"</span>);
     <span class="hljs-rule">}</span></span>
 </code></pre>
 <p>There are endless sources of libraries, scripts, examples etc. online, but there are also dangers in relying on unstable technology. </p>
+<h3 id="getting-dynamic-data-into-web-pages">Getting dynamic data into web pages</h3>
+<p>Ajax (Asynchronous JavaScript and XML) uses the XMLHttpRequest object (documented below). </p>
 <h3 id="the-client-side-nightmare">The client-side nightmare</h3>
 <p>Web technologies evolve at a remarkably fast rate. <a href="http://www.w3.org">Standards for web technologies are defined</a>, but are often only partially and sometimes incorrectly implemented by browser developers. Clients use a wide variety of platforms with different screen resolutions and capabilities, and different browsers, browser settings, plugins, and often quite old browser versions, making it very hard to predict what a page will look like or even whether it will even work. The situation today isn&#39;t much better than it was a decade ago (standards are clearer but vaster, and platforms are more diverse). Best practice is to keep things simple, detect failure and have fallback solutions, assume last year&#39;s technology at best, and test widely. </p>
 <h3 id="jquery">JQuery</h3>
-<p><a href="http://jquery.com/">JQuery</a> helps navigate and control the DOM, for finding, manipulating and even generating the page. It also helps smooth over the differences between browsers.</p>
+<p>To dynamically manipulated the DOM, we would normally have to do things like this:</p>
+<pre><code><span class="hljs-regexp">//</span> Inserting a <span class="hljs-keyword">new</span> element after another <span class="hljs-reserved">with</span> the <span class="hljs-reserved">native</span> DOM API.
+<span class="hljs-reserved">var</span> target = <span class="hljs-built_in">document</span>.getElementById( <span class="hljs-string">"target"</span> );
+<span class="hljs-reserved">var</span> newElement = <span class="hljs-built_in">document</span>.createElement( <span class="hljs-string">"div"</span> );
+newElement.innerHTML = <span class="hljs-string">"&lt;b&gt;Hello World&lt;/b&gt;"</span>
+target.parentNode.insertBefore( newElement, target.nextSibling );
+</code></pre><p>Using jQuery, we can simply say:</p>
+<pre><code><span class="hljs-keyword">var</span> newElement = $(<span class="hljs-string">"&lt;div&gt;&lt;/div&gt;"</span>);
+newElement.html(<span class="hljs-string">"&lt;b&gt;Hello World&lt;/b&gt;"</span>);
+$(<span class="hljs-string">"#target"</span>).after(newElement);
+</code></pre><p><a href="http://jquery.com/">JQuery</a> helps navigate and control the DOM, for finding, manipulating and even generating the page. It also helps smooth over the differences between browsers.</p>
 <p>You can <a href="http://jquery.com/download/">download jquery</a> and link it to your page by adding this to the HTML header (make sure the src name matches the filename):</p>
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"jquery-1.11.2.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
 </code></pre><p>Now you can access jquery from within your JavaScript code, using the <code>$</code> symbol. For example, to run code as soon as the document is ready to be manipulated, jQuery has a statement known as the ready event:</p>
@@ -145,15 +157,33 @@ $( <span class="hljs-string">"div:animated"</span> ); <span class="hljs-comment"
 <pre><code><span class="hljs-keyword">if</span> ( $( <span class="hljs-string">"div.foo"</span> ).length ) {
     <span class="hljs-keyword">...</span>
 }
+</code></pre><p>Iterate a selection:</p>
+<pre><code>$( <span class="hljs-string">"p"</span> ).each(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(idx, element)</span> </span>{
+    <span class="hljs-comment">// this points to the element:</span>
+    <span class="hljs-built_in">console</span>.log( $( <span class="hljs-keyword">this</span> ).text() );
+    <span class="hljs-comment">// do stuff</span>
+}
 </code></pre><p>With the selection you can set attributes:</p>
-<pre><code><span class="hljs-variable">$(</span> <span class="hljs-string">"h1"</span> ).html( <span class="hljs-string">"hello world"</span> );
-<span class="hljs-variable">$(</span> <span class="hljs-string">"h1"</span> ).<span class="hljs-keyword">text</span>( <span class="hljs-string">"hello world"</span> );    <span class="hljs-comment">// HTML will be stripped</span>
-<span class="hljs-variable">$(</span> <span class="hljs-string">"a"</span> ).attr( <span class="hljs-string">"href"</span>, <span class="hljs-string">"allMyHrefsAreTheSameNow.html"</span> );
-<span class="hljs-variable">$(</span> <span class="hljs-string">"a"</span> ).attr({
+<pre><code>$( <span class="hljs-string">"h1"</span> ).html( <span class="hljs-string">"hello world"</span> );
+$( <span class="hljs-string">"h1"</span> ).text( <span class="hljs-string">"hello world"</span> );    <span class="hljs-comment">// HTML will be stripped</span>
+
+$( <span class="hljs-string">"h1"</span> ).addClass(<span class="hljs-string">"bold"</span>); <span class="hljs-comment">// and .removeClass()</span>
+$( <span class="hljs-string">"h1"</span> ).css(<span class="hljs-string">"color"</span>, <span class="hljs-string">"red"</span>);
+$( <span class="hljs-string">"h1"</span> ).css({
+    color: <span class="hljs-string">"red"</span>, fontSize: <span class="hljs-number">100</span>px
+);
+<span class="hljs-comment">// also .width, .height, .position, etc.</span>
+
+$( <span class="hljs-string">"a"</span> ).attr( <span class="hljs-string">"href"</span>, <span class="hljs-string">"allMyHrefsAreTheSameNow.html"</span> );
+$( <span class="hljs-string">"a"</span> ).attr({
     title: <span class="hljs-string">"all titles are the same too!"</span>,
     href: <span class="hljs-string">"somethingNew.html"</span>
 });
-<span class="hljs-comment">// also .css, .width, .height, .position, etc.</span>
+$( <span class="hljs-string">"a"</span> ).attr(<span class="hljs-string">"href"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(idx, href)</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"somethingNew.html"</span>;
+});
+</code></pre><p>Usually the same function can also work as a getter (this is not the same as a query filter):</p>
+<pre><code>$<span class="hljs-comment">( "a" )</span>.attr<span class="hljs-comment">( "href" )</span>; <span class="hljs-comment">// Returns the href for the first a element in the document</span>
 </code></pre><p>Moving elements:</p>
 <pre><code><span class="hljs-variable">$(</span> <span class="hljs-string">"#myList li:first"</span> ).appendTo( <span class="hljs-string">"#myList"</span> );
 <span class="hljs-regexp">//</span> also .insert, insertTo, remove, detach, etc.
@@ -161,10 +191,87 @@ $( <span class="hljs-string">"div:animated"</span> ); <span class="hljs-comment"
 <pre><code><span class="hljs-keyword">var</span> myNewElement = $( <span class="hljs-string">"&lt;p&gt;New element&lt;/p&gt;"</span> );
 myNewElement.appendTo( <span class="hljs-string">"<span class="hljs-subst">#content</span>"</span> );
 $( <span class="hljs-string">"<span class="hljs-subst">#myList</span> li:first"</span> ).clone(<span class="hljs-literal">true</span>).appendTo( <span class="hljs-string">"<span class="hljs-subst">#myList</span>"</span> );
-</code></pre><p>myNewElement.appendTo( &quot;#content&quot; );</p>
-<p>Usually the same function can also work as a getter (this is not the same as a query filter):</p>
-<pre><code>$<span class="hljs-comment">( "a" )</span>.attr<span class="hljs-comment">( "href" )</span>; <span class="hljs-comment">// Returns the href for the first a element in the document</span>
-</code></pre><h3 id="visualization">Visualization</h3>
+ myNewElement.appendTo( <span class="hljs-string">"<span class="hljs-subst">#content</span>"</span> );
+</code></pre><p>Get parent(s), children and siblings of a selection:</p>
+<pre><code>   <span class="hljs-function"> $(</span><span class="hljs-string">"#foo"</span><span class="hljs-function">)</span>.parent(<span class="hljs-function">)</span>;    //<span class="hljs-instruction"> array </span>of one item
+   <span class="hljs-function"> $(</span><span class="hljs-string">"#foo"</span><span class="hljs-function">)</span>.parents(<span class="hljs-function">)</span>;    //<span class="hljs-instruction"> array </span>of all parents
+   <span class="hljs-function"> $(</span><span class="hljs-string">"#foo"</span><span class="hljs-function">)</span>.closest(<span class="hljs-string">"div"</span><span class="hljs-function">)</span>;    // first ancestor that is a<span class="hljs-instruction"> div
+</span>
+   <span class="hljs-function"> $(</span><span class="hljs-string">"#foo"</span><span class="hljs-function">)</span>.children(<span class="hljs-string">"div"</span><span class="hljs-function">)</span>;    //<span class="hljs-instruction"> array </span>of all immediate<span class="hljs-instruction"> div </span>children
+   <span class="hljs-function"> $(</span><span class="hljs-string">"#foo"</span><span class="hljs-function">)</span>.find(<span class="hljs-string">"div"</span><span class="hljs-function">)</span>;    //<span class="hljs-instruction"> array </span>of all immediate<span class="hljs-instruction"> and </span>nested<span class="hljs-instruction"> div </span>children
+
+    // also .next, .prev, .nextAll, .prevAll, .siblings
+</code></pre><h4 id="events">Events</h4>
+<p>Without jQuery, we can add events to HTML like so:</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">onclick</span>=<span class="hljs-value">"alert('Hello')"</span>&gt;</span>Say hello<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+</code></pre><p>But this quickly becomes tiresome, and isn&#39;t dynamic. jQuery provides <a href="http://api.jquery.com/category/events/">simple methods for attaching event handlers</a> to selections. When an event occurs, the provided function is executed. Inside the function, this refers to the element that was clicked.</p>
+<pre><code><span class="hljs-comment">// Event setup using a convenience method</span>
+$( <span class="hljs-string">"p"</span> ).click(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-built_in">console</span>.log( <span class="hljs-string">"You clicked a paragraph!"</span> );
+});
+
+<span class="hljs-comment">// Equivalent event setup using the `.on()` method</span>
+$( <span class="hljs-string">"p"</span> ).on( <span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-built_in">console</span>.log( <span class="hljs-string">"click"</span> );
+});
+
+<span class="hljs-comment">// Binding multiple events with different handlers</span>
+$( <span class="hljs-string">"p"</span> ).on({
+    <span class="hljs-string">"click"</span>: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{ <span class="hljs-built_in">console</span>.log( <span class="hljs-string">"clicked!"</span> ); },
+    <span class="hljs-string">"mouseover"</span>: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{ <span class="hljs-built_in">console</span>.log( <span class="hljs-string">"hovered!"</span> ); }
+});
+
+<span class="hljs-comment">// Tearing down all click handlers on a selection</span>
+$( <span class="hljs-string">"p"</span> ).off( <span class="hljs-string">"click"</span> );
+</code></pre><p>Every event handling function receives an event object, which contains many properties and methods. The event object is most commonly used to prevent the default action of the event via the .preventDefault() method. However, the event object contains a number of other useful properties and methods, including: <code>pageX, pageY, type, which, target, timeStamp</code>. The event handling function also has access to the DOM element that the handler was bound to via the keyword this, which we can turn into jQuery object:</p>
+<pre><code><span class="hljs-keyword">var</span> element = $( <span class="hljs-keyword">this</span> );
+</code></pre><p>You can stop the default action and event bubbling like this:</p>
+<pre><code><span class="hljs-comment">// Prevent the form's default submission.</span>
+<span class="hljs-keyword">event</span>.preventDefault();
+
+<span class="hljs-comment">// Prevent event from bubbling up DOM tree, prohibiting delegation</span>
+<span class="hljs-keyword">event</span>.stopPropagation();
+</code></pre><h4 id="utilities-">Utilities:</h4>
+<pre><code><span class="hljs-variable">$.</span><span class="hljs-keyword">trim</span>(str); <span class="hljs-comment">// remove whitespace padding from string</span>
+<span class="hljs-variable">$.</span>each(list, func(key, val))
+</code></pre><h4 id="effects">Effects</h4>
+<pre><code><span class="hljs-comment">// Instantaneously hide all paragraphs</span>
+<span class="hljs-variable">$(</span> <span class="hljs-string">"p"</span> ).<span class="hljs-keyword">hide</span>();
+<span class="hljs-comment">// Instantaneously show all divs that have the hidden style class</span>
+<span class="hljs-variable">$(</span> <span class="hljs-string">"div.hidden"</span> ).show();
+<span class="hljs-comment">// Slowly hide all paragraphs</span>
+<span class="hljs-variable">$(</span> <span class="hljs-string">"p"</span> ).<span class="hljs-keyword">hide</span>( <span class="hljs-string">"slow"</span> );
+<span class="hljs-comment">// Quickly show all divs that have the hidden style class</span>
+<span class="hljs-variable">$(</span> <span class="hljs-string">"div.hidden"</span> ).show( <span class="hljs-string">"fast"</span> );
+<span class="hljs-comment">// Hide all paragraphs over half a second</span>
+<span class="hljs-variable">$(</span> <span class="hljs-string">"p"</span> ).<span class="hljs-keyword">hide</span>( <span class="hljs-number">500</span> );
+<span class="hljs-comment">// Show all divs that have the hidden style class over 1.25 seconds</span>
+<span class="hljs-variable">$(</span> <span class="hljs-string">"div.hidden"</span> ).show( <span class="hljs-number">1250</span> );
+</code></pre><p>Custom animations:</p>
+<pre><code><span class="hljs-comment">// Custom effects with .animate()</span>
+$( <span class="hljs-string">"div.funtimes"</span> ).animate(
+    {
+        left: <span class="hljs-string">"+=50"</span>,
+        opacity: <span class="hljs-number">0.25</span>
+    },
+
+    <span class="hljs-comment">// Duration</span>
+    <span class="hljs-number">300</span>,
+
+    <span class="hljs-comment">// Callback to invoke when the animation is finished</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-built_in">console</span>.log( <span class="hljs-string">"done!"</span> );
+    }
+);
+</code></pre><p><a href="http://learn.jquery.com/effects/intro-to-effects/">More about effects here</a></p>
+<h4 id="ajax">Ajax</h4>
+<p><a href="http://learn.jquery.com/ajax/key-concepts/">See tutorial</a></p>
+<pre><code>$.get( <span class="hljs-string">"foo.php"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( response )</span> </span>{
+    <span class="hljs-built_in">console</span>.log( response ); <span class="hljs-comment">// server response</span>
+});
+</code></pre><p>In general, Ajax requests are limited to the same protocol (http or https), the same port, and the same domain as the page making the request. This limitation does not apply to scripts that are loaded via <a href="http://learn.jquery.com/ajax/jquery-ajax-methods/">jQuery&#39;s Ajax methods</a>.</p>
+<p>For JSONP, <a href="http://learn.jquery.com/ajax/working-with-jsonp/">see tutorial</a></p>
+<h3 id="visualization">Visualization</h3>
 <ul>
 <li><a href="http://d3js.org">D3.js</a> is a JavaScript library for manipulating documents based on data.<br><a href="http://chimera.labs.oreilly.com/books/1230000000345/index.html"><img src="http://alignedleft.com/assets/images/idvftw_cover.gif" alt="Interactive Data Visualization for the Web, Scott Murray"></a></li>
 <li><a href="https://developers.google.com/chart/interactive/docs/reference">The Google Visualization API</a></li>
@@ -204,15 +311,28 @@ killall -<span class="hljs-number">9</span> apache2
 <p>A typical example looks like this:</p>
 <pre><code class="lang-javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reqListener</span> <span class="hljs-params">()</span> </span>{
         <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.responseText);    <span class="hljs-comment">// Browser</span>
-        post(<span class="hljs-keyword">this</span>.responseText);        <span class="hljs-comment">// Max</span>
+        <span class="hljs-comment">//post(this.responseText);        // Max</span>
     }
 
     <span class="hljs-keyword">var</span> req = <span class="hljs-keyword">new</span> XMLHttpRequest();
     req.onreadystatechange = reqListener;
-    req.open(<span class="hljs-string">"get"</span>, <span class="hljs-string">"http://myttc.ca/york_university_common.json"</span>);
+    req.open(<span class="hljs-string">"get"</span>, <span class="hljs-string">"http://api.openweathermap.org/data/2.5/weather?q=Toronto,ca&amp;units=metric"</span>, <span class="hljs-literal">true</span>);
     req.setRequestHeader(<span class="hljs-string">"Content-Type"</span> , <span class="hljs-string">"application/json"</span>);
     req.send();
 </code></pre>
+<p>In the browser, we can also use jQuery&#39;s <code>$.get</code> wrapper for XMLHttpRequest. See <a href="http://api.jquery.com/jquery.get/">manual</a>.</p>
+<pre><code>// <span class="hljs-operator"><span class="hljs-keyword">insert</span> snippet.html <span class="hljs-keyword">into</span> the page <span class="hljs-keyword">at</span> the <span class="hljs-keyword">div</span> named <span class="hljs-string">"result"</span>:
+$.<span class="hljs-keyword">get</span>( <span class="hljs-string">"snippet.html"</span>, <span class="hljs-keyword">function</span>( <span class="hljs-keyword">data</span> ) {
+  $( <span class="hljs-string">"#result"</span> ).html( <span class="hljs-keyword">data</span> );</span>
+  alert( "<span class="hljs-operator"><span class="hljs-keyword">Load</span> was performed.<span class="hljs-string">" );
+});</span></span>
+</code></pre><h3 id="cross-origin-resource-sharing-cors-">Cross-Origin Resource Sharing (CORS)</h3>
+<p>For security, browsers typically do not allow a website on one domain to dynamically pull in data from another domain; i.e. they typically apply a <em>same-domain policy</em>. Fortunately, in the case of XMLHttpRequests, the provider may explicitly allow CORS, as is the case for <a href="http://api.openweathermap.org">http://api.openweathermap.org</a>. Moreover, most dynamic requests will fail when running the HTML file from a local filesystem. <em>They need to be running from a server.</em> </p>
+<p>Node.js lets us write complex server applications, but it also provides a simple way to run a server from any location on your filesystem. First, install this capability on your computer by typing this in your terminal (you&#39;ll have to make sure node.js is installed first of course, see above):</p>
+<pre><code>npm <span class="hljs-operator"><span class="hljs-keyword">install</span> -g http-<span class="hljs-keyword">server</span></span>
+</code></pre><p>Once installed, you can run this from any location in your terminal like this:</p>
+<pre><code>http-<span class="hljs-keyword">server</span>
+</code></pre><p>And you can then open this in your browser at address <a href="http://0.0.0.0:8080/test.html">http://0.0.0.0:8080/test.html</a></p>
 <h3 id="handling-the-response-in-max-">Handling the response in Max:</h3>
 <p>If the response is JSON formatted, we can convert this into a regular JavaScript object:</p>
 <pre><code><span class="hljs-comment">// convert JSON response into a javascript object:</span>
