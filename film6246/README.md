@@ -1,6 +1,6 @@
 # Future Cinema II
 
-**COURSE:** FILM 6246
+**COURSE:** FILM 6246   
 **COURSE DIRECTOR:** Graham Wakefield   
 **OFFICE:** 303C GCFA   
 **OFFICE HOURS:** Tuesdays 1:30-2:30 and by appointment    

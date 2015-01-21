@@ -121,11 +121,33 @@ CSS (Cascading Stylesheets) is a language for styling HTML pages. CSS styles (al
 
 There are endless sources of libraries, scripts, examples etc. online, but there are also dangers in relying on unstable technology. 
 
+### Getting dynamic data into web pages
+
+Ajax (Asynchronous JavaScript and XML) uses the XMLHttpRequest object (documented below). 
+
 ### The client-side nightmare
 
 Web technologies evolve at a remarkably fast rate. [Standards for web technologies are defined](http://www.w3.org), but are often only partially and sometimes incorrectly implemented by browser developers. Clients use a wide variety of platforms with different screen resolutions and capabilities, and different browsers, browser settings, plugins, and often quite old browser versions, making it very hard to predict what a page will look like or even whether it will even work. The situation today isn't much better than it was a decade ago (standards are clearer but vaster, and platforms are more diverse). Best practice is to keep things simple, detect failure and have fallback solutions, assume last year's technology at best, and test widely. 
 
 ### JQuery
+
+To dynamically manipulated the DOM, we would normally have to do things like this:
+
+```
+// Inserting a new element after another with the native DOM API.
+var target = document.getElementById( "target" );
+var newElement = document.createElement( "div" );
+newElement.innerHTML = "<b>Hello World</b>"
+target.parentNode.insertBefore( newElement, target.nextSibling );
+```
+
+Using jQuery, we can simply say:
+
+```
+var newElement = $("<div></div>");
+newElement.html("<b>Hello World</b>");
+$("#target").after(newElement);
+```
 
 [JQuery](http://jquery.com/) helps navigate and control the DOM, for finding, manipulating and even generating the page. It also helps smooth over the differences between browsers.
 
@@ -169,17 +191,39 @@ Ensure a selection is not empty:
 	if ( $( "div.foo" ).length ) {
 		...
 	}
+	
+Iterate a selection:
+
+	$( "p" ).each(function(idx, element) {
+		// this points to the element:
+		console.log( $( this ).text() );
+		// do stuff
+	}
 
 With the selection you can set attributes:
 
 	$( "h1" ).html( "hello world" );
 	$( "h1" ).text( "hello world" );	// HTML will be stripped
+	
+	$( "h1" ).addClass("bold"); // and .removeClass()
+	$( "h1" ).css("color", "red");
+	$( "h1" ).css({
+		color: "red", fontSize: 100px
+	);
+	// also .width, .height, .position, etc.
+	
 	$( "a" ).attr( "href", "allMyHrefsAreTheSameNow.html" );
 	$( "a" ).attr({
 		title: "all titles are the same too!",
 		href: "somethingNew.html"
 	});
-	// also .css, .width, .height, .position, etc.
+	$( "a" ).attr("href", function(idx, href) {
+		return "somethingNew.html";
+	});
+	
+Usually the same function can also work as a getter (this is not the same as a query filter):
+
+	$( "a" ).attr( "href" ); // Returns the href for the first a element in the document
 	
 Moving elements:
 
@@ -191,13 +235,113 @@ Adding elements:
 	var myNewElement = $( "<p>New element</p>" );
 	myNewElement.appendTo( "#content" );
 	$( "#myList li:first" ).clone(true).appendTo( "#myList" );
- 
-myNewElement.appendTo( "#content" );
+ 	myNewElement.appendTo( "#content" );
 	
-Usually the same function can also work as a getter (this is not the same as a query filter):
+Get parent(s), children and siblings of a selection:
 
-	$( "a" ).attr( "href" ); // Returns the href for the first a element in the document
+```	
+	$("#foo").parent();	// array of one item
+	$("#foo").parents();	// array of all parents
+	$("#foo").closest("div");	// first ancestor that is a div
 	
+	$("#foo").children("div");	// array of all immediate div children
+	$("#foo").find("div");	// array of all immediate and nested div children
+	
+	// also .next, .prev, .nextAll, .prevAll, .siblings
+```
+
+#### Events
+
+Without jQuery, we can add events to HTML like so:
+
+	<button onclick="alert('Hello')">Say hello</button>
+
+But this quickly becomes tiresome, and isn't dynamic. jQuery provides [simple methods for attaching event handlers](http://api.jquery.com/category/events/) to selections. When an event occurs, the provided function is executed. Inside the function, this refers to the element that was clicked.
+
+	// Event setup using a convenience method
+	$( "p" ).click(function() {
+		console.log( "You clicked a paragraph!" );
+	});
+
+	// Equivalent event setup using the `.on()` method
+	$( "p" ).on( "click", function() {
+		console.log( "click" );
+	});
+	
+	// Binding multiple events with different handlers
+	$( "p" ).on({
+		"click": function() { console.log( "clicked!" ); },
+		"mouseover": function() { console.log( "hovered!" ); }
+	});
+	
+	// Tearing down all click handlers on a selection
+	$( "p" ).off( "click" );
+
+Every event handling function receives an event object, which contains many properties and methods. The event object is most commonly used to prevent the default action of the event via the .preventDefault() method. However, the event object contains a number of other useful properties and methods, including: ```pageX, pageY, type, which, target, timeStamp```. The event handling function also has access to the DOM element that the handler was bound to via the keyword this, which we can turn into jQuery object:
+
+	var element = $( this );
+	
+You can stop the default action and event bubbling like this:
+
+	// Prevent the form's default submission.
+    event.preventDefault();
+ 
+    // Prevent event from bubbling up DOM tree, prohibiting delegation
+    event.stopPropagation();
+
+#### Utilities:
+
+```
+$.trim(str); // remove whitespace padding from string
+$.each(list, func(key, val))	
+```
+
+#### Effects
+
+	// Instantaneously hide all paragraphs
+	$( "p" ).hide();
+	// Instantaneously show all divs that have the hidden style class
+	$( "div.hidden" ).show();
+	// Slowly hide all paragraphs
+	$( "p" ).hide( "slow" );
+	// Quickly show all divs that have the hidden style class
+	$( "div.hidden" ).show( "fast" );
+	// Hide all paragraphs over half a second
+	$( "p" ).hide( 500 );
+	// Show all divs that have the hidden style class over 1.25 seconds
+	$( "div.hidden" ).show( 1250 );
+	
+Custom animations:
+	
+	// Custom effects with .animate()
+	$( "div.funtimes" ).animate(
+		{
+			left: "+=50",
+			opacity: 0.25
+		},
+ 
+		// Duration
+		300,
+ 
+		// Callback to invoke when the animation is finished
+		function() {
+			console.log( "done!" );
+		}
+	);
+	
+[More about effects here](http://learn.jquery.com/effects/intro-to-effects/)
+
+#### Ajax
+
+[See tutorial](http://learn.jquery.com/ajax/key-concepts/)
+
+	$.get( "foo.php", function( response ) {
+		console.log( response ); // server response
+	});
+
+In general, Ajax requests are limited to the same protocol (http or https), the same port, and the same domain as the page making the request. This limitation does not apply to scripts that are loaded via [jQuery's Ajax methods](http://learn.jquery.com/ajax/jquery-ajax-methods/).
+
+For JSONP, [see tutorial](http://learn.jquery.com/ajax/working-with-jsonp/)
 
 ### Visualization
 
@@ -265,15 +409,43 @@ A typical example looks like this:
 ```javascript
 	function reqListener () {
 		console.log(this.responseText);	// Browser
-		post(this.responseText);		// Max
+		//post(this.responseText);		// Max
 	}
 
 	var req = new XMLHttpRequest();
 	req.onreadystatechange = reqListener;
-	req.open("get", "http://myttc.ca/york_university_common.json");
+	req.open("get", "http://api.openweathermap.org/data/2.5/weather?q=Toronto,ca&units=metric", true);
 	req.setRequestHeader("Content-Type" , "application/json");
 	req.send();
 ```
+
+In the browser, we can also use jQuery's ```$.get``` wrapper for XMLHttpRequest. See [manual](http://api.jquery.com/jquery.get/).
+
+```
+// insert snippet.html into the page at the div named "result":
+$.get( "snippet.html", function( data ) {
+  $( "#result" ).html( data );
+  alert( "Load was performed." );
+});
+```
+
+### Cross-Origin Resource Sharing (CORS)
+
+For security, browsers typically do not allow a website on one domain to dynamically pull in data from another domain; i.e. they typically apply a *same-domain policy*. Fortunately, in the case of XMLHttpRequests, the provider may explicitly allow CORS, as is the case for http://api.openweathermap.org. Moreover, most dynamic requests will fail when running the HTML file from a local filesystem. *They need to be running from a server.* 
+
+Node.js lets us write complex server applications, but it also provides a simple way to run a server from any location on your filesystem. First, install this capability on your computer by typing this in your terminal (you'll have to make sure node.js is installed first of course, see above):
+
+```
+npm install -g http-server
+```
+
+Once installed, you can run this from any location in your terminal like this:
+
+```
+http-server
+```
+
+And you can then open this in your browser at address http://0.0.0.0:8080/test.html
 
 ### Handling the response in Max:
 
