@@ -71,6 +71,7 @@ x.import_json(<span class="hljs-string">"dict_file.json"</span>);
 <p><strong>Clients</strong> (browsers) make requests to <strong>servers</strong>, that respond with renderable content (mainly HTML, with embedded media and scripts). Servers (sites, services and applications) are addressable at <a href="http://en.wikipedia.org/wiki/Uniform_resource_locator">URLs</a>.</p>
 <h3 id="client-side-programming-html-css-js-">Client-side programming (HTML, CSS, JS)</h3>
 <p>Modern client-side web technology is a trio of HTML, CSS and <a href="js.html">JavaScript</a>, making extensive use of the new audiovisual capabilities of HTML5 including Canvas, SVG, WebGL etc. A great way to play with how it all fits together is using an online test-bed such as <a href="http://jsfiddle.net">JS Fiddle</a>.</p>
+<h4 id="html">HTML</h4>
 <p><a href="http://www.w3schools.com/html/">HTML</a> (HyperText Markup Language) is the standard markup language for the web. It is not a programming language, but a formatting language; the browser reads this language and uses it to render the web page. The basic document syntax:</p>
 <pre><code class="lang-html"><span class="hljs-doctype">&lt;!DOCTYPE html&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
@@ -89,31 +90,63 @@ x.import_json(<span class="hljs-string">"dict_file.json"</span>);
 <pre><code class="lang-html">&lt;p <span class="hljs-property">id</span>=<span class="hljs-string">"intro"</span> <span class="hljs-type">class</span>=<span class="hljs-string">"normal"</span>&gt;Welcome <span class="hljs-keyword">to</span> HTML&lt;/p&gt;
 </code></pre>
 <p>IDs and classes are often used in combination with <a href="http://www.w3schools.com/css/">CSS</a> to automatically define visual styles independently of the content. The DOM, including id and class attributes, are also available to JavaScript in the browser.  </p>
-<p>CSS (Cascading Stylesheets) is a language for styling HTML pages. CSS styles (also know as selectors) are typically applied to HTML tags based on their name, class, or ID.</p>
-<pre><code class="lang-css">    <span class="hljs-comment">/* Applied to all &lt;p&gt; tags */</span>
-    <span class="hljs-tag">p</span> <span class="hljs-rules">{
-      <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> blue</span></span>;
-    <span class="hljs-rule">}</span></span>
+<h4 id="css">CSS</h4>
+<p>CSS (Cascading Stylesheets) is a language for styling HTML pages. CSS styles (also know as selectors) are typically applied to HTML tags based on their name, class, or ID. Each selector specifies a set of property values to apply. Properties can be defined for backgrounds, text, fonts, links, lists, tables, boxes, borders, outlines, margins, paddings, sizes, display modes, alignment, and more. </p>
+<p>Stylesheets are embedded in the HTML&#39;s <code>&lt;head&gt;</code> tag. This can either be inline as below:</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">style</span>&gt;</span><span class="css">
+<span class="hljs-comment">/* put styles here */</span>
+</span><span class="hljs-tag">&lt;/<span class="hljs-title">style</span>&gt;</span>
+</code></pre><p>Or it can be imported from a separate file (multiple stylesheets can be imported this way):</p>
+<pre><code>&lt;link <span class="hljs-variable">rel=</span><span class="hljs-string">"stylesheet"</span> <span class="hljs-variable">type=</span><span class="hljs-string">"text/css"</span> <span class="hljs-variable">href=</span><span class="hljs-string">"mystyle.css"</span>&gt;
+</code></pre><p>The most commonly used rules for making selectors are fairly simple:</p>
+<pre><code class="lang-css">
+    <span class="hljs-comment">/* Applied to all &lt;p&gt; tags */</span>
+    <span class="hljs-tag">p</span> {
+          <span class="hljs-attribute">background-color</span>: <span class="hljs-hexcolor">#ff0000</span>;    <span class="hljs-comment">// hexadecimal color (RRGGBB)</span>
+                                      <span class="hljs-comment">// can also say rgb(255,0,0)</span>
+    }
 
-    <span class="hljs-comment">/* Applied to all tags with the class "red" */</span>
-    <span class="hljs-class">.red</span> <span class="hljs-rules">{
-      <span class="hljs-rule"><span class="hljs-attribute">background</span>:<span class="hljs-value"> red</span></span>;
-    <span class="hljs-rule">}</span></span>
+    <span class="hljs-comment">/* Applied to all &lt;p&gt;, &lt;h1&gt; and &lt;h2&gt; tags */</span>
+    <span class="hljs-tag">p</span>, <span class="hljs-tag">h1</span>, <span class="hljs-tag">h2</span> {
+          <span class="hljs-attribute">text-align</span>: left;
+    }
 
-    <span class="hljs-comment">/* Applied to the tag with the id "some-id" */</span>
-    <span class="hljs-id">#some-id</span> <span class="hljs-rules">{
-      <span class="hljs-rule"><span class="hljs-attribute">font-style</span>:<span class="hljs-value"> italic</span></span>;
-    <span class="hljs-rule">}</span></span>
+    <span class="hljs-comment">/* Applied to all tags with class="red" */</span>
+    <span class="hljs-class">.red</span> {
+          <span class="hljs-attribute">background-color</span>: red;
+    }
+
+    <span class="hljs-comment">/* Applied to &lt;p&gt; tags with class="red" */</span>
+    <span class="hljs-tag">p</span><span class="hljs-class">.red</span> {
+        <span class="hljs-attribute">color</span>: white;
+        <span class="hljs-attribute">background-color</span>: red;
+    }
+
+    <span class="hljs-comment">/* Applied to the tag with the id="some-id" */</span>
+    <span class="hljs-id">#some-id</span> {
+      <span class="hljs-attribute">font-style</span>: italic;
+      <span class="hljs-attribute">font-size</span>: large;
+    }
 
     <span class="hljs-comment">/* Applied only to &lt;p&gt; tags that are inside &lt;li&gt; tags */</span>
-    <span class="hljs-tag">li</span> <span class="hljs-tag">p</span> <span class="hljs-rules">{
-      <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#0C0</span></span></span>;
-    <span class="hljs-rule">}</span></span>
+    <span class="hljs-tag">li</span> <span class="hljs-tag">p</span> {
+      <span class="hljs-attribute">color</span>: <span class="hljs-hexcolor">#0C0</span>;
+    }
+
+    <span class="hljs-comment">/* Applied to &lt;a&gt; tags when the mouse is over them:
+    a:hover {
+        text-decoration: underline;
+    }
+
+    <span class="hljs-comment">/* Applied to all links starting with # (i.e. internal links) */</span>
+    a[href^="#"] {
+        background-color:gold
+    }</span>
 </code></pre>
-<p>There are endless sources of libraries, scripts, examples etc. online, but there are also dangers in relying on unstable technology. </p>
-<h3 id="getting-dynamic-data-into-web-pages">Getting dynamic data into web pages</h3>
-<p>Ajax (Asynchronous JavaScript and XML) uses the XMLHttpRequest object (documented below). </p>
+<p>To know more about CSS, I recommend looking at <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started">MDN&#39;s developer guide</a>. In particular, for geometric properties (margin, padding, width/height, border) you should know about the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box_model">Box Model</a>.</p>
+<p>Warning: css styles are not supported or rendered the same by all browsers!</p>
 <h3 id="the-client-side-nightmare">The client-side nightmare</h3>
+<p>There are endless sources of libraries, scripts, examples etc. online, but there are also dangers in relying on unstable technology. </p>
 <p>Web technologies evolve at a remarkably fast rate. <a href="http://www.w3.org">Standards for web technologies are defined</a>, but are often only partially and sometimes incorrectly implemented by browser developers. Clients use a wide variety of platforms with different screen resolutions and capabilities, and different browsers, browser settings, plugins, and often quite old browser versions, making it very hard to predict what a page will look like or even whether it will even work. The situation today isn&#39;t much better than it was a decade ago (standards are clearer but vaster, and platforms are more diverse). Best practice is to keep things simple, detect failure and have fallback solutions, assume last year&#39;s technology at best, and test widely. </p>
 <h3 id="jquery">JQuery</h3>
 <p>To dynamically manipulated the DOM, we would normally have to do things like this:</p>
@@ -127,6 +160,7 @@ target.parentNode.insertBefore( newElement, target.nextSibling );
 newElement.html(<span class="hljs-string">"&lt;b&gt;Hello World&lt;/b&gt;"</span>);
 $(<span class="hljs-string">"#target"</span>).after(newElement);
 </code></pre><p><a href="http://jquery.com/">JQuery</a> helps navigate and control the DOM, for finding, manipulating and even generating the page. It also helps smooth over the differences between browsers.</p>
+<h4 id="setup">Setup</h4>
 <p>You can <a href="http://jquery.com/download/">download jquery</a> and link it to your page by adding this to the HTML header (make sure the src name matches the filename):</p>
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"jquery-1.11.2.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
 </code></pre><p>Now you can access jquery from within your JavaScript code, using the <code>$</code> symbol. For example, to run code as soon as the document is ready to be manipulated, jQuery has a statement known as the ready event:</p>
@@ -136,6 +170,8 @@ $(<span class="hljs-string">"#target"</span>).after(newElement);
 
 });
 </code></pre><p><a href="http://learn.jquery.com/about-jquery/how-jquery-works/">JQuery tutorial</a></p>
+<p>If you are testing out ideas using <a href="http://jsfiddle.net/">JSFiddle</a>, you can select a JQuery library from the drop-down on the left.</p>
+<h4 id="selectors">Selectors</h4>
 <p>Most JQuery operations begin with a <strong>selector</strong>, which is a query into the DOM that returns one or more document elements. Examples: </p>
 <pre><code>$()        <span class="hljs-comment">// the whole document</span>
 $( <span class="hljs-string">"#myId"</span> );    

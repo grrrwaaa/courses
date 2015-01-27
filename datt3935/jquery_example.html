@@ -4,20 +4,44 @@
     <meta charset="utf-8">
     <title>Demo</title>
     <script src="jquery-1.11.2.min.js"></script>
+    <style>
+    	#result {
+    		visibility: hidden;
+    	}
+    	
+    	.data {
+    		color: green;
+    	}
+    </style>
 </head>
 <body>
+	<div id="status">Loading data, please wait...</div>
+	
+	<div id="result">
+		<p>Temp: <span id="temp" class="data"></span></p>
+	</div>
     <script>
 
 
 function gotdata(data) {
+	$("#name").text(data.name);
 	console.log(data);
-	$("body").append( $("<p>" + data + "</p>") );
+	
+	$("#temp").text(data.main.temp - 273.15);
+	
+	$("#status").remove();
+	$("#result").css("visibility", "visible");
 }
 
 $(document).ready(function() {
 	
-	$("body").append( $("<p>hello</p>") );
-	$.getJSON("http://myttc.ca/Union_station.json?callback=?", gotdata);	
+	$.getJSON("http://freegeoip.net/json/", function(data) {
+	console.log(data);
+	
+		$("body").append("<p>We think you are in " + data.city + "," + data.country_code + "</p>");
+		$.getJSON( "http://api.openweathermap.org/data/2.5/weather?q=" + data.city + "," + data.country_code, gotdata);
+	
+	});
 });
  
     </script>

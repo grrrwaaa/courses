@@ -92,6 +92,24 @@
 <li>Refine</li>
 <li>Interact</li>
 </ol>
+<hr>
+<h2 id="rest-representational-state-transfer">REST: Representational state transfer</h2>
+<p><a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> is an architectural style, consisting of constraints imposed on a hypermedia system, which is abstracted from the structure of the World Wide Web (WWW). A system is <strong>RESTful</strong> if it fulfils these constraints:</p>
+<ul>
+<li>Client-server model<br>A uniform interface separates clients and servers; e.g. clients are not concerned with data storage, and servers are not concerned with information display. This &quot;separation of concerns&quot; aids portability and scalability.<ul>
+<li>Layered<br>A client cannot tell whether it is connected to the server directly or through an intermediary (such as load balancer). </li>
+<li>Stateless<br>No client context is stored on the server between requests; each request includes all information needed to service it (session context is held in the client). </li>
+<li>Cacheable<br>Response data can be safely cached and re-used without becoming stale or inappropriate.</li>
+</ul>
+</li>
+<li>Uniform Interface  <ul>
+<li>Resources (such as entries in a database) can be requested through an identification system, such as URIs in the web, and returned as another representation such as XML, JSON etc.   </li>
+<li>This representation, and its metadata, are enough to allow the client to issue another request to modify or delete it.   </li>
+<li>Each message should include enough information to describe how it should be processed (such as what media type it includes, whether it is cacheable, etc.).  </li>
+<li>Clients make state transitions only through the actions identified by the server response, such as hyperlinks in returned hypertext (HATEOAS; this differentiates it from a service-oriented architecture, in which clients and servers interact through a fixed interface).</li>
+</ul>
+</li>
+</ul>
 
 	</div>
 	<footer>
