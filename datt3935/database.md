@@ -88,3 +88,23 @@ In the first chapter of the Visualizing Data book, Ben Fry sets up the Data Visu
 - Represent
 - Refine
 - Interact
+
+----
+
+## REST: Representational state transfer
+
+[REST](http://en.wikipedia.org/wiki/Representational_state_transfer) is an architectural style, consisting of constraints imposed on a hypermedia system, which is abstracted from the structure of the World Wide Web (WWW). A system is **RESTful** if it fulfils these constraints:
+
+- Client-server model   
+A uniform interface separates clients and servers; e.g. clients are not concerned with data storage, and servers are not concerned with information display. This "separation of concerns" aids portability and scalability.
+	- Layered   
+A client cannot tell whether it is connected to the server directly or through an intermediary (such as load balancer). 
+	- Stateless   
+No client context is stored on the server between requests; each request includes all information needed to service it (session context is held in the client). 
+	- Cacheable   
+Response data can be safely cached and re-used without becoming stale or inappropriate.
+- Uniform Interface  
+	- Resources (such as entries in a database) can be requested through an identification system, such as URIs in the web, and returned as another representation such as XML, JSON etc.   
+	- This representation, and its metadata, are enough to allow the client to issue another request to modify or delete it.   
+	- Each message should include enough information to describe how it should be processed (such as what media type it includes, whether it is cacheable, etc.).  
+	- Clients make state transitions only through the actions identified by the server response, such as hyperlinks in returned hypertext (HATEOAS; this differentiates it from a service-oriented architecture, in which clients and servers interact through a fixed interface).

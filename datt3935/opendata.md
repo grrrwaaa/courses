@@ -83,3 +83,19 @@ Example maxurl  request for openweathermap:
 [DataLook is all about finding and sharing data-driven projects for social good](http://datalook.io)
 
 [Many more examples from this blog post](http://blog.visual.ly/data-sources/)
+
+---
+
+### Flickr
+
+1. (Get an API key](https://www.flickr.com/services/apps/create/apply)
+- You'll need to use an existing Yahoo/Flickr account, or sign up for one.
+- Choose the *non-commercial* option
+- Pick a name. Choose wisely -- you won't be able to change it. 
+2. Copy the API key and secret!
+3. Make sure you have [read the terms and conditions](https://www.flickr.com/services/api/tos/). In particular:
+- Flickr users own the photos, and can set their own restrictions. You must abide by them.
+- Best practice is to not cache images for more than 24 hours
+- You must not use the images for commercial gain, nor to break any law.
+- You shall place the following notice prominently on your application: "This product uses the Flickr API but is not endorsed or certified by Flickr."
+4. The Flickr API works a little bit differently and instead of JSON it works with JSONP (JSON with Padding). The difference between these two formats is that JSONP returns a name of a function in its response and this function will handle the response data in your code.

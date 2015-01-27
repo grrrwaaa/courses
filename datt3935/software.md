@@ -70,6 +70,8 @@ Simple GET/POST requests can be made with messages to maxurl, which will output 
 
 Modern client-side web technology is a trio of HTML, CSS and [JavaScript](js.html), making extensive use of the new audiovisual capabilities of HTML5 including Canvas, SVG, WebGL etc. A great way to play with how it all fits together is using an online test-bed such as [JS Fiddle](http://jsfiddle.net).
 
+#### HTML
+
 [HTML](http://www.w3schools.com/html/) (HyperText Markup Language) is the standard markup language for the web. It is not a programming language, but a formatting language; the browser reads this language and uses it to render the web page. The basic document syntax:
 
 ```html
@@ -95,37 +97,79 @@ The indentation helps us to see that HTML has the abstract structure of a hierar
 
 IDs and classes are often used in combination with [CSS](http://www.w3schools.com/css/) to automatically define visual styles independently of the content. The DOM, including id and class attributes, are also available to JavaScript in the browser.  
 
-CSS (Cascading Stylesheets) is a language for styling HTML pages. CSS styles (also know as selectors) are typically applied to HTML tags based on their name, class, or ID.
+#### CSS
+
+CSS (Cascading Stylesheets) is a language for styling HTML pages. CSS styles (also know as selectors) are typically applied to HTML tags based on their name, class, or ID. Each selector specifies a set of property values to apply. Properties can be defined for backgrounds, text, fonts, links, lists, tables, boxes, borders, outlines, margins, paddings, sizes, display modes, alignment, and more. 
+
+Stylesheets are embedded in the HTML's ```<head>``` tag. This can either be inline as below:
+
+```
+<style>
+/* put styles here */
+</style>
+``` 
+
+Or it can be imported from a separate file (multiple stylesheets can be imported this way):
+
+```
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+```
+
+The most commonly used rules for making selectors are fairly simple:
 
 ```css
+
 	/* Applied to all <p> tags */
 	p {
-	  color: blue;
+	  	background-color: #ff0000;	// hexadecimal color (RRGGBB)
+	  								// can also say rgb(255,0,0)
+	}
+	
+	/* Applied to all <p>, <h1> and <h2> tags */
+	p, h1, h2 {
+	  	text-align: left;
 	}
 
-	/* Applied to all tags with the class "red" */
+	/* Applied to all tags with class="red" */
 	.red {
-	  background: red;
+	  	background-color: red;
+	}
+	
+	/* Applied to <p> tags with class="red" */
+	p.red {
+		color: white;
+		background-color: red;
 	}
 
-	/* Applied to the tag with the id "some-id" */
+	/* Applied to the tag with the id="some-id" */
 	#some-id {
 	  font-style: italic;
+	  font-size: large;
 	}
 
 	/* Applied only to <p> tags that are inside <li> tags */
 	li p {
 	  color: #0C0;
 	}
+	
+	/* Applied to <a> tags when the mouse is over them:
+	a:hover {
+		text-decoration: underline;
+	}
+	
+	/* Applied to all links starting with # (i.e. internal links) */
+	a[href^="#"] {
+		background-color:gold
+	}
 ```
 
-There are endless sources of libraries, scripts, examples etc. online, but there are also dangers in relying on unstable technology. 
+To know more about CSS, I recommend looking at [MDN's developer guide](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started). In particular, for geometric properties (margin, padding, width/height, border) you should know about the [Box Model](https://developer.mozilla.org/en-US/docs/Web/CSS/box_model).
 
-### Getting dynamic data into web pages
-
-Ajax (Asynchronous JavaScript and XML) uses the XMLHttpRequest object (documented below). 
+Warning: css styles are not supported or rendered the same by all browsers!
 
 ### The client-side nightmare
+
+There are endless sources of libraries, scripts, examples etc. online, but there are also dangers in relying on unstable technology. 
 
 Web technologies evolve at a remarkably fast rate. [Standards for web technologies are defined](http://www.w3.org), but are often only partially and sometimes incorrectly implemented by browser developers. Clients use a wide variety of platforms with different screen resolutions and capabilities, and different browsers, browser settings, plugins, and often quite old browser versions, making it very hard to predict what a page will look like or even whether it will even work. The situation today isn't much better than it was a decade ago (standards are clearer but vaster, and platforms are more diverse). Best practice is to keep things simple, detect failure and have fallback solutions, assume last year's technology at best, and test widely. 
 
@@ -151,6 +195,8 @@ $("#target").after(newElement);
 
 [JQuery](http://jquery.com/) helps navigate and control the DOM, for finding, manipulating and even generating the page. It also helps smooth over the differences between browsers.
 
+#### Setup
+
 You can [download jquery](http://jquery.com/download/) and link it to your page by adding this to the HTML header (make sure the src name matches the filename):
 
 	<script src="jquery-1.11.2.min.js"></script>
@@ -164,6 +210,10 @@ Now you can access jquery from within your JavaScript code, using the ```$``` sy
 	});
 	
 [JQuery tutorial](http://learn.jquery.com/about-jquery/how-jquery-works/)
+
+If you are testing out ideas using [JSFiddle](http://jsfiddle.net/), you can select a JQuery library from the drop-down on the left.
+
+#### Selectors
 
 Most JQuery operations begin with a **selector**, which is a query into the DOM that returns one or more document elements. Examples: 
 
