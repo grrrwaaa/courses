@@ -215,28 +215,6 @@ $(document).ready(function() {
 	
 });
 
-/*
-function gotdata(data) {
-	$("#name").text(data.name);
-	console.log(data);
-	
-	$("#temp").text(data.main.temp - 273.15);
-	
-	$("#status").remove();
-	$("#result").css("visibility", "visible");
-}
-
-$(document).ready(function() {
-	
-	$.getJSON("http://freegeoip.net/json/", function(data) {
-	console.log(data);
-	
-		$("body").append("<p>We think you are in " + data.city + "," + data.country_code + "</p>");
-		$.getJSON( "http://api.openweathermap.org/data/2.5/weather?q=" + data.city + "," + data.country_code, gotdata);
-	
-	});
-});
- */
     </script>
 </body>
 </html>
