@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Week 4</title>
+    <!-- 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    -->
+    <script src="jquery-1.11.2.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="mystyle.css"> -->
+    <style>
+
+body {
+	height: 100%;
+
+	background-color: gray;
+	
+	/* no single line comment */
+	
+	/*
+	background-image: url(http://farm8.staticflickr.com/7404/16195009199_8e809f8f87_m.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	*/
+	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: xx-large;
+	color: white;
+	text-shadow: 0 0 10px #000;
+}
+
+a {
+	color: #ffeecc;
+}
+
+a:hover {
+	color: #ff0000;
+}
+
+#main {
+	/*background-color: blue;*/
+	min-height: 100%;
+}
+
+footer {
+	/*background-color: green;*/
+	position: absolute;
+	bottom: 0;
+	font-size: 0.5em;
+}
+
+.param {
+	color: #ffeecc;
+}
+
+input {
+	float: right;
+}
+	</style>
+  </head>
+  <body>
+	<header>
+		<form action="mashup.html">
+			<input type="text" name="city">
+		</form>
+	</header>
+	<div id="main">
+		<p>City: <span class="param" id="name">Name</span></p>
+		<p>Weather: <span class="param"  id="weather">Nice</span></p>
+		<p>Temp: <span class="param"  id="temperature">0</span></p>
+	</div>
+	<footer>
+	Made by <a href="http://grrrwaaa.github.io/courses/datt3935/software.html">me</a>. This product uses the <a href="https://www.flickr.com/services/api/tos/">Flickr API</a> but is not endorsed or certified by Flickr.
+	</footer>
+	<script>
+function getQueryStringVar(name) {
+	var qs = window.location.search.slice(1);
+	var props = qs.split("&");
+	for (var i=0; i<props.length; i++) {
+		var pair = props[i].split("=");
+		if (pair[0] === name) {
+			return decodeURIComponent(pair[1]);
+		}
+	}
+	// return undefined
+}
+	
+$(document).ready(function() {
+	// document is now fully loaded and ready to run.
+	var city = getQueryStringVar("city") || "Toronto";
+	
+	var req = new XMLHttpRequest();
+	req.open("GET", "http://api.openweathermap.org/data/2.5/weather?q=" + city, true);
+	req.onreadystatechange = function() {
+		
+		// did we get valid data?
+		if (this.status == 200 && this.readyState == 4) {
+			
+			// convert to JS:
+			var data = JSON.parse(this.responseText);
+			
+			$("#name").html(data.name);
+			$("#weather").html(data.weather[0].description);
+			var t = data.main.temp - 273.15;
+			$("#temperature").html(t.toFixed(1) + " &deg;C");
+
+			var searchtags = data.name + "," + data.weather[0].description;
+			searchtags = searchtags.replace(/\s/g, ",");
+			console.log(searchtags);
+
+			var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+			$.getJSON( flickerAPI, {
+				tags: searchtags,	// cats,trains
+				tagmode: "any",  // all or any
+				format: "json"
+			}).done(function(flickrdata) {
+				console.log(flickrdata);
+				
+				// pick a random image from results:				
+				var i = Math.floor(Math.random() * flickrdata.items.length);
+				var item = flickrdata.items[i];
+				// get image url:
+				var url = item.media.m;
+				// apply image url as background image of page:
+				$("body").css({
+					"background-image": "url(" + url + ")",
+					"background-repeat": "no-repeat",
+					"background-size": "cover",
+					"background-attachment": "fixed"
+				});
+			});
+		}
+	}
+	req.send();
+});
+    </script>
+    
+  </body>
+</html>

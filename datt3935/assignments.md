@@ -6,7 +6,7 @@
 
 > The Canadian Open Data Experience (CODE) is an intense 48-hour coding sprint where innovators from coast to coast compete to build the best app utilizing federal government data from [Canada's Open Government Portal](http://open.canada.ca). Accelerating Innovation and Hacktivating Open Data: CODE is the first hackathon ever to be funded by the Government of Canada.
 
-As a practice-run for this event, the first assignment will be to find an interesting open data API (possibly, but not necessarily from [open.canada.ca](http://open.canada.ca/en/access-our-application-programming-interface-api)) and visualize (and/or sonify) it. You are welcome to use either Max or HTML5 for your work. The deadline for submission is **Feb 1st**. 
+As a practice-run for this event, the first assignment will be to find an interesting open data API (possibly, but not necessarily from [open.canada.ca](http://open.canada.ca/en/access-our-application-programming-interface-api)) and visualize (and/or sonify) it. You are welcome to use either Max or HTML5 for your work. The deadline for submission is **before class Feb 4th**. 
 
 Submit the project as an archive (zip file), and make sure that this file includes ALL resources necessary for it to run -- all max patchers and subpatchers, any additional extensions required (mac compatible), images, sounds and other media resources, javascript libraries, etc.
 
