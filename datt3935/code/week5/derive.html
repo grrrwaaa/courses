@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dice Man Derive</title>
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <style>
+body {
+	height: 100%;
+	background-color: gray;
+}
+#streetcanvas, #mapcanvas {
+	width: 600px;
+	height: 300px;
+}
+	</style>
+  </head>
+  <body>
+  	<div id="streetcanvas"></div>
+  	<p></p>
+  	<div id="mapcanvas"></div>
+	<script>
+$(document).ready(function() {
+	// our start point:
+	var pos = new google.maps.LatLng(43.772882, -79.502388);
+	// create streetview and aerial view:
+	var street = new google.maps.StreetViewPanorama(document.getElementById("streetcanvas"), {
+		position: pos
+	});	
+	var map = new google.maps.Map(document.getElementById("mapcanvas"), {
+		center: pos, 
+		zoom: 18,
+		mapTypeId: google.maps.MapTypeId.SATELLITE,
+		disableDefaultUI: true,
+	});
+	
+	
+});
+    </script>
+    
+  </body>
+</html>
