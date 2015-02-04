@@ -20,6 +20,19 @@ body {
   	<p></p>
   	<div id="mapcanvas"></div>
 	<script>
+function rand(max) {
+	return Math.floor(Math.random() * max);
+}
+
+// p1 and p2 are LatLng objects of the form
+// { lat:, lng: }
+// based on http://www.movable-type.co.uk/scripts/latlong.html
+function getBearing(p1, p2) {
+	var y = Math.sin(p2.lng()-p1.lng()) * Math.cos(p2.lat());
+	var x = Math.cos(p1.lat())*Math.sin(p2.lat()) - Math.sin(p1.lat())*Math.cos(p2.lat())*Math.cos(p2.lng()-p1.lng());
+	return Math.atan2(y, x) * 180/Math.PI;
+}
+	
 $(document).ready(function() {
 	// our start point:
 	var pos = new google.maps.LatLng(43.772882, -79.502388);
@@ -34,9 +47,42 @@ $(document).ready(function() {
 		disableDefaultUI: true,
 	});
 	
+	// at first, we didn't come from anywhere:
+	var lastLocation = "nowhere";
 	
+	google.maps.event.addListener( street, "links_changed", function() {
+		console.log("links changed");
+				
+		// get links:
+		var links = street.getLinks();	// array
+		
+		// avoid going back to same link (partially solved)
+		var selected;
+		do {
+			// pick a new location:
+			selected = links[rand(links.length)];
+		} while(selected.pano == lastLocation);
+		// update last location to our current location:
+		lastLocation = street.getPano();
+		
+		// look to direction we are going
+		var newpos = street.getPosition();
+		console.log(newpos);
+		street.setPov({
+			heading: 180,
+			pitch: 0
+		});
+		
+		// remove UI
+		// make beautiful
+		
+		// delay
+		setTimeout(function() {
+			// move:
+			street.setPano(selected.pano);
+		}, 500);
+	});
 });
     </script>
-    
   </body>
 </html>
