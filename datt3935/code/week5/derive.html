@@ -38,13 +38,18 @@ $(document).ready(function() {
 	var pos = new google.maps.LatLng(43.772882, -79.502388);
 	// create streetview and aerial view:
 	var street = new google.maps.StreetViewPanorama(document.getElementById("streetcanvas"), {
-		position: pos
+		position: pos,
+		disableDefaultUI: true
 	});	
 	var map = new google.maps.Map(document.getElementById("mapcanvas"), {
 		center: pos, 
 		zoom: 18,
-		mapTypeId: google.maps.MapTypeId.SATELLITE,
+		mapTypeId: google.maps.MapTypeId.HYBRID,
 		disableDefaultUI: true,
+	});
+	var marker = new google.maps.Marker({
+		position: pos,
+		map: map
 	});
 	
 	// at first, we didn't come from anywhere:
@@ -67,13 +72,19 @@ $(document).ready(function() {
 		
 		// look to direction we are going
 		var newpos = street.getPosition();
-		console.log(newpos);
+		var bearing = getBearing(pos, newpos);
 		street.setPov({
-			heading: 180,
+			heading: bearing,
 			pitch: 0
 		});
+		// update pos for the next iteration:
+		pos = newpos;
 		
-		// remove UI
+		// update map:
+		map.panTo(newpos);
+		map.setHeading(bearing);
+		marker.setPosition(newpos);
+		
 		// make beautiful
 		
 		// delay
