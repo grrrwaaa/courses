@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Random Walk in Toronto: Dice Man Dérives</title>
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?api_key=AIzaSyCjoF4In5HlUoIL0QRCDqeFw7wosLG3vaU"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="mystyle.css"> -->
+    <style>
+
+html { height: 100%; width: 100%; background-color: #333; }
+body { height: 100%; width: 100%; margin: 0; padding: 0 }
+
+#center {
+	min-height: 100%; min-width: 100%;
+
+	position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+
+#mapcanvas, #pancanvas { 
+
+	height: 50%; width: 100%;
+
+	-webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
+	filter: url(#greyscale);
+	filter: gray;
+}
+
+	</style>
+  </head>
+  <body>
+  	<div id="center">
+		<div id="pancanvas"></div>
+		<div id="mapcanvas"></div>
+	</div>
+	<script>
+
+function rand(max) {
+	return Math.floor(Math.random() * max)
+}	
+
+// p1 and p2 are LatLng objects of the form
+// { lat:, lng: }
+// see http://www.movable-type.co.uk/scripts/latlong.html
+function getBearing(p1, p2) {
+	var y = Math.sin(p2.lng()-p1.lng()) * Math.cos(p2.lat());
+	var x = Math.cos(p1.lat())*Math.sin(p2.lat()) - Math.sin(p1.lat())*Math.cos(p2.lat())*Math.cos(p2.lng()-p1.lng());
+	return Math.atan2(y, x) * 180/Math.PI;
+}
+
+$(document).ready(function() {
+	
+	
+	
+	// where did we just come from?
+	// initialized with a fake value:
+	var camefrom = "nowhere";
+	var pos = new google.maps.LatLng(43.651534,-79.383397);
+	
+	// API: https://developers.google.com/maps/documentation/javascript/reference#StreetViewPanorama
+	
+	// make streetview control:
+	var panorama = new google.maps.StreetViewPanorama(document.getElementById("pancanvas"), {
+		position: pos,
+		pov: {
+			heading: 270,
+			pitch: 0
+		},
+		zoom: 0,
+		visible: true,
+		disableDefaultUI: true
+	});
+	
+	// make maps control:
+	var map = new google.maps.Map(document.getElementById("mapcanvas"), {
+		center: pos,
+		zoom: 18,
+		mapTypeId: google.maps.MapTypeId.ROADMAP, // SATELLITE, ROADMAP, TERRAIN, HYBRID
+    	streetViewControl: false,
+    	
+		disableDefaultUI: true
+	});
+	
+	var marker = new google.maps.Marker({position: pos, map: map });
+	
+	google.maps.event.addListener(panorama, 'links_changed', function() {
+	
+		// update aerial map to match:
+		map.panTo(panorama.getLocation().latLng);
+		marker.setPosition(panorama.getLocation().latLng);
+		
+		// get all possible links from this pano:
+		var links =  panorama.getLinks();
+		
+		// pick a link to follow:
+		var selected = links[0];
+		if (links.length == 0) {
+			throw {
+				name: "MyMapError",
+				message: "We got lost -- this location has no links."
+			};
+		} else if (links.length > 1) {
+			// choose randomly but avoid going back to previous:
+			do {
+				selected = links[rand(links.length)];
+			} while (selected.pano == camefrom);
+		} 
+		// update our move:
+		camefrom = panorama.getPano();
+		
+		// update our bearing by comparing new & previous position
+		var newpos = panorama.getPosition();
+		var bearing = getBearing(pos, newpos);
+		// update the position:
+		pos = newpos;
+		
+		// rotate the view to face our bearing:
+		panorama.setPov({
+			heading: bearing,
+			pitch: 0
+		});
+		
+		// a little later, jump to our selected direction:
+		setTimeout(function moveto(pano) {
+			panorama.setPano(selected.pano);	
+		}, 1000);
+		
+	});
+		
+	map.setStreetView(panorama);
+});
+    </script>
+  </body>
+</html>

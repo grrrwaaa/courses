@@ -99,3 +99,10 @@ Example maxurl  request for openweathermap:
 - You must not use the images for commercial gain, nor to break any law.
 - You shall place the following notice prominently on your application: "This product uses the Flickr API but is not endorsed or certified by Flickr."
 4. The Flickr API works a little bit differently and instead of JSON it works with JSONP (JSON with Padding). The difference between these two formats is that JSONP returns a name of a function in its response and this function will handle the response data in your code.
+
+### Google Maps
+
+- [Some lovely examples](https://developers.google.com/maps/documentation/javascript/)
+- Pretty generous: "If your site or application generates 25 000 map loads or more each day, for more than 90 consecutive days, we’ll get in touch with you to talk about payment."
+- [Tutorial](https://developers.google.com/maps/documentation/javascript/tutorial)
+
