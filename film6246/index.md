@@ -19,7 +19,7 @@
 
 Soon after: [Osmose](http://www.immersence.com/osmose/), Char Davies, 1995. 
 
-<iframe width="640" height="480" src="//www.youtube.com/embed/54O4VP3tCoY?rel=0" frameborder="0" allowfullscreen></iframe>For the next two decades, VR develops in research labs. Only with advances in GPU technology (largely driven by game industry) and portable displays (largely driven by smartphone industry) do devices such as the [Oculus Rift](oculus.html) become feasible. 
+![Osmose](http://www.immersence.com/centralizedImages/osmose/Osm_Tree_600@2x.jpg)For the next two decades, VR develops in research labs. Only with advances in GPU technology (largely driven by game industry) and portable displays (largely driven by smartphone industry) do devices such as the [Oculus Rift](oculus.html) become feasible. 
 
 ## Cinematic VR
 

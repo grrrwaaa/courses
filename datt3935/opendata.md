@@ -69,7 +69,7 @@ Example maxurl  request for openweathermap:
 	}
 
 [Google Data APIs](https://developers.google.com/gdata/docs/directory) -- includes Picasa, YouTube, Maps, Translate etc.
-
+x
 [Open Street Map](http://wiki.openstreetmap.org/wiki/API)
 
 [NASA](http://open.nasa.gov/developer/)
@@ -106,3 +106,4 @@ Example maxurl  request for openweathermap:
 - Pretty generous: "If your site or application generates 25 000 map loads or more each day, for more than 90 consecutive days, we’ll get in touch with you to talk about payment."
 - [Tutorial](https://developers.google.com/maps/documentation/javascript/tutorial)
 
+[![xkcd](http://imgs.xkcd.com/comics/api.png)](https://xkcd.com/1481/)
