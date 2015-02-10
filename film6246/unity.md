@@ -19,6 +19,21 @@ To use the Leap Motion VR kit, currently you will be restricted to using Windows
 	- [More free 3D models](http://answers.unity3d.com/questions/16650/game-asset-website-list-free-and-paid-textures-mod.html)
 	- [More free sounds and music](http://unity3diy.blogspot.ca/2014/08/top-16-best-free-music-and-sound-effect.html)
 
+## Unity Free limitations
+
+There are some notable limitations in the free version of Unity, including:
+
+- No movie file playback
+	- But [here is a plugin](http://forum.unity3d.com/threads/movieplayer-for-unity-plays-mjpeg.229458/) that can do it for Unity Free and MJPEG files.
+- No audio effects
+- No inverse kinematics
+- No realtime spotlights/soft shadows, light probes, HDR
+- No lightmapping (global illumination)
+- No render to texture (reflections, refractions, cctv, feedback or full-screen post effects)
+- [full list here](http://unity3d.com/unity/licenses)
+
+If any of these are essential to your project, you might [consider Max/MSP/Jitter](maxmspjitter.html) instead.
+
 ## Editor tutorial notes
 
 ### Scene view
