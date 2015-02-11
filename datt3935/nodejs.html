@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Node.js</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="github.css" type="text/css" />
+  </head>
+  <body>
+  	<nav>
+	<ul>
+	<li><a href="README.html" alt="README">README</a></li>
+<li><a href="assignments.html" alt="assignments">assignments</a></li>
+<li><a href="database.html" alt="database">database</a></li>
+<li><a href="index.html" alt="index">index</a></li>
+<li><a href="js.html" alt="js">js</a></li>
+<li><a href="nodejs.html" alt="nodejs">nodejs</a></li>
+<li><a href="opendata.html" alt="opendata">opendata</a></li>
+<li><a href="software.html" alt="software">software</a></li>
+	</ul></nav>	
+	<div id="main">
+	<h1 id="node-js">Node.js</h1>
+<p>Dynamic sites, web apps and services can use any technology capable of TCP sockets and HTTP parsing, but we will concentrate on using <strong>node.js</strong> (AKA Node), which is also JavaScript based and runs on Mac/Linux/Windows. We can also use Node for general programming tasks, including static site generation.</p>
+<blockquote>
+<p>Node.js® is a platform built on Chrome&#39;s JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.</p>
+</blockquote>
+<p><strong>Windows</strong>: download the installer from <a href="http://nodejs.org/download/">node.js</a></p>
+<p>To run, open a command prompt (Start Menu / Accessories / Command Prompt or Start Menu / &quot;cmd&quot; / enter), and type &quot;node&quot; (followed by enter). </p>
+<p><strong>Mac</strong>: download the installer from <a href="http://nodejs.org/download/">node.js</a> or install via brew: </p>
+<pre><code>brew <span class="hljs-keyword">install</span> node
+</code></pre><p>To run from a console (Applications / Utilities / Console) type &quot;node&quot; followed by enter. </p>
+<p>Mostly node is used from a console (AKA terminal, AKA command prompt). On mac, the terminal is in Applications / Utilities. To issue commands as a superuser, type &quot;sudo&quot; before the command. On Windows, it is in Start / Accessories / Command Prompt, however you can also open it by pressing the Windows key, typing &quot;cmd&quot;, and enter. To open as an administrator, press the Windows key, type &quot;cmd&quot;, then ctrl-shift-enter. </p>
+<h2 id="what-does-node-do-">What does Node do?</h2>
+<p>Actually quite a lot. At its core, Node is an event-based application framework, which is primarily designed for file and web based input &amp; output. <a href="http://nodejs.org/api/index.html">Here is the full reference manual</a>, which gives a brief idea. It has a very strong emphasis on asynchronous programming, which means lots and lots of callbacks!</p>
+<p>Here&#39;s a minimal hello world server:</p>
+<pre><code><span class="hljs-keyword">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>);
+<span class="hljs-keyword">var</span> app = http.createServer(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(req, res)</span> </span>{
+  res.setHeader(<span class="hljs-number">200</span>, {<span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'text/plain'</span>});
+  res.end(<span class="hljs-string">"hello world"</span>);
+});
+app.listen(<span class="hljs-number">3000</span>);
+</code></pre><p>Here&#39;s a minimal hello world JSON server:</p>
+<pre><code><span class="hljs-keyword">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>);
+<span class="hljs-keyword">var</span> app = http.createServer(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(req, res)</span> </span>{
+  res.setHeader(<span class="hljs-number">200</span>, {<span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'text/plain'</span>});
+  res.end(<span class="hljs-built_in">JSON</span>.stringify({ <span class="hljs-string">"hello"</span>: <span class="hljs-string">"world"</span> }));
+});
+app.listen(<span class="hljs-number">3000</span>);
+</code></pre><p>You can build very complex applications with what Node provides, but a lot of hard work has already gone into solving common problems, and we can leverage that through NPM:</p>
+<h2 id="npm-packages-">NPM (packages)</h2>
+<p>Node can be extended with additional modules through <a href="https://www.npmjs.com">NPM</a>, the node package manager. There are more than 100,000 packages available!</p>
+<p>On Windows, open a command prompt <strong>as administrator</strong> and type npm. If you have an error &quot;ENOENT, stat &#39;C:\Users\RT\AppData\Roaming\npm&#39;&quot;, then manually create the folder at this path and try again. </p>
+<p>On Mac, type &quot;npm&quot; in the console. </p>
+<p>Typically when you create a new node project, you&#39;ll create a <em>package.json</em> file to describe it. Here&#39;s a small example package.json:</p>
+<pre><code class="lang-javascript">{
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"example"</span></span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"A small example Node.js project for DAT 3935"</span></span>,
+    "<span class="hljs-attribute">dependencies</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">express</span>": <span class="hljs-value"><span class="hljs-string">"4.x"</span></span>,
+        "<span class="hljs-attribute">xmlhttprequest</span>": <span class="hljs-value"><span class="hljs-string">"*"</span>
+    </span>}
+</span>}
+</code></pre>
+<p>A full list of the possible fields in package.json is <a href="http://browsenpm.org/package.json">here</a>.</p>
+<p>The dependencies dictionary lists the additional npm modules (and respective versions thereof) used by our project. Once you have created your package.json, you can run </p>
+<pre><code>npm <span class="hljs-keyword">install</span>
+</code></pre><p>in the same path, and all the dependent modules will be downloaded and built in the <code>/node_modules</code> subfolder. </p>
+<p>We&#39;re going to look at a couple of modules in particular.</p>
+<h2 id="xmlhttprequest-module">xmlhttprequest module</h2>
+<p>The <a href="https://www.npmjs.com/package/xmlhttprequest">xmlhttprequest</a> module mimics the browser&#39;s XMLHttpRequest object, so that code for the browser can be easily used in the server.</p>
+<p>To load in this module, add this to your header:</p>
+<pre><code class="lang-javascript"><span class="hljs-reserved">var</span> XMLHttpRequest = <span class="hljs-built_in">require</span>(<span class="hljs-string">"xmlhttprequest"</span>).XMLHttpRequest;
+</code></pre>
+<p>Then you can use it just as you did in the browser:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> req = <span class="hljs-keyword">new</span> XMLHttpRequest();
+req.open(<span class="hljs-string">"GET"</span>, <span class="hljs-string">"http://myttc.ca/york_university_common.json"</span>);
+req.onreadystatechange = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.status == <span class="hljs-number">200</span> &amp;&amp; <span class="hljs-keyword">this</span>.readyState == <span class="hljs-number">4</span>) {
+        <span class="hljs-keyword">var</span> data = <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-keyword">this</span>.responseText);
+        <span class="hljs-built_in">console</span>.log(data);
+    }
+};
+req.send();
+</code></pre>
+<p>Note that, unlike the browser, xmlhttprequest in Node.js supports cross-origin requests. Many mash-up services are now constructed server-side, with client code dedicated to rendering.</p>
+<h2 id="express">Express</h2>
+<p>Express is one of the most widely-used packages for building web servers in Node. Pull in express, and create the main app, as follows:</p>
+<pre><code><span class="hljs-reserved">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
+<span class="hljs-reserved">var</span> app = express();
+</code></pre><p>Here&#39;s our plain old hello world:</p>
+<pre><code>app.<span class="hljs-built_in">get</span>(<span class="hljs-string">'/'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req, res)</span>{</span>
+  <span class="hljs-keyword">res</span>.send(<span class="hljs-string">'hello world'</span>);
+});
+
+// <span class="hljs-keyword">set</span> <span class="hljs-keyword">up</span> other routes here
+
+app.listen(<span class="hljs-number">3000</span>);
+</code></pre><p>Routes are paths after the domain name in the application. They don&#39;t need to resolve to actual files, but can be thought of as API methods. <a href="http://expressjs.com/guide/routing.html">Express supports great flexibility in specifying routes</a>.</p>
+<p>The <a href="http://expressjs.com/4x/api.html">documentation</a> shows how multiple routes can be set up, handling many different kinds of requests and responses. For example, we can serve json data simply by passing an object rather than a string:</p>
+<pre><code>app.<span class="hljs-keyword">get</span>(<span class="hljs-string">'/json'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req, res)</span></span>{
+  res.send({ <span class="hljs-string">"hello"</span>: <span class="hljs-string">"world"</span> });
+});
+</code></pre><h2 id="cloud-9-ide">Cloud 9 IDE</h2>
+<p>For server-side programming, we can use the <a href="https://c9.io">Cloud 9 IDE</a>. You can sign up for a free account using your Github/Bitbucket ID. Cloud 9 gives you a Ubuntu Linux based server, and a browser-based IDE including multi-user live programming. </p>
+<p><em>If you have trouble with Error: EADDRINUSE, it may be that you already have a server running. Switch to the terminal tab in Cloud 9 and try the following, then restart your server script:</em></p>
+<pre><code><span class="hljs-title">kill</span> $(ps ax | grep <span class="hljs-string">'[j]s'</span> | awk <span class="hljs-string">'{ print <span class="hljs-variable">$1</span> }'</span>)
+killall -<span class="hljs-number">9</span> apache2
+</code></pre>
+	</div>
+	<footer>
+		&copy; 2015 Graham Wakefield
+	</footer>
+  </body>
+</html>
