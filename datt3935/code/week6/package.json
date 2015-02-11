@@ -1,6 +1,7 @@
 {
-	"name": "example",
-	"description": "A small example Node.js project for DAT 3935",
+	"name": "week6server",
+	"version": "0.0.0",
+	"description": "an example for the class",
 	"dependencies": {
 		"express": "4.x",
 		"xmlhttprequest": "*"
