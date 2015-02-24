@@ -400,7 +400,6 @@ For JSONP, [see tutorial](http://learn.jquery.com/ajax/working-with-jsonp/)
 - [The Google Visualization API](https://developers.google.com/chart/interactive/docs/reference)
 - [Sigma graph drawing](http://sigmajs.org)
 
-
 ## Server-side programming
 
 Sites can be **static** or **dynamic**. A dynamic site generates files in response to requests from a client. A static site just returns pre-existing files. Note that static files can still embed JavaScript for dynamic content generated or accessed from the client. 

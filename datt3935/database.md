@@ -75,20 +75,6 @@ For Edward Tufte, the *design principle* of the information graphic should suppo
 
 [Scientific visualization](http://en.wikipedia.org/wiki/Scientific_visualization) is primarily concerned with the visualization of three-dimensional phenomena, to graphically illustrate scientific data to enable scientists to understand, illustrate, and glean insight from their data. [Information visualization](http://en.wikipedia.org/wiki/Information_visualization) is the study of (interactive) visual representations of abstract data to reinforce human cognition. The abstract data include both numerical and non-numerical data, such as text and geographic information. 
 
-### The Ben Fry data visualization process
-
-[Using d3.js](https://www.dashingd3js.com/the-data-visualization-process)
-
-In the first chapter of the Visualizing Data book, Ben Fry sets up the Data Visualization process as a series of steps:
-
-1. Acquire
-- Parse
-- Filter
-- Mine
-- Represent
-- Refine
-- Interact
-
 ----
 
 ## REST: Representational state transfer

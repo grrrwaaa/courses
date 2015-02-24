@@ -1,16 +1,26 @@
 # Assignments
 
-## Assignment 1: Practice for the Canadian Open Data Experience
+## Assignment 1: Working with APIs
 
 [CANADIAN OPEN DATA EXPERIENCE](https://www.canadianopendataexperience.ca), Feb 20-22, 2015:
 
 > The Canadian Open Data Experience (CODE) is an intense 48-hour coding sprint where innovators from coast to coast compete to build the best app utilizing federal government data from [Canada's Open Government Portal](http://open.canada.ca). Accelerating Innovation and Hacktivating Open Data: CODE is the first hackathon ever to be funded by the Government of Canada.
 
-As a practice-run for this event, the first assignment will be to find an interesting open data API (possibly, but not necessarily from [open.canada.ca](http://open.canada.ca/en/access-our-application-programming-interface-api)) and visualize (and/or sonify) it. You are welcome to use either Max or HTML5 for your work. The deadline for submission is **before class Feb 4th**. 
+Anticipating this event, the first assignment will be to find an interesting open data API (possibly, but not necessarily from [open.canada.ca](http://open.canada.ca/en/access-our-application-programming-interface-api)) and visualize (and/or sonify) it. You are welcome to use either Max or HTML5 for your work. The deadline for submission is **before class Feb 4th**. 
+
+## Assignment 2: Interactive (or animated) visualisation
+
+For this assignment we will concentrate on the engaging visual (and sonic?) display of data. The data does not need to be dynamic -- you are welcome to use any kind of input data whether online or offline. The focus this time is in how this data is conveyed or utilized visually (and/or aurally), and how this occurs over time through animation and/or interaction.
+
+Your prototype could be an explanatory presentation, an exploratory tool, or a work of art, but you should make that clear in the documentation so that I can appropriately evaluate it. In an explanatory presentation, design is evaluated in terms of how it conveys the message or illuminates the data. In an exploratory tool, design is evaluated in terms of how it gives more powerful access to data, and enables insight. A work of art will be evaluated according to the terms, motivations and concepts by which you describe it; but these terms must include reference to the data.
+
+You are welcome to use either Max or HTML5 (e.g. D3.js) for your work. The deadline for submission is **before class March 11th**. 
+
+## Submission guidelines
 
 Submit the project as an archive (zip file), and make sure that this file includes ALL resources necessary for it to run -- all max patchers and subpatchers, any additional extensions required (mac compatible), images, sounds and other media resources, javascript libraries, etc.
 
-Document your work (including Max patchers, JavaScript and HTML files) using comments liberally. Try to use helpful variable names, e.g. ```width``` is more communicative than ```var3```.
+Document your work with comments liberally. Try to use helpful variable names, e.g. ```width``` is more communicative than ```var3```.
 
 Add a **README.txt** file including the following items. This file is essential to help me evaluate your work:
 
