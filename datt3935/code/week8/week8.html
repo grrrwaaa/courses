@@ -17,6 +17,7 @@
 var data = [];
 for (var i=0; i<200; i++) {
 	data.push({
+		unique: i,
 		x: Math.random(),
 		y: Math.random(),
 		value: Math.random()
@@ -34,7 +35,9 @@ var graph = d3.select("#graph");
 // (by attaching the data, and using enter() & append())
 // style the tags according to the data:
 var circles = graph.selectAll("circle")
-	.data(data)
+	.data(data, function(d) {
+		return d.unique();
+	})
 	.enter()
 	.append("circle")
 	.attr("cx", 125)
