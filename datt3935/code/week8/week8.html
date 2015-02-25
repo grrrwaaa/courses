@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>D3 example</title>
+    <script type="text/javascript" src="d3.min.js"></script>
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <svg width=250 height=250 id="graph">
+    	
+    </svg>
+    <script>
+    
+// generate some test data to work with:
+var data = [];
+for (var i=0; i<200; i++) {
+	data.push({
+		x: Math.random(),
+		y: Math.random(),
+		value: Math.random()
+	});
+}
+
+// create mappings from input domain to output range:
+var xscale = d3.scale.linear().domain([0, 1]).range([0, 250]);
+var yscale = d3.scale.linear().domain([0, 1]).range([0, 250]);
+
+// find the <svg> canvas with id="graph":
+var graph = d3.select("#graph");
+
+// create the collection of needed <circle> tags:
+// (by attaching the data, and using enter() & append())
+// style the tags according to the data:
+var circles = graph.selectAll("circle")
+	.data(data)
+	.enter()
+	.append("circle")
+	.attr("cx", 125)
+	.attr("cy", 125)
+	.attr("r", 1);
+	
+graph.selectAll("circle")
+	.transition()
+	.delay(function(d, i) {
+		return i*10;
+	})
+	.duration(2000)
+	.attr("cx", function(d, i) {
+		return xscale(d.x);
+	})
+	.attr("cy", function(d, i) {
+		return yscale(d.y);
+	})
+	.attr("r", function(d, u) {
+		return d.value * 10;
+	});
+
+
+// show the same data as HTML tags:
+var elements = d3.selectAll("p")
+	.data(data)
+	.enter()
+	.append("p");
+	
+elements
+	.text(function(d, i) {
+		return "x: " + d.x + ", y: " + d.y;
+	})
+	.style("color", function(d, i) {
+		return i % 2 ? "gray" : "darkgray";
+	})
+	.style("font-size", function(d, i) {
+		return d/10 + "pt";
+	});
+
+    </script>
+  </body>
+</html>
+
