@@ -27,3 +27,47 @@ Unity has an Asset Store that is incredibly full of models, textures and other p
 > E.g. I am authoring an extension to support the Oculus Rift, which can be downloaded [here](https://github.com/grrrwaaa/max_oculus). I also have extensions written for the Kinect, for AR marker tracking, for spatialized audio, etc.
 
 Unity Free is free, Unity Pro is $1500. Max is $250 or $10/month for students. Unity apps will export for mobile and web as well as major desktop platforms. Max apps only export to Windows and Mac. Exported Unity apps have some license limitations. Exported Max apps have no license limitations.
+
+## Basic maxing
+
+Main document is called a patcher, or patch. Patchers can be in: 
+- edit mode, for creating objects and drawing the wires (aka cables) between them. Use the padlock icon or Cmd-E to toggle edit mode.
+- locked mode, in which UI objects like buttons, toggles, number boxes, sliders etc. can be interacted with.
+- presentation mode, in which only specific objects are visible, hiding the actual patching from the user.
+
+### Edit mode
+
+Most commonly used keys for creating new objects:
+- **n**: generic object
+- **m**: message box object
+- **b**: button object (outputs a "bang")
+- **t**: toggle object (outputs 0 or 1 alternately)
+- **f**: number box object (for decimal numbers)
+- **i**: number box object (for whole numbers only)
+
+Objects have inlets and outlets. Wires connect outlets of one object to the inlets of another. Some outlets or inlets have specific types, which must match. In edit mode, mouse over an inlet or outlet for the tooltip to tell you what it does.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
