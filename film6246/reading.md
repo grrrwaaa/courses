@@ -13,6 +13,8 @@ Carse, J. Finite and Infinite Games, Chapter 1. [Seen here](http://wtf.tw/ref/ca
 
 [Michael Samyn. Not a Manifesto](http://notgames.org/blog/2010/03/19/not-a-manifesto/)
 
+Schell, Jesse. The Art of Game Design: A book of lenses. CRC Press, 2014. ([seen here](http://www.sfu.ca/~lws2/summercamp/Art_Game_Design.pdf))
+
 ## Art
 
 [Char Davies. Virtual Space.](http://www.immersence.com) 

@@ -36,7 +36,7 @@ var graph = d3.select("#graph");
 // style the tags according to the data:
 var circles = graph.selectAll("circle")
 	.data(data, function(d) {
-		return d.unique();
+		return d.unique;
 	})
 	.enter()
 	.append("circle")
