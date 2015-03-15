@@ -10,7 +10,7 @@ Anticipating this event, the first assignment will be to find an interesting ope
 
 ## Assignment 2: Interactive (or animated) visualisation
 
-For this assignment we will concentrate on the engaging visual (and sonic?) display of data. The data does not need to be dynamic -- you are welcome to use any kind of input data whether online or offline. The focus this time is in how this data is conveyed or utilized visually (and/or aurally), and how this occurs over time through animation and/or interaction.
+For this assignment we will concentrate on the engaging visual (and sonic?) display of data. The data does not need to be dynamic -- you are welcome to use any kind of input data whether online or offline. [It could be as simple as the digits of Pi](http://www.washingtonpost.com/blogs/wonkblog/wp/2015/03/14/10-stunning-images-show-the-beauty-hidden-in-pi/). The focus this time is in how this data is conveyed or utilized visually (and/or aurally), and how this occurs over time through animation and/or interaction.
 
 Your prototype could be an explanatory presentation, an exploratory tool, or a work of art, but you should make that clear in the documentation so that I can appropriately evaluate it. In an explanatory presentation, design is evaluated in terms of how it conveys the message or illuminates the data. In an exploratory tool, design is evaluated in terms of how it gives more powerful access to data, and enables insight. A work of art will be evaluated according to the terms, motivations and concepts by which you describe it; but these terms must include reference to the data.
 
