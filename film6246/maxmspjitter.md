@@ -35,22 +35,24 @@ Main document is called a patcher, or patch. Patchers can be in:
 - locked mode, in which UI objects like buttons, toggles, number boxes, sliders etc. can be interacted with.
 - presentation mode, in which only specific objects are visible, hiding the actual patching from the user.
 
-### Edit mode
+Objects have inlets and outlets. Wires connect outlets of one object to the inlets of another. Some outlets or inlets have specific types, which must match. In edit mode, mouse over an inlet or outlet for the tooltip to tell you what it does.
 
-Most commonly used keys for creating new objects:
+In **edit mode**, the most commonly used keys for creating new objects are:
 - **n**: generic object
 - **m**: message box object
 - **b**: button object (outputs a "bang")
 - **t**: toggle object (outputs 0 or 1 alternately)
-- **f**: number box object (for decimal numbers)
-- **i**: number box object (for whole numbers only)
+- **f**: number box object (decimal numbers)
 
-Objects have inlets and outlets. Wires connect outlets of one object to the inlets of another. Some outlets or inlets have specific types, which must match. In edit mode, mouse over an inlet or outlet for the tooltip to tell you what it does.
+## In-class screen recordings
 
+Introduction to Max/MSP/Jitter:
 
+<iframe width="640" height="480" src="https://www.youtube.com/embed/Fr17qFv5Qks?rel=0" frameborder="0" allowfullscreen></iframe>
 
+A first 3D scene:
 
-
+<iframe width="640" height="480" src="https://www.youtube.com/embed/JCt4PwtbWmU?rel=0" frameborder="0" allowfullscreen></iframe>
 
 
 
