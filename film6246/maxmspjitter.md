@@ -54,6 +54,7 @@ A first 3D scene:
 
 <iframe width="640" height="480" src="https://www.youtube.com/embed/JCt4PwtbWmU?rel=0" frameborder="0" allowfullscreen></iframe>
 
+The files created in these screen recordings can be [downloaded from here](https://github.com/grrrwaaa/courses/tree/master/film6246/max).
 
 
 
