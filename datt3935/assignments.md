@@ -14,7 +14,7 @@ For this assignment we will concentrate on the engaging visual (and sonic?) disp
 
 Your prototype could be an explanatory presentation, an exploratory tool, or a work of art, but you should make that clear in the documentation so that I can appropriately evaluate it. In an explanatory presentation, design is evaluated in terms of how it conveys the message or illuminates the data. In an exploratory tool, design is evaluated in terms of how it gives more powerful access to data, and enables insight. A work of art will be evaluated according to the terms, motivations and concepts by which you describe it; but these terms must include reference to the data.
 
-You are welcome to use either Max or HTML5 (e.g. D3.js) for your work. The deadline for submission is **before class March 11th**. 
+You are welcome to use either Max or HTML5 (e.g. D3.js) for your work. The deadline for submission is **before class March 25th**. 
 
 ## Submission guidelines
 
@@ -52,7 +52,6 @@ Collaboration is permitted, encouraged, but not required. For collaborative proj
 
 ## Course evaluation criteria
 
-- Assignments: 40%
-- Quiz: 10%
-- Final project: 40%
+- Assignments: 45%
+- Final project: 45%
 - Participation: 10%
