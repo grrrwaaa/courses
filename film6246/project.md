@@ -3,17 +3,7 @@
 
 [Project plan in Google Docs](https://docs.google.com/document/d/18WcE7htm6pOg-tiATDiLHA6p9mKLNJMtcEYSmV14Br4/edit)
 
-## Experience Design
-
-We can draw inspiration from [The Art of Game Design](http://www.amazon.ca/The-Art-Game-Design-Edition/dp/1466598646) ([seen here](http://www.sfu.ca/~lws2/summercamp/Art_Game_Design.pdf)). Although this book *is* oriented toward games in particular, the approach it takes is broad enough that most elements can be applied to experiences whether game-like or notgame-like. Written by one of the world's top game designers, it addresses game design holistically through a set of questions drawn in concurrent perspectives, or *"lenses"*, gradually building up a map that looks like this:
-
-![The Art of Game Design](http://www.gamasutra.com/db_area/images/feature/3934/image002.jpg)
-
-You can also get the lenses on your [phone](https://play.google.com/store/apps/details?id=com.schellgames.deckoflenses).
-
-----
-
-## Design questions
+## Some design questions
 
 Here are a set of questions that may help you come up with a design proposal for the project. Mainly these are questions specific to the interactive/VR nature of the medium; in addition most themes in film production are also applicable. 
 
@@ -134,4 +124,11 @@ These questions may be filtered according to a project theme, or considering the
 	- Recorded sounds (and samples and instruments) vs. synthetic sounds and effects
 	- Image-sound correlations and disjunctions; Michel Chion's l'Audiovision (seen [http://monoskop.org/images/6/6d/Chion_Michel_Audio-Vision.pdf](here)) is a significant reference
 	
-	
+## Experience Design in Games
+
+We can draw inspiration from [The Art of Game Design](http://www.amazon.ca/The-Art-Game-Design-Edition/dp/1466598646) ([seen here](http://www.sfu.ca/~lws2/summercamp/Art_Game_Design.pdf)). Although this book *is* oriented toward games in particular, the approach it takes is broad enough that most elements can be applied to experiences whether game-like or notgame-like. Written by one of the world's top game designers, it addresses game design holistically through a set of questions drawn in concurrent perspectives, or *"lenses"*, gradually building up a map that looks like this:
+
+![The Art of Game Design](http://www.gamasutra.com/db_area/images/feature/3934/image002.jpg)
+
+You can also get the lenses on your [phone](https://play.google.com/store/apps/details?id=com.schellgames.deckoflenses).
+
