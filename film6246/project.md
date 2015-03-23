@@ -132,3 +132,35 @@ We can draw inspiration from [The Art of Game Design](http://www.amazon.ca/The-A
 
 You can also get the lenses on your [phone](https://play.google.com/store/apps/details?id=com.schellgames.deckoflenses).
 
+## Assets
+
+Here are some places where free 3D models can be downloaded. Depending on what your intended use for the project is, pay special attention to the licensing terms of these models -- this is intellectual property.
+
+- [Google 3D Warehouse](https://3dwarehouse.sketchup.com/?redirect=1)
+- [3D models for free](http://tf3dm.com) 
+- [Turbosquid](http://www.turbosquid.com/Search/?KEYWORD=Free)
+- [Exchange 3D](http://www.exchange3d.com/Free%203D%20Models/cat_35.html)
+- [3DVia](http://www.3dvia.com/search/?search%5Bquery%5D=free&search%5Bresults_per_page%5D=12&search%5Bsort_order%5D=Rank&search%5Bfile_types%5D=1)
+
+For Max/MSP/Jitter, the best format is *Collada* (".dae" file extension). Jitter can also import OBJ (".obj" extension), and might also be able to import other formats. Here's an example patch for quickly checkout out whether a downloaded 3D model works (copy the text below, and in Max choose File -> New from Clipboard):
+
+<pre><code>
+----------begin_max5_patcher----------
+696.3ocyV98aaBCDG+YxeEm3YVD+H.M6ons2llzjl1aSSQNXOhaM1Y1llzU0
++2msAZHqERRaWWegHewb99943ty2NwyekXGQ4CuG9N34c6DOOmIqAu10d9Un
+cELjxsM+BQUEgq8CZ9OMYm1Y+yBwU.RJp4XXKUuF1F.p..E.3.3WAvugqH2n
+5dMFkSJL608twsF2fzEqo7xkRRgtIlhmkNML.hisOiRCs+jZV.+n8cnX2oKV
+c46hR57tReCi3r2YYU8pULhhhI8OPdcEkyHZmxh5hBIQYDHRSE7Chj38QRX6
+i6CiF+22MFeKp0cNOzZ7tISrOBdlj9qDDFnb.AeTvXHLBDR3Ke3SvOolP3LA
+b1ENxlj0CvI4C.33gA74fxnvYtSKN6+NK+VsjC50TEH39iPolb+7dPJd1.PJ
+5Lgz+B4VQTJTI4AxEwoUKsIk6IQyAouYCoQo992KpGqbLKxp84NPjG1UP7Xb
+X9Ihg3GUzQufhVZpWdpxsWwQR5XxM+UWtbxVyA+.0dIUO0llmhkzqIvhZ5RF
+UoIbHZXHDbLPzzFtqMwr7wPQxYV.bHJheYQQIaZAphHQvBsjtQfgHXASTbEy
+NuZXjXd2kkrkVeUKImLfZqIBGszH9MFfpDXBaTRTgLva2woPymGW3XQyjkgX
+P1qNCzhxx8yGefLo1QkGUaw4c89GdBP59AIRymdZhbIgiZ6wG9bj8KbahsBI
+COZSgUHd4Il0ybLIMZrjdzyJomzS8Nu6tjyec4UW7YseHRThZYQmxZaRA6iQ
+LQoob28T5sm3C1yZJFS38ygXpxlVwCOk9Til4uohl7SHZxdSwljWsnI8Dhln
+mXzz7QMZylqIRUqKcAhoh9RgztLOvsjxaV57n4BNWS61u69E9HooHUapPsyt
+rkY6tnogqusWujWSaamXN46l7G.Tw2CJ
+-----------end_max5_patcher-----------
+</code></pre>
