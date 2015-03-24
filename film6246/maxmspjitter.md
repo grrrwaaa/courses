@@ -54,6 +54,18 @@ A first 3D scene:
 
 <iframe width="640" height="480" src="https://www.youtube.com/embed/JCt4PwtbWmU?rel=0" frameborder="0" allowfullscreen></iframe>
 
+Finding & importing 3D models:
+
+<iframe width="640" height="480" src="https://www.youtube.com/embed/1g-RweUiouQ?rel=0" frameborder="0" allowfullscreen></iframe>
+
+Making video screens out of points:
+
+<iframe width="640" height="480" src="https://www.youtube.com/embed/RyZaTJR0sQw?rel=0" frameborder="0" allowfullscreen></iframe>
+
+Dropping in audio tracks:
+
+<iframe width="640" height="480" src="https://www.youtube.com/embed/3NDOdCoring?rel=0" frameborder="0" allowfullscreen></iframe>
+
 The files created in these screen recordings can be [downloaded from here](https://github.com/grrrwaaa/courses/tree/master/film6246/max).
 
 

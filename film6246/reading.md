@@ -10,6 +10,12 @@ Krueger, M. [Artificial Reality](http://www.amazon.ca/Artificial-Reality-2-2nd-E
 
 Viola, B. [Will There Be Condominiums in Data Space?](http://classes.design.ucla.edu/Spring06/259M/readings/viola.pdf), 1995
 
+Heim, M. The Metaphpysics of Virtual Reality. OUP, 1993. [Excerpt](http://web.stanford.edu/class/history34q/readings/Michael_Heim/HeimEssenceVR.html)
+
+[An Interview with Jaron Lanier](http://www.jaronlanier.com/jaron%20whole%20earth%20review.pdf), 1989
+
+Jim Blascovich & Jeremy Bailenson. [Infinite reality](http://www.infinitereality.org/authors.html) -- Introduction excerpt [here](http://www.infinitereality.org/book/introduction_excerpt.pdf)
+
 ## Game
 
 McGonigal, J. Reality is Broken, Chapter 1. [Seen here](http://hci.stanford.edu/courses/cs047n/readings/Reality_is_Broken.pdf)
