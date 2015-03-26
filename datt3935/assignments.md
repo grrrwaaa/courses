@@ -18,11 +18,11 @@ You are welcome to use either Max or HTML5 (e.g. D3.js) for your work. The deadl
 
 ## Final assignment: Data in context
 
-The final assignment will be a significant application of themes and techniques of the course to a project of contextual relevance, selected from one of the four categories listed below.
+The final assignment will be a significant application of themes and techniques of the course to a project of contextual relevance, selected from one of the four categories listed below. Please let me know of your project plan as soon as possible, so that I can shape lecture content in the final weeks to best assist you.
 
 Collaboration is permitted, encouraged, but not required. For collaborative projects each student must include a clear statement identifying which parts of the project they were responsible for. 
 
-There will be no final presentation event. Final assignments will be shared online. For those projects implemented in HTML/JS, we can host via the course website, or elsewhere if you prefer. For those implemented in Max, a video documenting the work should be uploaded to a suitable host (such as Vimeo or Youtube). In other respects submission guidelines are the same as previous assignments.
+There will be no final presentation event. Final assignments will be shared online. For those projects implemented in HTML/JS, we can host via the course website, or elsewhere if you prefer. For those implemented in Max, a video documenting the work should be uploaded to a suitable host (such as Vimeo or Youtube). In other respects submission guidelines are the same as previous assignments. 
 
 You are welcome to use either Max or HTML5 (e.g. D3.js) for your work.  The final assignment deadline is nominally the last day of classes (**April 20th**), however to provide additional cusioning, I will accept submissions up to the last day of examinations (May 6th). Nevertheless I encourage you to try to submit earlier if you can.
 
