@@ -24,6 +24,8 @@ Collaboration is permitted, encouraged, but not required. For collaborative proj
 
 There will be no final presentation event. Final assignments will be shared online. For those projects implemented in HTML/JS, we can host via the course website, or elsewhere if you prefer. For those implemented in Max, a video documenting the work should be uploaded to a suitable host (such as Vimeo or Youtube). In other respects submission guidelines are the same as previous assignments.
 
+You are welcome to use either Max or HTML5 (e.g. D3.js) for your work.  The final assignment deadline is nominally the last day of classes (**April 20th**), however to provide additional cusioning, I will accept submissions up to the last day of examinations (May 6th). Nevertheless I encourage you to try to submit earlier if you can.
+
 ### Option 1: Extend assignment 1 or 2 (or both combined!)
 
 The final project may extend existing work from one (or both) of the assignments or class materials. This is an opportunity to act upon ideas you identified as future directions for the assignments. The project's qualities will be evaluated only according to the new contributions.
