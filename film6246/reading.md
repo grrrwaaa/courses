@@ -16,11 +16,12 @@ Heim, M. The Metaphpysics of Virtual Reality. OUP, 1993. [Excerpt](http://web.st
 
 Jim Blascovich & Jeremy Bailenson. [Infinite reality](http://www.infinitereality.org/authors.html) -- Introduction excerpt [here](http://www.infinitereality.org/book/introduction_excerpt.pdf)
 
+
 ## Game
 
-McGonigal, J. Reality is Broken, Chapter 1. [Seen here](http://hci.stanford.edu/courses/cs047n/readings/Reality_is_Broken.pdf)
+McGonigal, J. Reality is Broken, Chapter 1. *[Seen here](http://hci.stanford.edu/courses/cs047n/readings/Reality_is_Broken.pdf)*
 
-Carse, J. Finite and Infinite Games, Chapter 1. [Seen here](http://wtf.tw/ref/carse.pdf)
+Carse, J. Finite and Infinite Games, Chapter 1. *[Seen here](http://wtf.tw/ref/carse.pdf)*
 
 [Eric Zimmerman & Heather Chaplin. Manifesto: The 21st Century Will Be Defined By Games](http://kotaku.com/manifesto-the-21st-century-will-be-defined-by-games-1275355204)
 ... and [Ian Bogost. Winning isn't everything.](https://medium.com/matter/winning-isnt-everything-255b3a26d1cf)
@@ -29,7 +30,7 @@ Carse, J. Finite and Infinite Games, Chapter 1. [Seen here](http://wtf.tw/ref/ca
 
 [Michael Samyn. Not a Manifesto](http://notgames.org/blog/2010/03/19/not-a-manifesto/)
 
-Schell, Jesse. The Art of Game Design: A book of lenses. CRC Press, 2014. ([seen here](http://www.sfu.ca/~lws2/summercamp/Art_Game_Design.pdf))
+Schell, Jesse. The Art of Game Design: A book of lenses. CRC Press, 2014. *([seen here](http://www.sfu.ca/~lws2/summercamp/Art_Game_Design.pdf))*
 
 ## Art
 
@@ -59,18 +60,40 @@ Novak, M. [Trans Terra Form](http://www.krcf.org/krcfhome/PRINT/nonlocated/nlonl
 Novak, M. [Speciation, Transvergence,
 Allogenesis: Notes on the Production of the Alien](http://www.mat.ucsb.edu/~marcos/transvergence.pdf) 
 
+Bachelard, G. [Poetics of Space](http://www.goodreads.com/book/show/13269.The_Poetics_of_Space)
+
 ## Collections
 
 [David Marlett's Cinemersia Research Literature Review](http://www.dmarlett.com/cin-lit-review)
 
 [Gene Youngblood. Expanded Cinema (almost any chapter could have inspirational relevance...)](http://www.vasulka.org/Kitchen/PDF_ExpandedCinema/book.pdf)
 
+## Blog etc.
+
+[http://www.roadtovr.com](http://www.roadtovr.com)
+
+[https://www.oculus.com/blog/](https://www.oculus.com/blog/)
+
+[http://www.theverge.com/a/virtual-reality](http://www.theverge.com/a/virtual-reality)
+
+[http://vrguy.blogspot.ca](http://vrguy.blogspot.ca)
+
+[http://doc-ok.org](http://doc-ok.org)
+
+[http://www.virtualrealityreviewer.com](http://www.virtualrealityreviewer.com)
+
+[http://www.polygon.com](http://www.polygon.com/2015/3/26/8294989/ccp-is-changing-the-virtual-reality-game-using-kinects)
+
+[http://www.reddit.com/r/virtualreality](http://www.reddit.com/r/virtualreality)
+
 ## Fiction
 
 > Perhaps the three best-known VR/cyberspace novels?
 
-Neal Stephenson. Snow Crash.
+Neal Stephenson. Snow Crash. [Excerpts](http://www.wenovel.com/topic/snow-crash.html)
 
-William Gibson. Neuromancer.
+William Gibson. [Neuromancer.](http://project.cyberpunk.ru/lib/neuromancer/)
 
-Ernest Cline. Ready Player One.
+Ernest Cline. [Ready Player One](http://io9.com/5831527/read-the-first-two-chapters-of-ernest-clines-dystopian-gamer-novel-ready-player-one). *[seen here](http://artax.karlin.mff.cuni.cz/~gurss5am/rpo/Ernest%20Cline%20-%20Ready%20Player%20One.pdf)*
+
+

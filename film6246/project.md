@@ -1,6 +1,10 @@
 
 # Final project
 
+In view of the current labour dispute conditions, the final project is no longer mandatory; an alternate option to submit a [paper](paper.html) is  also available.
+
+Additionally, you may wish to create projects within smaller groups, rather than everybody contributing to a single project. I will assess contributions according to scale. 
+
 [Project plan in Google Docs](https://docs.google.com/document/d/18WcE7htm6pOg-tiATDiLHA6p9mKLNJMtcEYSmV14Br4/edit)
 
 ## Some design questions
