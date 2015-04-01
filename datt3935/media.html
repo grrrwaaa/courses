@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Media are Data</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="github.css" type="text/css" />
+  </head>
+  <body>
+  	<nav>
+	<ul>
+	<li><a href="README.html" alt="README">README</a></li>
+<li><a href="assignments.html" alt="assignments">assignments</a></li>
+<li><a href="database.html" alt="database">database</a></li>
+<li><a href="index.html" alt="index">index</a></li>
+<li><a href="js.html" alt="js">js</a></li>
+<li><a href="media.html" alt="media">media</a></li>
+<li><a href="nodejs.html" alt="nodejs">nodejs</a></li>
+<li><a href="opendata.html" alt="opendata">opendata</a></li>
+<li><a href="software.html" alt="software">software</a></li>
+<li><a href="visualisation.html" alt="visualisation">visualisation</a></li>
+	</ul></nav>	
+	<div id="main">
+	<h1 id="media-are-data">Media are Data</h1>
+<p><img src="http://manovich.net/index.php/exhibitions/on-broadway" alt="On Broadway - Lev Manovich"></p>
+<p>Media objects themselves are considered databases. These objects could take the form of audio data (music, sound recordings, voice), visual data (paintings, photographs, drawings) and time-based visual data (cinema and other recordings), text (prose, poetry, software code), three-dimensional data (architecture, sculpture, spatially-captured data), etc. </p>
+<p>Lev Manovich has written extensively on the conceptualization of media as database, including characterizing computer games as navigable spatial databases (<a href="http://mitpress.mit.edu/books/language-new-media">Manovich, L. The Language of New Media. MIT Press, 2002.</a>); and has extensive course notes on the treatment of <a href="https://docs.google.com/document/d/1DsAQUQ7paWimVQMNwXDO5Qgm7xnpeqv9HQdpn9EPwsg">cultural artifacts as repositories of data</a>. </p>
+<blockquote>
+<p>After the novel, and subsequently cinema privileged narrative as the key form of cultural expression of the modern age, the computer age introduces its correlate — database. Many new media objects do not tell stories; they don&#39;t have beginning or end; in fact, they don&#39;t have any development, thematically, formally or otherwise which would organize their elements into a sequence. Instead, they are collections of individual items, where every item has the same significance as any other.</p>
+<p>Why does new media favor database form over others? Can we explain its popularity by analyzing the specificity of the digital medium and of computer programming? What is the relationship between database and another form, which has traditionally dominated human culture — narrative? These are the questions I will address in this article. <a href="http://manovich.net/content/04-projects/021-database-as-a-symbolic-form/19_article_1998.pdf">(Manovich, L. Database as a Symbolic Form, 1998)</a></p>
+</blockquote>
+<p>Some example artists working in this area:</p>
+<ul>
+<li><a href="http://www.georgelegrady.com">George Legrady</a>, </li>
+<li><a href="http://lukedubois.com">Luke Dubois</a>, </li>
+<li><a href="http://www.aaronkoblin.com/work.html">Aaron Koblin</a>, </li>
+<li><a href="http://benfry.com/distellamap/">Ben Fry</a>, </li>
+<li><a href="http://www.stefanieposavec.co.uk/-everything-in-between/#/writing-without-words/">Stefanie Posavec</a>, </li>
+<li><a href="http://manovich.net/index.php/exhibitions">Lev Manovich</a>,</li>
+<li><a href="http://hint.fm/projects/listen/">Fernanda Viégas and Martin Wattenberg</a></li>
+</ul>
+<h2 id="gathering-data-from-media">Gathering data from media</h2>
+<p>Objects-as-data can be considered alone, or as part of a collection; and may also be considered alongside metadata (such as song lyrics, film subtitles, historical documents, commentaries, dates and locations of capture, etc.)</p>
+<p>Within each media object, we are often driven to extract salience in human terms. We may be looking for occurrences of certain sounds within and audio file, or for its pitches, rhythms, dynamics and spectral variations. Within images we may be looking for specific shapes, or considering the distributions of colors, edges, patterns and densities. Within moving images we may seek general and specific movements of these elements. Within text we may seek keywords, associations, patterns of language usage, grammatical variations. And within three-dimensional data we may seek surfaces and planes, specific shapes, features of interest, enclosures and passages etc. </p>
+<p>In all these media we thus make use of pattern recognition, feature extraction, statistical analysis and machine learning. And many cases, a preliminary process of cleaning, organising, reducing and filtering the data is called for (and potentially filtering the results). </p>
+<h3 id="visual-media">Visual media</h3>
+<p><strong>Computer vision</strong> is a field that includes methods for acquiring, processing, analyzing, and understanding images in order to produce numerical or symbolic information. A theme in the development of this field has been to duplicate the abilities of human vision by electronically perceiving and understanding an image. As a scientific discipline, computer vision is concerned with the theory behind artificial systems that extract information from images. The image data can take many forms, such as video sequences, views from multiple cameras, or multi-dimensional data from a medical scanner. As a technological discipline, computer vision seeks to apply its theories and models to the construction of computer vision systems.</p>
+<blockquote>
+<p><a href="http://jmpelletier.com/cvjit/">cv.jit</a> is a collection of max/msp/jitter tools for computer vision applications. The goals of this project are to provide externals and abstractions to assist users in tasks such as image segmentation, shape and gesture recognition, motion tracking, etc. as well as to provide educational tools that outline the basics of computer vision techniques.</p>
+</blockquote>
+<p>For the purposes of this course, I have prepared a version of cv.jit in the Max package format, which you can <a href="https://github.com/grrrwaaa/courses/blob/master/datt3935/code/cv.jit_v1.7.2.zip">download from this page (click on the &quot;view raw&quot; link)</a>. Once downloaded, unzip the contents into Documents/Max 7/Packages and restart Max. You can verify that the package installed correctly by opening the &quot;cv.jit-Object Guide&quot; from Max&#39;s Extras menu.</p>
+<h3 id="audio">Audio</h3>
+<p>Descriptors are metadata to describe multimedia information to assist searching, classifying and understanding content. Audio descriptors are often derived from spectral analyses. </p>
+<p><a href="http://www.e--j.com/index.php/what-is-zsa-descriptors/">Zsa.descriptors</a> is a library for real-time sound descriptors analysis for Max developed by Mikhail Malt and Emmanuel Jourdan. The free version has a pop-up splash screen but is otherwise fully functional, and comes as an easily installable package (drop into Documents/Max 7/Packages). Analyses include:</p>
+<ul>
+<li><code>zsa.centroid~</code>: approximates center frequency of the input sound. <code>zsa.fund</code>: estimates the fundamental pitch of a sound -- good for clean melodic input only. <code>zsa.rolloff~</code> returns the frequency above which energy tends to reduce. It is useful to characterize noisy environments, for example.</li>
+<li><code>zsa.kurtosis~</code> returns a measure of the flatness of a spectrum around its centroid. That is -- it differentiates between sharply focused sounds and sounds with more diffuse focus. Similarly, <code>zsa.spread~</code> approximates the sharpness of energy distribution around the center. </li>
+<li><code>zsa.skewness~</code> returns a measure of the asymmetry of a spectrum around its centroid -- i.e. whether more energy is found above or below the center. <code>zsa.slope~</code> measures the overall balance between low and high frequency energy.</li>
+<li><code>zsa.bark~</code>: outputs loudness of 25 perceptually-oriented frequency bands. Think of it like a graphic equalizer display. <code>zsa.mel~</code> is very similar, and also perceptually driven. (In combination with <code>zsa.dist</code>, bark and mel can choose between several characteristic EQ shapes you are interested in). </li>
+<li><code>zsa.flux~</code>: reports changes of energy; useful to apply to clean sound sources &amp; detect transitions, for example.</li>
+</ul>
+<p><a href="http://www.eecs.qmul.ac.uk/~adams/software.html">A set of audio analysis externals from Adam Stark</a>, including beat tracking and tempo estimation, chroma (pitch class) estimation, and chord detection. OSX only, unfortunately.</p>
+<p><a href="http://web.media.mit.edu/~tristan/maxmsp.html">Another set of spectrally-driven audio feature analysis, from Tristan Jehan</a>, including pitch, loudness, brightness, noisiness, perceptually-driven spectrum, onset and beat detection -- however these are older and I have experienced them to be less stable.</p>
+<p><a href="http://artfab.art.cmu.edu/ml-lib/">ml.lib</a> is a collection of gesture analysis and machine learning externals based on the <a href="http://www.nickgillian.com/software/grt#MachineLearningAlgorithms">Gesture Recognition Toolkit</a>. A particularly useful page on the latter site is <a href="http://www.nickgillian.com/wiki/pmwiki.php/GRT/GettingStarted#AlgorithmSelection">a guide to selecting the algorithm for the task at hand</a>. The main goal of the library is to train a system to recognize specific patterns in an input stream based upon a collection of prior examples. I can upload a working archive for OSX if needed.</p>
+<hr>
+<h3 id="unsorted">Unsorted</h3>
+<p><a href="http://www.google.com/trends/explore?hl=en-US#q=doge&amp;cmpt=q">Trend analysis</a></p>
+
+	</div>
+	<footer>
+		&copy; 2015 Graham Wakefield
+	</footer>
+  </body>
+</html>
