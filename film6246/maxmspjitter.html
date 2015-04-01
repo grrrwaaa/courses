@@ -72,6 +72,20 @@
 <iframe width="640" height="480" src="https://www.youtube.com/embed/3NDOdCoring?rel=0" frameborder="0" allowfullscreen></iframe>
 
 <p>The files created in these screen recordings can be <a href="https://github.com/grrrwaaa/courses/tree/master/film6246/max">downloaded from here</a>.</p>
+<h2 id="audio-analysis">Audio analysis</h2>
+<p><a href="http://www.e--j.com/index.php/what-is-zsa-descriptors/">zsa.descriptors</a> - collection of audio analysis objects. Download and place into Documents/Max 7.</p>
+<ul>
+<li><p><code>zsa.centroid~</code>: approximates center frequency of the input sound. <code>zsa.fund</code>: estimates the fundamental pitch of a sound -- good for clean melodic input only. <code>zsa.rolloff~</code> returns the frequency above which energy tends to reduce. It is useful to characterize noisy environments, for example.</p>
+</li>
+<li><p><code>zsa.kurtosis~</code> returns a measure of the flatness of a spectrum around its centroid. That is -- it differentiates between sharply focused sounds and sounds with more diffuse focus. Similarly, <code>zsa.spread~</code> approximates the sharpness of energy distribution around the center. </p>
+</li>
+<li><p><code>zsa.skewness~</code> returns a measure of the asymmetry of a spectrum around its centroid -- i.e. whether more energy is found above or below the center. <code>zsa.slope~</code> measures the overall balance between low and high frequency energy.</p>
+</li>
+<li><p><code>zsa.bark~</code>: outputs loudness of 25 perceptually-oriented frequency bands. Think of it like a graphic equalizer display. <code>zsa.mel~</code> is very similar, and also perceptually driven. (In combination with <code>zsa.dist</code>, bark and mel can choose between several characteristic EQ shapes you are interested in). </p>
+</li>
+<li><p><code>zsa.flux~</code>: reports changes of energy; useful to apply to clean sound sources &amp; detect transitions, for example.</p>
+</li>
+</ul>
 
 	</div>
 	<footer>
