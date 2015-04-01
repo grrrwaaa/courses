@@ -86,6 +86,12 @@ x
 
 ---
 
+### Acquiring data that has already been collected about you. 
+
+Most major online services have an API, and many allow you to acquire data surrounding your activity. If you have a Google site, Android/iOS app, or even a Unity game, you might already be collecting data via [Google Analytics](https://developers.google.com/analytics/devguides/collection). If you host a site or code repository at [Github](https://developer.github.com/v3/), they have some great APIs you can use. Similarly for accessing your [Facebook data](https://developers.facebook.com/docs/graph-api/overview/). Look further afield-- even your bank might have an API you can use, or offer you the option to download transaction histories as a static database. 
+
+Your phone is a rich source of personal data. [You can probably browse your phone's location history here](https://maps.google.com/locationhistory/b/0/) -- however there is not currently a working API to download this en masse. [(A possible workaround is described here)](https://shkspr.mobi/blog/2014/04/extracting-your-own-location-information-from-google-the-hard-way/). 
+
 ### Flickr
 
 1. (Get an API key](https://www.flickr.com/services/apps/create/apply)
