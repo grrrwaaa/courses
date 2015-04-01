@@ -68,7 +68,19 @@ Dropping in audio tracks:
 
 The files created in these screen recordings can be [downloaded from here](https://github.com/grrrwaaa/courses/tree/master/film6246/max).
 
+## Audio analysis
 
+[zsa.descriptors](http://www.e--j.com/index.php/what-is-zsa-descriptors/) - collection of audio analysis objects. Download and place into Documents/Max 7.
+
+- ```zsa.centroid~```: approximates center frequency of the input sound. ```zsa.fund```: estimates the fundamental pitch of a sound -- good for clean melodic input only. ```zsa.rolloff~``` returns the frequency above which energy tends to reduce. It is useful to characterize noisy environments, for example.
+
+- ```zsa.kurtosis~``` returns a measure of the flatness of a spectrum around its centroid. That is -- it differentiates between sharply focused sounds and sounds with more diffuse focus. Similarly, ```zsa.spread~``` approximates the sharpness of energy distribution around the center. 
+
+- ```zsa.skewness~``` returns a measure of the asymmetry of a spectrum around its centroid -- i.e. whether more energy is found above or below the center. ```zsa.slope~``` measures the overall balance between low and high frequency energy.
+
+- ```zsa.bark~```: outputs loudness of 25 perceptually-oriented frequency bands. Think of it like a graphic equalizer display. ```zsa.mel~``` is very similar, and also perceptually driven. (In combination with ```zsa.dist```, bark and mel can choose between several characteristic EQ shapes you are interested in). 
+
+- ```zsa.flux~```: reports changes of energy; useful to apply to clean sound sources & detect transitions, for example.
 
 
 

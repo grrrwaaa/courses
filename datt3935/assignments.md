@@ -40,7 +40,7 @@ For inspiration, you could consider visualizations of cultural data created by a
 
 In this option, you will use knowledge gained through this class to augment a project that you are currently working on, or one which you recently completed. This could be an artwork, or some other project in which you are personally involved. If you choose this option please arrange a meeting with me (online or in person) to discuss the details further.
 
-### Option 4: A data visualization relating to the current labour dispute
+### Option 4: A data visualization relating to the labour dispute
 
 For this assignment option, you will author a data visualization relating to one or more of the issues identified in the labour dispute at York. 
 
