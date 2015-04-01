@@ -44,12 +44,27 @@
 <p>In all these media we thus make use of pattern recognition, feature extraction, statistical analysis and machine learning. And many cases, a preliminary process of cleaning, organising, reducing and filtering the data is called for (and potentially filtering the results). </p>
 <h3 id="visual-media">Visual media</h3>
 <p><strong>Computer vision</strong> is a field that includes methods for acquiring, processing, analyzing, and understanding images in order to produce numerical or symbolic information. A theme in the development of this field has been to duplicate the abilities of human vision by electronically perceiving and understanding an image. As a scientific discipline, computer vision is concerned with the theory behind artificial systems that extract information from images. The image data can take many forms, such as video sequences, views from multiple cameras, or multi-dimensional data from a medical scanner. As a technological discipline, computer vision seeks to apply its theories and models to the construction of computer vision systems.</p>
+<p>Max/MSP/Jitter includes several image analysis externals: [jit.3m] returns the min, mean and max values of each plane of a matrix. [jit.bsort] bubble-sorts the cells of an incoming matrix across one dimension. [jit.findbounds] locates the bounding region of pixels in a given value range. [jit.fft] moves matrices between spectral domains. [jit.histogram] calculates the distribution of values on each plane (i.e. colors) for one or more input matrices. </p>
+<p>However the computer vision capabilities have been greatly extended by Jean-Marc Pelletier:</p>
 <blockquote>
 <p><a href="http://jmpelletier.com/cvjit/">cv.jit</a> is a collection of max/msp/jitter tools for computer vision applications. The goals of this project are to provide externals and abstractions to assist users in tasks such as image segmentation, shape and gesture recognition, motion tracking, etc. as well as to provide educational tools that outline the basics of computer vision techniques.</p>
 </blockquote>
 <p>For the purposes of this course, I have prepared a version of cv.jit in the Max package format, which you can <a href="https://github.com/grrrwaaa/courses/blob/master/datt3935/code/cv.jit_v1.7.2.zip">download from this page (click on the &quot;view raw&quot; link)</a>. Once downloaded, unzip the contents into Documents/Max 7/Packages and restart Max. You can verify that the package installed correctly by opening the &quot;cv.jit-Object Guide&quot; from Max&#39;s Extras menu.</p>
+<p>The externals are broadly grouped according to:</p>
+<ul>
+<li>Edge extraction</li>
+<li>Pattern detection (lines, edges, salient points, faces, training)</li>
+<li>Shape detection (edges, directions, thinness, compactness</li>
+<li>Tracking (selected pixels, blobs, bright regions)</li>
+<li>Blob detection, and labeling, for tracking notable features within a moving image</li>
+<li>Optical flow (movement detection)</li>
+<li>Statistics (variance, deviation, running average, mean)</li>
+<li>Filtering (and morphology changes, such as erosion &amp; dilation)</li>
+</ul>
+<p>In most cases input needs to be converted to greyscale, and possibly even thresholded to obtain a binary image. This is a radical reduction of input data that should be done carefully to preserve meaning.</p>
 <h3 id="audio">Audio</h3>
-<p>Descriptors are metadata to describe multimedia information to assist searching, classifying and understanding content. Audio descriptors are often derived from spectral analyses. </p>
+<p>Descriptors are metadata to describe multimedia information to assist searching, classifying and understanding content. Audio descriptors are typically derived from temporal and spectral analyses. </p>
+<p>Max/MSP/Jitter comes with several analysis objects, including basic level following with [peakamp~] and [avg~], and time-domain level crossing detection with [zerox~], [thresh~], [edge~], [change~] and [spike~]; and more capabilities in this regard via gen~. There is also the [sync~] object, which can derive BPM from received bangs. In the spectral domain, there are several examples using fft~ and pfft~. However richer, more powerful or more accurate feature detection algorithms have been contributed by the community:</p>
 <p><a href="http://www.e--j.com/index.php/what-is-zsa-descriptors/">Zsa.descriptors</a> is a library for real-time sound descriptors analysis for Max developed by Mikhail Malt and Emmanuel Jourdan. The free version has a pop-up splash screen but is otherwise fully functional, and comes as an easily installable package (drop into Documents/Max 7/Packages). Analyses include:</p>
 <ul>
 <li><code>zsa.centroid~</code>: approximates center frequency of the input sound. <code>zsa.fund</code>: estimates the fundamental pitch of a sound -- good for clean melodic input only. <code>zsa.rolloff~</code> returns the frequency above which energy tends to reduce. It is useful to characterize noisy environments, for example.</li>
@@ -61,6 +76,11 @@
 <p><a href="http://www.eecs.qmul.ac.uk/~adams/software.html">A set of audio analysis externals from Adam Stark</a>, including beat tracking and tempo estimation, chroma (pitch class) estimation, and chord detection. OSX only, unfortunately.</p>
 <p><a href="http://web.media.mit.edu/~tristan/maxmsp.html">Another set of spectrally-driven audio feature analysis, from Tristan Jehan</a>, including pitch, loudness, brightness, noisiness, perceptually-driven spectrum, onset and beat detection -- however these are older and I have experienced them to be less stable.</p>
 <p><a href="http://artfab.art.cmu.edu/ml-lib/">ml.lib</a> is a collection of gesture analysis and machine learning externals based on the <a href="http://www.nickgillian.com/software/grt#MachineLearningAlgorithms">Gesture Recognition Toolkit</a>. A particularly useful page on the latter site is <a href="http://www.nickgillian.com/wiki/pmwiki.php/GRT/GettingStarted#AlgorithmSelection">a guide to selecting the algorithm for the task at hand</a>. The main goal of the library is to train a system to recognize specific patterns in an input stream based upon a collection of prior examples. I can upload a working archive for OSX if needed.</p>
+<h3 id="filtering-storing-analyses">Filtering &amp; storing analyses</h3>
+<p>Before submitting to analysis, it may be useful or even necessary to pre-filter. Audio signals may need dc blocking (a solution exists in gen~), and perhaps also thresholding to remove quiet moments. They may also neen normalization. Images may benefit from reduction in resolution, posterization and blur, or other techniques to reduce noise. </p>
+<p>The raw results of analyses can also be noisy, and it may be wise to smoothen the data (numbers with [zl stream] -&gt; [zl mean], matrices with [jit.slide] or [cv.jit.ravg], audio signals with [slide~] or [rampsmooth~] etc.). </p>
+<p>A rather direct working method to store data is to use the analyses to simply reduce and compile the input media into shorter fragments, e.g. cutting out all uninteresting segments (noisy frames, quiet moments, shaky camera, keeping only images with faces in, etc.), filtering on features of interest. Sometimes simply compiling these fragments into a new media file has been sufficient to present as a work of art.</p>
+<p>Another common process is to create annotation databases for media files. In the case of audio and movie inputs these annotations should be timestamped. There is no right or wrong way to store annotations -- it mostly depends on the intended use. Older patchers will likely used [coll], but today [dict] is more advisable (and it can also export to YML and JSON). A third option, for purely numeric data of known length, is to store annotations within a [jit.matrix], which can be saved and also exported as CSV.  Of course CSV and JSON can both be read by D3.js, opening up the option to perform analysis in Max but visualize in the browser.</p>
 <hr>
 <h3 id="unsorted">Unsorted</h3>
 <p><a href="http://www.google.com/trends/explore?hl=en-US#q=doge&amp;cmpt=q">Trend analysis</a></p>
