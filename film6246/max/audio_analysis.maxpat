@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 72.0, 78.0, 718.0, 302.0 ],
+		"rect" : [ 549.0, 78.0, 718.0, 302.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -44,7 +44,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 138.25, 228.0, 239.0, 24.0 ],
-					"presentation_rect" : [ 138.25, 229.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "LOOK IN HERE!!!"
 				}
@@ -66,7 +65,7 @@
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 104.0, 156.0, 719.0, 661.0 ],
+						"rect" : [ 72.0, 189.0, 719.0, 661.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -95,6 +94,67 @@
 						"subpatcher_template" : "",
 						"visible" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-14",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 521.3125, 116.0, 99.0, 22.0 ],
+									"style" : "",
+									"text" : "send audio_bark"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-13",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 325.0, 120.0, 105.0, 22.0 ],
+									"style" : "",
+									"text" : "send audio_rolloff"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-11",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 74.0, 120.0, 105.0, 22.0 ],
+									"style" : "",
+									"text" : "send audio_slope"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-7",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 199.0, 120.0, 95.0, 22.0 ],
+									"style" : "",
+									"text" : "send audio_flux"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-6",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 86.3125, 25.0, 534.0, 33.0 ],
+									"style" : "",
+									"text" : "Download the zsa.descriptors rom http://www.e--j.com/index.php/what-is-zsa-descriptors/ and place into your Documents/Max 7/Packages/"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"comment" : "",
 									"id" : "obj-1",
@@ -1602,7 +1662,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 200.0, 82.0, 39.0, 22.0 ],
+									"patching_rect" : [ 199.0, 82.0, 39.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -3555,6 +3615,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-11", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-46", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-20", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3573,10 +3642,28 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-7", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-47", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-26", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-48", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-13", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-49", 0 ]
 								}
 
 							}
@@ -3595,6 +3682,15 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-49", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-14", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-53", 0 ]
 								}
 
 							}
@@ -3640,7 +3736,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 63.25, 144.5, 29.5, 22.0 ],
+					"patching_rect" : [ 63.25, 174.0, 29.5, 22.0 ],
 					"style" : "",
 					"text" : "+~"
 				}
@@ -3895,7 +3991,7 @@
 					"maxclass" : "ezdac~",
 					"numinlets" : 2,
 					"numoutlets" : 0,
-					"patching_rect" : [ 6.0, 144.5, 45.0, 45.0 ],
+					"patching_rect" : [ 5.0, 150.0, 45.0, 45.0 ],
 					"style" : ""
 				}
 
@@ -3932,26 +4028,27 @@
 					"clipheight" : 44.0,
 					"data" : 					{
 						"clips" : [ 							{
-								"filename" : "jongly.aif",
+								"filename" : "/Users/grrrwaaa/Music/iTunes/iTunes Media/Music/Caribou/Andorra/08 Irene.mp3",
 								"filekind" : "audiofile",
-								"loop" : 0,
+								"selection" : [ 0.2725, 0.935 ],
+								"loop" : 1,
 								"content_state" : 								{
-									"basictuning" : [ 440 ],
-									"pitchcorrection" : [ 0 ],
-									"slurtime" : [ 0.0 ],
-									"mode" : [ "basic" ],
-									"quality" : [ "basic" ],
 									"followglobaltempo" : [ 0 ],
-									"timestretch" : [ 0 ],
-									"pitchshiftcent" : [ 0 ],
-									"play" : [ 0 ],
+									"quality" : [ "basic" ],
+									"speed" : [ 1.0 ],
+									"pitchcorrection" : [ 0 ],
 									"formantcorrection" : [ 0 ],
-									"formant" : [ 1.0 ],
-									"originallength" : [ 0.0, "ticks" ],
-									"originallengthms" : [ 0.0 ],
-									"originaltempo" : [ 120.0 ],
 									"pitchshift" : [ 1.0 ],
-									"speed" : [ 1.0 ]
+									"slurtime" : [ 0.0 ],
+									"play" : [ 0 ],
+									"originallength" : [ 0.0, "ticks" ],
+									"mode" : [ "basic" ],
+									"pitchshiftcent" : [ 0 ],
+									"formant" : [ 1.0 ],
+									"basictuning" : [ 440 ],
+									"originaltempo" : [ 120.0 ],
+									"timestretch" : [ 0 ],
+									"originallengthms" : [ 0.0 ]
 								}
 
 							}
@@ -3975,7 +4072,7 @@
 					"destination" : [ "obj-19", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 179.4375, 131.75, 41.5, 131.75 ],
+					"midpoints" : [ 179.4375, 131.75, 40.5, 131.75 ],
 					"source" : [ "obj-1", 1 ]
 				}
 
@@ -3985,7 +4082,7 @@
 					"destination" : [ "obj-19", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 72.75, 131.75, 15.5, 131.75 ],
+					"midpoints" : [ 72.75, 131.75, 14.5, 131.75 ],
 					"source" : [ "obj-1", 0 ]
 				}
 
