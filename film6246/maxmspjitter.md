@@ -83,7 +83,11 @@ The final result I got is here:
 
 - [walking audio analysis](https://raw.githubusercontent.com/grrrwaaa/courses/master/film6246/max/walking_audio_analysis.maxpat)
 
+----
 
+## Final screen recordings
+
+[**Download the projects from this link**](https://www.dropbox.com/sh/4s21vm30ol3ejob/AABmptMYGPFLWUkWPbKG35y2a?dl=0)
 
 
 
