@@ -93,6 +93,10 @@ Here's how to use them:
 
 <iframe width="640" height="480" src="https://www.youtube.com/embed/83yTR2uJkDY?rel=0" frameborder="0" allowfullscreen></iframe>
 
+Here's an update showing how to create many variations of an object, and how with the new version of OculusWorldProject that incorporates physics-based navigation to prevent you from being able to navigate through objects (the example here is a randomized 'maze'):
+
+<iframe width="640" height="480" src="https://www.youtube.com/embed/-3u2nlByuRI?rel=0" frameborder="0" allowfullscreen></iframe>
+
 
 
 
