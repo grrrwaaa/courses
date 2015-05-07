@@ -97,6 +97,9 @@ Here's an update showing how to create many variations of an object, and how wit
 
 <iframe width="640" height="480" src="https://www.youtube.com/embed/-3u2nlByuRI?rel=0" frameborder="0" allowfullscreen></iframe>
 
+And here's an extension of the above patch to include more mobile physics objects, and to place sounds in particular locations in space:
+
+<iframe width="640" height="480" src="https://www.youtube.com/embed/lFnBkNNjK70?rel=0" frameborder="0" allowfullscreen></iframe>
 
 
 
