@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+
+<style>
+@font-face {
+			font-family: Playfair Display;
+			src: url(Playfair_Display/PlayfairDisplay-Black.ttf);
+			
+		}
+
+@font-face {
+	font-family: PT Mono;
+	src: url(PT_Mono/PTMono.ttf);
+	
+}
+body {
+
+        margin-left:50px;
+
+}
+.node {
+  cursor: pointer;
+}
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font-family: 'Playfair Display';
+  
+  fill:#000;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 0.5px;
+}
+
+a {
+        color: #000;
+}
+a:hover {
+        color: #fff;
+}
+
+.nav {
+        font-family: 'PT Mono', Consolas;
+        position:fixed;
+        height: 210px;
+        right: 0;
+        top: 0px;
+        width:300px;
+        background-color:#fbf0a8;
+        padding:20px;
+
+}
+.row {
+
+  width: 340px;
+
+  position:fixed;
+  top:230px;
+  right: 0;
+  overflow: hidden;
+
+}
+
+.slide {
+  padding:20px;
+ font-family: 'PT Mono', Consolas;
+ font-size:11px;
+  background-color: #fbf0a8;
+
+  transition: .5s cubic-bezier(0, 1, 0.5, 1);
+  transform: translateY(0);
+}
+
+.slide-up {
+  transform: translateY(-100%);
+}
+
+#message {
+        font-size:11px;
+}
+
+svg {
+	width: 1300;
+	margin: 0 auto;
+
+}
+</style>
+<body>
+<script src="d3.v3.min.js"></script>
+<script>
+
+var margin = {top: 20, right: 120, bottom: 20, left: 230},
+    width = 1200 - margin.right - margin.left,
+    height = 800 - margin.top - margin.bottom;
+
+var i = 0,
+    duration = 750,
+    root;
+
+var tree = d3.layout.tree()
+    .size([height, width]);
+
+var diagonal = d3.svg.diagonal()
+    .projection(function(d) { return [d.y, d.x]; });
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.right + margin.left)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var links = [];
+d3.csv("data/A_B.csv", function(error, data){
+
+
+  var nodesByName = {};
+  var paths = {};
+
+        for (var i = 0; i<data.length; i++) {
+
+                var cue = data[i]["CUE"];
+
+                var target = data[i][" TARGET"].substring(1);
+
+                var fsg = data[i][" FSG"];
+
+
+
+                if (cue) {
+
+                        var item = { cue: cue, target: target, fsg: fsg };
+
+                        var node = paths[cue];
+
+                        if (node) {
+
+                                node.targets.push( item );
+
+                        } else {
+
+                                paths[cue] = {
+
+                                        cue: cue,
+
+                                        targets: [ item ]
+
+                                };
+
+                        }
+
+                }
+
+        }
+
+
+
+
+	function makeTree(cue, weight, depth) {
+	
+					if (depth <= 0) return;
+					var path = paths[cue];
+
+					if (path) {
+							//console.log("makeTree", cue, depth, path);
+
+							var result = {
+
+									cue: cue,
+
+									weight: weight,
+
+									children: [],
+
+							};
+							
+							var max = 0;
+							var min = 1;
+							// find min and max
+							for (var k in path.targets) {
+									var t = path.targets[k];
+									if (t.fsg > max ){
+											max = t.fsg;
+									}
+
+									if (t.fsg < min) {
+											min = t.fsg;
+									}
+
+							}
+
+							for (var k in path.targets) {
+
+									var t = path.targets[k];
+
+									var old = (max - min);
+									var newrange = (60 - 20);
+									var newfsg = (((t.fsg - min) * newrange) / old ) + 20;
+									var subtree = makeTree( t.target, newfsg, depth-1 );
+
+									if (subtree) {
+
+											result.children.push( subtree );
+
+									}
+
+							}
+							return result;
+
+					}
+
+			}
+			
+		var newlength = data.length - 1;
+		var newrandom = getRandomInt(0, newlength);
+		var newcue = data[newrandom].CUE;
+		//console.log(newcue);
+		
+		var searchquery = getQueryStringVar("search") || newcue;
+        searchquery = searchquery.toUpperCase();
+        //console.log(searchquery);
+        if(paths[searchquery]){
+                var commatree = makeTree(searchquery, 1, 5);
+        } else {
+                var commatree = makeTree("MISSING", 1, 5);
+                d3.select("#message").text(searchquery + " does not exist in our dataset.");
+        }
+
+        
+	var clicked = false;
+	root = commatree;
+	root.x0 = height / 2;
+	root.y0 = 0;
+
+	function collapse(d) {
+		if (d.children) {
+		  d._children = d.children;
+		  d._children.forEach(collapse);
+		  d.children = null;
+		}
+	}
+
+
+  root.children.forEach(collapse);
+  update(root);
+  
+  
+	function nodeByName(name) {
+		return nodesByName[name] || (nodesByName[name] = {name: name});
+	}
+
+
+	d3.select(self.frameElement).style("height", "800px");
+
+
+
+	function update(source) {
+
+	  // Compute the new tree layout.
+	  var nodes = tree.nodes(root).reverse(),
+		  links = tree.links(nodes);
+	
+	  // Normalize for fixed-depth.
+	  nodes.forEach(function(d) { d.y = d.depth * 180; });
+
+	  // Update the nodes…
+	  var node = svg.selectAll("g.node")
+		  .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+	  // Enter any new nodes at the parent's previous position.
+	  var nodeEnter = node.enter().append("g")
+		  .attr("class", "node")
+		  .attr("transform", function(d) {			
+			return "translate(" + source.y0 + "," + source.x0 + ")";
+		  })
+		  .on("click", click);
+
+	 
+  
+		nodeEnter.append("text")
+		  .attr("x", function(d) {						
+					return d.children || d._children ? 40 : 40;
+					})
+		  .attr("dx", ".35em")
+		  .attr("dy", ".35em")
+		  .attr("class", "bg")
+		  .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+		  .text(function(d) { return d.cue.toLowerCase(); })
+			  .attr("font-size", function(d) {
+							if(d.weight==1){
+									return 40;
+							}
+							return d.weight;
+					})
+		  .style("fill-opacity", 1e-6)
+		  .on("mouseover", function (d) { // highlight path onmouseover
+								clicked=false;
+								
+									if( d3.select(this).style("fill")!=="rgb(241, 184, 200)")
+									{
+											d3.select(this).style("fill", "#fee227");
+									}
+									
+							})
+		  .on('mouseout', function() {
+							if(clicked==false && d3.select(this).style("fill")!=="rgb(241, 184, 200)")
+							{
+								d3.select(this).style("fill", "#000");
+							}
+
+					})
+		  .on('click', keepgoing);
+
+					
+
+	  // Transition nodes to their new position.
+	  var nodeUpdate = node.transition()
+		  .duration(duration)
+		  .attr("transform", function(d) { 
+				return "translate(" + d.y + "," + d.x + ")"; 
+			});
+
+	  nodeUpdate.select("circle")
+		  .attr("r", 4.5)
+		  .style("fill", function(d) { 
+			return d._children ? "lightsteelblue" : "#fff";
+			});
+
+	  nodeUpdate.select("text")
+		  .style("fill-opacity", 1);
+
+		// Transition exiting nodes to the parent's new position.
+		var nodeExit = node.exit().transition()
+			.duration(duration)
+			.attr("transform", function(d) { 
+				return "translate(" + source.y + "," + source.x + ")"; 
+				})
+			.remove();
+
+		nodeExit.select("circle")
+			.attr("r", 1e-6);
+
+		nodeExit.select("text")
+			.style("fill-opacity", 1e-6);
+
+		// Update the links…
+		var link = svg.selectAll("path.link")
+			.data(links, function(d) { return d.target.id; });
+
+
+		// Enter any new links at the parent's previous position.
+		link.enter().insert("path", "g")
+			.attr("class", "link")
+			.attr("d", function(d) {						
+				var o = {x: source.x0, y: source.y0};
+				return diagonal({source: o, target: o});
+			});
+
+
+		// Transition links to their new position.
+		link.transition()
+			.duration(duration)
+			.attr("d", diagonal);
+
+	  // Transition exiting nodes to the parent's new position.
+		link.exit().transition()
+			.duration(duration)
+			.attr("d", function(d) {
+				var o = {x: source.x, y: source.y};
+				return diagonal({source: o, target: o});
+			})
+			.remove();
+
+	  // Stash the old positions for transition.
+		nodes.forEach(function(d) {
+			d.x0 = d.x;
+			d.y0 = d.y;
+		});
+	}
+
+	var recentList;
+
+	// Toggle children on click.
+	function click(d) {
+		
+		recentList = d;
+		
+	  if (d.children) {	
+		d._children = d.children;
+		d.children = null;
+		
+	  } else {	
+		d.children = d._children;
+		d._children = null;
+		
+	  }
+	 
+	  update(d);
+
+	}
+
+	function getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	/*** GET CURRENT WORD AND CHANGE COLOUR ***/
+	function getcurrent(e) {
+	
+		d3.selectAll("text").each( function(d,i){
+			var elt = d3.select(this);
+			var dataset = elt.data();
+				if (e.cue.toLowerCase() == elt.html()){
+				var dataID = dataset[0].id;
+				
+					if (e.id == dataID) {
+						elt.style("fill", "#f1b8c8");
+					} 
+				
+				}
+			
+		});
+
+	}
+
+	function keepgoing(d) {
+
+		  
+
+			if(d._children!=null && d._children.length==0) {
+				 //   console.log(d.cue);
+					var newtree = makeTree(d.cue, 1, 5);
+					root = newtree;
+					root.x0 = height / 2;
+					root.y0 = 0;
+					root.children.forEach(collapse);
+					update(root);
+					
+
+			}
+
+			clicked = true;
+			d3.select(this).style("fill", "#f1b8c8");
+			
+			speech(d);
+
+	}
+
+
+	function speech(d) {
+			if ('speechSynthesis' in window) {
+					// Synthesis support. Make your web apps talk!
+					
+					var accents = [];
+					speechSynthesis.getVoices().forEach(function(voice) 
+					{
+							accents.push(voice.name);
+							
+					});
+
+					var random = getRandomInt(0, accents.length-1);
+					var msg = new SpeechSynthesisUtterance();
+					var voices = window.speechSynthesis.getVoices();
+					msg.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == accents[random]; })[0];;
+					//console.log(accents[random]);
+					//msg.voice = voices[10]; // Note: some voices don't support altering params
+					//msg.voiceURI = 'native';
+					msg.volume = 1; // 0 to 1
+					msg.rate = 1; // 0.1 to 10
+					msg.pitch = 2; //0 to 2
+					msg.text = d.cue;
+					msg.lang = 'en-US';
+
+					speechSynthesis.speak(msg);
+			}
+
+
+	}
+
+	/*** RANDOM WALK FUNCTION ***/
+	function bored() {
+	 
+			/// on startup 
+			if(recentList==undefined) {
+				speech(root);
+				getcurrent(root);
+				var length = root.children.length - 1;
+				var random = getRandomInt(0, length);
+				click(root.children[random]);	
+				getcurrent(root.children[random]);
+				speech(root.children[random]);
+			}
+			
+			// if children exist
+			if (recentList && recentList.children!=undefined) {
+				//console.log("length", recentList.children.length);
+				//var cue = recentList.cue;
+				//cue = randomWalk(cue);
+				//console.log("random", cue);
+				
+				// select random target word
+				var length = recentList.children.length - 1;
+				var random = getRandomInt(0, length);
+				var child = recentList.children[random];
+
+				   
+				getcurrent(child);
+				speech(child);
+				click(child);
+				//keepgoing(child);
+					
+			}  else // if children do not exist, create new root tree
+			{
+						//var newchild = recentList.cue;
+						//click(newchild);
+						//console.log("ELSE", recentList);
+						//	console.log(d.cue);
+						
+					var newtree = makeTree(recentList.cue, 1, 5); 
+					root = newtree;
+					root.x0 = height / 2;
+					root.y0 = 0;
+					root.children.forEach(collapse);
+					update(root);
+					click(root);
+					speech(root);				
+					getcurrent(root);
+					
+					
+					 if(recentList._children) 
+					 { // click to start new root tree
+					
+					 click(recentList);
+					
+			
+					 }
+						
+			}
+
+	}
+
+setInterval(bored, 2000);
+
+});
+
+function getQueryStringVar(name) {
+        var qs = window.location.search.slice(1);
+        var props = qs.split("&");
+        for (var i=0; i<props.length; i++) {
+                var pair = props[i].split("=");
+                if (pair[0] === name) {
+                        return decodeURIComponent(pair[1]);
+                }
+        }
+        // return undefined
+}
+</script>
+        <div class="nav" >
+        <div style="text-align:center;">
+        Search for a new root word:<br/>
+                <form action="indexrandom.html">
+                <input type="text" name="search">
+                </form><br/>
+                <div style="font-size:11px;">Listen to me associate words with one another.</div>
+                <br/>
+				<a href="index.html" id="auto" style="color: #fe2773; font-size: 24px;">I'M TIRED. TAKE CONTROL.</a>
+                <div id="message">&nbsp;</div><br/>
+                <a href="#" id="toggleSlider">Show less</a><br/>
+                </div>
+        </div>
+
+        <div class="row">
+                <div class="slide">
+                                This web page is a data visualization of the <a href="http://w3.usf.edu/FreeAssociation/Intro.html" target="new">University of South Florida's free association database</a>. <br/>
+                                <blockquote>
+                                         More than 6,000 participants produced nearly three-quarters of a million responses to 5,019 stimulus words.
+                                         Participants were asked to write the first word that came to mind that was meaningfully related or strongly associated to
+                                         the presented word on the blank shown next to each item. For example, if given BOOK _________, they might write READ on the blank next to it.<br/>
+                                         <span style="font-style:italic; text-align:right;">----Excerpt from Intro essay</span>
+                                </blockquote>
+                                The larger a word is, the higher probability it has of being associated with the stimulus word.<br/><br/>
+                                Text-to-speech synthesis is also a part of this project. To access this feature, make sure you are viewing this page on Chrome.<br/><br/><br/>
+                                Created by Jennifer Wu.
+
+                </div>
+                </div>
+
+
+<script>
+				var autoButton = document.getElementById('auto');
+				autoButton.addEventListener('click', auto);
+				auto();
+				function auto() {
+					
+				
+				}
+                var toggleButton = document.getElementById('toggleSlider'),
+                        slide = document.querySelector('.slide');
+
+                toggleButton.addEventListener('click', toggleSlider, false);
+                toggleSlider();
+                function toggleSlider() {
+                  if (slide.classList.contains('slide-up')) {
+                        document.getElementById('toggleSlider').innerHTML="Show less";
+                        slide.classList.remove('slide-up');
+                  } else {
+                  document.getElementById('toggleSlider').innerHTML="Read About";
+
+                        slide.classList.add('slide-up');
+                  }
+                }
+</script>
+</body>
+</html>
