@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>This is a title</title>
+    <script src="./audiosynth.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Calligraffitti' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+
+    <style type="text/css">
+    	body{
+    		background-image: url("natural_paper.png"); 
+    		background-repeat: repeat;
+    	}
+
+    	p{
+    		font-size: 70px;
+    		font-family: 'Calligraffitti', cursive;
+    		color: #000F55; /*blue ink*/
+    	}
+    	p.info{
+    		font-size: 15px;
+    		font-family: 'Open Sans Condensed', sans-serif;
+    		color: #ac3235; /*red ink*/
+    		line-height: 10%;
+    	}
+    	h1{
+    		font-size: 70px;
+    		font-family: 'Calligraffitti', cursive;
+    		color: #ac3235;
+    		line-height: 10%;
+    	}
+    	a{
+    		text-decoration: none;
+    		color: #000F55;
+    	}
+
+    	#inner{
+    		text-align: center;
+    		width: 50%;
+    		margin: 0 auto;
+    		line-height: 80%;
+    	}
+
+    </style>
+
+  </head>
+  <body>
+	<div id="outer" style="width:100%">
+	    <div id="inner">
+	    	<h1>Sonnet 18</h1>
+	    	<p class="info">A sonification of William Shakespeare's Sonnet 18</p>
+	    	<p class="info">DATT3935 Final Assignment by <a href="http://derekmart.in">Derek Martin</a></p>
+	    	
+
+	    </div>
+	</div>
+
+    <script> 
+
+    /*
+    ---TO DO--------
+		DONE	map phonemes to specific note/sound (vowels for now)
+		DONE 	seperate each word by delimeter (:)
+		DONE 	style
+		DONE	display word by word (with case/punctuation from original wording)
+		-	split lines by a delimiter
+		-	get new line
+		-	display line by line
+		-	take input for sonnet
+	---TO DO---------
+	*/
+
+    var data;
+    var pron = [];
+    var schedule = [];
+	var score = [];
+    var string = "";
+
+    var piano = Synth.createInstrument('piano');
+    var organ = Synth.createInstrument('organ');
+    var acoustic = Synth.createInstrument('acoustic');
+
+    var str = ("Shall I compare thee to a summer's day? Thou art more lovely and more temperate: Rough winds do shake the darling buds of May, And summer's lease hath all too short a date: Sometime too hot the eye of heaven shines, And often is his gold complexion dimm'd; And every fair from fair sometime declines, By chance or nature's changing course untrimm'd; But thy eternal summer shall not fade Nor lose possession of that fair thou owest; Nor shall Death brag thou wander'st in his shade, When in eternal lines to time thou growest: So long as men can breathe or eyes can see, So long lives this and this gives life to thee.");
+    var displayWord = str.split(" ");
+
+	str = str.toLowerCase().replace(/[:,'.*+?^${}()|[\]\\]/g, "");
+
+	var word = str.split(" ");
+	var total = word.length;
+	var count = 0;
+	var n = -1;
+	var textnode;
+	var wordPhon;
+	var phonemes;
+
+	var r = /([A-Z]{1,2})([0-2]?)(:?)/; //(phoneme,stress,end of word)
+
+
+    function getPron(word, i){
+    	var oReq = new XMLHttpRequest();
+    	oReq.open("get", "http://api.wordnik.com:80/v4/word.json/"+word+"/pronunciations?useCanonical=true&typeFormat=arpabet&limit=50&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5", true);
+
+    	oReq.onreadystatechange = function() {
+    		//console.log("result for", i);
+    		if (this.status == 200 && this.readyState == 4){
+				count++;
+				data = JSON.parse(this.responseText);
+
+				if (data[0]) {
+					pron[i] = data[0].raw;
+
+					if (count == total) {
+						 
+						while (pron.length > 0) {
+							wordPhon = pron.shift();
+							wordPhon = wordPhon.concat(":"); //indicate end of word
+							phonemes = wordPhon.split(" ");
+							for (var k=0; k<phonemes.length; k++){
+							 	pushphoneme(phonemes[k]);
+							}
+						}
+
+						console.log("scheduled to play:", pron);
+
+						// start requesting the next line...
+					}
+				}
+    		}
+		}
+		oReq.send();
+	}
+
+	for(var i = 0; i < total; i++){
+		console.log(word[i]);
+		pron[i] = word[i];
+		getPron(word[i], i);
+	}
+
+	function playphoneme(phoneme, stress, endWord) {
+			stress = (stress * 2)
+			console.log("PLAY", phoneme, stress, endWord);
+			if (endWord){
+			++n; 
+			var para = document.createElement("p");
+			var node = document.createTextNode(displayWord[n]);
+			para.appendChild(node);
+			var element = document.getElementById("inner");
+			element.appendChild(para);
+			window.scrollTo(0,document.body.scrollHeight);
+		}
+
+		switch(phoneme){
+				    	case 'AA':
+				    		organ.play('A', 2, stress);
+				    	break;
+				    	
+				    	case 'AE':
+				    		organ.play('A', 3, stress);
+				    	break;
+				    	
+				    	case 'AH':
+				    		organ.play('A', 4, stress);
+				    	break;
+				    	
+				    	case 'AO':
+				    		organ.play('A', 5, stress);
+				    	break;
+
+				    	case 'AW':
+				    		organ.play('A', 6, stress);
+				    	break;
+
+				    	case 'AY':
+				    		organ.play('A', 6, stress);
+				    	break;
+
+				    	case 'EH':
+				    		organ.play('E', 3, stress);
+				    	break;
+
+				    	case 'ER':
+				    		organ.play('E', 4, stress);
+				    	break;
+				    	
+				    	case 'EY':
+				    		organ.play('E', 5, stress);
+				    	break;
+
+				    	case 'IH':
+				    		organ.play('B', 3, stress);
+				    	break;
+
+				    	case 'IY':
+				    		organ.play('B', 4, stress);
+				    	break;
+
+				    	case 'OW':
+				    		organ.play('G', 2, stress);
+				    	break;
+
+				    	case 'OY':
+				    		organ.play('G', 3, stress);
+				    	break;
+
+				    	case 'UH':
+				    		organ.play('F', 4, stress);
+				    	break;
+
+				    	case 'UW':
+				    		organ.play('F', 5, stress);
+				    	break;
+
+				    	default:
+				    		acoustic.play('C', 6, 1);
+				    	break;
+
+				    };
+
+
+	}
+
+	function pushphoneme(str) {
+		var captures = r.exec(str);
+		if (captures) {
+			var phoneme = captures[1];
+			var stress = captures[2];
+			var endWord = captures[3];
+			score.push({
+				duration: 200, //TODO:change duration based on stress/sylables
+				event: function() {
+					playphoneme(phoneme, stress, endWord);
+				}
+			})
+
+ 		} else {
+			score.push({
+				duration: 200,
+				event: function() {
+					console.log("couldn't play", str); //still write to page
+					++n;
+					var para = document.createElement("p");
+					var node = document.createTextNode(displayWord[n]);
+					para.appendChild(node);
+					var element = document.getElementById("inner");
+					element.appendChild(para);
+				}
+			})
+			
+		}
+	}
+
+	function playscore() {
+		// play the next note:
+		if (score.length) {
+			var note = score.shift();
+
+			note.event();
+
+			setTimeout(playscore, note.duration);
+		} else {
+			setTimeout(playscore, 100);
+		}
+	}
+
+	playscore();
+
+    </script>
+
+  </body>
+</html>
