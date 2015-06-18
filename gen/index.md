@@ -61,15 +61,16 @@ Because the patcher is compiled, debugging is not as easy. You can't put number 
 ## Tons of help, docs, tutorials, examples, ...
 
 - gen~.maxhelp
-- Reference pages: Gen Overview, Gen/gen~ operators, GenExpr, etc.
+- [Gen Overview](https://docs.cycling74.com/max7/vignettes/gen_overview)
+- [Gen common operators](https://docs.cycling74.com/max7/vignettes/gen_common_operators)
+- [gen~ operators](https://docs.cycling74.com/max7/vignettes/gen~_operators)
+- [GenExpr](https://docs.cycling74.com/max7/vignettes/gen_genexpr), etc.
 - Reference panel (select an object)
 - Left margin [+] button shows ALL operators
 - Codeview panel to understand patcher as GenExpr
 - Keep max window open to watch out for compile errors (more important for GenExpr)
-
 - [gen~_For_Beginners](https://cycling74.com/wiki/index.php?title=gen~_For_Beginners)
 - [gen~ tutorial](https://cycling74.com/2011/11/07/gen-tutorial-1-the-garden-of-earthly-delays/)
-
 - Help->Examples->gen (or in the file browser)
 - Tons of code sharing on the [gen~ forum](https://cycling74.com/forums/forum/gen/)
 - Really nicely documented and awesome gen~ tools at [http://www.yofiel.com](http://www.yofiel.com/software/cycling-74-patches), such as [this one](http://www.yofiel.com/software/cycling-74-patches/antialiased-oscillators)
