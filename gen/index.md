@@ -75,7 +75,9 @@ Because the patcher is compiled, debugging is not as easy. You can't put number 
 - Tons of code sharing on the [gen~ forum](https://cycling74.com/forums/forum/gen/)
 - Really nicely documented and awesome gen~ tools at [http://www.yofiel.com](http://www.yofiel.com/software/cycling-74-patches), such as [this one](http://www.yofiel.com/software/cycling-74-patches/antialiased-oscillators)
 
+## Patchers from the Tacit Group sessions:
 
+[Download from here](https://github.com/grrrwaaa/courses/tree/master/gen)
 
 
 
