@@ -30,10 +30,10 @@
 <h2 id="html-javascript-starter">HTML/JavaScript starter</h2>
 <p><a href="http://codepen.io/anon/pen/QbmEvG/right/?editors=001">http://codepen.io/anon/pen/QbmEvG/right/?editors=001</a></p>
 <form action="http://codepen.io/pen/define" method="POST" target="_blank">
-  <input type="hidden" name="data" value='{"title": "Artificial Life", "js_external": "http://grrrwaaa.github.io/courses/alife/al.js", "js": "al.init();\n\n/// put your variables here /////////////////////////////////////////////////////////\n\nfunction reset() {\n\t// re-initialize the simulation here\n}\n\nfunction update() {\n\t// animate your scene here\n}\n\nfunction draw(ctx) {\n\t// put your drawing calls here\n}\n\n/// end of user code ///////////////////////////////////////////////////////////\n\nreset();\nal.start();": }'>
-
-  <input type="submit" value="Create a new artificial life codepen">
+<input id="data-input" type="hidden" name="data" value="{&amp;quot;title&amp;quot;:&amp;quot;Artificial Life&amp;quot;,&amp;quot;description&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_external&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js_external&amp;quot;:&amp;quot;http://grrrwaaa.github.io/courses/alife/al.min.js&amp;quot;,&amp;quot;html&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js&amp;quot;:&amp;quot;al.init();\n/// put your JavaScript code here //////////////////////////////////////////////\n\n// put your variables here\n\nfunction reset() {\n\t// re-initialize the simulation here\n}\n\nfunction update() {\n\t// animate your scene here\n}\n\nfunction draw(ctx) {\n\t// put your drawing calls here\n}\n\nfunction mouse(event, button, x, y) {\n\t// handle mouse events here\n}\n\nfunction key(event, k) {\n\t// handle key events here\n}\n\n/// end of user code ///////////////////////////////////////////////////////////\nreset();\nal.start();&amp;quot;,&amp;quot;html_pre_processor&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_pre_processor&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_starter&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_prefix&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js_library&amp;quot;:&amp;quot;&amp;quot;}">
+<input type="image" src="http://s.cdpn.io/3/cp-arrow-right.svg" width="40" height="40" value="Create Pen" class="codepen-mover-button"> Yo, Try it
 </form>
+
 
 
 <pre><code class="lang-html"><span class="hljs-doctype">&lt;!DOCTYPE html&gt;</span>
@@ -53,9 +53,33 @@
 <span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">script</span>&gt;</span><span class="javascript">
 al.init();
+<span class="hljs-comment">/// put your JavaScript code here //////////////////////////////////////////////</span>
 
-<span class="hljs-comment">/// put your JavaScript code here ///</span>
+<span class="hljs-comment">// put your variables here</span>
 
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reset</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// re-initialize the simulation here</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">update</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// animate your scene here</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">draw</span><span class="hljs-params">(ctx)</span> </span>{
+    <span class="hljs-comment">// put your drawing calls here</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mouse</span><span class="hljs-params">(event, button, x, y)</span> </span>{
+    <span class="hljs-comment">// handle mouse events here</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">key</span><span class="hljs-params">(event, k)</span> </span>{
+    <span class="hljs-comment">// handle key events here</span>
+}
+
+<span class="hljs-comment">/// end of user code ///////////////////////////////////////////////////////////</span>
+reset();
+al.start();
 </span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
