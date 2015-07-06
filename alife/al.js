@@ -23,7 +23,7 @@ var rng = new Math.seedrandom();
 
 // return integer in 0..(n-1)
 random = function (n) {
-	if (n != undefined) {
+	if (n !== undefined) {
 		return Math.floor(rng()*n);
 	} else {
 		return rng();
@@ -62,10 +62,10 @@ var al_render = function() {
 	al_now = now;
 	// wrap in a try/catch?
 	if (al_updating) {
-		if (update && typeof update === "function") {
+		if (update !== undefined  && typeof update === "function") {
 			update(al_dt);
 		}
-		if (draw && typeof draw === "function") {
+		if (draw !== undefined  && typeof draw === "function") {
 			ctx.clearRect(0,0, canvas.width, canvas.height);
 			ctx.save();
 			ctx.scale(canvas.width, canvas.height);
@@ -127,7 +127,7 @@ al.init = function () {
 	var mouse_is_down = false;
 	canvas.addEventListener("mousedown", function(event) {
 		mouse_is_down = true;
-		if (mouse && typeof mouse === "function") {
+		if (mouse !== undefined && typeof mouse === "function") {
 			var canvas_rect = canvas.getBoundingClientRect();
 			mouse("down", event.button, (event.clientX - canvas_rect.left) / canvas_rect.width, (event.clientY - canvas_rect.top) / canvas_rect.height);
 			return false;
@@ -135,7 +135,7 @@ al.init = function () {
 	}, false);
 	canvas.addEventListener("mouseup", function(event) {
 		mouse_is_down = false;
-		if (mouse && typeof mouse === "function") {
+		if (mouse !== undefined  && typeof mouse === "function") {
 			var canvas_rect = canvas.getBoundingClientRect();
 			mouse("up", event.button, (event.clientX - canvas_rect.left) / canvas_rect.width, (event.clientY - canvas_rect.top) / canvas_rect.height);
 			return false;
@@ -143,7 +143,7 @@ al.init = function () {
 	}, false);
 	canvas.addEventListener("mouseover", function(event) {
 		mouse_is_down = true;
-		if (mouse && typeof mouse === "function") {
+		if (mouse !== undefined  && typeof mouse === "function") {
 			var canvas_rect = canvas.getBoundingClientRect();
 			mouse("enter", event.button, (event.clientX - canvas_rect.left) / canvas_rect.width, (event.clientY - canvas_rect.top) / canvas_rect.height);
 			return false;
@@ -151,21 +151,21 @@ al.init = function () {
 	}, false);
 	canvas.addEventListener("mouseout", function(event) {
 		mouse_is_down = false;
-		if (mouse && typeof mouse === "function") {
+		if (mouse !== undefined  && typeof mouse === "function") {
 			var canvas_rect = canvas.getBoundingClientRect();
 			mouse("exit", event.button, (event.clientX - canvas_rect.left) / canvas_rect.width, (event.clientY - canvas_rect.top) / canvas_rect.height);
 			return false;
 		}
 	}, false);
 	canvas.onmousemove = function(event) {
-		if (mouse && typeof mouse === "function") {
+		if (mouse !== undefined  && typeof mouse === "function") {
 			var canvas_rect = canvas.getBoundingClientRect();
 			mouse(mouse_is_down ? "drag" : "move", event.button, (event.clientX - canvas_rect.left) / canvas_rect.width, (event.clientY - canvas_rect.top) / canvas_rect.height);
 			return false;
 		}
 	}
 	canvas.addEventListener('mousewheel', function(event){
-		if (mouse && typeof mouse === "function") {
+		if (mouse !== undefined  && typeof mouse === "function") {
 			var delta = 0;
 			if (!event) /* For IE. */
 					event = window.event;
@@ -196,21 +196,21 @@ al.init = function () {
 	}, false);
 	
 	window.addEventListener( "keydown", function(event) {
-		if (key && typeof key == "function") {
+		if (key !== undefined  && typeof key == "function") {
 			var k = event.keyCode;
 			key("down", k);
 			return true;
 		}
 	}, false);
 	window.addEventListener( "keyup", function(event) {
-		if (key && typeof key == "function") {
+		if (key !== undefined  && typeof key == "function") {
 			var k = event.keyCode;
 			key("up", k);
 			return true;
 		}
 	}, false);
 	window.addEventListener( "keypress", function(event) {
-		if (key && typeof key == "function") {
+		if (key !== undefined  && typeof key == "function") {
 			var k = event.keyCode;
 			k = String.fromCharCode(k); 
 			key("press", k);
@@ -249,10 +249,10 @@ field2D = function (width, height) {
 
 field2D.prototype.draw = function(x0, y0, w0, h0) {
 	
-	x0 = (x0 != undefined) ? x0 : 0;
-	y0 = (y0 != undefined) ? y0 : 0;
-	w0 = (w0 != undefined) ? w0 : 1;
-	h0 = (h0 != undefined) ? h0 : 1;
+	x0 = (x0 !== undefined) ? x0 : 0;
+	y0 = (y0 !== undefined) ? y0 : 0;
+	w0 = (w0 !== undefined) ? w0 : 1;
+	h0 = (h0 !== undefined) ? h0 : 1;
 	
 	var x, y, i = 0;
 	var w = offscreen_canvas.width, h = offscreen_canvas.height;
@@ -601,8 +601,8 @@ vec2 = function(x, y) {
 		this.x = x.x;
 		this.y = x.y;
 	} else {
-		this.x = (x != undefined) ? x : 0;
-		this.y = (y != undefined) ? y : 0;
+		this.x = (x !== undefined) ? x : 0;
+		this.y = (y !== undefined) ? y : 0;
 	}
 	return this;
 }
@@ -616,20 +616,20 @@ vec2.prototype.set = function(x, y) {
 		this.x = x.x;
 		this.y = x.y;
 	} else {
-		this.x = (x != undefined) ? x : 0;
-		this.y = (y != undefined) ? y : 0;
+		this.x = (x !== undefined) ? x : 0;
+		this.y = (y !== undefined) ? y : 0;
 	}
 	return this;
 }
 
 vec2.prototype.fromAngle = function(a) {
-	a = (a != undefined) ? a : 0;
+	a = (a !== undefined) ? a : 0;
 	return new vec2(cos(a), sin(a));
 }
 
 vec2.prototype.fromPolar = function(r, a) {
-	r = (r != undefined) ? r : 0;
-	a = (a != undefined) ? a : 0;
+	r = (r !== undefined) ? r : 0;
+	a = (a !== undefined) ? a : 0;
 	this.x = r*cos(a);
 	this.y = r*sin(a);
 	return this;
@@ -680,8 +680,8 @@ vec2.prototype.div = function(b) {
 }
 
 vec2.prototype.relativewrap = function(x, y) {
-	x = (x != undefined) ? x : 1;
-	y = (y != undefined) ? y : x;
+	x = (x !== undefined) ? x : 1;
+	y = (y !== undefined) ? y : x;
 	var halfx = x * 0.5;
 	var halfy = y * 0.5;
 	this.x = wrap(this.x + halfx, x) - halfx;
@@ -780,7 +780,7 @@ vec2.prototype.lerp = function(v, f) {
 }
 
 vec2.prototype.random = function(r) {
-	r = (r != undefined) ? r : 1;
+	r = (r !== undefined) ? r : 1;
 	var a = random() * pi * 2;
 	this.x = r * cos(a);
 	this.y = r * sin(a);
@@ -788,8 +788,8 @@ vec2.prototype.random = function(r) {
 }
 
 vec2.fromPolar = function(r, a) {
-	r = (r != undefined) ? r : 0;
-	a = (a != undefined) ? a : 0;
+	r = (r !== undefined) ? r : 0;
+	a = (a !== undefined) ? a : 0;
 	return new vec2(r*cos(a), r*sin(a));
 }
 
@@ -826,8 +826,8 @@ vec2.div = function(a, b) {
 }
 
 vec2.relativewrap = function(a, x, y) {
-	x = (x != undefined) ? x : 1;
-	y = (y != undefined) ? y : x;
+	x = (x !== undefined) ? x : 1;
+	y = (y !== undefined) ? y : x;
 	var halfx = x * 0.5;
 	var halfy = y * 0.5;
 	return new vec2(
@@ -863,7 +863,7 @@ vec2.equals = function(a, b) {
 }
 
 vec2.random = function(r) {
-	r = (r != undefined) ? r : 1;
+	r = (r !== undefined) ? r : 1;
 	var a = random() * pi * 2;
 	return new vec2(cos(a) * r, sin(a) * r);
 }
@@ -919,7 +919,7 @@ draw2D.translate = function(x, y) {
 	return draw2D;
 }
 draw2D.scale = function(x, y) { 
-	y = (y != undefined) ? y : x;
+	y = (y !== undefined) ? y : x;
 	ctx.scale(x, y); 
 	return draw2D;
 }
@@ -929,10 +929,10 @@ draw2D.rotate = function(a) {
 }
 
 draw2D.line = function(x1, y1, x2, y2) {
-	x1 = (x1 != undefined) ? x1 : 0;
-	y1 = (y1 != undefined) ? y1 : 0;
-	x2 = (x2 != undefined) ? x2 : 0;
-	y2 = (y2 != undefined) ? y2 : 0;
+	x1 = (x1 !== undefined) ? x1 : 0;
+	y1 = (y1 !== undefined) ? y1 : 0;
+	x2 = (x2 !== undefined) ? x2 : 0;
+	y2 = (y2 !== undefined) ? y2 : 0;
 	ctx.beginPath();
 	ctx.moveTo(x1, y1);
 	ctx.lineTo(x2, y2);
@@ -941,10 +941,10 @@ draw2D.line = function(x1, y1, x2, y2) {
 }
 
 draw2D.rect = function(x, y, w, h) {
-	x = (x != undefined) ? x : 0;
-	y = (y != undefined) ? y : 0;
-	w = (w != undefined) ? w : 0;
-	h = (h != undefined) ? h : 0;
+	x = (x !== undefined) ? x : 0;
+	y = (y !== undefined) ? y : 0;
+	w = (w !== undefined) ? w : 0;
+	h = (h !== undefined) ? h : 0;
 	var w2 = w/2;
 	var h2 = h/2;
 	var x1 = x - w2;
@@ -954,9 +954,9 @@ draw2D.rect = function(x, y, w, h) {
 }
 
 draw2D.circle = function(x, y, d) {
-	x = (x != undefined) ? x : 0;
-	y = (y != undefined) ? y : 0;
-	var r = (d != undefined) ? d/2 : 0.5;
+	x = (x !== undefined) ? x : 0;
+	y = (y !== undefined) ? y : 0;
+	var r = (d !== undefined) ? d/2 : 0.5;
 	ctx.beginPath();
 	ctx.arc(x, y, r, 0, 2*Math.PI);
 	ctx.closePath();
@@ -965,9 +965,9 @@ draw2D.circle = function(x, y, d) {
 }
 
 draw2D.arc = function(x, y, s, e, d) {
-	x = (x != undefined) ? x : 0;
-	y = (y != undefined) ? y : 0;
-	var r = (d != undefined) ? d/2 : 0.5;
+	x = (x !== undefined) ? x : 0;
+	y = (y !== undefined) ? y : 0;
+	var r = (d !== undefined) ? d/2 : 0.5;
 	ctx.beginPath();
 	ctx.arc(x, y, r, s, e);
 	ctx.closePath();
@@ -976,10 +976,10 @@ draw2D.arc = function(x, y, s, e, d) {
 }
 
 draw2D.color = function(r, g, b, a) {
-	r = (r != undefined) ? r : 0.5;
-	g = (g != undefined) ? g : r;
-	b = (b != undefined) ? b : r;
-	a = (a != undefined) ? a : 1;
+	r = (r !== undefined) ? r : 0.5;
+	g = (g !== undefined) ? g : r;
+	b = (b !== undefined) ? b : r;
+	a = (a !== undefined) ? a : 1;
 	al.color.r = Math.floor(r*255.);
 	al.color.g = Math.floor(g*255.);
 	al.color.b = Math.floor(b*255.);
