@@ -61,6 +61,20 @@ var al_updating = false;
 var al_now = Date.now();
 var al_dt = 1/al.fps;
 
+al.once = function() {
+	if (update && typeof update === "function") {
+		update(al_dt);
+	}
+	if (draw && typeof draw === "function") {
+		ctx.clearRect(0,0, canvas.width, canvas.height);
+		ctx.save();
+		ctx.scale(canvas.width, canvas.height);
+		draw(ctx);
+		ctx.restore();
+	}
+}
+
+
 var al_render = function() {
 	var now = Date.now();
 	al_dt = (now - al_now) * 0.001;
