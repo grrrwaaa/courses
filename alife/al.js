@@ -45,10 +45,13 @@ var max = Math.max;
 
 var piover2 = Math.PI/2.;
 
+/*
 function mouse(event, button, x, y) {}
 function key(event, k) {}
 function update() {}
-function draw() {}
+function draw(ctx) {}
+function reset() {}
+*/
 
 ////////////////////////////////////////////////////////////////////////////////
 
