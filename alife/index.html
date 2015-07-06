@@ -51,7 +51,7 @@
 <p>We have found that life isn&#39;t always what we think it is: evolution is not necessarily progressive, nor gradual, survival is not often a question of fitness, large amounts of DNA are shared between incredibly different species, environmental nurture is essential to development, etc. Can we understand more deeply by creating autonomous life-like systems?</p>
 <p>Life is the best example we have of systems adapting to unpredictable environments while propagating complexity; of surpassing themselves. What we learn may inform adaptive, responsive (responsible? sustainable?) designs for present-day concerns: biotech, ubicomp, cloud &amp; device, robotics... </p>
 <p>It may offer opportunities to raise new ethical issues. For example, the post-human / post-organic life discussions (see Hayles); away from &#39;essentialism&#39; toward &#39;cyborg subjects&#39; (Haraway). The future of <em>our</em> life is (and always has been) deeply connected with the future of machines.</p>
-<p><a href="http://simonpenny.net/texts/Resources/a_life.pdf">Artificial Life -- a Primer. Simon Penny, 2009</a></p>
+<p><a href="http://simonpenny.net/texts/Resources/a_life.pdf">Artificial Life // a Primer. Simon Penny, 2009</a></p>
 <p><a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=21&amp;ved=0CC8QFjAAOBQ&amp;url=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D10.1.1.70.1101%26rep%3Drep1%26type%3Dpdf&amp;ei=p-U3UZqBI43ckgWg2YCwAQ&amp;usg=AFQjCNHDG_pHBeHBKPtfIZZvXu6HDeHlhw&amp;bvm=bv.43287494,d.dGI">On Biologically Inspired Computation “a.k.a. The Field”. Jason Brownlee, 2005.</a></p>
 <h2 id="alife-resources">ALife Resources</h2>
 <h3 id="journals-">Journals:</h3>
@@ -60,33 +60,282 @@
 <p>ECAL, <a href="http://evostar.dei.uc.pt/2012/">EvoWorkshops</a>, IEEE ALIFE, IEEE CEC, GECCO, ALEA, EA</p>
 <h3 id="see-also-">See also:</h3>
 <p><a href="http://alife.org/">alife.org</a>, <a href="http://biota.org">biota.org</a>, <a href="http://www.freshsim.org/discussion/11/established-alife-projects">FreshSim</a>, <a href="http://comdig.unam.mx/">Complexity Digest</a></p>
-<h2 id="plan">Plan</h2>
+<h1 id="cellular-systems-and-lattice-models">Cellular systems and lattice models</h1>
+<p>Provides an interesting continuum between non-living (such as molecules in crystal and metalline structures) and living (such as cells of a multi-cellular organism). The main difference is that, although both begin with more or less &#39;the same program&#39;, in living material the individual behavior of each cell specializes according to early conditions. This is important for <em>developmental biology</em>. Of course, computational cellular systems are far, far simpler than biological cells; but still draw from this inpsiration. The CA model was propsed by Stanislaw Ulam and used by von Neumann to demonstrate machines that can reproduce themselves; a more concise example being proposed by <a href="http://www.youtube.com/watch?v=2iDc4C6vbcc">Christopher Langton</a> decades later, itself later <a href="http://www.youtube.com/watch?v=vbpoTZlNTiw&amp;NR=1&amp;feature=endscreen">improved upon using artificial evolutionary techniques</a>.</p>
+<p><a href="http://www.interciencia.es/PDF/WikipediaBooks/CellAutomata.pdf">The wikibooks on CA</a>.</p>
+<p>The essential components that define a cellular system:</p>
 <ul>
-<li>a simple creature, turtle-style control. agent-centric, rather than global.</li>
-<li><p>random walks in nature</p>
-</li>
-<li><p>Field: food to discover and consume. Model as a grid of pixels.</p>
-</li>
-<li>fill the field with food. Not too smooth, not to random; a number of splatters</li>
-<li>Diffuse it (we could write this as a kernel perhaps?) -- preserve energy</li>
-<li><p>Make it dynamic -- decaying, and new deposits</p>
-</li>
-<li><p>agents detect local sugar. direct, or interpolated read.</p>
-</li>
-<li>agents eat sugar (remove)</li>
-<li>many agents: initialize random location</li>
-<li>make a another agent that adds sugar?</li>
-<li>swim/tumble</li>
+<li><strong>Cellular space:</strong> A collection of cells arranged into a discrete lattice, such as a 2D grid. </li>
+<li><strong>Cell states:</strong> The information representing the current condition of a cell. In <em>Game of Life</em> this is either 0 or 1, but in other systems the state could be represented by an n-tuple of values, or something more complex. The set of possible states could be defined as finite or unbounded.</li>
+<li><strong>Initial conditions:</strong> What state the cells are in at the start of the simulation.</li>
+<li><strong>Neighborhood:</strong> The set of adjacent/nearby cells that can directly influence a particular cell. In <em>Game of Life</em> these are the 8 side and corner neighbors (the <em>Moore</em> neighborhood). In other systems it could be expressed as a radius or range.</li>
+<li><strong>State transition function:</strong> The rule that a cell follows to update its state, which depends on the current state and the state of the neighborhood.</li>
+<li><strong>Time axis:</strong> The cells are generally updated in a discrete fashion, which may be synchronous (all cells update simultaneously) or asynchronous (cells update separately, e.g. in a probabilistic manner).</li>
+<li><strong>Boundary conditions:</strong> What happens to cells at the edges. A periodic boundary &#39;wraps around&#39; to the opposite edge; a static boundary always has the same state, a copying or reflective boundary mirrors the neighbor state, etc.</li>
 </ul>
-<p>ALTERNATIVELY, BOIDS</p>
+<h2 id="cellular-automata">Cellular automata</h2>
+<p>The mathematical notion of <em>automaton</em> indicates a discrete-time system with finite set of possible states, a finite number of inputs, a finite number of outputs, and a transition rule which gives the state at the next step in terms of the state and inputs at the previous step.</p>
+<p>A <em>CA</em> applies this notion to a cellular space. It has discrete time, finite neighborhood (inputs), finite state set (often represented as integers) and synchronous update. The transition rule (or CA rule) is usually deterministic, giving a cell state[t+1] as a function of the states[t] of itself and neighbours; and all cells use the same transition rule. </p>
+<p>The space itself is usually 1D, 2D or 3D, but rarely greater. Wolfram performed most of his research using 1D CAs, such as the &#39;rule 30&#39; CA below, whose evolution bears similarities with some shell patterns. The most famous CA <em>Game of Life</em> is 2D, which is so popular that people have written <a href="http://www.youtube.com/watch?v=My8AsV7bA94">Turing machines</a> and <a href="http://www.youtube.com/watch?v=xP5-iIeKXE8">Game of Life</a> in terms of it. <a href="https://www.youtube.com/watch?v=wNypW-aSCmE">Over here a 3D cellular automaton is taking over Minecraft</a>, and <a href="http://www.youtube.com/watch?v=PBXO_6Jn1fs">here is a self-replicating computer in 3D</a>.</p>
+<p><img src="img/ca_shells.jpg" alt="Evolution of a 1D CA: rule 30"></p>
+<p>Wolfram divided CA into four classes, according to their long-term behavior:</p>
 <ul>
-<li>random walk</li>
-<li>neighbor relations:</li>
-<li>avoidance</li>
-<li>copy</li>
-<li>center</li>
+<li><strong>Class 1</strong> - stable. Evolves to homogeneous state.</li>
+<li><strong>Class 2</strong> - cyclic. Evolves to simple separated periodic structures. Local changes to the initial pattern tend to remain local</li>
+<li><strong>Class 3</strong> - chaotic. Any stable structures that appear are quickly destroyed by the surrounding noise. Local changes to the initial pattern tend to spread indefinitely</li>
+<li><strong>Class 4</strong> - complex. Local changes to the initial pattern may spread indefinitely. Wolfram has conjectured that many, if not all class 4 cellular automata are capable of universal computation.</li>
 </ul>
-<h2 id="examples">Examples</h2>
+<h3 id="conway-s-game-of-life">Conway&#39;s Game of Life</h3>
+<p>The <em>Game of Life</em> CA is an example of a <em>outer totalistic</em> CA: The spatial directions of cells do not matter, only the total value of all neighbors is used, along with the current value of teh cell itself. The transition rule for a cell can be stated concisely as follows:</p>
+<ul>
+<li>If the current state is 1 (&quot;alive&quot;):<ul>
+<li>If the neighbor total is less than 2: New state is 0 (&quot;death by loneliness&quot;)</li>
+<li>Else if the neighbor total is greater than 3: New state is 0 (&quot;death by overcrowding&quot;)</li>
+<li>Else: State remains the same (&quot;alive&quot;)</li>
+</ul>
+</li>
+<li>If the current state is 0 (&quot;dead&quot;):<ul>
+<li>If the neigbor total is exactly 3: New state is 1 (&quot;reproduction&quot;)</li>
+<li>Else: State remains the same (&quot;dead&quot;)</li>
+</ul>
+</li>
+</ul>
+<p>The Game of Life produces easily recognizable higher-level formations including stable objects, oscillatory objects, mobile objects and objects that produce or consume others, for example, which have been called &#39;ponds&#39;, &#39;gliders&#39;, &#39;eaters&#39;, &#39;glider guns&#39; and so on. In Wolfram&#39;s terms, it is <em>Class 4</em> CA.</p>
+<p>Note that these rules mean that the Game of Life is not reversible: from a given state it is not possible to determine the previous state.</p>
+<h3 id="implementation">Implementation</h3>
+<p>If the cells are densely packed into a regular lattice structure, such as a 2D grid, they can efficiently be represented as <em>array</em> memory blocks. The state of a cell can be represented by a number, so an array of integers works well. A way to index this array memory to read or write a cell coordinate will be useful.</p>
+<p>In theory the transition rule can be represented as a <em>look-up table</em>, however above a certain number of states and neighbors the size of this table would become astronomical (k states raised to the power of k neighbor states raised to the power of n neighbors; for a 3-state, 3-neighbor system this requires 7 billon rules!), so a procedural implementation is preferable. CAs may use bit-wise operators to implement the transition rules in a hardware-optimized way, but we will use regular <code>if</code> statements, like the above, for clarity. </p>
+<p>One complication is that the states of the whole lattice must update synchronously. That means: when one cell changes, all cells should change. This is not easy to achieve in most computing systems today, which mostly follow instructions one at a time (with only limited parallelism). A naive implementation will thus update cells one at a time, and the neighborhood of a particular cell will contain both &#39;past&#39; and &#39;future&#39; states. One way to work around this is to maintain two copies of the lattice; one for the &#39;past&#39; states, and one for the &#39;future&#39; states. The transition rule always reads from the &#39;past&#39; lattice, and always writes to the &#39;future&#39; lattice. After all cells are updated, either the &#39;future&#39; is copied to the &#39;past&#39;, or the &#39;future&#39; and &#39;past&#39; lattices are swapped, since the future of yesterday is the past of tomorrow. </p>
+<blockquote>
+<p>This technique is called <em>double-buffering</em>, and is widely used in software systems where a parallel process interacts with a serial machine. It is used to render graphics to the screen, for example.</p>
+</blockquote>
+<p>Here is the <a href="http://codepen.io/anon/pen/QbmEvG/right/?editors=001">Game of Life</a> in our online code editor. And here is a similar CA using 3 states: <a href="http://codepen.io/anon/pen/EjENaK/right/?editors=001">Brian&#39;s Brain</a></p>
+<h2 id="variations">Variations</h2>
+<h3 id="non-homogenous-ca">Non-homogenous CA</h3>
+<p>The rule is not the same for all cells / for all time steps. Spatial non-homogeneity can be interesting to simulate different geographies (such as boundaries). Temporal non-homogeneity can be used to perform a sequence of different filters.</p>
+<ul>
+<li>Special <em>boundary</em> cells in the field may follow different rules from others.</li>
+<li>Some rules may depend on the cell position; perhaps the same CA has different regions using different rules.</li>
+<li>The rules used could alternate between different rule definitions, over a period of N frames. Or certain parameters to rules could cycle over certain periods.</li>
+<li>The neighborhood selection rules could change spatially or temporally as above (also see particle CA below).</li>
+<li>Variations of space/rule/neighborhood could depend on global conditions, such as the overall density of black and white cells, or due to user interactions.</li>
+<li>Combinations of the above.</li>
+</ul>
+<p>These can be implemented by changing the function used in the transition rule, or by extending the state set to accommodate the differences. Changing the function is usually easier to implement and understand.</p>
+<h3 id="probabilistic-stochastic-ca">Probabilistic/Stochastic CA</h3>
+<p>In this case the transition rule is not deterministic, but includes some random factor. </p>
+<ul>
+<li>A probability can be assigned to each successor state according to the prior states. </li>
+<li>A <em>backround noise</em> can be added, such that from time to time a randomly chosen cell changes state. A <em>temperature</em> control could control the statistical frequency of such changes.</li>
+<li>Combinations with non-homogenous CAs: statistical choice of rules and neighborhoods; variations of probabilities over space and time, etc.</li>
+</ul>
+<p>Take a look at the <a href="http://codepen.io/anon/pen/LVdbEW/right/?editors=001">Forest Fire</a>, and try changing the probabilities to see how it behaves.</p>
+<h3 id="particle-ca-lattice-gas-automata-and-block-rule-ca">Particle CA, Lattice-Gas Automata and Block Rule CA</h3>
+<p>The cell states represent the presence (or absence) of particles in a cell, and transition rules represent how particles move across cells. Generally the transition rule must preserve the quantity of particles. The elementary 1D traffic CA (rule 184) is a simple particle CA. </p>
+<p>An implementation option is to use <em>block rules</em>, which consider small regions at a time, rather than individual cells; e.g. a 2x2 region of cells in a 2D CA (the <em>Margolus neighborhood</em>). To handle the boundaries between blocks, the regions are shifted between each application (<a href="http://en.wikipedia.org/wiki/Block_cellular_automaton">see wikipedia</a>). </p>
+<p><img src="img/mnhood.gif" alt="Margolus neigborhood"></p>
+<p>Note that a block rule CA does not need to be implemented with two buffers, since each block updates synchronously internally, and independently externally.</p>
+<p>More example block CAs <a href="http://psoup.math.wisc.edu/mcell/rullex_marg.html">here</a> // many of these are implemented in the example code: <a href="http://codepen.io/anon/pen/MwVbag/right/?editors=001">Block Rules</a>. </p>
+<p>In 1969, German computer pioneer (and painter) Konrad Zuse published his book <a href="ftp://ftp.idsia.ch/pub/juergen/zuserechnenderraum.pdf">Calculating Space</a>, proposing that the physical laws of the universe are discrete by nature, and that the entire universe is the output of a deterministic computation on a single cellular automaton. This became the foundation of the field of study called <em>digital physics</em>. Zuse&#39;s first model is a 3D particle CA.</p>
+<p><img src="img/zuse.jpg" alt="Zuse&#39;s vision of nature"></p>
+<p>Particle CA can use probabilistic rules to simulate brownian motions and other non-deterministic media (but the rules would usually still need to be matter/energy preserving). Particle CA benefit from the inclusion of boundaries and other spatial non-homogeneities such as influx and outflow of particles at opposite edges.</p>
+<h3 id="asynchronous-ca">Asynchronous CA</h3>
+<p>Instead of updating all cells at once, update one cell at a time, according to some update policy. The same choices can be applied per-block in a block-rule CA.</p>
+<ul>
+<li>A fixed update policy, such as linear scan or pre-determined path, is orderly, but may introduce artifacts (related to the <em>double-buffering</em> pattern). </li>
+<li>A <em>probabilistic asynchronous CA</em> chooses the next active cell according to a random selection (related to the Monte Carlo methods described below).</li>
+<li>A multi-rate CA (self-clocked) updates each cell according to a clock period that varies from cell to cell. The clock period could also be affected by neighbors, to achieve <em>entrainment</em> effects.</li>
+<li>A <em>mobile CA</em> chooses a related cell (such as one of the neighbors) of the current active cell as the next active cell. So in addition to choosing a new state for the cell, the transition rule must also choose how to move the active cell. This could also be partly probabilistic.</li>
+</ul>
+<p>There could be more than one &#39;active cell&#39;. What happens if two active cells occupy the same site?</p>
+<p><a href="http://en.wikipedia.org/wiki/Langton%27s_ant">Langton&#39;s Ant</a> is a mobile CA in a 2D, two-state space, with very simple rules:</p>
+<ul>
+<li>At a white square, turn 90° right, flip the color of the square, move forward one unit</li>
+<li>At a black square, turn 90° left, flip the color of the square, move forward one unit</li>
+</ul>
+<p><a href="http://codepen.io/anon/pen/MwVbwg/right/?editors=001">See Langton&#39;s Ant</a>, and the <a href="http://www.youtube.com/watch?v=w6XQQhCgq5c">original video by Christopher Langton</a>, including examples of multiple ants (and music by the Vasulkas). Note that Langton&#39;s Ant, and other related Turmites, are closely related to the turtle graphics often used for L-systems. <a href="http://codepen.io/anon/pen/oXqYXW/right/?editors=001">Here are Multiple Ants</a>.</p>
+<h4 id="statistical-and-unbounded-state-models">Statistical and unbounded state models</h4>
+<p>The <em>Ising model</em> of ferromagnetism in statistical mechanics can also be simulated in a <em>Monte Carlo</em> fashion. Each site (cell) has either positive or negative spin (we can encode that as 0 or 1 value). At each time step, consider a site at random, and evaluate the probability of changing state. If changing state moves the site toward energetic equilibrium with neighbors (determined according to the Hamiltonian of the site), then the change is made. Otherwise, the change is made only with a small probability that is dependent on the energetic difference and overall temperature. Thus at high temperatures, the system remains noisy, while at low temperatures it gradually self-organizes into all sites with equal spin.</p>
+<p>It is also related to the <em>contact process</em> model, which has been used to simulate the spread of infection: infected sites become healthy at a constant rate, while healthy sites become infected at a rate proportional to the number infected neighbor (see also the <em>HodgePodge</em> simulation). This can be extented to multiple states for a multitype contact process. The <em>voter model</em> similarly simulates the changing of opinion in social groups. </p>
+<p>Here is the amazing <a href="http://codepen.io/anon/pen/qdoqOr/right/?editors=001">Hodgepodge</a> in our editor.</p>
+<p>The cellular <em>Potts model</em> (also known as the <em>Glazier-Graner</em> model) generalizes these to allow more than two site states, and in some cases, an unbounded number of possible site states; however it still utilizes the notion of statistical movement toward neighbor equilibrium to drive change, though the definition of a local Hamiltonian. Variations have been used to model grain growth, foam, fluid flow, chemotaxis, biological cells, and even the developmental cycle of whole organisms. Note that in this field, the term <em>cell</em> is used not to refer to a site on the lattice, but to a whole group of connected sites that share the same state. So in modeling foam, a <em>cell</em> represents a single bubble, and is made of one or more <em>sites</em>. Most changes therefore happen at the boundaries between these cells.</p>
+<p>Stan Marée used this model to simulate the whole life cycle of <a href="http://www-binf.bio.uu.nl/stan/Thesis/">Dictyostelium discoideum</a>.</p>
+<h3 id="continuous-automata">Continuous automata</h3>
+<p><strong>Continuous states:</strong> In this case, the states are not discrete but belong to a continuum, such as the linear range 0..1. Instead of using a discrete transition rule or lookup table, continuous functions can be used (or combined with discrete rules such as numeric comparisons). Continuous automata can show liquid and diffusive effects.</p>
+<p><strong>Continuous neighborhood:</strong> Instead of accumulating whole neighbor cells, apply a <em>kernel</em> region. Perhaps give different weights to cells according to the degree that they fall under a radius, or by distance.</p>
+<h4 id="smoothlife">SmoothLife</h4>
+<p><a href="http://www.youtube.com/playlist?list=PL69EDA11384365494">SmoothLife</a> still uses a discrete grid, but both the kernel and transition functions are adjusted for smooth, continuous values. A disc around the cell is integrated and normalized (i.e. averaged) for the cell&#39;s state, and a ring around this is integrated &amp; normalized (averaged) for the neighbor state. Cell transition functions are expressed in terms of continuous sigmoid thresholds over the [0, 1] range, and re-expressed in terms of differential functions (velocities of change) to approximate continuous time. <a href="http://arxiv.org/pdf/1111.1567v2.pdf">Paper here</a>. By doing so, it removes the discrete bias and leads to fascinating results. <a href="http://www.youtube.com/watch?v=l7t8LtdBAV8">Another implementaton</a>. <a href="http://www.youtube.com/watch?v=zA857JdUn9o&amp;list=PL69EDA11384365494&amp;index=46">Taken to 3D</a>. In effect, by making all components continuous, it is essentially a simulation of differential equations.</p>
+<p><a href="http://0fps.net/2012/11/19/conways-game-of-life-for-curved-surfaces-part-1/">Here is a great explanation of the SmoothLife implementation, with a jsfiddle demo</a></p>
+<h4 id="reaction-diffusion">Reaction Diffusion</h4>
+<p>The reaction-diffusion model was proposed by Turing to describe embryo development and pattern-generation (<a href="http://www.dna.caltech.edu/courses/cs191/paperscs191/turing.pdf">Turing, A. The Chemical Basic for Morphogenesis.</a>); it is still used today in CG (<a href="http://www.cc.gatech.edu/~turk/my_papers/reaction_diffusion.pdf">Greg Turk&#39;s famous paper</a>). RD systems and other differential equation systems can be approximated using continuous automata.</p>
+<p><img src="img/xmorphia-parameter-map.jpg" alt="The Gray-Scott parameter map"></p>
+<p>One approach to simulating RD using CA is the <em>Gray-Scott</em> model, as described in <a href="http://arxiv.org/pdf/patt-sol/9304003.pdf">Pearson, J. E. Complex Patterns in a Simple System</a>. There is <a href="http://mrob.com/pub/comp/xmorphia/">a wonderful archive of this model at this webpage</a>, including many great video examples of the <a href="http://www.youtube.com/watch?v=F5oKgVZ6bTk">u-skate world</a>, and even <a href="http://www.youtube.com/watch?v=B03lcPEmSOQ">u-skate in 3D</a>. An implementation in our software can be found <a href="https://github.com/grrrwaaa/gct753/blob/master/ca_2D_greyscott.lua">here</a>.</p>
+<p>Some of these systems share resemblance with analog video feedback (<a href="http://www.youtube.com/watch?v=hDYEVv9t32U">example</a>, <a href="http://www.youtube.com/watch?v=Uw5onuS2_mw">example</a>), which has been exploited by earlier media artists (notably the Steiner and Woody Vasulka). </p>
+<h3 id="multi-scale-systems">Multi-Scale Systems</h3>
+<p>Several cellular systems can be coupled together at different scales. </p>
+<ul>
+<li>Perhaps each cell of a macro-CA is itself an entire micro-CA world. Or several CA can overlap with different spatial relationships. </li>
+<li>Different indexing rules (such as affine transformations of coordinate space) can be used to impart non-local symmetries and behavior.</li>
+<li>Different rules (or different neighborhood specifications) can be run in parallel on the same shared data. </li>
+<li>Higher- and lower-level systems could progress at different rates (or statistical frequencies).</li>
+</ul>
+<p>Artists Driessens &amp; Verstappen created a recursive cellular system (exhibited in the artwork <em>IMA Traveller</em>) which appears to show an endless zoom; as the whole field appears to expand, each cell periodically subdivides into four daughter cells, following one of several rules to vary the color. Cells outside the viewpoint are thrown away. The effect is an infinitely expanding landscape or journey, which can be partially navigated by the gallery visitor. See the <a href="http://notnot.home.xs4all.nl/ima/IMAtraveller.html">website</a> and in particular the <a href="http://notnot.home.xs4all.nl/ima/IMAcat.html">info</a> link. This work has inspired discussion by several critics, including <a href="http://www.tandfonline.com/doi/abs/10.1076/digc.14.1.43.8810">Mitchell Whitelaw</a> and <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.16.6640&amp;rep=rep1&amp;type=pdf&amp;utm_source=twitterfeed&amp;utm_medium=twitter">Jon McCormack and Alan Dorin</a>.</p>
+<h4 id="multi-scale-symmetric-turing-patterns">Multi-Scale Symmetric Turing Patterns</h4>
+<p><a href="http://www.jonathanmccabe.com/">Jonathan McCabe&#39;s cyclic multi-scale Turing patterns</a>, and a <a href="http://teemingvoid.blogspot.kr/2007/02/jonathan-mccabe-very-cellular-automata.html">commentary by Mitchell Whitelaw</a>. The implementation is described <a href="http://www.jonathanmccabe.com/Cyclic_Symmetric_Multi-Scale_Turing_Patterns.pdf">in this paper</a>.</p>
+<p>It starts with a straightforward reaction/diffusion system:</p>
+<ul>
+<li>Diffusion is simulated by averaging the continuous cell values over small (activator) and large (inhibitor) radii; if the the smaller (activator) concentration is greater than the larger (inhibitor) concentration, increase the cell value by a small amount; otherwise decrease. </li>
+<li>After running the rule over all cells, the entire field is <em>normalized</em> (to ensure the minimum cell value is zero and the maximum cell value is 1).</li>
+</ul>
+<p>Since this creates structure at a single spatial scale, it can be elaborated by super-imposing several models at different spatial scales (different small and large radii). Or, by changing the radii dynamically over time (as in <a href="http://www.cc.gatech.edu/~turk/my_papers/reaction_diffusion.pdf">Greg Turk&#39;s famous paper</a>). McCabe&#39;s system uses several pre-defined scales, but selects which scale to apply for a particular cell according to which one currently shows the least local variation. </p>
+<p>Additionally, his system does not measure all cells within a radius; instead it selects cells at the radius distance and certain angular directions, creating cyclical symmetries in the result. For example, 3-fold symmetry may be used at a smaller scale, and 9-fold symmetry at a larger scale.</p>
+<h1 id="multi-agent-systems-agent-based-models-">Multi-agent systems (agent-based models)</h1>
+<p>Some of the most beautiful, fascinating or strange phenomena of nature can be understood as emerging from the behaviors of interacting agents. Widely acknowledged examples include the flocking of birds (or swarming insects, schools of fish), and the societal &#39;superorganisms&#39; of ant colonies. </p>
+<p><img src="http://americablog.com/wp-content/uploads/2014/01/flock-of-starlings.gif" alt="Flocking"></p>
+<p>We have come to understand that despite the obvious organization that we see at the macro-scale, there is no hierarchical center of coordination, but rather the whole emerges from simple interactions at local levels. These have been suggested as examples of emergence, or of self-organization. Which is to say, the whole is greater than a naive sum of its parts. </p>
+<p><img src="http://underthecblog.files.wordpress.com/2014/02/fishschool.gif" alt="Fish school"></p>
+<p>Agent-based models, or multi-agent systems, attempt to understand how non-trivial organized macro-behavior emerges from objects that interact primarily at a local-level. These objects are called <strong>agents</strong>. Besides modeling flocks and colonies, agent-based modeling has applications from microbiology to sociology, as well as video games and computer graphics. </p>
+<h2 id="what-is-an-agent-">What is an agent?</h2>
+<p>An autonomous agent interacts within an environment populated by other agents, but behaves independently without taking direct commands from other agents nor a global planner or leader. Agent-based models typically operate in parallel within a spatial environment, in which interactions are usually limited to local distances, rather like cellular automata. But unlike CA, which roots a program in a particular spatial location (the cell), an agent-based program is typically mobile. </p>
+<p>The agent abstraction has arisen somewhat independently in different fields, thus the definition of an agent can vary widely. The following components are usually present:</p>
+<ul>
+<li><strong>Properties</strong>: Persistent but variable features of an agent, such as size, color, speed, direction, energy level, and so on. </li>
+<li><strong>Input</strong>: Limited capabilities of sensing (or receiving messages from) the environment</li>
+<li><strong>Output</strong>: Limited capabilities of performing actions on (or sending messages to) the environment, or its own properties. Typically this includes the ability to move through space.</li>
+<li><strong>Processing</strong>: An information processing capacity to select actions in response to inputs. This capacity may also include information storage (memory).</li>
+<li><strong>Motivations</strong>: The agent may also incorporate explicit goals or purposes in the form of self-evaluation and self-adaptation; or these may be implict in the design of the processing algorithm.</li>
+</ul>
+<p>As a biological approximation, an agent could refer to anything from individual proteins, viruses, cells, bacteria, organisms, or population groups. Agent systems also share similarities with particle systems.</p>
+<p>Just like CA, at times, the self-organizing behavior of systems of even relatively simple agents can be unpredictable, complex, and generate new emergent structures of order. </p>
+<h2 id="tortoises-and-vehicles">Tortoises and Vehicles</h2>
+<p>In the 1950&#39;s, Cyberneticist Grey Walter pioneered the engineering of agents, as early examples of autonomous robots, with his <em>&quot;tortoises&quot;</em>. Remarkably, this direction of research was largely forgotten as efforts in artificial intelligence concentrated on symbolic thinking. (Brief history <a href="http://www.rutherfordjournal.org/article020101.html">here</a>).</p>
+<p><a href="http://www.youtube.com/watch?v=lLULRlmXkKo"><img src="http://www.rutherfordjournal.org/images/020101-05.jpg" alt="Machina Speculatrix"> &gt;&gt; video</a></p>
+<p>Nevertheless, Walter&#39;s tortoises inspired the turtle graphics of Logo, the situated robotics of Rodney Brooks, the flocking behaviors of Craig Reynolds, and Valentino Braitenberg&#39;s Vehicles.</p>
+<h3 id="vehicles">Vehicles</h3>
+<p><img src="http://www.ini.uzh.ch/~conradt/research/BraitenbergVehicle/Braitenberg%20Vehikels_files/BVinh.jpg" alt="Vehicle"></p>
+<blockquote>
+<p>A Braitenberg vehicle is an agent that can autonomously move around. It has primitive sensors (measuring some stimulus at a point) and wheels (each driven by its own motor) that function as actuators or effectors. A sensor, in the simplest configuration, is directly connected to an effector, so that a sensed signal immediately produces a movement of the wheel. Depending on how sensors and wheels are connected, the vehicle exhibits different behaviors (which can be goal-oriented).  <a href="http://en.wikipedia.org/wiki/Braitenberg_vehicle">wikipedia</a></p>
+</blockquote>
+<p>Cyberneticist Valentino Braitenberg argues that his extraordinarily simple mechanical vehicles manifest behaviors that appear identifiable as fear, aggression, love, foresight, and optimism. The vehicle idea was a thought experiment conceived to show that complex, apparently purposive behaviour did not need to depend on complex representations of the environment inside a creature or agents brain. In fact simply by reacting to the environment in a consistent manner was more than enough to explain the low level reactive behaviours exhibited by many animals.</p>
+<blockquote>
+<p>Braitenberg, V. (1984). Vehicles: Experiments in synthetic psychology. Cambridge, MA: MIT Press. </p>
+</blockquote>
+<p>Casey Reas (co-author of Processing), Yanni Loukissas, and many others have used populations of Braitenberg-inspired vehicles to create artworks based on their combined paths.</p>
+<p><img src="http://reas.com/tissue_p/reas_tissue_p_13.jpg" alt="Reas&#39; Tissue"></p>
+<p>Vehicles have also been constructed in hardware of course // see examples <a href="http://www.ini.uzh.ch/~conradt/research/BraitenbergVehicle/">here</a>, <a href="http://blog.electricbricks.com/en/2010/05/vehiculos-braitenberg-nxt-g/">here</a>, <a href="http://tinkerlog.com/2009/06/07/mini-braitenberg-vehicle/">here</a>.</p>
+<h3 id="steering-behaviors">Steering Behaviors</h3>
+<p>Craig Reynolds&#39; work with robotics is strongly inspired by Braitenberg&#39;s and Walter&#39;s vehicles, and became famous for his work on simulating flocking behavior (see below). His work has been widely used in robotics, game design, special effects and simulation. Reynolds&#39; paper <a href="http://www.red3d.com/cwr/steer/gdc99/">Steering Behaviors for Autonomous Characters</a> breaks agent movement into three layers:</p>
+<ul>
+<li><strong>Action Selection</strong>: selecting actions to perform according to environmental input and goals to achieve. </li>
+<li><strong>Steering</strong>: path determination according to the action selected. Many different behaviors can be used; the essential strategy is <code>steering force = desired_velocity - current_velocity</code>.</li>
+<li><strong>Locomotion</strong>: mechanisms of conversion of steering into actual movement.</li>
+</ul>
+<p>The paper is well worth exploring as a collection of patterns for autonomous agent movements; and presents the elements that make up his simulation of flocking behavior.</p>
+<h3 id="random-walks-in-nature">Random walks in nature</h3>
+<p>A <strong>random walk</strong> involves small random deviations to steering. This produces a <strong>random walk</strong> or <strong>Brownian motion</strong>, a form of movement that is widely utilized by nature. In Reynolds&#39; paper it is the <em>wander</em> steering strategy.</p>
+<h3 id="boids-flocking-swarms">Boids, flocking, swarms</h3>
+<p>In the late 1980s Reynolds proposed a model of animal motion to model flocks, herds and schools, which he named <em>boids</em>. Each boid follows a set of rules based on simple principles:</p>
+<ul>
+<li><strong>Avoidance</strong>: Move away from other boids that are too close (avoid collision)</li>
+<li><strong>Copy</strong>: Fly in the same general direction as other nearby boids</li>
+<li><strong>Center</strong>: Move toward the center of the flock (avoid exposure)</li>
+</ul>
+<p>In addition, if none of the conditions above apply, i.e. the boid cannot perceive any others, it may move by random walk. </p>
+<p>To make this more realistic, we can consider that each boid can only perceive other boids within a certain distance and viewing angle. We should also restrict how quickly boids can change direction and speed (to account for momentum). Additionally, the avoidance rule may carry greater <em>weight</em> or take precedence over the other rules. Gary Flake also recommends adding an influence for <em>View</em>: to move laterally away from any boid blocking the view.</p>
+<p>Evidently the <em>properties</em> of a boid (apart from location) include direction and speed. It could be assumed that viewing angle and range are shared by all boids, or these could also vary per individual. The <em>sensors</em> of a boid include an ability to detect the density of boids in different directions (to detect the center of the flock), as well as the average speed and direction of boids, within a viewable area. The <em>actions</em> of a boid principally are to alter the direction and speed of flight. </p>
+<h4 id="implementation">Implementation</h4>
+<p>The behavior of an agent depends on the other agents that it can perceive (the <em>neighborhood</em>). The simplest way to detect nearby agents is to simply iterate all agents and apply a distance condition (being careful to exclude the agent itself!). We can also include a view angle condition (easily calculated using vector dot product).</p>
+<pre><code class="lang-javascript">view_range = <span class="hljs-number">0.1</span>;     <span class="hljs-comment">// how far an agent can see</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">agent_update_sensors</span><span class="hljs-params">(self)</span> </span>{
+    <span class="hljs-comment">// create a list of nearby agents:</span>
+    <span class="hljs-keyword">var</span> neighbors = [];
+    <span class="hljs-comment">// test all agents:</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>; i&lt;agents.length; i++) {
+        <span class="hljs-keyword">var</span> near = agents[i];
+        <span class="hljs-comment">// don't compare with ourself!</span>
+        <span class="hljs-keyword">if</span> (near != <span class="hljs-keyword">self</span>) {        
+            <span class="hljs-comment">// near enough?</span>
+            <span class="hljs-keyword">var</span> rel = near.location.subnew(<span class="hljs-keyword">self</span>.location);
+            <span class="hljs-keyword">if</span> (rel.length() &lt; view_range) {
+                <span class="hljs-comment">// is the neighbor in front of us?</span>
+                <span class="hljs-comment">// (use dot product of my velocity to determine this)</span>
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">self</span>.velocity.dot(rel) &gt; <span class="hljs-number">0</span>) {
+                    <span class="hljs-comment">// add this to the set of neighbors:</span>
+                    neighbors.push(near);
+                }
+            }
+        }
+    }
+
+    <span class="hljs-keyword">if</span> (neighbors.length &gt; <span class="hljs-number">0</span>) {
+        <span class="hljs-comment">// now calculate steering influence according to visible neighbors:</span>
+        <span class="hljs-comment">// ...</span>
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// no visible neighbors, so we can explore freely...</span>
+        <span class="hljs-comment">// ...</span>
+    }
+}
+</code></pre>
+<blockquote>
+<p>This isn&#39;t especially efficient, but for small populations it is quite reasonable.</p>
+</blockquote>
+<p>Once a set of visible neighbors is calculated, it can be used to derive the steering influences of the agent. The center force depends on the average location of neighbors, relative to the agent. The copy force depends on the average velocity of neighbors. The avoidance force applies if a neighbor is too close.</p>
+<blockquote>
+<p>Note that since the agents are dependent on each other, it also makes sense to perform movements and information processing in separate steps. Otherwise, the order in which the agent list is iterated may cause unwanted side-effects on the behavior. (This multi-pass approach is similar in motivation to the double buffering required in many cellular automata).</p>
+</blockquote>
+<p>See the example of <a href="http://codepen.io/anon/pen/gpeLaK?/right/editors=001">Flocking Boids</a> in the editor.</p>
+<hr>
+<h2 id="environmental-interaction">Environmental interaction</h2>
+<h3 id="chemotaxis">Chemotaxis</h3>
+<p>When we look at microbiology, we find even simpler modes of steering behavior.</p>
+<blockquote>
+<p>Chemotaxis is the phenomenon whereby somatic cells, bacteria, and other single-cell or multicellular organisms direct their movements according to certain chemicals in their environment. This is important for bacteria to find food (for example, glucose) by swimming towards the highest concentration of food molecules, or to flee from poisons (for example, phenol). In multicellular organisms, chemotaxis is critical to early development (e.g. movement of sperm towards the egg during fertilization) and subsequent phases of development (e.g. migration of neurons or lymphocytes) as well as in normal function. <a href="https://en.wikipedia.org/wiki/Chemotaxis">wikipedia</a></p>
+</blockquote>
+<p>A <a href="http://www.youtube.com/watch?v=ZV5CfOkV6ek">video example of chemotaxis in E. coli</a>.</p>
+<p>E. coli can use its flagella to move in just two modes (<em>locomotion</em>): </p>
+<ul>
+<li>Move forward more or less straight</li>
+<li>Tumble about randomly</li>
+</ul>
+<p>The <em>goal</em> is to find the highest sugar concentration. It can sense the local sugar concentration at its current location. However it cannot sense at a distance, and has no sense of direction, never mind which direction is best. </p>
+<p>Instead it uses chemical memory to detect sugar concentration <em>gradient</em>, that is, the differential of concentration at the current location compared to how it was just a few moments ago. This gradient tells the E. coli whether things are getting better or worse, which can be used to select between the swimming or tumbling patterns. </p>
+<p>With just a few tuning parameters, this can lead to a very rapid success in finding the higher concentrations of sugar (assuming the environment is smoothly varying). </p>
+<h4 id="implementation">Implementation</h4>
+<p>The first thing we need is an environment of varying sugar concentrations for the agents to explore. We can use the <code>field2D</code> module for this purpose. The behavior of the agents will depend on the spatial distribution of sugar in the field; a totally random space is both unrealistic and will defeat chemotactic strategies; a smoothly distributed landscape is needed. For example, we can use the distance from the center:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> dim = <span class="hljs-number">128</span>;
+<span class="hljs-keyword">var</span> sugar = <span class="hljs-keyword">new</span> field2D(dim, dim);
+<span class="hljs-keyword">var</span> center = <span class="hljs-keyword">new</span> vec2(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>);
+
+sugar.<span class="hljs-keyword">set</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(x, y)</span> </span>{
+    <span class="hljs-comment">// convert x, y in to 0..1 range:</span>
+    <span class="hljs-keyword">var</span> p = <span class="hljs-keyword">new</span> vec2(x / dim, y / dim);
+    <span class="hljs-comment">// get distance from center:</span>
+    <span class="hljs-keyword">var</span> d = p.copy().sub(center).length();
+    <span class="hljs-comment">// make concentration higher at center, lower with increasing distance:</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> - d;
+})
+</code></pre>
+<p>Agents can then sample the local field during their update routine as follows:</p>
+<pre><code class="lang-javascript">    <span class="hljs-comment">// in agent_update:</span>
+    <span class="hljs-tag">var</span> sugar_concentration = sugar.<span class="hljs-function"><span class="hljs-title">sample</span><span class="hljs-params">(self.location.x, self.location.y)</span></span>
+</code></pre>
+<p>Here&#39;s an implementation of <a href="http://codepen.io/anon/pen/pJLNgM/right/?editors=001">Chemotaxis</a> in the editor.</p>
+<p>A variety of other <em>taxes</em> worth exploring can be found on the <a href="http://en.wikipedia.org/wiki/Taxis#Aerotaxis">wikipedia page</a>. Note how chemotaxis (and other taxes) can be divided into positive (attractive) and negative (repulsive) characters, just like forces (directly seen in steering forces). This is closely related to the concepts of positive and negative feedback and the explorations of cybernetics.</p>
+<h3 id="stigmergy">Stigmergy</h3>
+<p><em>Stigmergy</em> is a mechanism of indirect coordination between agents by leaving traces in the environment as a mode of stimulating future action by agents in the same location. For example, ants (and some other social insects) lay down a trace of pheromones when returning to the nest while carrying food. Future ants are attracted to follow these trails, increasing the likelihood of encountering food. This environmental marking constitutes a shared external memory (without needing a map). However if the food source is exhausted, the pheromone trails will gradually fade away, leading to new foraging behavior. </p>
+<p>Traces evidently lead to self-reinforcement and self-organization: complex and seeminly intelligent structures without global planning or control. Since the term stigmergy focuses on self-reinforcing, task-oriented signaling, E. O. Wilson suggested a more general term <em>sematectonic communication</em> for environmental communication that is not necessarily task-oriented.</p>
+<p>Stigmergy has become a key concept in the field of <a href="http://en.wikipedia.org/wiki/Swarm_intelligence">swarm intelligence</a>, and the method of <em>ant colony optimization</em> in particular. In ACO, the landscape is a parameter space (possibly much larger than two or three dimensions) in which populations of virtual agents leave pheromone trails to high-scoring solutions.</p>
+<p>Related environmental communication strategies include social nest construction (e.g. termites) and territory marking.</p>
+<h4 id="implementation">Implementation</h4>
+<p>Being able to leave pheromones behind depends on the ability to write into as well as read from fields. This can be achieved using the <code>splat</code> method of the field:</p>
+<pre><code class="lang-javascript">    <span class="hljs-comment">// in agent update:</span>
+    pheromone_field.<span class="hljs-function"><span class="hljs-title">splat</span><span class="hljs-params">(intensity, self.location.x, self.location.y)</span></span>
+</code></pre>
+<p>To store different pheromones we might want to use different fields. These fields should also probably decay over time (using the <code>field.decay()</code> method), and possibly diffuse slightly (using the <code>field.diffuse()</code> method).</p>
+<p>To detect field intensites in different directions, we might want to sample with sensors further from the body center (similar to the sensors in the Vehicles model) and compare their results. </p>
+<hr>
+<h2 id="all-the-examples">All the examples</h2>
 <ul>
 <li><a href="http://codepen.io/anon/pen/QbmEvG/right/?editors=001">Game of Life</a></li>
 <li><a href="http://codepen.io/anon/pen/EjENaK/right/?editors=001">Brian&#39;s Brain</a></li>
