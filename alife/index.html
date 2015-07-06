@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Artificial Life tutorial</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="github.css" type="text/css" />
+  </head>
+  <body>
+  	<nav>
+	<ul>
+	<li><a href="index.html" alt="index">index</a></li>
+	</ul></nav>	
+	<div id="main">
+	<h1 id="artificial-life-tutorial">Artificial Life tutorial</h1>
+<p>Artificial life was named by Christopher Langton in 1986, but it can trace examples from the dawn of computing. The earliest computer scientists and cyberneticians (Turing, von Neumann, Wiener, Ashby) investigated artificial approaches to biological phenomena. In a sense, it also reformulates an age-old motivation to create life from artifice, such as the Golem, early automatons, and <em>anima</em>tion. </p>
+<p>A major hypothesis is that <strong>life is not a property of the specific matter we know, but rather a more general property of particular organizations and behaviors</strong>. Computing pioneer John von Neumann claimed that &quot;life is a process which can be abstracted away from any particular medium&quot;. If so, there is no reason to suppose that life cannot occur in systems that are not part of our natural evolution, including digital media. Artificial life can be broadly categorized according to the media used:</p>
+<ul>
+<li>Soft: digital simulation</li>
+<li>Hard: physical robotic</li>
+<li>Wet: biochemical manipuation</li>
+</ul>
+<p>In contrast to more traditional science, which focuses on particular systems to capture their principal parameters, the core strategy in Artificial Life is to investigate the principles of life through simulation. This involves finding simple rules that can generate complex behaviors, in a <strong>bottom-up</strong> approach. (At the birth of Artificial Life this was a sharp departure from top-down symbolic AI, but today this is no longer a reliable distinction.) </p>
+<p>Due to this methodology, Artificial life research can also be categorized according to principal motivations and modes of evaluation (<a href="http://www.mitpressjournals.org/doi/abs/10.1162/002409402760105271">Exteberria, &quot;Artificial Evolution and Lifelike Creativity&quot;</a>):</p>
+<ul>
+<li><strong>Scientific models</strong>: as analytical tools to propose and evaluate theories with respect to actual life phenomena,</li>
+<li><strong>Engineering/design tools</strong>: a problem solving-strategy evaluated according to fit, efficiency, accuracy etc.,</li>
+<li><strong>New ontologies and instantiations</strong>: evaluated for other criteria involving &#39;lifelikeness&#39;; including generative arts (<strong>&quot;life as it could be&quot;</strong>).</li>
+</ul>
+<p>It has been significant for philosophy: &quot;Artificial life’s computational methodology is a direct and natural extension of philosophy’s traditional methodology of a priori thought experiment.&quot; <a href="http://authors.library.caltech.edu/13564/1/BEDal00.pdf">Bedau, M. Open Problems in Artifical Life</a></p>
+<h2 id="html-javascript-starter">HTML/JavaScript starter</h2>
+<pre><code class="lang-html"><span class="hljs-doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">meta</span> <span class="hljs-attribute">http-equiv</span>=<span class="hljs-value">"content-type"</span> <span class="hljs-attribute">content</span>=<span class="hljs-value">"text/html; charset=UTF-8"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"al.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">style</span>&gt;</span><span class="css">
+<span class="hljs-tag">body</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">background</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#eee</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"> <span class="hljs-number">512px</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">min-height</span>:<span class="hljs-value"> <span class="hljs-number">100%</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">margin</span>:<span class="hljs-value"> <span class="hljs-number">50px</span> auto <span class="hljs-number">50px</span> auto</span></span>;
+<span class="hljs-rule">}</span></span>
+</span><span class="hljs-tag">&lt;/<span class="hljs-title">style</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span>&gt;</span><span class="javascript">
+al.init();
+
+<span class="hljs-comment">/// put your JavaScript code here ///</span>
+
+</span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
+</code></pre>
+<h2 id="plan">Plan</h2>
+<ul>
+<li>a simple creature, turtle-style control. agent-centric, rather than global.</li>
+<li><p>random walks in nature</p>
+</li>
+<li><p>Field: food to discover and consume. Model as a grid of pixels.</p>
+</li>
+<li>fill the field with food. Not too smooth, not to random; a number of splatters</li>
+<li>Diffuse it (we could write this as a kernel perhaps?) -- preserve energy</li>
+<li><p>Make it dynamic -- decaying, and new deposits</p>
+</li>
+<li><p>agents detect local sugar. direct, or interpolated read.</p>
+</li>
+<li>agents eat sugar (remove)</li>
+<li>many agents: initialize random location</li>
+<li>make a another agent that adds sugar?</li>
+<li>swim/tumble</li>
+</ul>
+<p>ALTERNATIVELY, BOIDS</p>
+<ul>
+<li>random walk</li>
+<li>neighbor relations:</li>
+<li>avoidance</li>
+<li>copy</li>
+<li>center</li>
+</ul>
+
+	</div>
+	<footer>
+		&copy; 2015 Graham Wakefield
+	</footer>
+  </body>
+</html>
