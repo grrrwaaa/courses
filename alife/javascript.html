@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>JavaScript for the tutorial</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="github.css" type="text/css" />
+  </head>
+  <body>
+  	<nav>
+	<ul>
+	<li><a href="index.html" alt="index">index</a></li>
+<li><a href="javascript.html" alt="javascript">javascript</a></li>
+<li><a href="vectors.html" alt="vectors">vectors</a></li>
+	</ul></nav>	
+	<div id="main">
+	<h1 id="javascript-for-the-tutorial">JavaScript for the tutorial</h1>
+<h2 id="html-javascript-starter">HTML/JavaScript starter</h2>
+<p>To start a new script, <a href="http://codepen.io/anon/pen/jPzMjJ/right/?editors=001">open the following link and then press the &quot;Fork&quot; button to create a new copy</a></p>
+<p>Alternatively, click the button below, then close the CSS and HTML tabs:</p>
+<form action="http://codepen.io/pen/define" method="POST" target="_blank">
+<input id="data-input" type="hidden" name="data" value="{&amp;quot;title&amp;quot;:&amp;quot;Artificial Life&amp;quot;,&amp;quot;description&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_external&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js_external&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;html&amp;quot;:&amp;quot;<script src=\&amp;quot;http://grrrwaaa.github.io/courses/alife/al.min.js\&amp;quot;></script>&amp;quot;,&amp;quot;css&amp;quot;:&amp;quot;body {\n    background: #aaa;\n    width: 512px;\n    min-height: 100%;\n    margin: 50px auto 50px auto;\n}&amp;quot;,&amp;quot;js&amp;quot;:&amp;quot;al.init();\n/// put your JavaScript code here //////////////////////////////////////////////\n\n// put your variables here\n\nfunction reset() {\n\t// re-initialize the simulation here\n}\n\nfunction update() {\n\t// animate your scene here\n}\n\nfunction draw(ctx) {\n\t// put your drawing calls here\n}\n\nfunction mouse(event, button, x, y) {\n\t// handle mouse events here\n}\n\nfunction key(event, k) {\n\t// handle key events here\n}\n\n/// end of user code ///////////////////////////////////////////////////////////\nreset();\nal.start();&amp;quot;,&amp;quot;html_pre_processor&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_pre_processor&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_starter&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_prefix&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js_library&amp;quot;:&amp;quot;&amp;quot;}">
+<input type="submit" value="Create a new Codepen editor">
+</form>
+
+<p>Or, if you prefer to edit a file locally, download and edit <a href="template.html">this template</a> (right-click and &#39;download file as&#39;).</p>
+<h1 id="starter-library">Starter library</h1>
+<p>The al.js library we provide adds several powerful helpers to make it faster to prototype ideas. </p>
+<h2 id="callbacks">Callbacks</h2>
+<p>To define how the canvas renders, implement a function called <code>draw()</code>. The <code>draw</code> function receives the canvas context as its first argument, so any <a href="http://www.w3schools.com/tags/ref_canvas.asp">HTML5 canvas API</a> calls can be used. For simulation updates, implement a function called <code>update()</code>. This function will receive a delta-time argument, representing the time in seconds since the last time it was called. The <code>reset()</code> function is used to re-initialize variables, when the &quot;reset&quot; button on the HTML page is pressed.</p>
+<p>For example:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> x = <span class="hljs-number">0</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reset</span><span class="hljs-params">()</span> </span>{
+    x = <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">draw</span> <span class="hljs-params">(ctx)</span> </span>{
+    ctx.fillStyle = <span class="hljs-string">"green"</span>;
+    ctx.fillRect(x, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.1</span>, <span class="hljs-number">0.1</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">update</span><span class="hljs-params">(dt)</span> </span>{
+    x = x + dt*<span class="hljs-number">0.1</span>;
+}
+</code></pre>
+<h3 id="interaction">Interaction</h3>
+<p>Two additional callbacks exist to detect mouse and keyboard interaction respectively. </p>
+<pre><code class="lang-javascript">// event can <span class="hljs-keyword">be</span> <span class="hljs-string">"down"</span> <span class="hljs-built_in">or</span> <span class="hljs-string">"up"</span> <span class="hljs-keyword">for</span> clicks,
+// <span class="hljs-built_in">or</span> <span class="hljs-string">"drag"</span> when moving with <span class="hljs-keyword">a</span> mouse button pressed,
+// <span class="hljs-built_in">or</span> <span class="hljs-string">"move"</span> when moving with <span class="hljs-keyword">no</span> button pressed,
+// event <span class="hljs-keyword">is</span> <span class="hljs-string">"enter"</span> when the mouse enters the canvas, <span class="hljs-built_in">and</span> <span class="hljs-string">"exit"</span> when the mouse goes outside it
+// button <span class="hljs-keyword">is</span> the mouse button pressed (<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> <span class="hljs-keyword">left</span>, <span class="hljs-number">1</span> <span class="hljs-keyword">for</span> <span class="hljs-keyword">right</span>...)
+// in <span class="hljs-keyword">all</span> the above cases, 
+// <span class="hljs-keyword">x</span> <span class="hljs-built_in">and</span> <span class="hljs-keyword">y</span> are the mouse position from <span class="hljs-number">0</span>,<span class="hljs-number">0</span> (top <span class="hljs-keyword">left</span>) <span class="hljs-keyword">to</span> <span class="hljs-number">1</span>,<span class="hljs-number">1</span> (bottom <span class="hljs-keyword">right</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mouse</span><span class="hljs-params">(event, button, x, y)</span> {</span>
+    console.<span class="hljs-built_in">log</span>(event, button, <span class="hljs-keyword">x</span>, <span class="hljs-keyword">y</span>);
+}
+
+// <span class="hljs-keyword">if</span> event <span class="hljs-keyword">is</span> <span class="hljs-string">"press"</span>, key <span class="hljs-keyword">is</span> <span class="hljs-keyword">a</span> single character <span class="hljs-built_in">string</span>
+// <span class="hljs-keyword">if</span> event <span class="hljs-keyword">is</span> <span class="hljs-string">"down"</span> <span class="hljs-built_in">or</span> <span class="hljs-string">"up"</span>, key <span class="hljs-keyword">is</span> <span class="hljs-keyword">a</span> numeric code
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">key</span><span class="hljs-params">(event, key)</span> {</span>
+    console.<span class="hljs-built_in">log</span>(event, key);
+}
+</code></pre>
+<h2 id="globals">Globals</h2>
+<p>The <code>random()</code> function can be used to generate random numbers. The <code>wrap()</code> applies a Euclidean modulo (remainder after division) in such a way that the result is always positive and without reflections:</p>
+<pre><code class="lang-javascript"><span class="hljs-function">random</span>();         <span class="hljs-comment">// a floating-point number between 0 and 1</span>
+<span class="hljs-function">random</span>(6);        <span class="hljs-comment">// an integer between 0 and 5</span>
+<span class="hljs-function">wrap</span>(-1, 4);    <span class="hljs-comment">// returns 3 (whereas -1 % 4 would return -1)</span>
+</code></pre>
+<h2 id="draw2d">Draw2D</h2>
+<p>The Draw2D library is a light wrapper of HTML5 canvas.</p>
+<p>It uses a stack-based coordinate transform system. Push the context, apply transforms, then return back to the previous coordinate system by popping the context again:</p>
+<pre><code class="lang-javascript">// create a local coordinate system:
+draw2D.push();
+    draw2D.translate(x, y);
+    draw2D.rotate(angle_in_radians);
+    draw2D.scale(sizex, sizey);
+
+    // draw <span class="hljs-keyword">in</span> local coordinate system
+    //<span class="hljs-keyword">...</span>
+
+// <span class="hljs-keyword">return</span> to global coordinate system:
+draw2D.pop();
+</code></pre>
+<p>Graphics are drawn using whatever color is currently set, via <code>draw2D.color()</code>. The current color is set in terms of red, green, and blue components (from 0 to 1). The color also applies to fields. </p>
+<p>Basic shapes are as follows:</p>
+<pre><code class="lang-javascript">    draw2D.<span class="hljs-built_in">color</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);    <span class="hljs-comment">// red</span>
+    field.<span class="hljs-title">draw</span>();
+    draw2D.<span class="hljs-built_in">color</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);    <span class="hljs-comment">// green</span>
+    draw2D.circle(center_x, center_y, diameter);
+    draw2D.<span class="hljs-built_in">color</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);    <span class="hljs-comment">// yellow</span>
+    draw2D.<span class="hljs-built_in">rect</span>(center_x, center_y, <span class="hljs-variable">width</span>, <span class="hljs-variable">height</span>);
+</code></pre>
+<h2 id="field2d">field2D</h2>
+<p>We have a <code>field2D</code> type to represent grids of cells, where each cell holds a floating point number (typically but not necessarily in the range of zero to one). You can create a field like this:</p>
+<pre><code class="lang-javascript">var field = <span class="hljs-keyword">new</span> field2D(<span class="hljs-variable">width</span>, <span class="hljs-variable">height</span>);
+</code></pre>
+<p>By default field cells will be zero. You can get and set individual field cells this way:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> <span class="hljs-keyword">value</span> = field.<span class="hljs-keyword">get</span>(x, y);
+field.<span class="hljs-keyword">set</span>(<span class="hljs-keyword">value</span>, x, y);
+</code></pre>
+<p>Note that if x or y is out of bounds for the field, it will wrap around from the other side. So you are always guaranteed it will return or set a value. </p>
+<p>To set the value of all cells at once, omit the x and y:</p>
+<pre><code class="lang-javascript">// <span class="hljs-operator"><span class="hljs-keyword">set</span> <span class="hljs-keyword">all</span> <span class="hljs-keyword">field</span> cells <span class="hljs-keyword">to</span> <span class="hljs-number">1</span>:
+<span class="hljs-keyword">field</span>.<span class="hljs-keyword">set</span>(<span class="hljs-number">1</span>);</span>
+</code></pre>
+<p>A more powerful feature of <code>field2D.set()</code> is that it can take a function instead of a number. It calls this function to derive a new value for each cell in the field. The function receives as arguments the x and y position of the cell, so for example, this code initializes the field with a horizontal gradient:</p>
+<pre><code class="lang-javascript">field.<span class="hljs-keyword">set</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(x, y)</span> </span>{
+    <span class="hljs-keyword">return</span> x / field.width;
+);
+</code></pre>
+<p>Typically we will render the field in the <code>draw()</code> callback by calling the field&#39;s draw method:</p>
+<pre><code class="lang-javascript">draw = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(ctx)</span> </span>{
+    field.draw();
+}
+</code></pre>
+<p>More useful methods:</p>
+<pre><code class="lang-javascript">
+field.min(<span class="hljs-function">)</span>;    // returns the lowest cell value in the<span class="hljs-instruction"> array
+</span>field.max(<span class="hljs-function">)</span>;    // returns the highest cell value in the<span class="hljs-instruction"> array
+</span>field.sum(<span class="hljs-function">)</span>;    // adds up all cell values<span class="hljs-instruction"> and </span>returns the total
+
+field.clear(<span class="hljs-function">)</span>;         // set all field cells to zero
+field.normalize(<span class="hljs-function">)</span>;     // re-scales the field into a 0..1 range
+</code></pre>
+<p>There are some methods for interpolated reading/writing/modifying fields. These methods use x and y indices in a normalized 0..1 floating-point range rather than 0..width or 0..height integer range:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// returns interpolated value at the normalized position x,y</span>
+field.sample<span class="hljs-comment">(x, y)</span>;            
+
+<span class="hljs-comment">// set the field at position x,y to value v </span>
+<span class="hljs-comment">// (the four nearest cells will be interpolated)</span>
+<span class="hljs-comment">// if v is a function, it is evaluated for each cell. The function arguments are cellvalue, x, y.</span>
+field.update<span class="hljs-comment">(v, x, y)</span>;
+
+<span class="hljs-comment">// adds v to a field at position x, y</span>
+<span class="hljs-comment">// (interpolated addition to nearest four cells)</span>
+field.splat<span class="hljs-comment">(v, x, y)</span>;
+
+<span class="hljs-comment">// scale a field at x,y by factor v</span>
+<span class="hljs-comment">// (interpolated scale over nearest four cells)</span>
+field.scale<span class="hljs-comment">(v, x, y)</span>;
+<span class="hljs-comment">// if x and y are ommitted, the scale factor is applied to the whole field:</span>
+field.scale<span class="hljs-comment">(v)</span>;
+</code></pre>
+<p>The field2D type also includes a diffusion method, which can be used to smoothly distribute values over time. It requires a second (previous) copy of the field to diffuse from:</p>
+<pre><code class="lang-javascript"><span class="hljs-regexp">//</span> field_previous <span class="hljs-keyword">is</span> another field2D <span class="hljs-keyword">of</span> equal dimensions
+<span class="hljs-regexp">//</span> diffusion_rate <span class="hljs-keyword">is</span> a value between <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> <span class="hljs-number">1</span>; a rate <span class="hljs-keyword">of</span> <span class="hljs-number">0</span> means <span class="hljs-literal">no</span> diffusion.
+<span class="hljs-regexp">//</span> accuracy <span class="hljs-keyword">is</span> an optional integer <span class="hljs-keyword">for</span> the number <span class="hljs-keyword">of</span> diffusion steps; the <span class="hljs-reserved">default</span> <span class="hljs-keyword">is</span> <span class="hljs-number">10.</span>
+field.diffuse(field_previous, diffusion_rate, accuracy);
+</code></pre>
+<p>There are also a couple of classic functional programming methods. The <code>map(function)</code> method applies a function to each cell of the field in turn. The function arguments will be the current value of the cell and the x and y position, and the return value should be the new value of the cell (or nil to indicate no change). </p>
+<p>The <code>reduce(function, initial)</code> method is used to reduce a field to a single value, such as calculating the total of all cells. This value is defined by the <code>initial</code> argument, passed to the function for each cell, and updated by its return value. Easier to explain by example:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// multiply all cells by 2: </span>
+field.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value, x, y)</span> </span>{ <span class="hljs-keyword">return</span> value * <span class="hljs-number">2</span>; });
+
+<span class="hljs-comment">// find the sum total of all cell values:</span>
+<span class="hljs-keyword">var</span> total = field.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(sum, value, x, y)</span> </span>{
+    <span class="hljs-keyword">return</span> sum + value;
+}, <span class="hljs-number">0</span>);
+</code></pre>
+<h2 id="vec2">vec2</h2>
+<p>The library also includes support for 2D <a href="vectors.html">vectors</a>. </p>
+<pre><code class="lang-javascript">
+<span class="hljs-comment">// create a new vector of zero magnitude</span>
+p = <span class="hljs-keyword">new</span> vec2(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+
+<span class="hljs-comment">// create a new vector of unit magnitude, pointing in a random direction:</span>
+p = <span class="hljs-keyword">new</span> vec2.<span class="hljs-built_in">random</span>(<span class="hljs-number">1</span>);
+
+<span class="hljs-comment">// create a copy of it:</span>
+p2 = p.<span class="hljs-built_in">copy</span>();
+
+<span class="hljs-comment">// make it point into the X axis:</span>
+p.<span class="hljs-built_in">set</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);
+
+<span class="hljs-comment">// create a vector from polar coordinates:</span>
+p = vec2.fromPolar(length, angle);
+</code></pre>
+<p>Operations on vectors can either modify the object in place, or create a new vector:</p>
+<pre><code class="lang-javascript">p.<span class="hljs-keyword">add</span>(p1);    <span class="hljs-comment">// modifies p</span>
+p.sub(p1);    <span class="hljs-comment">// modifies p</span>
+
+p2 = p.addnew(p1); <span class="hljs-comment">// creates a new vector</span>
+p2 = p.subnew(p1); <span class="hljs-comment">// creates a new vector</span>
+</code></pre>
+<p>Here are all the vec2 methods:</p>
+<ul>
+<li><code>p.add (v)</code>    Add a vector (or number) to self (in-place)</li>
+<li><code>vec2.addnew (a, b)</code>    Add two vectors (or numbers) to create a new vector</li>
+<li>```p.sub (v)    Subtract a vector (or number) to self (in-place)</li>
+<li><code>vec2.subnew (a, b)</code>    Subtract two vectors (or numbers) to create a new vector</li>
+<li>```p.mul (v)    Multiply a vector (or number) to self (in-place)</li>
+<li><code>vec2.mulnew (a, b)</code>    Multiply two vectors (or numbers) to create a new vector</li>
+<li>```p.div (v)    Divide a vector (or number) to self (in-place)</li>
+<li><code>vec2.divnew (a, b)</code>    Divide two vectors (or numbers) to create a new vector</li>
+<li>```p.pow (v)    Raise to power a vector (or number) to self (in-place)</li>
+<li><code>vec2.pownew (a, b)</code>    Raise to power two vectors (or numbers) to create a new vector</li>
+<li>```p.mod (v)    Calculate modulo a vector (or number) to self (in-place)</li>
+<li><code>vec2.modnew (a, b)</code>    Calculate modulo two vectors (or numbers) to create a new vector</li>
+<li>```p.min (v)    Calculate minimum of elements (in-place)</li>
+<li><code>vec2.minnew (a, b)</code>    Calculate minimum of elements to create a new vector</li>
+<li><code>p.max (v)</code>    Calculate maximum of elements (in-place)</li>
+<li><code>vec2.maxnew (a, b)</code>    Calculate maximum of elements to create a new vector</li>
+<li><code>p.clip (lo, hi)</code>    Constrain vector to range (in-place)</li>
+<li><code>p.clip (lo, hi)</code>    Constrain vector to range to create a new vector</li>
+<li><code>p.relativewrap (dimx, dimy)</code>    Determine shortest relative vector in a toroidal space</li>
+<li><code>p.relativewrapnew (dimx, dimy)</code>    Create new vector as shortest relative vector in a toroidal space</li>
+<li><code>p.lerp (v, f)</code>    interpolate from self to v by factor of f</li>
+<li><code>vec2.lerpnew (a, b, f)</code>    create a vector from the linear interpolation of two vectors:</li>
+<li><code>p.normalize ()</code>    set the length of the vector to 1 (unit vector) (randomized direction if self length was zero)</li>
+<li><code>p.normalizenew ()</code>    return a normalized copy of the vector (randomized direction if self length was zero)</li>
+<li><code>p.limit (maximum)</code>    Impose a maximum magnitude Rescales vector if greater than maximum</li>
+<li><code>p.limitnew (maximum)</code>    Create a copy of a vector, limited to a maximum magnitude Rescales vector if greater than maximum</li>
+<li><code>p.setangle (a)</code>    Rotate a vector to a specific angle:</li>
+<li><code>p.setanglenew (a)</code>    Return a copy rotated to a specific angle:</li>
+<li><code>p.setmag (m)</code>    Rescale a vector to a specific magnitude:</li>
+<li><code>p.setmagnew (m)</code>    Return a vector copy rescaled to a specific magnitude:</li>
+<li><code>p.rotate (angle)</code>    Rotate a vector by an angle</li>
+<li><code>p.rotatenew (angle)</code>    Create a vector by rotating a vector by an angle</li>
+<li><code>p.randomize (mag)</code>    Set to a vector of magnitude 1 in a uniformly random direction:</li>
+<li><code>p.length ()</code>    return the length of a vector (Can also use #vector)</li>
+<li><code>p.angle ()</code>    Return the angle to the vector (direction)</li>
+<li><code>p.polar ()</code>    Return the magnitude and angle (polar form):</li>
+<li><code>vec2.dot (a, b)</code>    return the dot product of two vectors:</li>
+<li><code>p.distance (p)</code>    The distance between two vectors (two points) (The relative distance from self to p)</li>
+<li><code>vec2.anglebetween (a, b)</code>    The angle between two vectors (two points) (The relative angle from self to v)</li>
+</ul>
+<hr>
+<h2 id="why-javascript-">Why JavaScript?</h2>
+<p>JavaScript (JS) is a language of growing importance at the intersection of media/culture technology. </p>
+<blockquote>
+<p>Note: Despite the similarity of name, JavaScript has no particular relation to Java. JavaScript is however also known as <a href="http://en.wikipedia.org/wiki/ECMAScript">ECMAScript</a>, JScript, and ActionScript.</p>
+</blockquote>
+<h3 id="js-is-everywhere-">JS is everywhere:</h3>
+<ul>
+<li>It has become the de facto &#39;language of the web&#39;, having evolved from lightweight scripting roots to a full-fledged application language with powerful capabilities in HTML5. </li>
+<li>Not only is it used pervasively in client browser-based applications, it is also used for high-performance server applications, particularly using the <a href="http://nodejs.org/">node.js</a> system. </li>
+<li>JS has also been used as an embedded scripting language for desktop applications by Google, Adobe, OpenOffice, Apple, MicroSoft, Qt, GNOME, etc., including many media-oriented applications such as Max/MSP/Jitter, <a href="http://en.wikipedia.org/wiki/Processing.js">Processing</a>, Logic Pro, Unity, DX Studio, Maxwell Render, Flash, etc., and many games/game engines.</li>
+</ul>
+<h3 id="for-media-culture-technology-purposes-">For media/culture technology purposes:</h3>
+<ul>
+<li>A browser-based JS application will run on Windows, OSX, Linux, Android, iOS etc., so long as browser applications are up to date. In recent years this has meant that even low-level audio signal processing and 3D OpenGL are available for use. </li>
+<li>Browser and server-based applications open up easy possibilities to reach out to vast audiences and connect to social and other media networks, to explore collaborative interfaces, to interact with the increasing number of devices supporting websocket APIs, etc.</li>
+</ul>
+<h3 id="flexible-fast-well-supported-">Flexible, fast, well-supported:</h3>
+<ul>
+<li><p>JS is a primarily imperative, procedural language (just like C, Java, Python, etc.), however it also supports functional programming features such as first-class functions. It is dynamically-typed and object-based, but uses a more flexible, dynamic <a href="http://en.wikipedia.org/wiki/Prototype-based_programming">prototype-based</a> rather than static class-based inheritance. </p>
+</li>
+<li><p>Although it is a dynamic language, JS virtual machines such as <a href="http://en.wikipedia.org/wiki/V8_(JavaScript_engine">Google&#39;s V8</a>) can achieve remarkably high performance through implicit Just-In-Time compilation to machine code.  </p>
+</li>
+<li><p>The JS community is vast, and the available libraries, modules, frameworks, extensions, etc. are correspondingly huge. For example <a href="https://www.npmjs.org/">npm</a> lists almost 60,000 (at time of writing) libraries for node.js desktop/server-side applications. </p>
+</li>
+<li><p>JS has become the language of choice for several Introduction to Computer Science (CS101) courses, including at <a href="http://www.stanford.edu/class/cs101/">Stanford University</a> (also <a href="https://www.coursera.org/course/cs101">here</a>). The Khan Academy also offers <a href="https://www.khanacademy.org/cs">a free, online course</a>.</p>
+</li>
+</ul>
+<h2 id="additional-learning-resources-">Additional learning resources:</h2>
+<ul>
+<li><a href="http://eloquentjavascript.net/contents.html">Eloquent JavaScript</a></li>
+<li><a href="http://www.w3schools.com/js/">W3C JavaScript Guide</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide">Mozilla JavaScript Guide</a></li>
+<li><a href="http://www.codecademy.com/tracks/javascript">Codecadamy</a></li>
+<li><a href="https://www.khanacademy.org/cs/programming">Khan Academy</a></li>
+<li><a href="https://www.coursera.org/course/cs101">Stanford CS101</a></li>
+<li><a href="http://www.nodebeginner.org/">The Node handbook</a></li>
+<li><a href="http://howtonode.org/">How to Node</a></li>
+</ul>
+
+	</div>
+	<footer>
+		&copy; 2015 Graham Wakefield
+	</footer>
+  </body>
+</html>

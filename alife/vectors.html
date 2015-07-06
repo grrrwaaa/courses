@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>(Euclidean) Vectors</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="github.css" type="text/css" />
+  </head>
+  <body>
+  	<nav>
+	<ul>
+	<li><a href="index.html" alt="index">index</a></li>
+<li><a href="javascript.html" alt="javascript">javascript</a></li>
+<li><a href="vectors.html" alt="vectors">vectors</a></li>
+	</ul></nav>	
+	<div id="main">
+	<p>title: Vectors</p>
+<h1 id="-euclidean-vectors">(Euclidean) Vectors</h1>
+<p>A <strong>vector</strong> is one way of describing a direction with a magnitude. (A magnitude without direction (such as a regular number) is called a <strong>scalar</strong>.) Vectors can describe spatial properties such as locations, but also properties that change over time such as velocities, accelerations, forces of attraction and repulsion, local wind speed and direction, etc. Vectors are also useful for representing relationships between points,  normals and tangents, vertices and other attributes of geometry, and many other spatial relationships. Most graphics languages have some kind of vector primitives. </p>
+<p>In a 2D space, a vector has two components (X, Y). Programming with vectors is easier if these components are combined into a single abstraction of a <em>vector object</em>. We can also treat a position in space as a vector: <em>the vector from the origin (0, 0) to the position</em>. </p>
+<h2 id="operations-on-vectors">Operations on vectors</h2>
+<p>Adding two vectors is like applying their movements in series. </p>
+<p>The difference between two points can be obtained by subtraction; it also a vector. The <em>relative</em> position of B with respect to A is simply <code>B - A</code>. So the position of agent B relative to agent A is <code>B.pos.sub(A.pos)</code>. (For agent-oriented programming we often need to take the perspective <em>relative to an agent</em>, rather than the absolute, global perspective.)</p>
+<p>We can multiply (or divide) vectors by scalars to make them longer or shorter. So <code>A.mul(2)</code> produces a copy of vector A which is twice as long.</p>
+<p>Using this, we can interpolate between two vectors A and B by interpolating their components according to an interpolation factor <code>a</code> which varies between 0 (for A) and 1 (for B) like this: <code>A + a * (B - A)</code>. This is <em>linear interpolation</em>, or &quot;lerp&quot;. If a is 0.5, then it corresponds to the <em>mean</em> (average) of two vectors.</p>
+<p>The distance between two points is the length (<em>magnitude</em>) of the vector between them. We can use Pythagoras&#39; theorem: <code>distance = Math.sqrt(v.x*v.x + v.y*v.y)</code>. </p>
+<p>A <em>unit vector</em> is a vector whose magnitude equals 1. The set of all unit vectors makes up the unit circle (a circle of radius 1). We can turn any vector into a unit vector by dividing by its length: </p>
+<pre><code class="lang-javascript">local len = Math.<span class="hljs-function"><span class="hljs-title">sqrt</span><span class="hljs-params">(v.x*v.x + v.y*v.y)</span></span>
+v<span class="hljs-class">.x</span> = v<span class="hljs-class">.x</span> / len
+v<span class="hljs-class">.y</span> = v<span class="hljs-class">.y</span> / len
+</code></pre>
+<p>Or simply:</p>
+<pre><code class="lang-javascript">v.<span class="hljs-function"><span class="hljs-title">normalize</span><span class="hljs-params">()</span></span>
+</code></pre>
+<p>The angle between two points can be derived using the <em>arctangent</em> of Y over X. We can calculate it as <code>Math.atan2(y, x)</code>. (<code>Math.atan(y/x)</code> would work, except that it could be satisfied by two different angles; <code>Math.atan2</code> is more explicit and usually gives us the angle we require.)</p>
+<p>The length and angle of a vector form the <em>polar</em> representation. We can convert back to <em>Cartesian</em> form again just as easily:</p>
+<pre><code class="lang-lua">// Cartesian <span class="hljs-built_in">to</span> polar:
+<span class="hljs-built_in">local</span> <span class="hljs-built_in">len</span> = Math.<span class="hljs-built_in">sqrt</span>(v.x*v.x + v.y*v.y)
+<span class="hljs-built_in">local</span> angle = Math.<span class="hljs-built_in">atan2</span>(y, x)<span class="hljs-comment">
+// Polar to Cartesian:</span>
+<span class="hljs-built_in">local</span> x = <span class="hljs-built_in">len</span> * Math.<span class="hljs-built_in">cos</span>(angle)
+<span class="hljs-built_in">local</span> y = <span class="hljs-built_in">len</span> * Math.<span class="hljs-built_in">sin</span>(angle)
+</code></pre>
+<p>This is one way that we can rotate a vector: convert to polar form, add to (or subtract from) the angle, convert back to Cartesian form. Another way is to rotate the X and Y components individually, and sum them (the matrix form):</p>
+<pre><code class="lang-lua">x1 = v.x * Math.<span class="hljs-built_in">cos</span>(rotation) + v.y * Math.<span class="hljs-built_in">sin</span>(rotation)
+y1 = v.y * Math.<span class="hljs-built_in">cos</span>(rotation) - v.x * Math.<span class="hljs-built_in">cos</span>(rotation)
+</code></pre>
+<p>The <em>dot product</em> (also known as <em>scalar product</em> or <em>inner product</em>) of two vectors v1 and v2 is defined as <code>v1.x*v2x + v1.y*v2.y</code>. (Note the similarity with the Pythagorean theorem). In a way the dot product tells us how similar two vectors are (it is related to correlation). Geometrically it is defined as <code>||A|| ||B|| cos t</code>, which means the length of A multiplied by the length of B multipled by the angle t between A and B. So we can re-arrange that to determine the angle between to vectors as <code>arccosine( dot(A, B) / (mag(A) * mag(B)))</code>. Of course, if A and B are <em>unit vectors</em>, this simplifies to <code>arccosine(dot(A, b))</code>. </p>
+<blockquote>
+<p>One useful result is that if the dot product is zero, then A and B are orthogonal (at right angles to each other). If it is positive, then the angle between is less than 90 degrees, and if negative, the vectors must face away from each other since the angle between them is greater than 90 degrees. (And since magnitudes are always positive, we can skip that part of the calculation too!)</p>
+</blockquote>
+<h1 id="movement-behavior-force-and-vectors">Movement, behavior, force and vectors</h1>
+<p>A vector can be used to store any property that has a magnitude and direction. It represents this in terms of components of principal axes. Examples include:</p>
+<ul>
+<li>absolute location (i.e. vector relative to the spatial origin)</li>
+<li>relative location (e.g. the path from object A to object B, or a line segment for drawing shapes)</li>
+<li>velocity</li>
+<li>acceleration, force</li>
+</ul>
+<h2 id="position-velocity-and-acceleration">Position, velocity and acceleration</h2>
+<p>If an object has a location in space, we can move it by adding a relative motion vector to the location. </p>
+<p>If we add this motion vector repeatedly, e.g. on each frame or simulation update, we create the illusion of continuous movement. In this case the motion represents a stable <strong>velocity</strong>, and the repeated addition is called <strong>integration</strong>. Put another way, the velocity is a discrete approximation of the location&#39;s (first) <strong>derivative</strong>: modeling how it changes over time. </p>
+<pre><code><span class="hljs-keyword">var</span> location = <span class="hljs-keyword">new</span> vec2(-<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);
+<span class="hljs-keyword">var</span> velocity = <span class="hljs-keyword">new</span> vec2(<span class="hljs-number">0.01</span>, <span class="hljs-number">0.01</span>);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span>    </span>{
+    <span class="hljs-comment">// integrate velocity to location:</span>
+    location.add(velocity);
+
+    draw2D.circle(location.x, location.y, <span class="hljs-number">0.1</span>);
+}
+</code></pre><p>The <strong>second derivative</strong> of location is <strong>acceleration</strong>:</p>
+<pre><code><span class="hljs-keyword">var</span> location = <span class="hljs-keyword">new</span> vec2(-<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);
+<span class="hljs-keyword">var</span> velocity = <span class="hljs-keyword">new</span> vec2(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+<span class="hljs-keyword">var</span> acceleration = <span class="hljs-keyword">new</span> vec2(<span class="hljs-number">0.01</span>, <span class="hljs-number">0.01</span>);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span>    </span>{
+    <span class="hljs-comment">// integrate acceleration to velocity:</span>
+    velocity.add(acceleration);
+    <span class="hljs-comment">// integrate velocity to location:</span>
+    location.add(velocity);
+
+    draw2D.push();
+        draw2D.translate(location.x, location.y);
+        draw2D.circle(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.05</span>);
+    draw2D.pop();
+}
+</code></pre><h2 id="constraints">Constraints</h2>
+<p>Pretty soon the object leaves visible space. You might want to handle this in different ways:</p>
+<h3 id="limit-movement-to-the-boundary">Limit movement to the boundary</h3>
+<pre><code>    <span class="hljs-comment">// prevent location component going below -1</span>
+    <span class="hljs-keyword">if</span> (location.y &lt; -<span class="hljs-number">1</span>) {
+        location.y = -<span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-comment">// or more simply apply to all limits:</span>
+    location.<span class="hljs-built_in">min</span>(<span class="hljs-number">1</span>).<span class="hljs-built_in">max</span>(-<span class="hljs-number">1</span>);
+</code></pre><h3 id="limit-movement-to-a-distance-i-e-a-circular-space-">Limit movement to a distance (i.e. a circular space)</h3>
+<pre><code>    location.limit(1);
+</code></pre><h3 id="wrap-movement-at-the-boundary">Wrap movement at the boundary</h3>
+<p>Also known as <em>toroidal</em> space.</p>
+<pre><code>    <span class="hljs-comment">// wrap at x boundaries:</span>
+    location.wrap(<span class="hljs-number">1</span>);
+</code></pre><h3 id="execute-arbitrary-code-at-boundaries">Execute arbitrary code at boundaries</h3>
+<p>For example, switch the direction of the velocity to point back to the center:</p>
+<pre><code>    <span class="hljs-comment">// the fraction of energy retained when a bounce occurs:</span>
+    <span class="hljs-keyword">var</span> bounce_factor = <span class="hljs-number">0.9</span>
+    <span class="hljs-comment">// bounce at ground level:</span>
+    <span class="hljs-keyword">if</span> (location.y &lt; -<span class="hljs-number">1</span>) {
+        <span class="hljs-comment">// force the Y velocity to be positive:</span>
+        <span class="hljs-comment">// and lose a bit of energy due to the collision:</span>
+        velocity.y = <span class="hljs-built_in">Math</span>.abs(velocity.y) * bounce_factor;
+    }
+</code></pre><h3 id="other-constraints">Other constraints</h3>
+<p>Other forms of constraints can be limiting movement to a line, or path. In this case a new force can be applied toward the line of the path. Another very common constraint is to limit the velocity to an absolute maximum: <code>velocity.limit(max)</code>.</p>
+<h2 id="forces">Forces</h2>
+<p>So far we have used a constant acceleration, which is physically unrealistic. Acceleration has to come from somewhere, and it can change magnitude and direction.</p>
+<p>Acceleration was defined by Newton in terms of <strong>force</strong>: <code>F = ma</code>, which means &quot;Force = mass * acceleration&quot;. Therefore &quot;acceleration = Force / mass&quot;. Let&#39;s wrap this into an object called &quot;agent&quot;:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> agent = {
+    location: <span class="hljs-keyword">new</span> vec2(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>),
+    velocity: <span class="hljs-keyword">new</span> vec2(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>),
+    acceleration: <span class="hljs-keyword">new</span> vec2(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>),
+    force: <span class="hljs-keyword">new</span> vec2(<span class="hljs-number">0</span>, -<span class="hljs-number">0.1</span>),
+    mass: <span class="hljs-number">100</span>,
+};
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">move_agent</span><span class="hljs-params">(self)</span> </span>{
+    <span class="hljs-comment">// calculate acceleration:</span>
+    <span class="hljs-keyword">self</span>.acceleration = <span class="hljs-keyword">self</span>.force / <span class="hljs-keyword">self</span>.mass;
+    <span class="hljs-comment">// integrate velocity:</span>
+    <span class="hljs-keyword">self</span>.velocity.add(<span class="hljs-keyword">self</span>.acceleration);
+    <span class="hljs-comment">// integrate location:</span>
+    <span class="hljs-keyword">self</span>.location.add(<span class="hljs-keyword">self</span>.velocity);
+    <span class="hljs-comment">// limit position:</span>
+    location:wrap(<span class="hljs-number">1</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">draw_agent</span><span class="hljs-params">(self)</span> </span>{
+    draw2D.push()
+        draw2D.translate(<span class="hljs-keyword">self</span>.location.x, <span class="hljs-keyword">self</span>.location.y)
+        draw2D.circle(<span class="hljs-number">0.05</span> * <span class="hljs-keyword">self</span>.mass * <span class="hljs-number">0.01</span>)
+    draw2D.pop()
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">update</span><span class="hljs-params">()</span> </span>{
+    move_agent(agent);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span>    </span>{
+    draw_agent(agent);
+}
+</code></pre>
+<p>In this case we have modeled an object that is continuously subject to a force of (0, -0.1). This would be something like the effect of gravity. Other continuous forces might be e.g. the effects of a force of wind. </p>
+<p>To make it more interesting, we could consider that the wind may change direction over time. So we can model wind as a function that returns a force vector:</p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">wind</span>() {</span>
+    <span class="hljs-constant">return</span> vec2.<span class="hljs-built_in">random</span>(<span class="hljs-number">0.1</span>)
+}
+
+   <span class="hljs-comment"> // (in agent.move)</span>
+    self.force.<span class="hljs-built_in">add</span>(wind())
+</code></pre><p>We could also make the wind vary over space, etc.</p>
+<p>Other forces a body interacts may be approximately instantaneous, rather than continuous. For example, if mousepad is scrolled, we could add an instantaneous &quot;jump&quot; force:</p>
+<pre><code>function <span class="hljs-keyword">mouse</span>(<span class="hljs-keyword">event</span>, <span class="hljs-keyword">button</span>, x, y) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">event</span> == <span class="hljs-string">"down"</span>) {
+        agent.force.sub(vec2(x, y))
+    }
+}
+</code></pre><h3 id="friction">Friction</h3>
+<p>So far our agent moves in a perfect Newtonian world: until a force acts on it, the velocity remains constant. In the world we are familiar with this rarely occurs, and velocity gradually decreases due to friction.</p>
+<p>The simplest way we can model this is by scaling down the velocity on each frame:</p>
+<pre><code class="lang-javascript">    // (<span class="hljs-flow">in</span> agent.<span class="hljs-built_in">move</span>)
+    self.velocity.mul(<span class="hljs-number">0</span>.<span class="hljs-number">9</span>);
+</code></pre>
+<p>A crude simulation of air friction operates in the opposite direction to movement, with a constant magnitude. We can get the magnitude of a vector (it&#39;s length) by Pythagoras&#39;s theorem. Of course we could also create a function to vary the amount of friction over space. </p>
+<h3 id="intentional-forces">Intentional forces</h3>
+<p>So far we have concentrated on physical forces external to an agent, but we can also consider the agent&#39;s ability to apply forces to itself (locomotion). Different situations call for different strategies, and these lead to different forces being applied. Hunting, chasing, evading, random walk exploration, chemotaxis, avoidance, copying, centering, swarming... </p>
+<h2 id="many-agents">Many agents</h2>
+<p>The way we have designed <code>move_agent</code> and <code>draw_agent</code> allows them to be applied to many agents. We could create an array (or a map) of agents, and initialize them differently:</p>
+<pre><code>local agents = <span class="hljs-literal">[]</span>;
+<span class="hljs-keyword">for</span> (var i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">100</span>; i++) {
+    agents[i] = {
+        location: vec2.random<span class="hljs-literal">()</span>,
+        velocity: vec2<span class="hljs-literal">()</span>,
+        acceleration: vec2<span class="hljs-literal">()</span>,
+        force: vec2<span class="hljs-literal">()</span>,
+    }
+}
+</code></pre><p>Then all we need to do is update our callbacks to visit each one of them:</p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">update</span><span class="hljs-params">()</span></span>
+    <span class="hljs-keyword">for</span> (var <span class="hljs-built_in">i</span>=<span class="hljs-number">0</span>; <span class="hljs-built_in">i</span>&lt;agents.<span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span>++) <span class="hljs-cell">{
+        move_agent(agents[i]);
+    }</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> {    </span>
+    <span class="hljs-keyword">for</span> (var <span class="hljs-built_in">i</span>=<span class="hljs-number">0</span>; <span class="hljs-built_in">i</span>&lt;agents.<span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span>++) <span class="hljs-cell">{
+        draw_agent(agents[i]);
+    }</span>
+}
+</code></pre><p>However, special care needs to be taken if the <code>move_agent</code> function includes behavior between different agents (gravitation, spring forces, flocking, etc.). In order to make sure the effect of A on B is equal to the effect of B on A, you must separate the force calculation from the velocity/location integration into multiple passes:</p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">update</span><span class="hljs-params">()</span> {</span>
+    <span class="hljs-keyword">for</span> (var <span class="hljs-built_in">i</span>=<span class="hljs-number">0</span>; <span class="hljs-built_in">i</span>&lt;agents.<span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span>++) <span class="hljs-cell">{
+        calculate_forces(agents[i]);
+    }</span>
+    <span class="hljs-keyword">for</span> (var <span class="hljs-built_in">i</span>=<span class="hljs-number">0</span>; <span class="hljs-built_in">i</span>&lt;agents.<span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span>++) <span class="hljs-cell">{
+        move_agent(agents[i]);
+    }</span>
+}
+</code></pre>
+	</div>
+	<footer>
+		&copy; 2015 Graham Wakefield
+	</footer>
+  </body>
+</html>
