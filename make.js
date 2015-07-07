@@ -155,15 +155,17 @@ function parse(fileobj, nav) {
 				// just ignore it -- assume that this is not a YAML header
 			}
 		}
-		
-		view.name = view.name || fileobj.base;
 		view.nav = nav;
+		
+		if (!view.name) {
+			view.name = fileobj.base;
+		}
 		
 		if (!view.title) {
 			// search in doc for first # tag:
 			var h1_regex = /#\s*([^#\n].*)/;
 			var captures = h1_regex.exec(data);
-			if (captures[1]) {
+			if (captures !== undefined && captures[1] !== undefined) {
 				view.title = captures[1];
 			} else {
 				// generate name from file:

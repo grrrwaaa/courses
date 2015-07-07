@@ -1,7 +1,3 @@
-title: Artificial Life, Generative Art and Creative Code
-
----
-
 # Artificial Life, Generative Art and Creative Code
 
 [Course info](README.html)
