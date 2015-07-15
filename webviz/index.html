@@ -12,206 +12,200 @@
 	</ul></nav>	
 	<div id="main">
 	<h1 id="bridging-data-viz-and-3d-web">Bridging data viz and 3D web</h1>
+<p>Quick demo:</p>
+<p><a href="http://codepen.io/anon/pen/dommMg?editors=001">codepen</a></p>
 <h2 id="webgl-quickstart">WebGL quickstart</h2>
 <p>Introductory tutorial video:</p>
 <iframe width="853" height="480" src="https://www.youtube.com/embed/rfQ8rKGTVlg?rel=0" frameborder="0" allowfullscreen></iframe>
 
 <p>GL scenes are made out of geometry, often called &quot;meshes&quot;, which are:</p>
-<p><ul></p>
-<p><li>collections of points in space (vertices), that may also have other attributes (such as color, normal, texture coordinate...), </li></p>
-<p><li>with a method for how to connect them, as points, lines or polygons (usually triangles), and typically also an indexing array (since a particular vertex may be used more than once)</li>
-</ul></p>
-<p><p>Most of the art of OpenGL is taking these meshes, together with textures, and sending them to the GPU with a pair of shaders to define how they will appear.</p></p>
-<p><p>The general process of drawing an object is thus:</p></p>
-<p><pre><code>script =&gt; uniforms + attributes =&gt; vertex shader =&gt; gl_Position, varyings
-uniforms + varyings =&gt; fragment shader =&gt; gl_FragColor 
-bind textures
-bind buffers
-draw mesh
-</code></pre><p>In semi-psuedo-code:</p></p>
-<p><pre><code>gl.<span class="hljs-function"><span class="hljs-title">UseProgram</span><span class="hljs-params">(shader_program)</span></span>
-<span class="hljs-function"><span class="hljs-title">setupattributes</span><span class="hljs-params">()</span></span>
-<span class="hljs-function"><span class="hljs-title">setupuniforms</span><span class="hljs-params">()</span></span>
-<span class="hljs-function"><span class="hljs-title">bindtextures</span><span class="hljs-params">()</span></span>
-gl.<span class="hljs-function"><span class="hljs-title">DrawElements</span><span class="hljs-params">(num_vertices)</span></span>
-</code></pre><p>Where typically:</p></p>
-<p><ul></p>
-<p><li>uniforms are properties shared by a whole <em>geometry</em></li></p>
-<p><li>attributes are the properties that vary <em>per vertex</em>, passed from the script as <em>buffers</em></li></p>
-<p><li>vertex shader runs <em>per vertex</em></li></p>
-<p><li>varyings are properties that are interpolated <em>between vertices</em></li></p>
-<p><li>fragment shader runs <em>per fragment</em> (similar to <em>per pixel</em>)</li>
-</ul></p>
-<p><h3 id="shaders">Shaders</h3></p>
-<p><p>Shaders are written in GLSL. Usually a <em>shader program</em> is a vertex shader plus a fragment shader.</p></p>
-<p><p>Simplest vertex shader:</p></p>
-<p><pre><code class="lang-glsl">    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;vertex_shader&quot;</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">&quot;x-shader/x-vertex&quot;</span>&gt;</span><span class="javascript">
+<ul>
+<li>collections of points in space (vertices), that may also have other attributes (such as color, normal, texture coordinate...), </li>
+<li>with a method for how to connect them, as points, lines or polygons (usually triangles), and typically also an indexing array (since a particular vertex may be used more than once)</li>
+</ul>
+<p>Most of the art of OpenGL is taking these meshes, together with textures, and sending them to the GPU with a pair of shaders to define how they will appear.</p>
+<p>The general process of drawing an object is thus:</p>
+<pre><code>    <span class="hljs-variable">script =</span>&gt; uniforms + <span class="hljs-variable">attributes =</span>&gt; vertex <span class="hljs-variable">shader =</span>&gt; gl_Position, varyings
+    uniforms + <span class="hljs-variable">varyings =</span>&gt; fragment <span class="hljs-variable">shader =</span>&gt; gl_FragColor 
+    bind textures&lt;span <span class="hljs-variable">class=</span><span class="hljs-string">"hljs-function"</span>&gt;
+    bind buffers
+    draw mesh
+</code></pre><p>In semi-psuedo-code:</p>
+<pre><code>    gl.<span class="hljs-function"><span class="hljs-title">UseProgram</span><span class="hljs-params">(shader_program)</span></span>
+    <span class="hljs-function"><span class="hljs-title">setupattributes</span><span class="hljs-params">()</span></span>
+    <span class="hljs-function"><span class="hljs-title">setupuniforms</span><span class="hljs-params">()</span></span>
+    <span class="hljs-function"><span class="hljs-title">bindtextures</span><span class="hljs-params">()</span></span>
+    gl.<span class="hljs-function"><span class="hljs-title">DrawElements</span><span class="hljs-params">(num_vertices)</span></span>
+</code></pre><p>Where typically:</p>
+<ul>
+<li>uniforms are properties shared by a whole <em>geometry</em></li>
+<li>attributes are the properties that var</h3>y <em>per vertex</em>, passed from the script as <em>buffers</em></li>
+<li>vertex shader runs <em>per vertex</em></li>
+<li>varyings are properties that are interpolated <em>between vertices</em></li>
+<li>fragment shader runs <em>per fragment</em> (similar to <em>per pixel</em>)</li>
+</ul>
+<h3 id="shaders">Shaders</h3>
+<p>Shaders are written in GLSL. Usually a <em>shader program</em> is a vertex shader plus a fragment shader.</p>
+<p>Simplest vertex shader:</p>
+<pre><code class="lang-glsl">    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"vertex_shader"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"x-shader/x-vertex"</span>&gt;</span><span class="javascript">
     attribute vec4 position;
     <span class="hljs-keyword">void</span> main() {
         gl_Position = position;
     }
     </span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-</code></pre></p>
-<p><p>Simplest fragment shader:</p></p>
-<p><pre><code class="lang-glsl">    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;fragment_shader&quot;</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">&quot;x-shader/x-fragment&quot;</span>&gt;</span><span class="javascript">
+</code></pre>
+<p>Simplest fragment shader:</p>
+<pre><code class="lang-glsl">    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"fragment_shader"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"x-shader/x-fragment"</span>&gt;</span><span class="javascript">
     <span class="hljs-keyword">void</span> main() {
         vec4 red = vec4(<span class="hljs-number">1.</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>);    <span class="hljs-comment">// RGBA</span>
         gl_Color = red;
     }
     </span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-</code></pre></p>
-<p><pre><code>matrix_uniform = model_in_world_matrix <em> camer<span class="hljs-built_in">a_view</span>_matrix </em> camer<span class="hljs-built_in">a_projection</span>_matrix
-</code></pre><h3 id="coordinate-systems">Coordinate systems</h3></p>
-<p><p>Vertex shaders typically transform the position in <em>model space</em> into <em>clip space</em> by matrix multiplications, to take into account the model&#39;s pose in the world, the camera&#39;s pose in the world, and the camera perspective properties. These matrices are usually generated in JavaScript and passed in as uniforms. </p></p>
-<p><ul></p>
-<p><li><p><strong>Model space</strong></p></p>
-<p><ul></p>
-<p><li>Used by mesh position attributes. </li></p>
-<p><li>Typically the origin of this space is the center or base of the mesh object</li>
-</ul>
-</li></p>
-<p><li><p><strong>World space</strong></p></p>
-<p><ul></p>
-<p><li>The shared space in which all objects of the world (including the camera) are located</li></p>
-<p><li>Origin and axes are fixed relative to the world</li>
-</ul>
-</li></p>
-<p><li><p><strong>View space</strong></p></p>
-<p><ul></p>
-<p><li>The world space, but transformed (rotated/translated) into the view of the camera</li>
-</ul>
-</li></p>
-<p><li><p><strong>Clip space</strong></p></p>
-<p><ul></p>
-<p><li>Used by <code>gl_Position</code>. </li></p>
-<p><li>Always covers entire canvas from bottom-left (-1, -1) to top-right (1, 1), and depth also from -1 to 1.</li></p>
-<p><li>The fourth coordinate is used for perspective division, after assignment to <code>gl_Position</code></li>
-</ul>
-</li></p>
-<p><li><p><strong>Fragment space</strong></p></p>
-<p><ul></p>
-<p><li>The final location of a fragment in the canvas (or other render target), typically measured in pixels</li>
+</code></pre>
+<h3 id="coordinate-systems">Coordinate systems</h3>
+<p>Vertex shaders typically transform the position in <em>model space</em> into <em>clip space</em> by matrix multiplications, to take into account the model&#39;s pose in the world, the camera&#39;s pose in the world, and the camera perspective properties. These matrices are usually generated in JavaScript and passed in as uniforms. </p>
+<ul>
+<li><p><strong>Model space</strong></p>
+<ul>
+<li>Used by mesh position attributes. </li>
+<li>Typically the origin of this space is the center or base of the mesh object</li>
 </ul>
 </li>
-</ul></p>
-<p><p>Beside this workflow, there are other spaces that are used in OpenGL:</p></p>
-<p><ul></p>
-<p><li><strong>Texture space</strong><ul></p>
-<p><li>Texture coordinates usually cover the source data by ranging from (0, 0) to (1, 1)</li></p>
-<p><li>Also known as &quot;UV&quot; coordinates</li>
+<li><p><strong>World space</strong></p>
+<ul>
+<li>The shared space in which all objects of the world (including the camera) are located</li>
+<li>Origin and axes are fixed relative to the world</li>
 </ul>
 </li>
-</ul></p>
-<p><h3 id="post-processing">Post-processing</h3></p>
-<p><p>Also-known as multi-pass rendering. Rather than rendering directly to the screen, render to an off-screen texture, then render that texture again through another shader to process it further. Usually the vertex shader is just a pass-through drawing a single big rectangle, and all the work is in the fragment shader (screen-space effects).    </p></p>
-<p><h3 id="differences-with-opengl">Differences with OpenGL</h3></p>
-<p><p>Some of the significant <a href="https://www.khronos.org/webgl/wiki/WebGL_and_OpenGL_Differences#No_3D_Texture_support">differences with OpenGL</a>:</p></p>
-<p><ul></p>
-<p><li>Textures with non-power-of-two (NPOT) dimensions have limited support</li></p>
-<p><li>No GL_DOUBLE -- this may be a problem for high-precision visualizations</li></p>
-<p><li>No 3D Textures -- this <em>is</em> a problem for things like volume-rendering, common to sci-viz<ul></p>
-<p><li>There are workarounds by tiling 3D slices over a 2D texture <a href="http://jsfiddle.net/greggman/gSnHZ/">example</a></li>
+<li><p><strong>View space</strong></p>
+<ul>
+<li>The world space, but transformed (rotated/translated) into the view of the camera</li>
 </ul>
 </li>
-</ul></p>
-<p><h3 id="development-tips">Development tips</h3></p>
-<p><p>Use the WebGL inspector, for <a href="https://chrome.google.com/webstore/detail/webgl-inspector/ogkcjmbhnfmlnielkjhedpcjomeaghda?hl=en">Chrome</a> or <a href="https://addons.mozilla.org/en-us/firefox/addon/webgl-inspector/">Firefox</a></p></p>
-<p><p>More <a href="http://www.realtimerendering.com/blog/webgl-debugging-and-profiling-tools/">debugging &amp; development tools</a></p></p>
-<p><h3 id="optimization-tips">Optimization tips</h3></p>
-<p><p>Minimize updates to the GPU. Use the same shader for many objects -- set up the shader once, then draw each object. Similarly, only update the uniforms that differ between objects.</p></p>
-<p><p>Do the least amount of work possible in the draw routines -- anything that is unchanged between frames move to a setup() function that runs once. </p></p>
-<p><p>Move work out of JavaScript and into GLSL, especially if it is the kind of thing GLSL is really good at (vector math!). That can even mean part of the behaviour of the object itself.</p></p>
-<p><p>Never call glGet** anything while rendering.</p></p>
-<p><p>Possibly also merge instances into a single mesh, by storing instance-specific parameters in additional attributes.</p></p>
-<p><p>Don&#39;t attach render buffers while rendering -- just set up however many framebuffers you need before starting and swap them, rather than rebuilding a renderbuffer.</p></p>
-<p><p>Don&#39;t use setInterval(), use requestAnimationFrame() (so it pauses when not visible)</p></p>
-<p><p>The render resolution doesn&#39;t have to be the same as the canvas resolution. Large resolutions are expensive (especially for fragment shader operations), so it can be cheaper to render at a lower resolution and stretch up (though it will be blurrier). </p></p>
+<li><p><strong>Clip space</strong></p>
+<ul>
+<li>Used by <code>gl_Position</code>. </li>
+<li>Always covers entire canvas from bottom-left (-1, -1) to top-right (1, 1), and depth also from -1 to 1.</li>
+<li>The fourth coordinate is used for perspective division, after assignment to <code>gl_Position</code></li>
+</ul>
+</li>
+<li><p><strong>Fragment space</strong></p>
+<ul>
+<li>The final location of a fragment in the canvas (or other render target), typically measured in pixels</li>
+</ul>
+</li>
+</ul>
+<p>Beside this workflow, there are other spaces that are used in OpenGL:</p>
+<ul>
+<li><strong>Texture space</strong><ul>
+<li>Texture coordinates usually cover the source data by ranging from (0, 0) to (1, 1)</li>
+<li>Also known as &quot;UV&quot; coordinates</li>
+</ul>
+</li>
+</ul>
+<pre><code>    matrix_uniform = model_in_world_matrix * camer<span class="hljs-built_in">a_view</span>_matrix * camer<span class="hljs-built_in">a_projection</span>_matrix
+</code></pre><h3 id="post-processing">Post-processing</h3>
+<p>Also-known as multi-pass rendering. Rather than rendering directly to the screen, render to an off-screen texture, then render that texture again through another shader to process it further. Usually the vertex shader is just a pass-through drawing a single big rectangle, and all the work is in the fragment shader (screen-space effects).    </p>
+<h3 id="differences-with-opengl">Differences with OpenGL</h3>
+<p>Some of the significant <a href="https://www.khronos.org/webgl/wiki/WebGL_and_OpenGL_Differences#No_3D_Texture_support">differences with OpenGL</a>:</p>
+<ul>
+<li>Textures with non-power-of-two (NPOT) dimensions have limited support</li>
+<li>No GL_DOUBLE -- this may be a problem for high-precision visualizations</li>
+<li>No 3D Textures -- this <em>is</em> a problem for things like volume-rendering, common to sci-viz<ul>
+<li>There are workarounds by tiling 3D slices over a 2D texture <a href="http://jsfiddle.net/greggman/gSnHZ/">example</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="development-tips">Development tips</h3>
+<p>Use the WebGL inspector, for <a href="https://chrome.google.com/webstore/detail/webgl-inspector/ogkcjmbhnfmlnielkjhedpcjomeaghda?hl=en">Chrome</a> or <a href="https://addons.mozilla.org/en-us/firefox/addon/webgl-inspector/">Firefox</a></p>
+<p>More <a href="http://www.realtimerendering.com/blog/webgl-debugging-and-profiling-tools">debugging &amp; development tools</a></p>
+<h3 id="optimization-tips">Optimization tips</h3>
+<p>Minimize updates to the GPU. Use the same shader for many objects -- set up the shader once, then draw each object. Similarly, only update the uniforms that differ between objects.</p>
+<p>Do the least amount of work possible in the draw routines -- anything that is unchanged between frames move to a setup() function that runs once. </p>
+<p>Move work out of JavaScript and into GLSL, especially if it is the kind of thing GLSL is really good at (vector math!). That can even mean part of the behaviour of the object itself.</p>
+<p>Never call glGet** anything while rendering.</p>
+<p>Possibly also merge instances into a single mesh, by storing instance-specific parameters in additional attributes.</p>
+<p>Don&#39;t attach render buffers while rendering -- just set up however many framebuffers you need before starting and swap them, rather than rebuilding a renderbuffer.</p>
+<p>Don&#39;t use setInterval(), use requestAnimationFrame() (so it pauses when not visible)</p>
+<p>The render resolution doesn&#39;t have to be the same as the canvas resolution. Large resolutions are expensive (especially for fragment shader operations), so it can be cheaper to render at a lower resolution and stretch up (though it will be blurrier). </p>
 <h2 id="three-js">Three.js</h2>
 <p>Most people are using the <a href="http://threejs.org">THREE.js</a> wrapper, because raw WebGL involves a lot of repetitive fiddly work.</p>
 <p><a href="http://threejs.org/docs/index.html#Manual/Introduction/Creating_a_scene">Tutorial</a> </p>
 <p>Basic sample:</p>
-<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>Three.js app<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">style</span>&gt;</span><span class="css">
-    <span class="hljs-tag">body</span> <span class="hljs-rules">{ <span class="hljs-rule"><span class="hljs-attribute">margin</span>:<span class="hljs-value"> <span class="hljs-number">0</span></span></span>; <span class="hljs-rule">}</span></span>
-    <span class="hljs-tag">canvas</span> <span class="hljs-rules">{ <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"> <span class="hljs-number">100%</span></span></span>; <span class="hljs-rule"><span class="hljs-attribute">height</span>:<span class="hljs-value"> <span class="hljs-number">100%</span> </span></span></span>}
-</span><span class="hljs-tag">&lt;/<span class="hljs-title">style</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
-<span class="hljs-comment">&lt;!-- or &lt;script src=&quot;<a href="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js&quot;&gt;&lt;/script&amp;gt">https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js&quot;&gt;&lt;/script&amp;gt</a>; --&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">&quot;three.min.js&quot;</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">script</span>&gt;</span><span class="javascript">
+<pre><code class="lang-html">    &lt;html&gt;
+    &lt;head&gt;
+    &lt;title&gt;Three.js app&lt;/title&gt;
+    &lt;style&gt;&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"css"</span>&gt;
+        body &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-rules"</span>&gt;{ &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-rule"</span>&gt;margin: <span class="hljs-number">0</span>; &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-rule"</span>&gt;}
+        canvas &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-rules"</span>&gt;{ &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-rule"</span>&gt;width: <span class="hljs-number">100</span>%; &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-rule"</span>&gt;height: <span class="hljs-number">100</span>% }
+    &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;!-- or &lt;script src=<span class="hljs-string">"https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js"</span>&gt;&lt;/script&gt; --&gt;
+    &lt;script src=<span class="hljs-string">"three.min.js"</span>&gt;&lt;/script&gt;
+    &lt;script&gt;
 
-<span class="hljs-comment">// create an HTML canvas via a THREE.js renderer:</span>
-<span class="hljs-keyword">var</span> canvas_width = <span class="hljs-built_in">window</span>.innerWidth;
-<span class="hljs-keyword">var</span> canvas_height = <span class="hljs-built_in">window</span>.innerHeight;
-<span class="hljs-keyword">var</span> renderer = <span class="hljs-keyword">new</span> THREE.WebGLRenderer();
-renderer.setSize(canvas_width, canvas_height);
-<span class="hljs-built_in">document</span>.body.appendChild(renderer.domElement);
+    <span class="hljs-comment">// create an HTML canvas via a THREE.js renderer:</span>
+    <span class="hljs-keyword">var</span> canvas_width = &lt;span window.innerWidth;
+    <span class="hljs-keyword">var</span> canvas_height = &lt;span window.innerHeight;
+    <span class="hljs-keyword">var</span> renderer = <span class="hljs-keyword">new</span> THREE.WebGLRenderer();
+    renderer.setSize(canvas_width, canvas_height);
+    &lt;span document.body.appendChild(renderer.domElement);
 
-<span class="hljs-comment">// create a camera:</span>
-<span class="hljs-keyword">var</span> near = <span class="hljs-number">0.1</span>, far = <span class="hljs-number">1000</span>;
-<span class="hljs-keyword">var</span> aspect = canvas_width/canvas_height;
-<span class="hljs-keyword">var</span> field_of_view_Y = <span class="hljs-number">75</span>;
-<span class="hljs-keyword">var</span> camera = <span class="hljs-keyword">new</span> THREE.PerspectiveCamera(field_of_view_Y, aspect, near, far);
-camera.position.z = <span class="hljs-number">5</span>;
+    <span class="hljs-comment">// create a camera:</span>
+    <span class="hljs-keyword">var</span> near = <span class="hljs-number">0.1</span>, far = <span class="hljs-number">1000</span>;
+    <span class="hljs-keyword">var</span> aspect = canvas_width/canvas_height;
+    <span class="hljs-keyword">var</span> field_of_view_Y = <span class="hljs-number">75</span>;
+    <span class="hljs-keyword">var</span> camera = <span class="hljs-keyword">new</span> THREE.PerspectiveCamera(field_of_view_Y, aspect, near, far);
+    camera.position.z = <span class="hljs-number">5</span>;
 
-<span class="hljs-comment">// create a scene to hold objects:</span>
-<span class="hljs-keyword">var</span> scene = <span class="hljs-keyword">new</span> THREE.Scene();
+    <span class="hljs-comment">// create a scene to hold objects:</span>
+    <span class="hljs-keyword">var</span> scene = <span class="hljs-keyword">new</span> THREE.Scene();
 
-<span class="hljs-comment">// create a box:</span>
-<span class="hljs-keyword">var</span> geometry = <span class="hljs-keyword">new</span> THREE.BoxGeometry( <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span> );
-<span class="hljs-keyword">var</span> material = <span class="hljs-keyword">new</span> THREE.MeshBasicMaterial( { color: <span class="hljs-number">0x00ff00</span> } );
-<span class="hljs-keyword">var</span> cube = <span class="hljs-keyword">new</span> THREE.Mesh( geometry, material );
-scene.add( cube );
+    <span class="hljs-comment">// create a box:</span>
+    <span class="hljs-keyword">var</span> geometry = <span class="hljs-keyword">new</span> THREE.BoxGeometry( <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span> );
+    <span class="hljs-keyword">var</span> material = <span class="hljs-keyword">new</span> THREE.MeshBasicMaterial( { color: <span class="hljs-number">0x00ff00</span> } );
+    <span class="hljs-keyword">var</span> cube = <span class="hljs-keyword">new</span> THREE.Mesh( geometry, material );
+    scene.add( cube );
 
-<span class="hljs-comment">// simulation update:</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">update</span><span class="hljs-params">()</span> </span>{
-    cube.rotation.x += <span class="hljs-number">0.1</span>;
-    cube.rotation.y += <span class="hljs-number">0.1</span>;
-}
+    <span class="hljs-comment">// simulation update:</span>
+    <span class="hljs-function">function <span class="hljs-title">update</span><span class="hljs-params">()</span> </span>{
+        cube.rotation.x += <span class="hljs-number">0.1</span>;
+        cube.rotation.y += <span class="hljs-number">0.1</span>;
+    }
 
-<span class="hljs-comment">// render loop:</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">render</span><span class="hljs-params">()</span> </span>{
-    requestAnimationFrame(render);
-    update();
-    renderer.render(scene, camera);
-}
-render();
+    <span class="hljs-comment">// render loop:</span>
+    <span class="hljs-function">function <span class="hljs-title">render</span><span class="hljs-params">()</span> </span>{
+        requestAnimationFrame(render);
+        update();
+        renderer.render(scene, camera);
+    }
+    render();
 
-</span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+    &lt;/script&gt;
+    &lt;/body&gt;
 </code></pre>
 <p>An object&#39;s matrix stores the object&#39;s transformation relative to the object&#39;s parent (for top-level objects, the parent is the world).</p>
 <p>Updating object transformation matrix, using high level position/scale/quaternion properties to update the matrix:</p>
-<pre><code><span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">position</span> =</span> start_position;
+<pre><code>    <span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">position</span> =</span> start_position;
     <span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">quaternion</span> =</span> quaternion;
     <span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">updateMatrix</span>(</span>);
 </code></pre><p>Alternatively operate on the matrix directly:</p>
-<pre><code><span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">matrixAutoUpdate</span> =</span> <span class="hljs-literal">false</span>;
+<pre><code>    <span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">matrixAutoUpdate</span> =</span> &lt;span <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"hljs-literal"</span>&gt;<span class="hljs-literal">false</span>;
 <span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">matrix</span>.<span class="hljs-title">setRotationFromQuaternion</span>(</span>quaternion);
     <span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">matrix</span>.<span class="hljs-title">setPosition</span>(</span>start_position);
 </code></pre><p>If the object&#39;s parent is not the world, the world position can be requested: </p>
-<pre><code><span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">updateMatrixWorld</span>(</span>);
-<span class="hljs-keyword">return</span> <span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">matrixWorld</span>;</span>
+<pre><code>    <span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">updateMatrixWorld</span>(</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">matrixWorld</span>;</span>
 </code></pre><p>Quaternions are used for rotations, because they avoid <em>gimbal lock</em>, but you can specify with Euler Angles (object.setRotationFromEuler()) if gimbal lock will not be a problem.</p>
 <h3 id="extensions">Extensions</h3>
-<p><a href="http://www.threejsgames.com/extensions/">THREEx</a></p>
+<p><a href="http://www.threejsgames.com/extensions">THREEx</a></p>
 <h3 id="examples">Examples</h3>
 <p><a href="https://stemkoski.github.io/Three.js/">https://stemkoski.github.io/Three.js/</a></p>
 <h2 id="d3-in-3d">D3 in 3D</h2>
-
-
-
-
-
-
-
-
-
-
-
+<p>With <em>D3</em> being one of the most acclaimed data visualization libraries for the web, and <em>three.js</em> being probably the widest-used programming interface to WebGL, it seems natural to combine them for 3D visualizations. </p>
+<p>It&#39;s not so easy however. D3 operates on the HTML DOM (Document Object Model) itself, either by manipluating regular DOM elements such as <code>&lt;div&gt;</code>, or by manipulating graphical DOM elements created using SVG (Scalable Vector Graphics). But WebGL is entirely contained within a single <code>&lt;canvas&gt;</code> tag, and its 3D objects are not part of the DOM. </p>
+<p>Fortunately, with a bit of glue code, we can extend Three.js&#39;s <code>Object3D</code> prototype to &quot;look like&quot; a DOM node. The glue code provides <code>Object3D</code> with all the method names D3 expects to find in DOM nodes, but implements them in terms of changes to a 3D WebGL scene. Since <code>Object3D</code> is the base class of most of three.js&#39;s 3D objects, this means we can use D3&#39;s great data handling, data binding, and transitions work with 3D scenes.</p>
 
 	</div>
 	<footer>
