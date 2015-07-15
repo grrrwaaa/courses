@@ -248,7 +248,7 @@ With *D3* being one of the most acclaimed data visualization libraries for the w
 
 It's not so easy however. D3 operates on the HTML DOM (Document Object Model) itself, either by manipluating regular DOM elements such as ```<div>```, or by manipulating graphical DOM elements created using SVG (Scalable Vector Graphics). But WebGL is entirely contained within a single ```<canvas>``` tag, and its 3D objects are not part of the DOM. 
 
-Fortunately, with a bit of glue code, we can extend Three.js's ```Object3D``` prototype to "look like" a DOM node. The glue code provides ```Object3D``` with all the method names D3 expects to find in DOM nodes, but implements them in terms of changes to a 3D WebGL scene. Since ```Object3D``` is the base class of most of three.js's 3D objects, this means we can use D3's great data handling, data binding, and transitions work with 3D scenes.
+Fortunately, [with a bit of glue code](http://grrrwaaa.github.io/courses/webviz/d33d.js), we can extend Three.js's ```Object3D``` prototype to "look like" a DOM node. The glue code provides ```Object3D``` with all the method names D3 expects to find in DOM nodes, but implements them in terms of changes to a 3D WebGL scene. Since ```Object3D``` is the base class of most of three.js's 3D objects, this means we can use D3's great data handling, data binding, and transitions work with 3D scenes.
 
 
 
