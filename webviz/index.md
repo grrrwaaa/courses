@@ -3,7 +3,6 @@
 
 Quick demo:
 
-[codepen](http://codepen.io/anon/pen/dommMg?editors=001)
 
 
 
@@ -248,11 +247,22 @@ With *D3* being one of the most acclaimed data visualization libraries for the w
 
 It's not so easy however. D3 operates on the HTML DOM (Document Object Model) itself, either by manipluating regular DOM elements such as ```<div>```, or by manipulating graphical DOM elements created using SVG (Scalable Vector Graphics). But WebGL is entirely contained within a single ```<canvas>``` tag, and its 3D objects are not part of the DOM. 
 
-Fortunately, [with a bit of glue code](http://grrrwaaa.github.io/courses/webviz/d33d.js), we can extend Three.js's ```Object3D``` prototype to "look like" a DOM node. The glue code provides ```Object3D``` with all the method names D3 expects to find in DOM nodes, but implements them in terms of changes to a 3D WebGL scene. Since ```Object3D``` is the base class of most of three.js's 3D objects, this means we can use D3's great data handling, data binding, and transitions work with 3D scenes.
+**Glue:** Fortunately, [with a bit of glue code](http://grrrwaaa.github.io/courses/webviz/d33d.js), we can extend Three.js's ```Object3D``` prototype to "look like" a DOM node. The glue code provides ```Object3D``` with all the method names D3 expects to find in DOM nodes, but implements them in terms of changes to a 3D WebGL scene. Since ```Object3D``` is the base class of most of three.js's 3D objects, this means we can use D3's great data handling, data binding, and transitions work with 3D scenes.
+
+Here's a basic demo, based on D3's [General Update Pattern](http://bl.ocks.org/mbostock/3808234) -- the top version is regular D3, the bottom version is the same data but rendered via Three.js:
+
+[D33D demo](http://codepen.io/anon/pen/dommMg?editors=001)
 
 
 
+### Camera
 
+An orthographic camera may be more appropriate to data visualization, as it preserves the meaning of screen-space distance regardless of depth. 
+
+Conversely, a perspective camera may be preferable for stereoscopic and immersive visualizations, or any visualization intended to be 'navigable', where perspective grants focus and context.
+
+
+### Interaction
 
 
 
