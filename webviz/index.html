@@ -13,7 +13,6 @@
 	<div id="main">
 	<h1 id="bridging-data-viz-and-3d-web">Bridging data viz and 3D web</h1>
 <p>Quick demo:</p>
-<p><a href="http://codepen.io/anon/pen/dommMg?editors=001">codepen</a></p>
 <h2 id="webgl-quickstart">WebGL quickstart</h2>
 <p>Introductory tutorial video:</p>
 <iframe width="853" height="480" src="https://www.youtube.com/embed/rfQ8rKGTVlg?rel=0" frameborder="0" allowfullscreen></iframe>
@@ -205,7 +204,13 @@
 <h2 id="d3-in-3d">D3 in 3D</h2>
 <p>With <em>D3</em> being one of the most acclaimed data visualization libraries for the web, and <em>three.js</em> being probably the widest-used programming interface to WebGL, it seems natural to combine them for 3D visualizations. </p>
 <p>It&#39;s not so easy however. D3 operates on the HTML DOM (Document Object Model) itself, either by manipluating regular DOM elements such as <code>&lt;div&gt;</code>, or by manipulating graphical DOM elements created using SVG (Scalable Vector Graphics). But WebGL is entirely contained within a single <code>&lt;canvas&gt;</code> tag, and its 3D objects are not part of the DOM. </p>
-<p>Fortunately, with a bit of glue code, we can extend Three.js&#39;s <code>Object3D</code> prototype to &quot;look like&quot; a DOM node. The glue code provides <code>Object3D</code> with all the method names D3 expects to find in DOM nodes, but implements them in terms of changes to a 3D WebGL scene. Since <code>Object3D</code> is the base class of most of three.js&#39;s 3D objects, this means we can use D3&#39;s great data handling, data binding, and transitions work with 3D scenes.</p>
+<p><strong>Glue:</strong> Fortunately, <a href="http://grrrwaaa.github.io/courses/webviz/d33d.js">with a bit of glue code</a>, we can extend Three.js&#39;s <code>Object3D</code> prototype to &quot;look like&quot; a DOM node. The glue code provides <code>Object3D</code> with all the method names D3 expects to find in DOM nodes, but implements them in terms of changes to a 3D WebGL scene. Since <code>Object3D</code> is the base class of most of three.js&#39;s 3D objects, this means we can use D3&#39;s great data handling, data binding, and transitions work with 3D scenes.</p>
+<p>Here&#39;s a basic demo, based on D3&#39;s <a href="http://bl.ocks.org/mbostock/3808234">General Update Pattern</a> -- the top version is regular D3, the bottom version is the same data but rendered via Three.js:</p>
+<p><a href="http://codepen.io/anon/pen/dommMg?editors=001">D33D demo</a></p>
+<h3 id="camera">Camera</h3>
+<p>An orthographic camera may be more appropriate to data visualization, as it preserves the meaning of screen-space distance regardless of depth. </p>
+<p>Conversely, a perspective camera may be preferable for stereoscopic and immersive visualizations, or any visualization intended to be &#39;navigable&#39;, where perspective grants focus and context.</p>
+<h3 id="interaction">Interaction</h3>
 
 	</div>
 	<footer>
