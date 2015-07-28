@@ -2,7 +2,7 @@
 # Artificial Life, Generative Art and Creative Code
 
 **FADATT 4950** (3.00 Units)   
-**When:** Fall 2015, TBD 
+**When:** Fall 2015, Wednesdays 13:30 - 17:30 
 **Where:** GCFA, ACW 103   
 **Instructor:** Graham Wakefield    
 **Language:** English   
