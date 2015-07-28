@@ -8,17 +8,44 @@
   <body>
   	<nav>
 	<ul>
-	<li><a href="d33d.html" alt="d33d">d33d</a></li>
-<li><a href="index.html" alt="index">index</a></li>
+	<li><a href="index.html" alt="index">index</a></li>
 	</ul></nav>	
 	<div id="main">
 	<h1 id="bridging-web-based-visualization-and-3d">BRIDGING WEB-BASED VISUALIZATION AND 3D</h1>
-<p><a href="http://www.canvas2015.ca">http://www.canvas2015.ca</a></p>
-<p>Web-based technologies</p>
+<p><a href="http://www.canvas2015.ca/schedule/day-2-july-28/">http://www.canvas2015.ca</a></p>
+<h2 id="quick-intro">Quick intro</h2>
+<p><a href="http://www.mat.ucsb.edu/~wakefield/">me</a>, <a href="http://www.allosphere.ucsb.edu">Allosphere</a></p>
+<iframe width="853" height="480" src="https://www.youtube.com/embed/u-D-zEToJQ4?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<p>This is large-scale immersive visualization on distributed systems, but it is almost possible to achieve this in a browser at home today. It is that exciting possibility that motivates this workshop. </p>
+<p>Among the rapidly developing technologies available in modern browsers today is WebGL, a mostly-compatible port of the standardized, GPU-accelerated 3D graphics library OpenGL to the HTML5 canvas. </p>
+<blockquote>
+<p>Why 3D viz? Some data is naturally 3D (preponderance of sci viz in 3D), some data is more accessible plotted above a 2D surface (particularly geo data). Although most of our cognitive/perceptive pattern-finding capabilities operate in 2D, we can embed multiple 2D spaces in a 3D world. And we are biologically adapted to interact in a 3D world. There are affordances to be had in a dynamic 3D environment (spatial navigation, structure-from-motion). Stereoscopic cues can be particularly effective at short distances. </p>
+</blockquote>
+<p>Some fun examples:</p>
+<ul>
+<li><a href="http://www.georgeandjonathan.com/#9">Music viz</a></li>
+<li><a href="http://i-remember.fr/en">I remember</a></li>
+<li><a href="https://brainbrowser.cbrain.mcgill.ca">Brain browser</a></li>
+<li><a href="http://philogb.github.io">Several examples here</a> -- and a <a href="https://www.youtube.com/watch?v=VXiAMI69CZ4">video tutorial</a></li>
+<li><a href="http://acko.net">Some great articles &amp; tutorials</a></li>
+</ul>
+<p>An even more recent extension is WebVR, meaning that browser-based visualizations will be a URL away for owners of Oculus Rift, Leap Motion etc. Immersive live information visualization may suddenly be within reach of millions. Untrod land... an interesting research area!</p>
+<blockquote>
+<p>Firefox: <a href="http://mozvr.com/posts/webvr-lands-in-nightly/">&quot;VR a first class citizen on the Web&quot;</a>. Instructions: <a href="http://mozvr.com/downloads/">http://mozvr.com/downloads/</a></p>
+<p>Chrome: <a href="http://blog.tojicode.com/2014/07/bringing-vr-to-chrome.html">Google has pushed Cardboard, but also supporting Oculus Rift</a>. Go to chrome://flags, scroll down to webvr and enable</p>
+<p>Examples:</p>
+<ul>
+<li><a href="http://mozvr.com/projects/infodive/">Infodive</a></li>
+<li><a href="http://mozvr.com/projects/sechelt/">Sechelt</a></li>
+<li><a href="http://www.roadtovr.com/mozilla-research-vr-launches-mozvr-com-oculus-rift/">See also</a></li>
+</ul>
+</blockquote>
+<h2 id="overview-of-web-based-technologies">Overview of web-based technologies</h2>
 <ul>
 <li>Super accessible, nothing to install</li>
 <li>Modern browsers support rich graphics, audio, high performance</li>
-<li>HTML, CSS, JS:<ul>
+<li>Modern synthesis: HTML + CSS + JS:<ul>
 <li>HTML the original markup language of the web. Static, tree-like document structure (DOM)<ul>
 <li>now also includes vector graphics (SVG, Canvas), video, etc.</li>
 </ul>
@@ -26,41 +53,42 @@
 <li>CSS defines &#39;styles&#39; we can apply to HTML, richer set of layout &amp; appearance attributes</li>
 <li>JavaScript is the dynamic part<ul>
 <li>A full-fledged high-level programming language, with incredibly fast implementations</li>
-<li>Masses of JS libraries out there.</li>
+<li><em>Masses of JS libraries out there</em>.</li>
 <li>Can also write servers using JS (via Node.js)</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<p>An exciting recent development is WebGL, a mostly-compatible port of the standardized, GPU-accelerated 3D graphics library OpenGL to JavaScript/HTML5 canvas. An even more recent extension is WebVR, meaning that browser-based visualizations will be a URL away for owners of Oculus Rift etc. Immersive live information visualization may suddenly be within reach of millions. Untrod land... an interesting research area!</p>
-<p>D3.js</p>
+<hr>
+<h2 id="data-visualization-on-the-web-d3-js">Data visualization on the web: D3.js</h2>
 <ul>
-<li>very widely used, mature data viz library.</li>
-<li>core concept, let data drive the DOM. <ul>
+<li>Very widely used, mature data viz library.</li>
+<li>Core concept, let data drive the DOM. <ul>
 <li>Can be basic HTML, but usually SVG graphics. Lines, rects, circles, text, beziers, etc. 2D</li>
 </ul>
 </li>
 <li>utilities for reading data from external sources (e.g. open data APIs, CSV/JSON files)</li>
 <li>generate a selection from the data, and set its attributes to viz</li>
 <li>enter/update/exit for dynamic data selections</li>
-<li>transitions for animated changes</li>
+<li><a href="http://alignedleft.com/projects/2014/easy-as-pi/">transitions</a> for animated changes</li>
 <li>utilities for array analysis, scaling and quantizing, etc.</li>
 <li>force-driven graphs and many other classic viz examples</li>
 <li>2D</li>
 </ul>
-<p>D3 live example: currency scatterplot</p>
-<pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">form</span> <span class="hljs-attribute">action</span>=<span class="hljs-value">"http://codepen.io/pen/define"</span> <span class="hljs-attribute">method</span>=<span class="hljs-value">"POST"</span> <span class="hljs-attribute">target</span>=<span class="hljs-value">"_blank"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"data-input"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"hidden"</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"data"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"</span></span></span><span class="hljs-expression">{&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;<span class="hljs-variable">title</span>&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;:&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;<span class="hljs-variable">Canvas</span>2015&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;,&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;<span class="hljs-variable">description</span>&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;:&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;<span class="hljs-variable">D</span>3 <span class="hljs-variable">in</span> 3<span class="hljs-variable">D</span> <span class="hljs-variable">playground</span>&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;,&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;<span class="hljs-variable">css</span>_<span class="hljs-variable">external</span>&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;:&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;,&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;<span class="hljs-variable">js</span>_<span class="hljs-variable">external</span>&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;:&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;,&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;<span class="hljs-variable">html</span>&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;:&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;&amp;<span class="hljs-variable"><span class="hljs-keyword">lt</span></span>;!<span class="hljs-variable">--</span> <span class="hljs-variable">bring</span> <span class="hljs-variable">in</span> <span class="hljs-variable">our</span> <span class="hljs-variable">D</span>3<span class="hljs-end-block">/Three glue</span>: <span class="hljs-variable">--</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">gt</span></span>;\<span class="hljs-variable">n</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">lt</span></span>;<span class="hljs-variable">script</span> <span class="hljs-variable">src</span>=\&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;<span class="hljs-variable">http</span>:/<span class="hljs-end-block">/grrrwaaa.github.io</span><span class="hljs-end-block">/courses</span><span class="hljs-end-block">/webviz</span><span class="hljs-end-block">/d</span>33<span class="hljs-variable">d.js</span>\&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;&amp;<span class="hljs-variable"><span class="hljs-keyword">gt</span></span>;&amp;<span class="hljs-variable"><span class="hljs-keyword">lt</span></span>;<span class="hljs-end-block">/script</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">gt</span></span>;\<span class="hljs-variable">n</span>\<span class="hljs-variable">n</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">lt</span></span>;!<span class="hljs-variable">--</span> <span class="hljs-variable">load</span> <span class="hljs-variable">a</span> <span class="hljs-variable">sample</span> <span class="hljs-variable">data</span> <span class="hljs-variable">source</span>: <span class="hljs-variable">--</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">gt</span></span>;\<span class="hljs-variable">n</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">lt</span></span>;<span class="hljs-variable">script</span> <span class="hljs-variable">src</span>=\&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;<span class="hljs-variable">http</span>:/<span class="hljs-end-block">/grrrwaaa.github.io</span><span class="hljs-end-block">/courses</span><span class="hljs-end-block">/webviz</span><span class="hljs-end-block">/currencies.js</span>\&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;&amp;<span class="hljs-variable"><span class="hljs-keyword">gt</span></span>;&amp;<span class="hljs-variable"><span class="hljs-keyword">lt</span></span>;<span class="hljs-end-block">/script</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">gt</span></span>;\<span class="hljs-variable">n</span>\<span class="hljs-variable">n</span>\<span class="hljs-variable">n</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">lt</span></span>;!<span class="hljs-variable">--</span> <span class="hljs-variable">bring</span> <span class="hljs-variable">in</span> <span class="hljs-variable">Three.js</span> <span class="hljs-variable">and</span> <span class="hljs-variable">some</span> <span class="hljs-variable">of</span> <span class="hljs-variable">its</span> <span class="hljs-variable">extension</span> <span class="hljs-variable">libraries</span>: <span class="hljs-variable">--</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">gt</span></span>;\<span class="hljs-variable">n</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">lt</span></span>;<span class="hljs-variable">script</span> <span class="hljs-variable">src</span>=\&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;<span class="hljs-variable">http</span>:/<span class="hljs-end-block">/cdnjs.cloudflare.com</span><span class="hljs-end-block">/ajax</span><span class="hljs-end-block">/libs</span><span class="hljs-end-block">/three.js</span><span class="hljs-end-block">/r</span>70<span class="hljs-end-block">/three.min.js</span>\&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;&amp;<span class="hljs-variable"><span class="hljs-keyword">gt</span></span>;&amp;<span class="hljs-variable"><span class="hljs-keyword">lt</span></span>;<span class="hljs-end-block">/script</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">gt</span></span>;\<span class="hljs-variable">n</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">lt</span></span>;<span class="hljs-variable">script</span> <span class="hljs-variable">src</span>=\&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;<span class="hljs-variable">http</span>:/<span class="hljs-end-block">/threejs.org</span><span class="hljs-end-block">/examples</span><span class="hljs-end-block">/js</span><span class="hljs-end-block">/controls</span><span class="hljs-end-block">/OrbitControls.js</span>\&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;&amp;<span class="hljs-variable"><span class="hljs-keyword">gt</span></span>;&amp;<span class="hljs-variable"><span class="hljs-keyword">lt</span></span>;<span class="hljs-end-block">/script</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">gt</span></span>;\<span class="hljs-variable">n</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">lt</span></span>;<span class="hljs-variable">script</span> <span class="hljs-variable">src</span>=\&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;<span class="hljs-variable">http</span>:/<span class="hljs-end-block">/rawgit.com</span><span class="hljs-end-block">/mrdoob</span><span class="hljs-end-block">/stats.js</span><span class="hljs-end-block">/master</span><span class="hljs-end-block">/build</span><span class="hljs-end-block">/stats.min.js</span>\&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;&amp;<span class="hljs-variable"><span class="hljs-keyword">gt</span></span>;&amp;<span class="hljs-variable"><span class="hljs-keyword">lt</span></span>;<span class="hljs-end-block">/script</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">gt</span></span>;\<span class="hljs-variable">n</span>\<span class="hljs-variable">n</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">lt</span></span>;!<span class="hljs-variable">--</span> <span class="hljs-variable">bring</span> <span class="hljs-variable">in</span> <span class="hljs-variable">D</span>3<span class="hljs-variable">.js</span> <span class="hljs-variable">and</span> <span class="hljs-variable">some</span> <span class="hljs-variable">of</span> <span class="hljs-variable">its</span> <span class="hljs-variable">extension</span> <span class="hljs-variable">libraries</span>: <span class="hljs-variable">--</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">gt</span></span>;\<span class="hljs-variable">n</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">lt</span></span>;<span class="hljs-variable">script</span> <span class="hljs-variable">src</span>=\&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;<span class="hljs-variable">http</span>:/<span class="hljs-end-block">/cdnjs.cloudflare.com</span><span class="hljs-end-block">/ajax</span><span class="hljs-end-block">/libs</span><span class="hljs-end-block">/d</span>3/3<span class="hljs-variable">.</span>5<span class="hljs-variable">.</span>5<span class="hljs-end-block">/d</span>3<span class="hljs-variable">.min.js</span>\&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;&amp;<span class="hljs-variable"><span class="hljs-keyword">gt</span></span>;&amp;<span class="hljs-variable"><span class="hljs-keyword">lt</span></span>;<span class="hljs-end-block">/script</span>&amp;<span class="hljs-variable"><span class="hljs-keyword">gt</span></span>;\<span class="hljs-variable">n</span>&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;,&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;<span class="hljs-variable">css</span>&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;:&amp;<span class="hljs-variable">amp</span>;<span class="hljs-variable">quot</span>;<span class="hljs-variable">body</span> {\<span class="hljs-variable">n</span>  <span class="hljs-variable">margin</span>: 0;\<span class="hljs-variable">n</span>}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">\n\ncanvas </span></span></span><span class="hljs-expression">{\<span class="hljs-variable">n</span>  <span class="hljs-variable">width</span>: 100%;\<span class="hljs-variable">n</span>  <span class="hljs-variable">height</span>: 100%;\<span class="hljs-variable">n</span>}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">\n\nsvg </span></span></span><span class="hljs-expression">{\<span class="hljs-variable">n</span>  <span class="hljs-variable">position</span>: <span class="hljs-variable">absolute</span>;\<span class="hljs-variable">n</span>  <span class="hljs-variable">top</span>: 0;\<span class="hljs-variable">n</span>  <span class="hljs-variable">left</span>: 0;\<span class="hljs-variable">n</span>}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">\n&amp;amp;quot;,&amp;amp;quot;js&amp;amp;quot;:&amp;amp;quot;&amp;amp;quot;,&amp;amp;quot;html_pre_processor&amp;amp;quot;:&amp;amp;quot;&amp;amp;quot;,&amp;amp;quot;css_pre_processor&amp;amp;quot;:&amp;amp;quot;&amp;amp;quot;,&amp;amp;quot;css_starter&amp;amp;quot;:&amp;amp;quot;&amp;amp;quot;,&amp;amp;quot;css_prefix&amp;amp;quot;:&amp;amp;quot;&amp;amp;quot;,&amp;amp;quot;js_library&amp;amp;quot;:&amp;amp;quot;&amp;amp;quot;}"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"image"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://s.cdpn.io/3/cp-arrow-right.svg"</span> <span class="hljs-attribute">width</span>=<span class="hljs-value">"40"</span> <span class="hljs-attribute">height</span>=<span class="hljs-value">"40"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"Create new codepen"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"codepen-mover-button"</span>&gt;</span> Yo, Try it
-<span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span></span>
-</code></pre><ul>
+<p>D3 live example: <a href="http://codepen.io/anon/pen/zGMBbG?editors=001">currency scatterplot</a></p>
+<p>Let&#39;s build that up:</p>
+<form action="http://codepen.io/pen/define" method="POST" target="_blank">
+<input id="data-input" type="hidden" name="data" value="{&amp;quot;title&amp;quot;:&amp;quot;Canvas2015&amp;quot;,&amp;quot;description&amp;quot;:&amp;quot;D3 in 3D playground&amp;quot;,&amp;quot;css_external&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js_external&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;html&amp;quot;:&amp;quot;&lt;!-- bring in D3.js and some of its extension libraries: --&gt;\n&lt;script src=\&amp;quot;http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js\&amp;quot;&gt;&lt;/script&gt;\n\n&lt;!-- load a sample data source: --&gt;\n&lt;script src=\&amp;quot;http://grrrwaaa.github.io/courses/webviz/currencies.js\&amp;quot;&gt;&lt;/script&gt;\n\n&lt;!-- bring in Three.js and some of its extension libraries: --&gt;\n&lt;script src=\&amp;quot;http://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js\&amp;quot;&gt;&lt;/script&gt;\n&lt;script src=\&amp;quot;http://threejs.org/examples/js/controls/OrbitControls.js\&amp;quot;&gt;&lt;/script&gt;\n&lt;script src=\&amp;quot;http://rawgit.com/mrdoob/stats.js/master/build/stats.min.js\&amp;quot;&gt;&lt;/script&gt;\n\n&lt;!-- bring in our D3/Three glue: --&gt;\n&lt;script src=\&amp;quot;http://grrrwaaa.github.io/courses/webviz/d33d.js\&amp;quot;&gt;&lt;/script&gt;&amp;quot;,&amp;quot;css&amp;quot;:&amp;quot;body {\n  margin: 0;\n}\n\ncanvas {\n  width: 100%;\n  height: 100%;\n}\n\nsvg {\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n&amp;quot;,&amp;quot;js&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;html_pre_processor&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_pre_processor&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_starter&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_prefix&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js_library&amp;quot;:&amp;quot;&amp;quot;}">
+<input type="submit" value="Create a new Codepen editor">
+</form>
+
+<ul>
 <li>We&#39;ll use some data I prepared earlier, drawn from an open data resource (rather than hammering the servers every time we edit!)</li>
 <li>We&#39;ll use <a href="http://codepen.io">Codepen.io</a> to build our demo. This is a live browser-based HTML/CSS/JS editor, which means we can work without needing to install anything.</li>
 <li>D3.js, currencies.json</li>
 <li></li>
 </ul>
-<p><a href="http://codepen.io/anon/pen/YXRXZb?editors=001">http://codepen.io/anon/pen/YXRXZb?editors=001</a></p>
 <pre><code class="lang-javascript">    <span class="hljs-keyword">var</span> canvas_width = <span class="hljs-built_in">window</span>.innerWidth;
     <span class="hljs-keyword">var</span> canvas_height = <span class="hljs-built_in">window</span>.innerHeight;
 
@@ -71,7 +99,7 @@
             .attr(<span class="hljs-string">'height'</span>, <span class="hljs-built_in">window</span>.innerHeight);
 
     <span class="hljs-comment">// get the basic data resource:</span>
-    <span class="hljs-keyword">var</span> data = currencies.history;
+    <span class="hljs-keyword">var</span> data = currencies;
 
     <span class="hljs-comment">// create linear mappings from the data domain (min, max) to the canvas size:</span>
     <span class="hljs-keyword">var</span> xScale = d3.scale.linear()
@@ -119,174 +147,13 @@
             })
             .attr(<span class="hljs-string">"stroke"</span>, <span class="hljs-string">"black"</span>);
 </code></pre>
-<p>WebGL</p>
-<ul>
-<li>geometry (buffers), images (textures), vertex transformation and pixel-coloring programs (shaders). Journey of a vertex from object space to screen space.</li>
-<li>close to original OpenGL, i.e. verbose, fiddly, and arcane API, including another required sub-language (GLSL).</li>
-</ul>
-<p>Three.js</p>
-<p>Most people are using the <a href="http://threejs.org">THREE.js</a> wrapper, because raw WebGL involves a lot of repetitive fiddly work. </p>
-<p><a href="http://threejs.org/docs/index.html#Manual/Introduction/Creating_a_scene">Three.js tutorial</a></p>
-<pre><code class="lang-html">    <span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>My first Three.js app<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">style</span>&gt;</span><span class="css">
-                <span class="hljs-tag">body</span> <span class="hljs-rules">{ <span class="hljs-rule"><span class="hljs-attribute">margin</span>:<span class="hljs-value"> <span class="hljs-number">0</span></span></span>; <span class="hljs-rule">}</span></span>
-                <span class="hljs-tag">canvas</span> <span class="hljs-rules">{ <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"> <span class="hljs-number">100%</span></span></span>; <span class="hljs-rule"><span class="hljs-attribute">height</span>:<span class="hljs-value"> <span class="hljs-number">100%</span> </span></span></span>}
-            </span><span class="hljs-tag">&lt;/<span class="hljs-title">style</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"js/three.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">script</span>&gt;</span><span class="javascript">
-                <span class="hljs-keyword">var</span> scene = <span class="hljs-keyword">new</span> THREE.Scene();
-                <span class="hljs-keyword">var</span> camera = <span class="hljs-keyword">new</span> THREE.PerspectiveCamera( <span class="hljs-number">75</span>, <span class="hljs-built_in">window</span>.innerWidth/<span class="hljs-built_in">window</span>.innerHeight, <span class="hljs-number">0.1</span>, <span class="hljs-number">1000</span> );
-
-                <span class="hljs-keyword">var</span> renderer = <span class="hljs-keyword">new</span> THREE.WebGLRenderer();
-                renderer.setSize( <span class="hljs-built_in">window</span>.innerWidth, <span class="hljs-built_in">window</span>.innerHeight );
-                <span class="hljs-built_in">document</span>.body.appendChild( renderer.domElement );
-
-                <span class="hljs-keyword">var</span> geometry = <span class="hljs-keyword">new</span> THREE.BoxGeometry( <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span> );
-                <span class="hljs-keyword">var</span> material = <span class="hljs-keyword">new</span> THREE.MeshBasicMaterial( { color: <span class="hljs-number">0x00ff00</span> } );
-                <span class="hljs-keyword">var</span> cube = <span class="hljs-keyword">new</span> THREE.Mesh( geometry, material );
-                scene.add( cube );
-
-                camera.position.z = <span class="hljs-number">5</span>;
-
-                <span class="hljs-keyword">var</span> render = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
-                    requestAnimationFrame( render );
-
-                    cube.rotation.x += <span class="hljs-number">0.1</span>;
-                    cube.rotation.y += <span class="hljs-number">0.1</span>;
-
-                    renderer.render(scene, camera);
-                };
-
-                render();
-            </span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
-</code></pre>
-<blockquote>
-<p>Watch out: an annoying thing about three.js is that, despite being very widely used, it is still officially in alpha and there have been many API changes -- there&#39;s a good chance that code you find on the web won&#39;t work with newer versions of the library.</p>
-</blockquote>
-<p>A renderer needs a scene and a camera to paint a canvas, at up to 60 frames per second.</p>
-<p>The camera handles the perspective, including depth cues of foreshortening (unless an orthographic camera is used). Typically we want some kind of navigation control (world-in-hand or flying/walking) to move and orient the camera. For now we&#39;ll use the OrbitControls example supplied by Three.js, which is a kind of world-in-hand navigation.</p>
-<p>A scene is a a hierarchical tree of nodes, the leaves of which are &quot;meshes&quot;. A mesh is a geometry plus a material. We&#39;ll inject D3 into the process of managing the scene of meshes, via some <a href="http://codepen.io/anon/pen/BNGaeP?editors=011">glue code</a>. </p>
-<p>Our scene will look like this:</p>
-<ul>
-<li>scene<ul>
-<li>lights</li>
-<li>chart3d<ul>
-<li>grid lines</li>
-<li>box nodes (the data entities)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>Geometry: primitive cubes, spheres, planes etc., geometry loaded from 3D model assets, geometry extruded from text, arbitrary geometry from data/algorithms, etc. Geometry is basically an array of 3D vertex positions with other attributes (normals, texture coordinates, etc.)  These are pushed through a shader program (written in GLSL) to define how the intermediate surfaces are painted. With Three.js we don&#39;t have to think about shader programs much, we can just use the built-in <em>materials</em>, where MeshBasicMaterial, MeshLambertMaterial, MeshPhongMaterial are the most common cases.</p>
-<p>Most materials require that we add some lights to our scene. For 3D info viz top left/top right lights are the most appropriate. Lights might also need to track the camera.</p>
-<p>We&#39;ll generate grid lines as another kind of mesh, using D3&#39;s <code>scale</code> mapping generators to simplify and automate the process, and to reposition the chart into the center of the world, etc.</p>
-<p>Rather than adding text labels into the 3D world, we&#39;ll demonstrate a head-up-display using SVG overlaid on top of the WebGL canvas. We create an array of labels and let D3 render them, after Three.js projects the 3D world position into a 2D pixel position.</p>
-<p>We also show how to go the other way, to take a mouse pixel coordinate and select the 3D object underneath it, to add another text overlay.</p>
-<p>We demonstrate the classic D3 enter/update/exit cycle for dynamically showing subsets of points, and animating transitions. </p>
-<p>We also show a few other niceties along the way.</p>
-<p><a href="http://codepen.io/anon/pen/RPqwmj?editors=001">Here&#39;s the currency scatterplot in 3D</a></p>
-<h1 id="bridging-data-viz-and-3d-web">Bridging data viz and 3D web</h1>
-<p><a href="http://codepen.io/anon/pen/MwXNWm?editors=101">Currency demo</a></p>
-<h2 id="webgl-quickstart">WebGL quickstart</h2>
+<hr>
+<h2 id="webgl">WebGL</h2>
+<p>GL scenes are made out of geometry, often called &quot;meshes&quot;, which are buffers (arrays) of points in space (vertices), that may have other attributes such as color, normal, texture coordinates, etc. These meshes may be combined with image data (textures). Most of the art of OpenGL is taking these meshes and textures, and sending them to the GPU with &quot;shader&quot; programs written in another language (GLSL), that define the interesting journey of a vertex in object space into painted surfaces in screen space, passing through model space, world space, view space, clip space and fragment space along the way...</p>
 <p>Introductory tutorial video:</p>
 <iframe width="853" height="480" src="https://www.youtube.com/embed/rfQ8rKGTVlg?rel=0" frameborder="0" allowfullscreen></iframe>
 
-<p>GL scenes are made out of geometry, often called &quot;meshes&quot;, which are:</p>
-<ul>
-<li>collections of points in space (vertices), that may also have other attributes (such as color, normal, texture coordinate...), </li>
-<li>with a method for how to connect them, as points, lines or polygons (usually triangles), and typically also an indexing array (since a particular vertex may be used more than once)</li>
-</ul>
-<p>Most of the art of OpenGL is taking these meshes, together with textures, and sending them to the GPU with a pair of shaders to define how they will appear.</p>
-<p>The general process of drawing an object is thus:</p>
-<pre><code>    <span class="hljs-variable">script =</span>&gt; uniforms + <span class="hljs-variable">attributes =</span>&gt; vertex <span class="hljs-variable">shader =</span>&gt; gl_Position, varyings
-    uniforms + <span class="hljs-variable">varyings =</span>&gt; fragment <span class="hljs-variable">shader =</span>&gt; gl_FragColor 
-    bind textures&lt;span <span class="hljs-variable">class=</span><span class="hljs-string">"hljs-function"</span>&gt;
-    bind buffers
-    draw mesh
-</code></pre><p>In semi-psuedo-code:</p>
-<pre><code>    gl.<span class="hljs-function"><span class="hljs-title">UseProgram</span><span class="hljs-params">(shader_program)</span></span>
-    <span class="hljs-function"><span class="hljs-title">setupattributes</span><span class="hljs-params">()</span></span>
-    <span class="hljs-function"><span class="hljs-title">setupuniforms</span><span class="hljs-params">()</span></span>
-    <span class="hljs-function"><span class="hljs-title">bindtextures</span><span class="hljs-params">()</span></span>
-    gl.<span class="hljs-function"><span class="hljs-title">DrawElements</span><span class="hljs-params">(num_vertices)</span></span>
-</code></pre><p>Where typically:</p>
-<ul>
-<li>uniforms are properties shared by a whole <em>geometry</em></li>
-<li>attributes are the properties that var</h3>y <em>per vertex</em>, passed from the script as <em>buffers</em></li>
-<li>vertex shader runs <em>per vertex</em></li>
-<li>varyings are properties that are interpolated <em>between vertices</em></li>
-<li>fragment shader runs <em>per fragment</em> (similar to <em>per pixel</em>)</li>
-</ul>
-<h3 id="shaders">Shaders</h3>
-<p>Shaders are written in GLSL. Usually a <em>shader program</em> is a vertex shader plus a fragment shader.</p>
-<p>Simplest vertex shader:</p>
-<pre><code class="lang-glsl">    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"vertex_shader"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"x-shader/x-vertex"</span>&gt;</span><span class="javascript">
-    attribute vec4 position;
-    <span class="hljs-keyword">void</span> main() {
-        gl_Position = position;
-    }
-    </span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-</code></pre>
-<p>Simplest fragment shader:</p>
-<pre><code class="lang-glsl">    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"fragment_shader"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"x-shader/x-fragment"</span>&gt;</span><span class="javascript">
-    <span class="hljs-keyword">void</span> main() {
-        vec4 red = vec4(<span class="hljs-number">1.</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>);    <span class="hljs-comment">// RGBA</span>
-        gl_Color = red;
-    }
-    </span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-</code></pre>
-<h3 id="coordinate-systems">Coordinate systems</h3>
-<p>Vertex shaders typically transform the position in <em>model space</em> into <em>clip space</em> by matrix multiplications, to take into account the model&#39;s pose in the world, the camera&#39;s pose in the world, and the camera perspective properties. These matrices are usually generated in JavaScript and passed in as uniforms. </p>
-<ul>
-<li><p><strong>Model space</strong></p>
-<ul>
-<li>Used by mesh position attributes. </li>
-<li>Typically the origin of this space is the center or base of the mesh object</li>
-</ul>
-</li>
-<li><p><strong>World space</strong></p>
-<ul>
-<li>The shared space in which all objects of the world (including the camera) are located</li>
-<li>Origin and axes are fixed relative to the world</li>
-</ul>
-</li>
-<li><p><strong>View space</strong></p>
-<ul>
-<li>The world space, but transformed (rotated/translated) into the view of the camera</li>
-</ul>
-</li>
-<li><p><strong>Clip space</strong></p>
-<ul>
-<li>Used by <code>gl_Position</code>. </li>
-<li>Always covers entire canvas from bottom-left (-1, -1) to top-right (1, 1), and depth also from -1 to 1.</li>
-<li>The fourth coordinate is used for perspective division, after assignment to <code>gl_Position</code></li>
-</ul>
-</li>
-<li><p><strong>Fragment space</strong></p>
-<ul>
-<li>The final location of a fragment in the canvas (or other render target), typically measured in pixels</li>
-</ul>
-</li>
-</ul>
-<p>Beside this workflow, there are other spaces that are used in OpenGL:</p>
-<ul>
-<li><strong>Texture space</strong><ul>
-<li>Texture coordinates usually cover the source data by ranging from (0, 0) to (1, 1)</li>
-<li>Also known as &quot;UV&quot; coordinates</li>
-</ul>
-</li>
-</ul>
-<pre><code>    matrix_uniform = model_in_world_matrix * camer<span class="hljs-built_in">a_view</span>_matrix * camer<span class="hljs-built_in">a_projection</span>_matrix
-</code></pre><h3 id="post-processing">Post-processing</h3>
-<p>Also-known as multi-pass rendering. Rather than rendering directly to the screen, render to an off-screen texture, then render that texture again through another shader to process it further. Usually the vertex shader is just a pass-through drawing a single big rectangle, and all the work is in the fragment shader (screen-space effects).    </p>
-<h3 id="differences-with-opengl">Differences with OpenGL</h3>
+<p>WebGL is often too close to original OpenGL, i.e. verbose, fiddly, and arcane API, including another required sub-language (GLSL).</p>
 <p>Some of the significant <a href="https://www.khronos.org/webgl/wiki/WebGL_and_OpenGL_Differences#No_3D_Texture_support">differences with OpenGL</a>:</p>
 <ul>
 <li>Textures with non-power-of-two (NPOT) dimensions have limited support</li>
@@ -308,80 +175,164 @@
 <p>Don&#39;t attach render buffers while rendering -- just set up however many framebuffers you need before starting and swap them, rather than rebuilding a renderbuffer.</p>
 <p>Don&#39;t use setInterval(), use requestAnimationFrame() (so it pauses when not visible)</p>
 <p>The render resolution doesn&#39;t have to be the same as the canvas resolution. Large resolutions are expensive (especially for fragment shader operations), so it can be cheaper to render at a lower resolution and stretch up (though it will be blurrier). </p>
-<h2 id="three-js">Three.js</h2>
-<p>Most people are using the <a href="http://threejs.org">THREE.js</a> wrapper, because raw WebGL involves a lot of repetitive fiddly work.</p>
-<p><a href="http://threejs.org/docs/index.html#Manual/Introduction/Creating_a_scene">Tutorial</a> </p>
-<p>Basic sample:</p>
-<pre><code class="lang-html">    &lt;html&gt;
-    &lt;head&gt;
-    &lt;title&gt;Three.js app&lt;/title&gt;
-    &lt;style&gt;&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"css"</span>&gt;
-        body &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-rules"</span>&gt;{ &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-rule"</span>&gt;margin: <span class="hljs-number">0</span>; &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-rule"</span>&gt;}
-        canvas &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-rules"</span>&gt;{ &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-rule"</span>&gt;width: <span class="hljs-number">100</span>%; &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-rule"</span>&gt;height: <span class="hljs-number">100</span>% }
-    &lt;/style&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-    &lt;!-- or &lt;script src=<span class="hljs-string">"https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js"</span>&gt;&lt;/script&gt; --&gt;
-    &lt;script src=<span class="hljs-string">"three.min.js"</span>&gt;&lt;/script&gt;
-    &lt;script&gt;
+<hr>
+<h2 id="-three-js-http-threejs-org-"><a href="http://threejs.org/">Three.js</a></h2>
+<p>Since WebGL is so fiddly and arcane, most people are using the <a href="http://threejs.org">THREE.js</a> wrapper. It&#39;s a lot less code!</p>
+<p><a href="[https://stemkoski.github.io/Three.js/](https://stemkoski.github.io/Three.js/">See many examples</a>)</p>
+<p><a href="http://www.threejsgames.com/extensions">Also many extensions</a></p>
+<blockquote>
+<p>But watch out: an annoying thing about three.js is that, despite being very widely used, it is still officially in alpha and there have been many API changes -- there&#39;s a good chance that code you find on the web won&#39;t work with newer versions of the library.</p>
+</blockquote>
+<p>Here&#39;s a <a href="http://codepen.io/anon/pen/NqERxo?editors=001">basic sample</a>:</p>
+<pre><code class="lang-javascript">    <span class="hljs-keyword">var</span> scene = <span class="hljs-keyword">new</span> THREE.Scene();
+    <span class="hljs-keyword">var</span> camera = <span class="hljs-keyword">new</span> THREE.PerspectiveCamera(<span class="hljs-number">75</span>, <span class="hljs-built_in">window</span>.innerWidth / <span class="hljs-built_in">window</span>.innerHeight, <span class="hljs-number">0.1</span>, <span class="hljs-number">1000</span>);
 
-    <span class="hljs-comment">// create an HTML canvas via a THREE.js renderer:</span>
-    <span class="hljs-keyword">var</span> canvas_width = &lt;span window.innerWidth;
-    <span class="hljs-keyword">var</span> canvas_height = &lt;span window.innerHeight;
     <span class="hljs-keyword">var</span> renderer = <span class="hljs-keyword">new</span> THREE.WebGLRenderer();
-    renderer.setSize(canvas_width, canvas_height);
-    &lt;span document.body.appendChild(renderer.domElement);
+    renderer.setSize(<span class="hljs-built_in">window</span>.innerWidth, <span class="hljs-built_in">window</span>.innerHeight);
+    <span class="hljs-built_in">document</span>.body.appendChild(renderer.domElement);
 
-    <span class="hljs-comment">// create a camera:</span>
-    <span class="hljs-keyword">var</span> near = <span class="hljs-number">0.1</span>, far = <span class="hljs-number">1000</span>;
-    <span class="hljs-keyword">var</span> aspect = canvas_width/canvas_height;
-    <span class="hljs-keyword">var</span> field_of_view_Y = <span class="hljs-number">75</span>;
-    <span class="hljs-keyword">var</span> camera = <span class="hljs-keyword">new</span> THREE.PerspectiveCamera(field_of_view_Y, aspect, near, far);
+    <span class="hljs-keyword">var</span> geometry = <span class="hljs-keyword">new</span> THREE.BoxGeometry(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">var</span> material = <span class="hljs-keyword">new</span> THREE.MeshBasicMaterial({
+      color: <span class="hljs-number">0x00ff00</span>
+    });
+    <span class="hljs-keyword">var</span> cube = <span class="hljs-keyword">new</span> THREE.Mesh(geometry, material);
+    scene.add(cube);
+
     camera.position.z = <span class="hljs-number">5</span>;
 
-    <span class="hljs-comment">// create a scene to hold objects:</span>
-    <span class="hljs-keyword">var</span> scene = <span class="hljs-keyword">new</span> THREE.Scene();
+    <span class="hljs-keyword">var</span> render = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+      requestAnimationFrame(render);
 
-    <span class="hljs-comment">// create a box:</span>
-    <span class="hljs-keyword">var</span> geometry = <span class="hljs-keyword">new</span> THREE.BoxGeometry( <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span> );
-    <span class="hljs-keyword">var</span> material = <span class="hljs-keyword">new</span> THREE.MeshBasicMaterial( { color: <span class="hljs-number">0x00ff00</span> } );
-    <span class="hljs-keyword">var</span> cube = <span class="hljs-keyword">new</span> THREE.Mesh( geometry, material );
-    scene.add( cube );
+      cube.rotation.x += <span class="hljs-number">0.1</span>;
+      cube.rotation.y += <span class="hljs-number">0.1</span>;
 
-    <span class="hljs-comment">// simulation update:</span>
-    <span class="hljs-function">function <span class="hljs-title">update</span><span class="hljs-params">()</span> </span>{
-        cube.rotation.x += <span class="hljs-number">0.1</span>;
-        cube.rotation.y += <span class="hljs-number">0.1</span>;
-    }
+      renderer.render(scene, camera);
+    };
 
-    <span class="hljs-comment">// render loop:</span>
-    <span class="hljs-function">function <span class="hljs-title">render</span><span class="hljs-params">()</span> </span>{
-        requestAnimationFrame(render);
-        update();
-        renderer.render(scene, camera);
-    }
     render();
-
-    &lt;/script&gt;
-    &lt;/body&gt;
 </code></pre>
-<p>An object&#39;s matrix stores the object&#39;s transformation relative to the object&#39;s parent (for top-level objects, the parent is the world).</p>
-<p>Updating object transformation matrix, using high level position/scale/quaternion properties to update the matrix:</p>
-<pre><code>    <span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">position</span> =</span> start_position;
-    <span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">quaternion</span> =</span> quaternion;
-    <span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">updateMatrix</span>(</span>);
-</code></pre><p>Alternatively operate on the matrix directly:</p>
-<pre><code>    <span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">matrixAutoUpdate</span> =</span> &lt;span <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"hljs-literal"</span>&gt;<span class="hljs-literal">false</span>;
-<span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">matrix</span>.<span class="hljs-title">setRotationFromQuaternion</span>(</span>quaternion);
-    <span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">matrix</span>.<span class="hljs-title">setPosition</span>(</span>start_position);
-</code></pre><p>If the object&#39;s parent is not the world, the world position can be requested: </p>
-<pre><code>    <span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">updateMatrixWorld</span>(</span>);
-    <span class="hljs-keyword">return</span> <span class="hljs-class"><span class="hljs-keyword">object</span>.<span class="hljs-title">matrixWorld</span>;</span>
-</code></pre><p>Quaternions are used for rotations, because they avoid <em>gimbal lock</em>, but you can specify with Euler Angles (object.setRotationFromEuler()) if gimbal lock will not be a problem.</p>
-<h3 id="extensions">Extensions</h3>
-<p><a href="http://www.threejsgames.com/extensions">THREEx</a></p>
-<h3 id="examples">Examples</h3>
-<p><a href="https://stemkoski.github.io/Three.js/">https://stemkoski.github.io/Three.js/</a></p>
+<hr>
+<p>The high-level view: a renderer needs a scene and a camera to paint a canvas, at up to 60 frames per second, where a scene is made of meshes that combine geometry and materials.</p>
+<blockquote>
+<p>Note the use of <code>requestAnimationFrame()</code> rather than <code>SetInterval</code> to do most of the work -- including modifications to the data set that drive scene changes. This makes sure the animation is not using resources when not being viewed. </p>
+</blockquote>
+<h3 id="camera">Camera</h3>
+<p>The camera handles the perspective, including depth cues of foreshortening (unless an orthographic camera is used). An orthographic camera may be more appropriate to data visualization, as it preserves the meaning of screen-space distance regardless of depth. Conversely, a perspective camera may be preferable for stereoscopic and immersive visualizations, or any visualization intended to be &#39;navigable&#39;, where perspective grants focus and context. A scene may be better understood by utilizing multiple cameras, whether side-by-side or picture-in-picture.</p>
+<p>Typically we want some kind of navigation control (world-in-hand or flying/walking) to move and orient the camera. For now we&#39;ll use the OrbitControls example supplied by Three.js, which is a kind of world-in-hand navigation.</p>
+<p>A scene is a a hierarchical tree of nodes, the leaves of which are &quot;meshes&quot;. A mesh is a geometry plus a material. We&#39;ll inject D3 into the process of managing the scene of meshes, via some <a href="http://codepen.io/anon/pen/BNGaeP?editors=011">glue code</a>. </p>
+<p>Geometry: primitive cubes, spheres, planes etc., geometry loaded from 3D model assets, geometry extruded from text, arbitrary geometry from data/algorithms, etc. Geometry is basically an array of 3D vertex positions with other attributes (normals, texture coordinates, etc.)  These are pushed through a shader program (written in GLSL) to define how the intermediate surfaces are painted. With Three.js we don&#39;t have to think about shader programs much, we can just use the built-in <em>materials</em>, where MeshBasicMaterial, MeshLambertMaterial, MeshPhongMaterial are the most common cases.</p>
+<p>Most materials require that we add some lights to our scene. For 3D info viz top left/top right lights are the most appropriate. Lights might also need to track the camera.</p>
+<hr>
+<h2 id="d3-in-3d">D3 in 3D</h2>
+<p>With <em>D3</em> being one of the most acclaimed data visualization libraries for the web, and <em>three.js</em> being probably the widest-used programming interface to WebGL, it seems natural to combine them for 3D visualizations. </p>
+<p>It&#39;s not so easy however. D3 operates on the HTML DOM (Document Object Model) itself, either by manipluating regular DOM elements such as <code>&lt;div&gt;</code>, or by manipulating graphical DOM elements created using SVG (Scalable Vector Graphics). But WebGL is entirely contained within a single <code>&lt;canvas&gt;</code> tag, and its 3D objects are not part of the DOM. </p>
+<p><strong>Glue:</strong> Fortunately, <a href="http://grrrwaaa.github.io/courses/webviz/d33d.js">with a bit of glue code</a>, we can extend Three.js&#39;s <code>Object3D</code> prototype to &quot;look like&quot; a DOM node. </p>
+<blockquote>
+<p>The glue code provides <code>Object3D</code> with all the method names D3 expects to find in DOM nodes, but implements them in terms of changes to a 3D WebGL scene. Since <code>Object3D</code> is the base class of most of three.js&#39;s 3D objects, this means we can use D3&#39;s great data handling, data binding, and transitions work with 3D scenes.</p>
+</blockquote>
+<p>Here are some examples that show the D3 and 3D versions side by side:</p>
+<ul>
+<li><a href="http://codepen.io/anon/pen/rVqqOp?editors=001">A simple bar chart</a></li>
+<li><a href="http://codepen.io/anon/pen/dommMg?editors=001">A variation of D3&#39;s General Update Pattern example</a></li>
+</ul>
+<hr>
+<h2 id="-currency-scatterplot-in-3d-http-codepen-io-anon-pen-pjqeez-editors-001-"><a href="http://codepen.io/anon/pen/pJQEEz?editors=001">Currency scatterplot in 3D</a></h2>
+<p>Our scene will look like this:</p>
+<ul>
+<li>scene<ul>
+<li>lights</li>
+<li>chart3d<ul>
+<li>grid lines</li>
+<li>box nodes (the data entities)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>We&#39;ll generate grid lines as another kind of mesh, using D3&#39;s <code>scale</code> mapping generators to simplify and automate the process, and to reposition the chart into the center of the world, etc.</p>
+<p>Rather than adding text labels into the 3D world, we&#39;ll demonstrate a head-up-display using SVG overlaid on top of the WebGL canvas. We create an array of labels and let D3 render them, after Three.js projects the 3D world position into a 2D pixel position.</p>
+<p>We also show how to go the other way, to take a mouse pixel coordinate and select the 3D object underneath it, to add another text overlay.</p>
+<p>We demonstrate the classic D3 enter/update/exit cycle for dynamically showing subsets of points, and animating transitions. </p>
+<p>We also show a few other niceties along the way.</p>
+<h3 id="using-the-glue">Using the glue</h3>
+<p>Whereas with SVG we have a set of predefined shape nodes, such as <code>rect</code>, <code>circle</code>, etc., for our 3D graphs we are going to need to define new node type constructors. To do this, we wrap our our object creation code in a function that takes data (and data-index) parameters. Here&#39;s an example using a red box of unit size, whose color depends on a data element:</p>
+<pre><code class="lang-javascript">    function makeBox(<span class="hljs-typedef"><span class="hljs-keyword">data</span>, index) <span class="hljs-container">{
+      <span class="hljs-title">return</span> <span class="hljs-title">new</span> <span class="hljs-type">THREE</span>.<span class="hljs-type">Mesh</span>(
+        <span class="hljs-title">new</span> <span class="hljs-type">THREE</span>.<span class="hljs-type">BoxGeometry</span>(0.5, 0.5, 0.5),    // 0.5 "<span class="hljs-title">radius</span>"
+        <span class="hljs-title">new</span> <span class="hljs-type">THREE</span>.<span class="hljs-type">MeshLambertMaterial</span>({ <span class="hljs-title">color</span>: <span class="hljs-title">data</span>.<span class="hljs-title">color</span> }</span>);</span>
+      );
+    }
+</code></pre>
+<p>Creating new geometry and materials for each node is wasteful if they are all the same. For example, if all nodes are cubes, we can define the geometry once and re-use it. Similarly, we can define a default material, and clone it per instance. (If we didn&#39;t clone it, then changing the colour of one box would change the colours of all boxes. The same would hold true for geometry, if this was data-driven.) So our constructor is more likely to look like this:</p>
+<pre><code class="lang-javascript">    <span class="hljs-keyword">var</span> box_geometry = <span class="hljs-keyword">new</span> THREE.BoxGeometry(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>);
+    <span class="hljs-keyword">var</span> default_material = <span class="hljs-keyword">new</span> THREE.MeshLambertMaterial();
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">makeBox</span><span class="hljs-params">(data, index)</span> </span>{
+        <span class="hljs-keyword">var</span> material = default_material.<span class="hljs-keyword">clone</span>();
+        material.color.setHex(data.color);
+         <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> THREE.Mesh(box_geometry, material);
+    }
+</code></pre>
+<p>We may want to group data-driven objects under a container node, so that they can be transformed en-masse, rather than adding them directly to the <code>scene</code> root:</p>
+<pre><code class="lang-javascript">    // <span class="hljs-operator"><span class="hljs-keyword">create</span> container node <span class="hljs-keyword">for</span> our <span class="hljs-keyword">data</span>-driven objects:
+    <span class="hljs-keyword">var</span> chart3d = new THREE.Object3D();</span>
+    scene.add(chart3d);
+</code></pre>
+<h3 id="filling-the-chart">Filling the chart</h3>
+<p>Rather than adding objects to <code>chart3d</code> directly with <code>chart3d.add(myobject)</code>, we&#39;re going to use D3&#39;s update pattern to do this automatically.</p>
+<p>Now we can use D3&#39;s typical commands to add 3D boxes to our chart, with only a few small variations:</p>
+<ul>
+<li><code>select(chart3d)</code> instead of <code>select(svgelement)</code></li>
+<li><code>selectAll(&quot;THREE.Mesh&quot;)</code> instead of <code>select(&quot;rect&quot;)</code> etc. </li>
+<li>after binding data, append using our constructor function defined above instead of appending <code>&quot;rect&quot;</code> etc. </li>
+<li>the set of attributes we can set are different for 3D objects</li>
+</ul>
+<pre><code class="lang-javascript">    d3.select(chart3d)                            // instead <span class="hljs-keyword">of</span> svg    
+      .selectAll(<span class="hljs-string">"THREE.Mesh"</span>)                    // instead <span class="hljs-keyword">of</span> <span class="hljs-string">"rect"</span> etc.
+      .<span class="hljs-typedef"><span class="hljs-keyword">data</span><span class="hljs-container">(<span class="hljs-title">data</span>)</span>                                </span>
+      .enter()
+          .append(makeBox)                        // instead <span class="hljs-keyword">of</span> <span class="hljs-string">"rect"</span> etc.
+          .attr(<span class="hljs-string">"position.x"</span>, function(d, i) {    // instead <span class="hljs-keyword">of</span> <span class="hljs-string">"x"</span>
+              return d.x;
+          })
+</code></pre>
+<h2 id="setting-and-animating-attributes-calling-methods">Setting and animating attributes, calling methods</h2>
+<p>The attributes we can set on a data-driven element depend on the type of the element. In SVG rendering, &quot;rect&quot; gives us &quot;x&quot;, &quot;y&quot;, &quot;width&quot;, &quot;height&quot;, &quot;fill&quot;, &quot;stroke&quot;, etc.  For <code>&quot;THREE.Mesh&quot;</code> objects we have:</p>
+<ul>
+<li>&quot;position.x&quot;, &quot;position.y&quot;, &quot;position.z&quot;</li>
+<li>&quot;rotation.x&quot;, &quot;rotation.y&quot;, &quot;rotation.z&quot; (Euler angles; can also set &quot;quaternion.x&quot; etc.)</li>
+<li>&quot;scale.x&quot;, &quot;scale.y&quot;, &quot;scale.z&quot;</li>
+<li>&quot;visible&quot; (true/false)</li>
+</ul>
+<p>Material properties can also be changed -- but be sure that the constructor creates a unique or cloned material per instance:</p>
+<ul>
+<li>&quot;material.color.r&quot;, &quot;material.color.g&quot;, &quot;material.color.b&quot; (all 0-1 range)</li>
+<li>&quot;material.transparent&quot; (true/false)</li>
+<li>&quot;material.opacity&quot; (0-1, only if material.transparent == true)</li>
+<li><a href="http://threejs.org/docs/#Reference/Materials/Material">see also</a></li>
+</ul>
+<p>The great thing about setting selection attributes is that they can be animated by D3&#39;s transitions. </p>
+<p>To call methods of Object3D, use the <code>.each()</code> method of the selection. Unlike attribute modification, this won&#39;t interpolate during transitions.</p>
+<pre><code class="lang-javascript">    .<span class="hljs-keyword">each</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d, i)</span> </span>{
+        <span class="hljs-comment">// 'this' refers to the THREE.Mesh    </span>
+        <span class="hljs-keyword">this</span>.translateZ(-<span class="hljs-number">1</span>);
+    })
+</code></pre>
+<h2 id="grids-labels">Grids &amp; labels</h2>
+<p>For grid lines we can generate line based geometry by directly specifying the vertices. We&#39;ll use Three&#39;s <code>LineBasicMaterial</code> to do this, and D3&#39;s scale objects to make the markings intelligently spaced. </p>
+<p>There are several ways to incorporate text into WebGL, depending on how 3D we really want them.</p>
+<ul>
+<li>As 3D geometry, where fonts are extruded into 3D shapes. This is not usually relevant to data visualizations.</li>
+<li>As text &#39;sprites&#39; actually placed in the 3D world: plane geometries on which the text is textured, which always face the camera, and which are embedded in the 3D scene. The text itself can be rendered by using an off-screen HTML5 Canvas2D, and brought into THREE.js with a bit of extra code. Should be faster than option 1 because of the simpler geometry; and more readable.</li>
+<li>As a 2D text overlaid above the 3D scene (like a HUD: head-up display). This is relatively easily done via HTML, SVG, or Canvas2D. HTML/SVG means we can also use D3 to do this. However there is no occlusion or distance-scaling here. It requires a bit of code to extract the 2D pixel location of a 3D object.</li>
+</ul>
+<p>For our scatterplot demo we chose the 3rd option.</p>
+<h3 id="interaction">Interaction</h3>
+<p>Mouse interaction is trickier in 3D. A 3D scene is not a simple pixel space like in D3. We need to push the mouse coordinates through the inverse transform of the renderer, by projecting it as a ray from the camera, to see what it hits.</p>
+<p>THREE.js makes this fairly easy with a RayCaster object.</p>
+<p>For our scatterplot demo, we show this with a simple text overlay when the mouse hovers over a data point.</p>
+<p>We also show some variations of animating the data (kinetic cues), shaking the camera (toward structure-from-motion), and animating the dataset (extending D3&#39;s update/enter/exit cycle).</p>
+<p>Thanks!</p>
 
 	</div>
 	<footer>
