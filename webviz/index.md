@@ -33,6 +33,13 @@ D3.js
 
 D3 live example: currency scatterplot
 
+
+    <form action="http://codepen.io/pen/define" method="POST" target="_blank">
+      <input id="data-input" type="hidden" name="data" value="{&amp;quot;title&amp;quot;:&amp;quot;Canvas2015&amp;quot;,&amp;quot;description&amp;quot;:&amp;quot;D3 in 3D playground&amp;quot;,&amp;quot;css_external&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js_external&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;html&amp;quot;:&amp;quot;&lt;!-- bring in our D3/Three glue: --&gt;\n&lt;script src=\&amp;quot;http://grrrwaaa.github.io/courses/webviz/d33d.js\&amp;quot;&gt;&lt;/script&gt;\n\n&lt;!-- load a sample data source: --&gt;\n&lt;script src=\&amp;quot;http://grrrwaaa.github.io/courses/webviz/currencies.js\&amp;quot;&gt;&lt;/script&gt;\n\n\n&lt;!-- bring in Three.js and some of its extension libraries: --&gt;\n&lt;script src=\&amp;quot;http://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js\&amp;quot;&gt;&lt;/script&gt;\n&lt;script src=\&amp;quot;http://threejs.org/examples/js/controls/OrbitControls.js\&amp;quot;&gt;&lt;/script&gt;\n&lt;script src=\&amp;quot;http://rawgit.com/mrdoob/stats.js/master/build/stats.min.js\&amp;quot;&gt;&lt;/script&gt;\n\n&lt;!-- bring in D3.js and some of its extension libraries: --&gt;\n&lt;script src=\&amp;quot;http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js\&amp;quot;&gt;&lt;/script&gt;\n&amp;quot;,&amp;quot;css&amp;quot;:&amp;quot;body {\n  margin: 0;\n}\n\ncanvas {\n  width: 100%;\n  height: 100%;\n}\n\nsvg {\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n&amp;quot;,&amp;quot;js&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;html_pre_processor&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_pre_processor&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_starter&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_prefix&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js_library&amp;quot;:&amp;quot;&amp;quot;}">
+      <input type="image" src="http://s.cdpn.io/3/cp-arrow-right.svg" width="40" height="40" value="Create new codepen" class="codepen-mover-button"> Yo, Try it
+    </form>
+  
+
 - We'll use some data I prepared earlier, drawn from an open data resource (rather than hammering the servers every time we edit!)
 - We'll use [Codepen.io](http://codepen.io) to build our demo. This is a live browser-based HTML/CSS/JS editor, which means we can work without needing to install anything.
 - D3.js, currencies.json
