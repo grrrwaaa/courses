@@ -1,18 +1,195 @@
 <!DOCTYPE html>
 <html>
   <head>
-	<title>Bridging data viz and 3D web</title>
+	<title>BRIDGING WEB-BASED VISUALIZATION AND 3D</title>
 	<link rel="stylesheet" href="style.css" type="text/css" />
 	<link rel="stylesheet" href="github.css" type="text/css" />
   </head>
   <body>
   	<nav>
 	<ul>
-	<li><a href="index.html" alt="index">index</a></li>
+	<li><a href="d33d.html" alt="d33d">d33d</a></li>
+<li><a href="index.html" alt="index">index</a></li>
 	</ul></nav>	
 	<div id="main">
-	<h1 id="bridging-data-viz-and-3d-web">Bridging data viz and 3D web</h1>
-<p>Quick demo:</p>
+	<h1 id="bridging-web-based-visualization-and-3d">BRIDGING WEB-BASED VISUALIZATION AND 3D</h1>
+<p><a href="http://www.canvas2015.ca">http://www.canvas2015.ca</a></p>
+<p>Web-based technologies</p>
+<ul>
+<li>Super accessible, nothing to install</li>
+<li>Modern browsers support rich graphics, audio, high performance</li>
+<li>HTML, CSS, JS:<ul>
+<li>HTML the original markup language of the web. Static, tree-like document structure (DOM)<ul>
+<li>now also includes vector graphics (SVG, Canvas), video, etc.</li>
+</ul>
+</li>
+<li>CSS defines &#39;styles&#39; we can apply to HTML, richer set of layout &amp; appearance attributes</li>
+<li>JavaScript is the dynamic part<ul>
+<li>A full-fledged high-level programming language, with incredibly fast implementations</li>
+<li>Masses of JS libraries out there.</li>
+<li>Can also write servers using JS (via Node.js)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>An exciting recent development is WebGL, a mostly-compatible port of the standardized, GPU-accelerated 3D graphics library OpenGL to JavaScript/HTML5 canvas. An even more recent extension is WebVR, meaning that browser-based visualizations will be a URL away for owners of Oculus Rift etc. Immersive live information visualization may suddenly be within reach of millions. Untrod land... an interesting research area!</p>
+<p>D3.js</p>
+<ul>
+<li>very widely used, mature data viz library.</li>
+<li>core concept, let data drive the DOM. <ul>
+<li>Can be basic HTML, but usually SVG graphics. Lines, rects, circles, text, beziers, etc. 2D</li>
+</ul>
+</li>
+<li>utilities for reading data from external sources (e.g. open data APIs, CSV/JSON files)</li>
+<li>generate a selection from the data, and set its attributes to viz</li>
+<li>enter/update/exit for dynamic data selections</li>
+<li>transitions for animated changes</li>
+<li>utilities for array analysis, scaling and quantizing, etc.</li>
+<li>force-driven graphs and many other classic viz examples</li>
+<li>2D</li>
+</ul>
+<p>D3 live example: currency scatterplot</p>
+<ul>
+<li>We&#39;ll use some data I prepared earlier, drawn from an open data resource (rather than hammering the servers every time we edit!)</li>
+<li>We&#39;ll use <a href="http://codepen.io">Codepen.io</a> to build our demo. This is a live browser-based HTML/CSS/JS editor, which means we can work without needing to install anything.</li>
+<li>D3.js, currencies.json</li>
+<li></li>
+</ul>
+<p><a href="http://codepen.io/anon/pen/YXRXZb?editors=001">http://codepen.io/anon/pen/YXRXZb?editors=001</a></p>
+<pre><code class="lang-javascript">    <span class="hljs-keyword">var</span> canvas_width = <span class="hljs-built_in">window</span>.innerWidth;
+    <span class="hljs-keyword">var</span> canvas_height = <span class="hljs-built_in">window</span>.innerHeight;
+
+    <span class="hljs-comment">// create an SVG canvas:</span>
+    svg = d3.select(<span class="hljs-string">'body'</span>)
+            .append(<span class="hljs-string">'svg'</span>)
+            .attr(<span class="hljs-string">'width'</span>, <span class="hljs-built_in">window</span>.innerWidth)
+            .attr(<span class="hljs-string">'height'</span>, <span class="hljs-built_in">window</span>.innerHeight);
+
+    <span class="hljs-comment">// get the basic data resource:</span>
+    <span class="hljs-keyword">var</span> data = currencies.history;
+
+    <span class="hljs-comment">// create linear mappings from the data domain (min, max) to the canvas size:</span>
+    <span class="hljs-keyword">var</span> xScale = d3.scale.linear()
+            .domain([d3.min(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+                    <span class="hljs-keyword">return</span> d.rates.EUR;
+            }), d3.max(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+                    <span class="hljs-keyword">return</span> d.rates.EUR;
+            })])
+            .range([<span class="hljs-number">0</span>, canvas_width]);
+
+    <span class="hljs-keyword">var</span> yScale = d3.scale.linear()
+            .domain([d3.min(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+                    <span class="hljs-keyword">return</span> d.rates.GBP;
+            }), d3.max(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+                    <span class="hljs-keyword">return</span> d.rates.GBP;
+            })])
+            .range([canvas_height, <span class="hljs-number">0</span>]);    <span class="hljs-comment">// note Y range is upside down</span>
+
+    <span class="hljs-comment">// another linear mapping for circle radius:</span>
+    <span class="hljs-keyword">var</span> rScale = d3.scale.linear()
+            .domain([d3.min(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+                    <span class="hljs-keyword">return</span> d.rates.CAD;
+            }), d3.max(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+                    <span class="hljs-keyword">return</span> d.rates.CAD;
+            })])
+            .range([<span class="hljs-number">1</span>, <span class="hljs-number">8</span>]);
+
+    <span class="hljs-comment">// plot circles for each entity:</span>
+    svg.selectAll(<span class="hljs-string">"circle"</span>)
+            .data(data)
+            .enter()
+            .append(<span class="hljs-string">"circle"</span>)
+            .attr(<span class="hljs-string">"cx"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+                    <span class="hljs-keyword">return</span> xScale(d.rates.EUR);
+            })
+            .attr(<span class="hljs-string">"cy"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+                    <span class="hljs-keyword">return</span> yScale(d.rates.GBP);
+            })
+            .attr(<span class="hljs-string">"r"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+                    <span class="hljs-keyword">return</span> rScale(d.rates.CAD);
+            })
+            .attr(<span class="hljs-string">"fill"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d, i)</span> </span>{
+                    h = <span class="hljs-number">360</span> * i / data.length;
+                    <span class="hljs-keyword">return</span> d3.hsl(h, <span class="hljs-number">0.85</span>, <span class="hljs-number">0.65</span>);
+            })
+            .attr(<span class="hljs-string">"stroke"</span>, <span class="hljs-string">"black"</span>);
+</code></pre>
+<p>WebGL</p>
+<ul>
+<li>geometry (buffers), images (textures), vertex transformation and pixel-coloring programs (shaders). Journey of a vertex from object space to screen space.</li>
+<li>close to original OpenGL, i.e. verbose, fiddly, and arcane API, including another required sub-language (GLSL).</li>
+</ul>
+<p>Three.js</p>
+<p>Most people are using the <a href="http://threejs.org">THREE.js</a> wrapper, because raw WebGL involves a lot of repetitive fiddly work. </p>
+<p><a href="http://threejs.org/docs/index.html#Manual/Introduction/Creating_a_scene">Three.js tutorial</a></p>
+<pre><code class="lang-html">    <span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>My first Three.js app<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">style</span>&gt;</span><span class="css">
+                <span class="hljs-tag">body</span> <span class="hljs-rules">{ <span class="hljs-rule"><span class="hljs-attribute">margin</span>:<span class="hljs-value"> <span class="hljs-number">0</span></span></span>; <span class="hljs-rule">}</span></span>
+                <span class="hljs-tag">canvas</span> <span class="hljs-rules">{ <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"> <span class="hljs-number">100%</span></span></span>; <span class="hljs-rule"><span class="hljs-attribute">height</span>:<span class="hljs-value"> <span class="hljs-number">100%</span> </span></span></span>}
+            </span><span class="hljs-tag">&lt;/<span class="hljs-title">style</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"js/three.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">script</span>&gt;</span><span class="javascript">
+                <span class="hljs-keyword">var</span> scene = <span class="hljs-keyword">new</span> THREE.Scene();
+                <span class="hljs-keyword">var</span> camera = <span class="hljs-keyword">new</span> THREE.PerspectiveCamera( <span class="hljs-number">75</span>, <span class="hljs-built_in">window</span>.innerWidth/<span class="hljs-built_in">window</span>.innerHeight, <span class="hljs-number">0.1</span>, <span class="hljs-number">1000</span> );
+
+                <span class="hljs-keyword">var</span> renderer = <span class="hljs-keyword">new</span> THREE.WebGLRenderer();
+                renderer.setSize( <span class="hljs-built_in">window</span>.innerWidth, <span class="hljs-built_in">window</span>.innerHeight );
+                <span class="hljs-built_in">document</span>.body.appendChild( renderer.domElement );
+
+                <span class="hljs-keyword">var</span> geometry = <span class="hljs-keyword">new</span> THREE.BoxGeometry( <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span> );
+                <span class="hljs-keyword">var</span> material = <span class="hljs-keyword">new</span> THREE.MeshBasicMaterial( { color: <span class="hljs-number">0x00ff00</span> } );
+                <span class="hljs-keyword">var</span> cube = <span class="hljs-keyword">new</span> THREE.Mesh( geometry, material );
+                scene.add( cube );
+
+                camera.position.z = <span class="hljs-number">5</span>;
+
+                <span class="hljs-keyword">var</span> render = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+                    requestAnimationFrame( render );
+
+                    cube.rotation.x += <span class="hljs-number">0.1</span>;
+                    cube.rotation.y += <span class="hljs-number">0.1</span>;
+
+                    renderer.render(scene, camera);
+                };
+
+                render();
+            </span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
+</code></pre>
+<blockquote>
+<p>Watch out: an annoying thing about three.js is that, despite being very widely used, it is still officially in alpha and there have been many API changes -- there&#39;s a good chance that code you find on the web won&#39;t work with newer versions of the library.</p>
+</blockquote>
+<p>A renderer needs a scene and a camera to paint a canvas, at up to 60 frames per second.</p>
+<p>The camera handles the perspective, including depth cues of foreshortening (unless an orthographic camera is used). Typically we want some kind of navigation control (world-in-hand or flying/walking) to move and orient the camera. For now we&#39;ll use the OrbitControls example supplied by Three.js, which is a kind of world-in-hand navigation.</p>
+<p>A scene is a a hierarchical tree of nodes, the leaves of which are &quot;meshes&quot;. A mesh is a geometry plus a material. We&#39;ll inject D3 into the process of managing the scene of meshes, via some <a href="http://codepen.io/anon/pen/BNGaeP?editors=011">glue code</a>. </p>
+<p>Our scene will look like this:</p>
+<ul>
+<li>scene<ul>
+<li>lights</li>
+<li>chart3d<ul>
+<li>grid lines</li>
+<li>box nodes (the data entities)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Geometry: primitive cubes, spheres, planes etc., geometry loaded from 3D model assets, geometry extruded from text, arbitrary geometry from data/algorithms, etc. Geometry is basically an array of 3D vertex positions with other attributes (normals, texture coordinates, etc.)  These are pushed through a shader program (written in GLSL) to define how the intermediate surfaces are painted. With Three.js we don&#39;t have to think about shader programs much, we can just use the built-in <em>materials</em>, where MeshBasicMaterial, MeshLambertMaterial, MeshPhongMaterial are the most common cases.</p>
+<p>Most materials require that we add some lights to our scene. For 3D info viz top left/top right lights are the most appropriate. Lights might also need to track the camera.</p>
+<p>We&#39;ll generate grid lines as another kind of mesh, using D3&#39;s <code>scale</code> mapping generators to simplify and automate the process, and to reposition the chart into the center of the world, etc.</p>
+<p>Rather than adding text labels into the 3D world, we&#39;ll demonstrate a head-up-display using SVG overlaid on top of the WebGL canvas. We create an array of labels and let D3 render them, after Three.js projects the 3D world position into a 2D pixel position.</p>
+<p>We also show how to go the other way, to take a mouse pixel coordinate and select the 3D object underneath it, to add another text overlay.</p>
+<p>We demonstrate the classic D3 enter/update/exit cycle for dynamically showing subsets of points, and animating transitions. </p>
+<p>We also show a few other niceties along the way.</p>
+<p><a href="http://codepen.io/anon/pen/RPqwmj?editors=001">Here&#39;s the currency scatterplot in 3D</a></p>
+<h1 id="bridging-data-viz-and-3d-web">Bridging data viz and 3D web</h1>
+<p><a href="http://codepen.io/anon/pen/MwXNWm?editors=101">Currency demo</a></p>
 <h2 id="webgl-quickstart">WebGL quickstart</h2>
 <p>Introductory tutorial video:</p>
 <iframe width="853" height="480" src="https://www.youtube.com/embed/rfQ8rKGTVlg?rel=0" frameborder="0" allowfullscreen></iframe>
@@ -201,16 +378,6 @@
 <p><a href="http://www.threejsgames.com/extensions">THREEx</a></p>
 <h3 id="examples">Examples</h3>
 <p><a href="https://stemkoski.github.io/Three.js/">https://stemkoski.github.io/Three.js/</a></p>
-<h2 id="d3-in-3d">D3 in 3D</h2>
-<p>With <em>D3</em> being one of the most acclaimed data visualization libraries for the web, and <em>three.js</em> being probably the widest-used programming interface to WebGL, it seems natural to combine them for 3D visualizations. </p>
-<p>It&#39;s not so easy however. D3 operates on the HTML DOM (Document Object Model) itself, either by manipluating regular DOM elements such as <code>&lt;div&gt;</code>, or by manipulating graphical DOM elements created using SVG (Scalable Vector Graphics). But WebGL is entirely contained within a single <code>&lt;canvas&gt;</code> tag, and its 3D objects are not part of the DOM. </p>
-<p><strong>Glue:</strong> Fortunately, <a href="http://grrrwaaa.github.io/courses/webviz/d33d.js">with a bit of glue code</a>, we can extend Three.js&#39;s <code>Object3D</code> prototype to &quot;look like&quot; a DOM node. The glue code provides <code>Object3D</code> with all the method names D3 expects to find in DOM nodes, but implements them in terms of changes to a 3D WebGL scene. Since <code>Object3D</code> is the base class of most of three.js&#39;s 3D objects, this means we can use D3&#39;s great data handling, data binding, and transitions work with 3D scenes.</p>
-<p>Here&#39;s a basic demo, based on D3&#39;s <a href="http://bl.ocks.org/mbostock/3808234">General Update Pattern</a> -- the top version is regular D3, the bottom version is the same data but rendered via Three.js:</p>
-<p><a href="http://codepen.io/anon/pen/dommMg?editors=001">D33D demo</a></p>
-<h3 id="camera">Camera</h3>
-<p>An orthographic camera may be more appropriate to data visualization, as it preserves the meaning of screen-space distance regardless of depth. </p>
-<p>Conversely, a perspective camera may be preferable for stereoscopic and immersive visualizations, or any visualization intended to be &#39;navigable&#39;, where perspective grants focus and context.</p>
-<h3 id="interaction">Interaction</h3>
 
 	</div>
 	<footer>
