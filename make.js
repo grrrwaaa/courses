@@ -165,7 +165,8 @@ function parse(fileobj, nav) {
 			// search in doc for first # tag:
 			var h1_regex = /#\s*([^#\n].*)/;
 			var captures = h1_regex.exec(data);
-			if (captures !== undefined && captures[1] !== undefined) {
+			console.log(captures);
+			if (captures != null && captures[1] != null) {
 				view.title = captures[1];
 			} else {
 				// generate name from file:

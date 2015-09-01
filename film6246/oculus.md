@@ -6,6 +6,13 @@ The Rift is an upcoming virtual reality head-mounted display, being developed by
 
 The consumer version of the product is expected to become available sometime in 2015. Oculus released two 'development kits', DK1 in late 2012 and DK2 in mid 2014, to give developers a chance to develop content in time for the Rift's release; these have also been purchased by many virtual reality enthusiasts for general usage.
 
+## New links
+
+- [First test of the consumer version](https://www.youtube.com/watch?v=asduqdRizqs)
+- [Industrial Light & Magic's xLAB](http://www.ilmxlab.com); [Intro video](https://www.youtube.com/watch?v=7T9Dv1aLMbw&feature=youtu.be); [Inside](http://www.theverge.com/2015/8/13/9131805/ilm-ilmxlab-interview-virtual-reality-star-wars-movies)
+- [Interview with Unreal CEO Tim Sweeney about AR and VR](http://venturebeat.com/2015/08/03/epics-graphics-guru-tim-sweeney-tells-us-what-perfect-augmented-reality-will-mean/view-all/)
+- [Valve advice in interaction in VR](http://www.gamasutra.com/view/news/250362/Valve_shares_advice_on_designing_great_VR_game_interactions.php)
+
 ## "Experiences"
 
 - Sightline - Mainly passive, oneiric. A very interesting way of changing scenes. Psychological. 
