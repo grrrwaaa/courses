@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Labs</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="github.css" type="text/css" />
+  </head>
+  <body>
+  	<nav>
+	<ul>
+	<li><a href="index.html" alt="DATT4950">DATT4950</a></li>
+<li><a href="labs.html" alt="Labs">Labs</a></li>
+<li><a href="themes.html" alt="Themes">Themes</a></li>
+<li><a href="cellular.html" alt="Cellular Systems">Cellular Systems</a></li>
+	</ul></nav>	
+	<div id="main">
+	<h1 id="labs">Labs</h1>
+<p>Most of the examples we will work though in the labs will use the JavaScript programming language, embedded in the web. To make this easier, I have prepared a starter-kit template, from which all our in-lab examples will be written, and which students can easily fork and extend via Codepen.io&#39;s online editor. </p>
+<p>Graphics rendering uses the HTML5 Canvas and WebGL, which is supported on most computers with recent versions of Chrome, Firefox or Safari. The starter-kit uses WebGL technology for performance, but for simplicity&#39;s sake examples will be confined to a 2D world, and coded through simplified abstractions. This world has coordinates ranging from (0,0) in the bottom-left corner to (1,1) in the top right corner -- i.e. it assumes the world to be square shaped and unit length. </p>
+<h2 id="callbacks">Callbacks</h2>
+<p>For simulation updates, implement a function called <code>update()</code>. </p>
+<!-- delta time argument -->
+
+<p>To define how the canvas renders, implement a function called <code>draw()</code>. All graphics code should go into this callback.</p>
+<!-- gl context argument -->
+
+<!-- The ```reset()``` function is used to re-initialize variables, when the "reset" button on the HTML page is pressed.
+
+For example:
+
+```javascript
+var x = 0;
+
+function reset() {
+    x = 0;
+}
+
+function draw (ctx) {
+    ctx.fillStyle = "green";
+    ctx.fillRect(x, 0.5, 0.1, 0.1);
+}
+
+function update(dt) {
+    x = x + dt*0.1;
+}
+```
+
+### Interaction
+
+Two additional callbacks exist to detect mouse and keyboard interaction respectively. 
+
+```javascript
+// event can be "down" or "up" for clicks,
+// or "drag" when moving with a mouse button pressed,
+// or "move" when moving with no button pressed,
+// event is "enter" when the mouse enters the canvas, and "exit" when the mouse goes outside it
+// button is the mouse button pressed (0 for left, 1 for right...)
+// in all the above cases, 
+// x and y are the mouse position from 0,0 (top left) to 1,1 (bottom right)
+
+function mouse(event, button, x, y) {
+    console.log(event, button, x, y);
+}
+
+// if event is "press", key is a single character string
+// if event is "down" or "up", key is a numeric code
+function key(event, key) {
+    console.log(event, key);
+}
+```
+-->
+
+<h2 id="globals">Globals</h2>
+<p><code>random()</code> can be used to generate random numbers. Without an argument it returns rational numbers between 0 and 1; with a numeric argument it returns integers in the given range (e.g. useful for picking within an array).</p>
+<p><code>wrap()</code> applies a Euclidean modulo (remainder after division) in such a way that the result is always positive and without reflections.</p>
+<pre><code class="lang-javascript"><span class="hljs-function">random</span>();         <span class="hljs-comment">// a floating-point number between 0 and 1</span>
+<span class="hljs-function">random</span>(6);        <span class="hljs-comment">// an integer between 0 and 5</span>
+<span class="hljs-function">wrap</span>(-1, 4);    <span class="hljs-comment">// returns 3 (whereas -1 % 4 would return -1)</span>
+</code></pre>
+<h2 id="field2d">field2D</h2>
+<p>The <code>field2D</code> type represents a dense grids of cells of floating point numbers (typically but not necessarily in the range of zero to one). You can create a field like this:</p>
+<pre><code class="lang-javascript">var field = <span class="hljs-keyword">new</span> field2D(<span class="hljs-variable">width</span>, <span class="hljs-variable">height</span>);
+</code></pre>
+<p>Typically we will render a field in the <code>draw()</code> callback by calling the field&#39;s draw method:</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> </span>{
+    field.draw();
+}
+</code></pre>
+<p>By default field cells will be zero, which looks black. You can get and set individual field cells this way:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> <span class="hljs-keyword">value</span> = field.<span class="hljs-keyword">get</span>(x, y);
+field.<span class="hljs-keyword">set</span>(<span class="hljs-keyword">value</span>, x, y);
+</code></pre>
+<p>Note that if x or y is out of bounds for the field, it will wrap around from the other side. So you are always guaranteed it will return or set a value. </p>
+<p>To set the value of all cells at once, omit the x and y:</p>
+<pre><code class="lang-javascript">// <span class="hljs-operator"><span class="hljs-keyword">set</span> <span class="hljs-keyword">all</span> <span class="hljs-keyword">field</span> cells <span class="hljs-keyword">to</span> <span class="hljs-number">1</span> (white):
+<span class="hljs-keyword">field</span>.<span class="hljs-keyword">set</span>(<span class="hljs-number">1</span>);</span>
+</code></pre>
+<p>A more powerful feature of <code>field2D.set()</code> is that it can take a function instead of a number. When x and y are omitted, this function is called to update each cell in the field. The function receives as arguments the x and y position of the cell, so for example, this code initializes the field with a horizontal gradient:</p>
+<pre><code class="lang-javascript">field.<span class="hljs-keyword">set</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(x, y)</span> </span>{
+    <span class="hljs-keyword">return</span> x / <span class="hljs-keyword">this</span>.width;
+});
+</code></pre>
+<p>Note that <code>field.set</code> returns the field itself, so it can be chained.`</p>
+<p>More useful methods:</p>
+<pre><code class="lang-javascript">field.clear(<span class="hljs-function">)</span>;         // set all field cells to zero, faster than<span class="hljs-function"> field.set(</span>0<span class="hljs-function">)</span>
+field.normalize(<span class="hljs-function">)</span>;     // re-scales the field into a 0..1 range
+
+field.clone(<span class="hljs-function">)</span>;     // create a duplicate copy of the field
+
+field.min(<span class="hljs-function">)</span>;    // returns the lowest cell value in the<span class="hljs-instruction"> array
+</span>field.max(<span class="hljs-function">)</span>;    // returns the highest cell value in the<span class="hljs-instruction"> array
+</span>field.sum(<span class="hljs-function">)</span>;    // adds up all cell values<span class="hljs-instruction"> and </span>returns the total
+</code></pre>
+<!--
+
+### Normalized sampling
+
+There are some methods for interpolated reading/writing/modifying fields. These methods use x and y indices in a normalized 0..1 floating-point range rather than 0..width or 0..height integer range:
+
+```javascript
+// returns interpolated value at the normalized position x,y
+field.sample(x, y);        
+```
+
+
+// set the field at position x,y to value v 
+// (the four nearest cells will be interpolated)
+// if v is a function, it is evaluated for each cell. The function arguments are cellvalue, x, y.
+field.update(v, x, y);
+
+// adds v to a field at position x, y
+// (interpolated addition to nearest four cells)
+field.splat(v, x, y);
+
+// scale a field at x,y by factor v
+// (interpolated scale over nearest four cells)
+field.scale(v, x, y);
+// if x and y are ommitted, the scale factor is applied to the whole field:
+field.scale(v);
+```
+
+The field2D type also includes a diffusion method, which can be used to smoothly distribute values over time. It requires a second (previous) copy of the field to diffuse from:
+
+```javascript
+// field_previous is another field2D of equal dimensions
+// diffusion_rate is a value between 0 and 1; a rate of 0 means no diffusion.
+// accuracy is an optional integer for the number of diffusion steps; the default is 10.
+field.diffuse(field_previous, diffusion_rate, accuracy);
+```
+
+There are also a couple of classic functional programming methods. The ```map(function)``` method applies a function to each cell of the field in turn. The function arguments will be the current value of the cell and the x and y position, and the return value should be the new value of the cell (or nil to indicate no change). 
+
+The ```reduce(function, initial)``` method is used to reduce a field to a single value, such as calculating the total of all cells. This value is defined by the ```initial``` argument, passed to the function for each cell, and updated by its return value. Easier to explain by example:
+
+```javascript
+// multiply all cells by 2: 
+field.map(function(value, x, y) { return value * 2; });
+
+// find the sum total of all cell values:
+var total = field.reduce(function(sum, value, x, y) {
+    return sum + value;
+}, 0);
+```
+
+### Multi-plane fields
+
+Field cells are in fact 4-plane vectors, mapping to red, green, blue and alpha channels when rendered; however the methods described above are designed to simulate single-plane (greyscale) semantics.
+
+Whereas ```field.get``` returns a single number (the red-channel value), ```field.cell``` returns the entire 4-plane vector as an array, which you can modify in-place to set a particular color:
+
+```javascript
+// turn a cell red:
+var cell = field.cell(x, y);
+cell[0] = 1;
+cell[1] = 0;
+cell[2] = 0;
+```
+
+Alternatively, you can pass an array to ```field.set```:
+
+```javascript
+// turn a cell red:
+field.set([1, 0, 0], x, y);
+```
+
+-->
+<!--
+
+```javascript
+// to interpolate a specific channel (0, 1, 2 or 3):
+field.sample(x, y, channel);    
+```
+
+## Draw2D
+
+The Draw2D library is a light wrapper of HTML5 canvas.
+
+It uses a stack-based coordinate transform system. Push the context, apply transforms, then return back to the previous coordinate system by popping the context again:
+
+```javascript
+// create a local coordinate system:
+draw2D.push();
+    draw2D.translate(x, y);
+    draw2D.rotate(angle_in_radians);
+    draw2D.scale(sizex, sizey);
+
+    // draw in local coordinate system
+    //...
+
+// return to global coordinate system:
+draw2D.pop();
+```
+Graphics are drawn using whatever color is currently set, via ```draw2D.color()```. The current color is set in terms of red, green, and blue components (from 0 to 1). The color also applies to fields. 
+
+Basic shapes are as follows:
+
+```javascript
+    draw2D.color(1, 0, 0);    // red
+    field.draw();
+    draw2D.color(0, 1, 0);    // green
+    draw2D.circle(center_x, center_y, diameter);
+    draw2D.color(1, 1, 0);    // yellow
+    draw2D.rect(center_x, center_y, width, height);
+```
+
+----
+
+# Turning research into code (and vice versa)
+
+[Math as code](https://github.com/Jam3/math-as-code/blob/master/README.md). "This is a reference to ease developers into mathematical notation by showing comparisons with JavaScript code. Motivation: Academic papers can be intimidating for self-taught game and graphics programmers." It also includes helpful links to various JavaScript libraries we can use for mathematics.
+
+-->
+
+
+
+	</div>
+	<footer>
+		&copy; 2015 Graham Wakefield
+	</footer>
+  </body>
+</html>

@@ -8,9 +8,9 @@
   <body>
   	<nav>
 	<ul>
-	<li><a href="index.html" alt="index">index</a></li>
-<li><a href="javascript.html" alt="javascript">javascript</a></li>
-<li><a href="vectors.html" alt="vectors">vectors</a></li>
+	<li><a href="vectors.html" alt="(Euclidean) Vectors">(Euclidean) Vectors</a></li>
+<li><a href="index.html" alt="Artificial Life tutorial">Artificial Life tutorial</a></li>
+<li><a href="javascript.html" alt="JavaScript for the tutorial">JavaScript for the tutorial</a></li>
 	</ul></nav>	
 	<div id="main">
 	<h1 id="javascript-for-the-tutorial">JavaScript for the tutorial</h1>
@@ -106,19 +106,18 @@ field.<span class="hljs-keyword">set</span>(<span class="hljs-keyword">value</sp
 <pre><code class="lang-javascript">// <span class="hljs-operator"><span class="hljs-keyword">set</span> <span class="hljs-keyword">all</span> <span class="hljs-keyword">field</span> cells <span class="hljs-keyword">to</span> <span class="hljs-number">1</span>:
 <span class="hljs-keyword">field</span>.<span class="hljs-keyword">set</span>(<span class="hljs-number">1</span>);</span>
 </code></pre>
-<p>A more powerful feature of <code>field2D.set()</code> is that it can take a function instead of a number. It calls this function to derive a new value for each cell in the field. The function receives as arguments the x and y position of the cell, so for example, this code initializes the field with a horizontal gradient:</p>
+<p>A more powerful feature of <code>field2D.set()</code> is that it can take a function instead of a number. It calls this function to derive a new value for each cell in the field. The function receives as arguments the x and y position of the cell (and the variable <code>this</code> maps to the field itself), so for example, this code initializes the field with a horizontal gradient:</p>
 <pre><code class="lang-javascript">field.<span class="hljs-keyword">set</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(x, y)</span> </span>{
-    <span class="hljs-keyword">return</span> x / field.width;
-);
+    <span class="hljs-keyword">return</span> x / <span class="hljs-keyword">this</span>.width;
+});
 </code></pre>
-<p>Typically we will render the field in the <code>draw()</code> callback by calling the field&#39;s draw method:</p>
-<pre><code class="lang-javascript">draw = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(ctx)</span> </span>{
+<p>Typically we will render a field in the <code>draw()</code> callback by calling the field&#39;s draw method:</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> </span>{
     field.draw();
 }
 </code></pre>
 <p>More useful methods:</p>
-<pre><code class="lang-javascript">
-field.min(<span class="hljs-function">)</span>;    // returns the lowest cell value in the<span class="hljs-instruction"> array
+<pre><code class="lang-javascript">field.min(<span class="hljs-function">)</span>;    // returns the lowest cell value in the<span class="hljs-instruction"> array
 </span>field.max(<span class="hljs-function">)</span>;    // returns the highest cell value in the<span class="hljs-instruction"> array
 </span>field.sum(<span class="hljs-function">)</span>;    // adds up all cell values<span class="hljs-instruction"> and </span>returns the total
 
