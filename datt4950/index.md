@@ -117,7 +117,7 @@ At the completion of the course students will:
 
 - Floreano, Dario, and Claudio Mattiussi. Bio-inspired artificial intelligence: theories, methods, and technologies. MIT press, 2008.
 - Flake, Gary William. The computational beauty of nature: Computer explorations of fractals, chaos, complex systems, and adaptation. MIT press, 1998. 
-
+- Whitelaw, Mitchell. Metacreation: art and artificial life. Mit Press, 2004.
 - Artificial Life [Volume 21, Issue 3 - Summer 2015 - Artificial Life Art and Creativity](http://www.mitpressjournals.org/toc/artl/21/3)
 
 ----
