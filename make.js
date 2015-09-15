@@ -120,27 +120,24 @@ var md_partials = {
 
 };
 
-console.log(sitetree);
+//console.log(sitetree);
 
-function parse(fileobj, nav) {
-
-	if (fileobj.ext === undefined) {
-		
-	} else if (fileobj.ext == ".md") {
-		
+function parse_meta(fileobj, nav) {
+	if (fileobj.ext == ".md") {
+	
+		//console.log("read", fileobj);
+	
 		var data = fs.readFileSync(fileobj.path, "utf-8");
 		if (!data) {
 			console.log(err);
 			return;
 		}
 		
-		//console.log(data);
-		
 		var view = {};
 		// grab header variables (YAML) from file:
 		// search in file up to first instance of "\n---":
 		var n = data.indexOf("\n---");
-		if (n >= 0) {
+		if (n >= 0 && n < 1000) {
 			try {
 				// try to parse this as yaml:
 				view = yaml.safeLoad(data.slice(0, n), {
@@ -151,11 +148,13 @@ function parse(fileobj, nav) {
 				});
 				// skip ahead to next newline:
 				data = data.slice(data.indexOf("\n", n+1));
+				//console.log(fileobj.path, data);
 			} catch(e) {
 				// just ignore it -- assume that this is not a YAML header
 			}
 		}
 		view.nav = nav;
+		view.data = data;
 		
 		if (!view.name) {
 			view.name = fileobj.base;
@@ -165,14 +164,26 @@ function parse(fileobj, nav) {
 			// search in doc for first # tag:
 			var h1_regex = /#\s*([^#\n].*)/;
 			var captures = h1_regex.exec(data);
-			console.log(captures);
+			//console.log(captures);
 			if (captures != null && captures[1] != null) {
 				view.title = captures[1];
+				//console.log("TITLE", view.title);
 			} else {
 				// generate name from file:
 				view.title = view.name.charAt(0).toUpperCase() + view.name.slice(1).toLowerCase();
 			}
 		}
+		
+		return view;
+	}
+}
+
+function generate_html(fileobj, nav) {
+	
+	if (fileobj.ext == ".md") {
+		
+		var view = fileobj.view; 
+		var data = view.data; 
 		
 		// give a chance for the markdown to embed metadata:
 		data = mustache.render(data, view, md_partials);
@@ -186,76 +197,71 @@ function parse(fileobj, nav) {
 		// save:
 		var dst = path.join(config.dst, fileobj.dir, fileobj.base + ".html");
 		fs.writeFileSync(dst, html);
-		console.log("wrote", dst);
+		//console.log("wrote", dst);
+	}
+}
+
+function navsorter(a, b) {
+	
+	
+	if (typeof a.importance == "number" && typeof b.importance == "number") {
+		return b.importance - a.importance;
+	} else if (typeof a.importance == "number") {
+		return a.importance;
+	} else if (typeof b.importance == "number") {
+		return b.importance;
+	} else if (a.name < b.name) {
+		return -1;
+	} else if (a.name > b.name)  {
+		return 1;
+	} else {
+		return 0;
 	}
 }
 
 function generate(root) {
-
-	// build nav:
 	var nav = [];
-	for (name in root) {
-		var o = root[name];
-		if (o.ext && o.ext == ".md") {
-			nav.push({
-				name: o.base,
-				href: o.base + ".html",
-			});
-		}
-	}
-	nav.sort();
-
-	// build pages:
+	
+	// first pass gathers metadata:
 	for (name in root) {
 		var o = root[name];
 		if (o.ext) {
-			parse(o, nav);
+			o.view = parse_meta(o, nav);
+			nav.push({
+				name: (typeof o.view !== "undefined") ? o.view.title : o.base,
+				href: o.base + ".html",
+				importance: (typeof o.view !== "undefined") ? o.view.importance : 0,
+			});
 		} else {
+			// recurse to subfolder:
 			generate(o);
+		}
+	}
+	
+	// second pass generates shared metadata:
+	nav.sort(navsorter);
+	
+	// final pass renders:
+	for (name in root) {
+		var o = root[name];
+		if (o.ext) {
+			generate_html(o);
 		}
 	}
 }
 
 generate(sitetree);
 
-console.log("ok");
 
 /*
 // now watch:
 watcher = fs.watch(config.src, {}, function(event, file) {
 	console.log(event, file);
 	var dir = config.src;
-	
-	
 	if (event == "change" || event == "rename") {
-		var path = dir + '/' + file;
+		generate(sitetree);
 		
-		fs.stat(path, function(err, stat) {
-			if (stat && stat.isDirectory()) {
-			
-			} else {
-				var name = file;
-				var ext = "";
-				var i = file.lastIndexOf('.');
-				if (i > 0) {
-					name = file.substr(0, i);
-					ext = file.substr(i+1).toLowerCase();
-				}
-				var fileobj = {
-					file: file,
-					path: path,
-					dir: dir,
-					name: name,
-					ext: ext,
-					// output type should depend on ext... 
-					dst: config.dst + '/' + name + ".html",
-				};
-				
-				parse(fileobj);
-			}
-		});
-		
+		console.log("ok");
 	}
 });
-
 */

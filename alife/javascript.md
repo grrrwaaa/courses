@@ -131,18 +131,18 @@ To set the value of all cells at once, omit the x and y:
 field.set(1);
 ```
 
-A more powerful feature of ```field2D.set()``` is that it can take a function instead of a number. It calls this function to derive a new value for each cell in the field. The function receives as arguments the x and y position of the cell, so for example, this code initializes the field with a horizontal gradient:
+A more powerful feature of ```field2D.set()``` is that it can take a function instead of a number. It calls this function to derive a new value for each cell in the field. The function receives as arguments the x and y position of the cell (and the variable ```this``` maps to the field itself), so for example, this code initializes the field with a horizontal gradient:
 
 ```javascript
 field.set(function(x, y) {
-	return x / field.width;
-);
+	return x / this.width;
+});
 ```
 
-Typically we will render the field in the ```draw()``` callback by calling the field's draw method:
+Typically we will render a field in the ```draw()``` callback by calling the field's draw method:
 
 ```javascript
-draw = function(ctx) {
+function draw() {
 	field.draw();
 }
 ```
@@ -150,7 +150,6 @@ draw = function(ctx) {
 More useful methods:
 
 ```javascript
-
 field.min();	// returns the lowest cell value in the array
 field.max();	// returns the highest cell value in the array
 field.sum();	// adds up all cell values and returns the total
