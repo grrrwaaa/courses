@@ -292,6 +292,8 @@ al.init = function() {
 	if (!floatTextures) {
 	  alert('no floating point texture support');
 	}
+	
+	console.log(gl);
 
 	// setup a GLSL program
 	var field2D_vertexshader = loadShader(gl, [
