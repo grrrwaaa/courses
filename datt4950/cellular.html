@@ -44,6 +44,7 @@
 <p><img src="img/ca_shells.jpg" alt="Evolution of a 1D CA: rule 30"></p>
 <iframe width="480" height="360" src="https://www.youtube.com/embed/jDguxopxyJk?rel=0" frameborder="0" allowfullscreen></iframe>
 
+<p><a href="http://codepen.io/grrrwaaa/pen/meVoMo?editors=001">Here are some of the well-known 1D rules</a></p>
 <p>Wolfram divided CA into four classes, according to their long-term behavior:</p>
 <ul>
 <li><strong>Class 1</strong> - stable. Evolves to homogeneous state.</li>
@@ -86,6 +87,8 @@
 <p>This technique is called <em>double-buffering</em>, and is widely used in software systems where a parallel process interacts with a serial machine. It is used to render graphics to the screen, for example.</p>
 </blockquote>
 <hr>
+<p>A simple variation: <a href="http://codepen.io/grrrwaaa/pen/WQrmGb?editors=001">Brian&#39;s Brain</a></p>
+<hr>
 <h2 id="particle-ca-and-lattice-gas-automata">Particle CA and Lattice-Gas Automata</h2>
 <p>If the transition rule is careful to preserve a total cell values before and after, it can appear to model particles or fluids moving through space. The elementary 1D traffic CA (rule 184) is a simple particle CA. </p>
 <p>Particle CA can use probabilistic rules to simulate brownian motions and other non-deterministic media (but the rules would usually still need to be matter/energy preserving). Particle CA benefit from the inclusion of boundaries and other spatial non-homogeneities such as influx and outflow of particles at opposite edges.</p>
@@ -97,8 +100,7 @@
 <p>One implementation option is to use <em>block rules</em>, which consider small regions at a time, rather than individual cells; e.g. a 2x2 region of cells in a 2D CA (the <em>Margolus neighborhood</em>). To handle the boundaries between blocks, the regions are shifted between each application (<a href="http://en.wikipedia.org/wiki/Block_cellular_automaton">see wikipedia</a>). </p>
 <p><img src="img/mnhood.gif" alt="Margolus neigborhood"></p>
 <p>Note that a block rule CA does not need to be double-buffered, since block updates do not overlap. </p>
-<!-- More example block CAs [here](http://psoup.math.wisc.edu/mcell/rullex_marg.html) -- many of these are implemented [in the example script here](https://github.com/grrrwaaa/gct753/blob/master/ca_2D_block_rules.lua). --> 
-
+<p>More example block CAs <a href="http://psoup.math.wisc.edu/mcell/rullex_marg.html">here</a> -- many of these are implemented <a href="http://codepen.io/grrrwaaa/pen/NGxJpP?editors=001">in the example script here</a>. </p>
 <hr>
 <h2 id="variations">Variations</h2>
 <p>There are many ways we can modulate the basic definition of a CA, some of which have been explored more than others. Here are some examples:</p>
@@ -120,8 +122,7 @@
 <li>A <em>backround noise</em> can be added, such that from time to time a randomly chosen cell changes state. A <em>temperature</em> control could control the statistical frequency of such changes.</li>
 <li>Combinations with non-homogenous CAs: statistical choice of rules and neighborhoods; variations of probabilities over space and time, etc.</li>
 </ul>
-<!--Take a look at the [Forest Fire CA example](https://github.com/grrrwaaa/gct753/blob/master/ca_2D_forest_fire.lua), and try changing the probabilities to see how it behaves.-->
-
+<p>Take a look at the <a href="http://codepen.io/grrrwaaa/pen/xwZBRP/?editors=001">Forest Fire CA example</a>, and try changing the probabilities to see how it behaves.</p>
 <h3 id="asynchronous-ca">Asynchronous CA</h3>
 <p>Rather than updating all cells at once, some other policy of visiting cells to update is applied:</p>
 <ul>
@@ -136,6 +137,7 @@
 </ul>
 </li>
 </ul>
+<p><a href="http://codepen.io/grrrwaaa/pen/RWrdoq?editors=001">See our JavaScript version</a>, and <a href="http://codepen.io/grrrwaaa/pen/MaKxJb?editors=001">a variation with multiple ants</a></p>
 <iframe width="640" height="360" src="https://www.youtube.com/embed/hy3LG6isnQA?rel=0" frameborder="0" allowfullscreen></iframe>
 
 <p>The <a href="http://www.youtube.com/watch?v=w6XQQhCgq5c">original video by Christopher Langton</a>, including examples of multiple ants (and music by the Vasulkas):</p>
@@ -144,14 +146,10 @@
 <blockquote>
 <p>Note that Langton&#39;s Ant, and other related Turmites, are closely related to the turtle graphics often used for L-systems, which will return to later in the course.</p>
 </blockquote>
-<!--[See the script](https://github.com/grrrwaaa/gct753/blob/master/ca_2D_langtons_ant.lua). 
-[See a browser-based example here](js.ants2.html)-->
-
-<ul>
-<li>A <em>probabilistic asynchronous CA</em> chooses the next active cell according to a random selection.</li>
-</ul>
+<h3 id="probabilistic-asynchronous-ca">Probabilistic Asynchronous CA</h3>
+<p>Chooses the next active cell according to a random selection.</p>
 <p>The <em>Ising model</em> of ferromagnetism in statistical mechanics can be simulated in a <em>Monte Carlo</em> fashion: Each site (cell) has either positive or negative spin (we can encode that as 0 or 1 value). At each time step, consider a site at random, and evaluate the probability of changing state. If changing state moves the site toward energetic equilibrium with its neighbors (determined according to the <a href="https://en.wikipedia.org/wiki/Hamiltonian_(quantum_mechanics">Hamiltonian</a>) of the site), then the change is made. Otherwise, the change is made only with a small probability that is dependent on the energetic difference and overall temperature. Thus at high temperatures, the system remains noisy, while at low temperatures it gradually self-organizes into all sites with equal spin.</p>
-<p>The <a href="https://en.wikipedia.org/wiki/Contact_process_(mathematics">contact process</a>) model has been used to simulate the spread of infection (and changes of opinion in voting): infected sites become healthy at a constant rate, while healthy sites become infected at a rate proportional to the number infected neighbours (see also the <em>HodgePodge</em> simulation). This can be extented to multiple states for a multitype contact process.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Contact_process_(mathematics">contact process</a>) model has been used to simulate the spread of infection (and changes of opinion in voting): infected sites become healthy at a constant rate, while healthy sites become infected at a rate proportional to the number infected neighbours (see also the <a href="http://codepen.io/grrrwaaa/pen/LpGaxm?editors=001">HodgePodge</a> simulation). This can be extented to multiple states for a multitype contact process.</p>
 <h3 id="large-unbounded-complex-states">Large/unbounded/complex states</h3>
 <p>The cellular <em>Potts model</em> (also known as the <em>Glazier-Graner</em> model) generalizes probabilistic asynchronous CA to allow more than two site states, and in some cases, an unbounded number of possible site states; however it still utilizes the notion of statistical movement toward neighbor equilibrium to drive change, though the definition of a local Hamiltonian. Variations have been used to model grain growth, foam, fluid flow, chemotaxis, biological cells, and even the developmental cycle of whole organisms. </p>
 <blockquote>
@@ -171,8 +169,6 @@
 
 <p>One approach to simulating RD using CA is the <em>Gray-Scott</em> model, as described in <a href="http://arxiv.org/pdf/patt-sol/9304003.pdf">Pearson, J. E. Complex Patterns in a Simple System</a>. There is <a href="http://mrob.com/pub/comp/xmorphia/">a wonderful archive of this model at this webpage</a>, including many great video examples of the <a href="http://www.youtube.com/watch?v=F5oKgVZ6bTk">u-skate world</a>, and even <a href="http://www.youtube.com/watch?v=B03lcPEmSOQ">u-skate in 3D</a>. </p>
 <p><img src="img/xmorphia-parameter-map.jpg" alt="The Gray-Scott parameter map"></p>
-<!--An implementation in our software can be found [here](https://github.com/grrrwaaa/gct753/blob/master/ca_2D_greyscott.lua).-->
-
 <p>Some of these systems share resemblance with analog video feedback (<a href="http://www.youtube.com/watch?v=hDYEVv9t32U">example</a>, <a href="http://www.youtube.com/watch?v=Uw5onuS2_mw">example</a>), which has been exploited by earlier media artists (notably the Steiner and Woody Vasulka). </p>
 <h3 id="multi-scale-systems">Multi-Scale Systems</h3>
 <p>Several cellular systems can be coupled together at different scales. </p>
