@@ -81,7 +81,7 @@ Final project (40%)
 ### 9. Nov 11
 <!-- Remembrance day, which is not a holiday -->
 
-Lecture: Artificial chemistries. von Neumann machine, Langton's ant. Bytecode worlds, viruses, Tierra, Avida. Fontana alchemy.
+Lecture: Artificial chemistries. Bytecode worlds, viruses, Tierra, Alchemy.
 
 ### 10. Nov 18
 
@@ -110,7 +110,7 @@ At the completion of the course students will:
 **Assessment** is based on assignments, projects, quizzes, readings and participation, with the following weighting for the final grade:
 
 - 30% Assignments: Exercises and readings are assigned throughout the course. Exercises develop essential practice-informed critique and experiential learning.
-- 40% Projects: Projects, realized individually or in groups, demonstrate the effective application of understanding through the course in novel expressions of adaptive media and art. Projects are evaluated in terms of technical completeness, aesthetic qualities and novel contributions.
+- 40% Final Project: Realized individually or in groups, demonstrate the effective application of understanding through the course in novel expressions of adaptive media and art. Projects will be presented to the class at the end of the term and will be in the form of a critical discussion that reflects on the results of the experience gained over duration of the course.
 - 30% Quizzes, readings and participation. Quizzes are given periodically through the course. Readings are short selections from books or landmark papers, chosen to directly support the assignments and tutorial discussion. Participation incorporates contributions to tutorial discussions, awareness of issues in readings, and the ability to relate tutorial issues to the broader concerns of the course.
 
 ## Readings
