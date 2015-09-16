@@ -277,14 +277,20 @@ browserify al.src.js -o al.js && minify al.js && cp al.min.js ../../_site/datt49
   
 		  
 	  var canvas = document.createElement('canvas');
-	canvas.setAttribute("width", innerWidth);
-	canvas.setAttribute("height", innerHeight);
+
+	var onresize = function() {
+		w = Math.min(innerWidth, innerHeight);
+	  canvas.setAttribute("width", w);
+	  canvas.setAttribute("height", w);
+	
+	  canvas.style.width = w + 'px';
+	  canvas.style.height = w + 'px';
+	}
+	
+	onresize();
 
 	// TODO: http://webglfundamentals.org/webgl/lessons/webgl-resizing-the-canvas.html
-	window.addEventListener('resize', function() {
-	  canvas.style.width = innerWidth + 'px';
-	  canvas.style.height = innerHeight + 'px';
-	}, false);
+	window.addEventListener('resize', onresize, false);
 
   	document.body.style.margin = "0px";
 	document.body.style.padding = "0px";
