@@ -219,7 +219,7 @@ al.init = function() {
 	   * @param {!Array.<string>} opt_attribs The attribs names.
 	   * @param {!Array.<number>} opt_locations The locations for the attribs.
 	   */
-	  var loadProgram = function(gl, shaders, opt_attribs, opt_locations) {
+	  var createProgram = function(gl, shaders, opt_attribs, opt_locations) {
 		var program = gl.createProgram();
 		for (var ii = 0; ii < shaders.length; ++ii) {
 		  gl.attachShader(program, shaders[ii]);
