@@ -294,6 +294,7 @@ browserify al.src.js -o al.js && minify al.js && cp al.min.js ../../_site/datt49
 
   	document.body.style.margin = "0px";
 	document.body.style.padding = "0px";
+	document.body.style.backgroundColor = "#000000";
 	document.body.appendChild(canvas); // or document.getElementById('someBox').appendChild(canvas);
 
 	var gl = getWebGLContext(canvas, {
