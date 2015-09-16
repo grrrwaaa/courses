@@ -219,8 +219,8 @@ al.init = function() {
 	   * @param {!Array.<string>} opt_attribs The attribs names.
 	   * @param {!Array.<number>} opt_locations The locations for the attribs.
 	   */
-	  var createProgram = function(gl, shaders, opt_attribs, opt_locations) {
-		var program = gl.createProgram();
+	  var loadProgram = function(gl, shaders, opt_attribs, opt_locations) {
+		var program = gl.loadProgram();
 		for (var ii = 0; ii < shaders.length; ++ii) {
 		  gl.attachShader(program, shaders[ii]);
 		}
@@ -314,7 +314,7 @@ al.init = function() {
 	  "}"
 	].join("\n"), gl.FRAGMENT_SHADER);
 
-	var field2D_program = createProgram(gl, [field2D_vertexshader, field2D_fragmentshader]);
+	var field2D_program = loadProgram(gl, [field2D_vertexshader, field2D_fragmentshader]);
 	// look up where the vertex data needs to go.
 	var field2D_positionLocation = gl.getAttribLocation(field2D_program, "a_position");
 	var field2D_texLocation = gl.getUniformLocation(field2D_program, "u_tex");
@@ -350,7 +350,7 @@ al.init = function() {
 	  "}"
 	].join("\n"), gl.FRAGMENT_SHADER);
 
-	var draw2D_program = createProgram(gl, [draw2D_vertexshader, draw2D_fragmentshader]);
+	var draw2D_program = loadProgram(gl, [draw2D_vertexshader, draw2D_fragmentshader]);
 	// look up where the vertex data needs to go.
 	var draw2D_positionLocation = gl.getAttribLocation(draw2D_program, "a_position");
 	var draw2D_colorLocation = gl.getUniformLocation(draw2D_program, "u_color");
