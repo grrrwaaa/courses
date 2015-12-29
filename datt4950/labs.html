@@ -17,6 +17,7 @@
 	</ul></nav>	
 	<div id="main">
 	<h1 id="labs">Labs</h1>
+<p><a href="http://paleofuture.com/blog/2011/8/24/the-push-button-school-of-tomorrow-1958.html"><img src="img/collaborative_coding.jpg" alt="Labs of the paleofuture"></a></p>
 <p>Most of the examples we will work though in the labs will use the JavaScript programming language, embedded in web browsers. To make this easier, I have prepared a starter-kit template, from which all our in-lab examples will be written, and which students can easily fork and extend via Codepen.io&#39;s online editor. </p>
 <p>To start a new script, <a href="http://codepen.io/grrrwaaa/pen/qObgdb?editors=001">open the following link and then press the &quot;Fork&quot; button to create a new copy</a></p>
 <p>Alternatively, click the button below, then close the CSS and HTML tabs:</p>
@@ -28,16 +29,19 @@
 <blockquote>
 <p>If you haven&#39;t used JavaScript before, I&#39;ve provided a <a href="js.html">quick introduction here</a></p>
 </blockquote>
+<p>Here&#39;s an example:</p>
+<p><p data-height="269" data-theme-id="0" data-slug-hash="EVPGOB" data-preview ="true" data-default-tab="result" data-user="grrrwaaa" class='codepen'>See the Pen <a href='http://codepen.io/grrrwaaa/pen/EVPGOB/'>Game of Life</a> by Graham (<a href='http://codepen.io/grrrwaaa'>@grrrwaaa</a>) on <a href='http://codepen.io'>CodePen</a>.</p></p>
+<script async src="http://assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>If the example above doesn&#39;t work, it might be that you are among the <a href="http://webglstats.com">~10% of users</a> whose browsers don&#39;t yet support WebGL. You can check support <a href="http://www.doesmybrowsersupportwebgl.com">here</a>, and compare browser support <a href="http://caniuse.com/#feat=webgl">here</a>. Note that IE users need to have version 11, or use Edge. Chrome has had good support for a long time. Safari has supported WebGL since version 8. Firefox has partial support. </p>
 <h2 id="overview">Overview</h2>
 <p>Graphics rendering uses the HTML5 Canvas and WebGL, which is supported on most computers with recent versions of Chrome, Firefox or Safari. The starter-kit uses WebGL technology for performance, but for simplicity&#39;s sake examples will be confined to a 2D world, and coded through simplified abstractions. This world has coordinates ranging from (0,0) in the bottom-left corner to (1,1) in the top right corner -- i.e. it assumes the world to be square shaped and unit length. </p>
 <h2 id="callbacks">Callbacks</h2>
 <p>The kit provides an event-based callback system, in which you implement specially-named functions to handle specific events.</p>
 <p>For simulation updates, implement a function called <code>update()</code>. </p>
 <!-- delta time argument -->
-
 <p>To define how the canvas renders, implement a function called <code>draw()</code>. All graphics code should go into this callback.</p>
 <!-- gl context argument -->
-
 <!-- The ```reset()``` function is used to re-initialize variables, when the "reset" button on the HTML page is pressed.
 
 For example:
@@ -83,18 +87,17 @@ function key(event, key) {
 }
 ```
 -->
-
 <h2 id="globals">Globals</h2>
 <p>The starter-kit provides a few extra global functions that are frequently needed:</p>
 <p><code>random()</code> can be used to generate random numbers. Without an argument it returns rational numbers between 0 and 1; with a numeric argument it returns integers in the given range (e.g. useful for picking within an array).</p>
 <p><code>wrap()</code> applies a Euclidean modulo (remainder after division) in such a way that the result is always positive and without reflections.</p>
-<pre><code class="lang-javascript"><span class="hljs-function">random</span>();         <span class="hljs-comment">// a floating-point number between 0 and 1</span>
-<span class="hljs-function">random</span>(6);        <span class="hljs-comment">// an integer between 0 and 5</span>
-<span class="hljs-function">wrap</span>(-1, 4);    <span class="hljs-comment">// returns 3 (whereas -1 % 4 would return -1)</span>
+<pre><code class="lang-javascript"><span class="hljs-built_in">random</span>();        <span class="hljs-comment"> // a floating-point number between 0 and 1</span>
+<span class="hljs-built_in">random</span>(<span class="hljs-number">6</span>);       <span class="hljs-comment"> // an integer between 0 and 5</span>
+<span class="hljs-keyword">wrap</span>(<span class="hljs-number">-1</span>, <span class="hljs-number">4</span>);   <span class="hljs-comment"> // returns 3 (whereas -1 % 4 would return -1)</span>
 </code></pre>
 <h2 id="field2d">field2D</h2>
 <p>The <code>field2D</code> type represents a dense grids of cells of floating point numbers (typically but not necessarily in the range of zero to one). You can create a field like this:</p>
-<pre><code class="lang-javascript">var field = <span class="hljs-keyword">new</span> field2D(<span class="hljs-variable">width</span>, <span class="hljs-variable">height</span>);
+<pre><code class="lang-javascript">var field = <span class="hljs-keyword">new</span> field2D(<span class="hljs-built_in">width</span>, <span class="hljs-built_in">height</span>);
 </code></pre>
 <p>Typically we will render a field in the <code>draw()</code> callback by calling the field&#39;s draw method:</p>
 <pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> </span>{
@@ -107,8 +110,8 @@ field.<span class="hljs-keyword">set</span>(<span class="hljs-keyword">value</sp
 </code></pre>
 <p>Note that if x or y is out of bounds for the field, it will wrap around from the other side. So you are always guaranteed it will return or set a value. </p>
 <p>To set the value of all cells at once, omit the x and y:</p>
-<pre><code class="lang-javascript">// <span class="hljs-operator"><span class="hljs-keyword">set</span> <span class="hljs-keyword">all</span> <span class="hljs-keyword">field</span> cells <span class="hljs-keyword">to</span> <span class="hljs-number">1</span> (white):
-<span class="hljs-keyword">field</span>.<span class="hljs-keyword">set</span>(<span class="hljs-number">1</span>);</span>
+<pre><code class="lang-javascript">// <span class="hljs-keyword">set</span> all <span class="hljs-keyword">field</span> cells <span class="hljs-keyword">to</span> <span class="hljs-number">1</span> (white):
+<span class="hljs-keyword">field</span>.<span class="hljs-keyword">set</span>(<span class="hljs-number">1</span>);
 </code></pre>
 <p>A more powerful feature of <code>field2D.set()</code> is that it can take a function instead of a number. When x and y are omitted, this function is called to update each cell in the field. The function receives as arguments the x and y position of the cell, so for example, this code initializes the field with a horizontal gradient:</p>
 <pre><code class="lang-javascript">field.<span class="hljs-keyword">set</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(x, y)</span> </span>{
@@ -117,14 +120,14 @@ field.<span class="hljs-keyword">set</span>(<span class="hljs-keyword">value</sp
 </code></pre>
 <p>Note that <code>field.set</code> returns the field itself, so it can be chained.`</p>
 <p>More useful methods:</p>
-<pre><code class="lang-javascript">field.clear(<span class="hljs-function">)</span>;         // set all field cells to zero, faster than<span class="hljs-function"> field.set(</span>0<span class="hljs-function">)</span>
-field.normalize(<span class="hljs-function">)</span>;     // re-scales the field into a 0..1 range
+<pre><code class="lang-javascript">field.clear();         // set all field cells to zero, faster than field.set(0)
+field.normalize();     // re-scales the field into a 0..1 range
 
-field.clone(<span class="hljs-function">)</span>;     // create a duplicate copy of the field
+field.clone();     // create a duplicate copy of the field
 
-field.min(<span class="hljs-function">)</span>;    // returns the lowest cell value in the<span class="hljs-instruction"> array
-</span>field.max(<span class="hljs-function">)</span>;    // returns the highest cell value in the<span class="hljs-instruction"> array
-</span>field.sum(<span class="hljs-function">)</span>;    // adds up all cell values<span class="hljs-instruction"> and </span>returns the total
+field.min();    // returns the lowest cell value in the<span class="hljs-built_in"> array
+</span>field.max();    // returns the highest cell value in the<span class="hljs-built_in"> array
+</span>field.sum();    // adds up all cell values<span class="hljs-built_in"> and </span>returns the total
 </code></pre>
 <!--
 
@@ -206,47 +209,46 @@ field.set([1, 0, 0], x, y);
 field.sample(x, y, channel);    
 ```
 -->
-
 <h2 id="draw2d">Draw2D</h2>
 <p>The Draw2D namespace provides a very simple interface for drawing 2D primitives.</p>
 <p>It uses a stack-based coordinate transform system. Push the context, apply transforms, then return back to the previous coordinate system by popping the context again:</p>
-<pre><code class="lang-javascript">// create a local coordinate system:
-draw2D.push();
-    draw2D.translate(x, y);
-    draw2D.rotate(angle_in_radians);
-    draw2D.scale(sizex, sizey);
+<pre><code class="lang-javascript"><span class="hljs-comment">// create a local coordinate system:</span>
+draw2D.push()<span class="hljs-comment">;</span>
+    draw2D.translate(x, y)<span class="hljs-comment">;</span>
+    draw2D.rotate(angle_in_radians)<span class="hljs-comment">;</span>
+    draw2D.scale(sizex, sizey)<span class="hljs-comment">;</span>
 
-    // draw <span class="hljs-keyword">in</span> local coordinate system
-    //<span class="hljs-keyword">...</span>
+    <span class="hljs-comment">// draw in local coordinate system</span>
+    <span class="hljs-comment">//...</span>
 
-// <span class="hljs-keyword">return</span> to global coordinate system:
-draw2D.pop();
+<span class="hljs-comment">// return to global coordinate system:</span>
+draw2D.pop()<span class="hljs-comment">;</span>
 </code></pre>
 <p>Typically, to move into an agent&#39;s coordinate system, operate in the order &quot;translate, rotate, scale&quot;.</p>
 <p>Graphics are drawn using whatever color is currently set, via <code>draw2D.color()</code>:</p>
 <pre><code class="lang-javascript">
-draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">// red</span>
-draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">// green</span>
-draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>); <span class="hljs-comment">// blue</span>
-draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0.5</span>); <span class="hljs-comment">// semi-transparent white</span>
+draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<span class="hljs-comment">; // red</span>
+draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)<span class="hljs-comment">; // green</span>
+draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)<span class="hljs-comment">; // blue</span>
+draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0.5</span>)<span class="hljs-comment">; // semi-transparent white</span>
 
 <span class="hljs-comment">// you can also use standard CSS color names:</span>
-draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-string">"red"</span>);
+draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-string">"red"</span>)<span class="hljs-comment">;</span>
 </code></pre>
 <p>Basic shapes are as follows:</p>
-<pre><code class="lang-javascript">    draw2D.circle(center_x, center_y, diameter);
-    draw2D.circle(center_x, center_y, diameter_x, diameter_y);
+<pre><code class="lang-javascript">    draw2D.<span class="hljs-keyword">circle</span>(center_x, center_y, diameter)<span class="hljs-comment">;</span>
+    draw2D.<span class="hljs-keyword">circle</span>(center_x, center_y, diameter_x, diameter_y)<span class="hljs-comment">;</span>
 
-    draw2D.<span class="hljs-built_in">rect</span>(center_x, center_y, <span class="hljs-built_in">size</span>);
-    draw2D.<span class="hljs-built_in">rect</span>(center_x, center_y, <span class="hljs-variable">width</span>, <span class="hljs-variable">height</span>);
+    draw2D.rect(center_x, center_y, size)<span class="hljs-comment">;</span>
+    draw2D.rect(center_x, center_y, <span class="hljs-keyword">width</span>, height)<span class="hljs-comment">;</span>
 </code></pre>
 <p>Most calls to draw2D can be chained:</p>
-<pre><code class="lang-javascript">draw2D.push()
-    .<span class="hljs-built_in">translate</span>(x, y)
-    .<span class="hljs-built_in">rotate</span>(angle_in_radians)
-    .<span class="hljs-built_in">scale</span>(sizex, sizey)
-    .<span class="hljs-built_in">rect</span>()
-    .pop();
+<pre><code class="lang-javascript"><span class="hljs-selector-tag">draw2D</span><span class="hljs-selector-class">.push</span>()
+    <span class="hljs-selector-class">.translate</span>(<span class="hljs-selector-tag">x</span>, <span class="hljs-selector-tag">y</span>)
+    <span class="hljs-selector-class">.rotate</span>(<span class="hljs-selector-tag">angle_in_radians</span>)
+    <span class="hljs-selector-class">.scale</span>(<span class="hljs-selector-tag">sizex</span>, <span class="hljs-selector-tag">sizey</span>)
+    <span class="hljs-selector-class">.rect</span>()
+    <span class="hljs-selector-class">.pop</span>();
 </code></pre>
 <blockquote>
 <p>Note: The draw2D transform and color are reset before each <code>draw()</code> call.</p>
@@ -262,8 +264,6 @@ Shape API
 [Math as code](https://github.com/Jam3/math-as-code/blob/master/README.md). "This is a reference to ease developers into mathematical notation by showing comparisons with JavaScript code. Motivation: Academic papers can be intimidating for self-taught game and graphics programmers." It also includes helpful links to various JavaScript libraries we can use for mathematics.
 
 -->
-
-
 
 	</div>
 	<footer>

@@ -103,26 +103,26 @@
 
     <span class="hljs-comment">// create linear mappings from the data domain (min, max) to the canvas size:</span>
     <span class="hljs-keyword">var</span> xScale = d3.scale.linear()
-            .domain([d3.min(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+            .domain([d3.min(data, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d</span>) </span>{
                     <span class="hljs-keyword">return</span> d.rates.EUR;
-            }), d3.max(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+            }), d3.max(data, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d</span>) </span>{
                     <span class="hljs-keyword">return</span> d.rates.EUR;
             })])
             .range([<span class="hljs-number">0</span>, canvas_width]);
 
     <span class="hljs-keyword">var</span> yScale = d3.scale.linear()
-            .domain([d3.min(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+            .domain([d3.min(data, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d</span>) </span>{
                     <span class="hljs-keyword">return</span> d.rates.GBP;
-            }), d3.max(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+            }), d3.max(data, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d</span>) </span>{
                     <span class="hljs-keyword">return</span> d.rates.GBP;
             })])
             .range([canvas_height, <span class="hljs-number">0</span>]);    <span class="hljs-comment">// note Y range is upside down</span>
 
     <span class="hljs-comment">// another linear mapping for circle radius:</span>
     <span class="hljs-keyword">var</span> rScale = d3.scale.linear()
-            .domain([d3.min(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+            .domain([d3.min(data, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d</span>) </span>{
                     <span class="hljs-keyword">return</span> d.rates.CAD;
-            }), d3.max(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+            }), d3.max(data, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d</span>) </span>{
                     <span class="hljs-keyword">return</span> d.rates.CAD;
             })])
             .range([<span class="hljs-number">1</span>, <span class="hljs-number">8</span>]);
@@ -132,16 +132,16 @@
             .data(data)
             .enter()
             .append(<span class="hljs-string">"circle"</span>)
-            .attr(<span class="hljs-string">"cx"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+            .attr(<span class="hljs-string">"cx"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d</span>) </span>{
                     <span class="hljs-keyword">return</span> xScale(d.rates.EUR);
             })
-            .attr(<span class="hljs-string">"cy"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+            .attr(<span class="hljs-string">"cy"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d</span>) </span>{
                     <span class="hljs-keyword">return</span> yScale(d.rates.GBP);
             })
-            .attr(<span class="hljs-string">"r"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+            .attr(<span class="hljs-string">"r"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d</span>) </span>{
                     <span class="hljs-keyword">return</span> rScale(d.rates.CAD);
             })
-            .attr(<span class="hljs-string">"fill"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d, i)</span> </span>{
+            .attr(<span class="hljs-string">"fill"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d, i</span>) </span>{
                     h = <span class="hljs-number">360</span> * i / data.length;
                     <span class="hljs-keyword">return</span> d3.hsl(h, <span class="hljs-number">0.85</span>, <span class="hljs-number">0.65</span>);
             })
@@ -200,7 +200,7 @@
 
     camera.position.z = <span class="hljs-number">5</span>;
 
-    <span class="hljs-keyword">var</span> render = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">var</span> render = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
       requestAnimationFrame(render);
 
       cube.rotation.x += <span class="hljs-number">0.1</span>;
@@ -256,10 +256,10 @@
 <p>We also show a few other niceties along the way.</p>
 <h3 id="using-the-glue">Using the glue</h3>
 <p>Whereas with SVG we have a set of predefined shape nodes, such as <code>rect</code>, <code>circle</code>, etc., for our 3D graphs we are going to need to define new node type constructors. To do this, we wrap our our object creation code in a function that takes data (and data-index) parameters. Here&#39;s an example using a red box of unit size, whose color depends on a data element:</p>
-<pre><code class="lang-javascript">    function makeBox(<span class="hljs-typedef"><span class="hljs-keyword">data</span>, index) <span class="hljs-container">{
+<pre><code class="lang-javascript">    function makeBox(<span class="hljs-class"><span class="hljs-keyword">data</span>, index) {
       <span class="hljs-title">return</span> <span class="hljs-title">new</span> <span class="hljs-type">THREE</span>.<span class="hljs-type">Mesh</span>(
         <span class="hljs-title">new</span> <span class="hljs-type">THREE</span>.<span class="hljs-type">BoxGeometry</span>(0.5, 0.5, 0.5),    // 0.5 "<span class="hljs-title">radius</span>"
-        <span class="hljs-title">new</span> <span class="hljs-type">THREE</span>.<span class="hljs-type">MeshLambertMaterial</span>({ <span class="hljs-title">color</span>: <span class="hljs-title">data</span>.<span class="hljs-title">color</span> }</span>);</span>
+        <span class="hljs-title">new</span> <span class="hljs-type">THREE</span>.<span class="hljs-type">MeshLambertMaterial</span>({ <span class="hljs-title">color</span>: <span class="hljs-title">data</span>.<span class="hljs-title">color</span> });</span>
       );
     }
 </code></pre>
@@ -274,8 +274,8 @@
     }
 </code></pre>
 <p>We may want to group data-driven objects under a container node, so that they can be transformed en-masse, rather than adding them directly to the <code>scene</code> root:</p>
-<pre><code class="lang-javascript">    // <span class="hljs-operator"><span class="hljs-keyword">create</span> container node <span class="hljs-keyword">for</span> our <span class="hljs-keyword">data</span>-driven objects:
-    <span class="hljs-keyword">var</span> chart3d = new THREE.Object3D();</span>
+<pre><code class="lang-javascript">    // <span class="hljs-keyword">create</span> <span class="hljs-keyword">container</span> node <span class="hljs-keyword">for</span> our <span class="hljs-keyword">data</span>-driven objects:
+    <span class="hljs-keyword">var</span> chart3d = <span class="hljs-keyword">new</span> THREE.Object3D();
     scene.add(chart3d);
 </code></pre>
 <h3 id="filling-the-chart">Filling the chart</h3>
@@ -289,7 +289,7 @@
 </ul>
 <pre><code class="lang-javascript">    d3.select(chart3d)                            // instead <span class="hljs-keyword">of</span> svg    
       .selectAll(<span class="hljs-string">"THREE.Mesh"</span>)                    // instead <span class="hljs-keyword">of</span> <span class="hljs-string">"rect"</span> etc.
-      .<span class="hljs-typedef"><span class="hljs-keyword">data</span><span class="hljs-container">(<span class="hljs-title">data</span>)</span>                                </span>
+      .<span class="hljs-class"><span class="hljs-keyword">data</span>(<span class="hljs-title">data</span>)                                </span>
       .enter()
           .append(makeBox)                        // instead <span class="hljs-keyword">of</span> <span class="hljs-string">"rect"</span> etc.
           .attr(<span class="hljs-string">"position.x"</span>, function(d, i) {    // instead <span class="hljs-keyword">of</span> <span class="hljs-string">"x"</span>
@@ -315,7 +315,7 @@
 <p>To call methods of Object3D, use the <code>.each()</code> method of the selection. Unlike attribute modification, this won&#39;t interpolate during transitions.</p>
 <pre><code class="lang-javascript">    .<span class="hljs-keyword">each</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d, i)</span> </span>{
         <span class="hljs-comment">// 'this' refers to the THREE.Mesh    </span>
-        <span class="hljs-keyword">this</span>.translateZ(-<span class="hljs-number">1</span>);
+        <span class="hljs-keyword">this</span>.translateZ(<span class="hljs-number">-1</span>);
     })
 </code></pre>
 <h2 id="grids-labels">Grids &amp; labels</h2>

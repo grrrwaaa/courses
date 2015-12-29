@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <script src="al.js"></script>
+    <script>
+// create a new field:
+var field = new field2D(64);
+
+// initialize with some noise:
+field.set(function(x, y) {
+  return random(2);
+});
+
+// duplicate the field for double-buffering:
+past = field.clone();
+
+// the game of life rule:
+function game(x, y) {
+  // neighbourhood:
+  var N = past.get(x, y + 1);
+  var E = past.get(x + 1, y);
+  var S = past.get(x, y - 1);
+  var W = past.get(x - 1, y);
+  var NE = past.get(x + 1, y + 1);
+  var SE = past.get(x + 1, y - 1);
+  var SW = past.get(x - 1, y - 1);
+  var NW = past.get(x - 1, y + 1);
+  var near = N + S + E + W + NW + SW + NE + SE;
+  // current state:
+  var C = past.get(x, y);
+  // transition rule:
+  // if alive:
+  if (C == 1) {
+    if (near < 2) {
+      // die by loneliness:
+      return 0;
+    } else if (near > 3) {
+      // die by overcrowding:
+      return 0;
+    }
+  } else if (C == 0) {
+    // if dead, rebirth by three neighbours:
+    if (near == 3) {
+      return 1;
+    }
+  }
+  // else remain the same:
+  return C;
+}
+
+// update the simulation (called frequently!)
+function update() {
+  // swap the buffers (cheaper than copying)
+  var tmp = past;
+  past = field;
+  field = tmp;
+
+   // run the game one step:
+  field.set(game);
+}
+
+// render the simulation (called frequently!)
+function draw() {
+  field.draw();
+  
+  draw2D.circle(0., 0., 0.1);
+}
+    </script>
+  </body>
+</html>

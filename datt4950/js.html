@@ -49,7 +49,6 @@ function main() {
 }
 ```
 -->
-
 <h3 id="flexible-fast-well-supported-">Flexible, fast, well-supported:</h3>
 <ul>
 <li><p>JS is a primarily imperative, procedural language (just like C, Java, Python, etc.), however it also supports functional programming features such as first-class functions. It has been described as Lisp in C&#39;s clothing. It is dynamically-typed and object-based, but uses a more flexible, dynamic <a href="http://en.wikipedia.org/wiki/Prototype-based_programming">prototype-based</a> rather than static class-based inheritance. </p>
@@ -136,7 +135,7 @@ function main() {
 <h3 id="strings">Strings</h3>
 <p>Strings are bounded by <code>&quot;</code> or <code>&#39;</code>. Characters are 16-bit. Special characters are escaped: <code>\&quot;, \&#39;, \\, \/, \n (newline), \t (tab)</code>. Also character codes, e.g. <code>&quot;A&quot; === &quot;\u0041&quot;</code>.</p>
 <p>Strings are immutable but can be concatenated with <code>+</code> and manipulated through methods.</p>
-<pre><code><span class="hljs-string">"seven"</span>.<span class="hljs-built_in">length</span> == <span class="hljs-number">5</span>
+<pre><code><span class="hljs-string">"seven"</span>.<span class="hljs-keyword">length</span> == <span class="hljs-number">5</span>
 <span class="hljs-string">'cat'</span>.toUpperCase() === <span class="hljs-string">'CAT'</span>
 </code></pre><p><code>string.charAt(n)</code> returns the character (a string of length 1) at position n. <code>string.charCodeAt(n)</code> returns a character code (integer). <code>string.fromCharCode(n)</code> converts back to a string.</p>
 <p><code>string.indexOf(s, i)</code> returns the first index of s, starting at position i. If not found, it returns -1. See also <code>string.lastIndexOf</code>.</p>
@@ -148,7 +147,7 @@ function main() {
 <p><code>1/0</code> returns <code>Infinity</code>. </p>
 <p><code>Math.sqrt(-1)</code> and similar return <code>NaN</code>. You can check with <code>isNaN(number)</code>. Note that <code>NaN</code> is not equal to itself.</p>
 <p>To check if a value is a usable number:</p>
-<pre><code><span class="hljs-keyword">var</span> isNumber = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{
+<pre><code><span class="hljs-keyword">var</span> isNumber = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">v</span>) </span>{
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">typeof</span> v === <span class="hljs-string">"number"</span> &amp;&amp; <span class="hljs-built_in">isFinite</span>(v);
 }
 </code></pre><p>There are several built-in numbers (constants) such as <code>Math.PI</code>.</p>
@@ -167,12 +166,12 @@ function main() {
     <span class="hljs-comment">// all other cases</span>
 }
 
-<span class="hljs-keyword">for</span> (&lt;<span class="hljs-keyword">init</span>&gt;; &lt;cond&gt;; &lt;increment&gt;) {
+<span class="hljs-keyword">for</span> (&lt;init&gt;; &lt;cond&gt;; &lt;increment&gt;) {
     <span class="hljs-comment">// body</span>
 }
 
-<span class="hljs-comment">// note: the order is unpredictable.</span>
-<span class="hljs-keyword">for</span> (&lt;name&gt; <span class="hljs-keyword">in</span> &lt;obj&gt;) {
+<span class="hljs-comment">// <span class="hljs-doctag">note:</span> the order is unpredictable.</span>
+<span class="hljs-keyword">for</span> (&lt;<span class="hljs-built_in">name</span>&gt; <span class="hljs-built_in">in</span> &lt;obj&gt;) {
     <span class="hljs-comment">// body</span>
 }
 
@@ -183,7 +182,7 @@ function main() {
 <p>An object maps keys (strings, including &#39;&#39;) to values (anything at all except <code>undefined</code>). A key only appears once. Objects collect &amp; organize data. Keys can be added, modified and removed.</p>
 <pre><code><span class="hljs-keyword">var</span> emptyobj = {};
 <span class="hljs-keyword">var</span> binarytree = {
-    <span class="hljs-string">"left"</span>: {            <span class="hljs-comment">// note: quotes around keys are optional</span>
+    <span class="hljs-string">"left"</span>: {            <span class="hljs-comment">// <span class="hljs-doctag">note:</span> quotes around keys are optional</span>
         <span class="hljs-string">"left"</span>: <span class="hljs-number">10</span>,        <span class="hljs-comment">// so long as key name is valid syntax</span>
         <span class="hljs-string">"right"</span>: <span class="hljs-number">20</span>        <span class="hljs-comment">// for a JavaScript variable name</span>
     },
@@ -247,13 +246,13 @@ emptyarray[<span class="hljs-number">1000</span>] = <span class="hljs-number">1<
 emptyarray.<span class="hljs-keyword">length</span>;    <span class="hljs-regexp">//</span> <span class="hljs-number">1001</span>
 </code></pre><p>Because arrays are really objects, we can add non-numeric properties and methods to individual arrays. We can also change their <code>.prototype</code>. Arrays inherit from <code>Array.prototype</code> by default, which gives them many useful methods (and the <code>.length</code> special property). </p>
 <p>Don&#39;t use <code>delete</code> on arrays; it will leave <code>undefined</code> holes in them. Instead use <code>.splice(index, elements_to_remove, elements_to_add)</code>:</p>
-<pre><code>[<span class="hljs-string">"a"</span>, <span class="hljs-string">"p"</span>, <span class="hljs-string">"q"</span>, <span class="hljs-string">"c"</span>].splice(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-string">"b"</span>);    <span class="hljs-regexp">//</span> [<span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span>, <span class="hljs-string">"c"</span>]
+<pre><code>[<span class="hljs-string">"a"</span>, <span class="hljs-string">"p"</span>, <span class="hljs-string">"q"</span>, <span class="hljs-string">"c"</span>].splice(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-string">"b"</span>);    // [<span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span>, <span class="hljs-string">"c"</span>]
 </code></pre><p><code>array.concat(items...)</code> will create a new array (a shallow copy) and push items onto the end. <code>array.slice(start, end)</code> will create a shallow copy from a sub-section of the array. Do not confuse <code>slice</code> with <code>splice</code>.</p>
 <p><code>array.join(separator)</code> will turn the array into a string.</p>
 <p><code>array.shift()</code> removes and returns the first element, <code>array.pop()</code> removes and returns the last element. <code>array.unshift(item)</code> prepends to the start of the array, <code>array.push(item)</code> appends to the end. </p>
 <p><code>array.sort(comparefunc)</code>. The default comparefunc is alphabetic, so it will sort numbers incorrectly. Provide your own comparefunc, which takes two arguments and returns negative if the first item is lower, positive if the second item is lower, and zero if they are equal. E.g.:</p>
 <pre><code><span class="hljs-comment">// sort numbers properly:</span>
-<span class="hljs-keyword">array</span>.sort(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span> </span>{ <span class="hljs-keyword">return</span> a - b; });
+<span class="hljs-keyword">array</span>.sort(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span> <span class="hljs-comment">{ return a - b; }</span>);</span>
 </code></pre><p>Multidimensional arrays are just arrays whose values are arrays. E.g. to create a 3x3 array of zeroes:</p>
 <pre><code><span class="hljs-keyword">var</span> z = [
     [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>],
@@ -269,7 +268,7 @@ emptyarray.<span class="hljs-keyword">length</span>;    <span class="hljs-regexp
     }
 }
 </code></pre><p>Note: since <code>typeof myarray</code> returns <code>&quot;object&quot;</code>, we must use the prototype to distinguish objects &amp; arrays:</p>
-<pre><code><span class="hljs-keyword">var</span> is_array = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(obj)</span> </span>{
+<pre><code><span class="hljs-keyword">var</span> is_array = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">obj</span>) </span>{
     <span class="hljs-keyword">return</span> obj &amp;&amp; <span class="hljs-keyword">typeof</span> obj === <span class="hljs-string">"object"</span> &amp;&amp; obj.constructor === <span class="hljs-built_in">Array</span>;
 }
 </code></pre><h3 id="functions">Functions</h3>
@@ -279,11 +278,11 @@ emptyarray.<span class="hljs-keyword">length</span>;    <span class="hljs-regexp
 </ul>
 <p>Functions are objects; they can have properties. Functions also store their context. As objects, they can be stored in variables, objects, arrays etc, and passed around as arguments &amp; return values of other functions. For example, passing a function as an argument is commonly done when specifying callbacks. </p>
 <p>If a function is a property of another object, it is called a <strong>method</strong>. Functions themselves can also have methods.</p>
-<pre><code><span class="hljs-keyword">var</span> &lt;name&gt; = <span class="hljs-function"><span class="hljs-keyword">function</span> &lt;<span class="hljs-title">optional</span> <span class="hljs-title">name</span>&gt;<span class="hljs-params">(&lt;argument list&gt;)</span> </span>{
+<pre><code>var &lt;<span class="hljs-keyword">name</span>&gt; = <span class="hljs-function"><span class="hljs-keyword">function</span></span> &lt;<span class="hljs-keyword">optional</span> <span class="hljs-keyword">name</span>&gt;(&lt;argument list&gt;) {
     &lt;body&gt;
 }
 
-<span class="hljs-keyword">var</span> add = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span> </span>{
+var add = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span></span> {
     <span class="hljs-keyword">return</span> a + b;
 }
 </code></pre><p>Note that functions are <em>hoisted</em> to the top of the program; that means functions don&#39;t have to be declared in order that they are used. You can use a function that is declared later in the program.</p>
@@ -291,9 +290,9 @@ emptyarray.<span class="hljs-keyword">length</span>;    <span class="hljs-regexp
 <p><code>arguments</code> is an array-like object of all the arguments passed to the function, including excess arguments. It is not really an array, and only has the .length property and support for <code>[]</code> indexing. It is there to allow functions with variable numbers of arguments:</p>
 <pre><code>var sum = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
     var <span class="hljs-built_in">i</span>, sum = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">i</span>=<span class="hljs-number">0</span>; <span class="hljs-built_in">i</span>&lt;arguments.<span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span>++) <span class="hljs-cell">{
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">i</span>=<span class="hljs-number">0</span>; <span class="hljs-built_in">i</span>&lt;arguments.<span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span>++) {
         sum += arguments[i];
-    }</span>
+    }
     <span class="hljs-keyword">return</span> sum;
 }
 </code></pre><p>What <code>this</code> refers to depends on how the function was invoked:</p>
@@ -354,18 +353,18 @@ Quo.prototype.get_status = <span class="hljs-function"><span class="hljs-keyword
 <pre><code><span class="hljs-keyword">var</span> myobj = <span class="hljs-built_in">Object</span>.create(prototype);
 </code></pre><p>This applies the prototype explicitly and avoids using <code>new</code> at all.</p>
 <pre><code><span class="hljs-keyword">var</span> mytype = <span class="hljs-keyword">function</span>(spec) {
-    <span class="hljs-keyword">var</span> <span class="hljs-literal">that</span> = {}; <span class="hljs-pi">// or Object.create... 
+    <span class="hljs-keyword">var</span> <span class="hljs-literal">that</span> = {}; <span class="hljs-regexp">// or Object.create... 
     //</span> initialize <span class="hljs-literal">that</span> according <span class="hljs-keyword">to</span> spec
-    <span class="hljs-pi">// define private members as local (var) variables
+    <span class="hljs-regexp">// define private members as local (var) variables
     //</span> define public members as properties <span class="hljs-keyword">of</span> <span class="hljs-literal">that</span>
-    <span class="hljs-pi">// define private methods as local (var) functions
+    <span class="hljs-regexp">// define private methods as local (var) functions
     //</span> assign methods <span class="hljs-keyword">to</span> <span class="hljs-literal">that</span> <span class="hljs-keyword">to</span> make them public
     <span class="hljs-keyword">return</span> <span class="hljs-literal">that</span>;
 }
 </code></pre><p>This style adds security through the private members/methods, but calling super methods becomes more clunky. It also allows us to procedurally build objects with different capabilities.</p>
 <h3 id="json">JSON</h3>
 <p>The only syntax difference between object/array and JSON, is that object key names must be quoted:</p>
-<pre><code>{ "<span class="hljs-attribute">one</span>": <span class="hljs-value"><span class="hljs-number">1</span> </span>}
+<pre><code>{ "<span class="hljs-attr">one</span>": <span class="hljs-number">1</span> }
 </code></pre><p>Most JS environments now provide <code>JSON.parse()</code> and <code>JSON.stringify()</code> wich convert between JSON strings and Javascript objects, and vice versa. Otherwise, JSON libraries are available at json.org. </p>
 <h3 id="exceptions">Exceptions</h3>
 <p>Throw exceptions with <code>throw &lt;exception-object&gt;;</code>, and catch with the <code>try...catch</code> control flow. A throw will immediately exit the current flow. The exception-object can be anything, but typically an object with <code>.name</code> and <code>.message</code> properties for the <code>catch</code> to deal with:</p>
@@ -378,7 +377,7 @@ Quo.prototype.get_status = <span class="hljs-function"><span class="hljs-keyword
 <p>A <em>regular expression</em> specifies the syntax of a simple (type-3) language. They are used to search and replace information from strings. RegExps are usually fast, but are difficult to write (and read!), which means they are common sources of bugs.</p>
 <p>A <em>pattern</em> is a template for text that may have fixed and optional or variable components. Patterns either match a strong, or they don&#39;t. A <em>capture</em> within a pattern identifies the part of the pattern that we want to return. </p>
 <p>Regular expressions are denoted with <code>/</code> delimiters:</p>
-<pre><code><span class="hljs-reserved">var</span> r = <span class="hljs-regexp">/pattern/</span>;
+<pre><code><span class="hljs-keyword">var</span> r = <span class="hljs-regexp">/pattern/</span>;
 </code></pre><ul>
 <li>anchors:<ul>
 <li><code>^</code> at the start anchors the pattern at the beginning of the string. Without it, the pattern can skip characters until it finds a matching start point.</li>

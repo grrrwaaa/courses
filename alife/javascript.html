@@ -65,37 +65,37 @@
 </code></pre>
 <h2 id="globals">Globals</h2>
 <p>The <code>random()</code> function can be used to generate random numbers. The <code>wrap()</code> applies a Euclidean modulo (remainder after division) in such a way that the result is always positive and without reflections:</p>
-<pre><code class="lang-javascript"><span class="hljs-function">random</span>();         <span class="hljs-comment">// a floating-point number between 0 and 1</span>
-<span class="hljs-function">random</span>(6);        <span class="hljs-comment">// an integer between 0 and 5</span>
-<span class="hljs-function">wrap</span>(-1, 4);    <span class="hljs-comment">// returns 3 (whereas -1 % 4 would return -1)</span>
+<pre><code class="lang-javascript"><span class="hljs-built_in">random</span>();        <span class="hljs-comment"> // a floating-point number between 0 and 1</span>
+<span class="hljs-built_in">random</span>(<span class="hljs-number">6</span>);       <span class="hljs-comment"> // an integer between 0 and 5</span>
+<span class="hljs-keyword">wrap</span>(<span class="hljs-number">-1</span>, <span class="hljs-number">4</span>);   <span class="hljs-comment"> // returns 3 (whereas -1 % 4 would return -1)</span>
 </code></pre>
 <h2 id="draw2d">Draw2D</h2>
 <p>The Draw2D library is a light wrapper of HTML5 canvas.</p>
 <p>It uses a stack-based coordinate transform system. Push the context, apply transforms, then return back to the previous coordinate system by popping the context again:</p>
-<pre><code class="lang-javascript">// create a local coordinate system:
-draw2D.push();
-    draw2D.translate(x, y);
-    draw2D.rotate(angle_in_radians);
-    draw2D.scale(sizex, sizey);
+<pre><code class="lang-javascript"><span class="hljs-comment">// create a local coordinate system:</span>
+draw2D.push()<span class="hljs-comment">;</span>
+    draw2D.translate(x, y)<span class="hljs-comment">;</span>
+    draw2D.rotate(angle_in_radians)<span class="hljs-comment">;</span>
+    draw2D.scale(sizex, sizey)<span class="hljs-comment">;</span>
 
-    // draw <span class="hljs-keyword">in</span> local coordinate system
-    //<span class="hljs-keyword">...</span>
+    <span class="hljs-comment">// draw in local coordinate system</span>
+    <span class="hljs-comment">//...</span>
 
-// <span class="hljs-keyword">return</span> to global coordinate system:
-draw2D.pop();
+<span class="hljs-comment">// return to global coordinate system:</span>
+draw2D.pop()<span class="hljs-comment">;</span>
 </code></pre>
 <p>Graphics are drawn using whatever color is currently set, via <code>draw2D.color()</code>. The current color is set in terms of red, green, and blue components (from 0 to 1). The color also applies to fields. </p>
 <p>Basic shapes are as follows:</p>
-<pre><code class="lang-javascript">    draw2D.<span class="hljs-built_in">color</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);    <span class="hljs-comment">// red</span>
-    field.<span class="hljs-title">draw</span>();
-    draw2D.<span class="hljs-built_in">color</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);    <span class="hljs-comment">// green</span>
-    draw2D.circle(center_x, center_y, diameter);
-    draw2D.<span class="hljs-built_in">color</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);    <span class="hljs-comment">// yellow</span>
-    draw2D.<span class="hljs-built_in">rect</span>(center_x, center_y, <span class="hljs-variable">width</span>, <span class="hljs-variable">height</span>);
+<pre><code class="lang-javascript">    draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<span class="hljs-comment">;    // red</span>
+    field.draw()<span class="hljs-comment">;</span>
+    draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)<span class="hljs-comment">;    // green</span>
+    draw2D.<span class="hljs-keyword">circle</span>(center_x, center_y, diameter)<span class="hljs-comment">;</span>
+    draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)<span class="hljs-comment">;    // yellow</span>
+    draw2D.rect(center_x, center_y, <span class="hljs-keyword">width</span>, height)<span class="hljs-comment">;</span>
 </code></pre>
 <h2 id="field2d">field2D</h2>
 <p>We have a <code>field2D</code> type to represent grids of cells, where each cell holds a floating point number (typically but not necessarily in the range of zero to one). You can create a field like this:</p>
-<pre><code class="lang-javascript">var field = <span class="hljs-keyword">new</span> field2D(<span class="hljs-variable">width</span>, <span class="hljs-variable">height</span>);
+<pre><code class="lang-javascript">var field = <span class="hljs-keyword">new</span> field2D(<span class="hljs-built_in">width</span>, <span class="hljs-built_in">height</span>);
 </code></pre>
 <p>By default field cells will be zero. You can get and set individual field cells this way:</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> <span class="hljs-keyword">value</span> = field.<span class="hljs-keyword">get</span>(x, y);
@@ -103,8 +103,8 @@ field.<span class="hljs-keyword">set</span>(<span class="hljs-keyword">value</sp
 </code></pre>
 <p>Note that if x or y is out of bounds for the field, it will wrap around from the other side. So you are always guaranteed it will return or set a value. </p>
 <p>To set the value of all cells at once, omit the x and y:</p>
-<pre><code class="lang-javascript">// <span class="hljs-operator"><span class="hljs-keyword">set</span> <span class="hljs-keyword">all</span> <span class="hljs-keyword">field</span> cells <span class="hljs-keyword">to</span> <span class="hljs-number">1</span>:
-<span class="hljs-keyword">field</span>.<span class="hljs-keyword">set</span>(<span class="hljs-number">1</span>);</span>
+<pre><code class="lang-javascript">// <span class="hljs-keyword">set</span> all <span class="hljs-keyword">field</span> cells <span class="hljs-keyword">to</span> <span class="hljs-number">1</span>:
+<span class="hljs-keyword">field</span>.<span class="hljs-keyword">set</span>(<span class="hljs-number">1</span>);
 </code></pre>
 <p>A more powerful feature of <code>field2D.set()</code> is that it can take a function instead of a number. It calls this function to derive a new value for each cell in the field. The function receives as arguments the x and y position of the cell (and the variable <code>this</code> maps to the field itself), so for example, this code initializes the field with a horizontal gradient:</p>
 <pre><code class="lang-javascript">field.<span class="hljs-keyword">set</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(x, y)</span> </span>{
@@ -117,12 +117,12 @@ field.<span class="hljs-keyword">set</span>(<span class="hljs-keyword">value</sp
 }
 </code></pre>
 <p>More useful methods:</p>
-<pre><code class="lang-javascript">field.min(<span class="hljs-function">)</span>;    // returns the lowest cell value in the<span class="hljs-instruction"> array
-</span>field.max(<span class="hljs-function">)</span>;    // returns the highest cell value in the<span class="hljs-instruction"> array
-</span>field.sum(<span class="hljs-function">)</span>;    // adds up all cell values<span class="hljs-instruction"> and </span>returns the total
+<pre><code class="lang-javascript">field.min();    // returns the lowest cell value in the<span class="hljs-built_in"> array
+</span>field.max();    // returns the highest cell value in the<span class="hljs-built_in"> array
+</span>field.sum();    // adds up all cell values<span class="hljs-built_in"> and </span>returns the total
 
-field.clear(<span class="hljs-function">)</span>;         // set all field cells to zero
-field.normalize(<span class="hljs-function">)</span>;     // re-scales the field into a 0..1 range
+field.clear();         // set all field cells to zero
+field.normalize();     // re-scales the field into a 0..1 range
 </code></pre>
 <p>There are some methods for interpolated reading/writing/modifying fields. These methods use x and y indices in a normalized 0..1 floating-point range rather than 0..width or 0..height integer range:</p>
 <pre><code class="lang-javascript"><span class="hljs-comment">// returns interpolated value at the normalized position x,y</span>
@@ -144,45 +144,45 @@ field.scale<span class="hljs-comment">(v, x, y)</span>;
 field.scale<span class="hljs-comment">(v)</span>;
 </code></pre>
 <p>The field2D type also includes a diffusion method, which can be used to smoothly distribute values over time. It requires a second (previous) copy of the field to diffuse from:</p>
-<pre><code class="lang-javascript"><span class="hljs-regexp">//</span> field_previous <span class="hljs-keyword">is</span> another field2D <span class="hljs-keyword">of</span> equal dimensions
-<span class="hljs-regexp">//</span> diffusion_rate <span class="hljs-keyword">is</span> a value between <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> <span class="hljs-number">1</span>; a rate <span class="hljs-keyword">of</span> <span class="hljs-number">0</span> means <span class="hljs-literal">no</span> diffusion.
-<span class="hljs-regexp">//</span> accuracy <span class="hljs-keyword">is</span> an optional integer <span class="hljs-keyword">for</span> the number <span class="hljs-keyword">of</span> diffusion steps; the <span class="hljs-reserved">default</span> <span class="hljs-keyword">is</span> <span class="hljs-number">10.</span>
+<pre><code class="lang-javascript">// field_previous <span class="hljs-keyword">is</span> another field2D <span class="hljs-keyword">of</span> equal dimensions
+// diffusion_rate <span class="hljs-keyword">is</span> a value between <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> <span class="hljs-number">1</span>; a rate <span class="hljs-keyword">of</span> <span class="hljs-number">0</span> means no diffusion.
+// accuracy <span class="hljs-keyword">is</span> an optional <span class="hljs-built_in">integer</span> <span class="hljs-keyword">for</span> the number <span class="hljs-keyword">of</span> diffusion steps; the <span class="hljs-keyword">default</span> <span class="hljs-keyword">is</span> <span class="hljs-number">10</span>.
 field.diffuse(field_previous, diffusion_rate, accuracy);
 </code></pre>
 <p>There are also a couple of classic functional programming methods. The <code>map(function)</code> method applies a function to each cell of the field in turn. The function arguments will be the current value of the cell and the x and y position, and the return value should be the new value of the cell (or nil to indicate no change). </p>
 <p>The <code>reduce(function, initial)</code> method is used to reduce a field to a single value, such as calculating the total of all cells. This value is defined by the <code>initial</code> argument, passed to the function for each cell, and updated by its return value. Easier to explain by example:</p>
-<pre><code class="lang-javascript"><span class="hljs-comment">// multiply all cells by 2: </span>
-field.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value, x, y)</span> </span>{ <span class="hljs-keyword">return</span> value * <span class="hljs-number">2</span>; });
+<pre><code class="lang-javascript">// multiply <span class="hljs-built_in">all</span> cells by <span class="hljs-number">2</span>: 
+field.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value, x, y)</span></span> { <span class="hljs-keyword">return</span> <span class="hljs-keyword">value</span> * <span class="hljs-number">2</span>; });
 
-<span class="hljs-comment">// find the sum total of all cell values:</span>
-<span class="hljs-keyword">var</span> total = field.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(sum, value, x, y)</span> </span>{
-    <span class="hljs-keyword">return</span> sum + value;
+// find the <span class="hljs-built_in">sum</span> total of <span class="hljs-built_in">all</span> cell values:
+var total = field.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(sum, value, x, y)</span></span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">sum</span> + <span class="hljs-keyword">value</span>;
 }, <span class="hljs-number">0</span>);
 </code></pre>
 <h2 id="vec2">vec2</h2>
 <p>The library also includes support for 2D <a href="vectors.html">vectors</a>. </p>
 <pre><code class="lang-javascript">
-<span class="hljs-comment">// create a new vector of zero magnitude</span>
-p = <span class="hljs-keyword">new</span> vec2(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+// <span class="hljs-keyword">create</span> a <span class="hljs-keyword">new</span> vector <span class="hljs-keyword">of</span> zero magnitude
+<span class="hljs-keyword">p</span> = <span class="hljs-keyword">new</span> vec2(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
 
-<span class="hljs-comment">// create a new vector of unit magnitude, pointing in a random direction:</span>
-p = <span class="hljs-keyword">new</span> vec2.<span class="hljs-built_in">random</span>(<span class="hljs-number">1</span>);
+// <span class="hljs-keyword">create</span> a <span class="hljs-keyword">new</span> vector <span class="hljs-keyword">of</span> unit magnitude, pointing <span class="hljs-keyword">in</span> a random direction:
+<span class="hljs-keyword">p</span> = <span class="hljs-keyword">new</span> vec2.random(<span class="hljs-number">1</span>);
 
-<span class="hljs-comment">// create a copy of it:</span>
-p2 = p.<span class="hljs-built_in">copy</span>();
+// <span class="hljs-keyword">create</span> a copy <span class="hljs-keyword">of</span> it:
+p2 = <span class="hljs-keyword">p</span>.copy();
 
-<span class="hljs-comment">// make it point into the X axis:</span>
-p.<span class="hljs-built_in">set</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);
+// make it point into the X axis:
+p.set(1, 0);
 
-<span class="hljs-comment">// create a vector from polar coordinates:</span>
-p = vec2.fromPolar(length, angle);
+// <span class="hljs-keyword">create</span> a vector <span class="hljs-keyword">from</span> polar coordinates:
+<span class="hljs-keyword">p</span> = vec2.fromPolar(<span class="hljs-keyword">length</span>, angle);
 </code></pre>
 <p>Operations on vectors can either modify the object in place, or create a new vector:</p>
-<pre><code class="lang-javascript">p.<span class="hljs-keyword">add</span>(p1);    <span class="hljs-comment">// modifies p</span>
-p.sub(p1);    <span class="hljs-comment">// modifies p</span>
+<pre><code class="lang-javascript">p.add(p1);    // modifies p
+p.sub(p1);    // modifies p
 
-p2 = p.addnew(p1); <span class="hljs-comment">// creates a new vector</span>
-p2 = p.subnew(p1); <span class="hljs-comment">// creates a new vector</span>
+p2 = p.addnew(p1); // creates a<span class="hljs-built_in"> new </span>vector
+p2 = p.subnew(p1); // creates a<span class="hljs-built_in"> new </span>vector
 </code></pre>
 <p>Here are all the vec2 methods:</p>
 <ul>

@@ -318,7 +318,7 @@ sugar.<span class="hljs-keyword">set</span>(<span class="hljs-function"><span cl
 </code></pre>
 <p>Agents can then sample the local field during their update routine as follows:</p>
 <pre><code class="lang-javascript">    <span class="hljs-comment">// in agent_update:</span>
-    <span class="hljs-tag">var</span> sugar_concentration = sugar.<span class="hljs-function"><span class="hljs-title">sample</span><span class="hljs-params">(self.location.x, self.location.y)</span></span>
+    <span class="hljs-selector-tag">var</span> sugar_concentration = sugar.sample(self<span class="hljs-selector-class">.location</span><span class="hljs-selector-class">.x</span>, self<span class="hljs-selector-class">.location</span><span class="hljs-selector-class">.y</span>)
 </code></pre>
 <p>Here&#39;s an implementation of <a href="http://codepen.io/anon/pen/pJLNgM/right/?editors=001">Chemotaxis</a> in the editor.</p>
 <p>A variety of other <em>taxes</em> worth exploring can be found on the <a href="http://en.wikipedia.org/wiki/Taxis#Aerotaxis">wikipedia page</a>. Note how chemotaxis (and other taxes) can be divided into positive (attractive) and negative (repulsive) characters, just like forces (directly seen in steering forces). This is closely related to the concepts of positive and negative feedback and the explorations of cybernetics.</p>
@@ -330,7 +330,7 @@ sugar.<span class="hljs-keyword">set</span>(<span class="hljs-function"><span cl
 <h4 id="implementation">Implementation</h4>
 <p>Being able to leave pheromones behind depends on the ability to write into as well as read from fields. This can be achieved using the <code>splat</code> method of the field:</p>
 <pre><code class="lang-javascript">    <span class="hljs-comment">// in agent update:</span>
-    pheromone_field.<span class="hljs-function"><span class="hljs-title">splat</span><span class="hljs-params">(intensity, self.location.x, self.location.y)</span></span>
+    pheromone_field.splat(intensity, self<span class="hljs-selector-class">.location</span><span class="hljs-selector-class">.x</span>, self<span class="hljs-selector-class">.location</span><span class="hljs-selector-class">.y</span>)
 </code></pre>
 <p>To store different pheromones we might want to use different fields. These fields should also probably decay over time (using the <code>field.decay()</code> method), and possibly diffuse slightly (using the <code>field.diffuse()</code> method).</p>
 <p>To detect field intensites in different directions, we might want to sample with sensors further from the body center (similar to the sensors in the Vehicles model) and compare their results. </p>

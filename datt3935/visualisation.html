@@ -226,18 +226,18 @@
 <h1 id="d3-js">D3.js</h1>
 <p><a href="http://d3js.org">D3.js</a> is a JavaScript library for manipulating documents based on data.<br><a href="http://chimera.labs.oreilly.com/books/1230000000345/index.html"><img src="http://alignedleft.com/assets/images/idvftw_cover.gif" alt="Interactive Data Visualization for the Web, Scott Murray"></a></p>
 <p>To get the main D3.js JavaScript file go to the D3.js website and download the latest version d3.v2.min.js to your project folder, and add it to your HTML <code>head</code> like so:</p>
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/javascript"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"d3.v3.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"d3.v3.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
 </code></pre><p>Or, you can link to the host directly:</p>
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://d3js.org/d3.v3.min.js"</span> <span class="hljs-attribute">charset</span>=<span class="hljs-value">"utf-8"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://d3js.org/d3.v3.min.js"</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
 </code></pre><blockquote>
 <p>D3 allows you to bind arbitrary data to a Document Object Model (DOM), and then apply data-driven transformations to the document. For example, you can use D3 to generate an HTML table from an array of numbers. Or, use the same data to create an interactive SVG bar chart with smooth transitions and interaction.</p>
 </blockquote>
 <p>D3 does this by means of a query/attribute system very similar to jQuery. E.g., to change all paragraph text to be white:</p>
-<pre><code>d3.selectAll(<span class="hljs-string">"p"</span>).style(<span class="hljs-string">"color"</span>, <span class="hljs-string">"white"</span>);
+<pre><code>d3.selectAll(<span class="hljs-string">"p"</span>).style(<span class="hljs-string">"color"</span>, <span class="hljs-string">"white"</span>)<span class="hljs-comment">;</span>
 </code></pre><p>Yet styles, attributes, and other properties can be specified as functions of data in D3, not just simple constants. For example, to alternate shades of gray for even and odd nodes:</p>
 <pre><code>d3.selectAll(<span class="hljs-string">"p"</span>).style(<span class="hljs-string">"color"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d, i)</span> </span>{
   <span class="hljs-keyword">return</span> i % <span class="hljs-number">2</span> ? <span class="hljs-string">"#fff"</span> : <span class="hljs-string">"#eee"</span>;
@@ -262,27 +262,27 @@
 <p>D3 lets you transform documents based on data; this includes both creating and destroying elements. D3 allows you to change an existing document in response to user interaction, animation over time, or even asynchronous notification from a third-party. Best of all, D3 is easy to debug using the browser’s built-in element inspector: the nodes that you manipulate with D3 are exactly those that the browser understands natively.</p>
 </blockquote>
 <p>In addition to using standard HTML and CSS, D3 allows you to use another web standard, SVG (scalable vector graphics) for drawing graphical representations of data in the DOM. You can create SVG elements using D3 and style them with external stylesheets. SVG can be embedded in HTML pages just like any other tag, e.g. a blue circle:</p>
-<pre><code>&lt;svg <span class="hljs-variable">width=</span><span class="hljs-string">"50"</span> <span class="hljs-variable">height=</span><span class="hljs-string">"50"</span>&gt;
-    &lt;circle <span class="hljs-variable">cx=</span><span class="hljs-string">"25"</span> <span class="hljs-variable">cy=</span><span class="hljs-string">"25"</span> <span class="hljs-variable">r=</span><span class="hljs-string">"22"</span>
-     <span class="hljs-variable">fill=</span><span class="hljs-string">"blue"</span>/&gt;
-&lt;/svg&gt;
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"50"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"50"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">circle</span> <span class="hljs-attr">cx</span>=<span class="hljs-string">"25"</span> <span class="hljs-attr">cy</span>=<span class="hljs-string">"25"</span> <span class="hljs-attr">r</span>=<span class="hljs-string">"22"</span>
+     <span class="hljs-attr">fill</span>=<span class="hljs-string">"blue"</span>/&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">svg</span>&gt;</span>
 </code></pre><p>D3’s focus on transformation extends naturally to animated transitions. Transitions gradually interpolate styles and attributes over time. For example, to resize circles in a symbol map with a staggered delay:</p>
 <pre><code>d3.selectAll(<span class="hljs-string">"circle"</span>).transition()
     .duration(<span class="hljs-number">750</span>)
-    .delay(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d, i)</span> </span>{ <span class="hljs-keyword">return</span> i * <span class="hljs-number">10</span>; })
-    .attr(<span class="hljs-string">"r"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.sqrt(d * scale); });
+    .delay(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d, i</span>) </span>{ <span class="hljs-keyword">return</span> i * <span class="hljs-number">10</span>; })
+    .attr(<span class="hljs-string">"r"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.sqrt(d * scale); });
 </code></pre><h2 id="svg-graphics">SVG graphics</h2>
 <p>Always wrapped in an <code>&lt;svg&gt;</code> element, which should have a width &amp; height (graphics will be clipped to this box). Within that, SVG code itself is a form of XML. </p>
 <p>Simple SVG shapes include rect, circle, ellipse, line, text, and path. The coordinate system is pixel based, with 0,0 at the top left. </p>
 <p>Common SVG properties are: fill (CSS color), stroke (CSS color), stroke-width, opacity (0.0 is transparent, 1.0 is opaque). <a href="http://www.w3.org/TR/SVG/styling.html">These can all be set with CSS styles</a>. All text will inherit the CSS-specified font styles of its parent element unless specified otherwise via CSS.</p>
-<pre><code>&lt;svg <span class="hljs-variable">width=</span><span class="hljs-number">500</span> <span class="hljs-variable">height=</span><span class="hljs-number">500</span>&gt;
-    &lt;rect <span class="hljs-variable">x=</span><span class="hljs-string">"0"</span> <span class="hljs-variable">y=</span><span class="hljs-string">"0"</span> <span class="hljs-variable">width=</span><span class="hljs-string">"500"</span> <span class="hljs-variable">height=</span><span class="hljs-string">"10"</span> /&gt;
-    &lt;circle <span class="hljs-variable">cx=</span><span class="hljs-string">"250"</span> <span class="hljs-variable">cy=</span><span class="hljs-string">"20"</span> <span class="hljs-variable">r=</span><span class="hljs-string">"5"</span> <span class="hljs-variable">fill=</span><span class="hljs-string">"yellow"</span> <span class="hljs-variable">stroke=</span><span class="hljs-string">"orange"</span> <span class="hljs-variable">stroke-width=</span><span class="hljs-string">"2"</span>/&gt;
-    &lt;g <span class="hljs-variable">transform=</span><span class="hljs-string">"translate(250,30)"</span>&gt;
-        &lt;ellipse <span class="hljs-variable">cx=</span><span class="hljs-string">"0"</span> <span class="hljs-variable">cy=</span><span class="hljs-string">"0"</span> <span class="hljs-variable">rx=</span><span class="hljs-string">"10"</span> <span class="hljs-variable">ry=</span><span class="hljs-string">"5"</span> <span class="hljs-variable">class=</span><span class="hljs-string">"pumpkin"</span>/&gt;
+<pre><code>&lt;svg <span class="hljs-built_in">width</span>=<span class="hljs-number">500</span> <span class="hljs-built_in">height</span>=<span class="hljs-number">500</span>&gt;
+    &lt;<span class="hljs-built_in">rect</span> x=<span class="hljs-string">"0"</span> y=<span class="hljs-string">"0"</span> <span class="hljs-built_in">width</span>=<span class="hljs-string">"500"</span> <span class="hljs-built_in">height</span>=<span class="hljs-string">"10"</span> /&gt;
+    &lt;circle cx=<span class="hljs-string">"250"</span> cy=<span class="hljs-string">"20"</span> r=<span class="hljs-string">"5"</span> <span class="hljs-built_in">fill</span>=<span class="hljs-string">"yellow"</span> <span class="hljs-built_in">stroke</span>=<span class="hljs-string">"orange"</span> <span class="hljs-built_in">stroke</span>-<span class="hljs-built_in">width</span>=<span class="hljs-string">"2"</span>/&gt;
+    &lt;g transform=<span class="hljs-string">"translate(250,30)"</span>&gt;
+        &lt;<span class="hljs-built_in">ellipse</span> cx=<span class="hljs-string">"0"</span> cy=<span class="hljs-string">"0"</span> rx=<span class="hljs-string">"10"</span> ry=<span class="hljs-string">"5"</span> class=<span class="hljs-string">"pumpkin"</span>/&gt;
     &lt;/g&gt;
-    &lt;line <span class="hljs-variable">x1=</span><span class="hljs-string">"0"</span> <span class="hljs-variable">y1=</span><span class="hljs-string">"40"</span> <span class="hljs-variable">x2=</span><span class="hljs-string">"500"</span> <span class="hljs-variable">y2=</span><span class="hljs-string">"50"</span> <span class="hljs-variable">stroke=</span><span class="hljs-string">"black"</span>/&gt;
-    &lt;text <span class="hljs-variable">x=</span><span class="hljs-string">"250"</span> <span class="hljs-variable">y=</span><span class="hljs-string">"60"</span>&gt;Easy-peasy&lt;/text&gt;
+    &lt;<span class="hljs-built_in">line</span> x1=<span class="hljs-string">"0"</span> y1=<span class="hljs-string">"40"</span> x2=<span class="hljs-string">"500"</span> y2=<span class="hljs-string">"50"</span> <span class="hljs-built_in">stroke</span>=<span class="hljs-string">"black"</span>/&gt;
+    &lt;<span class="hljs-built_in">text</span> x=<span class="hljs-string">"250"</span> y=<span class="hljs-string">"60"</span>&gt;Easy-peasy&lt;/<span class="hljs-built_in">text</span>&gt;
 &lt;/svg&gt;
 </code></pre><p>Objects draw with the &#39;painter&#39;s algorithm&#39;: objects are draw in order, and new objects will hide older objects (unless opacity is less than one). It is important to render axes, labels etc. last.</p>
 <p>Here&#39;s an example of binding data to SVG:</p>
@@ -307,40 +307,40 @@ svg.selectAll(<span class="hljs-string">"circle"</span>)
         <span class="hljs-keyword">return</span> d;
     });
 </code></pre><p>Here&#39;s a different way, using group transforms:</p>
-<pre><code><span class="hljs-keyword">var</span> data = [<span class="hljs-number">4</span>, <span class="hljs-number">8</span>, <span class="hljs-number">15</span>, <span class="hljs-number">16</span>, <span class="hljs-number">23</span>, <span class="hljs-number">42</span>];
+<pre><code><span class="hljs-symbol">var</span> <span class="hljs-meta">data</span> = [<span class="hljs-number">4</span>, <span class="hljs-number">8</span>, <span class="hljs-number">15</span>, <span class="hljs-number">16</span>, <span class="hljs-number">23</span>, <span class="hljs-number">42</span>]<span class="hljs-comment">;</span>
 
-<span class="hljs-keyword">var</span> width = <span class="hljs-number">420</span>,
-    barHeight = <span class="hljs-number">20</span>;
+<span class="hljs-symbol">var</span> width = <span class="hljs-number">420</span>,
+    <span class="hljs-keyword">barHeight </span>= <span class="hljs-number">20</span><span class="hljs-comment">;</span>
 
-<span class="hljs-keyword">var</span> x = d3.scale.linear()
-    .domain([<span class="hljs-number">0</span>, d3.max(data)])
-    .range([<span class="hljs-number">0</span>, width]);
+<span class="hljs-symbol">var</span> x = <span class="hljs-built_in">d3</span>.scale.linear()
+    .domain([<span class="hljs-number">0</span>, <span class="hljs-built_in">d3</span>.max(<span class="hljs-meta">data</span>)])
+    .range([<span class="hljs-number">0</span>, width])<span class="hljs-comment">;</span>
 
-<span class="hljs-keyword">var</span> chart = d3.select(<span class="hljs-string">".chart"</span>)
-    .attr(<span class="hljs-string">"width"</span>, width)
-    .attr(<span class="hljs-string">"height"</span>, barHeight * data.length);
+<span class="hljs-symbol">var</span> chart = <span class="hljs-built_in">d3</span>.<span class="hljs-keyword">select(".chart")
+</span>    .attr(<span class="hljs-string">"width"</span>, width)
+    .attr(<span class="hljs-string">"height"</span>, <span class="hljs-keyword">barHeight </span>* <span class="hljs-meta">data</span>.length)<span class="hljs-comment">;</span>
 
-<span class="hljs-keyword">var</span> bar = chart.selectAll(<span class="hljs-string">"g"</span>)
-    .data(data)
+<span class="hljs-symbol">var</span> <span class="hljs-keyword">bar </span>= chart.<span class="hljs-keyword">selectAll("g")
+</span>    <span class="hljs-meta">.data</span>(<span class="hljs-meta">data</span>)
   .enter().append(<span class="hljs-string">"g"</span>)
-    .attr(<span class="hljs-string">"transform"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d, i)</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-string">"translate(0,"</span> + i * barHeight + <span class="hljs-string">")"</span>; });
+    .attr(<span class="hljs-string">"transform"</span>, <span class="hljs-meta">function</span>(d, i) { return <span class="hljs-string">"translate(0,"</span> + i * <span class="hljs-keyword">barHeight </span>+ <span class="hljs-string">")"</span><span class="hljs-comment">; });</span>
 
-bar.append(<span class="hljs-string">"rect"</span>)
-    .attr(<span class="hljs-string">"width"</span>, x)
-    .attr(<span class="hljs-string">"height"</span>, barHeight - <span class="hljs-number">1</span>);
+<span class="hljs-keyword">bar.append("rect")
+</span>    .attr(<span class="hljs-string">"width"</span>, x)
+    .attr(<span class="hljs-string">"height"</span>, <span class="hljs-keyword">barHeight </span>- <span class="hljs-number">1</span>)<span class="hljs-comment">;</span>
 
-bar.append(<span class="hljs-string">"text"</span>)
-    .attr(<span class="hljs-string">"x"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> x(d) - <span class="hljs-number">3</span>; })
-    .attr(<span class="hljs-string">"y"</span>, barHeight / <span class="hljs-number">2</span>)
+<span class="hljs-keyword">bar.append("text")
+</span>    .attr(<span class="hljs-string">"x"</span>, <span class="hljs-meta">function</span>(d) { return x(d) - <span class="hljs-number">3</span><span class="hljs-comment">; })</span>
+    .attr(<span class="hljs-string">"y"</span>, <span class="hljs-keyword">barHeight </span>/ <span class="hljs-number">2</span>)
     .attr(<span class="hljs-string">"dy"</span>, <span class="hljs-string">".35em"</span>)
-    .text(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d; });
+    <span class="hljs-meta">.text</span>(<span class="hljs-meta">function</span>(d) { return d<span class="hljs-comment">; });</span>
 </code></pre><p>To add labels, we would run another <code>selectAll(&quot;text&quot;)</code> and position accordingly.</p>
 <h2 id="better-data-handling">Better data handling</h2>
 <p>The data array does not need to be simply an array of numbers; it can be an array of objects. Each one of those objects will be passed to the attr() handlers for each item. It therefore makes a whole lot of sense to prepare and annotate this array of objects before passing to the svg.selectAll.</p>
 <p>Scales are functions that map from an <em>input domain</em> to an <em>output range</em>. Since data is unlikely to be in the same range as the svg pixels, a scale function can be used to provide the transformation from an input domain of fahrenheit to an output range of celsius:</p>
 <pre><code>var <span class="hljs-keyword">scale</span> = d3.<span class="hljs-keyword">scale</span>.linear()
                     .domain([<span class="hljs-number">0</span>, <span class="hljs-number">100</span>])                <span class="hljs-comment">// fahrenheit</span>
-                    .range([-<span class="hljs-number">17.7778</span>, <span class="hljs-number">37.7778</span>]);    <span class="hljs-comment">// celsius    </span>
+                    .range([<span class="hljs-number">-17.7778</span>, <span class="hljs-number">37.7778</span>]);    <span class="hljs-comment">// celsius    </span>
                     <span class="hljs-comment">// .clamp(true) </span>
                     <span class="hljs-comment">// .nice()</span>
 <span class="hljs-keyword">scale</span>(<span class="hljs-number">32</span>);  <span class="hljs-comment">//returns 0</span>
