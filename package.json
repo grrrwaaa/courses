@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "chroma-js": "^1.1.1",
+    "gl-matrix": "^2.3.1",
+    "seedrandom": "^2.4.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-jshint": "^2.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.1",
+    "gulp-util": "^3.0.7",
+    "highlight.js": "^9.0.0",
+    "js-yaml": "^3.4.6",
+    "jshint": "^2.8.0",
+    "jshint-stylish": "^2.1.0",
+    "marked": "^0.3.5",
+    "mustache": "^2.2.1",
+    "reporter": "^0.1.0",
+    "watchify": "^3.6.1"
+  }
+}

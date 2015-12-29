@@ -2,12 +2,26 @@
 
 [![https://www.oculus.com](http://www.hollywoodreporter.com/sites/default/files/imagecache/675x380/2014/09/oculus_crescentbay_0.jpg)](https://www.oculus.com)
 
-The Rift is an upcoming virtual reality head-mounted display, being developed by Oculus VR. Starting with a Kickstarter campaign in 2012, and during its period as an independent company, Oculus VR raised US$2.4 million for the development of the Rift. It was then purchased by Facebook for $2 billion. 
+The Oculus Rift is a virtual reality head-mounted display being developed by Oculus VR. Starting with a phenomenally successful Kickstarter campaign in 2012, and during its period as an independent company, Oculus VR raised US$2.4 million for the development of the Rift. It was then purchased by Facebook for $2 billion. 
 
 The consumer version of the product is expected to become available sometime in 2015. Oculus released two 'development kits', DK1 in late 2012 and DK2 in mid 2014, to give developers a chance to develop content in time for the Rift's release; these have also been purchased by many virtual reality enthusiasts for general usage.
 
+![Oculus Menagerie](oculus_menagerie.jpg)   
+Image taken by author at the Unreal Summit, Seoul, May 2015.
+
 ## New links
 
+- [In the Eyes of the Animal](http://www.creativeapplications.net/maxmsp/in-the-eyes-of-the-animal-mlf-virtualise-a-forest-through-the-eyes-of-its-creatures/)
+
+<iframe src="https://player.vimeo.com/video/140057053" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+[CLOUDS documentary](http://cloudsdocumentary.com) ([review/promo](http://www.creativeapplications.net/reviews/clouds-code-creativity-and-immersion/)) -- [source on github](https://github.com/CLOUDS-Interactive-Documentary/CLOUDS)
+
+<iframe src="https://embed.vhx.tv/packages/2302" width="640" height="360" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+<iframe src="https://player.vimeo.com/video/42852185" width="720" height="405" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/42852185">Clouds: beta</a> from <a href="https://vimeo.com/deepspeed">Deepspeed media</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
+- [Oculus on Creative Applications](http://www.creativeapplications.net/tag/oculus-rift/)
 - [First test of the consumer version](https://www.youtube.com/watch?v=asduqdRizqs)
 - [Industrial Light & Magic's xLAB](http://www.ilmxlab.com); [Intro video](https://www.youtube.com/watch?v=7T9Dv1aLMbw&feature=youtu.be); [Inside](http://www.theverge.com/2015/8/13/9131805/ilm-ilmxlab-interview-virtual-reality-star-wars-movies)
 - [Interview with Unreal CEO Tim Sweeney about AR and VR](http://venturebeat.com/2015/08/03/epics-graphics-guru-tim-sweeney-tells-us-what-perfect-augmented-reality-will-mean/view-all/)

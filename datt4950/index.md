@@ -22,82 +22,11 @@ Artists, composers, designers and architects have always drawn inspiration from 
 
 The course is focused on practice in the arts, interactive media, and design: interactive audiovisual applications are implemented both in-class and through student projects, and are critically examined by interweaving the history, theory and landmark works in the literature of generative art, evolutionary music and art, and process art, as well as artificial life, systems biology, and bioinformatics research, and philosophies of process, creativity, and the aesthetics of nature. 
 
+**Rationale:** Autonomous complexity is one of the fundamental hallmarks of computational art; an integral message of the medium. Biologically-inspired methods of digital media formation have found wide applications in art, film, music, video games, robotics, and other computationally-facilitated experiences, frequently drawing upon scientific models of pattern formation, system dynamics, and symbol processing in large populations. Art has always been deeply concerned with its relationship to nature, though the forms of the relationship have changed many times. Likewise, from its origins computing has also found biological inspiration in pattern formation, self-construction and reproduction, intelligence, autonomy and collective behaviour. This course is necessary to understand such developments from their arts and science foundations, in both theory and practice.
+
 **Prerequisite:** DATT 2050. No prior study in biology is required. Open to non-majors.
 
-## Schedule
-
-### 1. Sep 16
-
-Lecture: Course overview. Introduction to the field(s), and the coding environment used in lectures & labs. Cellular Automata, classes of behaviour, Game of Life.
-
-Assignment I (10%)
-
-### 2. Sep 23
-
-Lecture: Variations of CA: non-homogeneity, stochastics, asynchrony, unbounded states. Continuous, reaction-diffusion. Particle/block rule. Multi-scale systems.
-
-### 3. Sep 30
-
-Assignment I due.
-
-Lecture: Agent-based modelling. Turtles and tortoises, vehicles, steering models, random walks.
-
-Assignment II (10%)
-
-### 4. Oct 7
-
-Lecture: Agents cont'd. Boids, subsumption architectures. 
-
-Quiz I (10%)
-
-### 5. Oct 14
-<!-- ZKM -->
-
-Lecture: Development and grammars. Rewriting systems, L-systems, bracketed & context-sensitive, parametric, conditional.
-
-Assignment II due.
-
-### 6. Oct 21
-
-Lecture: Agents and fields. Chemotaxis, stigmergy, social models. 
-
-Quiz II (10%)
-
-Assignment III (10%)
-
-### 7. Oct 28 
-<!-- IEEE VISAP -->
-
-Lecture: Evolutionary theory (natural, artificial). Selection models, mutation models, population models. 
-
-### 8. Nov 4
-
-Lecture: Evolutionary cont'd. Genetic programming. Ecology and ecosystem.
-
-Assignment III due.
-
-Final project (40%)
-
-### 9. Nov 11
-<!-- Remembrance day, which is not a holiday -->
-
-Lecture: Artificial chemistries. Bytecode worlds, viruses, Tierra, Alchemy.
-
-### 10. Nov 18
-
-Lecture: Artificial Nature presentation at the ArtSci Salon, **6pm, Fields Institute University of Toronto.**
-
-### 11. Nov 25
-
-Lecture: Evo + X, other advanced topics.
-
-Lab: final portfolio assistance.
-
-Note: This will be the last class, since Dec 2 is a Fall Study Day.
-
-**Learning outcomes / objectives:**
-
-At the completion of the course students will:
+**Learning outcomes / objectives:** At the completion of the course students will:
 
 - Show strong grounding in multiple methodologies of bio-inspired computation, including demonstrating understanding of mathematical, theoretical as well as aesthetic aspects. 
 - Be able to apply methodologies effectively in creative practice to a diversity of digital and interactive media, as evidenced in a project portfolio.
@@ -105,22 +34,104 @@ At the completion of the course students will:
 - Leverage experience in the application of cutting-edge creative coding in generative and interactive arts in order to intelligently extrapolate into future culture technologies.
 - Refine advanced coding skills.
 
-**Contact hours** are 4 per week, split between lectures and lab work. Lectures focus on the introduction of theoretical, aesthetic and conceptual content of the course. Labs focus on the application of lecture material in the form of instructor-led reconstructions, excercises/studies, and larger projects, and will include time for one-on-one meetings. 
+**Contact hours:** 4 per week, split between lectures and lab work. Lectures focus on the introduction of theoretical, aesthetic and conceptual content of the course. Labs focus on the application of lecture material in the form of instructor-led reconstructions, excercises/studies, and larger projects, and will include time for one-on-one meetings. 
 
-**Assessment** is based on assignments, projects, quizzes, readings and participation, with the following weighting for the final grade:
+**Assessment:** Assignments, projects, quizzes, readings and participation, with the following weighting for the final grade:
 
-- 30% Assignments: Exercises and readings are assigned throughout the course. Exercises develop essential practice-informed critique and experiential learning.
-- 40% Final Project: Realized individually or in groups, demonstrate the effective application of understanding through the course in novel expressions of adaptive media and art. Projects will be presented to the class at the end of the term and will be in the form of a critical discussion that reflects on the results of the experience gained over duration of the course.
+- 40% Assignments: Exercises and readings are assigned throughout the course. Exercises develop essential practice-informed critique and experiential learning.
+- 30% Final Project: Realized individually or in groups, demonstrate the effective application of understanding through the course in novel expressions of adaptive media and art. Projects will be presented to the class at the end of the term and will be in the form of a critical discussion that reflects on the results of the experience gained over duration of the course.
 - 30% Quizzes, readings and participation. Quizzes are given periodically through the course. Readings are short selections from books or landmark papers, chosen to directly support the assignments and tutorial discussion. Participation incorporates contributions to tutorial discussions, awareness of issues in readings, and the ability to relate tutorial issues to the broader concerns of the course.
 
+---
+
+## Schedule
+
+Content may vary from this plan according to needs and interests of students.
+
+### 1. Jan 6
+
+**Course overview**. Introduction to the field(s), and the coding environment used in lectures & labs.    
+**Cellular Automata**, classes of behaviour, Game of Life.
+
+### 2. Jan 13
+
+CA variations: non-homogeneity, stochastics, asynchrony, unbounded states. Continuous, reaction-diffusion. Particle/block rule. Multi-scale systems.
+
+### 3. Jan 20
+
+**Due:** [Assignment I (10%)](due.html#assignment-i)
+
+**Quiz I** (10%)
+
+**Agent-based modelling**. Turtles and tortoises, vehicles, steering models, random walks.
+
+### 4. Jan 27
+
+Boids, subsumption architectures.   
+Agents and fields. Chemotaxis, stigmergy, social models. 
+
+### 5. Feb 3
+
+**Due:** [Assignment II (10%)](due.html#assignment-ii)
+
+**Quiz II** (10%)
+
+**Evolution** (natural and artificial). Selection models, mutation models, population models. 
+
+### 6. Feb 10
+
+Genetic programming. Ecology and ecosystem.
+
+(Feb 17: reading week)
+
+### 7. Feb 24
+
+**Due:** [Assignment III (10%)](due.html#assignment-iii)
+
+**Quiz III** (10%)
+
+**Rewriting systems**. Development and grammars. L-systems, bracketed & context-sensitive, parametric, conditional.
+
+### 8. Mar 2
+
+**Artificial chemistries**. Bytecode worlds, Tierra, Alchemy.
+
+### 9. Mar 9
+
+**Due:** [Assignment IV (10%)](due.html#assignment-iv)
+
+**Virtual worlds.**
+
+### 10. Mar 16
+
+Other/advanced topics.
+
+Final project/portfolio assistance.
+
+### 11. Mar 23
+
+Other/advanced topics.
+
+Final project/portfolio assistance.
+
+### 12. Mar 30
+
+**Due:** [Final project (30%)](due.html#final-project)
+
+Final project presentation & discussion, open lab.
+
+---
+
 ## Readings
+
+Highly recommended:
 
 - Floreano, Dario, and Claudio Mattiussi. Bio-inspired artificial intelligence: theories, methods, and technologies. MIT press, 2008.
 - Flake, Gary William. The computational beauty of nature: Computer explorations of fractals, chaos, complex systems, and adaptation. MIT press, 1998. 
 - Whitelaw, Mitchell. Metacreation: art and artificial life. Mit Press, 2004.
 - Artificial Life [Volume 21, Issue 3 - Summer 2015 - Artificial Life Art and Creativity](http://www.mitpressjournals.org/toc/artl/21/3)
 
-----
+Further reading:
 
 - Adami, Christoph. Introduction to artificial life. Vol. 1. Springer Science & Business Media, 1998.
 - Bedau, Mark A., et al. "Open problems in artificial life." Artificial life 6.4 (2000): 363-376.
