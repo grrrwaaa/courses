@@ -82,9 +82,11 @@ Agents and fields. Chemotaxis, stigmergy, social models.
 
 Genetic programming. Ecology and ecosystem.
 
-(Feb 17: reading week)
+### 7. Feb 17
 
-### 7. Feb 24
+Reading week
+
+### 8. Feb 24
 
 **Due:** [Assignment III (10%)](due.html#assignment-iii)
 
@@ -92,29 +94,29 @@ Genetic programming. Ecology and ecosystem.
 
 **Rewriting systems**. Development and grammars. L-systems, bracketed & context-sensitive, parametric, conditional.
 
-### 8. Mar 2
+### 9. Mar 2
 
 **Artificial chemistries**. Bytecode worlds, Tierra, Alchemy.
 
-### 9. Mar 9
+### 10. Mar 9
 
 **Due:** [Assignment IV (10%)](due.html#assignment-iv)
 
 **Virtual worlds.**
 
-### 10. Mar 16
+### 11. Mar 16
 
 Other/advanced topics.
 
 Final project/portfolio assistance.
 
-### 11. Mar 23
+### 12. Mar 23
 
 Other/advanced topics.
 
 Final project/portfolio assistance.
 
-### 12. Mar 30
+### 13. Mar 30
 
 **Due:** [Final project (30%)](due.html#final-project)
 
