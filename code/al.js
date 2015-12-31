@@ -353,38 +353,39 @@ canvas.addEventListener("touchmove", function(event) {
 	touchevent(event, "move");
 }, false);
 
-var keyevent = function(event, name) {
-	if (typeof(key) === "function") {
-		var k = event.key || event.keyCode;
-		key(name, k);
-		// only printable characters:
-		var c = String.fromCharCode(k).replace(/[^ -~]+/g, "");	
-		if (c !== "") {
-			key(name, c);
-			// combos like "shift-A", "ctrl-alt-R" etc. 
-			var prefix = "";
-			if (event.ctrlKey) prefix += "ctrl-";
-			if (event.altKey) prefix += "alt-";
-			if (event.shiftKey) prefix += "shift-";
-			if (prefix !== "") {	
-				key(name, prefix+c);
-			}
+var keyevent = function(event, name, callback) {
+	var k = event.key || event.keyCode;
+	if (typeof(key) === "function") key(name, k);
+	if (typeof(callback) === "function") callback(k);
+	// only printable characters:
+	var c = String.fromCharCode(k).replace(/[^ -~]+/g, "");	
+	if (c !== "") {
+		if (typeof(key) === "function") key(name, c);
+		if (typeof(callback) === "function") callback(c);
+		// combos like "shift-A", "ctrl-alt-R" etc. 
+		var prefix = "";
+		if (event.ctrlKey) prefix += "ctrl-";
+		if (event.altKey) prefix += "alt-";
+		if (event.shiftKey) prefix += "shift-";
+		if (prefix !== "") {	
+			if (typeof(key) === "function") key(name, prefix+c);
+			if (typeof(callback) === "function") callback(prefix+c);
 		}
 	}
 };
 
 window.addEventListener( "keydown", function(event) {
-	keyevent(event, "down");
+	keyevent(event, "down", keydown);
 }, true);
 
 window.addEventListener( "keyup", function(event) {
-	keyevent(event, "up");
+	keyevent(event, "up", keyup);
 }, true);
 
 window.addEventListener( "keypress", function(event) {
-	if (typeof(key) === "function") {
-		key("press", String.fromCharCode(event.keyCode));
-	}
+	var c = String.fromCharCode(k).replace(/[^ -~]+/g, "");	
+	if (c !== "" && typeof(key) === "function") key("press",c);
+	if (c !== "" && typeof(keypress) === "function") keypress(c);
 }, true);
 
 var gl = getWebGLContext(canvas, { alpha: false });
