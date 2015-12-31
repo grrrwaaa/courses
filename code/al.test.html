@@ -9,7 +9,7 @@
     <script src="al.js"></script>
     <script>
 // create a new field:
-var field = new field2D(64);
+var field = new field2D(128);
 
 // initialize with some noise:
 field.set(function(x, y) {
@@ -66,10 +66,21 @@ function update() {
 
 // render the simulation (called frequently!)
 function draw() {
-  field.draw();
-  
-  draw2D.circle(0., 0., 0.1);
+	//draw2D.scale(0.5);
+	field.draw();
+
+	draw2D.color(1, 1, 1, 0.5);
+	draw2D.circle(0.5, 0., 0.5);
 }
+
+function mouse(event, point) {
+	console.log(event, point);
+}
+
+function key(event, key) {
+	console.log(event, key);
+}
+
     </script>
   </body>
 </html>
