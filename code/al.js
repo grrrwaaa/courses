@@ -375,15 +375,49 @@ var keyevent = function(event, name, callback) {
 };
 
 window.addEventListener( "keydown", function(event) {
-	keyevent(event, "down", keydown);
+	var k = event.key || event.keyCode;
+	if (typeof(key) === "function") key("down", k);
+	if (typeof(keydown) === "function") keydown(k);
+	// only printable characters:
+	var c = String.fromCharCode(k).replace(/[^ -~]+/g, "");	
+	if (c !== "") {
+		if (typeof(key) === "function") key("down", c);
+		if (typeof(keydown) === "function") keydown(c);
+		// combos like "shift-A", "ctrl-alt-R" etc. 
+		var prefix = "";
+		if (event.ctrlKey) prefix += "ctrl-";
+		if (event.altKey) prefix += "alt-";
+		if (event.shiftKey) prefix += "shift-";
+		if (prefix !== "") {	
+			if (typeof(key) === "function") key("down", prefix+c);
+			if (typeof(keydown) === "function") keydown(prefix+c);
+		}
+	}
 }, true);
 
 window.addEventListener( "keyup", function(event) {
-	keyevent(event, "up", keyup);
+	var k = event.key || event.keyCode;
+	if (typeof(key) === "function") key("up", k);
+	if (typeof(keyup) === "function") keyup(k);
+	// only printable characters:
+	var c = String.fromCharCode(k).replace(/[^ -~]+/g, "");	
+	if (c !== "") {
+		if (typeof(key) === "function") key("up", c);
+		if (typeof(keyup) === "function") keyup(c);
+		// combos like "shift-A", "ctrl-alt-R" etc. 
+		var prefix = "";
+		if (event.ctrlKey) prefix += "ctrl-";
+		if (event.altKey) prefix += "alt-";
+		if (event.shiftKey) prefix += "shift-";
+		if (prefix !== "") {	
+			if (typeof(key) === "function") key("up", prefix+c);
+			if (typeof(keyup) === "function") keyup(prefix+c);
+		}
+	}
 }, true);
 
 window.addEventListener( "keypress", function(event) {
-	var c = String.fromCharCode(k).replace(/[^ -~]+/g, "");	
+	var c = String.fromCharCode(event.which).replace(/[^ -~]+/g, "");	
 	if (c !== "" && typeof(key) === "function") key("press",c);
 	if (c !== "" && typeof(keypress) === "function") keypress(c);
 }, true);
