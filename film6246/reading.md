@@ -1,3 +1,8 @@
+title: Reading
+importance: 1
+
+---
+
 # A collection of interesting reading
 
 [Bachelard, Gaston. "The Poetics of Space, trans." Maria Jolas (1958) (1969): 127.](http://www.goodreads.com/book/show/13269.The_Poetics_of_Space)
