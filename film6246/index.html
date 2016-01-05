@@ -9,10 +9,9 @@
 	<ul>
 	<li><a href="index.html" alt="Future Cinema II">Future Cinema II</a></li>
 <li><a href="vr.html" alt="VR">VR</a></li>
-<li><a href="lab.html" alt="Labs">Labs</a></li>
-<li><a href="unreal.html" alt="Unreal">Unreal</a></li>
-<li><a href="due.html" alt="Due">Due</a></li>
+<li><a href="osmose.html" alt="Osmose">Osmose</a></li>
 <li><a href="reading.html" alt="Reading">Reading</a></li>
+<li><a href="unreal.html" alt="Unreal">Unreal</a></li>
 	</ul>
 	</nav>	
 	<div id="main">
@@ -24,18 +23,49 @@
 <p>You will work in the lab to build prototypes that will function as a testing ground. You are encouraged to be both theorists and practical experimenters, to research while doing, understanding that the process of exploring firsthand is an important step toward the kinds of knowledge and ways of knowing enabled and encouraged by these evocative new digital technologies, and suggest new ways to think about future forms of the moving image, from new literacies to new audiences. The course will expose you to the imperfect software support for building worlds, and encourage you to think about and beyond their limits. Our work is put into context and guided by a century of preceding theory and practice even as we try, collectively, to imagine moving images and screens of the future, through discussions interwoven with the individual and group projects.</p>
 <p>Students with backgrounds in film, digital media, design, theatre, music, architecture, video production, and visual storytelling are welcome, as are students with programming, human-computer interaction, or computer graphics backgrounds. Knowledge of Max/MSP/Jitter, Unity/Unreal, Cinder/OpenFrameworks, or related software will be at an advantage, but is not required. The labs aim to accelerate development such that the technology need not be so difficult to penetrate. Above all, creative thinking with and through technology is the most important asset that you can bring to this course. This seminar and its associated lab component are understood to be very much an experimental think tank whose success very much depends on your collective enthusiasm and active engagement.</p>
 <hr>
+<h2 id="labs">Labs</h2>
+<p>Although there is great excitement in producing 360&#39; films for VR, this is not what we will be doing. Practically, we do not have access to a 360&#39; camera rig. But arguably, 360&#39; filmmaking (at least with current technology) is not able to leverage some of the fundamental capabilities of VR -- such as positional head-tracking -- and is thus not a full exploration of the medium&#39;s message. Instead, we will rely more on software to create worlds.</p>
+<p>Creating a VR world requires high-performance computer graphics supported by low-level drivers and libraries. Few developers want to work at this level, so a number of higher-level programming frameworks exist -- for new media artists these might still use a lower level language such as C++ (openFrameworks, Cinder being two good examples), or might present a completely different high-level interface such as the visual programming of Max/MSP/Jitter, VVVV, etc. </p>
+<p>However the majority of VR experiences are programmed using <em>game engines</em>. The most widely used and freely available game engines used today are <a href="http://unity3d.com">Unity</a> and <a href="https://www.unrealengine.com/blog">Unreal</a>. Game Engines can get you a long way by just importing assets, dragging &amp; dropping, tweaking parameters etc. without having to ever see code, and some have some kind of visual programming option too. Though they don&#39;t grant the full freedom of a programming framework, the learning curve is gentler. Compared to many frameworks, game engines have much more built-in features (lighting models, terrain, physics, etc.). The danger is that these engines and their editors are permeated by game-oriented concepts, terminology, workflows etc, and the result is often recognizably the product of a game engine. They also benefit from the largest VR communities at present.</p>
+<p>As an alternative to creating an <em>app</em>, some VR creators are focusing on the <em>web browser</em> as primary medium. Unity and Unreal also offer options to export to web, but this might not yet be VR-capable. Alternatively, numerous 3D graphics frameworks exist for browser-based JavaScript (e.g. Three.js), which can be combined with <a href="http://mozvr.com">MozVR</a> for Firefox or <a href="http://webvr.info">WebVR</a> for Firefox &amp; Chrome.</p>
+<p>Another option is to avoid software development altogether, and work within a sandbox platform: a game or game-like world that already exists, but which can be redefined by its users to build and design &quot;user generated content&quot; (such as SecondLife -- see <a href="http://secondlife.com/destinations/oculus">this collection of Rift-oriented examples</a>). Obviously this may appear the easiest, but is also the most constrained of the available options.</p>
+<p>For our labs we will begin with the game engine route, with the <a href="unreal.html">Unreal Engine</a> in particular.</p>
+<hr>
 <h2 id="schedule">Schedule</h2>
 <p>Content may vary from this plan according to needs and interests of students.</p>
 <h3 id="1-jan-5">1. Jan 5</h3>
-<p><strong>Course overview</strong>. Introduction to the field, the objectives, the hardware and software.   </p>
-<p><strong>Task:</strong> <a href="lab.html#getting-unreal">Download &amp; install the Unreal Engine, editor, and content examples</a>. </p>
+<p><strong>Course overview</strong>. </p>
+<p>Introduction to the field, the themes and objectives, the hardware and software. </p>
+<p><strong>Tasks</strong></p>
+<p>Part 1:</p>
+<ul>
+<li>In-class: try out one of the VR experiences, and write down as many of your immediate impressions as you can -- whatever they may be.</li>
+<li>After class, reflect on your first impressions of VR some more, and note down any further insights, observations, or ideas you have.</li>
+<li>Research online to find a VR project, or a project you think would be suitable for VR, that you would most like to experience. Some suggested places to explore are listed below, but please don&#39;t limit yourself to these:<ul>
+<li><a href="https://share.oculus.com">Oculus Share</a></li>
+<li><a href="https://play.google.com/store/apps/collection/promotion_3001011_cardboard_featured_apps?hl=en">Apps for Google Cardboard</a></li>
+<li><a href="https://docs.unrealengine.com/latest/INT/Resources/Showcases/index.html">Unreal feature examples</a></li>
+<li><a href="http://www.vrapplist.de">VR app list</a></li>
+<li><a href="http://ca.ign.com/articles/2013/12/01/10-games-thatll-make-you-want-an-oculus-rift">A typical indie game/VR list</a> -- and <a href="http://blog.ianiselsewhere.com/post/51243939314/27-games-i-want-to-play-on-the-oculus-rift">a more interesting one</a></li>
+</ul>
+</li>
+<li>Submit your responses and research via <a href="https://docs.google.com/forms/d/1RF_6YI1hTLUdHhsctx972J5qYbH9zNNZc98wZkItNiw/viewform">this survey form here</a>, by Saturday 9th, so that I have time to collate results and install whatever projects I can.</li>
+</ul>
+<p>Part 2:</p>
+<ul>
+<li>Download &amp; install the Unreal Engine, editor, and content examples <a href="lab.html#getting-unreal">according to the instructions here</a>. <ul>
+<li>Work through at least the first two <a href="https://wiki.unrealengine.com/Videos?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl">UE4 Editor Tutorial Videos</a>, following along with your own copy.</li>
+<li>If you can, try working through some of the steps of the Level Designer Quick Start Tutorial <a href="https://docs.unrealengine.com/latest/INT/Engine/QuickStart/1/index.html">starting here</a>.</li>
+</ul>
+</li>
+</ul>
 <h3 id="2-jan-12">2. Jan 12</h3>
 <h3 id="3-jan-19">3. Jan 19</h3>
 <h3 id="4-jan-26">4. Jan 26</h3>
 <h3 id="5-feb-2">5. Feb 2</h3>
 <h3 id="6-feb-9">6. Feb 9</h3>
 <h3 id="7-feb-16">7. Feb 16</h3>
-<p>Reading week</p>
+<p><strong>Reading week</strong></p>
 <h3 id="8-feb-23">8. Feb 23</h3>
 <h3 id="9-mar-1">9. Mar 1</h3>
 <h3 id="10-mar-8">10. Mar 8</h3>
@@ -44,7 +74,6 @@
 <h3 id="13-mar-29">13. Mar 29</h3>
 <p><strong>Due Mar 30:</strong> Final project</p>
 <p>Final project presentation &amp; discussion, open lab.</p>
-<hr>
 
 	</div>
 	<footer>&copy; 2016 Graham Wakefield</footer>

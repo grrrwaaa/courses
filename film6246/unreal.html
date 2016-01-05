@@ -9,10 +9,9 @@
 	<ul>
 	<li><a href="index.html" alt="Future Cinema II">Future Cinema II</a></li>
 <li><a href="vr.html" alt="VR">VR</a></li>
-<li><a href="lab.html" alt="Labs">Labs</a></li>
-<li><a href="unreal.html" alt="Unreal">Unreal</a></li>
-<li><a href="due.html" alt="Due">Due</a></li>
+<li><a href="osmose.html" alt="Osmose">Osmose</a></li>
 <li><a href="reading.html" alt="Reading">Reading</a></li>
+<li><a href="unreal.html" alt="Unreal">Unreal</a></li>
 	</ul>
 	</nav>	
 	<div id="main">
@@ -57,6 +56,39 @@
 <p>Within Unreal, sketch first with a &quot;roughed-in&quot; or &quot;blocked out&quot; schematic of the world, and start testing it&#39;s movement and flow as soon as possible -- long before spending any time on creating the real mesh geometry and other art assets. <a href="https://docs.unrealengine.com/latest/INT/Engine/Actors/Brushes/index.html">Geometry Brushes</a>, also sometimes called &quot;BSPs&quot;, are perfect for this aspect of the level design process. After testing &amp; refining, spend more time updating the meshes, lighting and other elements of the world, testing continually, up to the last stages of polishing up.</p>
 <p>A <em>Geometry Brush</em> is a way to fill in and carve out volumes of space in a level. They can be used to rapid-prototype a level where static meshes have not yet been created. Geometry Brush shapes include Boxes, Cones, Spheres, and Staircases, and have a few things that can be tweaked in the details panes. Using the <em>Geometry Editing Mode</em>, very simple 3D modeling can be performed. A geometry brush&#39;s settings can be set to &quot;Subtractive&quot; type, which will carve out holes in other brushes -- however the order of brushes is important. Also be careful to use the <em>Drag Grid</em> to make sure geometry snaps to tight alignment. You can also apply materials and lighting properties to a brushes&#39; surfaces. After modeling, you can convert a brush into a regular StaticMeshActor from the Brush settings.</p>
 <p>It can be useful to make new levels to test out ideas quickly without breaking work done in your main level(s). File-&gt;New Level.</p>
+<hr>
+<p><a href="https://docs.unrealengine.com/latest/INT/Engine/QuickStart/index.html">Level Designer Quick Start</a></p>
+<hr>
+<h2 id="vr-in-unreal">VR in Unreal</h2>
+<ul>
+<li>Documentation: <a href="https://docs.unrealengine.com/latest/INT/Platforms/VR/index.html">https://docs.unrealengine.com/latest/INT/Platforms/VR/index.html</a></li>
+<li>Oculus-specific: <a href="https://docs.unrealengine.com/latest/INT/Platforms/Oculus/index.html">https://docs.unrealengine.com/latest/INT/Platforms/Oculus/index.html</a></li>
+<li>Forums: <a href="https://forums.unrealengine.com/forumdisplay.php?27-VR-Development">https://forums.unrealengine.com/forumdisplay.php?27-VR-Development</a></li>
+<li>Videos: <a href="https://www.youtube.com/playlist?list=PLZlv_N0_O1gZaB0IgQEnO9WOXYRx3Puvo">https://www.youtube.com/playlist?list=PLZlv_N0_O1gZaB0IgQEnO9WOXYRx3Puvo</a></li>
+</ul>
+<p>When editing: Alt+P to play in VR mode
+When playing: Alt+Enter to switch between VR mode
+Control+R to reset the forward view</p>
+<h3 id="sim-sickness-dos-and-don-ts-">Sim sickness dos and don&#39;ts:</h3>
+<ul>
+<li>Never take away the head-tracking control of the camera.</li>
+<li>Do not adjust Field of View (FOV)</li>
+<li>Do not add &quot;walking bob&quot; or camera &quot;shake&quot; effects</li>
+<li>Avoid placing bright lights</li>
+<li>The frame rate must be 75 frames per second for the DK2</li>
+<li>Use lifts rather than stairs</li>
+<li>Make objects the same size as they are in the real world</li>
+<li>Do not use smoothed acceleration, instead constant speed. (Similarly, rotate by &#39;snapping&#39; rather than smoothly)</li>
+<li>Do not use motion blur or depth of field post-processing effects</li>
+</ul>
+<p>Recommendations:</p>
+<p>Unreal measures space in centimeters (so 1 meter is 100 Unreal units, or UU). The best interaction space is 75 to 350 UU from the player camera.</p>
+<p>Player height 176cm, width 68cm (this is smaller than Unreal default)
+Camera base eye height: 160cm
+Movement speed: 24 meters per second</p>
+<p>Switch AA method to FXAA or None in the Post Process volume settings.</p>
+<p>Normal mapping won&#39;t look as effective in VR; use &quot;Parallax mapping&quot;  or &quot;Tessellation Shader Displacement&quot; instead.</p>
+<p>Some blueprint functions under &quot;head mounted display&quot; menu in the blueprint editor</p>
 
 	</div>
 	<footer>&copy; 2016 Graham Wakefield</footer>
