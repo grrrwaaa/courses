@@ -72,7 +72,7 @@ Part 1:
 
 Part 2:
 
-- Download & install the Unreal Engine, editor, and content examples [according to the instructions here](lab.html#getting-unreal). 
+- Download & install the Unreal Engine, editor, and content examples [according to the instructions here](unreal.html#getting-unreal). 
 	- Work through at least the first two [UE4 Editor Tutorial Videos](https://wiki.unrealengine.com/Videos?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl), following along with your own copy.
 	- If you can, try working through some of the steps of the Level Designer Quick Start Tutorial [starting here](https://docs.unrealengine.com/latest/INT/Engine/QuickStart/1/index.html).
 
