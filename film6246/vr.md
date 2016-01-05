@@ -81,8 +81,6 @@ The crucial addition for head-mounted VR is *head tracking*, which means we can 
 
 **What went wrong?**
 
-[Whatever happened to VR -- interview with Jaron Lainer](http://www.10zenmonkeys.com/2007/03/09/whatever-happened-to-virtual-reality/)
-
 1992 Merrill Lynch VR industry research report ["Limitations & Drawbacks"](http://www.vrtifacts.com/wp-content/uploads/2009/12/Merrill-Lynch-Limitations.pdf):
 - Inadequate Image Resolution
 - Time Lag Between the User and the System’s Response (now known as "motion to photon latency")
@@ -103,9 +101,11 @@ According to [Jaron Lanier](http://www.jaronlanier.com/topeleven.html), reasons 
 - Single-user problem
 - No consumer "killer app"
 
-It's interesting to consider how many, and to what extent, these problems have been resolved today.
+See also: [Whatever happened to VR -- interview with Jaron Lainer](http://www.10zenmonkeys.com/2007/03/09/whatever-happened-to-virtual-reality/)
 
-### The 2000's dip
+It is interesting to consider how many, and to what extent, these problems have been resolved today.
+
+### The 2000's dip from public attention
 
 For the next two decades, VR develops in research labs. Although VR failed as a 1990's consumer phenomenon, it was steadily successful and continued to grow in industrial, science & health research, as well as military training.
 
@@ -150,17 +150,21 @@ Image taken by author at the Unreal Summit, Seoul, May 2015.
 
 ## VR is or is not cinema
 
+Whereas through the 90's surge and earlier, the cinema industry has been more interested in VR as a plot device, it is now becoming increasingly interested in VR as a medium.
+
 [Hollywood Reporter: Fox Is Bullish on Virtual Reality, But Is It the "Real Deal" for Hollywood?](http://www.hollywoodreporter.com/behind-screen/ces-fox-is-bullish-virtual-760925) - Fox Home Entertainment worldwide president Mike Dunn projects that virtual-reality technology will go mainstream, potentially reaching 25 million households by 2017.
 
 [Filmmakers Look to Virtual Reality and Oculus as the Future of Storytelling](http://www.hollywoodreporter.com/news/filmmakers-look-virtual-reality-oculus-734500) - “I think the next step for us as filmmakers is to figure out what narrative filmmaking looks like in virtual reality,” said music video director Chris Milk... Now is the time to figure out how to tell human stories — and that involves questioning fundamental concepts... "I don’t think this is cinema," he said. "I think this is something completely new."
 
-Despite the massive interest in VR from Hollywood etc., we should be cautious in bringing cinematic ideas to the medium. 
+Despite this, we should be cautious in naively bringing cinematic ideas to the medium. There are many quite fundamental differences, such as:
 
 - The immersant controls the camera (or else they will feel sick). How can framing make sense? What can cinematography tell us?
-- Cuts almost never work in VR! What can editing tell us?
+- This means the immersant may also need to control time. Moreover, cuts almost never work in VR! What can editing tell us?
 - Although in cinema the camera is usually positioned in the world, we do not think of it existing in the world, and we don't think of ourselves as part of the world -- the fourth wall must not be broken. But in VR there is no fourth wall, we are inside. Can we identify with characters in this situation? Are we also characters? If not, what are we?
 
-### Live action (or the lack of it)
+### Live action capture (or the lack of it)
+
+"Filming" for VR is an unsolved problem.
 
 - Lightfield cameras
 	- https://www.lytro.com/immerge
