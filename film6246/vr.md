@@ -156,15 +156,18 @@ Whereas through the 90's surge and earlier, the cinema industry has been more in
 
 [Filmmakers Look to Virtual Reality and Oculus as the Future of Storytelling](http://www.hollywoodreporter.com/news/filmmakers-look-virtual-reality-oculus-734500) - “I think the next step for us as filmmakers is to figure out what narrative filmmaking looks like in virtual reality,” said music video director Chris Milk... Now is the time to figure out how to tell human stories — and that involves questioning fundamental concepts... "I don’t think this is cinema," he said. "I think this is something completely new."
 
+A more integrated mixed-reality approach is being taken by [Industrial Light & Magic's xLAB](http://www.ilmxlab.com); [Intro video](https://www.youtube.com/watch?v=7T9Dv1aLMbw&feature=youtu.be); [Inside](http://www.theverge.com/2015/8/13/9131805/ilm-ilmxlab-interview-virtual-reality-star-wars-movies)
+
 Despite this, we should be cautious in naively bringing cinematic ideas to the medium. There are many quite fundamental differences, such as:
 
 - The immersant controls the camera (or else they will feel sick). How can framing make sense? What can cinematography tell us?
 - This means the immersant may also need to control time. Moreover, cuts almost never work in VR! What can editing tell us?
 - Although in cinema the camera is usually positioned in the world, we do not think of it existing in the world, and we don't think of ourselves as part of the world -- the fourth wall must not be broken. But in VR there is no fourth wall, we are inside. Can we identify with characters in this situation? Are we also characters? If not, what are we?
 
+
 ### Live action capture (or the lack of it)
 
-"Filming" for VR is an unsolved problem.
+"Filming" for VR is an unsolved problem. 
 
 - Lightfield cameras
 	- https://www.lytro.com/immerge
@@ -174,6 +177,7 @@ Despite this, we should be cautious in naively bringing cinematic ideas to the m
 	- Google Jump, JauntVR, VRSE, many others
 	- Imperfect, and likely impossible to perfect
 	- Viewer can't move
+	- Recent guide here: [Various contributors (open source). Making 360. Github, ongoing.](http://making360.com)
 - MoCap & avatar rigging
 	- Used in cinema (but rarely for main characters), and games (especially cut-scenes)... but in VR the artificiality becomes more apparent
 - Point cloud captures
@@ -186,6 +190,7 @@ Despite this, we should be cautious in naively bringing cinematic ideas to the m
 - 2D in 3D: placing video surfaces in the world, texturing objects
 
 Captured actors won't be able to look at you, or respond to your presence -- unless they are real people interacting in real time...
+
 
 ---
 

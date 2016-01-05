@@ -27,6 +27,11 @@ Students with backgrounds in film, digital media, design, theatre, music, archit
 
 ## Labs
 
+We will be using the Oculus Rift DK2, unless we are lucky enough to get a [CV1](](https://www.youtube.com/watch?v=asduqdRizqs) before the 
+semester ends.
+
+
+
 Although there is great excitement in producing 360' films for VR, this is not what we will be doing in this course. Practically, we do not have access to a 360' camera rig. Moreover, 360' filmmaking is arguably (at least with current technology) unable to leverage some of the fundamental capabilities of VR -- such as positional head-tracking -- and thus does not grant a full exploration of the medium's inherent message. Instead, we will rely more on software to create worlds.
 
 Creating a virtual world requires high-performance computer graphics -- for VR, the equivalent of at least HD resolution, but at 60 or more frames per second (90 for the Oculus CV1). This is supported by low-level drivers and libraries, but few creators want to work at this level. A number of higher-level programming frameworks exist -- for new media artists these might still use a lower level language such as C++ (openFrameworks, Cinder being two good examples), or might present a completely different high-level interface such as the visual programming of Max/MSP/Jitter, VVVV, etc. But these can still present a significant barrier to entry.
