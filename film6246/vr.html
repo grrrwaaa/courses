@@ -36,10 +36,10 @@
 <hr>
 <p><a href="https://www.oculus.com"><img src="http://www.hollywoodreporter.com/sites/default/files/imagecache/675x380/2014/09/oculus_crescentbay_0.jpg" alt="https://www.oculus.com"></a></p>
 <h2 id="what-is-vr">What is VR</h2>
-<p>Film/animation depends on a perceptual illusion -- <a href="https://en.wikipedia.org/wiki/Persistence_of_vision">persistence of vision</a>. This is easier to understand via animation: around 12-15 frames per second is enough for the brain to interpret as movement, but only when sequent images are plausible enough to be fused. <em>Plausibility</em> in this case is a function of neurophysiology and cognition. (Of course, cinema also depends on other perceptual quirks, e.g. why do cuts work, when nothing like a cut exists in real life? Why do non-human perspectives work?)</p>
-<p>S3D depends on presenting to each eye a viewpoint slightly displaced laterally -- the parallax effect -- which is one of the many visual cues to impart depth (distance). Again, this is dependent on the human body, and careful alignment. 
-(Some interesting limitations -- inconsistencies at the frame border are the reason why most content in S3D movies goes into the screen, rather than out of it. Also, some people experience discomfort due to depth cue discrepancies.)</p>
-<p>VR also depends on the above perceptual illusions (and often others, such as spatialized audio). The crucial addition for HMD VR is head tracking, which means we can presents a coherent image regardless of what direction we face. The illusion breaks down if the delay between movement and image (motion-to-photon) is greater than a handful or two of milliseconds, and frame rates of 60 Hz or more. The illusion is greatly enhanced by tracking head <em>position</em> as well as <em>orientation</em>, so that you can e.g. look around things. The result is that the viewer no longer perceives an image plane worn in front of the eyes, and instead perceives being present in another world. Instead of an image moving in front of your eyes, the world appears as a fixed space in which you are moving your own head.</p>
+<p>Film/animation depends on a perceptual illusion -- <a href="https://en.wikipedia.org/wiki/Persistence_of_vision">persistence of vision</a>. This is easier to understand via animation: around 12-15 frames per second is enough for the brain to interpret as movement, but only when sequent images are plausible enough to be fused. <em>Plausibility</em> in this case is a function of neurophysiology and cognition. (Of course, cinema also depends on other perceptual quirks, such as the brain&#39;s acceptance of cuts in editing even though nothing like a cut exists in real life, the suspension of disbelief through non-human perspectives, and so forth.)</p>
+<p>Stereoscopic 3D (S3D) builds on another perceptual illusion. Presenting to each eye a viewpoint slightly displaced laterally emulates the <em>parallax effect</em> -- one of the most powerful visual cues to impart depth (distance). Again, this is dependent on the human body, and also requires very careful alignment. Some, though few, people experience discomfort due to discrepancies between the stereoscopic 3D depth cue and others that are lacking, such as vergence.</p>
+<p>Virtual reality depends on both of these illusions, and others (such as egocentric spatialized audio). But where relatively low frame rates can satisfy on the projected screen, head-mounted VR depends on running at 60 or more frames per second (90 for the Oculus CV1), to avoid &quot;judder&quot;. On the other hand, while the frame of S3D cinema causes inconsistencies (which is why <em>most</em> 3D effects do not pop out of the screen), in VR there is no such limitation, and objects can be as close as your nose.</p>
+<p>The crucial addition for head-mounted VR is <em>head tracking</em>, which means we can present a coherent image regardless of what direction we face. This illusion breaks down if the delay between movement and image (motion-to-photon) is greater than a couple of handfuls of milliseconds, which underlies the need for high frame rates. This illusion is greatly enhanced by <em>position tracking</em>: matching the lateral movements of the head as well as its orientation, so that you can look around, over and under things, and generally benefit from more kinds of depth cues we experience in real life. The result is that the viewer no longer perceives an image plane worn in front of the eyes, and instead perceives oneself being present in another world. Instead of an image moving in front of your eyes, the world appears as a fixed space in which you are moving your own head. (Note that not all HMDs provide position tracking (e.g. Google Cardboard, Samsung VR). Together with the qualities of content, this leads to the evocation of <em>presence</em>, the sense of actually being-there in the world, sometimes referred to as the continuous illusion of non-mediation. </p>
 <hr>
 <h2 id="a-bit-of-history">A bit of history</h2>
 <p>(See also <a href="http://www.theverge.com/a/virtual-reality/">The Rise and Fall and Rise of Virtual Reality</a>)</p>
@@ -122,9 +122,9 @@
 <li>Cuts almost never work in VR! What can editing tell us?</li>
 <li>Although in cinema the camera is usually positioned in the world, we do not think of it existing in the world, and we don&#39;t think of ourselves as part of the world -- the fourth wall must not be broken. But in VR there is no fourth wall, we are inside. Can we identify with characters in this situation? Are we also characters? If not, what are we?</li>
 </ul>
-<h3 id="filming-or-lack-of-it-">Filming (or lack of it)</h3>
+<h3 id="live-action-or-the-lack-of-it-">Live action (or the lack of it)</h3>
 <ul>
-<li>Lightfield<ul>
+<li>Lightfield cameras<ul>
 <li><a href="https://www.lytro.com/immerge">https://www.lytro.com/immerge</a></li>
 <li>Incredibly expensive</li>
 <li>Viewer can&#39;t move</li>
@@ -136,17 +136,17 @@
 <li>Viewer can&#39;t move</li>
 </ul>
 </li>
-<li>Point clouds<ul>
+<li>MoCap &amp; avatar rigging<ul>
+<li>Used in cinema (but rarely for main characters), and games (especially cut-scenes)... but in VR the artificiality becomes more apparent</li>
+</ul>
+</li>
+<li>Point cloud captures<ul>
 <li>Using cheap depth cameras plus DSLRs: <a href="http://depthkit.tv">http://depthkit.tv</a></li>
 <li><a href="https://www.kickstarter.com/projects/specular/blackout-a-virtual-glimpse-into-the-lives-of-stran">https://www.kickstarter.com/projects/specular/blackout-a-virtual-glimpse-into-the-lives-of-stran</a></li>
 <li>See <a href="http://cloudsdocumentary.com">Clouds docu</a></li>
 <li><a href="http://www.wired.com/2015/10/uncorporeal-vr-movies/">Suspect this is essentially the same thing</a></li>
 <li><a href="http://www.mimesysvr.com">And this</a></li>
 <li>We might be able to set something like this up in the lab -- but don&#39;t expect miracles</li>
-</ul>
-</li>
-<li>MoCap &amp; avatar rigging<ul>
-<li>Used in cinema (but rarely for main characters), and games (especially cut-scenes)... but in VR the artificiality becomes more apparent</li>
 </ul>
 </li>
 <li>2D in 3D: placing video surfaces in the world, texturing objects</li>
