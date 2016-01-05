@@ -1,5 +1,5 @@
 title: Unreal
-importance: 4
+importance: 3
 
 --- 
 
@@ -67,3 +67,46 @@ Within Unreal, sketch first with a "roughed-in" or "blocked out" schematic of th
 A *Geometry Brush* is a way to fill in and carve out volumes of space in a level. They can be used to rapid-prototype a level where static meshes have not yet been created. Geometry Brush shapes include Boxes, Cones, Spheres, and Staircases, and have a few things that can be tweaked in the details panes. Using the *Geometry Editing Mode*, very simple 3D modeling can be performed. A geometry brush's settings can be set to "Subtractive" type, which will carve out holes in other brushes -- however the order of brushes is important. Also be careful to use the *Drag Grid* to make sure geometry snaps to tight alignment. You can also apply materials and lighting properties to a brushes' surfaces. After modeling, you can convert a brush into a regular StaticMeshActor from the Brush settings.
 
 It can be useful to make new levels to test out ideas quickly without breaking work done in your main level(s). File->New Level.
+
+---
+
+[Level Designer Quick Start](https://docs.unrealengine.com/latest/INT/Engine/QuickStart/index.html)
+
+---
+
+## VR in Unreal
+
+- Documentation: https://docs.unrealengine.com/latest/INT/Platforms/VR/index.html
+- Oculus-specific: https://docs.unrealengine.com/latest/INT/Platforms/Oculus/index.html
+- Forums: https://forums.unrealengine.com/forumdisplay.php?27-VR-Development
+- Videos: https://www.youtube.com/playlist?list=PLZlv_N0_O1gZaB0IgQEnO9WOXYRx3Puvo
+
+When editing: Alt+P to play in VR mode
+When playing: Alt+Enter to switch between VR mode
+Control+R to reset the forward view
+
+### Sim sickness dos and don'ts:
+
+- Never take away the head-tracking control of the camera.
+- Do not adjust Field of View (FOV)
+- Do not add "walking bob" or camera "shake" effects
+- Avoid placing bright lights
+- The frame rate must be 75 frames per second for the DK2
+- Use lifts rather than stairs
+- Make objects the same size as they are in the real world
+- Do not use smoothed acceleration, instead constant speed. (Similarly, rotate by 'snapping' rather than smoothly)
+- Do not use motion blur or depth of field post-processing effects
+
+Recommendations:
+
+Unreal measures space in centimeters (so 1 meter is 100 Unreal units, or UU). The best interaction space is 75 to 350 UU from the player camera.
+
+Player height 176cm, width 68cm (this is smaller than Unreal default)
+Camera base eye height: 160cm
+Movement speed: 24 meters per second
+
+Switch AA method to FXAA or None in the Post Process volume settings.
+
+Normal mapping won't look as effective in VR; use "Parallax mapping"  or "Tessellation Shader Displacement" instead.
+
+Some blueprint functions under "head mounted display" menu in the blueprint editor
