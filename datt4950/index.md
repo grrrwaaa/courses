@@ -14,7 +14,7 @@ importance: 10
 **Language:** English   
 **Prerequisite:** LE/EECS 1030 3.0, FA/DATT 2050 3.0, or permission of course director.   
 **Website:** [http://grrrwaaa.github.io/courses/datt4950/](http://grrrwaaa.github.io/courses/datt4950/)   
-**Code materials:** [https://github.com/grrrwaaa/courses/tree/master/code](https://github.com/grrrwaaa/courses/tree/master/datt4950/code)
+**Code materials:** [https://github.com/grrrwaaa/courses/tree/master/code](https://github.com/grrrwaaa/courses/tree/master/code)
 
 **Synopsis:** *This course addresses computation as a creative medium from a biologically-inspired standpoint to develop artworks, adaptive media and simulations approaching the fascinating complexity of nature.* 
 
