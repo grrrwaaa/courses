@@ -1,10 +1,9 @@
-importance: 6
+importance: 8
+title: Themes
 
 ---
 
-# Themes
-
-## Artificial Life
+## What is (Artificial) Life?
 
 Artists and engineers have devised lifelike technology for millennia, often prompting inquiry into our beliefs and perspectives about living systems. In this course we explore, theoretically and practically, topics of biologically inspired computing, and especially its roots in Artificial Life, in the practice of generative art. 
 

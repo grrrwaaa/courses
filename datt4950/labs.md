@@ -1,5 +1,5 @@
 
-importance: 8
+importance: 3
 
 ---
 
@@ -348,4 +348,4 @@ Shape API
 
 ## Under the hood
 
-The library code is in [GitHub here](http://www.github.com/grrrwaaa/courses/code/al.js).
+The library code is in [GitHub here](http://github.com/grrrwaaa/courses/blob/master/code/al.js).

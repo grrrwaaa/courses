@@ -1,3 +1,7 @@
+importance: 1
+
+---
+
 # JavaScript
 
 [JavaScript](http://en.wikipedia.org/wiki/JavaScript) (JS) is a language of growing importance at the intersection of media/culture technology:
