@@ -84,14 +84,12 @@ One complication is that the states of the whole lattice must update synchronous
 
 ---
 
-## Variations
-
 There are many ways we can modulate this into more complex CA. For example, by allowing more than two states (see [Brian's Brain](http://codepen.io/grrrwaaa/pen/WQrmGb?editors=001)). 
 
 More variations are possible by modulating the basic definition of a CA, some of which have been explored more than others. Here are some examples:
 
 
-### Probabilistic/Stochastic CA
+## Probabilistic/Stochastic CA
 
 In this case the transition rule is not deterministic, but includes some randomized factors. This can help avoid the CA falling into a stable or cyclic pattern -- at the risk of descending into uninteresting noise.
 
@@ -101,7 +99,7 @@ In this case the transition rule is not deterministic, but includes some randomi
 
 Take a look at the [Forest Fire CA example](http://codepen.io/grrrwaaa/pen/xwZBRP/?editors=001), and try changing the probabilities to see how it behaves.
 
-### Non-homogenous CA
+## Non-homogenous CA
 
 The rule is not the same for all cells / for all time steps. Spatial non-homogeneity can be interesting to simulate different geographies (such as boundaries). Temporal non-homogeneity can be used to perform a sequence of different filters. Scott Draves' [Bomb](http://scottdraves.com/bomb.html) modulated parameters continuously, with different rule sets picking up the last as their new initial conditions.
 
@@ -115,7 +113,7 @@ The rule is not the same for all cells / for all time steps. Spatial non-homogen
 These can be implemented by changing the function used in the transition rule, or by extending the state set to accommodate the differences. Changing the function is usually easier to implement and understand.
 
 
-### Particle CA and Lattice-Gas Automata
+## Particle CA and Lattice-Gas Automata
 
 If the transition rule is careful to preserve a total cell values before and after, it can appear to model particles or fluids moving through space. The elementary 1D traffic CA (rule 184) is a simple particle CA. 
 
@@ -125,7 +123,9 @@ Particle CA can use probabilistic rules to simulate brownian motions and other n
 
 > In 1969, German computer pioneer (and painter) Konrad Zuse published his book [Calculating Space](ftp://ftp.idsia.ch/pub/juergen/zuserechnenderraum.pdf), proposing that the physical laws of the universe are discrete by nature, and that the entire universe is the output of a deterministic computation on a single cellular automaton. This became the foundation of the field of study called *digital physics*. Zuse's first model is a 3D particle CA.
 
-#### Block rule CA
+A CA-inspired digital physics hypothesis is currently being promoted by Stephen Wolfram, as described in his magnum opus [A New Kind Of Science](http://www.wolframscience.com/nksonline/toc.html).
+
+### Block rule CA
 
 One implementation option is to use *block rules*, which consider small regions at a time, rather than individual cells; e.g. a 2x2 region of cells in a 2D CA (the *Margolus neighborhood*). To handle the boundaries between blocks, the regions are shifted between each application ([see wikipedia](http://en.wikipedia.org/wiki/Block_cellular_automaton)). 
 
@@ -135,8 +135,9 @@ Note that a block rule CA does not need to be double-buffered, since block updat
 
 More example block CAs [here](http://psoup.math.wisc.edu/mcell/rullex_marg.html) -- many of these are implemented [in the example script here](http://codepen.io/grrrwaaa/pen/NGxJpP?editors=001). 
 
+> The block-rule CA especially hints at another interpretation of CA as a pattern-based *rewriting system* -- a point we will return to later in the course. And in fact, many CA can be understood as the application of pattern-based rewrites, in which a region of space that matches a given template pattern is replaced by a new region with the template's corresponding result (or action). 
 
-### Asynchronous CA
+## Asynchronous CA
 
 Rather than updating all cells at once, some other policy of visiting cells to update is applied:
 
@@ -145,7 +146,7 @@ Rather than updating all cells at once, some other policy of visiting cells to u
 - Mobile CA (see below)
 - Probabilistic asynchrony (see below)
 
-#### Mobile CA
+### Mobile CA
 
 A *mobile CA* has a notion of active cells. The transition rule is only applied to active cells, and must also specify a related cell (such as one of the neighbors) of the current active cell as the next active cell. This could also be partly probabilistic. There could be more than one 'active cell' -- there could even be a list of currently active cells. Non-active cells are then described as "quiescent". What happens if two active cells occupy the same site?
 
@@ -163,7 +164,7 @@ The [original video by Christopher Langton](http://www.youtube.com/watch?v=w6XQQ
 
 > Note that Langton's Ant, and other related Turmites, are closely related to the turtle graphics often used for L-systems, which will return to later in the course.
 
-#### Probabilistic Asynchronous CA
+### Probabilistic Asynchronous CA
 
 Chooses the next active cell according to a random selection.
 
@@ -171,7 +172,7 @@ The *Ising model* of ferromagnetism in statistical mechanics can be simulated in
 
 The [contact process](https://en.wikipedia.org/wiki/Contact_process_(mathematics)) model has been used to simulate the spread of infection (and changes of opinion in voting): infected sites become healthy at a constant rate, while healthy sites become infected at a rate proportional to the number infected neighbours (see also the [HodgePodge](http://codepen.io/grrrwaaa/pen/LpGaxm?editors=001) simulation). This can be extented to multiple states for a multitype contact process.
 
-#### Large/unbounded/complex states
+### Large/unbounded/complex states
 
 The cellular *Potts model* (also known as the *Glazier-Graner* model) generalizes probabilistic asynchronous CA to allow more than two site states, and in some cases, an unbounded number of possible site states; however it still utilizes the notion of statistical movement toward neighbor equilibrium to drive change, though the definition of a local Hamiltonian. Variations have been used to model grain growth, foam, fluid flow, chemotaxis, biological cells, and even the developmental cycle of whole organisms. 
 
@@ -181,7 +182,7 @@ Stan Marée used this model to simulate the whole life cycle of [Dictyostelium d
 
 States need not be discrete integers -- in other systems the state could be represented by an n-tuple of values, or a recursive structure allowing unbounded complexity. 
 
-### Continuous automata
+## Continuous automata
 
 **Continuous states:** In this case, the states are not discrete but belong to a continuum, such as the linear range 0..1. Instead of using a discrete transition rule or lookup table, continuous functions can be used (or combined with discrete rules such as numeric comparisons). Continuous automata can show liquid and diffusive effects.
 
@@ -191,7 +192,7 @@ States need not be discrete integers -- in other systems the state could be repr
 
 [SmoothLife](http://www.youtube.com/playlist?list=PL69EDA11384365494) uses a discrete grid, but both the kernel and transition functions are adjusted for smooth, continuous values. A disc around the cell is integrated and normalized (i.e. averaged) for the cell's state, and a ring around this is integrated & normalized (averaged) for the neighbor state. Cell transition functions are expressed in terms of continuous sigmoid thresholds over the [0, 1] range, and re-expressed in terms of differential functions (velocities of change) to approximate continuous time. [Paper here](http://arxiv.org/pdf/1111.1567v2.pdf). By doing so, it removes the discrete bias and leads to fascinating results. [Another implementaton](http://www.youtube.com/watch?v=l7t8LtdBAV8). [Taken to 3D](http://www.youtube.com/watch?v=zA857JdUn9o&list=PL69EDA11384365494&index=46). In effect, by making all components continuous, it is essentially a simulation of differential equations. [Here is a great explanation of the SmoothLife implementation, with a jsfiddle demo](http://0fps.net/2012/11/19/conways-game-of-life-for-curved-surfaces-part-1/)
 
-#### Reaction Diffusion
+### Reaction Diffusion
 
 The reaction-diffusion model was proposed by Alan Turing to describe embryo development and pattern-generation ([Turing, A. The Chemical Basic for Morphogenesis.](http://www.dna.caltech.edu/courses/cs191/paperscs191/turing.pdf)); it is still used today in computer graphics ([Greg Turk's famous paper](http://www.cc.gatech.edu/~turk/my_papers/reaction_diffusion.pdf)). RD systems and other differential equation systems can be approximated using continuous automata.
 
@@ -203,7 +204,7 @@ One approach to simulating RD using CA is the *Gray-Scott* model, as described i
 
 Some of these systems share resemblance with analog video feedback ([example](http://www.youtube.com/watch?v=hDYEVv9t32U), [example](http://www.youtube.com/watch?v=Uw5onuS2_mw)), which has been exploited by earlier media artists (notably the Steiner and Woody Vasulka). 
 
-### Multi-Scale Systems 
+## Multi-Scale Systems 
 
 Several cellular systems can be coupled together at different scales. 
 
@@ -212,7 +213,7 @@ Several cellular systems can be coupled together at different scales.
 - Different rules (or different neighborhood specifications) can be run in parallel on the same shared data. 
 - Higher- and lower-level systems could progress at different rates (or statistical frequencies).
 
-#### Ima Traveller
+### Ima Traveller
 
 ![Ima Traveller](http://notnot.home.xs4all.nl/ima/overgadenL.jpg)
 
@@ -225,7 +226,7 @@ Ima traveller (1996) is interactive computer software for exploring an infinite 
 
 This work has inspired discussion by several critics, including [Mitchell Whitelaw](http://www.tandfonline.com/doi/abs/10.1076/digc.14.1.43.8810) and [Jon McCormack and Alan Dorin](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.16.6640&rep=rep1&type=pdf&utm_source=twitterfeed&utm_medium=twitter).
 
-#### Multi-Scale Symmetric Turing Patterns
+### Multi-Scale Symmetric Turing Patterns
 
 <iframe src="https://player.vimeo.com/video/137778082" width="720" height="405" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
@@ -241,3 +242,9 @@ Since this creates structure at a single spatial scale, it can be elaborated by 
 Additionally, his system does not measure all cells within a radius; instead it selects cells at the radius distance and certain angular directions, creating cyclical symmetries in the result. For example, 3-fold symmetry may be used at a smaller scale, and 9-fold symmetry at a larger scale.
 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/4Sz-iEdNFDc?rel=0" frameborder="0" allowfullscreen></iframe>
+
+## Multi-way CA & parallel histories
+
+In certain CA variants, more than one substitution could be valid to undertake. We have seen how some CA simply choose randomly between options, while Monte Carlo systems consider two or more options and take the one with the highest entropy. In a sense, for a brief moment, these systems follow two parallel histories, and then choose which one to discard. But there is no reason why we can't follow two (or more) histories for a little longer than a single step, nor to limit our decision-making to an energetic/entropic basis. We may return to this idea when exploring evolutionary systems, which present a similar parallelism. 
+
+> Wolfram also explored ['multi-way'](http://www.wolframscience.com/nksonline/page-204#previous) CA executions, in which all possible histories for a given state are explored, considering their long-term evolutions, and in particular exploring which rules lead to exponentially more universes, which tend to stabilize, and which ultimately lead to the same results.

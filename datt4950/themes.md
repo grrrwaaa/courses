@@ -5,7 +5,7 @@ title: Themes
 
 ## What is (Artificial) Life?
 
-Artists and engineers have devised lifelike technology for millennia, often prompting inquiry into our beliefs and perspectives about living systems. In this course we explore, theoretically and practically, topics of biologically inspired computing, and especially its roots in Artificial Life, in the practice of generative art. 
+Artists and engineers have devised lifelike technology for millennia, often prompting inquiry into our beliefs and perspectives about living systems. And time after time, we discover that more of the great patterns of nature can be reproduced by following relatively simple rules and relations, and increasingly, that by means of algorithms we can create wondrous complexity. In this course we explore, theoretically and practically, topics of biologically inspired computing, and especially its roots in Artificial Life, in the practice of generative art. 
 
 But, what is life anyway? It isn't always what we think it is: evolution is not necessarily progressive, nor gradual, survival is not often a question of fitness, large amounts of DNA are shared between incredibly different species, our DNA isn't constant through our lives, environmental nurture is essential to development, etc. -- and that's before we consider what we can do with biotechnology.
 

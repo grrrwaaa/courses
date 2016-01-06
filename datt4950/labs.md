@@ -7,7 +7,9 @@ importance: 3
 
 [![Labs of the paleofuture](img/collaborative_coding.jpg)](http://paleofuture.com/blog/2011/8/24/the-push-button-school-of-tomorrow-1958.html)
 
-Most of the examples we will work though in the labs will use the JavaScript programming language, embedded in web browsers. To make this easier, I have prepared a starter-kit template, from which all our in-lab examples will be written, and which students can easily fork and extend via Codepen.io's online editor. 
+Most of the examples we will work though in the labs will use the JavaScript programming language, embedded in web browsers. To make this easier, I have prepared a starter-kit template, from which all our in-lab examples will be written, and which students can easily fork and extend via Codepen.io's online editor. (I am happy however to also demonstrate taking these ideas into different environments, such as Max/MSP, Cinder, GLSL, Unreal, etc., and we may spend more time doing this in the later parts of the course.)
+
+---
 
 To start a new script, [open the following link and then press the "Fork" button to create a new copy](http://codepen.io/grrrwaaa/pen/qObgdb?editors=001)
 
@@ -336,12 +338,6 @@ draw2D.push()
 
 Shape API
 
-----
-
-# Turning research into code (and vice versa)
-
-[Math as code](https://github.com/Jam3/math-as-code/blob/master/README.md). "This is a reference to ease developers into mathematical notation by showing comparisons with JavaScript code. Motivation: Academic papers can be intimidating for self-taught game and graphics programmers." It also includes helpful links to various JavaScript libraries we can use for mathematics.
-
 -->
 
 ----
@@ -349,3 +345,9 @@ Shape API
 ## Under the hood
 
 The library code is in [GitHub here](http://github.com/grrrwaaa/courses/blob/master/code/al.js).
+
+----
+
+## Random intereresting links
+
+[Math as code](https://github.com/Jam3/math-as-code/blob/master/README.md). "This is a reference to ease developers into mathematical notation by showing comparisons with JavaScript code. Motivation: Academic papers can be intimidating for self-taught game and graphics programmers." It also includes helpful links to various JavaScript libraries we can use for mathematics.
