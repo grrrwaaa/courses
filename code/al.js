@@ -444,9 +444,10 @@ var field2D_vertexshader = loadShader(gl, [
 var field2D_fragmentshader = loadShader(gl, [
 	"precision mediump float;",
 	"uniform sampler2D u_tex;",
+	"uniform vec4 u_color;",
 	"varying vec2 texCoord;",
 	"void main() { ",
-	"gl_FragColor = texture2D(u_tex, texCoord);",
+	"gl_FragColor = u_color * texture2D(u_tex, texCoord);",
 	"}"
 ].join("\n"), gl.FRAGMENT_SHADER);
 
@@ -471,6 +472,7 @@ var draw2D_fragmentshader = loadShader(gl, [
 var field2D_program = loadProgram(gl, [field2D_vertexshader, field2D_fragmentshader]);
 // look up where the vertex data needs to go.
 var field2D_positionLocation = gl.getAttribLocation(field2D_program, "a_position");
+var field2D_colorLocation = gl.getUniformLocation(field2D_program, "u_color");
 var field2D_modelViewLocation = gl.getUniformLocation(field2D_program, "u_modelView");
 var field2D_texLocation = gl.getUniformLocation(field2D_program, "u_tex");
 
@@ -496,7 +498,6 @@ var draw2D_program = loadProgram(gl, [draw2D_vertexshader, draw2D_fragmentshader
 // look up where the vertex data needs to go.
 var draw2D_positionLocation = gl.getAttribLocation(draw2D_program, "a_position");
 var draw2D_colorLocation = gl.getUniformLocation(draw2D_program, "u_color");
-var draw2D_offsetscaleLocation = gl.getUniformLocation(draw2D_program, "u_offsetscale");
 var draw2D_modelViewLocation = gl.getUniformLocation(draw2D_program, "u_modelView");
 
 function makeshape(vertices, indices) {
@@ -773,6 +774,7 @@ field2D.prototype.clear = function() {
 field2D.prototype.draw = function() {
 	gl.useProgram(field2D_program);
 	gl.uniformMatrix3fv(field2D_modelViewLocation, false, modelView);
+	gl.uniform4fv(field2D_colorLocation, draw2D_chroma.gl());
 
 	gl.bindTexture(gl.TEXTURE_2D, this.tex);
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
