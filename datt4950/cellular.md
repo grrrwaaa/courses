@@ -56,10 +56,7 @@ Wolfram divided CA into four classes, according to their long-term behavior:
 
 ### Conway's Game of Life
 
-<p data-height="720" data-slug-hash="EVPGOB" data-default-tab="result" data-user="grrrwaaa" class='codepen'>See the Pen <a href='http://codepen.io/grrrwaaa/pen/EVPGOB/'>EVPGOB</a> by Graham (<a href='http://codepen.io/grrrwaaa'>@grrrwaaa</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
-
-The most famous CA is probably the *Game of Life*. It is a 2D, class 4 automata, which uses the Moore neighbourhood (8 neighbours), and synchronous update. The transition rule can be stated as follows:
+The most famous CA is probably the [*Game of Life*](http://codepen.io/grrrwaaa/pen/EVPGOB). It is a 2D, class 4 automata, which uses the Moore neighbourhood (8 neighbours), and synchronous update. The transition rule can be stated as follows:
 
 - If the current state is 1 ("alive"):
 	- If the neighbor total is less than 2: New state is 0 ("death by loneliness")
@@ -87,35 +84,22 @@ One complication is that the states of the whole lattice must update synchronous
 
 ---
 
-A simple variation: [Brian's Brain](http://codepen.io/grrrwaaa/pen/WQrmGb?editors=001)
-
----
-
-## Particle CA and Lattice-Gas Automata
-
-If the transition rule is careful to preserve a total cell values before and after, it can appear to model particles or fluids moving through space. The elementary 1D traffic CA (rule 184) is a simple particle CA. 
-
-Particle CA can use probabilistic rules to simulate brownian motions and other non-deterministic media (but the rules would usually still need to be matter/energy preserving). Particle CA benefit from the inclusion of boundaries and other spatial non-homogeneities such as influx and outflow of particles at opposite edges.
-
-![Zuse's vision of nature](img/zuse.jpg)
-
-> In 1969, German computer pioneer (and painter) Konrad Zuse published his book [Calculating Space](ftp://ftp.idsia.ch/pub/juergen/zuserechnenderraum.pdf), proposing that the physical laws of the universe are discrete by nature, and that the entire universe is the output of a deterministic computation on a single cellular automaton. This became the foundation of the field of study called *digital physics*. Zuse's first model is a 3D particle CA.
-
-### Block rule CA
-
-One implementation option is to use *block rules*, which consider small regions at a time, rather than individual cells; e.g. a 2x2 region of cells in a 2D CA (the *Margolus neighborhood*). To handle the boundaries between blocks, the regions are shifted between each application ([see wikipedia](http://en.wikipedia.org/wiki/Block_cellular_automaton)). 
-
-![Margolus neigborhood](img/mnhood.gif)
-
-Note that a block rule CA does not need to be double-buffered, since block updates do not overlap. 
-
-More example block CAs [here](http://psoup.math.wisc.edu/mcell/rullex_marg.html) -- many of these are implemented [in the example script here](http://codepen.io/grrrwaaa/pen/NGxJpP?editors=001). 
-
----
-
 ## Variations
 
-There are many ways we can modulate the basic definition of a CA, some of which have been explored more than others. Here are some examples:
+There are many ways we can modulate this into more complex CA. For example, by allowing more than two states (see [Brian's Brain](http://codepen.io/grrrwaaa/pen/WQrmGb?editors=001)). 
+
+More variations are possible by modulating the basic definition of a CA, some of which have been explored more than others. Here are some examples:
+
+
+### Probabilistic/Stochastic CA
+
+In this case the transition rule is not deterministic, but includes some randomized factors. This can help avoid the CA falling into a stable or cyclic pattern -- at the risk of descending into uninteresting noise.
+
+- A probability can be assigned to each successor state according to the prior states. 
+- A *backround noise* can be added, such that from time to time a randomly chosen cell changes state. A *temperature* control could control the statistical frequency of such changes.
+- Combinations with non-homogenous CAs: statistical choice of rules and neighborhoods; variations of probabilities over space and time, etc.
+
+Take a look at the [Forest Fire CA example](http://codepen.io/grrrwaaa/pen/xwZBRP/?editors=001), and try changing the probabilities to see how it behaves.
 
 ### Non-homogenous CA
 
@@ -130,15 +114,27 @@ The rule is not the same for all cells / for all time steps. Spatial non-homogen
 
 These can be implemented by changing the function used in the transition rule, or by extending the state set to accommodate the differences. Changing the function is usually easier to implement and understand.
 
-### Probabilistic/Stochastic CA
 
-In this case the transition rule is not deterministic, but includes some randomized factors. 
+### Particle CA and Lattice-Gas Automata
 
-- A probability can be assigned to each successor state according to the prior states. 
-- A *backround noise* can be added, such that from time to time a randomly chosen cell changes state. A *temperature* control could control the statistical frequency of such changes.
-- Combinations with non-homogenous CAs: statistical choice of rules and neighborhoods; variations of probabilities over space and time, etc.
+If the transition rule is careful to preserve a total cell values before and after, it can appear to model particles or fluids moving through space. The elementary 1D traffic CA (rule 184) is a simple particle CA. 
 
-Take a look at the [Forest Fire CA example](http://codepen.io/grrrwaaa/pen/xwZBRP/?editors=001), and try changing the probabilities to see how it behaves.
+Particle CA can use probabilistic rules to simulate brownian motions and other non-deterministic media (but the rules would usually still need to be matter/energy preserving). Particle CA benefit from the inclusion of boundaries and other spatial non-homogeneities such as influx and outflow of particles at opposite edges.
+
+![Zuse's vision of nature](img/zuse.jpg)
+
+> In 1969, German computer pioneer (and painter) Konrad Zuse published his book [Calculating Space](ftp://ftp.idsia.ch/pub/juergen/zuserechnenderraum.pdf), proposing that the physical laws of the universe are discrete by nature, and that the entire universe is the output of a deterministic computation on a single cellular automaton. This became the foundation of the field of study called *digital physics*. Zuse's first model is a 3D particle CA.
+
+#### Block rule CA
+
+One implementation option is to use *block rules*, which consider small regions at a time, rather than individual cells; e.g. a 2x2 region of cells in a 2D CA (the *Margolus neighborhood*). To handle the boundaries between blocks, the regions are shifted between each application ([see wikipedia](http://en.wikipedia.org/wiki/Block_cellular_automaton)). 
+
+![Margolus neigborhood](img/mnhood.gif)
+
+Note that a block rule CA does not need to be double-buffered, since block updates do not overlap. 
+
+More example block CAs [here](http://psoup.math.wisc.edu/mcell/rullex_marg.html) -- many of these are implemented [in the example script here](http://codepen.io/grrrwaaa/pen/NGxJpP?editors=001). 
+
 
 ### Asynchronous CA
 
@@ -146,10 +142,16 @@ Rather than updating all cells at once, some other policy of visiting cells to u
 
 - A fixed update policy, such as linear scan or pre-determined path, is orderly, but may introduce artifacts (related to the *double-buffering* pattern). 
 - A multi-rate CA (self-clocked) updates each cell according to a clock period that varies from cell to cell. The clock period could also be affected by neighbors, to achieve *entrainment* effects. 
-- A *mobile CA* chooses a related cell (such as one of the neighbors) of the current active cell as the next active cell. So in addition to choosing a new state for the cell, the transition rule must also choose how to move the active cell. This could also be partly probabilistic. There could be more than one 'active cell' -- there could even be a list of currently active cells. Non-active cells are then described as "quiescent". What happens if two active cells occupy the same site?
-	- [Langton's Ant](http://en.wikipedia.org/wiki/Langton%27s_ant) is a mobile CA in a 2D, two-state space, with very simple rules:
-		- At a white square, turn 90° right, flip the color of the square, move forward one unit
-		- At a black square, turn 90° left, flip the color of the square, move forward one unit
+- Mobile CA (see below)
+- Probabilistic asynchrony (see below)
+
+#### Mobile CA
+
+A *mobile CA* has a notion of active cells. The transition rule is only applied to active cells, and must also specify a related cell (such as one of the neighbors) of the current active cell as the next active cell. This could also be partly probabilistic. There could be more than one 'active cell' -- there could even be a list of currently active cells. Non-active cells are then described as "quiescent". What happens if two active cells occupy the same site?
+
+- [Langton's Ant](http://en.wikipedia.org/wiki/Langton%27s_ant) is a mobile CA in a 2D, two-state space, with very simple rules:
+	- At a white square, turn 90° right, flip the color of the square, move forward one unit
+	- At a black square, turn 90° left, flip the color of the square, move forward one unit
 		
 [See our JavaScript version](http://codepen.io/grrrwaaa/pen/RWrdoq?editors=001), and [a variation with multiple ants](http://codepen.io/grrrwaaa/pen/MaKxJb?editors=001)
 		
@@ -161,7 +163,7 @@ The [original video by Christopher Langton](http://www.youtube.com/watch?v=w6XQQ
 
 > Note that Langton's Ant, and other related Turmites, are closely related to the turtle graphics often used for L-systems, which will return to later in the course.
 
-### Probabilistic Asynchronous CA
+#### Probabilistic Asynchronous CA
 
 Chooses the next active cell according to a random selection.
 
@@ -169,7 +171,7 @@ The *Ising model* of ferromagnetism in statistical mechanics can be simulated in
 
 The [contact process](https://en.wikipedia.org/wiki/Contact_process_(mathematics)) model has been used to simulate the spread of infection (and changes of opinion in voting): infected sites become healthy at a constant rate, while healthy sites become infected at a rate proportional to the number infected neighbours (see also the [HodgePodge](http://codepen.io/grrrwaaa/pen/LpGaxm?editors=001) simulation). This can be extented to multiple states for a multitype contact process.
 
-### Large/unbounded/complex states
+#### Large/unbounded/complex states
 
 The cellular *Potts model* (also known as the *Glazier-Graner* model) generalizes probabilistic asynchronous CA to allow more than two site states, and in some cases, an unbounded number of possible site states; however it still utilizes the notion of statistical movement toward neighbor equilibrium to drive change, though the definition of a local Hamiltonian. Variations have been used to model grain growth, foam, fluid flow, chemotaxis, biological cells, and even the developmental cycle of whole organisms. 
 
@@ -189,7 +191,7 @@ States need not be discrete integers -- in other systems the state could be repr
 
 [SmoothLife](http://www.youtube.com/playlist?list=PL69EDA11384365494) uses a discrete grid, but both the kernel and transition functions are adjusted for smooth, continuous values. A disc around the cell is integrated and normalized (i.e. averaged) for the cell's state, and a ring around this is integrated & normalized (averaged) for the neighbor state. Cell transition functions are expressed in terms of continuous sigmoid thresholds over the [0, 1] range, and re-expressed in terms of differential functions (velocities of change) to approximate continuous time. [Paper here](http://arxiv.org/pdf/1111.1567v2.pdf). By doing so, it removes the discrete bias and leads to fascinating results. [Another implementaton](http://www.youtube.com/watch?v=l7t8LtdBAV8). [Taken to 3D](http://www.youtube.com/watch?v=zA857JdUn9o&list=PL69EDA11384365494&index=46). In effect, by making all components continuous, it is essentially a simulation of differential equations. [Here is a great explanation of the SmoothLife implementation, with a jsfiddle demo](http://0fps.net/2012/11/19/conways-game-of-life-for-curved-surfaces-part-1/)
 
-### Reaction Diffusion
+#### Reaction Diffusion
 
 The reaction-diffusion model was proposed by Alan Turing to describe embryo development and pattern-generation ([Turing, A. The Chemical Basic for Morphogenesis.](http://www.dna.caltech.edu/courses/cs191/paperscs191/turing.pdf)); it is still used today in computer graphics ([Greg Turk's famous paper](http://www.cc.gatech.edu/~turk/my_papers/reaction_diffusion.pdf)). RD systems and other differential equation systems can be approximated using continuous automata.
 
