@@ -146,6 +146,7 @@ Oculus VR is acquired by Facebook for $2 billion, which isn't well received by m
 ![Oculus Menagerie](oculus_menagerie.jpg)   
 Image taken by author at the Unreal Summit, Seoul, May 2015.
 
+
 ---
 
 ## VR is or is not cinema

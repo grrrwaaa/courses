@@ -429,86 +429,65 @@ if (!floatTextures) {
 }
 
 // GLSL programs
-var field2D_vertexshader = loadShader(gl, [
-	"attribute vec2 a_position;",
-	"uniform mat3 u_modelView;",
-	"varying vec2 texCoord;",
-	"void main() { ",
-	//"gl_Position = vec4(a_position, 0, 1);",
-	"vec3 p = u_modelView * vec3(a_position, 1.);",
-	"gl_Position = vec4(p, 1);",
-	"texCoord = a_position;",
-	"}"
-].join("\n"), gl.VERTEX_SHADER);
 
-var field2D_fragmentshader = loadShader(gl, [
-	"precision mediump float;",
-	"uniform sampler2D u_tex;",
-	"uniform vec4 u_color;",
-	"varying vec2 texCoord;",
-	"void main() { ",
-	"gl_FragColor = u_color * texture2D(u_tex, texCoord);",
-	"}"
-].join("\n"), gl.FRAGMENT_SHADER);
+/*
+	The only significant difference between these now is the existence of a texture
+	
+	To eliminate this difference (and thus use only one shader), need to:
+	
+	- have a uniform to switch between (mix between) textured and untextured
+		(or alternatively, have a default texture that is white)
+	- have an extra argument to the draw2D functions to pass in a texture ID 
+		or texture-like object, and update the shader uniform accordingly
+	- generate texcoords within the geometry buffer, rather than relying on a_position
+*/
 
 var draw2D_vertexshader = loadShader(gl, [
 	"attribute vec2 a_position;",
+	"attribute vec2 a_texcoord;",
 	"uniform mat3 u_modelView;",
+	"varying vec2 texCoord;",
 	"void main() { ",
 	"vec3 p = u_modelView * vec3(a_position, 1.);",
 	"gl_Position = vec4(p, 1);",
+	"texCoord = a_texcoord; //a_position;",
 	"}"
 ].join("\n"), gl.VERTEX_SHADER);
 
 var draw2D_fragmentshader = loadShader(gl, [
 	"precision mediump float;",
+	"uniform sampler2D u_tex;",
 	"uniform vec4 u_color;",
+	"varying vec2 texCoord;",
 	"void main() { ",
-	"gl_FragColor = u_color;",
+	"//gl_FragColor = u_color;",
+	"gl_FragColor = u_color * texture2D(u_tex, texCoord);",
 	"}"
 ].join("\n"), gl.FRAGMENT_SHADER);
-
-
-var field2D_program = loadProgram(gl, [field2D_vertexshader, field2D_fragmentshader]);
-// look up where the vertex data needs to go.
-var field2D_positionLocation = gl.getAttribLocation(field2D_program, "a_position");
-var field2D_colorLocation = gl.getUniformLocation(field2D_program, "u_color");
-var field2D_modelViewLocation = gl.getUniformLocation(field2D_program, "u_modelView");
-var field2D_texLocation = gl.getUniformLocation(field2D_program, "u_tex");
-
-// Create a buffer and put a single clipspace rectangle in
-// it (2 triangles)
-var field2D_buffer = gl.createBuffer();
-gl.bindBuffer(gl.ARRAY_BUFFER, field2D_buffer);
-gl.bufferData(
-gl.ARRAY_BUFFER,
-new Float32Array([
-	0.0, 0.0,
-	1.0, 0.0, 
-	0.0, 1.0, 
-	0.0, 1.0,
-	1.0, 0.0,
-	1.0, 1.0
-]),
-gl.STATIC_DRAW);
 
 
 
 var draw2D_program = loadProgram(gl, [draw2D_vertexshader, draw2D_fragmentshader]);
 // look up where the vertex data needs to go.
 var draw2D_positionLocation = gl.getAttribLocation(draw2D_program, "a_position");
+var draw2D_texcoordLocation = gl.getAttribLocation(draw2D_program, "a_texcoord");
 var draw2D_colorLocation = gl.getUniformLocation(draw2D_program, "u_color");
 var draw2D_modelViewLocation = gl.getUniformLocation(draw2D_program, "u_modelView");
+var draw2D_texLocation = gl.getUniformLocation(draw2D_program, "u_tex");
 
-function makeshape(vertices, indices) {
+function makeshape(vertices, texcoords, indices) {
 	var vertices_buffer = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, vertices_buffer);
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+	var texcoords_buffer = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, texcoords_buffer);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(texcoords), gl.STATIC_DRAW);
 	var indices_buffer = gl.createBuffer();
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indices_buffer);
 	gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
 	return {
 		vertices: vertices_buffer,
+		texcoords: texcoords_buffer,
 		indices: indices_buffer,
 		length: indices.length,
 	}; 
@@ -516,6 +495,7 @@ function makeshape(vertices, indices) {
 
 var draw2D_circle = (function() {
 	var vertices = [0, 0, 1, 0];
+	var texcoords = [0.5, 0.5, 1, 0.5];
 	var indices = [];
 	var incr = (2 * Math.PI) / 32;
 	for (var i = 1; i < 32; i++) {
@@ -523,12 +503,17 @@ var draw2D_circle = (function() {
 		var angle = incr * (i + 1);
 		vertices[index*2  ] = Math.cos(angle);
 		vertices[index*2+1] = Math.sin(angle);
+		
+		// TODO: maybe map whole square onto disc (i.e. corners are at 45,45')?
+		texcoords[index*2  ] = vertices[index*2  ]*0.5+0.5;
+		texcoords[index*2+1] = vertices[index*2+1]*0.5+0.5;
+		
 		// add triangle:
 		indices.push(0);
 		indices.push(index);
 		indices.push(index-1);
 	}
-	return makeshape(vertices, indices);
+	return makeshape(vertices, texcoords, indices);
 })();
 
 var draw2D_rect = (function() {
@@ -538,8 +523,14 @@ var draw2D_rect = (function() {
 		-1.0, 1.0,
 		1.0, 1.0
 	];
+	var texcoords = [
+		0, 0,
+		1, 0, 
+		0, 1,
+		1, 1
+	];
 	var indices = [0, 1, 2, 2, 1, 3];
-	return makeshape(vertices, indices);
+	return makeshape(vertices, texcoords, indices);
 })();
 
 // Create a buffer and put a single clipspace rectangle in
@@ -594,6 +585,32 @@ mat3.scale(modelView_default, modelView_default, [2, 2]);
 mat3.translate(modelView_default, modelView_default, [-0.5, -0.5]);
 draw2D_modelView_stack = [];
 
+var texture_default = (function() {
+	var id = gl.createTexture();
+	gl.bindTexture(gl.TEXTURE_2D, id);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+	var b = new ArrayBuffer(2 * 2 * 4 * 4);
+	var a = new Float32Array(b);
+	for (var i=0; i<2*2*4; i++) {
+		a[i] = 1;
+	}
+	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 2, 2, 0, gl.RGBA, gl.FLOAT, a);
+	return id;
+})();
+var texture_current = texture_default;
+
+draw2D.texture = function(t) {
+	if (t !== undefined && t.tex !== undefined) {
+		texture_current = t.tex;
+		t.bindtexture();
+	} else {
+		texture_current = texture_default;
+		gl.bindTexture(gl.TEXTURE_2D, texture_default);
+	}
+};
 
 draw2D.color = function(r, g, b, a) {
 	if (typeof r == "string" || typeof r == "object") {
@@ -658,19 +675,22 @@ draw2D.shape = function() {
 };
 
 function draw2D_drawshape(shape, mat_local) {
-	gl.useProgram(draw2D_program);
 	gl.uniform4fv(draw2D_colorLocation, draw2D_chroma.gl());
 	gl.uniformMatrix3fv(draw2D_modelViewLocation, false, mat_local);
 
 	gl.bindBuffer(gl.ARRAY_BUFFER, shape.vertices);
 	gl.enableVertexAttribArray(draw2D_positionLocation);
 	gl.vertexAttribPointer(draw2D_positionLocation, 2, gl.FLOAT, false, 0, 0);
+	
+	gl.bindBuffer(gl.ARRAY_BUFFER, shape.texcoords);
+	gl.enableVertexAttribArray(draw2D_texcoordLocation);
+	gl.vertexAttribPointer(draw2D_texcoordLocation, 2, gl.FLOAT, false, 0, 0);
+	
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, shape.indices);
 	gl.drawElements(gl.TRIANGLES, shape.length, gl.UNSIGNED_SHORT, 0);
 
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 	gl.bindBuffer(gl.ARRAY_BUFFER, null);
-	gl.useProgram(null);
 	return draw2D;
 }
 
@@ -771,25 +791,19 @@ field2D.prototype.clear = function() {
 	return this;
 };
 
-field2D.prototype.draw = function() {
-	gl.useProgram(field2D_program);
-	gl.uniformMatrix3fv(field2D_modelViewLocation, false, modelView);
-	gl.uniform4fv(field2D_colorLocation, draw2D_chroma.gl());
-
+field2D.prototype.bindtexture = function() {
 	gl.bindTexture(gl.TEXTURE_2D, this.tex);
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
 	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, this.width, this.height, 0, gl.RGBA, gl.FLOAT, this.array);
+};
 
-	gl.bindBuffer(gl.ARRAY_BUFFER, field2D_buffer);
-	gl.enableVertexAttribArray(field2D_positionLocation);
-	gl.vertexAttribPointer(field2D_positionLocation, 2, gl.FLOAT, false, 0, 0);
-	gl.drawArrays(gl.TRIANGLES, 0, 6);
-	gl.bindBuffer(gl.ARRAY_BUFFER, null);
-
-	gl.bindTexture(gl.TEXTURE_2D, null);
+field2D.prototype.draw = function() {
+	this.bindtexture();
+	draw2D.rect(0.5, 0.5, 1);
+	gl.bindTexture(gl.TEXTURE_2D, texture_default);
 };
 
 field2D.prototype.get = function(x, y) {
@@ -1027,6 +1041,12 @@ requestAnimationFrame(render);
 function render() {
 	requestAnimationFrame(render);
 
+	mat3.copy(modelView, modelView_default);
+	draw2D_chroma = chroma("white");
+	texture_current = texture_default;
+
+	if (typeof(update) === "function") update();
+	
 	// Set the viewport to match
 	gl.viewport(0, 0, canvas.width, canvas.height);
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -1034,10 +1054,8 @@ function render() {
 	// regular blending:
 	gl.enable(gl.BLEND);
 	gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
-	mat3.copy(modelView, modelView_default);
-	draw2D_chroma = chroma("white");
-
-	if (typeof(update) === "function") update();
+	gl.useProgram(draw2D_program);
 	if (typeof(draw) === "function") draw();
+	gl.useProgram(null);
+	
 }
