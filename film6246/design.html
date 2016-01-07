@@ -18,7 +18,56 @@
 	</nav>	
 	<div id="main">
 	<h1 id="design-notes-for-virtual-worlds">Design notes for virtual worlds</h1>
-<h2 id="nausea-motion-sickness-simulator-sickness-">Nausea, motion sickness, simulator sickness...</h2>
+<h2 id="causes-and-remedies-of-simulator-sickness">Causes and remedies of simulator sickness</h2>
+<p>Simulator sickness has been known about since the earliest flight simulators of the 1950&#39;s, but is still not fully understood. It is likely to be due to sensory conflict -- that what some parts of the visual system are reporting does not match what other sensory components (such as proprioceptive systems) are reporting. But it also may be a complex of several factors, and affects different people in different ways.</p>
+<p>It remains one of the greatest risks to virtual reality&#39;s success. Here are some things to avoid and ways to reduce the risk:</p>
+<p><strong>Maintain low latency (and high frame-rate)</strong></p>
+<ul>
+<li>Frame rates for the DK2 should be 75Hz, for the CV1 90Hz. This is quite demanding, which is why Oculus requires high recommended specifications for computer chips, memory, and graphics cards (GPUs).</li>
+<li>Latency is how long it takes for a message to transmit. <em>Motion to photon</em> latency measures how long it takes for a change in head rotation to be reflected in a change in the image perceived. It should be <em>consistently</em> on the order of 10 milliseconds to avoid nausea. The oculus driver does some tricks to help keep this down, but like frame-rate, it also depends crucially on the content and quality of the software.</li>
+<li>&quot;Judder&quot; happens when the frame rate is not consistent, and a few frames are dropped -- the image then stalls briefly, causing a nauseating mechanical movement of the world.</li>
+</ul>
+<p><strong>Avoid accelerations</strong></p>
+<p>Any change of velocity (or rotational velocity) is an <em>acceleration</em>, which imparts a physical force on the body detected primarily via the vestibular system. If such changes occur in the virtual world but are not mirrored in physical vestibular response (e.g. by navigating with a joystick rather than on a treadmill) nausea can very rapidly ensue. </p>
+<p>Since most of us don&#39;t have access to a treadmill, or the spherical equivalent, this makes navigation in virtual worlds a big problem. Even being able to turn around to face behind you (rather than looking over your shoulder) is problematic.</p>
+<ul>
+<li>Don&#39;t accelerate smoothly: immediately moving and immediately stopping is better (for most people).</li>
+<li>Same for rotations: jumping between angles is better than smooth panning (for most people).</li>
+</ul>
+<p><strong>Don&#39;t move like in video games</strong></p>
+<ul>
+<li>Movements should be much slower than we are accustomed to in video games. </li>
+<li>Sideways movement (strafing / tracking) can be particularly nauseous. </li>
+<li>Moving backwards is much worse than moving forwards.</li>
+</ul>
+<p><strong>No stairs</strong></p>
+<p>For some reason, stairs are really unpleasant (both going up and down). Use elevators, or ramps with very shallow inclines.</p>
+<p><strong>Give a visual reference frame</strong></p>
+<p>Placing a reference frame around the point of view can help stabilize the senses -- which is why cockpit-based simulations (inside cars, spaceships, robots, etc.) can handle much greater accelerations and rotations without inducing sickness. </p>
+<p><a href="https://www.reddit.com/r/oculus/comments/3yihao/i_solved_vr_sickness_maybe/">However it might be possible that the reference frame is semi-transparent, and even that it is not present for much of the time.</a> -- more research is needed.</p>
+<p><img src="http://www.wired.com/wp-content/uploads/2015/04/vrnosetuscany.gif" alt="nose"></p>
+<p><a href="http://www.wired.com/2015/04/reduce-vr-sickness-just-add-virtual-nose/">Research at Purdue suggests that overlaying the peripheral image of a nose helps reduce simulator sickness by 13.5%</a></p>
+<p><strong>Lighting &amp; texturing</strong></p>
+<ul>
+<li>Avoid very bright lights, flickering lights, and areas of high contrast.</li>
+<li>Avoid untextured surfaces, as the lack of detail provides less distance cue and weakens the perceptual illusion, making other conflicting signals more problematic.</li>
+<li>Avoid textures that are obviously repetitive, like tiling patterns.</li>
+</ul>
+<p><strong>Learn how to avoid it</strong></p>
+<p>Hardly a solution, but there are a few techniques that people susceptible to sim sickness can make use of: </p>
+<ul>
+<li>Take time to calibrate the headset to your eyes -- your inter-pupillary distance, your field of view, the height of your eyes above ground (when standing), etc.</li>
+<li>When turning, keep your eyes locked on to a specific point.</li>
+<li>Close your eyes for any nausea-inducing moments.</li>
+<li>Sitting is usually better than standing, so long as the experience can place you at an appropriate height in the virtual world.</li>
+<li>Remember to take breaks.</li>
+<li>Don&#39;t expose yourself to nauseating experiences too often -- it can make you more sensitive, and create negative associations that are hard to shake (e.g. with the smell of the headset).</li>
+<li>Eat ginger (a long known remedy for motion sickness). Some also recommend a little alcohol, while others say that this makes it worse.</li>
+</ul>
+<h2 id="interaction">Interaction</h2>
+<ul>
+<li><a href="http://www.gamasutra.com/view/news/250362/Valve_shares_advice_on_designing_great_VR_game_interactions.php">Valve advice in interaction in VR</a></li>
+</ul>
 
 	</div>
 	<footer>&copy; 2016 Graham Wakefield</footer>
