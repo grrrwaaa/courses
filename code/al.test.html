@@ -66,11 +66,12 @@ function update() {
 
 // render the simulation (called frequently!)
 function draw() {
-	//draw2D.scale(0.5);
+	draw2D.color(0, 1, 0);
 	field.draw();
 
-	draw2D.color(1, 1, 1, 0.5);
-	draw2D.circle(0.5, 0., 0.5);
+	draw2D.texture(field);
+	draw2D.color(1, 1, 1, 1);
+	draw2D.circle(0.5, 0.5, 0.5);
 }
 
 function mouse(event, point) {
