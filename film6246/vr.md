@@ -175,7 +175,7 @@ Despite this, we should be cautious in naively bringing cinematic ideas to the m
 	- Incredibly expensive
 	- Viewer can't move
 - 360 camera arrays + stitching
-	- Google Jump, JauntVR, VRSE, many others
+	- Google Jump, JauntVR, VRSE, **many** others -- a boom in 360 cameras right now
 	- Imperfect, and likely impossible to perfect
 	- Viewer can't move
 	- Recent guide here: [Various contributors (open source). Making 360. Github, ongoing.](http://making360.com)
