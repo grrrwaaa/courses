@@ -85,19 +85,7 @@ When editing: Alt+P to play in VR mode
 When playing: Alt+Enter to switch between VR mode
 Control+R to reset the forward view
 
-### Sim sickness dos and don'ts:
-
-- Never take away the head-tracking control of the camera.
-- Do not adjust Field of View (FOV)
-- Do not add "walking bob" or camera "shake" effects
-- Avoid placing bright lights
-- The frame rate must be 75 frames per second for the DK2
-- Use lifts rather than stairs
-- Make objects the same size as they are in the real world
-- Do not use smoothed acceleration, instead constant speed. (Similarly, rotate by 'snapping' rather than smoothly)
-- Do not use motion blur or depth of field post-processing effects
-
-Recommendations:
+**VR Recommendations**
 
 Unreal measures space in centimeters (so 1 meter is 100 Unreal units, or UU). The best interaction space is 75 to 350 UU from the player camera.
 
