@@ -26,6 +26,29 @@
 <li>Run this launcher (you will need to sign in again), and then under the &quot;Unreal&quot; tab download the Unreal Engine. This will take a while!</li>
 <li>From the launcher also get the &quot;content examples&quot;, and perhaps any other of the free samples you find interesting. Warning -- these examples can eat <em>gigabytes</em> of disk space!!</li>
 </ul>
+<h2 id="create-open-project">Create/open project</h2>
+<p>Open the editor directly, or via the launcher. It should open with the &#39;project browser&#39;. </p>
+<p>Create a new &#39;first person&#39; project, and make sure that &quot;with starter content&quot; is selected. Choose where to save it, and then &quot;create project&quot;. This will now open in the editor.</p>
+<p>In future, just go ahead and open your existing project from the browser.</p>
+<h2 id="the-editor">The editor</h2>
+<p><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=w4XlBKeE46E">video tutorial</a></p>
+<p>The main panel is the 3D <strong>viewport</strong>, showing a preview of the world. You can navigate around the world and also modify objects (actors) in here.</p>
+<ul>
+<li>Left mouse: move forward/backward/turn</li>
+<li>Right mouse: look around</li>
+<li>Both buttons (or middle button): vertical &amp; strafe movement</li>
+<li>Mouse-scroll to zoom in and out (not the same as moving!!)</li>
+<li>Keys: with any mouse button (usually the right) held down, keys W, A, S, D, Q and E move around. </li>
+<li>Select an object by clicking on it, then press &quot;F&quot; to focus on it (or, double-click an item in the World Outliner)</li>
+<li>Alt+mouse (&quot;maya style&quot;) pivots and dollys around the focused object.</li>
+</ul>
+<p>On the left, the Modes panel selects different task workflows, such as placing objects, creating geometry, painting meshes, generating trees, etc. Most of the time we stay in the initial &quot;placement mode&quot; -- which allows us to drop basic items such as default lights into the scene.</p>
+<p>At the bottom, the <strong>Content Browser</strong> is where you can manage the Assets used in your project. With this you can also drop any existing assets into the scene. You can also double-click on some items in this browser to modify them in special editors.</p>
+<p>On the right, the <strong>World Outliner</strong> panel shows all the levels, and all the actors involved in each level. You can select them here, or in the 3D viewport, to modify them. You can also use this to &quot;parent&quot; one object to another, so that they always are positioned together.</p>
+<p>Below that, the <strong>Details panel</strong> is used to modify properties of whatever is currently selected, and also to add additional components and &quot;blueprints&quot; (scripted behaviours) to them.</p>
+<blockquote>
+<p>Tip: Hold Control+Alt and mouse-over any Editor feature to see a help window about it.</p>
+</blockquote>
 <hr>
 <h2 id="concepts">Concepts</h2>
 <p><a href="https://docs.unrealengine.com/latest/INT/GettingStarted/index.html?utm_source=launcher&amp;utm_medium=ue&amp;utm_campaign=uelearn">Getting started with UE4</a></p>
@@ -34,32 +57,81 @@
 <p>Any object (a player, character, geometry mesh, light, etc.) that can be placed in 3D space (with position/translation, rotation/orientation, scale etc.) is an <em>Actor</em>. Remember that <em>Assets</em> in the content browser are the resources you can place into the world, while <em>Actors</em> are instances that use these resources.</p>
 <p>At its most basic level, creating levels boils down to placing Actors in a map. Actors can also be created (&quot;spawned&quot;) by scripts, e.g. the arrows launched by a bow. Some examples of kinds of Actor are StaticMeshActor, CameraActor, PlayerStartActor. A <em>Pawn</em> is a kind of actor that serves as an avatar or persona. </p>
 <p>A <em>Component</em> is a piece of functionality that can be added to an Actor. Components cannot exist by themselves. For example, a Spot Light Component will allow your Actor to emit light like a spot light.</p>
+<hr>
+<h2 id="viewport-navigating">Viewport navigating</h2>
+<p><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=j2CKS6G3G2k">Viewport tutorial</a>:</p>
+<ul>
+<li>Left mouse: move forward/backward/turn</li>
+<li>Right mouse: look around</li>
+<li>Both buttons (or middle button): vertical &amp; strafe movement</li>
+<li>Mouse-scroll to zoom in and out (not the same as moving!!)</li>
+<li>Keys: with any mouse button (usually the right) held down, keys W, A, S, D, Q and E move around. C and Z will do a temporary zoom in/out.</li>
+<li>Select an object by clicking on it, then press &quot;F&quot; to focus on it (or, double-click an item in the World Outliner)</li>
+<li>Alt+left mouse (&quot;maya style&quot;) pivots around the focused object.</li>
+<li>Alt+right mouse can dolly toward/away from the object.</li>
+</ul>
+<h2 id="placing-objects">Placing objects</h2>
+<p><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=01BL2bWeJSA">First tutorial</a>:</p>
+<p>By default new levels pretty much just have a floor and a player-start actor. Ways of adding content:</p>
+<ol>
+<li>We can drag basic objects &amp; actors from the &#39;place mode&#39; palette at the left. You can drag objects from the browser into the viewport, and also materials right onto objects in the viewport. And also more abstract items such as lights, triggers, and other classes. </li>
+<li>We can drag objects from the Content Browser below.</li>
+<li>Right-click in the viewport and choosing &#39;place actor&#39;, then selecting the time to add.</li>
+</ol>
+<p>Once placed, objects can be <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=wHJCv-Ph6zU">moved</a>, <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=ralshA7aWag">rotated</a>, and <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=rqJoX8orsUM">scaled</a>:</p>
+<p>Press &quot;w&quot; to enable the move tool (usually it is enabled by default), or using the toolbar at the top-right. The red, green, and blue arrows represent the X, Y, and Z axes respectively. Click &amp; drag an arrow to move the object.</p>
+<p>Press &quot;end&quot; with an object selected and it will drop down to the floor.</p>
+<p>Hold down &quot;shift&quot; while moving an object, and it will also move the camera at the same time.</p>
+<p>Press &quot;e&quot; to enable the rotation tool, or using the toolbar at the top-right. Click on one of the arcs to start rotating, and it will show you how much you are rotating in degrees. </p>
+<p>Press &quot;r&quot; to choose the scale mode, or using the toolbar at the top-right. To scale in one axis choose the corresponding red, green, or blue box, or to scale in all axes grab the white cube in the center.</p>
+<p>The globe icon (after the scale tool) chooses between world-space and object local-space to move &amp; rotate in. (Ctrl ~). Note: scaling is always in local space.</p>
+<p>The next tool along controls move snapping (enable, grid size, etc.) This is followed by the rotation snapping options, and then the scale snapping options. Snap to grid is useful for creating buildings -- making sure there are no gaps between walls! </p>
+<p>Position, rotation &amp; scale can also be modified from the object&#39;s details panel. Remember, Unreal measures in centimeters.</p>
+<p>&quot;alt drag&quot; to make a copy of an actor.</p>
+<h2 id="content-browser">Content browser</h2>
+<p>The <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=tG2KML-CDRo">Content browser</a> contains all assets created within Unreal, or imported from outside. Meshes, materals, particle effects, sounds, etc. This mirrors the directory structure on disk. Many of them can be edited and saved in-place, which will be automatically re-imported to Unreal.</p>
+<p>You can <strong>add new</strong> to create new simple assets or content packs. You can create new folders to organize assets better. You can <strong>import</strong> external assets to the content browser.</p>
+<p>Assets can be edited <em>before</em> bringing them into the level. Double-click any asset and it will open a special sub-editor in which it can be modified.</p>
+<p>Projects can end up with very many assets. There is a search tool and options to filter assets by type. You can have multiple content browsers and lock them to different folders.</p>
+<h2 id="buiding-a-level">Buiding a level</h2>
+<p>Like any major production, everything starts with planning and sketching; with some interesting overlaps and differences from film, architecture, design, composition, etc.</p>
+<blockquote>
+<p>Within Unreal, sketch first with a &quot;roughed-in&quot; or &quot;blocked out&quot; schematic of the world, and start testing it&#39;s movement and flow as soon as possible -- long before spending any time on creating the real mesh geometry and other art assets. <a href="https://docs.unrealengine.com/latest/INT/Engine/Actors/Brushes/index.html">Geometry Brushes</a>, also sometimes called &quot;BSPs&quot;, are perfect for this aspect of the level design process. After testing &amp; refining, spend more time updating the meshes, lighting and other elements of the world, testing continually, up to the last stages of polishing up.</p>
+</blockquote>
+<p><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=57MxoF4sy84">Geometry layout -- part 2</a>:</p>
+<p>The <strong>First person template</strong> gives us a simple world of grey and white blocks, with a character who can run around, jump, and also shoot physical balls. This is a good starting point.</p>
+<p><strong>To hide the silly blue character</strong>: In the content browser, double click the Blueprints/FirstPersonCharacter, switch to the viewport and select the Mesh1P mesh, in the details panel click the &quot;owner no see&quot; option. Then compile &amp; save.</p>
+<p>It can be useful to make new levels to test out ideas quickly without breaking work done in your main level(s). We can create a new level (File -&gt; new level), and likely choose the default map. Delete the &quot;player start&quot; for now. Maybe also delete the floor if we&#39;ll be making our own.</p>
+<p>A <em>Geometry Brush</em> is a way to fill in and carve out volumes of space in a level. They can be used to rapid-prototype a level where static meshes have not yet been created. Geometry Brush shapes include Boxes, Cones, Spheres, and Staircases, and have a few things that can be tweaked in the details panes. Using the <em>Geometry Editing Mode</em>, very simple 3D modeling can be performed. A geometry brush&#39;s settings can be set to &quot;Subtractive&quot; type, which will carve out holes in other brushes -- however the order of brushes is important. Also be careful to use the <em>Drag Grid</em> to make sure geometry snaps to tight alignment. You can also apply materials and lighting properties to a brushes&#39; surfaces. After modeling, you can convert a brush into a regular StaticMeshActor from the Brush settings.</p>
+<p>In the Placement mode tab, choose the BSP (also known as <em>geometry brush</em>). Now we can drag different kinds of brushes into the level, such as boxes, cylinders, and stairs (though remember -- stairs are nauseous in VR!). After dragging it in we can resize it (e.g. via the details panel). </p>
+<p>Snapping on is pretty important when drawing basic geometry -- and probably want to have the snap size bigger than the default 10cm. </p>
+<p>Use &quot;ctrl end&quot; to snap an object to grid (&quot;end&quot; by itself drops an item to the floor). </p>
+<p>&quot;alt drag&quot; to make copies. &quot;ctrl drag&quot; to select multiple items to copy.</p>
+<p>Switch to the <em>Geometry editing</em> mode tool to modify existing geometry brushes in terms of faces, vertices etc.</p>
+<p>Hit &quot;Build&quot; in the top toolbar to apply the changes, and rebuild lighting models etc.</p>
+<p><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=RGxf2SiUBt8">Part 3</a></p>
+<p>Create an opening in a wall: duplicate the wall, reduce its size. Set the brush type to &quot;subtractive&quot; (in the details panel). Then drag it back into the wall. The starter content has some static meshes for door frames, window frames etc. which we can drag into these openings.</p>
+<p><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=v5yCcP9EnT8">Part 4</a></p>
+<p>Can just drag &amp; drop materials onto the geometry brushes.</p>
+<p>Select a wall, press &quot;shift+w&quot;, it will select all adjacent walls.</p>
+<p>Select all adjoining panels (with &quot;ctrl&quot;) and in the details panel, set Geometry / Alignment / Align surface planar to make sure there are no seams between them.</p>
+<p><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=dSckAxhy_4I">Part 5</a></p>
+<p><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=xVDq-9kSD74">Part 6</a></p>
+<blockquote>
+<p>See also the <a href="https://docs.unrealengine.com/latest/INT/Engine/QuickStart/index.html">Level Designer Quick Start</a> documentation.</p>
+</blockquote>
+<hr>
+<h2 id="tips">Tips</h2>
+<blockquote>
 <p>A <em>Class</em> defines the behaviors and properties of a particular Actor or Object used in the creation of an Unreal Engine game. Classes can be created in C++ code or via visual diagrams called Blueprints. Each game has one <em>PlayerController</em> class which controls a Character Pawn from input controls (joystick etc.). An <em>AIController</em> possesses other Pawns to serve as non-player characters (NPCs) in the world.</p>
 <p><em>Volumes</em> define a 3D area for certain purposes, often invisible (such as blocking volumes to prevent actors leaving the area, pain causing volumes to inflict damage on any actor within the area, trigger volumes that cause events when an actor enters or exits them). </p>
-<h2 id="editing">Editing</h2>
-<p>The main panel is the 3D viewport, showing a preview of the world. </p>
-<ul>
-<li>Move &amp; look around by dragging the left mouse button, or rotate in place by dragging the right mouse button. Drag with both buttons down to move vertically.</li>
-<li>With any mouse button held down, using keys W, A, S, D, Q and E to move around.</li>
-<li>Mouse-scroll to zoom in and out.</li>
-<li>Select an object by clicking on it, then press &quot;F&quot; to focus on it (or, double-click an item in the World Outliner)</li>
-</ul>
-<p>On the left, the Modes panel selects different task workflows, such as placing objects, creating geometry, painting meshes, generating trees, etc.</p>
-<p>On the right, the World Outliner panel shows all the levels, and all the actors involved in each level. You can select them here, or in the 3D viewport, to modify them. Below that, the Details panel is used to modify properties of whatever is currently selected.</p>
-<p>Below, the Content Browser is where you can manage the Assets used in your project.</p>
-<blockquote>
-<p>Tip: Hold Control+Alt and mouse-over any Editor feature to see a help window about it.</p>
 </blockquote>
-<h2 id="viewing-the-frame-rate">Viewing the Frame rate</h2>
-<p>Command+Shift+H (or the dropdown top-right of the viewport)</p>
-<hr>
-<h2 id="building-levels">Building levels</h2>
-<p>Like any major production, everything starts with planning and sketching; with some interesting overlaps and differences from film, architecture, design, composition, etc.</p>
-<p>Within Unreal, sketch first with a &quot;roughed-in&quot; or &quot;blocked out&quot; schematic of the world, and start testing it&#39;s movement and flow as soon as possible -- long before spending any time on creating the real mesh geometry and other art assets. <a href="https://docs.unrealengine.com/latest/INT/Engine/Actors/Brushes/index.html">Geometry Brushes</a>, also sometimes called &quot;BSPs&quot;, are perfect for this aspect of the level design process. After testing &amp; refining, spend more time updating the meshes, lighting and other elements of the world, testing continually, up to the last stages of polishing up.</p>
-<p>A <em>Geometry Brush</em> is a way to fill in and carve out volumes of space in a level. They can be used to rapid-prototype a level where static meshes have not yet been created. Geometry Brush shapes include Boxes, Cones, Spheres, and Staircases, and have a few things that can be tweaked in the details panes. Using the <em>Geometry Editing Mode</em>, very simple 3D modeling can be performed. A geometry brush&#39;s settings can be set to &quot;Subtractive&quot; type, which will carve out holes in other brushes -- however the order of brushes is important. Also be careful to use the <em>Drag Grid</em> to make sure geometry snaps to tight alignment. You can also apply materials and lighting properties to a brushes&#39; surfaces. After modeling, you can convert a brush into a regular StaticMeshActor from the Brush settings.</p>
-<p>It can be useful to make new levels to test out ideas quickly without breaking work done in your main level(s). File-&gt;New Level.</p>
-<hr>
-<p><a href="https://docs.unrealengine.com/latest/INT/Engine/QuickStart/index.html">Level Designer Quick Start</a></p>
+<p><strong><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=RoiQOwCg-4Q">Orthographic views</a>:</strong></p>
+<p>In the top-right corner of viewport there is a small &#39;min/max&#39; button which will alternate between a maximized 3D view, and a 4-up set of views for top, left, and front &quot;orthographic&quot; (non-perspective) views as well as the regular perspective one. Right-click &amp; drag to move in these views, and mouse-scroll to zoom.</p>
+<p><strong><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=7UjP6gr44dc">View modes &amp; show flags tutorial</a></strong>:</p>
+<p>By default the viewport uses full lighting (&quot;lit&quot;) -- other modes are unlit (raw materials), wireframe (raw meshes), detail lighting (lighting effects only), reflections, etc. Next to this option is the <strong>Show</strong> drop-down, where you can enable and disable different kinds of content in the viewport.</p>
+<p><strong>We can <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=Z7OqNjFpy6U">lock the viewport to an actor</a></strong> by right-clicking on an object and selecting the &quot;pilot&quot; option. This fixes our viewport&#39;s perspective to the object itself, and we can use the standard viewport movement controls to reposition the object. This is especially useful for positioning lights and cameras, for example.</p>
+<p><strong>Viewing the Frame rate</strong>: Command+Shift+H (or the dropdown top-right of the viewport)</p>
 <hr>
 <h2 id="vr-in-unreal">VR in Unreal</h2>
 <ul>
@@ -79,6 +151,7 @@ Movement speed: 24 meters per second</p>
 <p>Switch AA method to FXAA or None in the Post Process volume settings.</p>
 <p>Normal mapping won&#39;t look as effective in VR; use &quot;Parallax mapping&quot;  or &quot;Tessellation Shader Displacement&quot; instead.</p>
 <p>Some blueprint functions under &quot;head mounted display&quot; menu in the blueprint editor</p>
+<p><a href="https://www.youtube.com/watch?v=L-uK0zIY28g">Mitch&#39;s VR tutorial</a></p>
 
 	</div>
 	<footer>&copy; 2016 Graham Wakefield</footer>
