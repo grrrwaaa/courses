@@ -78,6 +78,12 @@ Part 2:
 
 ### 2. Jan 12
 
+Recap. Getting to know Unreal. Simulator sickness. 
+
+**Tasks**
+
+- Watch the [geometry layout](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=57MxoF4sy84) tutorial and follow along to create your first project and level.
+
 ### 3. Jan 19
 
 ### 4. Jan 26
