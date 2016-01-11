@@ -29,6 +29,8 @@ In future, just go ahead and open your existing project from the browser.
 
 The main panel is the 3D **viewport**, showing a preview of the world. You can navigate around the world and also modify objects (actors) in here.
 
+[Navigating](https://docs.unrealengine.com/latest/INT/Engine/QuickStart/2/index.html)
+
 - Left mouse: move forward/backward/turn
 - Right mouse: look around
 - Both buttons (or middle button): vertical & strafe movement
@@ -41,7 +43,7 @@ On the left, the Modes panel selects different task workflows, such as placing o
 
 At the bottom, the **Content Browser** is where you can manage the Assets used in your project. With this you can also drop any existing assets into the scene. You can also double-click on some items in this browser to modify them in special editors.
 
-On the right, the **World Outliner** panel shows all the levels, and all the actors involved in each level. You can select them here, or in the 3D viewport, to modify them. You can also use this to "parent" one object to another, so that they always are positioned together.
+On the right, the **World Outliner** panel shows all the levels, and all the actors involved in each level. You can select them here, or in the 3D viewport, to modify them. You can also use this to "parent" one object to another, so that they always are positioned together (drag one item onto another to set it as parent).
 
 Below that, the **Details panel** is used to modify properties of whatever is currently selected, and also to add additional components and "blueprints" (scripted behaviours) to them.
 
@@ -104,9 +106,13 @@ The globe icon (after the scale tool) chooses between world-space and object loc
 
 The next tool along controls move snapping (enable, grid size, etc.) This is followed by the rotation snapping options, and then the scale snapping options. Snap to grid is useful for creating buildings -- making sure there are no gaps between walls! 
 
-Position, rotation & scale can also be modified from the object's details panel. Remember, Unreal measures in centimeters.
+Position, rotation & scale can also be modified from the object's details panel. Remember, Unreal measures in centimeters, and the Z axis is up.
 
 "alt drag" to make a copy of an actor.
+
+"ctrl g" to group, "shift g" to ungroup.
+
+"g" - toggle 'game view', which hides all the additional viewport visualizations that are not viewable in the game itself.
 
 ## Content browser
 
@@ -118,7 +124,7 @@ Assets can be edited *before* bringing them into the level. Double-click any ass
 
 Projects can end up with very many assets. There is a search tool and options to filter assets by type. You can have multiple content browsers and lock them to different folders.
 
-## Buiding a level
+## Building a level
 
 Like any major production, everything starts with planning and sketching; with some interesting overlaps and differences from film, architecture, design, composition, etc.
 
@@ -126,9 +132,9 @@ Like any major production, everything starts with planning and sketching; with s
 
 [Geometry layout -- part 2](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=57MxoF4sy84):
 
-The **First person template** gives us a simple world of grey and white blocks, with a character who can run around, jump, and also shoot physical balls. This is a good starting point.
+The **First person template** gives us a simple world of grey and white blocks, with a character who can run around, jump, and also shoot physical balls. This is a good starting point. **To hide the silly blue character**: In the content browser, double click the Blueprints/FirstPersonCharacter, switch to the viewport and select the Mesh1P mesh, in the details panel click the "owner no see" option. Then compile & save.
 
-**To hide the silly blue character**: In the content browser, double click the Blueprints/FirstPersonCharacter, switch to the viewport and select the Mesh1P mesh, in the details panel click the "owner no see" option. Then compile & save.
+Alternatively, when starting from the **blank template** you'll probably want to add some floor, light, atmospheric fog, Lightmass Importance Volume, etc. as [described here](https://docs.unrealengine.com/latest/INT/Engine/QuickStart/4/index.html).
 
 It can be useful to make new levels to test out ideas quickly without breaking work done in your main level(s). We can create a new level (File -> new level), and likely choose the default map. Delete the "player start" for now. Maybe also delete the floor if we'll be making our own.
 
@@ -158,12 +164,17 @@ Select a wall, press "shift+w", it will select all adjacent walls.
 
 Select all adjoining panels (with "ctrl") and in the details panel, set Geometry / Alignment / Align surface planar to make sure there are no seams between them.
 
-[Part 5](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=dSckAxhy_4I)
+[Part 5](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=dSckAxhy_4I), [Part 6](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=xVDq-9kSD74), [Part 7](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=xzGWuW_iWPM)
 
-[Part 6](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=xVDq-9kSD74)
+After adding the brushes and dropping in materials, we can start adding some more detailed meshes, improve the lighting, etc. The starter content has a few good architectural items to work with, such as a "glass window" panel that can be used for all kinds of glass panels.
 
+[Part 8](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=FaPmxQTQvs0), [Part 9](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=7Mzz6Ihivc8), [Part 10](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=HJbHs_oNQsk)
 
+These tutorials introduce Blueprint scripting, a visual scripting system designed for non-programmers to be able to create gameplay events & sequences. It isn't the simplest example unfortunately, but a couple of basic observations:
 
+- A **box trigger** can cause events to happen when a player enters or leaves the region of the (invisible) box region. 
+- Blueprint **timelines** are ways we can make a sequence of events happen -- and we can also make them happen in reverse. 
+- Any object that can be moved in-game must have the "movable" option set in the transform Detail (rather than "static"). 
 
 > See also the [Level Designer Quick Start](https://docs.unrealengine.com/latest/INT/Engine/QuickStart/index.html) documentation.
 
@@ -178,6 +189,8 @@ Select all adjoining panels (with "ctrl") and in the details panel, set Geometry
 **[Orthographic views](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&video=RoiQOwCg-4Q):**
 
 In the top-right corner of viewport there is a small 'min/max' button which will alternate between a maximized 3D view, and a 4-up set of views for top, left, and front "orthographic" (non-perspective) views as well as the regular perspective one. Right-click & drag to move in these views, and mouse-scroll to zoom.
+
+The "t" key will enable/disable the ability to select translucent objects. If it is off, you will select whatever object is seen *through* the translucent object.
 
 **[View modes & show flags tutorial](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&video=7UjP6gr44dc)**:
 
