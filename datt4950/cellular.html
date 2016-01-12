@@ -109,26 +109,36 @@
 </ul>
 <p>One has to be careful though: it could be that introducing these variations is not really different to a slightly more complex, but homogenous, CA.</p>
 <h2 id="particle-ca-and-lattice-gas-automata">Particle CA and Lattice-Gas Automata</h2>
-<p>If the transition rule is careful to preserve a total cell values before and after, it can appear to model particles or fluids moving through space. The elementary 1D traffic CA (rule 184) is a simple particle CA. </p>
-<p>Particle CA can use probabilistic rules to simulate brownian motions and other non-deterministic media (but the rules would usually still need to be matter/energy preserving). Particle CA benefit from the inclusion of boundaries and other spatial non-homogeneities such as influx and outflow of particles at opposite edges.</p>
+<p>If the transition rule (or, the set of transition rules as a whole) is careful to preserve a total cell values before and after, it can give the impression of a mass-conserving system, such as modeling the motion of particles and fluids. The elementary 1D traffic CA <a href="http://atlas.wolfram.com/01/01/184/">(rule 184)</a> is a simple particle CA. </p>
+<h3 id="block-rule-ca">Block rule CA</h3>
+<p>Since mass-preservation can be ensured by considering the neighbourhood before <em>and</em> after each transition, rules are often expressed in terms of a <em>block</em>. For a 2D CA, the simplest block is a 2x2 region (the <em>Margolus neighborhood</em>).</p>
+<p><img src="img/mnhood.gif" alt="Margolus neigborhood"></p>
+<p>A clever technique to simulate block-based rules is to shift the block grid on each successive frame, such that the even-aligned and then odd-aligned blocks interleave  (<a href="http://en.wikipedia.org/wiki/Block_cellular_automaton">see wikipedia</a>). Note that a block rule CA does not need to be double-buffered, since block updates do not overlap. </p>
+<p>Examples of 2x2 block rule CA are listed <a href="http://psoup.math.wisc.edu/mcell/rullex_marg.html">here</a> -- many of these are implemented <a href="http://codepen.io/grrrwaaa/pen/NGxJpP?editors=001">in the example script here</a>. </p>
 <p><img src="img/zuse.jpg" alt="Zuse&#39;s vision of nature"></p>
 <blockquote>
 <p>In 1969, German computer pioneer (and painter) Konrad Zuse published his book <a href="ftp://ftp.idsia.ch/pub/juergen/zuserechnenderraum.pdf">Calculating Space</a>, proposing that the physical laws of the universe are discrete by nature, and that the entire universe is the output of a deterministic computation on a single cellular automaton. This became the foundation of the field of study called <em>digital physics</em>. Zuse&#39;s first model is a 3D particle CA.</p>
 </blockquote>
 <p>A CA-inspired digital physics hypothesis is currently being promoted by Stephen Wolfram, as described in his magnum opus <a href="http://www.wolframscience.com/nksonline/toc.html">A New Kind Of Science</a>.</p>
-<h3 id="block-rule-ca">Block rule CA</h3>
-<p>One implementation option is to use <em>block rules</em>, which consider small regions at a time, rather than individual cells; e.g. a 2x2 region of cells in a 2D CA (the <em>Margolus neighborhood</em>). To handle the boundaries between blocks, the regions are shifted between each application (<a href="http://en.wikipedia.org/wiki/Block_cellular_automaton">see wikipedia</a>). </p>
-<p><img src="img/mnhood.gif" alt="Margolus neigborhood"></p>
-<p>Note that a block rule CA does not need to be double-buffered, since block updates do not overlap. </p>
-<p>More example block CAs <a href="http://psoup.math.wisc.edu/mcell/rullex_marg.html">here</a> -- many of these are implemented <a href="http://codepen.io/grrrwaaa/pen/NGxJpP?editors=001">in the example script here</a>. </p>
-<blockquote>
-<p>The block-rule CA especially hints at another interpretation of CA as a pattern-based <em>rewriting system</em> -- a point we will return to later in the course. And in fact, many CA can be understood as the application of pattern-based rewrites, in which a region of space that matches a given template pattern is replaced by a new region with the template&#39;s corresponding result (or action). </p>
-</blockquote>
-<h2 id="asynchronous-ca">Asynchronous CA</h2>
-<p>Rather than updating all cells at once, some other policy of visiting cells to update is applied:</p>
+<h3 id="some-observations">Some observations</h3>
 <ul>
-<li>A fixed update policy, such as linear scan or pre-determined path, is orderly, but may introduce artifacts (related to the <em>double-buffering</em> pattern). </li>
-<li>A multi-rate CA (self-clocked) updates each cell according to a clock period that varies from cell to cell. The clock period could also be affected by neighbors, to achieve <em>entrainment</em> effects. </li>
+<li><p>The block-rule CA especially hints at another interpretation of CA as a pattern-based <em>rewriting system</em> -- a point we will return to later in the course. And in fact, many CA can be understood as the application of pattern-based rewrites, in which a region of space that matches a given template pattern is replaced by a new region with the template&#39;s corresponding result (or action). </p>
+</li>
+<li><p>Clearly, mass-preserving CAs are guaranteed <em>not</em> to dissolve into homogenous final states -- which can alleviate any need for an external limiter to keep the balance -- but this does not mean they won&#39;t find a stable or cyclic end. On the other hand, CAs whose rules do not appear to preserve mass can still avoid dissolution into homogeneity.</p>
+</li>
+<li><p>Note that mass-preservation does not imply that the system is reversible. Reversibility is quite a different property, which states that each output neighbourhood can only be caused by a single predecessor neighbourhood. Some, but certainly not all, particle CAs are reversible.</p>
+</li>
+<li><p>Particle CA can also use probabilistic rules to simulate brownian motions and other non-deterministic media (but the rules would usually still need to be matter/energy preserving over long-term averages -- i.e. probabilities must balance to preserve mass). Particle CAs can also benefit from the inclusion of boundaries and other spatial non-homogeneities such as influx and outflow of particles at opposite edges to create more interesting gradients or otherwise keep the system away from equilibrium (a <em>dissipative system</em>).</p>
+</li>
+</ul>
+<h2 id="asynchronous-ca">Asynchronous CA</h2>
+<p>Rather than updating all cells at once, some other policy of visiting cells to update is applied.</p>
+<ul>
+<li><p>A fixed update policy, such as linear scan or pre-determined path, is orderly, but may introduce artifacts (related to the <em>double-buffering</em> pattern). A randomized, but still fixed, order can still lead to artifacts.</p>
+</li>
+<li><p>A multi-rate CA (self-clocked) updates each cell according to a clock period that varies from cell to cell. This implies that each cell must have more than one value (one to store the state, one to store the period, one to store the phase) -- or equivalently, that there is more than one cellular grid.</p>
+</li>
+<li>The clock period or phase could be affected by that of neighbours&#39;. This may lead to <em>entrainment</em> effects. </li>
 <li>Mobile CA (see below)</li>
 <li>Probabilistic asynchrony (see below)</li>
 </ul>
