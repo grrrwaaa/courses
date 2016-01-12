@@ -87,24 +87,27 @@
 <p>There are many ways we can modulate this into more complex CA. For example, by allowing more than two states (see <a href="http://codepen.io/grrrwaaa/pen/WQrmGb?editors=001">Brian&#39;s Brain</a>). </p>
 <p>More variations are possible by modulating the basic definition of a CA, some of which have been explored more than others. Here are some examples:</p>
 <h2 id="probabilistic-stochastic-ca">Probabilistic/Stochastic CA</h2>
-<p>In this case the transition rule is not deterministic, but includes some randomized factors. This can help avoid the CA falling into a stable or cyclic pattern -- at the risk of descending into uninteresting noise.</p>
+<p>In this case the transition rule is not deterministic, but includes some (pseudo-)randomized factors. This can help avoid the CA falling into a stable or cyclic pattern -- at the risk of descending into uninteresting noise.</p>
 <ul>
-<li>A probability can be assigned to each successor state according to the prior states. </li>
-<li>A <em>backround noise</em> can be added, such that from time to time a randomly chosen cell changes state. A <em>temperature</em> control could control the statistical frequency of such changes.</li>
-<li>Combinations with non-homogenous CAs: statistical choice of rules and neighborhoods; variations of probabilities over space and time, etc.</li>
+<li>A probability can be assigned to each successor state according to the prior states. For example, take a look at the <a href="http://codepen.io/grrrwaaa/pen/xwZBRP/?editors=001">Forest Fire CA</a>, and try changing the probabilities to see how it behaves.</li>
+<li>A <em>backround noise</em> can be added, such that from time to time a randomly chosen cell changes state. Try adding background noise to the Game of Life to avoid it reaching a stable or cyclic attractor. But too high a probability and it descends into noise. Try adding a <em>temperature</em> control to control the statistical frequency of such changes. Could something <em>intrinsic</em> to the system determine temperature? Could this vary over space?</li>
+<li>Probabilistic/statistical choices can be combined with other variations below, such as spatially non-homogenous probabilities, statistical rules and neighbourhoods, etc.</li>
 </ul>
-<p>Take a look at the <a href="http://codepen.io/grrrwaaa/pen/xwZBRP/?editors=001">Forest Fire CA example</a>, and try changing the probabilities to see how it behaves.</p>
 <h2 id="non-homogenous-ca">Non-homogenous CA</h2>
-<p>The rule is not the same for all cells / for all time steps. Spatial non-homogeneity can be interesting to simulate different geographies (such as boundaries). Temporal non-homogeneity can be used to perform a sequence of different filters. Scott Draves&#39; <a href="http://scottdraves.com/bomb.html">Bomb</a> modulated parameters continuously, with different rule sets picking up the last as their new initial conditions.</p>
+<p>The rule is not the same for all cells / for all time steps. Spatial inhomogeneity can be interesting to simulate different geographies (such as boundaries). The simplest option is to prime the system with inhomogeneous initial conditions, but these differences can quickly dissipate, whereas varying other components of a CA spatially can have more profound results (though, as with randomness, care may need to be taken that these differences do not overly dominate the process).</p>
 <ul>
+<li>Creating unusual neighbourhoods (or simply, non-totalistic ones) can introduce interesting spatial biases to behaviour.</li>
 <li>Special <em>boundary</em> cells in the field may follow different rules from others.</li>
-<li>Some rules may depend on the cell position; perhaps the same CA has different regions using different rules.</li>
-<li>The rules used could alternate between different rule definitions, over a period of N frames. Or certain parameters to rules could cycle over certain periods.</li>
-<li>The neighborhood selection rules could change spatially or temporally as above (also see particle CA below).</li>
-<li>Variations of space/rule/neighborhood could depend on global conditions, such as the overall density of black and white cells, or due to user interactions.</li>
-<li>Combinations of the above.</li>
+<li>Some rules may depend on the cell position; perhaps the same CA has different regions using different rules. These can be implemented by changing the function used in the transition rule, or by extending the state set to accommodate the differences. Changing the function is usually easier to implement and understand.</li>
 </ul>
-<p>These can be implemented by changing the function used in the transition rule, or by extending the state set to accommodate the differences. Changing the function is usually easier to implement and understand.</p>
+<p>Temporal non-homogeneity can be used to perform a sequence of different filters, or otherwise help to build long- as well as short-term arcs of behaviour.</p>
+<ul>
+<li>The neighborhood selection rules could change over time (also see particle CA below).</li>
+<li>The rules used could alternate between different rule definitions, over a period of N frames. Or certain parameters to rules could cycle over certain periods. Scott Draves&#39; <a href="http://scottdraves.com/bomb.html">Bomb</a> modulated parameters continuously, with different rule sets picking up the last as their new initial conditions.</li>
+<li>Variations of space/rule/neighborhood could depend on global conditions, such as the overall density of black and white cells, or due to user interactions.</li>
+<li>Other combinations of the above (and below)</li>
+</ul>
+<p>One has to be careful though: it could be that introducing these variations is not really different to a slightly more complex, but homogenous, CA.</p>
 <h2 id="particle-ca-and-lattice-gas-automata">Particle CA and Lattice-Gas Automata</h2>
 <p>If the transition rule is careful to preserve a total cell values before and after, it can appear to model particles or fluids moving through space. The elementary 1D traffic CA (rule 184) is a simple particle CA. </p>
 <p>Particle CA can use probabilistic rules to simulate brownian motions and other non-deterministic media (but the rules would usually still need to be matter/energy preserving). Particle CA benefit from the inclusion of boundaries and other spatial non-homogeneities such as influx and outflow of particles at opposite edges.</p>
