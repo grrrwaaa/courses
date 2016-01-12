@@ -7,9 +7,11 @@ importance: 3
 
 Unreal has long been used in many "AAA" (large-scale/high-production value/high-budget) games, but was open-sourced with an amenable license in early 2015; and now has built-in support for VR and the Oculus Rift.
 
-## Getting Unreal
-
 Note: you will need [a reasonably fast PC or Mac](https://docs.unrealengine.com/latest/INT/GettingStarted/RecommendedSpecifications/#recommendedhardware) to run Unreal comfortably. Mac users will also need a mouse with at least two buttons.
+
+> If you need it, you can request a lab card to access the workstations/laptops in the Digital Media Art and Technology Learning Laboratory (ACW 102). Lab cards are $20 for a semester. The Digital Media Lab Card can be purchased in the Digital Media office, located in Rm. 232, Goldfarb Centre for Fine Arts. The office is open Monday to Friday, 8:30am-4:30pm.
+
+## Getting Unreal
 
 - Go to [https://www.unrealengine.com](https://www.unrealengine.com) and follow the "Get Unreal" link to register an account and then download the launcher application. 
 - Run this launcher (you will need to sign in again), and then under the "Unreal" tab download the Unreal Engine. This will take a while!
@@ -19,7 +21,7 @@ Note: you will need [a reasonably fast PC or Mac](https://docs.unrealengine.com/
 
 Open the editor directly, or via the launcher. It should open with the 'project browser'. 
 
-Create a new project, typically from the "first person" template, and make sure that "with starter content" is selected. Choose where to save it, and then "create project". This will now open in the editor.
+Create a new project, typically from the "blank" or "first person" template, and make sure that "with starter content" is selected. Choose where to save it, and then "create project". This will now open in the editor. 
 
 In future, just go ahead and open your existing project from the launcher or the project browser.
 
