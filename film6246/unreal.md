@@ -5,11 +5,11 @@ importance: 3
 
 # Unreal Engine
 
-Unreal has long been used in many "AAA" (large-scale/high-production value/high-budget) games, but was recently open-sourced with an amenable license in early 2015; and now has built-in support for VR and the Oculus Rift (just press Alt + Enter!)
+Unreal has long been used in many "AAA" (large-scale/high-production value/high-budget) games, but was open-sourced with an amenable license in early 2015; and now has built-in support for VR and the Oculus Rift.
 
 ## Getting Unreal
 
-Note: you will need a reasonably fast PC or Mac to run Unreal comfortably. Mac users probably also want an external two- or three-button mouse. 
+Note: you will need [a reasonably fast PC or Mac](https://docs.unrealengine.com/latest/INT/GettingStarted/RecommendedSpecifications/#recommendedhardware) to run Unreal comfortably. Mac users will also need a mouse with at least two buttons.
 
 - Go to [https://www.unrealengine.com](https://www.unrealengine.com) and follow the "Get Unreal" link to register an account and then download the launcher application. 
 - Run this launcher (you will need to sign in again), and then under the "Unreal" tab download the Unreal Engine. This will take a while!
@@ -19,9 +19,9 @@ Note: you will need a reasonably fast PC or Mac to run Unreal comfortably. Mac u
 
 Open the editor directly, or via the launcher. It should open with the 'project browser'. 
 
-Create a new 'first person' project, and make sure that "with starter content" is selected. Choose where to save it, and then "create project". This will now open in the editor.
+Create a new project, typically from the "first person" template, and make sure that "with starter content" is selected. Choose where to save it, and then "create project". This will now open in the editor.
 
-In future, just go ahead and open your existing project from the browser.
+In future, just go ahead and open your existing project from the launcher or the project browser.
 
 ## The editor
 
@@ -158,23 +158,13 @@ Create an opening in a wall: duplicate the wall, reduce its size. Set the brush 
 
 [Part 4](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=v5yCcP9EnT8)
 
-Can just drag & drop materials onto the geometry brushes.
+**Applying materials**: Can just drag & drop materials onto the geometry brushes. To drag onto all faces of a geometry brush, first press "shift+b" to select all the faces. Also, if you select a wall, pressing "shift+w" will select all adjacent walls.
 
-Select a wall, press "shift+w", it will select all adjacent walls.
-
-Select all adjoining panels (with "ctrl") and in the details panel, set Geometry / Alignment / Align surface planar to make sure there are no seams between them.
+**Aligning textures (to avoid seams):** Select all adjoining panels (with "ctrl") and in the details panel, set Geometry / Alignment / Align surface planar to make sure there are no seams between them.
 
 [Part 5](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=dSckAxhy_4I), [Part 6](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=xVDq-9kSD74), [Part 7](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=xzGWuW_iWPM)
 
-After adding the brushes and dropping in materials, we can start adding some more detailed meshes, improve the lighting, etc. The starter content has a few good architectural items to work with, such as a "glass window" panel that can be used for all kinds of glass panels.
-
-[Part 8](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=FaPmxQTQvs0), [Part 9](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=7Mzz6Ihivc8), [Part 10](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=HJbHs_oNQsk)
-
-These tutorials introduce Blueprint scripting, a visual scripting system designed for non-programmers to be able to create gameplay events & sequences. It isn't the simplest example unfortunately, but a couple of basic observations:
-
-- A **box trigger** can cause events to happen when a player enters or leaves the region of the (invisible) box region. 
-- Blueprint **timelines** are ways we can make a sequence of events happen -- and we can also make them happen in reverse. 
-- Any object that can be moved in-game must have the "movable" option set in the transform Detail (rather than "static"). 
+**Adding feature and prop meshes, lights, etc.**: After adding the brushes and dropping in materials, we can start adding some more detailed meshes, improve the lighting, etc. The starter content has a few good architectural items to work with, such as a "glass window" panel that can be used for all kinds of glass panels.
 
 > See also the [Level Designer Quick Start](https://docs.unrealengine.com/latest/INT/Engine/QuickStart/index.html) documentation.
 
@@ -200,6 +190,9 @@ By default the viewport uses full lighting ("lit") -- other modes are unlit (raw
 
 **Viewing the Frame rate**: Command+Shift+H (or the dropdown top-right of the viewport)
 
+- A **box trigger** can cause events to happen when a player enters or leaves the region of the (invisible) box region. 
+- Blueprint **timelines** are ways we can make a sequence of events happen -- and we can also make them happen in reverse. 
+- Any object that can be moved in-game must have the "movable" option set in the transform Detail (rather than "static"). 
 
 ---
 
