@@ -18,9 +18,9 @@
 	</nav>	
 	<div id="main">
 	<h1 id="unreal-engine">Unreal Engine</h1>
-<p>Unreal has long been used in many &quot;AAA&quot; (large-scale/high-production value/high-budget) games, but was recently open-sourced with an amenable license in early 2015; and now has built-in support for VR and the Oculus Rift (just press Alt + Enter!)</p>
+<p>Unreal has long been used in many &quot;AAA&quot; (large-scale/high-production value/high-budget) games, but was open-sourced with an amenable license in early 2015; and now has built-in support for VR and the Oculus Rift.</p>
 <h2 id="getting-unreal">Getting Unreal</h2>
-<p>Note: you will need a reasonably fast PC or Mac to run Unreal comfortably. Mac users probably also want an external two- or three-button mouse. </p>
+<p>Note: you will need <a href="https://docs.unrealengine.com/latest/INT/GettingStarted/RecommendedSpecifications/#recommendedhardware">a reasonably fast PC or Mac</a> to run Unreal comfortably. Mac users will also need a mouse with at least two buttons.</p>
 <ul>
 <li>Go to <a href="https://www.unrealengine.com">https://www.unrealengine.com</a> and follow the &quot;Get Unreal&quot; link to register an account and then download the launcher application. </li>
 <li>Run this launcher (you will need to sign in again), and then under the &quot;Unreal&quot; tab download the Unreal Engine. This will take a while!</li>
@@ -28,8 +28,8 @@
 </ul>
 <h2 id="create-open-project">Create/open project</h2>
 <p>Open the editor directly, or via the launcher. It should open with the &#39;project browser&#39;. </p>
-<p>Create a new &#39;first person&#39; project, and make sure that &quot;with starter content&quot; is selected. Choose where to save it, and then &quot;create project&quot;. This will now open in the editor.</p>
-<p>In future, just go ahead and open your existing project from the browser.</p>
+<p>Create a new project, typically from the &quot;first person&quot; template, and make sure that &quot;with starter content&quot; is selected. Choose where to save it, and then &quot;create project&quot;. This will now open in the editor.</p>
+<p>In future, just go ahead and open your existing project from the launcher or the project browser.</p>
 <h2 id="the-editor">The editor</h2>
 <p><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=w4XlBKeE46E">video tutorial</a></p>
 <p>The main panel is the 3D <strong>viewport</strong>, showing a preview of the world. You can navigate around the world and also modify objects (actors) in here.</p>
@@ -115,18 +115,10 @@
 <p><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=RGxf2SiUBt8">Part 3</a></p>
 <p>Create an opening in a wall: duplicate the wall, reduce its size. Set the brush type to &quot;subtractive&quot; (in the details panel). Then drag it back into the wall. The starter content has some static meshes for door frames, window frames etc. which we can drag into these openings.</p>
 <p><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=v5yCcP9EnT8">Part 4</a></p>
-<p>Can just drag &amp; drop materials onto the geometry brushes.</p>
-<p>Select a wall, press &quot;shift+w&quot;, it will select all adjacent walls.</p>
-<p>Select all adjoining panels (with &quot;ctrl&quot;) and in the details panel, set Geometry / Alignment / Align surface planar to make sure there are no seams between them.</p>
+<p><strong>Applying materials</strong>: Can just drag &amp; drop materials onto the geometry brushes. To drag onto all faces of a geometry brush, first press &quot;shift+b&quot; to select all the faces. Also, if you select a wall, pressing &quot;shift+w&quot; will select all adjacent walls.</p>
+<p><strong>Aligning textures (to avoid seams):</strong> Select all adjoining panels (with &quot;ctrl&quot;) and in the details panel, set Geometry / Alignment / Align surface planar to make sure there are no seams between them.</p>
 <p><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=dSckAxhy_4I">Part 5</a>, <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=xVDq-9kSD74">Part 6</a>, <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=xzGWuW_iWPM">Part 7</a></p>
-<p>After adding the brushes and dropping in materials, we can start adding some more detailed meshes, improve the lighting, etc. The starter content has a few good architectural items to work with, such as a &quot;glass window&quot; panel that can be used for all kinds of glass panels.</p>
-<p><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=FaPmxQTQvs0">Part 8</a>, <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=7Mzz6Ihivc8">Part 9</a>, <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=HJbHs_oNQsk">Part 10</a></p>
-<p>These tutorials introduce Blueprint scripting, a visual scripting system designed for non-programmers to be able to create gameplay events &amp; sequences. It isn&#39;t the simplest example unfortunately, but a couple of basic observations:</p>
-<ul>
-<li>A <strong>box trigger</strong> can cause events to happen when a player enters or leaves the region of the (invisible) box region. </li>
-<li>Blueprint <strong>timelines</strong> are ways we can make a sequence of events happen -- and we can also make them happen in reverse. </li>
-<li>Any object that can be moved in-game must have the &quot;movable&quot; option set in the transform Detail (rather than &quot;static&quot;). </li>
-</ul>
+<p><strong>Adding feature and prop meshes, lights, etc.</strong>: After adding the brushes and dropping in materials, we can start adding some more detailed meshes, improve the lighting, etc. The starter content has a few good architectural items to work with, such as a &quot;glass window&quot; panel that can be used for all kinds of glass panels.</p>
 <blockquote>
 <p>See also the <a href="https://docs.unrealengine.com/latest/INT/Engine/QuickStart/index.html">Level Designer Quick Start</a> documentation.</p>
 </blockquote>
@@ -143,6 +135,11 @@
 <p>By default the viewport uses full lighting (&quot;lit&quot;) -- other modes are unlit (raw materials), wireframe (raw meshes), detail lighting (lighting effects only), reflections, etc. Next to this option is the <strong>Show</strong> drop-down, where you can enable and disable different kinds of content in the viewport.</p>
 <p><strong>We can <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=Z7OqNjFpy6U">lock the viewport to an actor</a></strong> by right-clicking on an object and selecting the &quot;pilot&quot; option. This fixes our viewport&#39;s perspective to the object itself, and we can use the standard viewport movement controls to reposition the object. This is especially useful for positioning lights and cameras, for example.</p>
 <p><strong>Viewing the Frame rate</strong>: Command+Shift+H (or the dropdown top-right of the viewport)</p>
+<ul>
+<li>A <strong>box trigger</strong> can cause events to happen when a player enters or leaves the region of the (invisible) box region. </li>
+<li>Blueprint <strong>timelines</strong> are ways we can make a sequence of events happen -- and we can also make them happen in reverse. </li>
+<li>Any object that can be moved in-game must have the &quot;movable&quot; option set in the transform Detail (rather than &quot;static&quot;). </li>
+</ul>
 <hr>
 <h2 id="vr-in-unreal">VR in Unreal</h2>
 <ul>
