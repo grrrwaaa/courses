@@ -462,6 +462,7 @@ var draw2D_fragmentshader = loadShader(gl, [
 	"void main() { ",
 	"//gl_FragColor = u_color;",
 	"gl_FragColor = u_color * texture2D(u_tex, texCoord);",
+	"gl_FragColor.rgb *= gl_FragColor.a; // premultiply alpha",
 	"}"
 ].join("\n"), gl.FRAGMENT_SHADER);
 
@@ -1053,7 +1054,7 @@ function render() {
 	
 	// regular blending:
 	gl.enable(gl.BLEND);
-	gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+	gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
 	gl.useProgram(draw2D_program);
 	if (typeof(draw) === "function") draw();
 	gl.useProgram(null);
