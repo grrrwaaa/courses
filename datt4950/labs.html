@@ -11,6 +11,7 @@
 <li><a href="due.html" alt="Deliverables">Deliverables</a></li>
 <li><a href="themes.html" alt="Themes">Themes</a></li>
 <li><a href="cellular.html" alt="Cellular Systems">Cellular Systems</a></li>
+<li><a href="agent.html" alt="Agent-Based Systems">Agent-Based Systems</a></li>
 <li><a href="labs.html" alt="Labs">Labs</a></li>
 <li><a href="js.html" alt="JavaScript">JavaScript</a></li>
 	</ul>
@@ -239,13 +240,109 @@ field.set([1, 0, 0], x, y);
 field.sample(x, y, channel);    
 ```
 -->
-<h2 id="draw2d">Draw2D</h2>
-<p>The Draw2D namespace provides a very simple interface for drawing 2D primitives.</p>
+<h2 id="vec2">vec2</h2>
+<p>The <code>vec2</code> type gives us a useful abstraction of two-component vectors. Here are some ways of creating a vec2:</p>
+<pre><code class="lang-javascript"><span class="hljs-variable"><span class="hljs-keyword">var</span> v0</span> = new vec2(x, y);
+<span class="hljs-variable"><span class="hljs-keyword">var</span> v1</span> = new vec2();     <span class="hljs-comment">// x and y components default to zero</span>
+
+v0 = vec2.create(x, y); <span class="hljs-comment">// equivalent to above</span>
+v1 = vec2.create();
+
+<span class="hljs-variable"><span class="hljs-keyword">var</span> v2</span> = v0.clone();    <span class="hljs-comment">// remember, v2 = v0 would not make a new copy</span>
+
+<span class="hljs-variable"><span class="hljs-keyword">var</span> v3</span> = vec2.random(); <span class="hljs-comment">// a vector with unit length but random direction</span>
+<span class="hljs-variable"><span class="hljs-keyword">var</span> v4</span> = vec2.random(<span class="hljs-number">0.1</span>); <span class="hljs-comment">// as above, but length is 0.1</span>
+
+<span class="hljs-variable"><span class="hljs-keyword">var</span> v5</span> = vec2.fromPolar(len, angle_in_radians);
+<span class="hljs-variable"><span class="hljs-keyword">var</span> v6</span> = vec2.fromPolar(angle_in_radians);    <span class="hljs-comment">// length is 1</span>
+</code></pre>
+<p>Getting some useful properties:</p>
+<pre><code class="lang-javascript"><span class="hljs-variable"><span class="hljs-keyword">var</span> d</span> = v0.len();        <span class="hljs-comment">// get the magnitude of the vector</span>
+<span class="hljs-variable"><span class="hljs-keyword">var</span> a</span> = v0.angle();     <span class="hljs-comment">// get the direction of the vector (in radians)</span>
+<span class="hljs-variable"><span class="hljs-keyword">var</span> d</span> = v0.distance(v1);    <span class="hljs-comment">// distance between two vectors</span>
+<span class="hljs-variable"><span class="hljs-keyword">var</span> a</span> = v0.anglebetween(v1);    <span class="hljs-comment">// angle between two vectors</span>
+<span class="hljs-variable"><span class="hljs-keyword">var</span> b</span> = v0.equals(v1);  <span class="hljs-comment">// true if both components are equal</span>
+<span class="hljs-variable"><span class="hljs-keyword">var</span> n</span> = v0.dot(v1);        <span class="hljs-comment">// dot product of two vectors (related to similarity)</span>
+</code></pre>
+<p>There are many methods available to call on a vec2. Some basic setters:</p>
+<pre><code class="lang-javascript">v0.<span class="hljs-built_in">set</span>(x, y);   <span class="hljs-comment"> // update a vector's values</span>
+v0.<span class="hljs-built_in">set</span>(v1);       <span class="hljs-comment"> // update by copying from another vector</span>
+<span class="hljs-comment">
+// changing the length (magnitude) of a vector:</span>
+v0.<span class="hljs-built_in">len</span>(n);   <span class="hljs-comment"> // update a vector's length</span>
+v0.limit(n);   <span class="hljs-comment"> // shortens a vector to length n if it was longer</span>
+v0.normalize();<span class="hljs-comment"> // set's a vector's length to 1</span>
+<span class="hljs-comment">
+// changing the orientation of a vector:</span>
+v0.negate();<span class="hljs-comment"> // reverses a vector</span>
+v0.angle(<span class="hljs-keyword">a</span>);<span class="hljs-comment"> // set a vector's direction (in radians)</span>
+v0.rotate(<span class="hljs-keyword">a</span>);<span class="hljs-comment"> // rotates a vector's direction (by radians)</span>
+</code></pre>
+<p>Almost all methods have both an in-place version and a standalone version. The in-place version is a method called on a vec2 object, which it will probably modify as a result. The standalone version is a method called on <code>vec2</code> itself, and requires an argument for the result.</p>
+<pre><code class="lang-javascript">// standalone:
+// vout is modified; v0<span class="hljs-built_in"> and </span>v1 are<span class="hljs-built_in"> not </span>changed
+vout =<span class="hljs-built_in"> new </span>vec2();
+vec2.add(vout, v0, v1);    
+
+// in-place:
+// v0 is modified; like the scalar equivalent s0 += s1
+v0.add(v1); 
+
+// Since in-place methods<span class="hljs-built_in"> return </span>themselves, they can be chained:
+v0.add(v1).sub(v1).mul(v1).div(v1); // etc.
+</code></pre>
+<p>Note that most method arguments will accept a number (i.e. a scalar), or an array, in place of a vector: So you can say <code>v0.pow(2)</code> rather than <code>v0.pow(new vec2(2, 2))</code>. </p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// These are all equivalent:</span>
+v0.<span class="hljs-built_in">pow</span>(<span class="hljs-keyword">new</span> vec2(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>));
+v0.<span class="hljs-built_in">pow</span>([<span class="hljs-number">2</span>, <span class="hljs-number">2</span>]);
+v0.<span class="hljs-built_in">pow</span>(<span class="hljs-number">2</span>);
+</code></pre>
+<p>Here are some basic algebraic methods, which operate on each component of a vector:</p>
+<pre><code class="lang-javascript">// component-wise math:
+v0.add(v1);
+v0.sub(v1);     // aka v0.subtract(v1)
+v0.absdiff(v1); // the absolute difference between two vectors (always positive)
+v0.mul(v1);     // aka v0.multiply(v1)
+v0.div(v1);     // aka v0.divide(v1)
+v0.pow(v1);        // raise v0 to the power of v1
+</code></pre>
+<p>There is a utility to perform linear interpolation between two vectors:</p>
+<pre><code class="lang-javascript">// a linear interpolation between v0 <span class="hljs-keyword">and</span> v1
+// <span class="hljs-keyword">if</span> t == <span class="hljs-number">0</span>, <span class="hljs-literal">result</span> <span class="hljs-keyword">is</span> v0; 
+// <span class="hljs-keyword">if</span> t == <span class="hljs-number">1</span>, <span class="hljs-literal">result</span> <span class="hljs-keyword">is</span> v1; 
+// <span class="hljs-keyword">if</span> t == <span class="hljs-number">0</span>.<span class="hljs-number">5</span>, <span class="hljs-literal">result</span> <span class="hljs-keyword">is</span> the average <span class="hljs-keyword">of</span> v0 <span class="hljs-keyword">and</span> v1; 
+// etc. <span class="hljs-keyword">for</span> other values <span class="hljs-keyword">of</span> t
+vec2.mix(vout, v0, v1, t);
+</code></pre>
+<p>There are also several useful methods for keeping vectors within bounds:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// max retains the values that are closer to Infinity</span>
+<span class="hljs-type">vec2</span>.<span class="hljs-built_in">max</span>(vout, v0, v1);
+<span class="hljs-comment">// min retains the values that are closer to -Infinity</span>
+<span class="hljs-type">vec2</span>.<span class="hljs-built_in">min</span>(vout, v0, v1);
+
+<span class="hljs-comment">// lesser retains the values that are closer to zero</span>
+<span class="hljs-type">vec2</span>.lesser(vout, v0, v1);
+<span class="hljs-comment">// greater retains the values that are further from zero    </span>
+<span class="hljs-type">vec2</span>.greater(vout, v0, v1);
+
+<span class="hljs-comment">// aka clip: keeps v0 within the bounds of vlo and vhi</span>
+v0.<span class="hljs-built_in">clamp</span>(vlo, vhi);    
+
+<span class="hljs-comment">// like wrap(), it gives the remainder after division</span>
+<span class="hljs-comment">// it uses Euclidean modulo, which handles negative numbers well for toroidal space</span>
+v0.wrap(d);    
+
+<span class="hljs-comment">// applies wrap in a relative range, up to +d/2 and down to -d/2</span>
+<span class="hljs-comment">// this can be useful e.g. for calculating the shortest distance between two points in toroidal space</span>
+<span class="hljs-type">vec2</span>.relativewrap(vout, v0, v1);
+</code></pre>
+<h2 id="draw2d">draw2D</h2>
+<p>The <code>draw2D</code> namespace provides a very simple interface for drawing 2D primitives.</p>
 <p>It uses a stack-based coordinate transform system. Push the context, apply transforms, then return back to the previous coordinate system by popping the context again:</p>
 <pre><code class="lang-javascript"><span class="hljs-comment">// create a local coordinate system:</span>
 draw2D.push()<span class="hljs-comment">;</span>
     draw2D.translate(x, y)<span class="hljs-comment">;</span>
-    draw2D.rotate(angle_in_radians)<span class="hljs-comment">;</span>
+    draw2D.rotate(angle_in_radians)<span class="hljs-comment">;  // or a direction vector</span>
     draw2D.scale(sizex, sizey)<span class="hljs-comment">;</span>
 
     <span class="hljs-comment">// draw in local coordinate system</span>
@@ -254,10 +351,22 @@ draw2D.push()<span class="hljs-comment">;</span>
 <span class="hljs-comment">// return to global coordinate system:</span>
 draw2D.pop()<span class="hljs-comment">;</span>
 </code></pre>
-<p>Typically, to move into an agent&#39;s coordinate system, operate in the order &quot;translate, rotate, scale&quot;.</p>
+<p>Most calls to draw2D can be chained together, since they return the <code>draw2D</code> object itself. Now typically, to move into an agent&#39;s coordinate system, operate in the order &quot;translate, rotate, scale&quot;. So since most draw2D methods can also accept vec2 arguments, a common idiom is:</p>
+<pre><code class="lang-javascript">    <span class="hljs-comment">// push into agent's local coordinate system:</span>
+    draw2D.push()    
+        .translate(agent.position)
+        .rotate(agent.direction)
+        .scale(agent.size)<span class="hljs-comment">;</span>
+
+        <span class="hljs-comment">// draw agent body -- the X axis is agent's forward direction</span>
+        draw2D.rect()<span class="hljs-comment">;</span>
+        draw2D.<span class="hljs-keyword">circle</span>([<span class="hljs-number">0.5</span>,  <span class="hljs-number">0.5</span>], <span class="hljs-number">0.5</span>)<span class="hljs-comment">;</span>
+        draw2D.<span class="hljs-keyword">circle</span>([<span class="hljs-number">0.5</span>, <span class="hljs-number">-0.5</span>], <span class="hljs-number">0.5</span>)<span class="hljs-comment">;</span>
+
+    draw2D.pop()<span class="hljs-comment">;  // done drawing agent</span>
+</code></pre>
 <p>Graphics are drawn using whatever color is currently set, via <code>draw2D.color()</code>:</p>
-<pre><code class="lang-javascript">
-draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<span class="hljs-comment">; // red</span>
+<pre><code class="lang-javascript">draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<span class="hljs-comment">; // red</span>
 draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)<span class="hljs-comment">; // green</span>
 draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)<span class="hljs-comment">; // blue</span>
 draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0.5</span>)<span class="hljs-comment">; // semi-transparent white</span>
@@ -271,14 +380,6 @@ draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-string">"red"</
 
     draw2D.rect(center_x, center_y, size)<span class="hljs-comment">;</span>
     draw2D.rect(center_x, center_y, <span class="hljs-keyword">width</span>, height)<span class="hljs-comment">;</span>
-</code></pre>
-<p>Most calls to draw2D can be chained:</p>
-<pre><code class="lang-javascript"><span class="hljs-selector-tag">draw2D</span><span class="hljs-selector-class">.push</span>()
-    <span class="hljs-selector-class">.translate</span>(<span class="hljs-selector-tag">x</span>, <span class="hljs-selector-tag">y</span>)
-    <span class="hljs-selector-class">.rotate</span>(<span class="hljs-selector-tag">angle_in_radians</span>)
-    <span class="hljs-selector-class">.scale</span>(<span class="hljs-selector-tag">sizex</span>, <span class="hljs-selector-tag">sizey</span>)
-    <span class="hljs-selector-class">.rect</span>()
-    <span class="hljs-selector-class">.pop</span>();
 </code></pre>
 <blockquote>
 <p>Note: The draw2D transform and color are reset before each <code>draw()</code> call.</p>

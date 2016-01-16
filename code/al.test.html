@@ -8,6 +8,38 @@
   <body>
     <script src="al.js"></script>
     <script>
+    
+var agent = {
+	pos: new vec2(0.5, 0.5),
+	dir: new vec2(0.01, 0),
+	size: 1/40
+};  
+
+function update() {
+	agent.dir.rotate(0.5*(random()-0.5));
+	//console.log(dir);
+	agent.pos.add(agent.dir).wrap(1);
+}
+
+function draw() {
+	draw2D.push()
+		.translate(agent.pos)
+		.rotate(agent.dir)
+		.scale(agent.size);
+		draw2D.color("pink");
+		draw2D.rect();
+		draw2D.color("white");
+		draw2D.circle([0.5,  0.5], 0.5);
+		draw2D.circle([0.5, -0.5], 0.5);
+	draw2D.pop();
+}  
+
+v = new vec2(1, 1);
+v0 = vec2.create();
+v1 = vec2.random();
+v2 = vec2.random();
+
+/*
 // create a new field:
 var field = new field2D(128);
 
@@ -81,7 +113,7 @@ function mouse(event, point) {
 function key(event, key) {
 	console.log(event, key);
 }
-
+*/
     </script>
   </body>
 </html>
