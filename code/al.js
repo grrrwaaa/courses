@@ -7,9 +7,9 @@ var glMatrix = require("gl-matrix");
 var mat2 = glMatrix.mat2;
 var mat3 = glMatrix.mat3;
 var mat4 = glMatrix.mat4;
-var vec2 = glMatrix.vec2;
-var vec3 = glMatrix.vec3;
-var vec4 = glMatrix.vec4;
+var glvec2 = glMatrix.vec2;
+var glvec3 = glMatrix.vec3;
+var glvec4 = glMatrix.vec4;
 var chroma = require("chroma-js");
 var seedrandom = require("seedrandom");
 
@@ -300,7 +300,7 @@ onresize();
 var mouseevent = function(event, name) {
 	if (typeof(mouse) === "function") {
 		var m = [event.pageX, event.pageY];
-		vec2.transformMat3(m, m, page_to_gl);
+		glvec2.transformMat3(m, m, page_to_gl);
 		mouse(name, m);
 	}
 };
@@ -332,7 +332,7 @@ var touchevent = function(event, name) {
 	if (typeof(touch) === "function") {
 		event.preventDefault();
 		var m = [event.targetTouches[0].pageX, targetTouches[0].pageY];
-		vec2.transformMat3(m, m, page_to_gl);
+		glvec2.transformMat3(m, m, page_to_gl);
 		touch(name, m);
 	}
 };
@@ -428,6 +428,373 @@ if (!floatTextures) {
 	alert('no floating point texture support');
 }
 
+gl.vec2 = glvec2;
+gl.vec3 = glvec3;
+gl.vec4 = glvec4;
+gl.mat2 = mat2;
+gl.mat3 = mat3;
+gl.mat4 = mat4;
+
+vec2 = function(x, y) {
+	this[0] = x || 0;
+	this[1] = y || this[0];
+};
+
+vec2.create = function(x, y) { return new vec2(x, y); };
+
+vec2.clone = function(b) {
+	var out = new vec2();
+	if (typeof(b) == "object") {
+		out[0] = b[0];
+		out[1] = b[1];
+	} else if (typeof(b) == "number") {
+		out[0] = b;
+		out[1] = b;
+	} 
+	return out;
+};
+
+// 'static' methods:
+vec2.len = function(v) { return Math.sqrt(v[0]*v[0] + v[1]*v[1]); };
+vec2.angle = function(v) { return Math.atan2(v[1], v[0]); };
+vec2.dot = function(a, b) { return a[0]*b[0] + a[1]*b[1]; };
+vec2.distance = function(a, b) { 
+	var v = [ a[0]-b[0], a[1]-b[1] ];
+	return Math.sqrt(v[0]*v[0] + v[1]*v[1]);
+};
+vec2.anglebetween = function(a, b) {
+	var m = vec2.len(a)*vec2.len(b);
+	if (m > 0) {
+		return Math.acos(vec2.dot(a, b) / (vec2.len(a)*vec2.len(b)));
+	} else {
+		return 0; // not mathematically accurate, but more useful than NaN
+	}
+};
+
+vec2.equals = function(a, b) { return a[0] == b[0] && a[1] == b[1]; };
+
+// static methods with out args
+vec2.set = function(out, x, y) {
+	if (typeof x == "object") {
+		out[0] = x[0];
+		out[1] = x[1];
+	} else if (typeof x == "number") {
+		out[0] = x;
+		out[1] = (y !== undefined) ? y : x;
+	}
+	return out;
+};
+
+vec2.setmag = function(out, v, m) {
+	var d = vec2.len(v); 
+	if (d > 0) {
+		var r = m / d;
+		out[0] = v[0] * r;
+		out[1] = v[1] * r;
+	} 
+	return out;
+};
+
+vec2.setangle = function(out, v, a) {
+	var r = vec2.len(v); 
+	out[0] = r * Math.cos(a);
+	out[1] = r * Math.sin(a);
+	return out;
+};
+
+vec2.add = function(out, a, b) {
+	if (typeof(b) == "object") {
+		out[0] = a[0] + (b[0]);
+		out[1] = a[1] + (b[1]);
+	} else if (typeof(n) == "number") {
+		out[0] = a[0] + b;
+		out[1] = a[1] + b;
+	}
+	return out;
+};
+
+vec2.sub = function(out, a, b) {
+	if (typeof(b) == "object") {
+		out[0] = a[0] - (b[0]);
+		out[1] = a[1] - (b[1]);
+	} else if (typeof(n) == "number") {
+		out[0] = a[0] - b;
+		out[1] = a[1] - b;
+	}
+	return out;
+};
+
+vec2.absdiff = function(out, a, b) {
+	if (typeof(b) == "object") {
+		out[0] = Math.abs(a[0] - (b[0]));
+		out[1] = Math.abs(a[1] - (b[1]));
+	} else if (typeof(n) == "number") {
+		out[0] = Math.abs(a[0] - b);
+		out[1] = Math.abs(a[1] - b);
+	}
+	return out;
+};
+
+vec2.mul = function(out, a, b) {
+	if (typeof(b) == "object") {
+		out[0] = a[0] * (b[0]);
+		out[1] = a[1] * (b[1]);
+	} else if (typeof(n) == "number") {
+		out[0] = a[0] * b;
+		out[1] = a[1] * b;
+	}
+	return out;
+};
+
+vec2.div = function(out, a, b) {
+	if (typeof(b) == "object") {
+		out[0] = a[0] / (b[0]);
+		out[1] = a[1] / (b[1]);
+	} else if (typeof(n) == "number") {
+		out[0] = a[0] / b;
+		out[1] = a[1] / b;
+	}
+	return out;
+};
+
+vec2.wrap = function(out, v, xr, yr) {
+	var x = 1, y = 1;
+	if (typeof xr == "object") {
+		x = xr[0];
+		y = xr[1];
+	} else if (typeof xr == "number") {
+		x = xr;
+		y = (typeof yr == "number") ? yr : x;
+	}
+	out[0] = wrap(v[0], x);
+	out[1] = wrap(v[1], y);
+	return out;
+};
+
+vec2.lesser = function(out, a, b) {
+	if (typeof b == "object") {
+		out[0] = (Math.abs(a[0]) < Math.abs(b[0])) ? a[0] : b[0];
+		out[1] = (Math.abs(a[1]) < Math.abs(b[1])) ? a[1] : b[1];
+	} else if (typeof b == "number") {
+		out[0] = (Math.abs(a[0]) < Math.abs(b)) ? a[0] : b;
+		out[1] = (Math.abs(a[1]) < Math.abs(b)) ? a[1] : b;
+	}
+	return out;
+};
+
+vec2.greater = function(out, a, b) {
+	if (typeof b == "object") {
+		out[0] = (Math.abs(a[0]) >= Math.abs(b[0])) ? a[0] : b[0];
+		out[1] = (Math.abs(a[1]) >= Math.abs(b[1])) ? a[1] : b[1];
+	} else if (typeof b == "number") {
+		out[0] = (Math.abs(a[0]) >= Math.abs(b)) ? a[0] : b;
+		out[1] = (Math.abs(a[1]) >= Math.abs(b)) ? a[1] : b;
+	}
+	return out;
+};
+
+var fold2 = function(f, def) {
+	def = def || 0;
+	return function(out, v, o) {
+		if (typeof o == "object") {
+			out[0] = f(v[0], o[0]);
+			out[1] = f(v[1], o[1]);
+		} else if (typeof o == "number") {
+			out[0] = f(v[0], o);
+			out[1] = f(v[1], o);
+		} else {
+			out[0] = f(v[0], def);
+			out[1] = f(v[1], def);
+		}
+		return out;
+	};
+};
+
+vec2.pow = fold2(Math.pow, 1);
+vec2.min = fold2(Math.min, 1);
+vec2.max = fold2(Math.max, 0);
+
+vec2.clip = function(out, v, lo, hi) {
+	if (hi === undefined) { 
+		hi = lo;
+		lo = 0; 
+	}
+	return vec2.max(out, vec2.min(out, v, hi), lo);
+};
+
+vec2.mix = function(out, a, b, t) {
+	if (typeof t == "object") {
+		var tb = [ t[0], t[1] ];
+		out[0] = a[0]*(1-t[0]) + b[0]*t[0];
+		out[1] = a[1]*(1-t[1]) + b[1]*t[1];
+		return out;
+	} else {
+		t = (typeof t == "number") ? t : 0.5;
+		var ta = 1-t;
+		out[0] = a[0]*ta + b[0]*t;
+		out[1] = a[1]*ta + b[1]*t;
+		return out;
+	}
+};
+
+vec2.relativewrap = function(out, v, xr, yr) {
+	var x = 1, y = 1;
+	if (typeof xr == "object") {
+		x = xr[0];
+		y = xr[1];
+	} else if (typeof xr == "number") {
+		x = xr;
+		y = (typeof yr == "number") ? yr : x;
+	}
+	var halfx = x * 0.5;
+	var halfy = y * 0.5;
+	out[0] = wrap(v[0] + halfx, x) - halfx;
+	out[1] = wrap(v[1] + halfy, y) - halfy;
+	return out;
+};
+
+vec2.normalize = function(out, v) {
+	var r = vec2.len(v);
+	if (r > 0) {
+		out[0] /= r;
+		out[1] /= r;
+		return out;
+	} else {
+		return out.random();
+	}
+};
+
+vec2.negate = function(out, v) {
+	out[0] = -v[0];
+	out[1] = -v[1];
+	return out;
+};
+
+vec2.limit = function(out, v, m) {
+	var r2 = vec2.dot(v, v);
+	if (r2 > m*m) {
+		var s = m / Math.sqrt(r2);
+		out[0] *= s;
+		out[1] *= s;
+	}
+	return out;
+};
+
+vec2.rotate = function(out, v, angle) {
+	var c = Math.cos(angle);
+	var s = Math.sin(angle);
+	var x = v[0], y = v[1];
+	out[0] = x * c - y * s;
+	out[1] = y * c + x * s;
+	return out;
+};
+
+// aliases:
+vec2.mag = vec2.len;
+vec2.magnitude = vec2.len;
+vec2.setlen = vec2.setmag;
+vec2.setlength = vec2.setmag;
+vec2.setmagnitude = vec2.setmag;
+vec2.dist = vec2.distance;
+vec2.copy = vec2.clone;
+vec2.translate = vec2.add;
+vec2.scale = vec2.mul;
+vec2.subtract = vec2.sub;
+vec2.multiply = vec2.mul;
+vec2.divide = vec2.div;
+vec2.clamp = vec2.clip;
+vec2.lerp = vec2.mix;
+
+// instance methods:
+vec2.prototype.fromAngle = function(a) {
+	a = (a !== undefined) ? a : 0;
+	this[0] = Math.cos(a);
+	this[1] = Math.sin(a);
+	return this;
+};
+
+vec2.prototype.fromPolar = function(r, a) {
+	// TODO: allow [r, a] input?
+	r = (r !== undefined) ? r : 1;
+	a = (a !== undefined) ? a : 0;
+	this[0] = r*Math.cos(a);
+	this[1] = r*Math.sin(a);
+	return this;
+};
+
+vec2.prototype.random = function(r) {
+	r = (r !== undefined) ? r : 1;
+	var a = random() * Math.PI * 2;
+	this[0] = Math.cos(a) * r;
+	this[1] = Math.sin(a) * r;
+	return this;
+};
+
+vec2.prototype.len = function(a) { 
+	if (a !== undefined) return vec2.setmag(this, this, a); 
+	return vec2.len(this); 
+};
+vec2.prototype.angle = function(a) { 
+	if (a !== undefined) return vec2.setangle(this, this, a); 
+	return vec2.angle(this);
+};
+vec2.prototype.distance = function(v) { return vec2.distance(this, v); };
+vec2.prototype.anglebetween = function(v) { return vec2.anglebetween(this, v); };
+vec2.prototype.dot = function(v) { return vec2.dot(this, v); };
+vec2.prototype.equals = function(v) { return vec2.equals(this, v); };
+
+vec2.prototype.set = function(x, y) { return vec2.set(this, x, y); };
+vec2.prototype.setmag = function(a) { return vec2.setmag(this, a); };
+vec2.prototype.setangle = function(a) { return vec2.setangle(this, a); };
+vec2.prototype.clone = function() { return vec2.clone(this); };
+vec2.prototype.add = function(b) { return vec2.add(this, this, b); };
+vec2.prototype.sub = function(b) { return vec2.sub(this, this, b); };
+vec2.prototype.absdiff = function(b) { return vec2.absdiff(this, this, b); };
+vec2.prototype.mul = function(b) { return vec2.mul(this, this, b); };
+vec2.prototype.div = function(b) { return vec2.div(this, this, b); };
+vec2.prototype.pow = function(x, y) { return vec2.pow(this, this, x, y); };
+vec2.prototype.max = function(x, y) { return vec2.max(this, this, x, y); };
+vec2.prototype.min = function(x, y) { return vec2.min(this, this, x, y); };
+vec2.prototype.greater = function(b) { return vec2.greater(this, this, b); };
+vec2.prototype.lesser = function(b) { return vec2.lesser(this, this, b); };
+vec2.prototype.clip = function(lo, hi) { return vec2.clip(this, this, lo, hi); };
+vec2.prototype.mix = function(b, t) { return vec2.mix(this, this, b, t); };
+vec2.prototype.wrap = function(x, y) { return vec2.wrap(this, this, x, y); };
+vec2.prototype.relativewrap = function(x, y) { return vec2.relativewrap(this, this, x, y); };
+vec2.prototype.normalize = function() { return vec2.normalize(this, this); };
+vec2.prototype.negate = function() { return vec2.negate(this, this); };
+vec2.prototype.limit = function(m) { return vec2.limit(this, this, m); };
+vec2.prototype.rotate = function(a) { return vec2.rotate(this, this, a); };
+
+// aliases:
+vec2.prototype.mag = vec2.prototype.len;
+vec2.prototype.magnitude = vec2.prototype.len;
+vec2.prototype.setlen = vec2.prototype.setmag;
+vec2.prototype.setlength = vec2.prototype.setmag;
+vec2.prototype.setmagnitude = vec2.prototype.setmag;
+vec2.prototype.dist = vec2.prototype.distance;
+vec2.prototype.copy = vec2.prototype.clone;
+vec2.prototype.translate = vec2.prototype.add;
+vec2.prototype.scale = vec2.prototype.mul;
+vec2.prototype.subtract = vec2.prototype.sub;
+vec2.prototype.multiply = vec2.prototype.mul;
+vec2.prototype.divide = vec2.prototype.div;
+vec2.prototype.clamp = vec2.prototype.clamp;
+vec2.prototype.lerp = vec2.prototype.mix;
+
+// utility constructors:
+var make_vec2_fun = function (f) {	// hack because of JS scope annoyance
+	return function() { return f.apply(new vec2(), arguments); };
+};
+var constructor_names = [ "random", "fromAngle", "fromPolar" ];
+for (var i=0; i<constructor_names.length; i++) {
+	var k = constructor_names[i];
+	var f = vec2.prototype[k];
+	vec2[constructor_names[i]] = make_vec2_fun(f);
+}
+
+////////////////////////////////////////////////////////////
+
 // GLSL programs
 
 /*
@@ -476,99 +843,6 @@ var draw2D_colorLocation = gl.getUniformLocation(draw2D_program, "u_color");
 var draw2D_modelViewLocation = gl.getUniformLocation(draw2D_program, "u_modelView");
 var draw2D_texLocation = gl.getUniformLocation(draw2D_program, "u_tex");
 
-function makeshape(vertices, texcoords, indices) {
-	var vertices_buffer = gl.createBuffer();
-	gl.bindBuffer(gl.ARRAY_BUFFER, vertices_buffer);
-	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-	var texcoords_buffer = gl.createBuffer();
-	gl.bindBuffer(gl.ARRAY_BUFFER, texcoords_buffer);
-	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(texcoords), gl.STATIC_DRAW);
-	var indices_buffer = gl.createBuffer();
-	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indices_buffer);
-	gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
-	return {
-		vertices: vertices_buffer,
-		texcoords: texcoords_buffer,
-		indices: indices_buffer,
-		length: indices.length,
-	}; 
-}
-
-var draw2D_circle = (function() {
-	var vertices = [0, 0, 1, 0];
-	var texcoords = [0.5, 0.5, 1, 0.5];
-	var indices = [];
-	var incr = (2 * Math.PI) / 32;
-	for (var i = 1; i < 32; i++) {
-		var index = i+1;
-		var angle = incr * (i + 1);
-		vertices[index*2  ] = Math.cos(angle);
-		vertices[index*2+1] = Math.sin(angle);
-		
-		// TODO: maybe map whole square onto disc (i.e. corners are at 45,45')?
-		texcoords[index*2  ] = vertices[index*2  ]*0.5+0.5;
-		texcoords[index*2+1] = vertices[index*2+1]*0.5+0.5;
-		
-		// add triangle:
-		indices.push(0);
-		indices.push(index);
-		indices.push(index-1);
-	}
-	return makeshape(vertices, texcoords, indices);
-})();
-
-var draw2D_rect = (function() {
-	var vertices = [
-		-1.0, -1.0,
-		1.0, -1.0, 
-		-1.0, 1.0,
-		1.0, 1.0
-	];
-	var texcoords = [
-		0, 0,
-		1, 0, 
-		0, 1,
-		1, 1
-	];
-	var indices = [0, 1, 2, 2, 1, 3];
-	return makeshape(vertices, texcoords, indices);
-})();
-
-// Create a buffer and put a single clipspace rectangle in
-// it (2 triangles)
-var draw2Drect_buffer = gl.createBuffer();
-gl.bindBuffer(gl.ARRAY_BUFFER, draw2Drect_buffer);
-gl.bufferData(
-gl.ARRAY_BUFFER,
-new Float32Array([
-	-1.0, -1.0,
-	1.0, -1.0, 
-	-1.0, 1.0,
-	1.0, 1.0
-]),
-gl.STATIC_DRAW);
-var draw2Drect_index_buffer = gl.createBuffer();
-gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, draw2Drect_index_buffer);
-gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([0, 1, 2, 2, 1, 3]), gl.STATIC_DRAW);
-
-var circledata = [0, 0, 1, 0];
-var incr = (2 * Math.PI) / 32;
-for (var i = 1; i < 32; i++) {
-	var index = i * 2 + 2;
-	var angle = incr * (i + 1);
-	circledata[index] = Math.cos(angle);
-	circledata[index + 1] = Math.sin(angle);
-}
-var draw2Dcircle_buffer = gl.createBuffer();
-gl.bindBuffer(gl.ARRAY_BUFFER, draw2Dcircle_buffer);
-gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(circledata), gl.STATIC_DRAW);
-/*
-var draw2D_circle = {
-buffer: draw2Dcircle_buffer,
-primitive: gl.TRIANGLE_FAN,
-length: 33,
-};
-*/
 
 draw2D = {
 	chroma: chroma,
@@ -639,22 +913,204 @@ draw2D.pop = function() {
 	return this;
 };
 
-draw2D.translate = function(x, y) {
-	if (typeof y == "undefined") y = 0;
-	mat3.translate(modelView, modelView, [x, y]);
+draw2D.translate = function() {
+	if (arguments.length > 0) {
+		var x = 0, y = 0;
+		var a = arguments[0];
+		if (typeof a == "number") {
+			x = a;
+			y = arguments[1] || y;
+		} else if (typeof a == "object") {
+			x = a[0] || a.x || x;
+			y = a[1] || a.y || y;
+		}
+		mat3.translate(modelView, modelView, [x, y]);
+	}
 	return this;
 };
 
-draw2D.scale = function(x, y) {
-	if (typeof y == "undefined") y = x;
-	mat3.scale(modelView, modelView, [x, y]);
+draw2D.scale = function() {
+	if (arguments.length > 0) {
+		var x = 0, y;
+		var a = arguments[0];
+		if (typeof a == "number") {
+			x = a;
+			y = arguments[1] || x;
+		} else if (typeof a == "object") {
+			x = a[0] || a.x || x;
+			y = a[1] || a.y || x;
+		}
+		mat3.scale(modelView, modelView, [x, y]);
+	}
 	return this;
 };
 
 draw2D.rotate = function(radians) {
-	mat3.rotate(modelView, modelView, radians);
+	if (typeof radians == "object") {
+		// assume vec2:
+		radians = vec2.angle(radians);
+	}
+	if (typeof radians == "number") {
+		mat3.rotate(modelView, modelView, radians);
+	}
 	return this;
 };
+
+
+var makeshapedrawfunction = function(shapefunc) {
+	// build an object with vertices, texcoords and indices buffers:
+	var shape = shapefunc();
+	
+	// convert these to GPU buffers:
+	var vertices_buffer = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, vertices_buffer);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(shape.vertices), gl.STATIC_DRAW);
+	
+	var texcoords_buffer = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, texcoords_buffer);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(shape.texcoords), gl.STATIC_DRAW);
+	
+	var indices_buffer = gl.createBuffer();
+	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indices_buffer);
+	gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(shape.indices), gl.STATIC_DRAW);
+	
+	var shapelength = shape.indices.length;
+	
+	// those will all be upvalues of the actual draw function:
+	return function() {
+		var mat_local = modelView;
+		// draw arguments can modify this local transform:
+		if (arguments.length > 0) {
+			// variants: 
+			// circle(x, y, w, h)
+			// circle(x, y, [w, h])
+			// circle(x, y, r)
+			// circle(x, y)
+			// circle([x, y], w, h)
+			// circle([x, y], [w, h])
+			// circle([x, y], r)
+			// circle([x, y])
+			var x = 0, y = 0, w = 1, h;
+			var a = arguments[0];
+			if (typeof a == "number") {
+				x = a;
+				y = arguments[1] || y;
+				// continue at arguments[2]
+				a = arguments[2];
+				if (typeof a == "object") {
+					w = a[0] || a.x || w;
+					h = a[1] || a.y;
+				} else if (typeof a == "number") {
+					w = a;
+					h = arguments[3];
+				}
+			} else if (typeof a == "object") {
+				x = a[0] || a.x || x;
+				y = a[1] || a.y || y;
+				// continue at arguments[1]
+				a = arguments[1];
+				if (typeof a == "object") {
+					w = a[0] || a.x || w;
+					h = a[1] || a.y;
+				} else if (typeof a == "number") {
+					w = a;
+					h = arguments[2];
+				}
+			} 
+			h = h || w;
+	
+			// create a local transformation matrix for these:
+			mat_local = mat3.clone(modelView);
+			mat3.translate(mat_local, mat_local, [x, y]);
+			mat3.scale(mat_local, mat_local, [w, h]);
+		}
+		
+		// apply uniforms:
+		gl.uniform4fv(draw2D_colorLocation, draw2D_chroma.gl());
+		gl.uniformMatrix3fv(draw2D_modelViewLocation, false, mat_local);
+
+		// bind shape buffers:
+		gl.bindBuffer(gl.ARRAY_BUFFER, vertices_buffer);
+		gl.enableVertexAttribArray(draw2D_positionLocation);
+		gl.vertexAttribPointer(draw2D_positionLocation, 2, gl.FLOAT, false, 0, 0);
+	
+		gl.bindBuffer(gl.ARRAY_BUFFER, texcoords_buffer);
+		gl.enableVertexAttribArray(draw2D_texcoordLocation);
+		gl.vertexAttribPointer(draw2D_texcoordLocation, 2, gl.FLOAT, false, 0, 0);
+	
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indices_buffer);
+		
+		// draw shape:
+		gl.drawElements(gl.TRIANGLES, shapelength, gl.UNSIGNED_SHORT, 0);
+
+		// clean up:
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+		gl.bindBuffer(gl.ARRAY_BUFFER, null);
+		return draw2D;
+	};
+};
+
+// variants: 
+// circle(x, y, w, h)
+// circle(x, y, [w, h])
+// circle(x, y, r)
+// circle(x, y)
+// circle([x, y], w, h)
+// circle([x, y], [w, h])
+// circle([x, y], r)
+// circle([x, y])
+draw2D.rect = makeshapedrawfunction(function() {
+	return {
+		vertices: [
+			-0.5, -0.5,
+			0.5, -0.5, 
+			-0.5, 0.5,
+			0.5, 0.5
+		],
+		texcoords: [
+			0, 0,
+			1, 0, 
+			0, 1,
+			1, 1
+		],
+		indices: [0, 1, 2, 2, 1, 3]
+	};
+});
+
+draw2D.circle = makeshapedrawfunction(function() {
+	var shape = {
+		vertices: [0, 0, 0.5, 0],
+		texcoords: [0.5, 0.5, 1, 0.5],
+		indices: []
+	};
+	var incr = (2 * Math.PI) / 32;
+	for (var i = 1; i < 32; i++) {
+		var index = i+1;
+		var angle = incr * (i + 1);
+		shape.vertices[index*2  ] = 0.5 * Math.cos(angle);
+		shape.vertices[index*2+1] = 0.5 * Math.sin(angle);
+		
+		// TODO: maybe map whole square onto disc (i.e. corners are at 45,45')?
+		shape.texcoords[index*2  ] = shape.vertices[index*2  ]+0.5;
+		shape.texcoords[index*2+1] = shape.vertices[index*2+1]+0.5;
+		
+		// add triangle:
+		shape.indices.push(0);
+		shape.indices.push(index);
+		shape.indices.push(index-1);
+	}
+	return shape;
+});
+
+// aliases:
+draw2D.square = draw2D.rect;
+draw2D.ellipse = draw2D.circle;
+
+/*
+draw2D.shape() should return a re-usable shape object that we can call similar methods on to extend its internal geometry
+
+should be easier now we have everything as indexed TRIANGLES
+
 
 function Shape() {
 	this.vertices = [];
@@ -674,57 +1130,6 @@ Shape.prototype.rect = function(x, y, w, h) {
 draw2D.shape = function() {
 	return new Shape();
 };
-
-function draw2D_drawshape(shape, mat_local) {
-	gl.uniform4fv(draw2D_colorLocation, draw2D_chroma.gl());
-	gl.uniformMatrix3fv(draw2D_modelViewLocation, false, mat_local);
-
-	gl.bindBuffer(gl.ARRAY_BUFFER, shape.vertices);
-	gl.enableVertexAttribArray(draw2D_positionLocation);
-	gl.vertexAttribPointer(draw2D_positionLocation, 2, gl.FLOAT, false, 0, 0);
-	
-	gl.bindBuffer(gl.ARRAY_BUFFER, shape.texcoords);
-	gl.enableVertexAttribArray(draw2D_texcoordLocation);
-	gl.vertexAttribPointer(draw2D_texcoordLocation, 2, gl.FLOAT, false, 0, 0);
-	
-	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, shape.indices);
-	gl.drawElements(gl.TRIANGLES, shape.length, gl.UNSIGNED_SHORT, 0);
-
-	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
-	gl.bindBuffer(gl.ARRAY_BUFFER, null);
-	return draw2D;
-}
-
-draw2D.rect = function(x, y, w, h) {
-	if (typeof x == "undefined") x = 0;
-	if (typeof y == "undefined") y = 0;
-	if (typeof w == "undefined") w = 1;
-	if (typeof h == "undefined") h = w;
-	var mat_local = mat3.clone(modelView);
-	mat3.translate(mat_local, mat_local, [x, y]);
-	mat3.scale(mat_local, mat_local, [w*0.5, h*0.5]);
-	var shape = draw2D_rect;
-	return draw2D_drawshape(shape, mat_local);
-};
-
-draw2D.circle = function(x, y, w, h) {
-	if (typeof x == "undefined") x = 0;
-	if (typeof y == "undefined") y = 0;
-	if (typeof w == "undefined") w = 1;
-	if (typeof h == "undefined") h = w;
-	var mat_local = mat3.clone(modelView);
-	mat3.translate(mat_local, mat_local, [x, y]);
-	mat3.scale(mat_local, mat_local, [w*0.5, h*0.5]);
-	var shape = draw2D_circle;
-	return draw2D_drawshape(shape, mat_local);
-};
-
-draw2D.ellipse = draw2D.circle;
-
-/*
-draw2D.shape() should return a re-usable shape object that we can call similar methods on to extend its internal geometry
-
-should be easier now we have everything as indexed TRIANGLES
 
 var s = draw2D.shape().translate(0.25, 0.25)
 .rotate(t)
