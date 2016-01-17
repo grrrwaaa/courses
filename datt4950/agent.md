@@ -70,6 +70,8 @@ One of the simplest strategies, which he calls *wander*, is based on the *random
 
 [See the random walker example here](http://codepen.io/grrrwaaa/pen/mVBBPQ?editors=001)
 
+[And here are many walkers](http://codepen.io/grrrwaaa/pen/mVBBPQ?editors=001)
+
 <!--
 
 ### Boids, flocking, swarms
