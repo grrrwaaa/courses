@@ -8,36 +8,199 @@
   <body>
     <script src="al.js"></script>
     <script>
-    
-var agent = {
-	pos: new vec2(0.5, 0.5),
-	dir: new vec2(0.01, 0),
-	size: 1/40
-};  
 
-function update() {
-	agent.dir.rotate(0.5*(random()-0.5));
-	//console.log(dir);
-	agent.pos.add(agent.dir).wrap(1);
+var mat3 = draw2D.gl.mat3;
+var glvec2 = draw2D.gl.vec2;
+var glvec3 = draw2D.gl.vec3;
+
+function pose() {
+	this.mat = mat3.create();
+	this.inverse = mat3.create();
+	
+	pose.prototype.update.apply(this, arguments);
 }
 
-function draw() {
-	draw2D.push()
-		.translate(agent.pos)
-		.rotate(agent.dir)
-		.scale(agent.size);
-		draw2D.color("pink");
-		draw2D.rect();
-		draw2D.color("white");
-		draw2D.circle([0.5,  0.5], 0.5);
-		draw2D.circle([0.5, -0.5], 0.5);
-	draw2D.pop();
-}  
+pose.prototype.global = function(v) {
+	return glvec2.transformMat3(new vec2(), v, this.mat);
+}
 
-v = new vec2(1, 1);
-v0 = vec2.create();
-v1 = vec2.random();
-v2 = vec2.random();
+pose.prototype.local = function(v) {
+	return glvec2.transformMat3(new vec2(), v, this.inverse);
+}
+
+pose.prototype.update = function(translate, rotate, scale) {
+	var m = this.mat;
+	mat3.identity(m);
+ 	if (typeof translate == "object") {
+ 		mat3.translate(m, m, translate);
+ 	}
+ 	if (typeof rotate == "number") {
+ 		mat3.rotate(m, m, rotate);
+ 	} else if (typeof rotate == "object") {
+ 		mat3.rotate(m, m, vec2.angle(rotate));
+ 	} 	
+	if (typeof scale == "number") {
+		mat3.scale(m, m, [scale, scale]);
+	} else if (typeof scale == "object") {
+		mat3.scale(m, m, scale);
+ 	}
+ 	mat3.invert(this.inverse, this.mat);
+	return this;
+};
+
+
+///////////////////////////
+    
+var max_speed = 0.0025;
+var max_force = 0.0005;
+var viewradius = 0.1;
+var viewangle = Math.PI * 3/4;
+ 
+ // our agents:
+var agents = [];
+
+function agent() {
+  this.pos = new vec2(random(), random());
+  //this.dir = random() * Math.PI * 2;
+  this.vel = vec2.random(max_speed);
+  this.acceleration = new vec2();
+  this.size = 0.02 + 0.02 * random();
+  
+  this.pose = new pose();
+  
+  
+  agents.push(this);
+}
+// make a few agents:
+for (var i=0; i<10; i++) new agent();
+
+function move_agent(a) {
+	
+	// forward Euler integration:
+	a.vel.add(a.acceleration);
+	a.vel.limit(max_speed);
+	a.pos.add(a.vel);
+	
+	// update the agent's direction:
+	//a.dir = a.vel.angle();
+	//a.spd = a.vel.length();
+	
+	// keep within the 0..1 bounds of the world:
+	a.pos.wrap(1);
+	
+	a.pose.update(a.pos, a.vel, a.size);
+}
+
+function update_agent(a) {
+	var dir = a.vel.angle();
+	var spd = a.vel.len();
+	
+	var neighbours = [];
+	var center = new vec2();
+	var avoid = new vec2();
+	var align = new vec2();
+	
+	for (var n of agents) {
+		if (n == a) continue;	// don't count yourself
+		
+		
+		
+		// get relative vector
+		var r = n.pos.clone().sub(a.pos);
+		// in toroidal space:
+		r.relativewrap(1);
+		var distance = r.len();
+		// transform into local space:
+		r.rotate(-dir);
+		var angle = r.angle();
+		
+		if (distance < viewradius
+		&& angle <  viewangle
+		&& angle > -viewangle) {
+			neighbours.push(n);
+			
+			center.add(r);
+			align.add(n.vel);
+			avoid.sub(
+				r.clone().div(distance*distance)
+			);
+		}
+	}
+	
+	var count = neighbours.length;
+	a.canseesomething = count > 0;
+	
+	var desired_velocity = vec2.random(max_force);
+	
+	if (a.canseesomething) {
+		// averages, scaled by importance:
+		center.div(count).mul(1);
+		align.div(count).rotate(-dir).mul(1);
+		avoid.div(count).mul(1);
+		
+		desired_velocity.add(center).add(align).add(avoid);
+	}
+		
+		// we are already in relative space, so we just need to subtract current forward vector:
+		var required_steering = desired_velocity.sub(new vec2(a.spd, 0));
+		
+		// apply constraints:
+		required_steering.limit(max_force);
+		if (required_steering[0] < 0) required_steering[0] = 0;
+		
+		// back to global:
+		required_steering.rotate(dir);
+		a.acceleration.set(required_steering);
+		
+// 	} else {
+// 		// wander:
+// 		a.acceleration.random(max_speed / 10);
+// 	}
+}
+
+function update() {
+  for (var a of agents) {
+  	update_agent(a);
+  }
+  
+  for (var a of agents) {
+  	move_agent(a);
+  }
+}
+  
+function draw() {
+  for (var a of agents) {
+  	draw2D.color("grey");
+  	draw2D.circle(a.pose.global([0.5, 0.5]), 1/30);
+  	draw2D.circle(a.pose.global([0.5,-0.5]), 1/30);
+  
+    // push into agent's local coordinate system
+    draw2D.push().translate(a.pos).rotate(a.vel).scale(a.size);
+    //draw2D.push(a.pose.mat);
+      // draw agent body:
+      if (a.canseesomething) draw2D.color("red");
+	  else draw2D.color("pink");
+      draw2D.circle();
+      // draw agent eyes:
+      draw2D.color("white");
+      draw2D.rect([0.5, 0.5], 0.5);
+      draw2D.rect([0.5,-0.5], 0.5);
+      
+      var t = a.pose.local([0.1, 0.1]);
+      draw2D.rect(t, 0.5);
+    // done drawing agent:
+    draw2D.pop(); 
+    
+  }
+}
+
+function mouse(e, pt) {
+  if (e == "down") {
+    // click to add more agents:
+    var a = new agent();
+    a.pos.set(pt);
+  }
+}
 
 /*
 // create a new field:
