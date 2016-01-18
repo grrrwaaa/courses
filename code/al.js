@@ -5,6 +5,7 @@ TODO:
 
 var glMatrix = require("gl-matrix");
 var mat2 = glMatrix.mat2;
+var mat2d = glMatrix.mat2d;
 var mat3 = glMatrix.mat3;
 var mat4 = glMatrix.mat4;
 var glvec2 = glMatrix.vec2;
@@ -434,10 +435,11 @@ gl.vec4 = glvec4;
 gl.mat2 = mat2;
 gl.mat3 = mat3;
 gl.mat4 = mat4;
+gl.mat2d = mat2d;
 
 vec2 = function(x, y) {
 	this[0] = x || 0;
-	this[1] = y || this[0];
+	this[1] = (y !== undefined) ? y : this[0];
 };
 
 vec2.create = function(x, y) { return new vec2(x, y); };
@@ -858,7 +860,7 @@ var modelView_default = mat3.create();
 mat3.identity(modelView_default);
 mat3.scale(modelView_default, modelView_default, [2, 2]);
 mat3.translate(modelView_default, modelView_default, [-0.5, -0.5]);
-draw2D_modelView_stack = [];
+var draw2D_modelView_stack = [];
 
 var texture_default = (function() {
 	var id = gl.createTexture();
@@ -900,9 +902,12 @@ draw2D.color = function(r, g, b, a) {
 	return this;
 };
 
-draw2D.push = function() {
+draw2D.push = function(m) {
 	draw2D_modelView_stack.push(modelView);
 	modelView = mat3.clone(modelView);
+	if (typeof m == "object") {
+		mat3.multiply(modelView, modelView, m);
+	}
 	return this;
 };
 
@@ -913,16 +918,23 @@ draw2D.pop = function() {
 	return this;
 };
 
+draw2D.transform = function(m) {
+	if (typeof m == "object") {
+		mat3.multiply(modelView, modelView, m);
+	}
+	return this;
+};
+
 draw2D.translate = function() {
 	if (arguments.length > 0) {
 		var x = 0, y = 0;
 		var a = arguments[0];
 		if (typeof a == "number") {
 			x = a;
-			y = arguments[1] || y;
+			y = (arguments[1] !== undefined) ? arguments[1] : y;
 		} else if (typeof a == "object") {
-			x = a[0] || a.x || x;
-			y = a[1] || a.y || y;
+			x = a[0] || x;
+			y = a[1] || y;
 		}
 		mat3.translate(modelView, modelView, [x, y]);
 	}
@@ -935,10 +947,10 @@ draw2D.scale = function() {
 		var a = arguments[0];
 		if (typeof a == "number") {
 			x = a;
-			y = arguments[1] || x;
+			y = (arguments[1] !== undefined) ? arguments[1] : x;
 		} else if (typeof a == "object") {
-			x = a[0] || a.x || x;
-			y = a[1] || a.y || x;
+			x = a[0] || x;
+			y = (a[1] !== undefined) ? a[1] : x;
 		}
 		mat3.scale(modelView, modelView, [x, y]);
 	}
@@ -994,30 +1006,29 @@ var makeshapedrawfunction = function(shapefunc) {
 			var a = arguments[0];
 			if (typeof a == "number") {
 				x = a;
-				y = arguments[1] || y;
+				y = (arguments[1] !== undefined) ? arguments[1] : y;
 				// continue at arguments[2]
 				a = arguments[2];
 				if (typeof a == "object") {
-					w = a[0] || a.x || w;
-					h = a[1] || a.y;
+					w = (a[0] !== undefined) ? a[0] : w;
+					h = (a[1] !== undefined) ? a[1] : w;
 				} else if (typeof a == "number") {
 					w = a;
-					h = arguments[3];
+					h = (arguments[3] !== undefined) ? arguments[3] : w;
 				}
 			} else if (typeof a == "object") {
-				x = a[0] || a.x || x;
-				y = a[1] || a.y || y;
+				x = a[0] || x;
+				y = a[1] || y;
 				// continue at arguments[1]
 				a = arguments[1];
 				if (typeof a == "object") {
-					w = a[0] || a.x || w;
-					h = a[1] || a.y;
+					w = (a[0] !== undefined) ? a[0] : w;
+					h = (a[1] !== undefined) ? a[1] : w;
 				} else if (typeof a == "number") {
 					w = a;
-					h = arguments[2];
+					h = (arguments[2] !== undefined) ? arguments[2] : w;
 				}
 			} 
-			h = h || w;
 	
 			// create a local transformation matrix for these:
 			mat_local = mat3.clone(modelView);

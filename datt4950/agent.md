@@ -76,6 +76,8 @@ One of the simplest strategies, which he calls *wander*, is based on the *random
 
 ### Boids, flocking, swarms
 
+[Flockers](http://codepen.io/grrrwaaa/pen/LGzgpO?editors=001)
+
 In the late 1980s Reynolds proposed a model of animal motion to model flocks, herds and schools, which he named *boids*. Each boid follows a set of rules based on simple principles:
 
 - **Avoidance**: Move away from other boids that are too close (avoid collision)
