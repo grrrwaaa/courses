@@ -146,10 +146,9 @@ Oculus VR is acquired by Facebook for $2 billion, which isn't well received by m
 ![Oculus Menagerie](oculus_menagerie.jpg)   
 Image taken by author at the Unreal Summit, Seoul, May 2015.
 
-
 ---
 
-## VR is or is not cinema
+## VR is or is not cinema...?
 
 Whereas through the 90's surge and earlier, the cinema industry has been more interested in VR as a plot device, it is now becoming increasingly interested in VR as a medium.
 
@@ -164,35 +163,5 @@ Despite this, we should be cautious in naively bringing cinematic ideas to the m
 - The immersant controls the camera (or else they will feel sick). How can framing make sense? What can cinematography tell us?
 - This means the immersant may also need to control time. Moreover, cuts almost never work in VR! What can editing tell us?
 - Although in cinema the camera is usually positioned in the world, we do not think of it existing in the world, and we don't think of ourselves as part of the world -- the fourth wall must not be broken. But in VR there is no fourth wall, we are inside. Can we identify with characters in this situation? Are we also characters? If not, what are we?
-
-
-### Live action capture (or the lack of it)
-
-"Filming" for VR is an unsolved problem. 
-
-- Lightfield cameras
-	- https://www.lytro.com/immerge
-	- Incredibly expensive
-	- Viewer can't move
-- 360 camera arrays + stitching
-	- Google Jump, JauntVR, VRSE, **many** others -- a boom in 360 cameras right now
-	- Imperfect, and likely impossible to perfect
-	- Viewer can't move
-	- Recent guide here: [Various contributors (open source). Making 360. Github, ongoing.](http://making360.com)
-- MoCap & avatar rigging
-	- Used in cinema (but rarely for main characters), and games (especially cut-scenes)... but in VR the artificiality becomes more apparent
-- Point cloud captures
-	- Using cheap depth cameras plus DSLRs: http://depthkit.tv
-	- https://www.kickstarter.com/projects/specular/blackout-a-virtual-glimpse-into-the-lives-of-stran
-	- See [Clouds docu](http://cloudsdocumentary.com)
-	- [Suspect this is essentially the same thing](http://www.wired.com/2015/10/uncorporeal-vr-movies/)
-	- [And this](http://www.mimesysvr.com)
-	- We might be able to set something like this up in the lab -- but don't expect miracles
-- 2D in 3D: placing video surfaces in the world, texturing objects
-
-Captured actors won't be able to look at you, or respond to your presence -- unless they are real people interacting in real time...
-
-
----
 
 [![Codex](codex.jpg)](https://en.wikipedia.org/wiki/Codex_Seraphinianus)

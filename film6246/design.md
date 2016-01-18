@@ -17,22 +17,39 @@ Here is a collection of observations, insights, and recommendations being gather
 
 > Simulation Sickness is a syndrome, which can result in eyestrain, headaches, problems standing up (postural instability), sweating, disorientation, vertigo, loss of colour to the skin, nausea, and - the most famous effect - vomiting. It is similar in effects to motion sickness, although technically a different thing. Simulation sickness can occur during simulator or VR equipment use and can sometimes persist for hours afterwards... If VR experiences ignore fundamental best practices, they can lead to simulator sickness—a combination of symptoms clustered around eyestrain, disorientation, and nausea. - [Article on Gamasutra - by Ben Lewis-Evans on 04/04/14](http://www.gamasutra.com/blogs/BenLewisEvans/20140404/214732/Simulation_Sickness_and_VR__What_is_it_and_what_can_developers_and_players_do_to_reduce_it.php)
 
-Simulator sickness has been known about since the earliest flight simulators of the 1950's, but is still not fully understood. It is likely to be due to sensory conflict -- that what some parts of the visual system are reporting does not match what other sensory components (such as proprioceptive systems) are reporting. But it also may be a complex of several factors, and affects different people in different ways.
+Simulator sickness involves three kinds of issues:
 
-Some people are far more or less susceptible than others. It generally affects younger people less, and tends to reduce with increased exposure.
+- Oculomotor
+	- Headaches, fatigue, eye strain, can't focus
+- Nausea
+	- Sweating, salivation, can't concentrate, burping/stomach awareness
+- Disorientation
+	- Blurry vision, dizziness (with eyes open or closed), vertigo (24%)
+
+Which is to say, *virtual worlds can be dangerous!* See this 1996 NBC special:
+
+<iframe width="480" height="360" src="https://www.youtube.com/embed/O0arluK5zrQ?rel=0" frameborder="0" allowfullscreen></iframe>
+
+In fact simulator sickness has been known about since the earliest flight simulators of the 1950's, but is still not fully understood. It is likely to be due to sensory conflict ("Cue Conflict Theory") -- that what some parts of the visual system are reporting does not match what other sensory components (such as proprioceptive systems) are reporting. But it also may be a complex of several factors, and affects different people in different ways.
+
+Some people are far more or less susceptible than others. It generally affects younger people less, and tends to reduce with increased exposure (getting your "VR legs"). People with a history of MS, alcohol/drug abuse, etc. also tend to be more susceptible.
 
 > Around 5% of all individuals will never acclimate regardless how much they try to build a resistance to it meaning there is a confirmed minority of individuals who will never be able to us Virtual Reality as a mainstream product over their lifetime. - [Sim Sickness guide on Oculus forums](https://forums.oculus.com/viewtopic.php?t=170)
 
 It remains one of the greatest risks to virtual reality's success. Here are some things to avoid and ways to reduce the risk:
 
-**Maintain low latency and high frame-rate**
+**Maintain low latency, high frame-rate, and tracking**
 
-- Frame rates for the DK2 should be 75Hz, for the CV1 90Hz. This is quite demanding, which is why Oculus requires high recommended specifications for computer chips, memory, and graphics cards (GPUs).
-- Latency is how long it takes for a message to transmit. *Motion to photon* latency measures how long it takes for a change in head rotation to be reflected in a change in the image perceived. It should be *consistently* under 20 milliseconds to avoid nausea. The oculus driver does some tricks to help keep this down, but like frame-rate, it also depends crucially on the content and quality of the software.
-- "Judder" happens when the frame rate is not consistent, and a few frames are dropped -- the image then stalls briefly, causing a nauseating mechanical movement of the world.
-- A related issue is image persistence: a low-persistence image has a longer black interval between presenting frames, which reduces the smear-blur when moving your head:
+- Frame rates for the DK2 should be 75Hz, for the CV1 90Hz. This is quite demanding, which is why Oculus requires high recommended specifications for computer chips, memory, and graphics cards (GPUs). 
+	- "Judder" happens when the frame rate is not consistent, and a few frames are dropped -- the image then stalls briefly, causing a nauseating mechanical movement of the world.
+- Latency is how long it takes for a message to transmit. *Motion to photon* latency measures how long it takes for a change in head rotation to be reflected in a change in the image perceived. It should be *consistently* under 20 milliseconds to avoid nausea. The oculus driver does some tricks to help keep this down, but like frame-rate, it also depends crucially on the content and quality of the software. 
+	- The need for low-latency and high-framerate is one of the reasons why many VR works opt for simpler graphics than we may be used to for videogames; but the effect in-world can be far more powerful. Improving geometry may be more worthwhile than special effects. In particular, some effects popular in games are rendered across several frames -- this is not viable for VR.
+	
+- A related issue is image persistence: a low-persistence image has a longer black interval between presenting frames, which reduces the smear/blur/ghosting when moving your head. This is mainly a display screen technology issue. 
 
 ![Persistence](https://lh5.googleusercontent.com/bS3bZRKphnYPK1IAP7DwYN6e3Y_7y6-8RnHVutmm15S_wjzkf4M1vDR0OczN0kHx6PVd-10jd4vmhDFNhY0I18_31ovaKI2s6X_noyC9jk0AutfhEM4BIvnNyFjS6Q)
+
+- Finally, maintaining good head tracking is a necessity, or else the world will appear to jump unnaturally. Although this is also mostly a hardware/software issue, it does require some thought in how an experience is presented (e.g. as an installation).
 
 **Avoid accelerations (and decelerations)**
 
@@ -47,11 +64,13 @@ Since most of us don't have access to a treadmill, or the spherical equivalent, 
 - Don't accelerate smoothly: immediately moving and immediately stopping is better (for most people).
 - Same for rotations. Jumping between angles is better than smooth panning (for most people). Cloudhead games calls this "comfort mode": snapping a predictable number of degrees left or right, and holds that this significantly reduces nausea. But for some players this breaks immersion too much, and it can also leave immersants a bit confused as to where they are actually facing.
 
+<iframe width="640" height="360" src="https://www.youtube.com/embed/Gp0eMNSVtZA?rel=0" frameborder="0" allowfullscreen></iframe>
+
 This is really problematic for game-like experiences -- we can't use mouse or right-stick to change body orientation in the world without getting dizzy. The future of first-person shooter VR does not look good. [Some say locomotion is the biggest problem for VR.](http://fatedblog.com/2015/08/06/locomotion-simulation-sickness-and-the-fear-of-vr/) Many developers are choosing 3rd person (behind the avatar) viewpoints to sidestep the issue.
 
 See also the potentially immersion-breaking "canvas mode" [here](http://tore-knabe.com/virtual-reality#MovementExperiments)
 
-- Move the camera in the direction it is facing, or close to it. Moving the camera perpendicular to the direction it's facing seems to cause problems for some people. This is important to consider if the orientation of the body (or vehicle) is not locked to the orientation of the immersant's head.
+- Move the camera in the direction it is facing, or close to it. Moving the camera perpendicular to the direction it's facing seems to cause problems for some people. This is important to consider if the orientation of the body (or vehicle) is not locked to the orientation of the immersant's head. Rapid tilts and rolls can be very upsetting.
 
 - Oscillating movement is the worst -- especially in oscillatory periods of around 3-5 seconds.
 - Don't create a fake 'head bob' or 'camera shake' camera movement -- it works great on a screen but awful in VR. Even collisions with world objects shouldn't affect the viewpoint if possible.
@@ -89,11 +108,14 @@ Even acceleration-free, forward-only movement can still cause some people troubl
 **Scale**
 
 - The head-height above ground should be consistent with the immersant's own height, whether sitting or standing. 
+- Real-world movement is more comfortable. Humans walk at ~1.4 meters per second (this is much slower than 'walking' in most video games).
+
 - Objects drawn from the real-world should have consistent and usually accurate scale.
+- On the other hand, miniature worlds work well -- about table-sized + 3rd person view
 
 > The rendered image must correspond directly with the user's physical movements; do not manipulate the gain of the virtual camera’s movements. A single global scale on the entire head model is fine (e.g. to convert feet to meters, or to shrink or grow the player), but do not scale head motion independent of interpupillary distance (IPD). - [Best practices, Oculus](https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/)
 
-- Real-world movement is more comfortable. Humans walk at ~1.4 meters per second (this is much slower than 'walking' in most video games).
+- Avoid confined spaces.
 
 **Choose an experience that is not familiar**
 
@@ -105,7 +127,7 @@ This means nothing should "stick" to the viewer's headset -- not even messages/m
 
 > Maintain VR immersion from start to finish—don’t affix an image in front of the user (such as a full-field splash screen that does not respond to head movements), as this can be disorienting... Even in menus, when the game is paused, or during cutscenes, users should be able to look around. - [Best practices, Oculus](https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/)
 
-**Give a visual reference frame**
+**Give a visual reference frame ("anchoring in the world")**
 
 Placing a reference frame around the point of view can help stabilize the senses -- which is why cockpit-based simulations (inside cars, spaceships, robots, or even just a helmet, etc.) can handle much greater accelerations and rotations without inducing sickness. It might be as simple as having a reference that says which way is "body-forward" (see the "nose" below).
 
@@ -180,6 +202,15 @@ Hardly a solution, but there are a few techniques that people susceptible to sim
 - Eat ginger (a long known remedy for motion sickness). Some also recommend a little alcohol, while others say that this makes it worse. Do not try VR when sick, hungover, etc. 
 > A popular household remedy in Asia is rub eucalypti leaves together and inhale the scent produced from them. - [Sim Sickness guide on Oculus forums](https://forums.oculus.com/viewtopic.php?t=170)
 
+**See also:**
+
+	
+(Elements borrowed from [Kevin Burke's guide](https://kev.inburke.com/slides/virtual-reality/), [Simulator Sickness](http://www.gamasutra.com/blogs/BenLewisEvans/20140404/214732/Simulation_Sickness_and_VR__What_is_it_and_what_can_developers_and_players_do_to_reduce_it.php))
+
+[Tips from a team who ported a base-jumping game to VR](https://youtu.be/DqZZKi4UHuo?list=PLckFgM6dUP2hc4iy-IdKFtqR9TeZWMPjm&t=228)
+
+See the [Simulator Sickness questionnaire](https://www.twentymilliseconds.com/html/ssq-scoring.html)
+
 ---
 
 ## From screen to VR
@@ -187,6 +218,8 @@ Hardly a solution, but there are a few techniques that people susceptible to sim
 > VR is an immersive medium. It creates the sensation of being entirely transported into a virtual (or real, but digitally reproduced) three-dimensional world, and it can provide a far more visceral experience than screen-based media. Enabling the mind’s continual suspension of disbelief requires particular attention to detail...  - [Best practices, Oculus](https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/)
 
 - With positional tracking, users can now move their viewpoint to look places you might have expect them to, such as under objects, over ledges, and around corners, and more worryingly, poke their head through walls and inside objects -- though most immersants tend to avoid this if they can.
+
+- That said, keep most content at a comfortable viewing angle. It is uncomfortable to look up or down for very long, or to twist sideways frequently or for sustained time. 
 
 > Provide the user with warnings as they approach (but well before they reach) the edges of the position camera’s tracking volume as well as feedback for how they can re-position themselves to avoid losing tracking. We recommend you do not leave the virtual environment displayed on the Rift screen if the user leaves the camera’s tracking volume, where positional tracking is disabled. It is far less discomforting to have the scene fade to black or otherwise attenuate the image (such as dropping brightness and/or contrast) before tracking is lost. - [Best practices, Oculus](https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/)
 
@@ -208,34 +241,84 @@ Hardly a solution, but there are a few techniques that people susceptible to sim
 
 > When we started tinkering with the DK1 back in the beginning of 2014, the VR scene was pretty much two things: first-person view horror games and rollercoasters. A lot of people saw the future of VR entertainment as that kind of experiences. - [Locomotion and the fear of VR](http://fatedblog.com/2015/08/06/locomotion-simulation-sickness-and-the-fear-of-vr/)
 
+
+
 ---
 
 ## Interaction
+
+### Navigation
+
+(See also discussion above in *simulator sickness*)
+
+Walking around a world is really counter intuitive, as you have to think about two spaces simultaneously. Since we can change viewpoint by moving our heads, typical gaming conventions (mouse / right stick to look around) map two entirely different physiological actions to the same perceptual result, confusing the body. If you do have movement, does looking in a direction mean you move in that direction, or are they independent? And if look-orientation == move-orientation, does this stop when you are not moving ("tank mode")?
+
+The immersant is free to look in any direction they choose -- you need to make sure all directions are valid, potentially valuable, and that nothing essential will be missed because 'they were looking the wrong way'. 
+
+### Physical devices
 
 Devices can't been seen while wearing a headset. The keyboard in particular is almost impossible to use. Use head-movement for control as much as possible, and hand-held devices otherwise, and place more interaction via in-world manipulation.
 
 > “In VR, you don’t have a keyboard full of hotkeys,” says Malaika. “The buttons on a controller are much more limited, so you have to think about how to provide the same number of choices…and manage the number of choices a user has.”   - [Valve advice for VR](http://www.gamasutra.com/view/news/250362/Valve_shares_advice_on_designing_great_VR_game_interactions.php)
 
-- However, don't make interaction laborious (even if it really would be):
+However, don't make interaction laborious (even if it really would be):
 
 > For example, you can require players to reach out, grasp a door handle, and turn it a full 90 degrees to open a door. “Something like that, although novel the first time, can quickly become fatiguing.”   - [Valve advice for VR](http://www.gamasutra.com/view/news/250362/Valve_shares_advice_on_designing_great_VR_game_interactions.php)
-
-If you do have movement, does looking in a direction mean you move in that direction, or are they independent? And if look-orientation == move-orientation, does this stop when you are not moving ("tank mode")?
-
-<iframe width="640" height="360" src="https://www.youtube.com/embed/Gp0eMNSVtZA?rel=0" frameborder="0" allowfullscreen></iframe>
 
 Even with tracked hand-held devices, like those provided with VIVE, or the Oculus Touch, or tracking via Leap Motion or the Kinect, there is still no haptic feedback -- no sense of touch. And for some reason, gloves are not in fashion for VR this time around (as they were in the 90's).
 
 For Leap Motion in particular, [here are some accumulated best practices.](https://developer.leapmotion.com/assets/Leap%20Motion%20VR%20Best%20Practices%20Guidelines.pdf)
 
-> Draw any crosshair, reticle, or cursor at the same depth as the object it is targeting; otherwise, it can appear as a doubled image when it is not at the plane of depth on which the eyes are converged.
-> Don’t require the user to swivel their eyes in their sockets to see the UI. Ideally, your UI should fit inside the middle 1/3rd of the user’s viewing area; otherwise, they should be able to examine it with head movements. - [Best practices, Oculus](https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/)
-
-The immersant is free to look in any direction they choose -- you need to make sure all directions are valid, potentially valuable, and that nothing essential will be missed because 'they were looking the wrong way'. 
+**See also:**
 
 - [Valve advice in interaction in VR](http://www.gamasutra.com/view/news/250362/Valve_shares_advice_on_designing_great_VR_game_interactions.php)
 
-- **Don't cross the streams**: Since we can change viewpoint by moving our heads, don't use typical gaming conventions (mouse / right stick to look around) -- this would map two entirely different physiological actions to the same perceptual result, confusing the body.
+### Virtual user interfaces
 
-- Overly realistic environments can confuse immersants -- who may begin to expect that *everything* in the environment can be interacted with, and be disappointed when it isn't. 
+UI should be located in the world -- overlays & head-up-displays (HUDs) locked to the screen should be avoided. They could be:
+
+- on walls ![walls](https://twentymilliseconds.com/screenshots/ui-walls-example.png)
+- on objects, on screens in world ![screens](https://twentymilliseconds.com/screenshots/vr_typing_hud.png)
+- or cockpit, 
+- or floating over its subject ![coins](https://twentymilliseconds.com/screenshots/lucky/coins-ui.gif)
+
+Pop-up alerts should also be in-world, but appear in the center of the current view.
+
+> Draw any crosshair, reticle, or cursor at the same depth as the object it is targeting; otherwise, it can appear as a doubled image when it is not at the plane of depth on which the eyes are converged.
+> Don’t require the user to swivel their eyes in their sockets to see the UI. Ideally, your UI should fit inside the middle 1/3rd of the user’s viewing area; otherwise, they should be able to examine it with head movements. - [Best practices, Oculus](https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/)
+
+Text should use thick and larger fonts, and not require head movement to read.
+
+Overly realistic environments can confuse immersants -- who may begin to expect that *everything* in the environment can be interacted with, and be disappointed when it isn't. 
+
+---
+
+## Live action capture (or the lack of it)
+
+"Filming" for VR is an unsolved problem. 
+
+- Lightfield cameras
+	- https://www.lytro.com/immerge
+	- Incredibly expensive
+	- Viewer can't move
+- 360 camera arrays + stitching
+	- Google Jump, JauntVR, VRSE, **many** others -- a boom in 360 cameras right now
+	- Imperfect, and likely impossible to perfect
+	- Viewer can't move
+	- Recent guide here: [Various contributors (open source). Making 360. Github, ongoing.](http://making360.com)
+- MoCap & avatar rigging
+	- Used in cinema (but rarely for main characters), and games (especially cut-scenes)... but in VR the artificiality becomes more apparent
+- Point cloud captures
+	- Using cheap depth cameras plus DSLRs: http://depthkit.tv
+	- https://www.kickstarter.com/projects/specular/blackout-a-virtual-glimpse-into-the-lives-of-stran
+	- See [Clouds docu](http://cloudsdocumentary.com)
+	- [Suspect this is essentially the same thing](http://www.wired.com/2015/10/uncorporeal-vr-movies/)
+	- [And this](http://www.mimesysvr.com)
+	- We might be able to set something like this up in the lab -- but don't expect miracles
+
+![point clouds](http://57.media.tumblr.com/d9412a062bcf9e58847ffb2db7990839/tumblr_nzhs49wQUy1qamt2wo1_500.gif)
+
+A very important consideration for VR: captured actors won't be able to look at you, or respond to your presence -- unless they are real people interacting in real time...
+
+Of course, we can still bring human elements from traditional filming media into 3D worlds by placing them on surfaces. They could be regular TVs/projectors/billboards etc., or textured onto more unusual or abstract surfaces. This also includes stereoscopic video, though the depth effect will depend on the viewer's viewpoint.
 
