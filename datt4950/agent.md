@@ -63,7 +63,6 @@ Craig Reynolds' work with robotics is strongly inspired by Braitenberg's and Wal
 - **Steering**: path determination according to the action selected. Many different behaviors can be used; the essential strategy is ```steering force = desired_velocity - current_velocity```.
 - **Locomotion**: mechanisms of conversion of steering into actual movement.
 
-
 ### Random walks in nature
 
 One of the simplest strategies, which he calls *wander*, is based on the *random walk*. Random walks are a well-established model in mathematics, with a physical interpretation as [Brownian motion](https://en.wikipedia.org/wiki/Brownian_motion). Essentially, for an agent a **random walk** involves small random deviations to steering. This form of movement is widely utilized by nature, whether purposefully or simply through environmental interactions. 
@@ -71,8 +70,6 @@ One of the simplest strategies, which he calls *wander*, is based on the *random
 [See the random walker example here](http://codepen.io/grrrwaaa/pen/mVBBPQ?editors=001)
 
 [And here are many walkers](http://codepen.io/grrrwaaa/pen/mVBBPQ?editors=001)
-
-<!--
 
 ### Boids, flocking, swarms
 
@@ -92,41 +89,7 @@ Evidently the *properties* of a boid (apart from location) include direction and
 
 #### Implementation
 
-The behavior of an agent depends on the other agents that it can perceive (the *neighborhood*). The simplest way to detect nearby agents is to simply iterate all agents and apply a distance condition (being careful to exclude the agent itself!). We can also include a view angle condition (easily calculated using vector dot product).
-
-```javascript
-view_range = 0.1; 	// how far an agent can see
-
-function agent_update_sensors(self) {
-	// create a list of nearby agents:
-	var neighbors = [];
-	// test all agents:
-	for (var i=0; i<agents.length; i++) {
-		var near = agents[i];
-		// don't compare with ourself!
-		if (near != self) {		
-			// near enough?
-			var rel = near.location.subnew(self.location);
-			if (rel.length() < view_range) {
-				// is the neighbor in front of us?
-				// (use dot product of my velocity to determine this)
-				if (self.velocity.dot(rel) > 0) {
-					// add this to the set of neighbors:
-					neighbors.push(near);
-				}
-			}
-		}
-	}
-	
-	if (neighbors.length > 0) {
-		// now calculate steering influence according to visible neighbors:
-		// ...
-	} else {
-		// no visible neighbors, so we can explore freely...
-		// ...
-	}
-}
-```
+The behavior of an agent depends on the other agents that it can perceive (the *neighborhood*). The simplest way to detect nearby agents is to simply iterate all agents and apply a distance condition (being careful to exclude the agent itself!). We may also include a view angle condition (easily calculated using vector dot product).
 
 > This isn't especially efficient, but for small populations it is quite reasonable.
 
@@ -134,12 +97,20 @@ Once a set of visible neighbors is calculated, it can be used to derive the stee
 
 > Note that since the agents are dependent on each other, it also makes sense to perform movements and information processing in separate steps. Otherwise, the order in which the agent list is iterated may cause unwanted side-effects on the behavior. (This multi-pass approach is similar in motivation to the double buffering required in many cellular automata).
 
-See the example of [Flocking Boids](http://codepen.io/anon/pen/gpeLaK?/right/editors=001) in the editor.
+Several choices have to be made to balance the forces well -- how far agents can see, over what radius, what kind of clipping on the strength of forces, or clipping on the resulting velocities, what range and sensitivity does the avoidance force have, what relative weight does the center force have, etc. Varying these can produce quite different behaviours.
+
+See the example of [flocking boids here](http://codepen.io/grrrwaaa/pen/LGzgpO?editors=001).
 
 ----
 
+
 ## Environmental interaction
 
+One of the attractive features of the Boids model is how they behave when attempting to avoid immobile obstacles. For a small number of obstacles, we can simply use a list with a similar avoidance force routine.
+
+[Several pretty flockers with obstacles](http://codepen.io/grrrwaaa/pen/XXevBb?editors=001)
+
+<!--
 ### Chemotaxis
 
 When we look at microbiology, we find even simpler modes of steering behavior.

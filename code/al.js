@@ -744,7 +744,6 @@ vec2.prototype.distance = function(v) { return vec2.distance(this, v); };
 vec2.prototype.anglebetween = function(v) { return vec2.anglebetween(this, v); };
 vec2.prototype.dot = function(v) { return vec2.dot(this, v); };
 vec2.prototype.equals = function(v) { return vec2.equals(this, v); };
-
 vec2.prototype.set = function(x, y) { return vec2.set(this, x, y); };
 vec2.prototype.clone = function() { return vec2.clone(this); };
 
