@@ -62,74 +62,33 @@
 <p>One of the simplest strategies, which he calls <em>wander</em>, is based on the <em>random walk</em>. Random walks are a well-established model in mathematics, with a physical interpretation as <a href="https://en.wikipedia.org/wiki/Brownian_motion">Brownian motion</a>. Essentially, for an agent a <strong>random walk</strong> involves small random deviations to steering. This form of movement is widely utilized by nature, whether purposefully or simply through environmental interactions. </p>
 <p><a href="http://codepen.io/grrrwaaa/pen/mVBBPQ?editors=001">See the random walker example here</a></p>
 <p><a href="http://codepen.io/grrrwaaa/pen/mVBBPQ?editors=001">And here are many walkers</a></p>
+<h3 id="boids-flocking-swarms">Boids, flocking, swarms</h3>
+<p><a href="http://codepen.io/grrrwaaa/pen/LGzgpO?editors=001">Flockers</a></p>
+<p>In the late 1980s Reynolds proposed a model of animal motion to model flocks, herds and schools, which he named <em>boids</em>. Each boid follows a set of rules based on simple principles:</p>
+<ul>
+<li><strong>Avoidance</strong>: Move away from other boids that are too close (avoid collision)</li>
+<li><strong>Copy</strong>: Fly in the same general direction as other nearby boids</li>
+<li><strong>Center</strong>: Move toward the center of the flock (avoid exposure)</li>
+</ul>
+<p>In addition, if none of the conditions above apply, i.e. the boid cannot perceive any others, it may move by random walk. </p>
+<p>To make this more realistic, we can consider that each boid can only perceive other boids within a certain distance and viewing angle. We should also restrict how quickly boids can change direction and speed (to account for momentum). Additionally, the avoidance rule may carry greater <em>weight</em> or take precedence over the other rules. Gary Flake also recommends adding an influence for <em>View</em>: to move laterally away from any boid blocking the view.</p>
+<p>Evidently the <em>properties</em> of a boid (apart from location) include direction and speed. It could be assumed that viewing angle and range are shared by all boids, or these could also vary per individual. The <em>sensors</em> of a boid include an ability to detect the density of boids in different directions (to detect the center of the flock), as well as the average speed and direction of boids, within a viewable area. The <em>actions</em> of a boid principally are to alter the direction and speed of flight. </p>
+<h4 id="implementation">Implementation</h4>
+<p>The behavior of an agent depends on the other agents that it can perceive (the <em>neighborhood</em>). The simplest way to detect nearby agents is to simply iterate all agents and apply a distance condition (being careful to exclude the agent itself!). We may also include a view angle condition (easily calculated using vector dot product).</p>
+<blockquote>
+<p>This isn&#39;t especially efficient, but for small populations it is quite reasonable.</p>
+</blockquote>
+<p>Once a set of visible neighbors is calculated, it can be used to derive the steering influences of the agent. The center force depends on the average location of neighbors, relative to the agent. The copy force depends on the average velocity of neighbors. The avoidance force applies if a neighbor is too close.</p>
+<blockquote>
+<p>Note that since the agents are dependent on each other, it also makes sense to perform movements and information processing in separate steps. Otherwise, the order in which the agent list is iterated may cause unwanted side-effects on the behavior. (This multi-pass approach is similar in motivation to the double buffering required in many cellular automata).</p>
+</blockquote>
+<p>Several choices have to be made to balance the forces well -- how far agents can see, over what radius, what kind of clipping on the strength of forces, or clipping on the resulting velocities, what range and sensitivity does the avoidance force have, what relative weight does the center force have, etc. Varying these can produce quite different behaviours.</p>
+<p>See the example of <a href="http://codepen.io/grrrwaaa/pen/LGzgpO?editors=001">flocking boids here</a>.</p>
+<hr>
+<h2 id="environmental-interaction">Environmental interaction</h2>
+<p>One of the attractive features of the Boids model is how they behave when attempting to avoid immobile obstacles. For a small number of obstacles, we can simply use a list with a similar avoidance force routine.</p>
+<p><a href="http://codepen.io/grrrwaaa/pen/XXevBb?editors=001">Several pretty flockers with obstacles</a></p>
 <!--
-
-### Boids, flocking, swarms
-
-[Flockers](http://codepen.io/grrrwaaa/pen/LGzgpO?editors=001)
-
-In the late 1980s Reynolds proposed a model of animal motion to model flocks, herds and schools, which he named *boids*. Each boid follows a set of rules based on simple principles:
-
-- **Avoidance**: Move away from other boids that are too close (avoid collision)
-- **Copy**: Fly in the same general direction as other nearby boids
-- **Center**: Move toward the center of the flock (avoid exposure)
-
-In addition, if none of the conditions above apply, i.e. the boid cannot perceive any others, it may move by random walk. 
-
-To make this more realistic, we can consider that each boid can only perceive other boids within a certain distance and viewing angle. We should also restrict how quickly boids can change direction and speed (to account for momentum). Additionally, the avoidance rule may carry greater *weight* or take precedence over the other rules. Gary Flake also recommends adding an influence for *View*: to move laterally away from any boid blocking the view.
-
-Evidently the *properties* of a boid (apart from location) include direction and speed. It could be assumed that viewing angle and range are shared by all boids, or these could also vary per individual. The *sensors* of a boid include an ability to detect the density of boids in different directions (to detect the center of the flock), as well as the average speed and direction of boids, within a viewable area. The *actions* of a boid principally are to alter the direction and speed of flight. 
-
-#### Implementation
-
-The behavior of an agent depends on the other agents that it can perceive (the *neighborhood*). The simplest way to detect nearby agents is to simply iterate all agents and apply a distance condition (being careful to exclude the agent itself!). We can also include a view angle condition (easily calculated using vector dot product).
-
-```javascript
-view_range = 0.1;     // how far an agent can see
-
-function agent_update_sensors(self) {
-    // create a list of nearby agents:
-    var neighbors = [];
-    // test all agents:
-    for (var i=0; i<agents.length; i++) {
-        var near = agents[i];
-        // don't compare with ourself!
-        if (near != self) {        
-            // near enough?
-            var rel = near.location.subnew(self.location);
-            if (rel.length() < view_range) {
-                // is the neighbor in front of us?
-                // (use dot product of my velocity to determine this)
-                if (self.velocity.dot(rel) > 0) {
-                    // add this to the set of neighbors:
-                    neighbors.push(near);
-                }
-            }
-        }
-    }
-
-    if (neighbors.length > 0) {
-        // now calculate steering influence according to visible neighbors:
-        // ...
-    } else {
-        // no visible neighbors, so we can explore freely...
-        // ...
-    }
-}
-```
-
-> This isn't especially efficient, but for small populations it is quite reasonable.
-
-Once a set of visible neighbors is calculated, it can be used to derive the steering influences of the agent. The center force depends on the average location of neighbors, relative to the agent. The copy force depends on the average velocity of neighbors. The avoidance force applies if a neighbor is too close.
-
-> Note that since the agents are dependent on each other, it also makes sense to perform movements and information processing in separate steps. Otherwise, the order in which the agent list is iterated may cause unwanted side-effects on the behavior. (This multi-pass approach is similar in motivation to the double buffering required in many cellular automata).
-
-See the example of [Flocking Boids](http://codepen.io/anon/pen/gpeLaK?/right/editors=001) in the editor.
-
-----
-
-## Environmental interaction
-
 ### Chemotaxis
 
 When we look at microbiology, we find even simpler modes of steering behavior.
