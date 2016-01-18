@@ -106,6 +106,8 @@ A recommended [notgames Tumblr](http://notgames.tumblr.com).
 
 ## Games and not-games of interest or inspiration
 
+Some common themes: traveling; exploring, discovering; being unusual beings, meeting unknown agencies; playing with physics and other simulations; breaking usual geometries; perceptual limits, transferences, and extremes; meeting unknown agencies; non-standard imagery and the importance of sound.
+
 ### Proteus
 
 [Proteus](http://www.visitproteus.com) is an "open world exploration game". **It has no specific goals.** Every creature and plant has a unique musical signature. The game world is procedurally generated, creating a unique layout each game. Non-realistic 8-bit style. Slow-paced.
@@ -117,6 +119,12 @@ Proteus sold 23,000 copies in first nine months. It achieved 80% rating on metac
 [Proteus is being ported to Oculus Rift](https://www.youtube.com/watch?v=xlHvUwilW6Q)
 
 <iframe width="640" height="480" src="http://www.youtube.com/embed/gWs_RKXkyu0?rel=0" frameborder="0" allowfullscreen></iframe>
+
+### Kira
+
+A similar feeling for VR, but without the chip-style rendering, more World of Warcraft. Sports navigation-by-staring, like a puzzle-free Myst.
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/5_KHYYaxSyY?rel=0" frameborder="0" allowfullscreen></iframe>
 
 ### Journey
 
