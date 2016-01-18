@@ -118,24 +118,6 @@ Proteus sold 23,000 copies in first nine months. It achieved 80% rating on metac
 
 <iframe width="640" height="480" src="http://www.youtube.com/embed/gWs_RKXkyu0?rel=0" frameborder="0" allowfullscreen></iframe>
 
-### Dear Esther
-
-Dear Esther is an experimental first-person art video game developed by The Chinese Room. The game does not follow traditional video game conventions, as it involves minimal interaction from the player and does not require choices to be made nor tasks to be completed. It instead places focus on its story, which is told through a fragmented, epistolary narrative as the player explores an unnamed island in the Hebrides.
-
-[On Edge: A Chat With Robert Briscoe](http://www.rockpapershotgun.com/2013/10/23/on-edge-a-chat-with-robert-briscoe/#more-173753) - "One of the goals with Dear Esther's art was to make the island look like one big organic sculpture, with rocks, grass and even buildings seemingly growing from its surface... The caves are a unique break in Dear Esther's bleak, open environments that allowed room to explore a more surreal, organic style that was full of metaphors and hidden imagery... One of my pet gripes is that every game today wants to look like it's shot through Michael Bay's sunglasses or JJ Abrams' asshole"
-
-By October 2013 Dear Esther sold over 750,000 copies.
-
-<iframe width="640" height="360" src="http://www.youtube.com/embed/hlGdbziSwEY?rel=0" frameborder="0" allowfullscreen></iframe>
-
-### Bientot l'&eacute;t&eacute;
-
-[From Tale of Tales](http://tale-of-tales.com/bientotlete/)
-
-> Forbes - “Of course, basing a computer game set in the distant future on an examination of the quiet desperation of bourgeois French womanhood in the 1950s is, itself, going to look like non-linear art game weirdness. But there is a plan.” 
-
-<iframe width="640" height="360" src="http://www.youtube.com/embed/QJe5O7b5JYo?rel=0" frameborder="0" allowfullscreen></iframe>
-
 ### Journey
 
 Journey is an indie video game. In Journey, the player controls a robed figure in a vast desert, traveling towards a mountain in the distance. Other players on the same journey can be discovered, and two players can meet and assist each other, but they cannot communicate via speech or text and cannot see each other's names. The robed figure wears a trailing scarf, which when charged by approaching floating pieces of cloth, briefly allows the player to float through the air. The developers sought to evoke in the player a sense of smallness and wonder, and to forge an emotional connection between them and the anonymous players they meet along the way. - [wiki](http://en.wikipedia.org/wiki/Journey_(2012_video_game))
@@ -153,14 +135,6 @@ Flower, and Journey, are follow-up works from Flow:
 > “In the fall of 2005, Jenova Chen and Kellee Santiago began thinking about creating their own video game company. The two were in their final year as master's students in the Interactive Media Program at the University of Southern California's School of Cinematic Arts”
 
 <iframe width="640" height="480" src="http://www.youtube.com/embed/LTBIG4tOMmE?rel=0" frameborder="0" allowfullscreen></iframe>
-
-### The Endless Forest
-
-> The Endless Forest is a multiplayer online game and social screensaver, a virtual place where you can play with your friends. When your computer goes to sleep you appear as a deer in this magical place. There are no goals to achieve or rules to follow. Just run through the forest and see what happens. [http://tale-of-tales.com/TheEndlessForest/](http://tale-of-tales.com/TheEndlessForest/)
-
-[Second Life for deer?]
-
-<iframe width="640" height="480" src="http://www.youtube.com/embed/vaB0XquLW7U?rel=0" frameborder="0" allowfullscreen></iframe>
 
 ### No Man's Sky
 
@@ -225,7 +199,39 @@ Making of:
 
 <iframe width="640" height="360" src="http://www.youtube.com/embed/ySJJZUpC6Sg?rel=0" frameborder="0" allowfullscreen></iframe>
 
-### Dumpy
+### Dear Esther
+
+Dear Esther is an experimental first-person art video game developed by The Chinese Room. The game does not follow traditional video game conventions, as it involves minimal interaction from the player and does not require choices to be made nor tasks to be completed. It instead places focus on its story, which is told through a fragmented, epistolary narrative as the player explores an unnamed island in the Hebrides.
+
+[On Edge: A Chat With Robert Briscoe](http://www.rockpapershotgun.com/2013/10/23/on-edge-a-chat-with-robert-briscoe/#more-173753) - "One of the goals with Dear Esther's art was to make the island look like one big organic sculpture, with rocks, grass and even buildings seemingly growing from its surface... The caves are a unique break in Dear Esther's bleak, open environments that allowed room to explore a more surreal, organic style that was full of metaphors and hidden imagery... One of my pet gripes is that every game today wants to look like it's shot through Michael Bay's sunglasses or JJ Abrams' asshole"
+
+By October 2013 Dear Esther sold over 750,000 copies.
+
+<iframe width="640" height="360" src="http://www.youtube.com/embed/hlGdbziSwEY?rel=0" frameborder="0" allowfullscreen></iframe>
+
+### Bientot l'&eacute;t&eacute;
+
+[From Tale of Tales](http://tale-of-tales.com/bientotlete/)
+
+> Forbes - “Of course, basing a computer game set in the distant future on an examination of the quiet desperation of bourgeois French womanhood in the 1950s is, itself, going to look like non-linear art game weirdness. But there is a plan.” 
+
+<iframe width="640" height="360" src="http://www.youtube.com/embed/QJe5O7b5JYo?rel=0" frameborder="0" allowfullscreen></iframe>
+
+### The Endless Forest
+
+> The Endless Forest is a multiplayer online game and social screensaver, a virtual place where you can play with your friends. When your computer goes to sleep you appear as a deer in this magical place. There are no goals to achieve or rules to follow. Just run through the forest and see what happens. [http://tale-of-tales.com/TheEndlessForest/](http://tale-of-tales.com/TheEndlessForest/)
+
+[Second Life for deer?]
+
+<iframe width="640" height="480" src="http://www.youtube.com/embed/vaB0XquLW7U?rel=0" frameborder="0" allowfullscreen></iframe>
+
+### Noby & Dumpy
+
+Examples of the exploration of physics simulation for the sheer pleasure of it.
+
+[Noby noby boy](https://en.wikipedia.org/wiki/Noby_Noby_Boy)
+
+<iframe width="480" height="360" src="https://www.youtube.com/embed/vlMhthzbL1I?rel=0" frameborder="0" allowfullscreen></iframe>
 
 [Dumpy](http://www.dumpygame.com/media/index.html): Strap on that Oculus Rift to become Dumpy the Elephant! She just broke out of a carnival and is bopping her way to freedom. Rotate your head to fling cop cars over mountains and smash delicious ice cream trucks with your mighty trunk. This crazy new art of Trunk-Fu is easy to learn but so hard to master. Her rampage takes place in a surreal lofi blisscape of exploding boys and trypnotic UFOs!
 
