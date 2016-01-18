@@ -508,7 +508,7 @@ vec2.add = function(out, a, b) {
 	if (typeof(b) == "object") {
 		out[0] = a[0] + (b[0]);
 		out[1] = a[1] + (b[1]);
-	} else if (typeof(n) == "number") {
+	} else if (typeof(b) == "number") {
 		out[0] = a[0] + b;
 		out[1] = a[1] + b;
 	}
@@ -519,7 +519,7 @@ vec2.sub = function(out, a, b) {
 	if (typeof(b) == "object") {
 		out[0] = a[0] - (b[0]);
 		out[1] = a[1] - (b[1]);
-	} else if (typeof(n) == "number") {
+	} else if (typeof(b) == "number") {
 		out[0] = a[0] - b;
 		out[1] = a[1] - b;
 	}
@@ -530,7 +530,7 @@ vec2.absdiff = function(out, a, b) {
 	if (typeof(b) == "object") {
 		out[0] = Math.abs(a[0] - (b[0]));
 		out[1] = Math.abs(a[1] - (b[1]));
-	} else if (typeof(n) == "number") {
+	} else if (typeof(b) == "number") {
 		out[0] = Math.abs(a[0] - b);
 		out[1] = Math.abs(a[1] - b);
 	}
@@ -541,7 +541,7 @@ vec2.mul = function(out, a, b) {
 	if (typeof(b) == "object") {
 		out[0] = a[0] * (b[0]);
 		out[1] = a[1] * (b[1]);
-	} else if (typeof(n) == "number") {
+	} else if (typeof(b) == "number") {
 		out[0] = a[0] * b;
 		out[1] = a[1] * b;
 	}
@@ -552,7 +552,7 @@ vec2.div = function(out, a, b) {
 	if (typeof(b) == "object") {
 		out[0] = a[0] / (b[0]);
 		out[1] = a[1] / (b[1]);
-	} else if (typeof(n) == "number") {
+	} else if (typeof(b) == "number") {
 		out[0] = a[0] / b;
 		out[1] = a[1] / b;
 	}
