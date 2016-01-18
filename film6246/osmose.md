@@ -9,7 +9,7 @@ importance: 6
 
 Exhibited (and recorded) at Musee d'Art Contemparain de Montreal
 
-<iframe width="640" height="480" src="//www.youtube.com/embed/54O4VP3tCoY?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="640" height="480" src="http://www.youtube.com/embed/54O4VP3tCoY?rel=0" frameborder="0" allowfullscreen></iframe>
 
 Notice the framing, dramatization of donning equipment, abstracted via silhouette.
 
