@@ -746,9 +746,10 @@ vec2.prototype.dot = function(v) { return vec2.dot(this, v); };
 vec2.prototype.equals = function(v) { return vec2.equals(this, v); };
 
 vec2.prototype.set = function(x, y) { return vec2.set(this, x, y); };
-vec2.prototype.setmag = function(a) { return vec2.setmag(this, a); };
-vec2.prototype.setangle = function(a) { return vec2.setangle(this, a); };
 vec2.prototype.clone = function() { return vec2.clone(this); };
+
+vec2.prototype.setmag = function(a) { return vec2.setmag(this, this, a); };
+vec2.prototype.setangle = function(a) { return vec2.setangle(this, this, a); };
 vec2.prototype.add = function(b) { return vec2.add(this, this, b); };
 vec2.prototype.sub = function(b) { return vec2.sub(this, this, b); };
 vec2.prototype.absdiff = function(b) { return vec2.absdiff(this, this, b); };
