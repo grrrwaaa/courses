@@ -23,7 +23,7 @@ Open the editor directly, or via the launcher. It should open with the 'project 
 
 Create a new project, typically from the "blank" or "first person" template, and make sure that "with starter content" is selected. Choose where to save it, and then "create project". This will now open in the editor. 
 
-In future, just go ahead and open your existing project from the launcher or the project browser.
+In future, just go ahead and open your existing project from the launcher or the project browser. I recommend that you only create one project, and just make new levels whenever you want to try a new idea out. This will make it easier to copy things between levels, and save disk space.
 
 ## The editor
 
@@ -60,6 +60,8 @@ Below that, the **Details panel** is used to modify properties of whatever is cu
 You use the Unreal *Editor* application to author your world. Ultimately you will export it as an application (.exe on windows), but most of the time you will edit and also playtest the world via the Editor. A *Project* is actually a whole folder of files on your disk, including a .uproject file that keeps the global settings together. You can see these files via the Content Browser in the Unreal editor. You can see all your projects in the "Library" section of the Unreal launcher.
 
 Each project has one or more *Levels* (sometimes also called "maps"), which are like 3D scenes or locations into which you place objects to define the world experienced. Each level is saved as a separate .umap file. All the levels in an Unreal project make up a *World*.
+
+> I recommend that you do all your development in a single project. You can create new levels to try different ideas out, but keeping it all in a single project will make it easier to copy items between levels, and reduce disk space.
 
 Any object (a player, character, geometry mesh, light, etc.) that can be placed in 3D space (with position/translation, rotation/orientation, scale etc.) is an *Actor*. Remember that *Assets* in the content browser are the resources you can place into the world, while *Actors* are instances that use these resources.
 
@@ -128,7 +130,9 @@ Projects can end up with very many assets. There is a search tool and options to
 
 ## Building a level
 
-Like any major production, everything starts with planning and sketching; with some interesting overlaps and differences from film, architecture, design, composition, etc.
+We're not going to cover roles an "environment artist" would play in game development, such as the creation of 3D models. Instead we will operate more like "level designers". 
+
+Like any major production, everything starts with planning and sketching; with some interesting overlaps and differences from film, architecture, design, composition, etc. 
 
 > Within Unreal, sketch first with a "roughed-in" or "blocked out" schematic of the world, and start testing it's movement and flow as soon as possible -- long before spending any time on creating the real mesh geometry and other art assets. [Geometry Brushes](https://docs.unrealengine.com/latest/INT/Engine/Actors/Brushes/index.html), also sometimes called "BSPs", are perfect for this aspect of the level design process. After testing & refining, spend more time updating the meshes, lighting and other elements of the world, testing continually, up to the last stages of polishing up.
 
@@ -172,29 +176,113 @@ Create an opening in a wall: duplicate the wall, reduce its size. Set the brush 
 
 ---
 
+Of course, we can also drag in other kinds of props, such as basic particle systems (e.g. fire).
+
+Any mesh props can be made to simulate physics simply by selecting them and ticking the "simulate physics" option in the Details tab.
+
+Whenever we add or modify a light source, we will need to rebuild the lighting model (press Build in the big toolbar). 
+
+---
+
+## Landscaping
+
+[See documentation](https://docs.unrealengine.com/latest/INT/Engine/Landscape/QuickStart/index.html)
+
+If this is a new level, delete the default floor. In the Modes panel select the Lanscapes mode. A green grid will show in the viewport.
+
+If this is the first time to use it, you will need to "Create New" to make a new landscape. It's a good idea to assign a landscape material before creating it. You can drag on the landscape's edges to make it cover more or less area.
+
+Once created, you can start to Sculpt and Paint it.
+
+### Sculpting
+
+Ctrl-click to select areas.
+
+With the default sculpt tool, left click to increase elevation, shift-click to decrease.
+
+There are lots of other tools, for smoothing, flattening, eroding, etc. the land. Smoothing & flattening is good for VR, as it feels more comfortable to walk on. Flattening can also be good for making rivers and roads.
+
+Use the brush options to change the size & strength.
+
+Make sure that your Player Start object is above your terrain or else you will fall through the world. If this does happen, drag the player to start up on top of the terrain and hit the End key for it to fall.
+
+### Painting
+
+We can just drop in a single material, but we can also use Paint mode to blend multiple materials on the landscape. 
+
+Creating landscape materials is a little more complex, but we can migrate some from other example projects or content packs available through the Epic community (via the Launcher app). See below for how to migrate content.
+
+### Adding water
+
+Place a BSP box into the world so that it lies above the lowest land. Drag on the "M_Water_Lake" material from the Materials folder in the content browser.
+
+It might seem weird that we can walk on water. This is because BSP boxes are solid objects. We can fix that by converting it into a static mesh. With the water box actor selected, in the Details panel, go to Brush Settings and click on the little arrow at the bottom of the part to show the extended options, and click on the Create Static Mesh option.
+
+---
+
 ## Tips
 
-> A *Class* defines the behaviors and properties of a particular Actor or Object used in the creation of an Unreal Engine game. Classes can be created in C++ code or via visual diagrams called Blueprints. Each game has one *PlayerController* class which controls a Character Pawn from input controls (joystick etc.). An *AIController* possesses other Pawns to serve as non-player characters (NPCs) in the world.
+### Projects & levels
 
-> *Volumes* define a 3D area for certain purposes, often invisible (such as blocking volumes to prevent actors leaving the area, pain causing volumes to inflict damage on any actor within the area, trigger volumes that cause events when an actor enters or exits them). 
+You can make a new level at any time from File->New Level. 
+
+To set the default level (the one that opens when a project launches), go to Project Settings
+
+To set where the immersant will start (and what direction they face) when the level runs, move and rotate the "Player Start" actor. If you don't have a Player Start actor in the level, you can drag one in from the starter content collection. It's common while editing a level to remove the Player Start, so that it will run from wherever you where editing from. 
+
+### Content
+
+**Copying (migrating) assets between projects**:
+
+You can't usually copy objects directly from one project to another, but you can [migrate assets](https://wiki.unrealengine.com/Migrate_content_between_projects). Migrating an asset will also migrate everything that it depends on (textures, materials, blueprints, etc.):
+
+1. Locate the content in the Content Browser, right-click and choose "Migrate"
+2. Confirm all the assets to migrate
+3. Locate the project "Content" folder (on disk) of the project to migrate to (not a subfolder!)
+
+**Copying actors between levels (maps) of the same project**:
+
+Just select what you want to copy in the Outliner and Ctrl-C to copy, then switch to the destination level, and Ctrl-V to paste.
+
+**Copying actors between levels (maps) of different projects**:
+
+First, migrate the necessary assets, then copy the actors, both as described above.
+
+### More viewport editing options
 
 **[Orthographic views](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&video=RoiQOwCg-4Q):**
 
 In the top-right corner of viewport there is a small 'min/max' button which will alternate between a maximized 3D view, and a 4-up set of views for top, left, and front "orthographic" (non-perspective) views as well as the regular perspective one. Right-click & drag to move in these views, and mouse-scroll to zoom.
 
-The "t" key will enable/disable the ability to select translucent objects. If it is off, you will select whatever object is seen *through* the translucent object.
-
-**[View modes & show flags tutorial](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&video=7UjP6gr44dc)**:
+**[View modes & show flags](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&video=7UjP6gr44dc)**:
 
 By default the viewport uses full lighting ("lit") -- other modes are unlit (raw materials), wireframe (raw meshes), detail lighting (lighting effects only), reflections, etc. Next to this option is the **Show** drop-down, where you can enable and disable different kinds of content in the viewport.
+
+**Selecting translucent objects**: The "t" key will enable/disable the ability to select translucent objects. If it is off, you will select whatever object is seen *through* the translucent object.
 
 **We can [lock the viewport to an actor](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&video=Z7OqNjFpy6U)** by right-clicking on an object and selecting the "pilot" option. This fixes our viewport's perspective to the object itself, and we can use the standard viewport movement controls to reposition the object. This is especially useful for positioning lights and cameras, for example.
 
 **Viewing the Frame rate**: Command+Shift+H (or the dropdown top-right of the viewport)
 
+**Other tips**:
+
+The "[" and "]" keys change the snapping size.
+
+### More concepts & definitions
+
+- A *Class* defines the behaviors and properties of a particular Actor or Object used in the creation of an Unreal Engine game. Classes can be created in C++ code or via visual diagrams called Blueprints. Each game has one *PlayerController* class which controls a Character Pawn from input controls (joystick etc.). An *AIController* possesses other Pawns to serve as non-player characters (NPCs) in the world.
+
+- *Volumes* define a 3D area for certain purposes, often invisible (such as blocking volumes to prevent actors leaving the area, pain causing volumes to inflict damage on any actor within the area, trigger volumes that cause events when an actor enters or exits them). 
+
 - A **box trigger** can cause events to happen when a player enters or leaves the region of the (invisible) box region. 
+
+A neat thing is to turn an existing geometry brush into a trigger. You can select a BSP geometry brush in a level, duplicate it, then in the Details panel, the Actor section, you can choose "Convert Actor" and turn it into a "Trigger Volume". 
+
 - Blueprint **timelines** are ways we can make a sequence of events happen -- and we can also make them happen in reverse. 
-- Any object that can be moved in-game must have the "movable" option set in the transform Detail (rather than "static"). 
+
+### Scripting
+
+- Any object that will be moved in-game must have the "movable" option set in the transform Detail (rather than "static"). 
 
 ---
 

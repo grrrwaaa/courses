@@ -78,13 +78,21 @@ Part 2:
 
 ### 2. Jan 12
 
-Recap. Getting to know Unreal. Simulator sickness. 
+Recap & discussion. More VR experiences. Getting to know Unreal.
 
 **Tasks**
 
 - Watch the [geometry layout](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=57MxoF4sy84) tutorial, no further than part 7, and follow along to create your first project and level.
 
 ### 3. Jan 19
+
+Simulator sickness. Game.
+
+Unreal level-building/roughing-out tutorial.
+
+**Tasks**
+
+Develop your first Unreal project level -- and bring it in next week (on a USB stick) to show. Keep a record of any questions you have, and any ideas that come that you'd like to know whether is possible / how to do, what you'd like to do next, and/or how you might like people to experience this space. We can discuss these ideas as you show it.
 
 ### 4. Jan 26
 
