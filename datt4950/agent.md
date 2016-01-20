@@ -15,7 +15,7 @@ Agent-based models, or multi-agent systems, attempt to understand how non-trivia
 
 ## What is an agent?
 
-The agent abstraction has arisen somewhat independently in different fields, thus the definition of an agent can vary widely. However, in most cases, **an autonomous agent interacts within an environment populated by other agents, but behaves independently without taking direct commands from other agents nor a global planner or leader.** Agent-based models typically operate in parallel within a spatial environment, in which interactions are usually limited to local distances, rather like cellular automata. But unlike CA, which roots a program in a particular spatial location (the cell), an agent-based program is typically mobile. The following components are usually present:
+The agent abstraction has arisen somewhat independently in different fields, thus the definition of an agent can vary widely. However, in most cases, **an autonomous agent interacts within an environment populated by other agents, but behaves independently without taking direct commands from other agents nor a global planner or leader.** Agent-based models consist of **populations** that typically operate in parallel within a spatial environment. Interactions are usually limited to local distances, rather like cellular automata. But unlike CA, which roots a program in a particular spatial location (the cell), an agent-based program is typically mobile. The following components are usually present:
 
 - **Properties**: Persistent but variable features of an agent, such as size, color, speed, direction, energy level, and so on. 
 - **Input**: Limited capabilities of sensing (or receiving messages from) the environment
@@ -63,13 +63,19 @@ Craig Reynolds' work with robotics is strongly inspired by Braitenberg's and Wal
 - **Steering**: path determination according to the action selected. Many different behaviors can be used; the essential strategy is ```steering force = desired_velocity - current_velocity```.
 - **Locomotion**: mechanisms of conversion of steering into actual movement.
 
+His paper concentrates on several different steering algorithms. Locomotion is extremely simple -- equivalent to a single force vector on a point mass -- but a more complex (and thus constrained) locomotion system could be swapped in without changing the steering model significantly. Action selection is not dealt with, but also arguably independent.
+
+[Here for example is the "seek" and "flee" steering methods](http://codepen.io/grrrwaaa/pen/xZPeNV?editors=001), which derive desired velocity from a the relative vector toward (or away from) a target point. Given a desired velocity, the steering force is obtained by subtracting the current velocity.
+
+[Here for "seek" extended with obstacle avoidance](http://codepen.io/grrrwaaa/pen/xZPeNV?editors=001). The basic concept is to project forward a rectangle of the same width as the agent, up to a limit of visible range, and see if it intersects with the obstacle. If it does, a lateral force opposite in magnitude to the expected overlap is added to prevent a collision happening.
+
 ### Random walks in nature
 
-One of the simplest strategies, which he calls *wander*, is based on the *random walk*. Random walks are a well-established model in mathematics, with a physical interpretation as [Brownian motion](https://en.wikipedia.org/wiki/Brownian_motion). Essentially, for an agent a **random walk** involves small random deviations to steering. This form of movement is widely utilized by nature, whether purposefully or simply through environmental interactions. 
+One of the most useful strategies, which he calls *wander*, is based on the *random walk*. Random walks are a well-established model in mathematics, with a physical interpretation as [Brownian motion](https://en.wikipedia.org/wiki/Brownian_motion). Essentially, for an agent a **random walk** involves small random deviations to steering. This form of movement is widely utilized by nature, whether purposefully or simply through environmental interactions. 
 
-[See the random walker example here](http://codepen.io/grrrwaaa/pen/mVBBPQ?editors=001)
+[See the random walker example here](http://codepen.io/grrrwaaa/pen/mVBBPQ?editors=001). Rather than simple deviations to the current heading, this follows Reynold's method to generate headings based on deviations of an ideal point just ahead of the agent, which is more parametrically defined.
 
-[And here are many walkers](http://codepen.io/grrrwaaa/pen/mVBBPQ?editors=001)
+[And here are many walkers](http://codepen.io/grrrwaaa/pen/YwEbRO?editors=001) -- to help demonstrate how to support populations, and how quickly random walkers can cover a terrain. This is on reason why random walks feature in many foraging behaviours in nature.
 
 ### Boids, flocking, swarms
 
