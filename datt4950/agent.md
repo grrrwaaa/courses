@@ -67,7 +67,7 @@ His paper concentrates on several different steering algorithms. Locomotion is e
 
 [Here for example is the "seek" and "flee" steering methods](http://codepen.io/grrrwaaa/pen/xZPeNV?editors=001), which derive desired velocity from a the relative vector toward (or away from) a target point. Given a desired velocity, the steering force is obtained by subtracting the current velocity.
 
-[Here for "seek" extended with obstacle avoidance](http://codepen.io/grrrwaaa/pen/xZPeNV?editors=001). The basic concept is to project forward a rectangle of the same width as the agent, up to a limit of visible range, and see if it intersects with the obstacle. If it does, a lateral force opposite in magnitude to the expected overlap is added to prevent a collision happening.
+[Here for "seek" extended with obstacle avoidance](http://codepen.io/grrrwaaa/pen/Bjmepv?editors=001). The basic concept is to project forward a rectangle of the same width as the agent, up to a limit of visible range, and see if it intersects with the obstacle. If it does, a lateral force opposite in magnitude to the expected overlap is added to prevent a collision happening.
 
 ### Random walks in nature
 
@@ -103,9 +103,9 @@ Once a set of visible neighbors is calculated, it can be used to derive the stee
 
 > Note that since the agents are dependent on each other, it also makes sense to perform movements and information processing in separate steps. Otherwise, the order in which the agent list is iterated may cause unwanted side-effects on the behavior. (This multi-pass approach is similar in motivation to the double buffering required in many cellular automata).
 
-Several choices have to be made to balance the forces well -- how far agents can see, over what radius, what kind of clipping on the strength of forces, or clipping on the resulting velocities, what range and sensitivity does the avoidance force have, what relative weight does the center force have, etc. Varying these can produce quite different behaviours.
+Several choices have to be made to balance the forces well -- how far agents can see, over what radius, what kind of clipping on the strength of forces, or clipping on the resulting velocities, what range and sensitivity does the avoidance force have, what relative weight does the center force have, etc. Varying these can produce quite different behaviours. Do some forces (e.g. avoidance) completely override others? Do some forces apply only intermittently (by probability)? Etc.
 
-See the example of [flocking boids here](http://codepen.io/grrrwaaa/pen/LGzgpO?editors=001).
+See one example of [flocking boids here](http://codepen.io/grrrwaaa/pen/LGzgpO?editors=001).
 
 ----
 
