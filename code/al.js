@@ -35,6 +35,10 @@ wrap = function (n, m) {
 	return ((n%m)+m)%m;
 };
 
+var isarraylike = function(o) {
+	return Array.isArray(o) || (o instanceof Float32Array);
+};
+
 /**
  * Wrapped logging function.
  * @param {string} msg The message to log.
@@ -1277,6 +1281,11 @@ field2D.prototype.cell = function(x, y) {
 // @param x coordinate (0..1) to sample
 // @param y coordinate (0..1) to sample
 field2D.prototype.sample = function(x, y, channel) {
+	if (typeof x == "object") {
+		x = x[0];
+		y = x[1];
+		channel = y;
+	}
 	if (typeof x !== "number" || typeof y !== "number") {
 		error("attempt to get field cell with invalid coordinate type");
 		return 0;
@@ -1299,6 +1308,119 @@ field2D.prototype.sample = function(x, y, channel) {
 	var v11 = array[(y1 * this.width + x1) * 4 + channel];
 	return v00 * xa * ya + v10 * xb * ya + v01 * xa * yb + v11 * xb * yb;
 };
+
+// add a new value
+// value can be a number or an array
+// if channel arg is given, only that channel will be updated
+field2D.prototype.deposit = function(value, x, y, channel) {
+	if (typeof x == "object") {
+		x = x[0];
+		y = x[1];
+		channel = y;
+	}
+	if (typeof x !== "number" || typeof y !== "number") {
+		// or deposit to all cells?
+		error("attempt to get field cell with invalid coordinate type");
+		return 0;
+	}
+	var array = this.array;
+	x = wrap(((x * this.width) - 0.5), this.width);
+	y = wrap(((y * this.height) - 0.5), this.height);
+	var x0 = Math.floor(x);
+	var y0 = Math.floor(y);
+	var x1 = wrap(x0 + 1, this.width);
+	var y1 = wrap(y0 + 1, this.height);
+	// as array indices:
+	var i00 = (y0 * this.width + x0) * 4;
+	var i10 = (y0 * this.width + x1) * 4;
+	var i01 = (y1 * this.width + x0) * 4;
+	var i11 = (y1 * this.width + x1) * 4;
+	var xb = x - x0;
+	var yb = y - y0;
+	var xa = 1 - xb;
+	var ya = 1 - yb;
+	// channel range:
+	var c0 = 0, c1 = 4;
+	if (typeof channel == "number") {
+		// single-channel only:
+		c0 = (typeof channel !== "number") ? 0 : wrap(channel, 4);
+		c1 = c0+1;
+	}
+	for (var c = c0; c < c1; c++) {
+		var v = value; 
+		if (isarraylike(value)) v = v[channel];
+		if (v !== undefined) {
+			// old value
+			var v00 = array[i00 + c];
+			var v10 = array[i10 + c];
+			var v01 = array[i01 + c];
+			var v11 = array[i11 + c];
+			// interpolated addition:
+			array[i00 + c] = v00 + xa*ya*(v);
+			array[i10 + c] = v10 + xb*ya*(v);
+			array[i01 + c] = v01 + xa*ya*(v);
+			array[i11 + c] = v11 + xb*ya*(v);
+		}
+	}
+	// TODO: handle case of a function?
+	return this;
+};
+
+// change to a new value (change is interpolated between nearest cells)
+field2D.prototype.update = function(value, x, y, channel) {
+	if (typeof x == "object") {
+		x = x[0];
+		y = x[1];
+		channel = y;
+	}
+	if (typeof x !== "number" || typeof y !== "number") {
+		// or deposit to all cells?
+		error("attempt to get field cell with invalid coordinate type");
+		return 0;
+	}
+	var array = this.array;
+	x = wrap(((x * this.width) - 0.5), this.width);
+	y = wrap(((y * this.height) - 0.5), this.height);
+	var x0 = Math.floor(x);
+	var y0 = Math.floor(y);
+	var x1 = wrap(x0 + 1, this.width);
+	var y1 = wrap(y0 + 1, this.height);
+	// as array indices:
+	var i00 = (y0 * this.width + x0) * 4;
+	var i10 = (y0 * this.width + x1) * 4;
+	var i01 = (y1 * this.width + x0) * 4;
+	var i11 = (y1 * this.width + x1) * 4;
+	var xb = x - x0;
+	var yb = y - y0;
+	var xa = 1 - xb;
+	var ya = 1 - yb;
+	// channel range:
+	var c0 = 0, c1 = 4;
+	if (typeof channel == "number") {
+		// single-channel only:
+		c0 = (typeof channel !== "number") ? 0 : wrap(channel, 4);
+		c1 = c0+1;
+	}
+	for (var c = c0; c < c1; c++) {
+		var v = value; 
+		if (isarraylike(value)) v = v[channel];
+		if (v !== undefined) {
+			// old value
+			var v00 = array[i00 + c];
+			var v10 = array[i10 + c];
+			var v01 = array[i01 + c];
+			var v11 = array[i11 + c];
+			// interpolated addition:
+			array[i00 + c] = v00 + xa*ya*(v - v00);
+			array[i10 + c] = v10 + xb*ya*(v - v10);
+			array[i01 + c] = v01 + xa*ya*(v - v01);
+			array[i11 + c] = v11 + xb*ya*(v - v11);
+		}
+	}
+	// TODO: handle case of a function?
+	return this;
+};
+
 
 // this doesn't check bounds or for absence of x, y
 field2D.prototype.setxy = function(value, x, y) {
@@ -1397,6 +1519,14 @@ field2D.prototype.reduce = function(func, result) {
 	return result;
 };
 
+field2D.prototype.scale = function(n) {
+	var data = this.array.data;
+	for (var i = 0, l = data.length; i < l; i++) {
+		data[i] *= n;
+	}
+	return this;
+};
+
 //- return the sum of all cells
 // @return sum
 field2D.prototype.sum = function() {
@@ -1451,6 +1581,43 @@ field2D.prototype.clear = function() {
 	}
 	return this;
 };
+
+//- fill the field with a diffused (blurred) copy of another
+// @param sourcefield the field to be diffused
+// @param diffusion the rate of diffusion
+// @param passes ?int the number of iterations to improve numerical accuracy (default 10)
+field2D.prototype.diffuse = function(sourcefield, diffusion, passes) {
+	var array = this.array;
+	diffusion = typeof diffusion == "number" ? diffusion : 0.1;
+	passes = typeof passes == "number" ? passes : 10;
+	var input = sourcefield.array;
+	var div = 1.0/((1+4*diffusion));
+	var w = sourcefield.width, h = sourcefield.height;	
+	if (w != this.width || h != this.height) {
+		console.log("field2D.diffuse(): field dims do not match.");
+		return this;
+	}
+	// Gauss-Seidel relaxation scheme:
+	for (var n = 1; n < passes; n++) {
+		for (var y = 0; y < h; y++) {
+			for (var x = 0; x < w; x++) {
+				var C = (y * w + x) * 4;
+				var S = (wrap(y-1,h) * w + x) * 4;
+				var W = (y * w + wrap(x-1,w)) * 4;
+				var N = (wrap(y+1,h) * w + x) * 4;
+				var E = (y * w + wrap(x+1,w)) * 4;
+				for (var i=0; i<4; i++) {
+					var old = input[C+i];
+					var near = array[W+i] + array[E+i] + array[S+i] + array[N+i];
+					array[C+i] = div * (old + diffusion * near);
+				}
+			}
+		}
+	}
+	return this;
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////
 
 requestAnimationFrame(render);
 

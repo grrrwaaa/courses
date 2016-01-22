@@ -116,41 +116,40 @@ One of the attractive features of the Boids model is how they behave when attemp
 
 [Several pretty flockers with obstacles](http://codepen.io/grrrwaaa/pen/XXevBb?editors=001)
 
-<!--
 ### Chemotaxis
 
-When we look at microbiology, we find even simpler modes of steering behavior.
+Chemotaxis is the phenomenon whereby somatic cells, bacteria, and other single-cell or multicellular organisms direct their movements according to certain chemicals in their environment. This is important for bacteria to find food (for example, glucose) by swimming towards the highest concentration of food molecules, or to flee from poisons (for example, phenol). In multicellular organisms, chemotaxis is critical to early development (e.g. movement of sperm towards the egg during fertilization) and subsequent phases of development (e.g. migration of neurons or lymphocytes) as well as in normal function. [wikipedia](https://en.wikipedia.org/wiki/Chemotaxis)
 
-> Chemotaxis is the phenomenon whereby somatic cells, bacteria, and other single-cell or multicellular organisms direct their movements according to certain chemicals in their environment. This is important for bacteria to find food (for example, glucose) by swimming towards the highest concentration of food molecules, or to flee from poisons (for example, phenol). In multicellular organisms, chemotaxis is critical to early development (e.g. movement of sperm towards the egg during fertilization) and subsequent phases of development (e.g. migration of neurons or lymphocytes) as well as in normal function. [wikipedia](https://en.wikipedia.org/wiki/Chemotaxis)
+Note that here the environmental features being interacted with are not spatial objects, but spatial fields: things that occupy all space but in different intensities.
 
-A [video example of chemotaxis in E. coli](http://www.youtube.com/watch?v=ZV5CfOkV6ek).
+When we look at microbiology we can find some remarkably simple mechanisms to achieve chemotaxis. For example, the E. Coli bacterium's *goal* is to find the highest sugar concentration. But it has no eyes or ears to sense at a distance, it can only sense the local sugar concentration at its current location. Moreover it has no sense of direction, nor any internal "map".
 
-E. coli can use its flagella to move in just two modes (*locomotion*): 
+<iframe width="720" height="540" src="https://www.youtube.com/embed/ZV5CfOkV6ek?rel=0" frameborder="0" allowfullscreen></iframe>
+
+Here, E. coli uses its flagella to move in just two modes of *locomotion*: 
 
 - Move forward more or less straight
-- Tumble about randomly
+- Tumble about fairly randomly
 
-The *goal* is to find the highest sugar concentration. It can sense the local sugar concentration at its current location. However it cannot sense at a distance, and has no sense of direction, never mind which direction is best. 
+How does this solve the problem? It uses a very simple chemical memory to detect whether the concentration at the current moment is better, worse, or not much different to how it was a few moments ago. That is, it detects the differential experienced, or gradient traversed. Knowing whether things are getting better or worse is used to select between the swimming or tumbling patterns. With just a few tuning parameters, the method can lead to a very rapid success. 
 
-Instead it uses chemical memory to detect sugar concentration *gradient*, that is, the differential of concentration at the current location compared to how it was just a few moments ago. This gradient tells the E. coli whether things are getting better or worse, which can be used to select between the swimming or tumbling patterns. 
-
-With just a few tuning parameters, this can lead to a very rapid success in finding the higher concentrations of sugar (assuming the environment is smoothly varying). 
+Note that this method works when the variations of sugar concentration in the environment are fairly smooth, which is generally true for an environment in which concentrations diffuse. 
 
 #### Implementation
 
-The first thing we need is an environment of varying sugar concentrations for the agents to explore. We can use the ```field2D``` module for this purpose. The behavior of the agents will depend on the spatial distribution of sugar in the field; a totally random space is both unrealistic and will defeat chemotactic strategies; a smoothly distributed landscape is needed. For example, we can use the distance from the center:
+The first thing we need is an environment of varying sugar concentrations for the agents to explore. We can use ```field2D``` again for this purpose. The behavior of the agents will depend on the spatial distribution of sugar in the field; a totally random space is both unrealistic and will defeat chemotactic strategies; a smoothly distributed landscape is needed. For example, we can use the distance from the center:
 
 ```javascript
 var dim = 128;
-var sugar = new field2D(dim, dim);
+var sugar = new field2D(dim);
 var center = new vec2(0.5, 0.5);
 
 sugar.set(function(x, y) {
 	// convert x, y in to 0..1 range:
 	var p = new vec2(x / dim, y / dim);
 	// get distance from center:
-	var d = p.copy().sub(center).length();
-	// make concentration higher at center, lower with increasing distance:
+	var d = p.distance(center);
+	// make concentration high at center, lower with increasing distance:
 	return 1 - d;
 })
 ```
@@ -158,13 +157,14 @@ sugar.set(function(x, y) {
 Agents can then sample the local field during their update routine as follows:
 
 ```javascript
-	// in agent_update:
-	var sugar_concentration = sugar.sample(self.location.x, self.location.y)
+	// in per agent update routine:
+	var sensed_sugar_concentration = sugar.sample(a.pos);
 ```
 
+<!--
 Here's an implementation of [Chemotaxis](http://codepen.io/anon/pen/pJLNgM/right/?editors=001) in the editor.
 
-A variety of other *taxes* worth exploring can be found on the [wikipedia page](http://en.wikipedia.org/wiki/Taxis#Aerotaxis). Note how chemotaxis (and other taxes) can be divided into positive (attractive) and negative (repulsive) characters, just like forces (directly seen in steering forces). This is closely related to the concepts of positive and negative feedback and the explorations of cybernetics.
+> A variety of other *taxes* worth exploring can be found on the [wikipedia page](http://en.wikipedia.org/wiki/Taxis#Aerotaxis). Note how chemotaxis (and other taxes) can be divided into positive (attractive) and negative (repulsive) characters, just like forces (directly seen in steering forces). This is closely related to the concepts of positive and negative feedback and the explorations of cybernetics.
 
 ### Stigmergy
 
@@ -190,5 +190,17 @@ To store different pheromones we might want to use different fields. These field
 To detect field intensites in different directions, we might want to sample with sensors further from the body center (similar to the sensors in the Vehicles model) and compare their results. 
 
 ---
+
+## Action selection systems
+
+### Subsumption architecture
+
+Rodney Brooks was also strongly influenced by Braitenberg's vehicles.
+
+### Neural networks
+
+The neuron, von Neumann, biological & artificial plasticity, artificial neural networks (ANNs), supervised, unsupervised & reinforcement learning.
+
+### Complex adaptive systems
 
 -->

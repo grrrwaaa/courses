@@ -176,7 +176,17 @@ The [original video by Christopher Langton](http://www.youtube.com/watch?v=w6XQQ
 
 > Note that Langton's Ant, and other related Turmites, are closely related to the turtle graphics often used for L-systems, which we will return to later in the course.
 
+### Termites
 
+Mitchel Resnick's termite model is a random walker in a space that can contain woodchips, in which each termite can carry one woodchip at a time. The program for a termite looks something like this:
+
+- Look at the space just in front of me
+- If it is empty, move forward and randomly change direction (random walk)
+- Else if it is occupied by a woodchip:
+	- If I am carrying a wood chip, drop mine where I am and turn around
+	- Else move forward and pick up the woodchip
+	
+Over time, the termites begin to collect the woodchips into small piles, which gradually coalesce into a single large pile of chips.
 
 ### Probabilistic Asynchronous CA
 

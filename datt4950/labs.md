@@ -192,9 +192,9 @@ field.clone(); 	// create a duplicate copy of the field
 field.min();	// returns the lowest cell value in the array
 field.max();	// returns the highest cell value in the array
 field.sum();	// adds up all cell values and returns the total
-```
 
-<!--
+field.scale(n); // multiply all cells by n
+```
 
 ### Normalized sampling
 
@@ -202,24 +202,20 @@ There are some methods for interpolated reading/writing/modifying fields. These 
 
 ```javascript
 // returns interpolated value at the normalized position x,y
-field.sample(x, y);		
-```
-
-
-// set the field at position x,y to value v 
-// (the four nearest cells will be interpolated)
-// if v is a function, it is evaluated for each cell. The function arguments are cellvalue, x, y.
-field.update(v, x, y);
+var value = field.sample(x, y);		
+// or, using a vec2:
+var value = field.sample(agent.position);	
 
 // adds v to a field at position x, y
 // (interpolated addition to nearest four cells)
-field.splat(v, x, y);
+field.deposit(v, x, y);	
+// also accepts vec2
+// a negative deposit is a debit (subtraction from field)
+field.deposit(-v, agent.position);
 
-// scale a field at x,y by factor v
-// (interpolated scale over nearest four cells)
-field.scale(v, x, y);
-// if x and y are ommitted, the scale factor is applied to the whole field:
-field.scale(v);
+// set the field at position x,y to value v 
+// (the four nearest cells will be interpolated)
+field.update(v, x, y);
 ```
 
 The field2D type also includes a diffusion method, which can be used to smoothly distribute values over time. It requires a second (previous) copy of the field to diffuse from:
@@ -245,9 +241,9 @@ var total = field.reduce(function(sum, value, x, y) {
 }, 0);
 ```
 
-### Multi-plane fields
+### Multi-channel fields
 
-Field cells are in fact 4-plane vectors, mapping to red, green, blue and alpha channels when rendered; however the methods described above are designed to simulate single-plane (greyscale) semantics.
+Field cells are in fact 4-channel vectors, mapping to red, green, blue and alpha channels when rendered; however the methods described above are designed to simulate single-channel (greyscale) semantics.
 
 Whereas ```field.get``` returns a single number (the red-channel value), ```field.cell``` returns the entire 4-plane vector as an array, which you can modify in-place to set a particular color:
 
@@ -266,14 +262,17 @@ Alternatively, you can pass an array to ```field.set```:
 field.set([1, 0, 0], x, y);
 ```
 
-
-
+The normalized indexing and updating also supports multiple channels:
 
 ```javascript
-// to interpolate a specific channel (0, 1, 2 or 3):
-field.sample(x, y, channel);	
+// to sample a specific channel (0, 1, 2 or 3):
+field.sample(agent.position, channel);	
+
+// to update a single channel):
+field.deposit(0.1, agent.position, channel);
+// to update several channels:
+field.deposit([1, 0.5, 0.1], agent.position);
 ```
--->
 
 ## vec2
 
