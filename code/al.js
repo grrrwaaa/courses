@@ -1546,18 +1546,22 @@ field2D.prototype.min = function() {
 };
 
 field2D.prototype.scale = function(n) {
-	var data = this.array.data;
-	for (var i = 0, l = data.length; i < l; i++) {
-		data[i] *= n;
+	var data = this.array;
+	for (var i = 0, l = data.length; i < l; i+=4) {
+		data[i  ] *= n;
+		data[i+1] *= n;
+		data[i+2] *= n;
 	}
 	return this;
 };
 field2D.prototype.mul = field2D.prototype.scale;
 
 field2D.prototype.offset = function(n) {
-	var data = this.array.data;
-	for (var i = 0, l = data.length; i < l; i++) {
-		data[i] += n;
+	var data = this.array;
+	for (var i = 0, l = data.length; i < l; i+=4) {
+		data[i  ] += n;
+		data[i+1] += n;
+		data[i+2] += n;
 	}
 	return this;
 };
@@ -1567,8 +1571,7 @@ field2D.prototype.add = field2D.prototype.offset;
 // @return this
 field2D.prototype.normalize = function() {
 	var array = this.array;
-	var w = this.width,
-	h = this.height;
+	var w = this.width, h = this.height;
 	var lo = Math.min(array[0], array[1], array[2]);
 	var hi = Math.max(array[0], array[1], array[2]);
 	for (var i = 1, l = array.length; i < l; i += 4) {
@@ -1579,7 +1582,7 @@ field2D.prototype.normalize = function() {
 	if (range > 0) {
 		var scale = 1 / range;
 		for (i = 0, l = array.length; i < l; i += 4) {
-			array[i] = scale * (array[i] - lo);
+			array[i    ] = scale * (array[i    ] - lo);
 			array[i + 1] = scale * (array[i + 1] - lo);
 			array[i + 2] = scale * (array[i + 2] - lo);
 		}
