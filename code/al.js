@@ -1571,17 +1571,17 @@ field2D.prototype.add = field2D.prototype.offset;
 // @return this
 field2D.prototype.normalize = function() {
 	var array = this.array;
-	var w = this.width, h = this.height;
+	var w = this.width, h = this.height, l = array.length;
 	var lo = Math.min(array[0], array[1], array[2]);
 	var hi = Math.max(array[0], array[1], array[2]);
-	for (var i = 1, l = array.length; i < l; i += 4) {
+	for (var i = 1; i < l; i += 4) {
 		lo = Math.min(lo, array[i], array[i + 1], array[i + 2]);
 		hi = Math.max(hi, array[i], array[i + 1], array[i + 2]);
 	}
 	var range = hi - lo;
 	if (range > 0) {
 		var scale = 1 / range;
-		for (i = 0, l = array.length; i < l; i += 4) {
+		for (i = 0; i < l; i += 4) {
 			array[i    ] = scale * (array[i    ] - lo);
 			array[i + 1] = scale * (array[i + 1] - lo);
 			array[i + 2] = scale * (array[i + 2] - lo);
