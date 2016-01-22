@@ -1499,8 +1499,8 @@ field2D.prototype.set = function(value, x, y) {
 // @return this
 field2D.prototype.map = function(func) {
 	var array = this.array;
-	var w = this.width,
-	h = this.height;
+	var w = this.width;
+	var h = this.height;
 	for (var y = 0; y < h; y++) {
 		for (var x = 0; x < w; x++) {
 			var old = array[(y * w + x) * 4];
@@ -1515,22 +1515,14 @@ field2D.prototype.map = function(func) {
 
 field2D.prototype.reduce = function(func, result) {
 	var array = this.array;
-	var w = this.width,
-	h = this.height;
+	var w = this.width;
+	var h = this.height;
 	for (var y = 0; y < h; y++) {
 		for (var x = 0; x < w; x++) {
-			result = func(result, array[(y * w + x) * 4], x, y);
+			result = func(result, array[(y * w + x) * 4]);
 		}
 	}
 	return result;
-};
-
-field2D.prototype.scale = function(n) {
-	var data = this.array.data;
-	for (var i = 0, l = data.length; i < l; i++) {
-		data[i] *= n;
-	}
-	return this;
 };
 
 //- return the sum of all cells
@@ -1552,6 +1544,24 @@ field2D.prototype.max = function() {
 field2D.prototype.min = function() {
 	return this.reduce(Math.min, Number.MAX_VALUE);
 };
+
+field2D.prototype.scale = function(n) {
+	var data = this.array.data;
+	for (var i = 0, l = data.length; i < l; i++) {
+		data[i] *= n;
+	}
+	return this;
+};
+field2D.prototype.mul = field2D.prototype.scale;
+
+field2D.prototype.offset = function(n) {
+	var data = this.array.data;
+	for (var i = 0, l = data.length; i < l; i++) {
+		data[i] += n;
+	}
+	return this;
+};
+field2D.prototype.add = field2D.prototype.offset;
 
 //- normalize the field values to a 0..1 range
 // @return this

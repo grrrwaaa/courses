@@ -218,7 +218,8 @@ field.deposit(-v, agent.position);
 field.update(v, x, y);
 ```
 
-The field2D type also includes a diffusion method, which can be used to smoothly distribute values over time. It requires a second (previous) copy of the field to diffuse from:
+The field2D type also includes a diffusion method, which can be used to smoothly distribute values over time. It requires a second (previous) copy of the field to diffuse from. This method more than just a general blur -- it very accurately preserves mass before and after. So, for example, taking the ```.sum()``` of the input and output fields results in almost exactly the same quantity. 
+
 
 ```javascript
 // field_previous is another field2D of equal dimensions
