@@ -140,7 +140,7 @@ Note that this method works when the variations of sugar concentration in the en
 The first thing we need is an environment of varying sugar concentrations for the agents to explore. We can use ```field2D``` again for this purpose. The behavior of the agents will depend on the spatial distribution of sugar in the field; a totally random space is both unrealistic and will defeat chemotactic strategies; a smoothly distributed landscape is needed. For example, we can use the distance from the center:
 
 ```javascript
-var dim = 128;
+var dim = 256;
 var sugar = new field2D(dim);
 var center = new vec2(0.5, 0.5);
 
@@ -154,6 +154,19 @@ sugar.set(function(x, y) {
 })
 ```
 
+Or, for a more interesting and variegated landscape, we can start from uniform noise, and then smoothen it out:
+
+```javascript
+// fill with uniform noise
+sugar.set(function(x, y) { return random(); });
+// smoothen it out by long-range diffusion:
+sugar.diffuse(sugar.clone(), sugar.width, 100);
+// make it vary between 0 and 1:
+sugar.normalize();
+```
+
+We'll need two different steering behaviours, for normal swimming & for tumbling. These should not be completely independent, i.e. swimming should also include a small amount of turning (to look realistic!), and tumbling should include a small amount of forward movement (otherwise tumbling won't be effective). 
+
 Agents can then sample the local field during their update routine as follows:
 
 ```javascript
@@ -161,10 +174,13 @@ Agents can then sample the local field during their update routine as follows:
 	var sensed_sugar_concentration = sugar.sample(a.pos);
 ```
 
-<!--
-Here's an implementation of [Chemotaxis](http://codepen.io/anon/pen/pJLNgM/right/?editors=001) in the editor.
+Then all we need is to compare the sugar concentration with the agent's memory (a stored member variable) of the concentration on the last time step. 
+
+Here's an implementation of [Chemotaxis](http://codepen.io/grrrwaaa/pen/yepmvq?editors=001) in the editor.
 
 > A variety of other *taxes* worth exploring can be found on the [wikipedia page](http://en.wikipedia.org/wiki/Taxis#Aerotaxis). Note how chemotaxis (and other taxes) can be divided into positive (attractive) and negative (repulsive) characters, just like forces (directly seen in steering forces). This is closely related to the concepts of positive and negative feedback and the explorations of cybernetics.
+
+<!--
 
 ### Stigmergy
 
