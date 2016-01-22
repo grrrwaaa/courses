@@ -20,6 +20,7 @@
 	<div id="main">
 	<h1 id="evolutionary-systems">Evolutionary Systems</h1>
 <p>There have been more than four decades of computational systems inspired by natural evolution. It has become a major field of machine learning and optimization. Beyond AI, it has been used in hardware and circuit design, robotics, and more recently in industrial design and architecture. It has of course also been deeply explored in art and music.</p>
+<p><img src="http://www.karlsims.com/papers/ksf11.gif" alt="Karl Sims"></p>
 <h2 id="natural-and-artificial-evolution">Natural and artificial evolution</h2>
 <p>The theory of natural evolution combines <strong>population, diversity, heredity and selection</strong>. Evolution requires a <strong>population</strong> of individuals that exhibit <strong>diversity</strong> (both similarities and variations between each other, both within and between species). These individuals can produce new individuals; offspring that exhibit similarites with the parent(s) through <strong>heredity</strong>. However not all of the population can successfully reproduce. Any factor that affects the possibility of an individual reproducing, thus also affects what characteristics are inherited in the population as a whole. Charles Darwin&#39;s theory of natural <strong>selection</strong>, proposed in 1859, is that the section of the population that can reproduce is not entirely random, but rather is regulated by interactions between inherited characteristics and environmental constraints (such as available food, populations of symbionts, predators and parasites, and so on). Accordingly, the characteristics of a species may change over time (<strong>evolution</strong>), forming a history that can be investigated through the fossil records.</p>
 <p><img src="img/origin_of_the_species.jpg" alt="Origin of the Species"></p>
@@ -30,20 +31,167 @@
 <li>Provide a mechanism of heredity between generations</li>
 <li>Provide a mechanism of selection </li>
 </ul>
-<p>The main systematic differences are that the underlying mechanisms specified by us in advance, as are the initial populations and environmental conditions (if any). Most importantly, <em>the mechanism of selection is usually predetermined</em>. </p>
-<h3 id="common-misconceptions">Common misconceptions</h3>
-<p>Darwin&#39;s theory is sometimes misrepresented as &quot;survival of the fittest&quot; or even the competitive &quot;law of the jungle&quot;. We have already seen that the notion of &quot;fittest&quot; is misguided, since it implies a static absolute measure for something that is both dynamic and highly contextual. </p>
-<p>Most artificial systems are used toward a particular goal (<em>teleological</em>, even in artistic pursuits), in which there is a valid sense that one candidate genome may be fitter than another. But in natural evolution there is no pre-defined (<em>a priori</em>) fitness measure, since the environmental conditions (and selective criteria) evolve along with each species -- evolution is thus adaptive in an open-ended, undirected, goal-less (<em>non-teleological</em>), and <em>natural evolution does not imply progress</em>. </p>
+<p>The main systematic differences are that the underlying mechanisms specified by us in advance, as are the initial populations and environmental conditions (if any). Most importantly, <em>the mechanism of selection is usually predetermined</em>. And of course, artificial evolution occurs in a much simpler substrate than real chemistry.</p>
+<p>See <a href="http://www.karlsims.com/genetic-images.html">Karl Sims&#39; Genetic Images</a>.
+<a href="http://www.karlsims.com/papers/siggraph91.html">1991 Siggraph Paper</a></p>
+<p>Scott Draves, “Evolution and Collective Intelligence of the Electric Sheep,” The Art of Artificial Evolution, 2008.</p>
+<p><a href="http://boxcar2d.com/">Evolving 2D cars</a></p>
+<p><a href="https://www.youtube.com/watch?feature=player_embedded&amp;v=z9ptOeByLA4">Evolving soft robots</a></p>
+<p>An excellent discussion of <a href="http://www.youtube.com/watch?v=50-d_J0hKz0">the genetic algorithm in art and its relation to Deleuze, by Manuel Delanda</a></p>
+<h3 id="subtleties-and-misconceptions">Subtleties and misconceptions</h3>
+<p>Darwin&#39;s theory is sometimes misconceived as &quot;survival of the fittest&quot; or even the competitive &quot;law of the jungle&quot;, but evolution turns out to be quite a bit more subtle than this.</p>
+<ul>
+<li><p>First, the <em>notion of &quot;fittest&quot; is misleading</em>. It implies a static and absolute measure against which all individuals and species in the biological record can be compared. In natural evolution there can be no pre-defined (<em>a priori</em>) fitness measure. This is because the environmental conditions are highly dynamic, and thus selective criteria are quite contextual. The conditions in which we live evolve along with us, and the other species in our habitat, as we mutually influence each other. Evolution is an open-ended process. </p>
+</li>
+<li><p>Since there is no absolute goal or progress, the most we can measure in natural evolution is the changing frequencies over time of individual species, or of individual characteristics of a population. More importantly, evolution cannot be said to have a singular direction. That is to say, it is goal-less (<em>non-teleological</em>), and thus, counter to common opinion, <em>natural evolution does not imply progress</em>. </p>
+</li>
+<li><p>Nor is evolution a continuous process of change. The fossil records appear to show long periods of relative stability divided by relatively brief periods of biological invention. There are several competing theories as to why, but interestingly this &quot;<em>punctuated equilibrium</em>&quot; has appeared also in many artificial evolutionary systems.</p>
+</li>
+<li><p>An individual organism does not need to be optimally fit to the environment in order to contribute to the gene pool -- it simply needs to be <em>fit enough</em> to survive long enough to reproduce, i.e. to be <em>viable</em>. he survival of a natural species depends primarily on its <em>viability</em>; the ability of enough individuals to live long enough to reproduce within an unpredictable environment. </p>
+</li>
+<li><p>Evolution does not act on every facet of an organism, only those that directly influence viability (in the current environment). If a variation has neither positive or negative impact on the reproductive capability of an individual in the environment, this variation is called <strong>neutral</strong>. Since small variations are always occurring, neutral variations can tend to accumulate over time. Over time the gene pool may broaden and move quite far from its origin without causing any major changes in selective viability; this is called <strong>neutral drift</strong>.  This may be an important mechanism to escape evolutionary dead-ends (local minima in the fitness landscape). This is certainly true for many artificial evolutionary systems. It has also been hypothesized as an explanation for the long chunks of apparently unused DNA in our own genome, and also for punctuated equilibrium.</p>
+</li>
+<li><p>Competition turns out not to be the prime mode of interaction between species; most species are relatively independent, and the ones that do closely interact are more likely to be collaborative (symbiotic, parasitic, etc.) than competitive, as that is more likely to lead to viability. Like our society, the natural environment is complex enough to provide multiple methods of making a living. Evolution does not imply that individuals display selfish, competitive behavior. When Dawkins described evolution in terms of <a href="http://en.wikipedia.org/wiki/The_Selfish_Gene">selfish genes</a>, it indicates a gene-centric perspective on evolution that implies selfless and sometimes altruistic behavior in organisms.</p>
+</li>
+<li><p>Evolution by itself is not particularly creative, and its importance may have been over-stated. A continuous generation of novel diversity, new characteristics, is essential to the theory of natural selection. However the theory does not account for how diversity arises, simply that there must be a mechanism, which usually operates during reproduction. </p>
+</li>
+</ul>
+<h3 id="heredity-and-variation-genetics">Heredity and variation: genetics</h3>
+<p>In 1865 Mendel proposed that characteristics are transmitted to offspring through particles of matter (which we now call <strong>genetic material</strong>). Schroedinger conjectured that these materials must be aperiodic crystals, and the actual structure of DNA was identified several years later. The <em>&quot;modern synthesis&quot;</em> in biology today has integrated genetics with natural evolution, through the interaction of genotypes and phenotypes:</p>
+<ul>
+<li>The <strong>phenotype</strong> is the manifestation of the genotype, the individual organism in the population. It is physical and dynamic. Natural selection only operates on the phenotypic level.</li>
+<li>The <strong>genotype</strong> is the genetic material that is transmitted during reproduction. It encodes information that is usually static during a lifetime. Different information leads to different phenotypic variations, or even different species. Heritable variation and the creation of new characteristics operates only at the genotypic level. </li>
+</ul>
+<p>Hence the modern synthesis requires not only a model for how variation is introduced, but also how genetic material is transfered, how the phenotype accordingly emerges from the genotype (<em>developmental models</em>), and what other roles it plays. It is increasingly being understood how the complexity of the environment and materials of life are likely as much or more responsible for the variety of life than the genes themselves, however, these mechanisms are still in the progress of being revealed.</p>
 <blockquote>
-<p>Since there is no absolute goal or progress, the most we can measure in natural evolution is the changing frequencies over time of individual species, or of individual characteristics of a population.</p>
+<p>Briefly: a biological cell contains a vast array of different proteins, whose concentrations determine structures and behaviors of the cell. The proteins are specifed by information in the DNA genetic material (grouped physically into <strong>chromosomes</strong>). When a cell reproduces by <strong>mitosis</strong>, a copy of the DNA is made in the new cell. The sections of a DNA chromosome that code for behavior are called <strong>genes</strong>. These regions are constantly being <strong>transcribed</strong>, producing a specific RNA strand for each coding gene region which is in turn used to produce a specific protein; the protein string immediately folds up (in a way we cannot yet simulate) into a particular reactive shape which specifies the protein&#39;s behavioral role in the cell. This is a one-directional flow of information: Coding DNA -&gt; RNA -&gt; folding -&gt; active protein. In addition to coding regions genes may also have  <strong>regulatory region</strong> which can react with specific proteins to activate or inhibit the coding-protein system, forming a complex <strong>regulatory network</strong> of interactions by which one gene can activate or inhibit another, and also specify changes of behavior of a cell according to environmental conditions such as chemical signals. These networks can be fantastically complex even in very simple organisms, according to the scientific results of <strong>functional genomics</strong>. Between the coding and regulatory regions of DNA, there are huge sections of <strong>nongenic</strong> DNA, whose role (or lack thereof) is not yet understood.</p>
 </blockquote>
-<p>Nor is competition the prime mode of interaction between species; most species are relatively independent, and the ones that do closely interact are more likely to be collaborative (symbiotic, parasitic, etc.) than competitive.</p>
+<p><img src="img/transcription.jpg" alt="Rendering"></p>
+<p><a href="http://www.youtube.com/watch?v=WFCvkkDSfIU">The current theory of cell replication and DNA transcription been beautifully illustrated by Drew Berry</a>; and <a href="http://www.youtube.com/watch?v=yKW4F0Nu-UY&amp;list=PL3DB3C131CBCD2A0F&amp;index=5">more of his animations here</a></p>
+<p>Genetic variation can occur during replication of the genome, such as copying-error <em>mutations</em> (reversals of segments, insertion &amp; removal of segments, changing individual elements in the sequence, and pair-wise substitution over whole sections) and <em>recombination</em> (taking sections from two different parent genes to construct a new child gene). </p>
+<h2 id="artificial-evolution">Artificial evolution</h2>
+<p>An artificial evolutionary system thus requires:</p>
+<ol>
+<li>A representation of genotypes.</li>
+<li>A mechanism to produce phenotypes from genotypes (development).</li>
+<li>Mechanisms to introduce diversity to a genotype.</li>
+<li>A mechanism to evaluate the fitness (or viability) of phenotypes.</li>
+</ol>
+<p>These components must be provided by the author. The system is then run by these steps:</p>
+<ol>
+<li><strong>Initialization</strong> of a &#39;seed&#39; population of genotypes</li>
+<li><strong>Development</strong> of phenotypes from the genotypes </li>
+<li>Evaluation and <strong>selection</strong> of best/viable candidates of phenotypes, according to fitness criteria or ongong viability conditions, to choose who may reproduce.</li>
+<li><strong>Reproduction</strong>, creating new genotypes by applying mechanisms of variation, according to variation rates/probabilities.</li>
+<li>Repeat from step (2) or terminate if a terminating condition is satisfied (such as sufficient fitness). </li>
+</ol>
+<p>Steps 2-5 may be run in lock-step, or asynchronously with overlapping individual life-spans.</p>
+<h3 id="genetic-representation">Genetic representation</h3>
+<p>Many systems represent genetic information as a sequence of data, such as a string of characters or binary digits. Some systems use more elaborate structures (trees, networks), but these are usually reducible to and encoded as  linear sequences. After all, our genes wind up in complex structures with different reactive regions, but at the lowest level are just a long singular chain of A, G, C or T molecules.</p>
+<p>The simplest systems have a fixed length, but nature shows quite a lot of variance (not particularly correlated with the size, complexity, or evolutionary age of a species). </p>
+<p>Initializing the genotypes implies generating randomized candidates that stay within its bounds but hopefully give a sufficiently diverse range of the possibilities of the genotype. For a simple sequence of bits, symbols, or numbers, this is fairly easy to do.</p>
+<h3 id="development">Development</h3>
+<p>In some systems the developmental process is little more than a trivial mapping, but this potentially misses an entire and fascinating source of diversity. Incorporating more complex developmental models can lead to geometric variations that are not stored as simple parameters, to repeated segments and recursive structures, to symmetries, and to the re-application of common toolboxes toward a widely differing set of purposes -- all things that are evident in biological evolution. </p>
+<h3 id="selection">Selection</h3>
+<p><strong>For problem solving in data mining, engineering, design, architecture, etc.</strong>: If the fitness criterion is static and designed around a particular problem we wish to find a solution for, evolution can help evaluate &amp; test candidate solutions and selectively breed them to produce better solutions, ideally converging on an optimal one, without having to understand or derive by proof. It is a form of optimization. However this process may take a long time or a lot of processing power to find a satisfactory result, or may not reach a result at all. Not all problems are suitable for evolutionary search.</p>
+<p>Evidently, these systems differ markedly from natural evolution by having a static measure, and thus a singular teleological character, a meaningful sense of progress, across the entire history of the system. This is more akin to <em>selective breeding</em> than natural evolution. </p>
+<p>Note that simply taking the best candidate alone is not necessarily the ideal strategy; selecting randomly by proportion to fitness (&quot;roulette wheel&quot; selection) may better overcome local maxima.</p>
+<p><strong>For art, music, and other less formalized domains</strong> we may need to consider other methods of selection, since a formal measure may not be possible, or the problem may not be clearly statable in advance. E.g. can we measure aesthetic quality in formal terms?</p>
+<ul>
+<li>Interactive selection. Pioneered by Dawkins&#39; Biomorphs program and Karl Sims&#39; evolved images, in which several candidates are presented to human observers, who apply the selection manually. Also known as aesthetic selection. A problem here is that the human becomes the bottleneck of evolution, constraining population sizes and rates of evolution to very small scales. It may arguably also tend toward selecting for the aesthetic average rather than the remarkable.<ul>
+<li>An interesting variation is to make the selection continuous and implicit. Jon McCormack&#39;s Eden measured fitness globally according to how long gallery visitors remained in front of a particular evolving sub-population.</li>
+</ul>
+</li>
+<li>Evolved/evolving selection. First evolve a population of artificial art critics, trained from human-evaluated examples, and then use these to apply selection criteria to a population of candidate artworks. Some projects have also proposed a form where one population represents the candidate products, and the other population represents artificial critics.</li>
+<li>A viability-oriented form of artificial evolution may be used for more theoretical and aesthetic branches of artificial life research. The viability measure arises as an emergent property of underlying laws of the world, such as the requirement to maintain energetic/metabolic balance or to maintain structural integrity, as well as the collective effects of multiple species and non-living dynamics within the environment. For this reason it is sometimes referred to as <em>ecosystemic selection</em>. <a href="http://link.springer.com/chapter/10.1007%2F978-3-540-78761-7_42">See discussion here</a>. This may still incorporate indirect interaction from human agents if desired.</li>
+</ul>
+<h3 id="variation">Variation</h3>
+<p>The mechanisms of variation possible partly depend on the representation chosen. The two most common principles of variation in artificial evolution are naturally inspired:</p>
+<ul>
+<li>Random <strong>mutation</strong>; akin to errors copying DNA. If the genome is represented as a binary string, then random locations in the string may be replaced by new random characters. For example, a parent &quot;dog&quot; could produce children such as &quot;fog&quot;, &quot;dqg&quot;, and so on. Obviously some mutations will not create viable individuals.</li>
+<li>Sexual <strong>cross-over</strong> (or <strong>recombination</strong>): akin to sexual reproduction in biology. As a binary string, the child takes the first fraction from one parent, and the remainder from the other. For example, breeding the strings &quot;dog&quot; and &quot;cat&quot; could generate children such as &quot;dot&quot;, &quot;dat&quot;, &quot;cag&quot; and &quot;cog&quot;. </li>
+<li>Other variations (insertion, deletion, inversion) are less common, but have been used. A more flexible system might also permit &quot;doat&quot;, &quot;caog&quot;, &quot;dt&quot;, &quot;tac&quot;, etc. </li>
+</ul>
 <blockquote>
-<p>Evolution does not imply that individuals display selfish, competitive behavior. When Dawkins described evolution in terms of <a href="http://en.wikipedia.org/wiki/The_Selfish_Gene">selfish genes</a>, it indicates a gene-centric perspective on evolution that implies selfless and sometimes altruistic behavior in organisms.</p>
+<p>Why use reproduction for evolution? In the face of an unpredictable environment, we cannot know which strategy will be best; we can try small variations, and hedge our bets by making very many of them (population diversity). An individual loss is not catastrophic, but a few successes can be learned from. Furthermore, the face of unpredictibility implies that what was true today may not be tomorrow, so the flexibility to avoid timeless commitment is also a good strategy; but the inheritance of choices is a useful option when the environment retains some stability. If the world were fully predictable, a rational, teleological, monothematic strategy would be preferable. But the world isn&#39;t totally random either (if it was, there would be no valid strategy worth pursuing.) </p>
 </blockquote>
-<p>Moreover, an individual or species does not need to be the fittest, merely fit enough to survive long enough to reproduce, i.e. to be <em>viable</em>. The survival of a natural species depends on its <em>viability</em>; the ability of enough individuals to live long enough to reproduce within an unpredictable environment. </p>
-<h3 id="viability-and-ecosystemic-evolution">Viability and ecosystemic evolution</h3>
-<p>By pre-defining the selection mechanisms, most artificial evolutionary systems impose a static <em>fitness</em> measure that is extremely unnatural, gearing evolution toward a desired, fixed metric (some critics compare it more to <em>selective breeding</em>). Such artificial evolution will not match the creative diversity of natural evolution.Nevertheless, an artificial, viability-oriented form of evolution may be used for more theoretical and aesthetic branches of artificial life research. In these cases the viability measure arises as an emergent property of underlying laws of the world, such as the requirement to maintain energetic/metabolic balance or to maintain structural integrity, as well as the collective effects of multiple species and non-living dynamics within the environment. For this reason a viability-oriented approach is sometimes referred to as <em>ecosystemic selection</em>. <a href="http://link.springer.com/chapter/10.1007%2F978-3-540-78761-7_42">See discussion here</a></p>
+<p>See the <a href="http://en.wikipedia.org/wiki/Red_Queen_hypothesis">red queen</a> problem.</p>
+<p>As with temperature-like parameters we saw in CA, a crucial factor in evolution is the rate or probability of variation. Too much, and the population may never significantly diverge from a randomly initialized one; too little, and it may find itself stuck on the first solution it finds, with a largely homogenous population. It may be wise to have different mutation rates for different genes, or for different members of a population, or by fitness rank etc. It is likely desirable to gradually reduce mutation rates over time, unless the population appears to be stagnating. </p>
+<p>See also simulated annealing.</p>
+<hr>
+<h2 id="genetic-programming">Genetic Programming</h2>
+<p>Genetic Programming was invented by Nigel Cramer in 1985, but greatly expanded through the work of John Koza. GP evolves programs; it is an example of <strong>metaprogramming</strong>.</p>
+<p>GP has been used to generate programs to solve hard problems, and to evolve control systems for artificial agents and robots. Karl Sims used GP for his genetic images, and for his evolving virtual creatures.</p>
+<ul>
+<li><a href="http://dces.essex.ac.uk/staff/rpoli/gp-field-guide/A_Field_Guide_to_Genetic_Programming.pdf">A field guide to GP</a></li>
+<li><a href="http://www.cs.montana.edu/~bwall/cs580/introduction_to_gp.pdf">An overview paper</a></li>
+<li><a href="http://www.geneticalgorithms.com/Tutorial/index.html">Very short tutorial</a></li>
+<li><a href="http://www.pawfal.org/Software/fastbreeder/">An example for audio</a></li>
+</ul>
+<p>The central concept is that the generating a phenotype is a process of generating <em>code</em>. Populations of generated programs can then be selected and evolved as usual. </p>
+<p>Typically the programs for GP follow a tree-like structure. The leaves of the tree are <em>terminals</em> and the branches are <em>functions</em>. Terminals have no inputs; typical terminals are constant numbers and global variable names. Non-terminal functions are specified according to their operator (such as mathematical addition, multiplication, cosine, etc.); they have one or more inputs, which maybe terminals or other functions. This structure is natural to LISP programs:</p>
+<pre><code class="lang-lisp">(<span class="hljs-name"><span class="hljs-builtin-name">*</span></span> <span class="hljs-number">6</span> (<span class="hljs-name"><span class="hljs-builtin-name">sin</span></span> (<span class="hljs-name"><span class="hljs-builtin-name">+</span></span> x <span class="hljs-number">2</span>)))
+</code></pre>
+<p>The above would be represented in Javascript code as follows:</p>
+<pre><code class="lang-javascript">return <span class="hljs-number">6</span> * (<span class="hljs-name">Math</span>.sin(<span class="hljs-name">x</span> + <span class="hljs-number">2</span>))
+</code></pre>
+<p>The <strong>Linear Genetic Programming</strong> variant represents programs as sequences of instructions rather than trees. It more closely resembles the procedural nature of widely-used programming languages, virtual machines, assembly and machine code. Each instruction uses a single function, with zero or more arguments (constants or registers), and assigns to a register. </p>
+<p>The above program could be linearized to normal form as follows:</p>
+<pre><code class="lang-javascript">(<span class="hljs-meta">function</span>() {
+    var <span class="hljs-built_in">r1</span> = <span class="hljs-number">2</span><span class="hljs-comment">;</span>
+    var <span class="hljs-built_in">r2</span> = x<span class="hljs-comment">;</span>
+    var <span class="hljs-built_in">r3</span> = <span class="hljs-built_in">r1</span> + <span class="hljs-built_in">r2</span><span class="hljs-comment">;</span>
+    var <span class="hljs-built_in">r4</span> = Math.sin(<span class="hljs-built_in">r3</span>)<span class="hljs-comment">;</span>
+    var <span class="hljs-built_in">r5</span> = <span class="hljs-number">6</span><span class="hljs-comment">;</span>
+    var <span class="hljs-built_in">r6</span> = <span class="hljs-built_in">r5</span> * <span class="hljs-built_in">r4</span><span class="hljs-comment">;</span>
+    return <span class="hljs-built_in">r6</span><span class="hljs-comment">;</span>
+})()<span class="hljs-comment">;</span>
+</code></pre>
+<p>The linear structure may appear more flexible, since it allows branches to reconnect; however the functional programming interpretation of the tree is provably equivalent so long as no operator carries history. Ultimately the choice depends on practical rather than theoretical questions.</p>
+<h3 id="genetic-representation">Genetic representation</h3>
+<p>It may be convenient to represent these programs as a data structure, from which the phenotype code is generated. Doing so makes crossover and mutation much easier. </p>
+<p>For example, integers can be used to specify which function or terminal type a node contains, and which nodes are used as arguments. Tree structures can nest their data directly, while linear structures can refer to nodes by integer register id (or register stack offset). Here is the above program as a list of instruction codes -- which is just a list of numbers!</p>
+<pre><code class="lang-javascript">// operator <span class="hljs-symbol">IDs</span>: [ <span class="hljs-string">"constant"</span>, <span class="hljs-string">"global"</span>, <span class="hljs-string">"add"</span>, <span class="hljs-string">"mul"</span>, <span class="hljs-string">"sin"</span> ];
+// global <span class="hljs-symbol">IDs</span>: [ <span class="hljs-string">"x"</span> ];
+
+var geno = {
+    [ <span class="hljs-number">0</span>, <span class="hljs-number">2</span> ],
+    [ <span class="hljs-number">2</span>, <span class="hljs-number">1</span> ],
+    [ <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span> ],
+    [ <span class="hljs-number">4</span>, <span class="hljs-number">3</span> ],
+    [ <span class="hljs-number">0</span>, <span class="hljs-number">6</span> ],
+    [ <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">4</span> ],
+}
+</code></pre>
+<h3 id="initialization">Initialization</h3>
+<p>Generating a seed tree can follow a recursive structure, starting from the root at depth 0, up to a maximum depth <code>m</code>:</p>
+<ul>
+<li>If depth equals <code>m</code> choose a terminal at random,</li>
+<li>Else select a function or terminal at random.<ul>
+<li>If the node type is a function, choose a random function. Each function has a specific number of children (e.g. the + function has two children); for each child node, repeat the algorithm with depth increased by one.</li>
+</ul>
+</li>
+</ul>
+<p>An alternative algorithm for linear GP, with <code>n</code> operations:</p>
+<ul>
+<li>Loop from 1 to <code>n</code>:<ul>
+<li>If <code>n</code> is less than the maximum number of arguments (typically 2 or 3), create a random terminal node.</li>
+<li>Else create a random terminal or a random function.<ul>
+<li>If the node type is a function, use a randomly selected previous node for each of the function arguments.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The root (result) node is node <code>n</code>. </li>
+</ul>
+<h3 id="variation">Variation</h3>
+<p>For a linearized genotype representation, the genetic mutations and crossover operators are similar to other sequence-based evolutionary systems. </p>
+<p>For tree-like representations it becomes more complex and interesting: Mutations on a tree can include modifcation of instruction arguments, replacement of sub-trees, function mutation, etc. Cross-over can be implemented as swapping sub-trees of parents. </p>
+<hr>
+<p>Meta-evolution: the mechanisms of evolution (including development, variation, etc.) are also subject to variation and selection. After all, sexual reproduction had to be <em>discovered</em>. It turns out that some parts of our genes have evolved to be far less volatile than others, for good reason. </p>
+<p>Jurgen Schmidhuber proposed using GP to evolve GP (Meta-GP), since things like chromosomes, crossover etc. are themselves phenomena that have evolved. </p>
+<hr>
+<p>There is an obvious analogy of the genotype-as-code and phenotype-as-running-program underlying most systems. Few systems provide full models of development and genetic transfer, assuming instead a relatively predictable translation. Some systems explicity encode numeric values in the genotype (this is not naturalistic). </p>
 
 	</div>
 	<footer>&copy; 2016 Graham Wakefield</footer>

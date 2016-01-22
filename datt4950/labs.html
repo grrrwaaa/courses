@@ -152,95 +152,73 @@ field.<span class="hljs-keyword">set</span>(<span class="hljs-keyword">value</sp
 </code></pre>
 <p>Note that <code>field.set</code> returns the field itself, so it can be chained.`</p>
 <p>More useful methods:</p>
-<pre><code class="lang-javascript">field.clear();         // set all field cells to zero, faster than field.set(0)
-field.normalize();     // re-scales the field into a 0..1 range
+<pre><code class="lang-javascript">field.<span class="hljs-keyword">clear</span>();         <span class="hljs-comment">// set all field cells to zero, faster than field.set(0)</span>
+field.<span class="hljs-keyword">normalize</span>();     <span class="hljs-comment">// re-scales the field into a 0..1 range</span>
 
-field.clone();     // create a duplicate copy of the field
+field.clone();     <span class="hljs-comment">// create a duplicate copy of the field</span>
 
-field.min();    // returns the lowest cell value in the<span class="hljs-built_in"> array
-</span>field.max();    // returns the highest cell value in the<span class="hljs-built_in"> array
-</span>field.sum();    // adds up all cell values<span class="hljs-built_in"> and </span>returns the total
+field.<span class="hljs-keyword">min</span>();    <span class="hljs-comment">// returns the lowest cell value in the array</span>
+field.<span class="hljs-keyword">max</span>();    <span class="hljs-comment">// returns the highest cell value in the array</span>
+field.sum();    <span class="hljs-comment">// adds up all cell values and returns the total</span>
+
+field.<span class="hljs-keyword">scale</span>(n); <span class="hljs-comment">// multiply all cells by n</span>
 </code></pre>
-<!--
+<h3 id="normalized-sampling">Normalized sampling</h3>
+<p>There are some methods for interpolated reading/writing/modifying fields. These methods use x and y indices in a normalized 0..1 floating-point range rather than 0..width or 0..height integer range:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// returns interpolated value at the normalized position x,y</span>
+var value = field.sample<span class="hljs-comment">(x, y)</span>;        
+<span class="hljs-comment">// or, using a vec2:</span>
+var value = field.sample<span class="hljs-comment">(agent.position)</span>;    
 
-### Normalized sampling
+<span class="hljs-comment">// adds v to a field at position x, y</span>
+<span class="hljs-comment">// (interpolated addition to nearest four cells)</span>
+field.deposit<span class="hljs-comment">(v, x, y)</span>;    
+<span class="hljs-comment">// also accepts vec2</span>
+<span class="hljs-comment">// a negative deposit is a debit (subtraction from field)</span>
+field.deposit<span class="hljs-comment">(-v, agent.position)</span>;
 
-There are some methods for interpolated reading/writing/modifying fields. These methods use x and y indices in a normalized 0..1 floating-point range rather than 0..width or 0..height integer range:
-
-```javascript
-// returns interpolated value at the normalized position x,y
-field.sample(x, y);        
-```
-
-
-// set the field at position x,y to value v 
-// (the four nearest cells will be interpolated)
-// if v is a function, it is evaluated for each cell. The function arguments are cellvalue, x, y.
-field.update(v, x, y);
-
-// adds v to a field at position x, y
-// (interpolated addition to nearest four cells)
-field.splat(v, x, y);
-
-// scale a field at x,y by factor v
-// (interpolated scale over nearest four cells)
-field.scale(v, x, y);
-// if x and y are ommitted, the scale factor is applied to the whole field:
-field.scale(v);
-```
-
-The field2D type also includes a diffusion method, which can be used to smoothly distribute values over time. It requires a second (previous) copy of the field to diffuse from:
-
-```javascript
-// field_previous is another field2D of equal dimensions
-// diffusion_rate is a value between 0 and 1; a rate of 0 means no diffusion.
-// accuracy is an optional integer for the number of diffusion steps; the default is 10.
+<span class="hljs-comment">// set the field at position x,y to value v </span>
+<span class="hljs-comment">// (the four nearest cells will be interpolated)</span>
+field.update<span class="hljs-comment">(v, x, y)</span>;
+</code></pre>
+<p>The field2D type also includes a diffusion method, which can be used to smoothly distribute values over time. It requires a second (previous) copy of the field to diffuse from:</p>
+<pre><code class="lang-javascript">// field_previous <span class="hljs-keyword">is</span> another field2D <span class="hljs-keyword">of</span> equal dimensions
+// diffusion_rate <span class="hljs-keyword">is</span> a value between <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> <span class="hljs-number">1</span>; a rate <span class="hljs-keyword">of</span> <span class="hljs-number">0</span> means no diffusion.
+// accuracy <span class="hljs-keyword">is</span> an optional <span class="hljs-built_in">integer</span> <span class="hljs-keyword">for</span> the number <span class="hljs-keyword">of</span> diffusion steps; the <span class="hljs-keyword">default</span> <span class="hljs-keyword">is</span> <span class="hljs-number">10</span>.
 field.diffuse(field_previous, diffusion_rate, accuracy);
-```
+</code></pre>
+<p>There are also a couple of classic functional programming methods. The <code>map(function)</code> method applies a function to each cell of the field in turn. The function arguments will be the current value of the cell and the x and y position, and the return value should be the new value of the cell (or nil to indicate no change). </p>
+<p>The <code>reduce(function, initial)</code> method is used to reduce a field to a single value, such as calculating the total of all cells. This value is defined by the <code>initial</code> argument, passed to the function for each cell, and updated by its return value. Easier to explain by example:</p>
+<pre><code class="lang-javascript">// multiply <span class="hljs-built_in">all</span> cells by <span class="hljs-number">2</span>: 
+field.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value, x, y)</span></span> { <span class="hljs-keyword">return</span> <span class="hljs-keyword">value</span> * <span class="hljs-number">2</span>; });
 
-There are also a couple of classic functional programming methods. The ```map(function)``` method applies a function to each cell of the field in turn. The function arguments will be the current value of the cell and the x and y position, and the return value should be the new value of the cell (or nil to indicate no change). 
+// find the <span class="hljs-built_in">sum</span> total of <span class="hljs-built_in">all</span> cell values:
+var total = field.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(sum, value, x, y)</span></span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">sum</span> + <span class="hljs-keyword">value</span>;
+}, <span class="hljs-number">0</span>);
+</code></pre>
+<h3 id="multi-channel-fields">Multi-channel fields</h3>
+<p>Field cells are in fact 4-channel vectors, mapping to red, green, blue and alpha channels when rendered; however the methods described above are designed to simulate single-channel (greyscale) semantics.</p>
+<p>Whereas <code>field.get</code> returns a single number (the red-channel value), <code>field.cell</code> returns the entire 4-plane vector as an array, which you can modify in-place to set a particular color:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// turn a cell red:</span>
+var cell = field.cell(x, y)<span class="hljs-comment">;</span>
+cell[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+cell[<span class="hljs-number">1</span>] = <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+cell[<span class="hljs-number">2</span>] = <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+</code></pre>
+<p>Alternatively, you can pass an array to <code>field.set</code>:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// turn a cell red:</span>
+field.<span class="hljs-keyword">set</span>([<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>], <span class="hljs-keyword">x</span>, y);
+</code></pre>
+<p>The normalized indexing and updating also supports multiple channels:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// to sample a specific channel (0, 1, 2 or 3):</span>
+field.sample(<span class="hljs-built_in">agent</span>.<span class="hljs-built_in">position</span>, channel);    
 
-The ```reduce(function, initial)``` method is used to reduce a field to a single value, such as calculating the total of all cells. This value is defined by the ```initial``` argument, passed to the function for each cell, and updated by its return value. Easier to explain by example:
-
-```javascript
-// multiply all cells by 2: 
-field.map(function(value, x, y) { return value * 2; });
-
-// find the sum total of all cell values:
-var total = field.reduce(function(sum, value, x, y) {
-    return sum + value;
-}, 0);
-```
-
-### Multi-plane fields
-
-Field cells are in fact 4-plane vectors, mapping to red, green, blue and alpha channels when rendered; however the methods described above are designed to simulate single-plane (greyscale) semantics.
-
-Whereas ```field.get``` returns a single number (the red-channel value), ```field.cell``` returns the entire 4-plane vector as an array, which you can modify in-place to set a particular color:
-
-```javascript
-// turn a cell red:
-var cell = field.cell(x, y);
-cell[0] = 1;
-cell[1] = 0;
-cell[2] = 0;
-```
-
-Alternatively, you can pass an array to ```field.set```:
-
-```javascript
-// turn a cell red:
-field.set([1, 0, 0], x, y);
-```
-
-
-
-
-```javascript
-// to interpolate a specific channel (0, 1, 2 or 3):
-field.sample(x, y, channel);    
-```
--->
+<span class="hljs-comment">// to update a single channel):</span>
+field.deposit(<span class="hljs-number">0.1</span>, <span class="hljs-built_in">agent</span>.<span class="hljs-built_in">position</span>, channel);
+<span class="hljs-comment">// to update several channels:</span>
+field.deposit([<span class="hljs-number">1</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.1</span>], <span class="hljs-built_in">agent</span>.<span class="hljs-built_in">position</span>);
+</code></pre>
 <h2 id="vec2">vec2</h2>
 <p>The <code>vec2</code> type gives us a useful abstraction of two-component vectors. Here are some ways of creating a vec2:</p>
 <pre><code class="lang-javascript"><span class="hljs-variable"><span class="hljs-keyword">var</span> v0</span> = new vec2(x, y);

@@ -163,6 +163,18 @@
 <blockquote>
 <p>Note that Langton&#39;s Ant, and other related Turmites, are closely related to the turtle graphics often used for L-systems, which we will return to later in the course.</p>
 </blockquote>
+<h3 id="termites">Termites</h3>
+<p>Mitchel Resnick&#39;s termite model is a random walker in a space that can contain woodchips, in which each termite can carry one woodchip at a time. The program for a termite looks something like this:</p>
+<ul>
+<li>Look at the space just in front of me</li>
+<li>If it is empty, move forward and randomly change direction (random walk)</li>
+<li>Else if it is occupied by a woodchip:<ul>
+<li>If I am carrying a wood chip, drop mine where I am and turn around</li>
+<li>Else move forward and pick up the woodchip</li>
+</ul>
+</li>
+</ul>
+<p>Over time, the termites begin to collect the woodchips into small piles, which gradually coalesce into a single large pile of chips.</p>
 <h3 id="probabilistic-asynchronous-ca">Probabilistic Asynchronous CA</h3>
 <p>Chooses the next active cell according to a random selection.</p>
 <p>The <em>Ising model</em> of ferromagnetism in statistical mechanics can be simulated in a <em>Monte Carlo</em> fashion: Each site (cell) has either positive or negative spin (we can encode that as 0 or 1 value). At each time step, consider a site at random, and evaluate the probability of changing state. If changing state moves the site closer to energetic equilibrium with its neighbors (determined according to the <a href="https://en.wikipedia.org/wiki/Hamiltonian_(quantum_mechanics">Hamiltonian</a>) of the site), then the change is made. Otherwise, the change is made only with a small probability that is dependent on the energetic difference and overall temperature. Thus at high temperatures, the system remains noisy, while at low temperatures it gradually self-organizes into all sites with equal spin.</p>
