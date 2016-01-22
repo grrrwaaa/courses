@@ -27,6 +27,16 @@ random = (function() {
 	};
 })();
 
+srandom = function(n) { 
+	if (typeof n == "number") {
+		// integer in range -n to n-1
+		return random(n*2) - n;
+	} else {
+		// float in range -1 to 1
+		return random()*2-1; 
+	}
+};
+
 // a modulo operation that handles negative n more appropriately
 // e.g. wrap(-1, 3) returns 2
 // see http://en.wikipedia.org/wiki/Modulo_operation
@@ -1031,6 +1041,8 @@ var makeshapedrawfunction = function(shapefunc) {
 				} else if (typeof a == "number") {
 					w = a;
 					h = (arguments[2] !== undefined) ? arguments[2] : w;
+				} else {
+					h = w;
 				}
 			} 
 	
@@ -1294,7 +1306,6 @@ field2D.prototype.sample = function(x, y, channel) {
 	var array = this.array;
 	x = wrap(((x * this.width) - 0.5), this.width);
 	y = wrap(((y * this.height) - 0.5), this.height);
-	
 	var x0 = Math.floor(x);
 	var y0 = Math.floor(y);
 	var x1 = wrap(x0 + 1, this.width);
@@ -1303,15 +1314,10 @@ field2D.prototype.sample = function(x, y, channel) {
 	var yb = y - y0;
 	var xa = 1 - xb;
 	var ya = 1 - yb;
-	
-	
-	
 	var v00 = array[(y0 * this.width + x0) * 4 + channel];
 	var v10 = array[(y0 * this.width + x1) * 4 + channel];
 	var v01 = array[(y1 * this.width + x0) * 4 + channel];
 	var v11 = array[(y1 * this.width + x1) * 4 + channel];
-	console.log(y0, x0, this.width, channel, (y0 * this.width + x0) * 4 + channel);
-	
 	return v00 * xa * ya + v10 * xb * ya + v01 * xa * yb + v11 * xb * yb;
 };
 
@@ -1574,7 +1580,7 @@ field2D.prototype.normalize = function() {
 	var w = this.width, h = this.height, l = array.length;
 	var lo = Math.min(array[0], array[1], array[2]);
 	var hi = Math.max(array[0], array[1], array[2]);
-	for (var i = 1; i < l; i += 4) {
+	for (var i = 4; i < l; i += 4) {
 		lo = Math.min(lo, array[i], array[i + 1], array[i + 2]);
 		hi = Math.max(hi, array[i], array[i + 1], array[i + 2]);
 	}
