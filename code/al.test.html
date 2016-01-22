@@ -50,6 +50,13 @@ pose.prototype.update = function(translate, rotate, scale) {
 
 
 ///////////////////////////
+
+var sugar = new field2D(64);
+sugar.set(function(x, y) {
+  return y/sugar.width;
+});
+var old = sugar.clone();
+
     
 var max_speed = 0.0025;
 var max_force = 0.0005;
@@ -195,11 +202,7 @@ function draw() {
 }
 
 function mouse(e, pt) {
-  if (e == "down") {
-    // click to add more agents:
-    var a = new agent();
-    a.pos.set(pt);
-  }
+  console.log("mouse", sugar.sample(pt));
 }
 
 /*
