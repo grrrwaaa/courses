@@ -107,7 +107,7 @@
 <p>Note that this method works when the variations of sugar concentration in the environment are fairly smooth, which is generally true for an environment in which concentrations diffuse. </p>
 <h4 id="implementation">Implementation</h4>
 <p>The first thing we need is an environment of varying sugar concentrations for the agents to explore. We can use <code>field2D</code> again for this purpose. The behavior of the agents will depend on the spatial distribution of sugar in the field; a totally random space is both unrealistic and will defeat chemotactic strategies; a smoothly distributed landscape is needed. For example, we can use the distance from the center:</p>
-<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> dim = <span class="hljs-number">128</span>;
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> dim = <span class="hljs-number">256</span>;
 <span class="hljs-keyword">var</span> sugar = <span class="hljs-keyword">new</span> field2D(dim);
 <span class="hljs-keyword">var</span> center = <span class="hljs-keyword">new</span> vec2(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>);
 
@@ -120,14 +120,25 @@ sugar.<span class="hljs-keyword">set</span>(<span class="hljs-function"><span cl
     <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> - d;
 })
 </code></pre>
+<p>Or, for a more interesting and variegated landscape, we can start from uniform noise, and then smoothen it out:</p>
+<pre><code class="lang-javascript">//<span class="hljs-built_in"> fill </span>with uniform noise
+sugar.set(function(x, y) {<span class="hljs-built_in"> return </span>random(); });
+// smoothen it out by<span class="hljs-built_in"> long-range </span>diffusion:
+sugar.diffuse(sugar.clone(), sugar.width, 100);
+// make it vary between 0<span class="hljs-built_in"> and </span>1:
+sugar.normalize();
+</code></pre>
+<p>We&#39;ll need two different steering behaviours, for normal swimming &amp; for tumbling. These should not be completely independent, i.e. swimming should also include a small amount of turning (to look realistic!), and tumbling should include a small amount of forward movement (otherwise tumbling won&#39;t be effective). </p>
 <p>Agents can then sample the local field during their update routine as follows:</p>
 <pre><code class="lang-javascript">    // in per agent <span class="hljs-keyword">update</span> routine:
     <span class="hljs-keyword">var</span> sensed_sugar_concentration = sugar.<span class="hljs-keyword">sample</span>(a.pos);
 </code></pre>
+<p>Then all we need is to compare the sugar concentration with the agent&#39;s memory (a stored member variable) of the concentration on the last time step. </p>
+<p>Here&#39;s an implementation of <a href="http://codepen.io/grrrwaaa/pen/yepmvq?editors=001">Chemotaxis</a> in the editor.</p>
+<blockquote>
+<p>A variety of other <em>taxes</em> worth exploring can be found on the <a href="http://en.wikipedia.org/wiki/Taxis#Aerotaxis">wikipedia page</a>. Note how chemotaxis (and other taxes) can be divided into positive (attractive) and negative (repulsive) characters, just like forces (directly seen in steering forces). This is closely related to the concepts of positive and negative feedback and the explorations of cybernetics.</p>
+</blockquote>
 <!--
-Here's an implementation of [Chemotaxis](http://codepen.io/anon/pen/pJLNgM/right/?editors=001) in the editor.
-
-> A variety of other *taxes* worth exploring can be found on the [wikipedia page](http://en.wikipedia.org/wiki/Taxis#Aerotaxis). Note how chemotaxis (and other taxes) can be divided into positive (attractive) and negative (repulsive) characters, just like forces (directly seen in steering forces). This is closely related to the concepts of positive and negative feedback and the explorations of cybernetics.
 
 ### Stigmergy
 

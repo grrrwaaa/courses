@@ -52,12 +52,22 @@ pose.prototype.update = function(translate, rotate, scale) {
 ///////////////////////////
 
 var sugar = new field2D(64);
+
+// define an environment:
 function reset_sugar() {
+	// fill with uniform noise
 	sugar.set(function(x, y) { return random(); });
+	// smoothen it out by long-range diffusion:
 	sugar.diffuse(sugar.clone(), sugar.width, 10);
+	// make it vary between 0 and 1:
 	sugar.normalize();
 }
 reset_sugar();
+
+// click to reset environment:
+function mouse(e, pt) {
+	if (e == "down") reset_sugar();
+}
 
 var agents = [];
 for (var i=0; i<40; i++) {
@@ -100,14 +110,6 @@ function draw() {
   	draw2D.pop();
   }
 }
-
-// handle mouse events
-function mouse(e, pt) {
-	if (e == "down") reset_sugar();
-}
-
-// handle key events (must click on canvas first)
-function key(e, k) {}
     </script>
   </body>
 </html>
