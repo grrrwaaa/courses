@@ -1282,8 +1282,8 @@ field2D.prototype.cell = function(x, y) {
 // @param y coordinate (0..1) to sample
 field2D.prototype.sample = function(x, y, channel) {
 	if (typeof x == "object") {
-		x = x[0];
 		y = x[1];
+		x = x[1];
 		channel = y;
 	}
 	if (typeof x !== "number" || typeof y !== "number") {
@@ -1314,8 +1314,8 @@ field2D.prototype.sample = function(x, y, channel) {
 // if channel arg is given, only that channel will be updated
 field2D.prototype.deposit = function(value, x, y, channel) {
 	if (typeof x == "object") {
-		x = x[0];
 		y = x[1];
+		x = x[1];
 		channel = y;
 	}
 	if (typeof x !== "number" || typeof y !== "number") {
@@ -1369,8 +1369,8 @@ field2D.prototype.deposit = function(value, x, y, channel) {
 // change to a new value (change is interpolated between nearest cells)
 field2D.prototype.update = function(value, x, y, channel) {
 	if (typeof x == "object") {
-		x = x[0];
 		y = x[1];
+		x = x[1];
 		channel = y;
 	}
 	if (typeof x !== "number" || typeof y !== "number") {
