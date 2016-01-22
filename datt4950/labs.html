@@ -181,7 +181,7 @@ field.deposit<span class="hljs-comment">(-v, agent.position)</span>;
 <span class="hljs-comment">// (the four nearest cells will be interpolated)</span>
 field.update<span class="hljs-comment">(v, x, y)</span>;
 </code></pre>
-<p>The field2D type also includes a diffusion method, which can be used to smoothly distribute values over time. It requires a second (previous) copy of the field to diffuse from:</p>
+<p>The field2D type also includes a diffusion method, which can be used to smoothly distribute values over time. It requires a second (previous) copy of the field to diffuse from. This method more than just a general blur -- it very accurately preserves mass before and after. So, for example, taking the <code>.sum()</code> of the input and output fields results in almost exactly the same quantity. </p>
 <pre><code class="lang-javascript">// field_previous <span class="hljs-keyword">is</span> another field2D <span class="hljs-keyword">of</span> equal dimensions
 // diffusion_rate <span class="hljs-keyword">is</span> a value between <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> <span class="hljs-number">1</span>; a rate <span class="hljs-keyword">of</span> <span class="hljs-number">0</span> means no diffusion.
 // accuracy <span class="hljs-keyword">is</span> an optional <span class="hljs-built_in">integer</span> <span class="hljs-keyword">for</span> the number <span class="hljs-keyword">of</span> diffusion steps; the <span class="hljs-keyword">default</span> <span class="hljs-keyword">is</span> <span class="hljs-number">10</span>.
