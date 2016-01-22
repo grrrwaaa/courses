@@ -1282,9 +1282,9 @@ field2D.prototype.cell = function(x, y) {
 // @param y coordinate (0..1) to sample
 field2D.prototype.sample = function(x, y, channel) {
 	if (typeof x == "object") {
-		y = x[1];
-		x = x[1];
 		channel = y;
+		y = x[1];
+		x = x[0];
 	}
 	if (typeof x !== "number" || typeof y !== "number") {
 		error("attempt to get field cell with invalid coordinate type");
@@ -1294,6 +1294,7 @@ field2D.prototype.sample = function(x, y, channel) {
 	var array = this.array;
 	x = wrap(((x * this.width) - 0.5), this.width);
 	y = wrap(((y * this.height) - 0.5), this.height);
+	
 	var x0 = Math.floor(x);
 	var y0 = Math.floor(y);
 	var x1 = wrap(x0 + 1, this.width);
@@ -1302,10 +1303,15 @@ field2D.prototype.sample = function(x, y, channel) {
 	var yb = y - y0;
 	var xa = 1 - xb;
 	var ya = 1 - yb;
+	
+	
+	
 	var v00 = array[(y0 * this.width + x0) * 4 + channel];
 	var v10 = array[(y0 * this.width + x1) * 4 + channel];
 	var v01 = array[(y1 * this.width + x0) * 4 + channel];
 	var v11 = array[(y1 * this.width + x1) * 4 + channel];
+	console.log(y0, x0, this.width, channel, (y0 * this.width + x0) * 4 + channel);
+	
 	return v00 * xa * ya + v10 * xb * ya + v01 * xa * yb + v11 * xb * yb;
 };
 
@@ -1314,9 +1320,9 @@ field2D.prototype.sample = function(x, y, channel) {
 // if channel arg is given, only that channel will be updated
 field2D.prototype.deposit = function(value, x, y, channel) {
 	if (typeof x == "object") {
-		y = x[1];
-		x = x[1];
 		channel = y;
+		y = x[1];
+		x = x[0];
 	}
 	if (typeof x !== "number" || typeof y !== "number") {
 		// or deposit to all cells?
@@ -1369,9 +1375,9 @@ field2D.prototype.deposit = function(value, x, y, channel) {
 // change to a new value (change is interpolated between nearest cells)
 field2D.prototype.update = function(value, x, y, channel) {
 	if (typeof x == "object") {
-		y = x[1];
-		x = x[1];
 		channel = y;
+		y = x[1];
+		x = x[0];
 	}
 	if (typeof x !== "number" || typeof y !== "number") {
 		// or deposit to all cells?
