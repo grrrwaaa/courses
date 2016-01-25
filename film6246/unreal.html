@@ -147,10 +147,97 @@
 <p>Make sure that your Player Start object is above your terrain or else you will fall through the world. If this does happen, drag the player to start up on top of the terrain and hit the End key for it to fall.</p>
 <h3 id="painting">Painting</h3>
 <p>We can just drop in a single material, but we can also use Paint mode to blend multiple materials on the landscape. </p>
-<p>Creating landscape materials is a little more complex, but we can migrate some from other example projects or content packs available through the Epic community (via the Launcher app). See below for how to migrate content.</p>
+<p>Creating landscape materials is a little more complex (<a href="https://www.youtube.com/watch?v=tsXVP0fykBM">there&#39;s a tutorial here</a>), but we can migrate some from other example projects or content packs available through the Epic community (via the Launcher app).</p>
+<p>For example: </p>
+<ul>
+<li>open the ExampleContent project, </li>
+<li>navigate in the content browser to Content/Landscapes/Materials, </li>
+<li>right-click on M_LandscapeMaterial_Inst, </li>
+<li>choose Asset Actions &gt; Migrate...</li>
+<li>click OK to select all dependencies</li>
+<li>navigate to &amp; select your project&#39;s Content folder on disk (e.g. Documents/UnrealProjects/MyProject/Content) &amp; OK</li>
+<li>open your project </li>
+<li>File &gt; New Level, choose default, OK</li>
+<li>delete the ground box</li>
+<li>switch to Landscape tool</li>
+<li>in the content browser, navigate to ExampleContent/Landscapes/Materials</li>
+<li>drag the M_LandscapeMaterial_Inst into the Material option of the New Landscape tool </li>
+<li>set the size &amp; create landscape</li>
+<li>switch to the landscape tool&#39;s paint mode</li>
+<li>scroll down to the tool&#39;s target layers</li>
+<li>for each of Soil, Grass, and Snow layers, click on the + button to create layer instances (choose the &quot;Weighted Layer&quot; option, and save these in a sensible location, e.g. also in the ExampleContent/Landscapes)</li>
+<li>Now you can paint the materials</li>
+<li>After painting, click Build in the big toolbar to rebuild the lighting for the level</li>
+</ul>
+<p>Another fairly easy thing to do is to then customize this landcape material by replacing the textures -- just double-click on the material in the browser to open the editor, find the texture nodes you want to replace, and drag in different textures from the content browser. Save, apply, and build again.</p>
 <h3 id="adding-water">Adding water</h3>
-<p>Place a BSP box into the world so that it lies above the lowest land. Drag on the &quot;M_Water_Lake&quot; material from the Materials folder in the content browser.</p>
-<p>It might seem weird that we can walk on water. This is because BSP boxes are solid objects. We can fix that by converting it into a static mesh. With the water box actor selected, in the Details panel, go to Brush Settings and click on the little arrow at the bottom of the part to show the extended options, and click on the Create Static Mesh option.</p>
+<p>Place a BSP box into the world so that it lies above the lowest land. Drag on the &quot;M_Water_Lake&quot; material from the StarterContent/Materials folder in the content browser.</p>
+<p>It might seem weird that we can walk on water. <a href="https://wiki.unrealengine.com/Swimmable_Water_Volume_Tutorial">To make it swimmable, look here</a> -- or <a href="https://www.youtube.com/watch?v=LtyXjSb1P-4">this video tutorial</a>.</p>
+<hr>
+<h2 id="-foliage-">&quot;Foliage&quot;</h2>
+<p>The foliage tool is really just a way to randomly disperse objects over a landscape -- typically used for trees, bushes, grassy areas etc., but in fact it can be used for any kinds of objects.</p>
+<p>You&#39;ll need some ground to start with, whether a giant BSP, mesh, or a landscape, to place objects on. Then switch to the Foliage Mode tool.</p>
+<p>In the Paint option, drag one or more objects (meshes) into the Foliage Type box. Now click and drag in the viewport to paint randomized scatterings of these meshes on your ground. If you placed too many, you can also remove them by shift-clicking. </p>
+<p>The paint options can be used to set the area over which meshes are added, and how densely (and the shift-click erase density). The Reapply tool can be used to change parameters of existing instances. The selection tool can be used to grab individual instances for moving and deleting. With the Lasso tool, you can drag to select many instances.</p>
+<p>You can also vary the properties of each mesh type in the foliage tool -- select the mesh, and the details panel appear below. Common settings would be varying the scale, increasing the radius (spacing between objects), random yaw (random rotations), collision option (i.e. whether you can walk through them -- as BlockAll -- or not -- as NoCollision). There are many other options. Align to normal will rotate objects on sloped surfaces, ground slope angle will not place objects on extreme slopes, etc.</p>
+<blockquote>
+<p>Note that there is a newer, more experimental <a href="https://docs.unrealengine.com/latest/INT/Engine/OpenWorldTools/ProceduralFoliage/QuickStart/index.html">foliage creation system described here.</a></p>
+</blockquote>
+<hr>
+<h2 id="embedding-videos">Embedding videos</h2>
+<p><a href="https://docs.unrealengine.com/latest/INT/Engine/MediaFramework/index.html#mediaframeworkwithblueprints">See documentation</a> -- but note that the &quot;Auto Play&quot; feature they mention no longer exists. We will need to use Blueprints to make the video play.</p>
+<ul>
+<li>First, if it doesn&#39;t already exist, in the ContentBrowser (or in your project&#39;s Content folder on disk), create a folder called Movies</li>
+<li>Drag the movie clips you want to embed into this folder</li>
+<li>Press the Add New button in the content browser, and under Miscellaneous, choose MediaPlayer<ul>
+<li>It will create a new MediaPlayer asset in the content browser (which you can rename now). </li>
+</ul>
+</li>
+<li>Double-click on it to open the editor. In the Details panel, under Source, click on the &quot;...&quot; icon next to File or URL<ul>
+<li>Navigate to the Content/Movies folder and select your video</li>
+<li>Play the video to see it working</li>
+<li>Close the media editor.</li>
+</ul>
+</li>
+<li>Right-click on the MediaPlayer asset in the content browser, and select Create Media Texture. It will create a new MediaTexture asset in the content browser.</li>
+<li>You can now use the Media Texture in place of any texture in a Material. But even simpler, you can right-click on the MediaTexture and select &quot;Create Material&quot; to make a material we can drag onto any BSP or static mesh, which will play the video back in-game.</li>
+</ul>
+<p>Now, to make the video actually play, we need to trigger it -- typically this would be when you enter within a certain region near it. This involves some visual programming -- <a href="https://docs.unrealengine.com/latest/INT/Engine/MediaFramework/index.html#mediaframeworkwithblueprints">here&#39;s a tutorial for that</a>.</p>
+<p><img src="https://docs.unrealengine.com/latest/images/Engine/MediaFramework/LevelBlueprintExample.jpg" alt="diagram"></p>
+<ul>
+<li>From the (placement) Mode tool, drag in a box trigger. <ul>
+<li>Resize it to the area you want the video to be active in, but no bigger.</li>
+<li>Right click on it, and in the &quot;Add Event&quot; option, choose OnActorBeginOverlap<ul>
+<li>This will open up the blueprint editor, but move it out of the way for now</li>
+</ul>
+</li>
+<li>Do that again, for OnActorEndOverlap</li>
+</ul>
+</li>
+<li>Now call up the level blueprint editor again. If you closed it, you can reopen it from the Blueprints menu in the big toolbar, selecting &quot;Open Level Blueprint&quot;<ul>
+<li>In the left toolbar, click the &quot;+&quot; next to Variables<ul>
+<li>Set the type (the coloured icon) to Object Types &gt; MediaPlayer    </li>
+<li>Give it a name, e.g. &quot;myMovie1&quot;</li>
+</ul>
+</li>
+<li>In the right Details, set the Variable Type to Media Player</li>
+<li>Press the Compile button in the big toolbar</li>
+<li>Again, in the right Details, set the Default Value to your video asset</li>
+<li>Again, from the right, drag the Variable into the level blueprint, and choose the Get option.</li>
+</ul>
+</li>
+<li>Drag out a cable from this variabel reference, and let go of the mouse to see the menu<ul>
+<li>Choose Media &gt; Media Player &gt; Play</li>
+<li>Do that again, and choose Media &gt; Media Player &gt; Play (or Rewind)</li>
+</ul>
+</li>
+<li>Now hook up the OnActorBeginOverlap &quot;exec&quot; output to the Play &quot;exec&quot; input</li>
+<li>And hook up the OnActorEndOverlap &quot;exec&quot; output to the Pause &quot;exec&quot; input</li>
+<li>Again, press Compile in the big toolbar (it should say &quot;good to go&quot; -- otherwise there must be some error, and try to fix it or do it again)</li>
+<li>Close the blueprint editor, save &amp; build your level, and try it out!</li>
+</ul>
+<h3 id="media-sound">Media sound</h3>
+<p>If the video has sound, you can also create a Media Sound Wave for it</p>
 <hr>
 <h2 id="tips">Tips</h2>
 <h3 id="projects-levels">Projects &amp; levels</h3>
