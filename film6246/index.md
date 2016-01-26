@@ -86,15 +86,25 @@ Recap & discussion. More VR experiences. Getting to know Unreal.
 
 ### 3. Jan 19
 
-Simulator sickness. Game.
+Simulator sickness. 
 
-Unreal level-building/roughing-out tutorial.
+Engine: level-building/roughing-out tutorial.
 
 **Tasks**
 
 Develop your first Unreal project level -- and bring it in next week (on a USB stick) to show. Keep a record of any questions you have, and any ideas that come that you'd like to know whether is possible / how to do, what you'd like to do next, and/or how you might like people to experience this space. We can discuss these ideas as you show it.
 
 ### 4. Jan 26
+
+Showing the first worlds, questions & discussion. 
+
+Game/not game inspiration.
+
+Engine: foliage, embedding media, event triggers, post volumes.
+
+**Tasks**
+
+Continue working with the worlds. Begin sketching out ideas for a final project.
 
 ### 5. Feb 2
 
