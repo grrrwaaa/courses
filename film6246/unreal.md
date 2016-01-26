@@ -258,6 +258,23 @@ You can also vary the properties of each mesh type in the foliage tool -- select
 
 ---
 
+## Embedding sound
+
+[See documentation](https://docs.unrealengine.com/latest/INT/Engine/Audio/index.html)
+
+You can import .wav audio files into the Content Browser like any other content -- they become "Sound Wave" assets. A handy place to find free audio files is freesound.org. The simplest way to then add the Sound Wave to your world is to drag it from the content browser to the viewport. 
+
+More complex sounds can be created as "Sound Cues", which have their own editor similar to the material editor or blueprint editor. With this editor multiple sounds can be mixed together, with different modulation and other effects.
+
+When sound waves or sound cues are added to a level, they are known as "ambient sound actors". 
+- Generally these will get louder as you approach them, and quieter as you move away.
+- You can either have them play continuously and loop (enable looping in the sound wave or sound cue asset, and enable "Auto Activate" in the ambient sound actor details), or trigger them from e.g. box triggers.
+- In the Attenuation of an ambient sound actor's details, you can control if and how the sound is spatialized. 
+
+You can also create an "Audio Volume" (from the "Volumes" option of the placing mode tool), a region of space with specific audio properties, and then assign a Reverb Effect to this space with particular properties like the echo density, overall reverb gain, air absorption, and more, to craft its unique sonic character.
+
+---
+
 ## Embedding videos
 
 [See documentation](https://docs.unrealengine.com/latest/INT/Engine/MediaFramework/index.html#mediaframeworkwithblueprints) -- but note that the "Auto Play" feature they mention no longer exists. We will need to use Blueprints to make the video play.
@@ -284,7 +301,7 @@ Now, to make the video actually play, we need to trigger it -- typically this wo
 	- Do that again, for OnActorEndOverlap
 - Now call up the level blueprint editor again. If you closed it, you can reopen it from the Blueprints menu in the big toolbar, selecting "Open Level Blueprint"
 	- In the left toolbar, click the "+" next to Variables
-		- Set the type (the coloured icon) to Object Types > MediaPlayer	
+		- Set the type (the coloured icon) to Object Types > MediaPlayer > Reference	
 		- Give it a name, e.g. "myMovie1"
 	- In the right Details, set the Variable Type to Media Player
 	- Press the Compile button in the big toolbar
@@ -300,7 +317,10 @@ Now, to make the video actually play, we need to trigger it -- typically this wo
 
 ### Media sound
 
-If the video has sound, you can also create a Media Sound Wave for it
+If the video has sound, you can also create a Media Sound Wave for it -- it will also play and stop in sync with the video.
+
+- Right-click on the media asset in the content browser and choose "Create Media Sound Wave"
+- drag the newly created sound wave into the world
 
 ---
 
