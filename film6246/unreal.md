@@ -174,6 +174,16 @@ Create an opening in a wall: duplicate the wall, reduce its size. Set the brush 
 
 > See also the [Level Designer Quick Start](https://docs.unrealengine.com/latest/INT/Engine/QuickStart/index.html) documentation.
 
+### Mesh Assets
+
+Here are some other places where free 3D models can be downloaded. Depending on what your intended use for the project is, pay special attention to the licensing terms of these models -- this is intellectual property.
+
+- [Google 3D Warehouse](https://3dwarehouse.sketchup.com/?redirect=1)
+- [3D models for free](http://tf3dm.com) 
+- [Turbosquid](http://www.turbosquid.com/Search/?KEYWORD=Free)
+- [Exchange 3D](http://www.exchange3d.com/Free%203D%20Models/cat_35.html)
+- [3DVia](http://www.3dvia.com/search/?search%5Bquery%5D=free&search%5Bresults_per_page%5D=12&search%5Bsort_order%5D=Rank&search%5Bfile_types%5D=1)
+
 ---
 
 Of course, we can also drag in other kinds of props, such as basic particle systems (e.g. fire).
@@ -321,6 +331,14 @@ If the video has sound, you can also create a Media Sound Wave for it -- it will
 
 - Right-click on the media asset in the content browser and choose "Create Media Sound Wave"
 - drag the newly created sound wave into the world
+
+---
+
+## Post effects volumes
+
+From among the Volumes that can be dragged in, the post effects volume can be used to change the rendering style. It can also be used to define a completely new post rendering material, for more dramatic effects.
+
+Care needs to be taken with these however: the result experienced in VR may be quite different than how it is experienced on screen, where there is less depth and immersion.
 
 ---
 
