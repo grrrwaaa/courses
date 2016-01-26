@@ -184,6 +184,18 @@
 <p>Note that there is a newer, more experimental <a href="https://docs.unrealengine.com/latest/INT/Engine/OpenWorldTools/ProceduralFoliage/QuickStart/index.html">foliage creation system described here.</a></p>
 </blockquote>
 <hr>
+<h2 id="embedding-sound">Embedding sound</h2>
+<p><a href="https://docs.unrealengine.com/latest/INT/Engine/Audio/index.html">See documentation</a></p>
+<p>You can import .wav audio files into the Content Browser like any other content -- they become &quot;Sound Wave&quot; assets. A handy place to find free audio files is freesound.org. The simplest way to then add the Sound Wave to your world is to drag it from the content browser to the viewport. </p>
+<p>More complex sounds can be created as &quot;Sound Cues&quot;, which have their own editor similar to the material editor or blueprint editor. With this editor multiple sounds can be mixed together, with different modulation and other effects.</p>
+<p>When sound waves or sound cues are added to a level, they are known as &quot;ambient sound actors&quot;. </p>
+<ul>
+<li>Generally these will get louder as you approach them, and quieter as you move away.</li>
+<li>You can either have them play continuously and loop (enable looping in the sound wave or sound cue asset, and enable &quot;Auto Activate&quot; in the ambient sound actor details), or trigger them from e.g. box triggers.</li>
+<li>In the Attenuation of an ambient sound actor&#39;s details, you can control if and how the sound is spatialized. </li>
+</ul>
+<p>You can also create an &quot;Audio Volume&quot; (from the &quot;Volumes&quot; option of the placing mode tool), a region of space with specific audio properties, and then assign a Reverb Effect to this space with particular properties like the echo density, overall reverb gain, air absorption, and more, to craft its unique sonic character.</p>
+<hr>
 <h2 id="embedding-videos">Embedding videos</h2>
 <p><a href="https://docs.unrealengine.com/latest/INT/Engine/MediaFramework/index.html#mediaframeworkwithblueprints">See documentation</a> -- but note that the &quot;Auto Play&quot; feature they mention no longer exists. We will need to use Blueprints to make the video play.</p>
 <ul>
@@ -216,7 +228,7 @@
 </li>
 <li>Now call up the level blueprint editor again. If you closed it, you can reopen it from the Blueprints menu in the big toolbar, selecting &quot;Open Level Blueprint&quot;<ul>
 <li>In the left toolbar, click the &quot;+&quot; next to Variables<ul>
-<li>Set the type (the coloured icon) to Object Types &gt; MediaPlayer    </li>
+<li>Set the type (the coloured icon) to Object Types &gt; MediaPlayer &gt; Reference    </li>
 <li>Give it a name, e.g. &quot;myMovie1&quot;</li>
 </ul>
 </li>
@@ -237,7 +249,11 @@
 <li>Close the blueprint editor, save &amp; build your level, and try it out!</li>
 </ul>
 <h3 id="media-sound">Media sound</h3>
-<p>If the video has sound, you can also create a Media Sound Wave for it</p>
+<p>If the video has sound, you can also create a Media Sound Wave for it -- it will also play and stop in sync with the video.</p>
+<ul>
+<li>Right-click on the media asset in the content browser and choose &quot;Create Media Sound Wave&quot;</li>
+<li>drag the newly created sound wave into the world</li>
+</ul>
 <hr>
 <h2 id="tips">Tips</h2>
 <h3 id="projects-levels">Projects &amp; levels</h3>
