@@ -105,7 +105,7 @@
 </ul>
 <p>How does this solve the problem? It uses a very simple chemical memory to detect whether the concentration at the current moment is better, worse, or not much different to how it was a few moments ago. That is, it detects the differential experienced, or gradient traversed. Knowing whether things are getting better or worse is used to select between the swimming or tumbling patterns. With just a few tuning parameters, the method can lead to a very rapid success. </p>
 <p>Note that this method works when the variations of sugar concentration in the environment are fairly smooth, which is generally true for an environment in which concentrations diffuse. </p>
-<h4 id="implementation">Implementation</h4>
+<h3 id="implementation">Implementation</h3>
 <p>The first thing we need is an environment of varying sugar concentrations for the agents to explore. We can use <code>field2D</code> again for this purpose. The behavior of the agents will depend on the spatial distribution of sugar in the field; a totally random space is both unrealistic and will defeat chemotactic strategies; a smoothly distributed landscape is needed. For example, we can use the distance from the center:</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> dim = <span class="hljs-number">256</span>;
 <span class="hljs-keyword">var</span> sugar = <span class="hljs-keyword">new</span> field2D(dim);
@@ -128,42 +128,137 @@ sugar.diffuse(sugar.clone(), sugar.width, 100);
 // make it vary between 0<span class="hljs-built_in"> and </span>1:
 sugar.normalize();
 </code></pre>
-<p>We&#39;ll need two different steering behaviours, for normal swimming &amp; for tumbling. These should not be completely independent, i.e. swimming should also include a small amount of turning (to look realistic!), and tumbling should include a small amount of forward movement (otherwise tumbling won&#39;t be effective). </p>
-<p>Agents can then sample the local field during their update routine as follows:</p>
-<pre><code class="lang-javascript">    // in per agent <span class="hljs-keyword">update</span> routine:
-    <span class="hljs-keyword">var</span> sensed_sugar_concentration = sugar.<span class="hljs-keyword">sample</span>(a.pos);
+<p>We&#39;ll need two different steering behaviours, for normal swimming &amp; for tumbling. These should not be completely independent, i.e. swimming should also include a small amount of turning (to look realistic!), and tumbling should include a small amount of forward movement (otherwise tumbling won&#39;t be effective). For example:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// tumbling behaviour:</span>
+agent.vel.<span class="hljs-built_in">rotate</span>((<span class="hljs-built_in">random</span>()<span class="hljs-number">-0.5</span>)*<span class="hljs-number">2.0</span>).len(<span class="hljs-number">0.0005</span>);
+
+<span class="hljs-comment">// swimming behaviour:</span>
+agent.vel.<span class="hljs-built_in">rotate</span>((<span class="hljs-built_in">random</span>()<span class="hljs-number">-0.5</span>)*<span class="hljs-number">0.1</span>).len(<span class="hljs-number">0.005</span>);
 </code></pre>
-<p>Then all we need is to compare the sugar concentration with the agent&#39;s memory (a stored member variable) of the concentration on the last time step, and choose the behavior accordingly.</p>
+<p>Agents can then sample the local field during their update routine as follows:</p>
+<pre><code class="lang-javascript">// in per agent <span class="hljs-keyword">update</span> routine:
+<span class="hljs-keyword">var</span> sensed_sugar_concentration = sugar.<span class="hljs-keyword">sample</span>(a.pos);
+</code></pre>
+<p>Then all we need is to compare the sugar concentration with the agent&#39;s memory (a stored member variable) of the concentration on the last time step, and choose the behaviour accordingly (and of course, store our sensed value in memory for the next update).</p>
 <p>Here&#39;s an implementation of <a href="http://codepen.io/grrrwaaa/pen/yepmvq?editors=001">Chemotaxis</a> in the editor.</p>
 <blockquote>
 <p>A variety of other <em>taxes</em> worth exploring can be found on the <a href="http://en.wikipedia.org/wiki/Taxis#Aerotaxis">wikipedia page</a>. Note how chemotaxis (and other taxes) can be divided into positive (attractive) and negative (repulsive) characters, just like forces (directly seen in steering forces). This is closely related to the concepts of positive and negative feedback and the explorations of cybernetics.</p>
 </blockquote>
+<h3 id="continuations">Continuations</h3>
+<p>So far, our sugar field is static. We could regenerate the field in response to user interaction (e.g. click to regenerate), but it would be nice to see what a continuously dynamic field offers. For example, we could let the mouse add more sugar to the space, and watch it gradually diffuse away. </p>
+<p>Adding sugar in response to the mouse is fairly easy, by making use of the <code>deposit</code> method of field2D. This method accumulates into the field at a point coordinate, adding to its existing values. Note that the coordinate is in the normalized 0..1 range, and that it will spread the value over the nearest four cells:</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mouse</span><span class="hljs-params">(e, pt)</span> </span>{
+    <span class="hljs-comment">// add one unit of sugar at the location of the mouse:</span>
+    sugar.deposit(<span class="hljs-number">1</span>, pt);
+}
+</code></pre>
+<p>Another way is to have a separate agent (here called &quot;source&quot;) randomly walking and adding sugar, from inside the update() method:</p>
+<pre><code class="lang-javascript">    <span class="hljs-comment">// apply source agent to sugar:</span>
+    sugar.deposit(<span class="hljs-number">2</span>, <span class="hljs-keyword">source</span>.pos);
+    <span class="hljs-comment">// and then move it (random walk):</span>
+    <span class="hljs-keyword">source</span>.vel.<span class="hljs-keyword">rotate</span>(random()<span class="hljs-number">-0.5</span>).len(random()*<span class="hljs-keyword">source</span>.speed);
+    <span class="hljs-keyword">source</span>.pos.add(<span class="hljs-keyword">source</span>.vel).wrap(<span class="hljs-number">1</span>);
+</code></pre>
+<p>So far this isn&#39;t completely effective to attract agents, as there can be large spatial discontinuities. If agents happen to be on part of a drawn path, they might follow it, but otherwise they are unlikely to find it. </p>
+<p>To create a smoother gradient, we must diffuse the field continuously. To add continuous dynamics, we need to add field processing to our <code>update()</code> routine. And since the <code>diffuse()</code> method requires a distinct source field, we&#39;ll need to double buffer like before:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> sugar_old = sugar.<span class="hljs-keyword">clone</span>();
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">update</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// update field:</span>
+    <span class="hljs-keyword">var</span> tmp = sugar_old;
+    sugar_old = sugar;
+    sugar = tmp;
+    <span class="hljs-comment">// diffuse it</span>
+    sugar.diffuse(sugar_old, <span class="hljs-number">0.1</span>);
+
+    ... update agents <span class="hljs-keyword">as</span> before
+}
+</code></pre>
+<p>Note that since we are applying this process 60 times a second, we set the diffusion rate to be low (0.1 in the above code fragment). Nevertheless, it rapidly diffuses to a lower concentration that is hard to see, so we should probably also increase the quantity deposited each time (e.g. to 10 units). Now the agents are able to find the areas of sugar more easily -- and even show something like trail-following. </p>
+<p>But we also notice that even when the sugar is quite dissipated, the agents can still find the strongest concentrations. If we don&#39;t find this realistic, one thing we might consider adding is a low level of background randomness. The rationale is that even if sensing is perfectly accurate, small fluctuations in the world (such as due to the Brownian motion of water and sugar molecules) make it impossible to discern very small differences. The randomness added must be signed noise, balanced around zero such that overall the total intensity is statistically preserved. Note that the amplitude of this noise will have to be extremely high if it is applied <em>before</em> the diffusion, or very low if applied <em>after</em> diffusion. The effective results are also quite different.</p>
+<pre><code class="lang-javascript">    <span class="hljs-comment">// applied after sugar.diffuse:</span>
+    <span class="hljs-comment">// use field2D.map() to modify a cell value</span>
+    <span class="hljs-comment">// adding a small random deviation</span>
+    <span class="hljs-comment">// whose average is zero</span>
+    sugar.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ 
+        <span class="hljs-keyword">return</span> v + <span class="hljs-number">0.01</span>*(random() - <span class="hljs-number">0.5</span>);
+    });
+</code></pre>
+<p>Still, the sugar just seems to accumulate over time, and the more we draw, the more the screen tends to grey. This is because our diffuse() method spreads intensity out, but does not change the total quantity. We need some other process to reduce this total quantity to make a balance. One way to do that is to add a very weak overall decay to the field -- as if some particles of sugar occasionally evaporate:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// in update():</span>
+    sugar.mul<span class="hljs-comment">(0.99)</span>;
+</code></pre>
+<p>Of course, our agents aren&#39;t just looking for sugar to show it to us -- they want to eat it! We can also add the effect of this on the environment by <em>removing</em> intensity from the field by each agent. We can do this by calling the <code>field2D.deposit()</code> method with a negative argument (i.e. a debit!):</p>
+<pre><code class="lang-javascript">    <span class="hljs-comment">// get the sugar level at this location:</span>
+    var sense = Math.max(sugar.sample(a.<span class="hljs-keyword">pos</span>), <span class="hljs-number">0</span>)<span class="hljs-comment">;</span>
+    <span class="hljs-comment">// update the field to show that we removed sugar here:</span>
+    sugar.deposit(-sense, agent.<span class="hljs-keyword">pos</span>)<span class="hljs-comment">;</span>
+</code></pre>
+<blockquote>
+<p>Note that we add a <code>Math.max(0, sense)</code> component here, just as a sanity check. There is no such thing as a negative concentration of sugar, but it might happen that our field has negative values. We wouldn&#39;t want those to make our agents create food and put it back! Of course this also suggests that we think about how to actually start using the acquired energy for metabolism in the agent...</p>
+</blockquote>
+<p><a href="http://codepen.io/grrrwaaa/pen/mVxowj?editors=001">See the example here</a></p>
+<hr>
+<blockquote>
+<p><strong>Aside</strong>: A very different alternative to diffusion, scaling, and added noise is to use something closer to an asynchronous CA. The basic concept is to emulate Brownian diffusion by occasionally swapping to neighbouring particles. This can be made into a smoother gradient by interpolating the swap. And removal can be simulated as a small portion of randomly chosen cells being set to zero. This is a more challenging dynamic landscape for the agents to navigate:</p>
+</blockquote>
+<pre><code class="lang-javascript">  <span class="hljs-comment">// some swaps:</span>
+  <span class="hljs-keyword">for</span> (var i=<span class="hljs-number">0</span><span class="hljs-comment">; i&lt;10000; i++) {</span>
+    <span class="hljs-comment">// pick a point at random</span>
+    var x = random(sugar.<span class="hljs-keyword">width</span>)<span class="hljs-comment">;</span>
+    var y = random(sugar.height)<span class="hljs-comment">;</span>
+    <span class="hljs-comment">// pick a neighbour</span>
+    var x1 = x + random(<span class="hljs-number">3</span>)<span class="hljs-number">-1</span><span class="hljs-comment">;</span>
+    var y1 = y + random(<span class="hljs-number">3</span>)<span class="hljs-number">-1</span><span class="hljs-comment">;</span>
+    <span class="hljs-comment">// get the values</span>
+    var a = sugar.get(x, y)<span class="hljs-comment">;</span>
+    var b = sugar.get(x1, y1)<span class="hljs-comment">;</span>
+    <span class="hljs-comment">// pick a random interpolation factor</span>
+    var t = <span class="hljs-number">0.5</span>*random()<span class="hljs-comment">;</span>
+    <span class="hljs-comment">// blend a and b into each other accordingly</span>
+    var a1 = a + t*(b-a)<span class="hljs-comment">;</span>
+    var b1 = b + t*(a-b)<span class="hljs-comment">;</span>
+    <span class="hljs-comment">// write these values back to the field</span>
+    sugar.set(a1, x, y)<span class="hljs-comment">;</span>
+    sugar.set(b1, x1, y1)<span class="hljs-comment">;</span>
+  }
+  <span class="hljs-comment">// some removals:</span>
+  <span class="hljs-keyword">for</span> (var i=<span class="hljs-number">0</span><span class="hljs-comment">; i&lt;100; i++) {</span>
+    var x = random(sugar.<span class="hljs-keyword">width</span>)<span class="hljs-comment">;</span>
+    var y = random(sugar.height)<span class="hljs-comment">;</span>
+    sugar.set(<span class="hljs-number">0</span>, x, y)<span class="hljs-comment">;</span>
+  }
+</code></pre>
+<blockquote>
+<p>Obviously there&#39;s a hint here of how it might be interesting to pair our agents with some other CAs for field processes... </p>
+</blockquote>
+<hr>
+<p>Going back to the sketch of Vehicles, now we can implement a two-eyed agent following light as a diffuse field:</p>
+<p><a href="http://codepen.io/grrrwaaa/pen/yeKWax?editors=001">Vehicles</a></p>
+<p>How could it be extended to include collision avoidance? Or to have different vehicle types, some attracted to others, some repelled by others, etc.?</p>
+<hr>
+<h3 id="stigmergy">Stigmergy</h3>
+<p><em>Stigmergy</em> is a mechanism of indirect coordination between agents by leaving traces in the environment as a mode of stimulating future action by agents in the same location. For example, ants (and some other social insects) lay down a trace of pheromones when returning to the nest while carrying food. Future ants are attracted to follow these trails, increasing the likelihood of encountering food. This environmental marking constitutes a shared external memory (without needing a map). However if the food source is exhausted, the pheromone trails will gradually fade away, leading to new foraging behavior. </p>
+<p>Traces evidently lead to self-reinforcement and self-organization: complex and seeminly intelligent structures without global planning or control. Since the term stigmergy focuses on self-reinforcing, task-oriented signaling, E. O. Wilson suggested a more general term <em>sematectonic communication</em> for environmental communication that is not necessarily task-oriented.</p>
+<p>Stigmergy has become a key concept in the field of <a href="http://en.wikipedia.org/wiki/Swarm_intelligence">swarm intelligence</a>, and the method of <em>ant colony optimization</em> in particular. In ACO, the landscape is a parameter space (possibly much larger than two or three dimensions) in which populations of virtual agents leave pheromone trails to high-scoring solutions.</p>
+<p>Related environmental communication strategies include social nest construction (e.g. termites) and territory marking.</p>
+<h3 id="implementation">Implementation</h3>
+<p>Being able to leave pheromones behind depends on having a specific signature marker in space, such as a particular smell. A simple way to emulate this is to have a field for each pheromone. For example, we may want one pheromone to signal &quot;food this way&quot;, and another to signal &quot;nest this way&quot;. To draw multiple fields, we can turn on blending and apply different colors for each one:</p>
+<pre><code class="lang-javascript">function <span class="hljs-title">draw</span>() {
+    draw2D.<span class="hljs-built_in">blend</span>(<span class="hljs-keyword">true</span>);
+        draw2D.<span class="hljs-built_in">color</span>(<span class="hljs-string">"navy"</span>);
+        phero1.<span class="hljs-title">draw</span>();
+        draw2D.<span class="hljs-built_in">color</span>(<span class="hljs-string">"orange"</span>);
+        phero2.<span class="hljs-title">draw</span>();
+    draw2D.<span class="hljs-built_in">blend</span>(<span class="hljs-keyword">false</span>);
+
+    ... now <span class="hljs-title">draw</span> agents
+}
+</code></pre>
+<p>We already saw in the chemotaxis example how to leave trails in a field, as well as how to let these diffuse and dissipate in order to attract more distant agents and make way for new trails to be made, and similar processing will be needed for each pheromone field.</p>
+<p>But this time, our sugar field won&#39;t be dissipative -- we just need to create some clumps of sugar resources somewhat distant from the nest. And, inspired by ants, we may grant our agents two sensors, spatially separated. By comparing these two sensors (and perhaps our memory for a third) we can estimate the <em>spatial gradient</em> of the field, and turn accordingly.</p>
+<p><a href="http://codepen.io/grrrwaaa/pen/gPeyPV?editors=001">Here&#39;s a start in that direction</a>. </p>
 <!--
-
-### Stigmergy
-
-*Stigmergy* is a mechanism of indirect coordination between agents by leaving traces in the environment as a mode of stimulating future action by agents in the same location. For example, ants (and some other social insects) lay down a trace of pheromones when returning to the nest while carrying food. Future ants are attracted to follow these trails, increasing the likelihood of encountering food. This environmental marking constitutes a shared external memory (without needing a map). However if the food source is exhausted, the pheromone trails will gradually fade away, leading to new foraging behavior. 
-
-Traces evidently lead to self-reinforcement and self-organization: complex and seeminly intelligent structures without global planning or control. Since the term stigmergy focuses on self-reinforcing, task-oriented signaling, E. O. Wilson suggested a more general term *sematectonic communication* for environmental communication that is not necessarily task-oriented.
-
-Stigmergy has become a key concept in the field of [swarm intelligence](http://en.wikipedia.org/wiki/Swarm_intelligence), and the method of *ant colony optimization* in particular. In ACO, the landscape is a parameter space (possibly much larger than two or three dimensions) in which populations of virtual agents leave pheromone trails to high-scoring solutions.
-
-Related environmental communication strategies include social nest construction (e.g. termites) and territory marking.
-
-#### Implementation
-
-Being able to leave pheromones behind depends on the ability to write into as well as read from fields. This can be achieved using the ```deposit``` method of the field:
-
-```javascript
-    // in agent update:
-    pheromone_field.deposit(intensity, agent.pos);
-```
-
-To store different pheromones we might want to use different fields. These fields should also probably decay over time (using the ```field.mul()``` method), and probably diffuse slightly (using the ```field.diffuse()``` method).
-
-To detect field intensites in different directions, we might want to sample with sensors further from the body center (similar to the sensors in the Vehicles model) and compare their results. 
-
----
 
 ## Action selection systems
 
