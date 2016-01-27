@@ -331,36 +331,73 @@ draw2D.push()<span class="hljs-comment">;</span>
 draw2D.pop()<span class="hljs-comment">;</span>
 </code></pre>
 <p>Most calls to draw2D can be chained together, since they return the <code>draw2D</code> object itself. Now typically, to move into an agent&#39;s coordinate system, operate in the order &quot;translate, rotate, scale&quot;. So since most draw2D methods can also accept vec2 arguments, a common idiom is:</p>
-<pre><code class="lang-javascript">    <span class="hljs-comment">// push into agent's local coordinate system:</span>
-    draw2D.push()    
-        .translate(agent.position)
-        .rotate(agent.direction)
-        .scale(agent.size)<span class="hljs-comment">;</span>
+<pre><code class="lang-javascript"><span class="hljs-comment">// push into agent's local coordinate system:</span>
+draw2D.push()    
+    .translate(agent.position)
+    .rotate(agent.direction)
+    .scale(agent.size)<span class="hljs-comment">;</span>
 
-        <span class="hljs-comment">// draw agent body -- the X axis is agent's forward direction</span>
-        draw2D.rect()<span class="hljs-comment">;</span>
-        draw2D.<span class="hljs-keyword">circle</span>([<span class="hljs-number">0.5</span>,  <span class="hljs-number">0.5</span>], <span class="hljs-number">0.5</span>)<span class="hljs-comment">;</span>
-        draw2D.<span class="hljs-keyword">circle</span>([<span class="hljs-number">0.5</span>, <span class="hljs-number">-0.5</span>], <span class="hljs-number">0.5</span>)<span class="hljs-comment">;</span>
+    <span class="hljs-comment">// draw agent body -- the X axis is agent's forward direction</span>
+    draw2D.rect()<span class="hljs-comment">;</span>
+    draw2D.<span class="hljs-keyword">circle</span>([<span class="hljs-number">0.5</span>,  <span class="hljs-number">0.5</span>], <span class="hljs-number">0.5</span>)<span class="hljs-comment">;</span>
+    draw2D.<span class="hljs-keyword">circle</span>([<span class="hljs-number">0.5</span>, <span class="hljs-number">-0.5</span>], <span class="hljs-number">0.5</span>)<span class="hljs-comment">;</span>
 
-    draw2D.pop()<span class="hljs-comment">;  // done drawing agent</span>
+draw2D.pop()<span class="hljs-comment">;  // done drawing agent</span>
 </code></pre>
-<p>Graphics are drawn using whatever color is currently set, via <code>draw2D.color()</code>:</p>
+<p>Basic shapes are as follows:</p>
+<pre><code class="lang-javascript">draw2D.<span class="hljs-keyword">circle</span>(center_x, center_y, diameter)<span class="hljs-comment">;</span>
+draw2D.<span class="hljs-keyword">circle</span>(center_x, center_y, diameter_x, diameter_y)<span class="hljs-comment">;</span>
+
+draw2D.rect(center_x, center_y, size)<span class="hljs-comment">;</span>
+draw2D.rect(center_x, center_y, <span class="hljs-keyword">width</span>, height)<span class="hljs-comment">;</span>
+</code></pre>
+<p>Graphics are drawn using whatever color is currently set, via <code>draw2D.color()</code>. </p>
 <pre><code class="lang-javascript">draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<span class="hljs-comment">; // red</span>
 draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)<span class="hljs-comment">; // green</span>
 draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)<span class="hljs-comment">; // blue</span>
 draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0.5</span>)<span class="hljs-comment">; // semi-transparent white</span>
 
-<span class="hljs-comment">// you can also use standard CSS color names:</span>
+<span class="hljs-comment">// set via hue, saturation, and lightness (instead of red, green, blue)</span>
+draw2D.hsl(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>)<span class="hljs-comment">;</span>
+draw2D.hsl(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>)<span class="hljs-comment">;    // semi-opaque</span>
+
+<span class="hljs-comment">// you can also use standard CSS colors:</span>
+draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-string">"#ff3399"</span>)<span class="hljs-comment">; </span>
 draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-string">"red"</span>)<span class="hljs-comment">;</span>
 </code></pre>
-<p>Basic shapes are as follows:</p>
-<pre><code class="lang-javascript">    draw2D.<span class="hljs-keyword">circle</span>(center_x, center_y, diameter)<span class="hljs-comment">;</span>
-    draw2D.<span class="hljs-keyword">circle</span>(center_x, center_y, diameter_x, diameter_y)<span class="hljs-comment">;</span>
+<p>The full list of named colors is <a href="http://www.w3schools.com/colors/colors_hex.asp">here</a>. More color methods modify the current color:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// set opacity (0..1):</span>
+draw2D.alpha(<span class="hljs-number">0.5</span>)<span class="hljs-comment">;</span>
+draw2D.opacity(<span class="hljs-number">0.5</span>)<span class="hljs-comment">;</span>
 
-    draw2D.rect(center_x, center_y, size)<span class="hljs-comment">;</span>
-    draw2D.rect(center_x, center_y, <span class="hljs-keyword">width</span>, height)<span class="hljs-comment">;</span>
+<span class="hljs-comment">// set hue, saturation, lightness individually:</span>
+draw2D.hue(<span class="hljs-number">0.5</span>)<span class="hljs-comment">;</span>
+draw2D.saturation(<span class="hljs-number">0.5</span>)<span class="hljs-comment">; </span>
+draw2D.lightness(<span class="hljs-number">0.5</span>)<span class="hljs-comment">; </span>
+
+<span class="hljs-comment">// other modulations:</span>
+draw2D.darken()<span class="hljs-comment">;</span>
+draw2D.brighten()<span class="hljs-comment">;</span>
+draw2D.saturate()<span class="hljs-comment">;</span>
+draw2D.desaturate()<span class="hljs-comment">;</span>
 </code></pre>
 <blockquote>
+<p>Note that colors are also managed by push() and pop().</p>
+</blockquote>
+<p>It is also possible to cover the shape with a field2D, by setting it as a texture. To stop using the texture, call <code>draw2D.texture()</code> (with no arguments), or wrap the use of textures with <code>draw2D.push()</code> and <code>draw2D.pop()</code>:</p>
+<pre><code class="lang-javascript">var field = field2D(<span class="hljs-number">16</span>)<span class="hljs-comment">;</span>
+field.set(function() { <span class="hljs-keyword">return</span> random()<span class="hljs-comment">; });</span>
+
+<span class="hljs-comment">// in draw():</span>
+draw2D.push()<span class="hljs-comment">;</span>
+    draw2D.texture(field)<span class="hljs-comment">;</span>
+    draw2D.rect()<span class="hljs-comment">;</span>
+draw2D.pop()<span class="hljs-comment">;</span>
+</code></pre>
+<p>Finally, we can choose whether to mix drawings additively to each other, or simply replace previous drawings, by setting the blend option:</p>
+<pre><code>draw2D.<span class="hljs-built_in">blend</span>(<span class="hljs-keyword">true</span>);    <span class="hljs-comment">// mix with previous drawings</span>
+draw2D.<span class="hljs-built_in">blend</span>(<span class="hljs-keyword">false</span>); <span class="hljs-comment">// replace previous drawings</span>
+</code></pre><blockquote>
 <p>Note: The draw2D transform and color are reset before each <code>draw()</code> call.</p>
 </blockquote>
 <!--

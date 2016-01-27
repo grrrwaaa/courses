@@ -9,64 +9,43 @@
     <script src="al.js"></script>
     <script>
 
-var mat3 = draw2D.gl.mat3;
-var glvec2 = draw2D.gl.vec2;
-var glvec3 = draw2D.gl.vec3;
-
-function pose() {
-	this.mat = mat3.create();
-	this.inverse = mat3.create();
-	
-	pose.prototype.update.apply(this, arguments);
-}
-
-pose.prototype.global = function(v) {
-	return glvec2.transformMat3(new vec2(), v, this.mat);
-}
-
-pose.prototype.local = function(v) {
-	return glvec2.transformMat3(new vec2(), v, this.inverse);
-}
-
-pose.prototype.update = function(translate, rotate, scale) {
-	var m = this.mat;
-	mat3.identity(m);
- 	if (typeof translate == "object") {
- 		mat3.translate(m, m, translate);
- 	}
- 	if (typeof rotate == "number") {
- 		mat3.rotate(m, m, rotate);
- 	} else if (typeof rotate == "object") {
- 		mat3.rotate(m, m, vec2.angle(rotate));
- 	} 	
-	if (typeof scale == "number") {
-		mat3.scale(m, m, [scale, scale]);
-	} else if (typeof scale == "object") {
-		mat3.scale(m, m, scale);
- 	}
- 	mat3.invert(this.inverse, this.mat);
-	return this;
-};
-
 
 ///////////////////////////
 
-var sugar = new field2D(64);
+var food_phero = new field2D(128);
+var food_phero_old = food_phero.clone();
 
-// define an environment:
+// create a field of sugar concentrations
+var sugar = new field2D(128);
+// fill it:
 function reset_sugar() {
-	// fill with uniform noise
-	sugar.set(function(x, y) { return random(); });
-	// smoothen it out by long-range diffusion:
-	sugar.diffuse(sugar.clone(), sugar.width, 10);
-	// make it vary between 0 and 1:
-	sugar.normalize();
+  // clear it:
+  sugar.set(0);
+
+  // add some randomized points:
+	for (var i=0; i<10; i++) {
+    var p = vec2.random().add(1).mul(0.5);
+    sugar.deposit(random(8), p);
+  }
+  // blur it
+  sugar.diffuse(sugar.clone(), sugar.width, 150);
+  // fit to 0..1 range
+  sugar.normalize();
+  // threshold it:
+  sugar.map(function(v) { 
+  	return v > 0.1 ? 1 : 0;
+  });
 }
 reset_sugar();
-
 // click to reset environment:
 function mouse(e, pt) {
 	if (e == "down") reset_sugar();
+}
+
+// create a home:
+var nest = {
+  pos: new vec2(0.5, 0.5),
+  size: 0.1
 }
 
 var agents = [];
@@ -75,40 +54,66 @@ for (var i=0; i<40; i++) {
 		pos: new vec2(random(), random()),
 		vel: vec2.random(0.001),
 		size: 0.02,
-		sense: 0,
+    // stored recollection of previous sense
+		sense_memory: 0.5,
 	});
 }
 
 function update() {
+	// fields:
+	var tmp = food_phero_old;
+	food_phero_old = food_phero;
+	food_phero = tmp;
+	
+	
+	food_phero.diffuse(food_phero_old, 0.01).mul(0.995);
+
+
 	for (var a of agents) {
-		var sense = sugar.sample(a.pos);
-		var change = sense - a.sense;
-		if (change < 0) {
-			a.vel.rotate(3*(random()-0.5)).len(0.002);
-		} else {
-			a.vel.rotate(0.1*(random()-0.5)).len(0.008);
-		}	
-		// interpolate:
-		a.sense += 0.1*(sense - a.sense);
+    // get the sugar level at this location:
+		var sense = Math.max(0, sugar.sample(a.pos));
+    
+       // tumbling behavior:
+			a.vel
+        .rotate(srandom())
+        .len(0.002);
+		
+		// remember for the next time:
+		a.sense_memory = sense;
+		
+		// extract from world:
+		sugar.deposit(-sense, a.pos);
+		
+		// leave trail:
+		food_phero.deposit(1, a.pos);
 		
 		// locomotion
-
 		a.pos.add(a.vel).wrap(1);
 	}
 }
   
 function draw() {
-  sugar.draw();
-  
-  for (var a of agents) {
-  	draw2D.push().translate(a.pos).rotate(a.vel).scale(a.size);
-  	draw2D.color(a.sense, 1-a.sense, 0.5)
-  		.rect().circle([0.5, 0]).circle([-0.5, 0]);
-  	draw2D.color("yellow")
-  		.rect([0.5, 0.2], 0.2)
-  		.rect([0.5,-0.2], 0.2);
-  	draw2D.pop();
-  }
+	draw2D.blend(true);	
+		draw2D.color("green").alpha(0.2);
+		food_phero.draw();
+		// draw field
+		draw2D.color("yellow");
+		sugar.draw();
+		// draw home:
+		draw2D.color("darkred").circle(nest.pos, nest.size);
+	draw2D.blend(false);
+	
+	// draw agents
+	for (var a of agents) {
+		draw2D.push().translate(a.pos).rotate(a.vel).scale(a.size);
+		// body
+		draw2D.color("darkred")
+			.circle([0.3, 0]).circle([-0.3, 0]);
+		// sensor (shows current state by color)
+		draw2D.color(1-a.sense_memory, a.sense_memory, 0.5)
+		  .circle([0.3, 0.], 0.7);
+		draw2D.pop();
+	}
 }
     </script>
   </body>

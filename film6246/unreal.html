@@ -269,6 +269,7 @@
 <p>From among the Volumes that can be dragged in, the post effects volume can be used to change the rendering style. It can also be used to define a completely new post rendering material, for more dramatic effects.</p>
 <p>Care needs to be taken with these however: the result experienced in VR may be quite different than how it is experienced on screen, where there is less depth and immersion.</p>
 <hr>
+<hr>
 <h2 id="tips">Tips</h2>
 <h3 id="projects-levels">Projects &amp; levels</h3>
 <p>You can make a new level at any time from File-&gt;New Level. </p>
@@ -286,7 +287,17 @@
 <p>Just select what you want to copy in the Outliner and Ctrl-C to copy, then switch to the destination level, and Ctrl-V to paste.</p>
 <p><strong>Copying actors between levels (maps) of different projects</strong>:</p>
 <p>First, migrate the necessary assets, then copy the actors, both as described above.</p>
-<h3 id="more-viewport-editing-options">More viewport editing options</h3>
+<h3 id="converting-bsps-to-meshes">Converting BSPs to Meshes</h3>
+<p>A BSP, or even multiple selected BSPs, can be converted to a static mesh. This is helpful when you want to assign different properties or behaviors that BSPs don&#39;t support, or to use them as reusable assets for building blueprints, or with foliage, etc.</p>
+<p>By default, a static mesh created this way has no collision hull, so a character will fall right through it. To add a collision hull:</p>
+<pre><code>- double-click <span class="hljs-keyword">the</span> mesh <span class="hljs-built_in">to</span> <span class="hljs-built_in">open</span> <span class="hljs-keyword">the</span> mesh editor, 
+- <span class="hljs-built_in">to</span> generate <span class="hljs-keyword">the</span> hull automatically:
+    - <span class="hljs-built_in">from</span> <span class="hljs-keyword">the</span> Collision menu choose Auto Convex Collision
+    - <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> details panel that opens, <span class="hljs-built_in">set</span> <span class="hljs-keyword">the</span> accuracy options, <span class="hljs-keyword">and</span> click Apply
+    - <span class="hljs-keyword">a</span> visualization <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> collision hull will appear <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> viewport
+- otherwise, <span class="hljs-keyword">with</span> other options <span class="hljs-keyword">in</span> this menu you can build <span class="hljs-keyword">a</span> hull <span class="hljs-keyword">by</span> hand
+- <span class="hljs-keyword">finally</span>, save <span class="hljs-keyword">and</span> <span class="hljs-built_in">close</span> <span class="hljs-keyword">the</span> mesh editor    
+</code></pre><h3 id="more-viewport-editing-options">More viewport editing options</h3>
 <p><strong><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=RoiQOwCg-4Q">Orthographic views</a>:</strong></p>
 <p>In the top-right corner of viewport there is a small &#39;min/max&#39; button which will alternate between a maximized 3D view, and a 4-up set of views for top, left, and front &quot;orthographic&quot; (non-perspective) views as well as the regular perspective one. Right-click &amp; drag to move in these views, and mouse-scroll to zoom.</p>
 <p><strong><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=7UjP6gr44dc">View modes &amp; show flags</a></strong>:</p>
