@@ -1837,7 +1837,7 @@ function render() {
 	// regular blending:
 //	gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
 	gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
-	draw2D.blend(true);
+	draw2D.blend(false);
 	
 	// with uber shader, draw:
 	gl.useProgram(draw2D_program);

@@ -174,11 +174,13 @@ Agents can then sample the local field during their update routine as follows:
 	var sensed_sugar_concentration = sugar.sample(a.pos);
 ```
 
-Then all we need is to compare the sugar concentration with the agent's memory (a stored member variable) of the concentration on the last time step. 
+Then all we need is to compare the sugar concentration with the agent's memory (a stored member variable) of the concentration on the last time step, and choose the behavior accordingly.
 
 Here's an implementation of [Chemotaxis](http://codepen.io/grrrwaaa/pen/yepmvq?editors=001) in the editor.
 
 > A variety of other *taxes* worth exploring can be found on the [wikipedia page](http://en.wikipedia.org/wiki/Taxis#Aerotaxis). Note how chemotaxis (and other taxes) can be divided into positive (attractive) and negative (repulsive) characters, just like forces (directly seen in steering forces). This is closely related to the concepts of positive and negative feedback and the explorations of cybernetics.
+
+
 
 <!--
 
