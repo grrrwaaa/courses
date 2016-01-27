@@ -135,7 +135,7 @@ How does this solve the problem? It uses a very simple chemical memory to detect
 
 Note that this method works when the variations of sugar concentration in the environment are fairly smooth, which is generally true for an environment in which concentrations diffuse. 
 
-#### Implementation
+### Implementation
 
 The first thing we need is an environment of varying sugar concentrations for the agents to explore. We can use ```field2D``` again for this purpose. The behavior of the agents will depend on the spatial distribution of sugar in the field; a totally random space is both unrealistic and will defeat chemotactic strategies; a smoothly distributed landscape is needed. For example, we can use the distance from the center:
 
@@ -165,24 +165,149 @@ sugar.diffuse(sugar.clone(), sugar.width, 100);
 sugar.normalize();
 ```
 
-We'll need two different steering behaviours, for normal swimming & for tumbling. These should not be completely independent, i.e. swimming should also include a small amount of turning (to look realistic!), and tumbling should include a small amount of forward movement (otherwise tumbling won't be effective). 
+We'll need two different steering behaviours, for normal swimming & for tumbling. These should not be completely independent, i.e. swimming should also include a small amount of turning (to look realistic!), and tumbling should include a small amount of forward movement (otherwise tumbling won't be effective). For example:
+
+```javascript
+// tumbling behaviour:
+agent.vel.rotate((random()-0.5)*2.0).len(0.0005);
+
+// swimming behaviour:
+agent.vel.rotate((random()-0.5)*0.1).len(0.005);
+```
 
 Agents can then sample the local field during their update routine as follows:
 
 ```javascript
-	// in per agent update routine:
-	var sensed_sugar_concentration = sugar.sample(a.pos);
+// in per agent update routine:
+var sensed_sugar_concentration = sugar.sample(a.pos);
 ```
 
-Then all we need is to compare the sugar concentration with the agent's memory (a stored member variable) of the concentration on the last time step, and choose the behavior accordingly.
+Then all we need is to compare the sugar concentration with the agent's memory (a stored member variable) of the concentration on the last time step, and choose the behaviour accordingly (and of course, store our sensed value in memory for the next update).
 
 Here's an implementation of [Chemotaxis](http://codepen.io/grrrwaaa/pen/yepmvq?editors=001) in the editor.
 
 > A variety of other *taxes* worth exploring can be found on the [wikipedia page](http://en.wikipedia.org/wiki/Taxis#Aerotaxis). Note how chemotaxis (and other taxes) can be divided into positive (attractive) and negative (repulsive) characters, just like forces (directly seen in steering forces). This is closely related to the concepts of positive and negative feedback and the explorations of cybernetics.
 
+### Continuations
 
+So far, our sugar field is static. We could regenerate the field in response to user interaction (e.g. click to regenerate), but it would be nice to see what a continuously dynamic field offers. For example, we could let the mouse add more sugar to the space, and watch it gradually diffuse away. 
 
-<!--
+Adding sugar in response to the mouse is fairly easy, by making use of the ```deposit``` method of field2D. This method accumulates into the field at a point coordinate, adding to its existing values. Note that the coordinate is in the normalized 0..1 range, and that it will spread the value over the nearest four cells:
+
+```javascript
+function mouse(e, pt) {
+	// add one unit of sugar at the location of the mouse:
+	sugar.deposit(1, pt);
+}
+```
+
+Another way is to have a separate agent (here called "source") randomly walking and adding sugar, from inside the update() method:
+
+```javascript
+	// apply source agent to sugar:
+	sugar.deposit(2, source.pos);
+	// and then move it (random walk):
+	source.vel.rotate(random()-0.5).len(random()*source.speed);
+	source.pos.add(source.vel).wrap(1);
+```
+
+So far this isn't completely effective to attract agents, as there can be large spatial discontinuities. If agents happen to be on part of a drawn path, they might follow it, but otherwise they are unlikely to find it. 
+
+To create a smoother gradient, we must diffuse the field continuously. To add continuous dynamics, we need to add field processing to our ```update()``` routine. And since the ```diffuse()``` method requires a distinct source field, we'll need to double buffer like before:
+
+```javascript
+var sugar_old = sugar.clone();
+
+function update() {
+	// update field:
+	var tmp = sugar_old;
+	sugar_old = sugar;
+	sugar = tmp;
+	// diffuse it
+	sugar.diffuse(sugar_old, 0.1);
+
+	... update agents as before
+}
+```
+
+Note that since we are applying this process 60 times a second, we set the diffusion rate to be low (0.1 in the above code fragment). Nevertheless, it rapidly diffuses to a lower concentration that is hard to see, so we should probably also increase the quantity deposited each time (e.g. to 10 units). Now the agents are able to find the areas of sugar more easily -- and even show something like trail-following. 
+
+But we also notice that even when the sugar is quite dissipated, the agents can still find the strongest concentrations. If we don't find this realistic, one thing we might consider adding is a low level of background randomness. The rationale is that even if sensing is perfectly accurate, small fluctuations in the world (such as due to the Brownian motion of water and sugar molecules) make it impossible to discern very small differences. The randomness added must be signed noise, balanced around zero such that overall the total intensity is statistically preserved. Note that the amplitude of this noise will have to be extremely high if it is applied *before* the diffusion, or very low if applied *after* diffusion. The effective results are also quite different.
+
+```javascript
+	// applied after sugar.diffuse:
+	// use field2D.map() to modify a cell value
+	// adding a small random deviation
+	// whose average is zero
+	sugar.map(function(v) { 
+		return v + 0.01*(random() - 0.5);
+	});
+```
+
+Still, the sugar just seems to accumulate over time, and the more we draw, the more the screen tends to grey. This is because our diffuse() method spreads intensity out, but does not change the total quantity. We need some other process to reduce this total quantity to make a balance. One way to do that is to add a very weak overall decay to the field -- as if some particles of sugar occasionally evaporate:
+
+```javascript
+// in update():
+	sugar.mul(0.99);
+```
+
+Of course, our agents aren't just looking for sugar to show it to us -- they want to eat it! We can also add the effect of this on the environment by *removing* intensity from the field by each agent. We can do this by calling the ```field2D.deposit()``` method with a negative argument (i.e. a debit!):
+
+```javascript
+	// get the sugar level at this location:
+	var sense = Math.max(sugar.sample(a.pos), 0);
+	// update the field to show that we removed sugar here:
+	sugar.deposit(-sense, agent.pos);
+```
+
+> Note that we add a ```Math.max(0, sense)``` component here, just as a sanity check. There is no such thing as a negative concentration of sugar, but it might happen that our field has negative values. We wouldn't want those to make our agents create food and put it back! Of course this also suggests that we think about how to actually start using the acquired energy for metabolism in the agent...
+
+[See the example here](http://codepen.io/grrrwaaa/pen/mVxowj?editors=001)
+
+---
+
+> **Aside**: A very different alternative to diffusion, scaling, and added noise is to use something closer to an asynchronous CA. The basic concept is to emulate Brownian diffusion by occasionally swapping to neighbouring particles. This can be made into a smoother gradient by interpolating the swap. And removal can be simulated as a small portion of randomly chosen cells being set to zero. This is a more challenging dynamic landscape for the agents to navigate:
+
+```javascript
+  // some swaps:
+  for (var i=0; i<10000; i++) {
+    // pick a point at random
+    var x = random(sugar.width);
+    var y = random(sugar.height);
+    // pick a neighbour
+    var x1 = x + random(3)-1;
+    var y1 = y + random(3)-1;
+    // get the values
+    var a = sugar.get(x, y);
+    var b = sugar.get(x1, y1);
+    // pick a random interpolation factor
+    var t = 0.5*random();
+    // blend a and b into each other accordingly
+    var a1 = a + t*(b-a);
+    var b1 = b + t*(a-b);
+    // write these values back to the field
+    sugar.set(a1, x, y);
+    sugar.set(b1, x1, y1);
+  }
+  // some removals:
+  for (var i=0; i<100; i++) {
+    var x = random(sugar.width);
+    var y = random(sugar.height);
+    sugar.set(0, x, y);
+  }
+```
+
+> Obviously there's a hint here of how it might be interesting to pair our agents with some other CAs for field processes... 
+
+---
+
+Going back to the sketch of Vehicles, now we can implement a two-eyed agent following light as a diffuse field:
+
+[Vehicles](http://codepen.io/grrrwaaa/pen/yeKWax?editors=001)
+
+How could it be extended to include collision avoidance? Or to have different vehicle types, some attracted to others, some repelled by others, etc.?
+
+---
 
 ### Stigmergy
 
@@ -194,20 +319,30 @@ Stigmergy has become a key concept in the field of [swarm intelligence](http://e
 
 Related environmental communication strategies include social nest construction (e.g. termites) and territory marking.
 
-#### Implementation
+### Implementation
 
-Being able to leave pheromones behind depends on the ability to write into as well as read from fields. This can be achieved using the ```deposit``` method of the field:
+Being able to leave pheromones behind depends on having a specific signature marker in space, such as a particular smell. A simple way to emulate this is to have a field for each pheromone. For example, we may want one pheromone to signal "food this way", and another to signal "nest this way". To draw multiple fields, we can turn on blending and apply different colors for each one:
 
 ```javascript
-	// in agent update:
-	pheromone_field.deposit(intensity, agent.pos);
+function draw() {
+	draw2D.blend(true);
+		draw2D.color("navy");
+		phero1.draw();
+		draw2D.color("orange");
+		phero2.draw();
+	draw2D.blend(false);
+	
+	... now draw agents
+}
 ```
 
-To store different pheromones we might want to use different fields. These fields should also probably decay over time (using the ```field.mul()``` method), and probably diffuse slightly (using the ```field.diffuse()``` method).
+We already saw in the chemotaxis example how to leave trails in a field, as well as how to let these diffuse and dissipate in order to attract more distant agents and make way for new trails to be made, and similar processing will be needed for each pheromone field.
 
-To detect field intensites in different directions, we might want to sample with sensors further from the body center (similar to the sensors in the Vehicles model) and compare their results. 
+But this time, our sugar field won't be dissipative -- we just need to create some clumps of sugar resources somewhat distant from the nest. And, inspired by ants, we may grant our agents two sensors, spatially separated. By comparing these two sensors (and perhaps our memory for a third) we can estimate the *spatial gradient* of the field, and turn accordingly.
 
----
+[Here's a start in that direction](http://codepen.io/grrrwaaa/pen/gPeyPV?editors=001). 
+
+<!--
 
 ## Action selection systems
 
