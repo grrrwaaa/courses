@@ -194,14 +194,14 @@ Related environmental communication strategies include social nest construction 
 
 #### Implementation
 
-Being able to leave pheromones behind depends on the ability to write into as well as read from fields. This can be achieved using the ```splat``` method of the field:
+Being able to leave pheromones behind depends on the ability to write into as well as read from fields. This can be achieved using the ```deposit``` method of the field:
 
 ```javascript
 	// in agent update:
-	pheromone_field.splat(intensity, self.location.x, self.location.y)
+	pheromone_field.deposit(intensity, agent.pos);
 ```
 
-To store different pheromones we might want to use different fields. These fields should also probably decay over time (using the ```field.decay()``` method), and possibly diffuse slightly (using the ```field.diffuse()``` method).
+To store different pheromones we might want to use different fields. These fields should also probably decay over time (using the ```field.mul()``` method), and probably diffuse slightly (using the ```field.diffuse()``` method).
 
 To detect field intensites in different directions, we might want to sample with sensors further from the body center (similar to the sensors in the Vehicles model) and compare their results. 
 

@@ -342,6 +342,8 @@ Care needs to be taken with these however: the result experienced in VR may be q
 
 ---
 
+---
+
 ## Tips
 
 ### Projects & levels
@@ -369,6 +371,19 @@ Just select what you want to copy in the Outliner and Ctrl-C to copy, then switc
 **Copying actors between levels (maps) of different projects**:
 
 First, migrate the necessary assets, then copy the actors, both as described above.
+
+### Converting BSPs to Meshes
+
+A BSP, or even multiple selected BSPs, can be converted to a static mesh. This is helpful when you want to assign different properties or behaviors that BSPs don't support, or to use them as reusable assets for building blueprints, or with foliage, etc.
+
+By default, a static mesh created this way has no collision hull, so a character will fall right through it. To add a collision hull:
+	- double-click the mesh to open the mesh editor, 
+	- to generate the hull automatically:
+		- from the Collision menu choose Auto Convex Collision
+		- in the details panel that opens, set the accuracy options, and click Apply
+		- a visualization of the collision hull will appear in the viewport
+	- otherwise, with other options in this menu you can build a hull by hand
+	- finally, save and close the mesh editor	
 
 ### More viewport editing options
 

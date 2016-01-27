@@ -868,6 +868,7 @@ draw2D = {
 // https://github.com/gka/chroma.js/blob/gh-pages/src/index.md
 // http://vis4.net/blog/posts/avoid-equidistant-hsv-colors/
 var draw2D_chroma = chroma("white");
+var draw2D_chroma_default = chroma("white");
 // http://glmatrix.net/docs/2.2.0/
 var modelView = mat3.create();
 var modelView_default = mat3.create();
@@ -875,6 +876,7 @@ mat3.identity(modelView_default);
 mat3.scale(modelView_default, modelView_default, [2, 2]);
 mat3.translate(modelView_default, modelView_default, [-0.5, -0.5]);
 var draw2D_modelView_stack = [];
+var draw2D_color_stack = [];
 
 var texture_default = (function() {
 	var id = gl.createTexture();
@@ -892,6 +894,7 @@ var texture_default = (function() {
 	return id;
 })();
 var texture_current = texture_default;
+var texture_current_stack = [];
 
 draw2D.texture = function(t) {
 	if (t !== undefined && t.tex !== undefined) {
@@ -903,9 +906,14 @@ draw2D.texture = function(t) {
 	}
 };
 
+////////////////////////////////////////////////////////////////////////
+
 draw2D.color = function(r, g, b, a) {
 	if (typeof r == "string" || typeof r == "object") {
 		draw2D_chroma = chroma(r); // "pink", '#ff3399', etc.
+		if (typeof g == "number") {
+			this.alpha(g);
+		}
 		return this;
 	}
 	if (typeof r == "undefined") r = 0;
@@ -915,6 +923,78 @@ draw2D.color = function(r, g, b, a) {
 	draw2D_chroma = chroma.gl(r, g, b, a);
 	return this;
 };
+draw2D.colour = draw2D.color;
+
+draw2D.hsl = function(h, s, l, a) {
+	if (typeof h == "undefined") h = 0;
+	if (typeof s == "undefined") s = 0.5;
+	if (typeof l == "undefined") l = 0.5;
+	draw2D_chroma = chroma.hsl(h * 360, s, l);
+	if (typeof a == "number") this.alpha(a);
+	return this;
+};
+
+draw2D.alpha = function(n) {
+	if (typeof n == "number") {
+		draw2D_chroma.alpha(n);
+	}
+	return this;
+};
+draw2D.opacity = draw2D.alpha;
+
+draw2D.hue = function(n) {
+	if (typeof n == "number") {
+		draw2D_chroma.set("hsl.h", n * 360);
+	}
+	return this;
+};
+
+draw2D.saturation = function(n) {
+	if (typeof n == "number") {
+		draw2D_chroma.set("hsl.s", n);
+	}
+	return this;
+};
+
+draw2D.lightness = function(n) {
+	if (typeof n == "number") {
+		draw2D_chroma.set("hsl.l", n);
+	}
+	return this;
+};
+
+draw2D.darken = function(n) {
+	draw2D_chroma.darken(n);
+	return this;
+};
+
+draw2D.brighten = function(n) {
+	draw2D_chroma.brighten(n);
+	return this;
+};
+
+draw2D.saturate = function(n) {
+	draw2D_chroma.saturate(n);
+	return this;
+};
+
+draw2D.desaturate = function(n) {
+	draw2D_chroma.desaturate(n);
+	return this;
+};
+
+// chroma.mix('red', 'blue', 0.25);
+//chroma.mix('red', 'blue', 0.5, 'hsl');
+//chroma.mix('red', 'blue', 0.5, 'lab');
+//chroma.mix('red', 'blue', 0.5, 'lch');
+
+draw2D.blend = function(b) {
+	if (b) {
+		gl.enable(gl.BLEND);
+	} else {
+		gl.disable(gl.BLEND);
+	}
+};
 
 draw2D.push = function(m) {
 	draw2D_modelView_stack.push(modelView);
@@ -922,12 +1002,22 @@ draw2D.push = function(m) {
 	if (typeof m == "object") {
 		mat3.multiply(modelView, modelView, m);
 	}
+	// also push/pop color:
+	draw2D_color_stack.push(draw2D_chroma);
+	draw2D_chroma = chroma.gl(draw2D_chroma.gl());
+	texture_current_stack.push(texture_current);
 	return this;
 };
 
 draw2D.pop = function() {
 	if (draw2D_modelView_stack.length > 0) {
 		modelView = draw2D_modelView_stack.pop();
+	}
+	if (draw2D_color_stack.length > 0) {
+		draw2D_chroma = draw2D_color_stack.pop();
+	}
+	if (texture_current_stack.length > 0) {
+		texture_current = texture_current_stack.pop();
 	}
 	return this;
 };
@@ -1287,6 +1377,31 @@ field2D.prototype.cell = function(x, y) {
 	return this.array.subarray(offset, offset + 4);
 };
 
+field2D.prototype.each = function(func) {
+	var array = this.array;
+	var w = this.width;
+	var h = this.height;
+	for (var y = 0; y < h; y++) {
+		for (var x = 0; x < w; x++) {
+			var i = (y * w + x) * 4;
+			var cell = this.array.subarray(i, i + 4);
+			var v = func(cell, x, y);
+			if (v !== undefined) {
+				if (isarraylike(v)) {
+					if (typeof v[0] === "number") cell[0] = v[0];
+					if (typeof v[1] === "number") cell[1] = v[1];
+					if (typeof v[2] === "number") cell[2] = v[2];
+				} else if (typeof v == "number") {
+					cell[0] = v;
+					cell[1] = v;
+					cell[2] = v;
+				}
+			}
+		}
+	}
+	return this;
+};
+
 //- return the value at a normalized index (0..1 range maps to field dimensions)
 // Uses linear interpolation between nearest cells.
 // Indices out of range will wrap.
@@ -1357,10 +1472,12 @@ field2D.prototype.deposit = function(value, x, y, channel) {
 		// single-channel only:
 		c0 = (typeof channel !== "number") ? 0 : wrap(channel, 4);
 		c1 = c0+1;
+	} else {
+		if (isarraylike(value) && value.length !== undefined) c1 = value.length;
 	}
 	for (var c = c0; c < c1; c++) {
 		var v = value; 
-		if (isarraylike(value)) v = v[channel];
+		if (isarraylike(value)) v = v[c];
 		if (v !== undefined) {
 			// old value
 			var v00 = array[i00 + c];
@@ -1519,6 +1636,19 @@ field2D.prototype.map = function(func) {
 	return this;
 };
 
+
+
+field2D.prototype.cell = function(x, y) {
+	/*if (typeof x !== "number" || typeof y !== "number") {
+	error("attempt to get field cell with invalid coordinate type");
+	return 0; 
+	}*/
+	x = (wrap(x, this.width));
+	y = (wrap(y, this.height));
+	var offset = (y * this.width + x) * 4;
+	return this.array.subarray(offset, offset + 4);
+};
+
 field2D.prototype.reduce = function(func, result) {
 	var array = this.array;
 	var w = this.width;
@@ -1642,6 +1772,50 @@ field2D.prototype.diffuse = function(sourcefield, diffusion, passes) {
 	return this;
 };
 
+/*
+
+
+var mat3 = draw2D.gl.mat3;
+var glvec2 = draw2D.gl.vec2;
+var glvec3 = draw2D.gl.vec3;
+
+function pose() {
+	this.mat = mat3.create();
+	this.inverse = mat3.create();
+	
+	pose.prototype.update.apply(this, arguments);
+}
+
+pose.prototype.global = function(v) {
+	return glvec2.transformMat3(new vec2(), v, this.mat);
+}
+
+pose.prototype.local = function(v) {
+	return glvec2.transformMat3(new vec2(), v, this.inverse);
+}
+
+pose.prototype.update = function(translate, rotate, scale) {
+	var m = this.mat;
+	mat3.identity(m);
+ 	if (typeof translate == "object") {
+ 		mat3.translate(m, m, translate);
+ 	}
+ 	if (typeof rotate == "number") {
+ 		mat3.rotate(m, m, rotate);
+ 	} else if (typeof rotate == "object") {
+ 		mat3.rotate(m, m, vec2.angle(rotate));
+ 	} 	
+	if (typeof scale == "number") {
+		mat3.scale(m, m, [scale, scale]);
+	} else if (typeof scale == "object") {
+		mat3.scale(m, m, scale);
+ 	}
+ 	mat3.invert(this.inverse, this.mat);
+	return this;
+};
+
+*/
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 requestAnimationFrame(render);
@@ -1651,7 +1825,7 @@ function render() {
 	requestAnimationFrame(render);
 
 	mat3.copy(modelView, modelView_default);
-	draw2D_chroma = chroma("white");
+	draw2D_chroma = draw2D_chroma_default;
 	texture_current = texture_default;
 
 	if (typeof(update) === "function") update();
@@ -1661,8 +1835,11 @@ function render() {
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 	
 	// regular blending:
-	gl.enable(gl.BLEND);
-	gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+//	gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+	gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+	draw2D.blend(true);
+	
+	// with uber shader, draw:
 	gl.useProgram(draw2D_program);
 	if (typeof(draw) === "function") draw();
 	gl.useProgram(null);

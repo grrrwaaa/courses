@@ -419,21 +419,32 @@ draw2D.pop();
 Most calls to draw2D can be chained together, since they return the ```draw2D``` object itself. Now typically, to move into an agent's coordinate system, operate in the order "translate, rotate, scale". So since most draw2D methods can also accept vec2 arguments, a common idiom is:
 
 ```javascript
-	// push into agent's local coordinate system:
-	draw2D.push()	
-		.translate(agent.position)
-		.rotate(agent.direction)
-		.scale(agent.size);
-		
-		// draw agent body -- the X axis is agent's forward direction
-		draw2D.rect();
-		draw2D.circle([0.5,  0.5], 0.5);
-		draw2D.circle([0.5, -0.5], 0.5);
+// push into agent's local coordinate system:
+draw2D.push()	
+	.translate(agent.position)
+	.rotate(agent.direction)
+	.scale(agent.size);
 	
-	draw2D.pop();  // done drawing agent
+	// draw agent body -- the X axis is agent's forward direction
+	draw2D.rect();
+	draw2D.circle([0.5,  0.5], 0.5);
+	draw2D.circle([0.5, -0.5], 0.5);
+
+draw2D.pop();  // done drawing agent
 ```
 
-Graphics are drawn using whatever color is currently set, via ```draw2D.color()```:
+Basic shapes are as follows:
+
+```javascript
+draw2D.circle(center_x, center_y, diameter);
+draw2D.circle(center_x, center_y, diameter_x, diameter_y);
+
+draw2D.rect(center_x, center_y, size);
+draw2D.rect(center_x, center_y, width, height);
+```
+
+
+Graphics are drawn using whatever color is currently set, via ```draw2D.color()```. 
 
 ```javascript
 draw2D.color(1, 0, 0); // red
@@ -441,18 +452,54 @@ draw2D.color(0, 1, 0); // green
 draw2D.color(0, 0, 1); // blue
 draw2D.color(1, 1, 1, 0.5); // semi-transparent white
 
-// you can also use standard CSS color names:
+// set via hue, saturation, and lightness (instead of red, green, blue)
+draw2D.hsl(0.5, 0.5, 0.5);
+draw2D.hsl(0.5, 0.5, 0.5, 0.5);	// semi-opaque
+
+// you can also use standard CSS colors:
+draw2D.color("#ff3399"); 
 draw2D.color("red");
 ```
 
-Basic shapes are as follows:
+The full list of named colors is [here](http://www.w3schools.com/colors/colors_hex.asp). More color methods modify the current color:
 
 ```javascript
-	draw2D.circle(center_x, center_y, diameter);
-	draw2D.circle(center_x, center_y, diameter_x, diameter_y);
-	
-	draw2D.rect(center_x, center_y, size);
-	draw2D.rect(center_x, center_y, width, height);
+// set opacity (0..1):
+draw2D.alpha(0.5);
+draw2D.opacity(0.5);
+
+// set hue, saturation, lightness individually:
+draw2D.hue(0.5);
+draw2D.saturation(0.5); 
+draw2D.lightness(0.5); 
+
+// other modulations:
+draw2D.darken();
+draw2D.brighten();
+draw2D.saturate();
+draw2D.desaturate();
+```
+
+> Note that colors are also managed by push() and pop().
+
+It is also possible to cover the shape with a field2D, by setting it as a texture. To stop using the texture, call ```draw2D.texture()``` (with no arguments), or wrap the use of textures with ```draw2D.push()``` and ```draw2D.pop()```:
+
+```javascript
+var field = field2D(16);
+field.set(function() { return random(); });
+
+// in draw():
+draw2D.push();
+	draw2D.texture(field);
+	draw2D.rect();
+draw2D.pop();
+```
+
+Finally, we can choose whether to mix drawings additively to each other, or simply replace previous drawings, by setting the blend option:
+
+```
+draw2D.blend(true);	// mix with previous drawings
+draw2D.blend(false); // replace previous drawings
 ```
 
 > Note: The draw2D transform and color are reset before each ```draw()``` call.
