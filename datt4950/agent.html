@@ -133,7 +133,7 @@ sugar.normalize();
 <pre><code class="lang-javascript">    // in per agent <span class="hljs-keyword">update</span> routine:
     <span class="hljs-keyword">var</span> sensed_sugar_concentration = sugar.<span class="hljs-keyword">sample</span>(a.pos);
 </code></pre>
-<p>Then all we need is to compare the sugar concentration with the agent&#39;s memory (a stored member variable) of the concentration on the last time step. </p>
+<p>Then all we need is to compare the sugar concentration with the agent&#39;s memory (a stored member variable) of the concentration on the last time step, and choose the behavior accordingly.</p>
 <p>Here&#39;s an implementation of <a href="http://codepen.io/grrrwaaa/pen/yepmvq?editors=001">Chemotaxis</a> in the editor.</p>
 <blockquote>
 <p>A variety of other <em>taxes</em> worth exploring can be found on the <a href="http://en.wikipedia.org/wiki/Taxis#Aerotaxis">wikipedia page</a>. Note how chemotaxis (and other taxes) can be divided into positive (attractive) and negative (repulsive) characters, just like forces (directly seen in steering forces). This is closely related to the concepts of positive and negative feedback and the explorations of cybernetics.</p>
