@@ -252,16 +252,15 @@ function generate(root) {
 
 generate(sitetree);
 
-
-/*
-// now watch:
-watcher = fs.watch(config.src, {}, function(event, file) {
-	console.log(event, file);
-	var dir = config.src;
-	if (event == "change" || event == "rename") {
-		generate(sitetree);
+if (false) {
+	// now watch:
+	watcher = fs.watch(config.src, {}, function(event, file) {
+		console.log(event, file);
+		var dir = config.src;
+		if (event == "change" || event == "rename") {
+			generate(sitetree);
 		
-		console.log("ok");
-	}
-});
-*/
+			console.log("ok");
+		}
+	});
+}

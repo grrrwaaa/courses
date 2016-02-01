@@ -77,53 +77,19 @@ For simulation updates, implement a function called ```update()```.
 
 To define how the canvas renders, implement a function called ```draw()```. All graphics code should go into this callback.
 
-<!-- gl context argument -->
-
-<!-- The ```reset()``` function is used to re-initialize variables, when the "reset" button on the HTML page is pressed.
-
-For example:
-
-```javascript
-var x = 0;
-
-function reset() {
-	x = 0;
-}
-
-function draw (ctx) {
-	ctx.fillStyle = "green";
-	ctx.fillRect(x, 0.5, 0.1, 0.1);
-}
-
-function update(dt) {
-	x = x + dt*0.1;
-}
-```
-
 ### Interaction
 
 Two additional callbacks exist to detect mouse and keyboard interaction respectively. 
 
 ```javascript
-// event can be "down" or "up" for clicks,
-// or "drag" when moving with a mouse button pressed,
-// or "move" when moving with no button pressed,
-// event is "enter" when the mouse enters the canvas, and "exit" when the mouse goes outside it
-// button is the mouse button pressed (0 for left, 1 for right...)
-// in all the above cases, 
-// x and y are the mouse position from 0,0 (top left) to 1,1 (bottom right)
-
-function mouse(event, button, x, y) {
-	console.log(event, button, x, y);
+function mouse(event, point) {
+	console.log(event, point);
 }
 
-// if event is "press", key is a single character string
-// if event is "down" or "up", key is a numeric code
 function key(event, key) {
 	console.log(event, key);
 }
 ```
--->
 
 ## Globals
 
@@ -138,6 +104,8 @@ random(); 		// a floating-point number between 0 and 1
 random(6);		// an integer between 0 and 5
 wrap(-1, 4);	// returns 3 (whereas -1 % 4 would return -1)
 ```
+
+The ```write()``` function will output text above the main canvas. It can be more useful than calling ```console.log()``` in certain situations, since the text will reset on each frame. 
 
 ## field2D
 

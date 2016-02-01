@@ -24,14 +24,28 @@ The theory of natural evolution combines **population, diversity, heredity and s
 
 The main systematic differences are that the underlying mechanisms specified by us in advance, as are the initial populations and environmental conditions (if any). Most importantly, *the mechanism of selection is usually predetermined*. And of course, artificial evolution occurs in a much simpler substrate than real chemistry.
 
-See [Karl Sims' Genetic Images](http://www.karlsims.com/genetic-images.html).
-[1991 Siggraph Paper](http://www.karlsims.com/papers/siggraph91.html)
+[A fantastic list of practical applications of genetic algorithm & evolutionary programming](http://www.talkorigins.org/faqs/genalg/genalg.html#examples) 
 
-Scott Draves, “Evolution and Collective Intelligence of the Electric Sheep,” The Art of Artificial Evolution, 2008.
+### Some inspiration
+
+[Karl Sims' Genetic Images](http://www.karlsims.com/genetic-images.html) -- and the [1991 Siggraph Paper](http://www.karlsims.com/papers/siggraph91.html)
+
+[Karl Sims: Evolving 3D Morphology and Behavior by Competition, 1994](http://www.karlsims.com/evolved-virtual-creatures.html):
+
+<iframe width="420" height="315" src="https://www.youtube.com/embed/JBgG_VSP7f8" frameborder="0" allowfullscreen></iframe>
+
+[Scott Draves, “Evolution and Collective Intelligence of the Electric Sheep,” The Art of Artificial Evolution, 2008.](http://draves.org/aoae07/draves-aoae07.pdf)
+
+<iframe src="https://player.vimeo.com/video/22469941" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p><a href="https://vimeo.com/22469941">High Fidelity Sample</a> from <a href="https://vimeo.com/user4921556">Scott Draves</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 
 [Evolving 2D cars](http://boxcar2d.com/)
 
 [Evolving soft robots](https://www.youtube.com/watch?feature=player_embedded&v=z9ptOeByLA4)
+
+Evolving neural networks to play Mario:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/S9Y_I9vY8Qw" frameborder="0" allowfullscreen></iframe>
 
 An excellent discussion of [the genetic algorithm in art and its relation to Deleuze, by Manuel Delanda](http://www.youtube.com/watch?v=50-d_J0hKz0)
 
@@ -41,6 +55,8 @@ Darwin's theory is sometimes misconceived as "survival of the fittest" or even t
 
 - First, the *notion of "fittest" is misleading*. It implies a static and absolute measure against which all individuals and species in the biological record can be compared. In natural evolution there can be no pre-defined (*a priori*) fitness measure. This is because the environmental conditions are highly dynamic, and thus selective criteria are quite contextual. The conditions in which we live evolve along with us, and the other species in our habitat, as we mutually influence each other. Evolution is an open-ended process. 
 
+- The complication of living in an ever-changing environment means that no one strategy can be universally superior. This is sometimes referred to as the "no free lunch" theorem, which is more accurately stated that "if an algorithm performs well on a certain class of problems then it necessarily pays for that with degraded performance on the set of all remaining problems." (Wolpert, D.H., Macready, W.G. (1997), "No Free Lunch Theorems for Optimization", IEEE Transactions on Evolutionary Computation 1, 67.)
+
 - Since there is no absolute goal or progress, the most we can measure in natural evolution is the changing frequencies over time of individual species, or of individual characteristics of a population. More importantly, evolution cannot be said to have a singular direction. That is to say, it is goal-less (*non-teleological*), and thus, counter to common opinion, *natural evolution does not imply progress*. 
 
 - Nor is evolution a continuous process of change. The fossil records appear to show long periods of relative stability divided by relatively brief periods of biological invention. There are several competing theories as to why, but interestingly this "*punctuated equilibrium*" has appeared also in many artificial evolutionary systems.
@@ -49,7 +65,7 @@ Darwin's theory is sometimes misconceived as "survival of the fittest" or even t
 
 - Evolution does not act on every facet of an organism, only those that directly influence viability (in the current environment). If a variation has neither positive or negative impact on the reproductive capability of an individual in the environment, this variation is called **neutral**. Since small variations are always occurring, neutral variations can tend to accumulate over time. Over time the gene pool may broaden and move quite far from its origin without causing any major changes in selective viability; this is called **neutral drift**.  This may be an important mechanism to escape evolutionary dead-ends (local minima in the fitness landscape). This is certainly true for many artificial evolutionary systems. It has also been hypothesized as an explanation for the long chunks of apparently unused DNA in our own genome, and also for punctuated equilibrium.
 
-- Competition turns out not to be the prime mode of interaction between species; most species are relatively independent, and the ones that do closely interact are more likely to be collaborative (symbiotic, parasitic, etc.) than competitive, as that is more likely to lead to viability. Like our society, the natural environment is complex enough to provide multiple methods of making a living. Evolution does not imply that individuals display selfish, competitive behavior. When Dawkins described evolution in terms of [selfish genes](http://en.wikipedia.org/wiki/The_Selfish_Gene), it indicates a gene-centric perspective on evolution that implies selfless and sometimes altruistic behavior in organisms.
+- Competition turns out not to be the prime mode of interaction between species; most species are relatively independent, and the ones that do closely interact are more likely to be collaborative (symbiotic, parasitic, etc.) than competitive, as that is more likely to lead to viability. Like our society, the natural environment is complex enough to provide multiple methods of making a living. Evolution does not imply that individuals display selfish, competitive behavior. When Dawkins described evolution in terms of [selfish genes](http://en.wikipedia.org/wiki/The_Selfish_Gene), it indicates a gene-centric perspective on evolution that implies selfless and sometimes altruistic behavior in organisms. Nevertheless, there is a sense in which competition applies, as with [red queen](http://en.wikipedia.org/wiki/Red_Queen_hypothesis) hypothesis: that organisms must constantly adapt, evolve, and proliferate not merely to gain advantage in reproductive viability, but also simply to survive while pitted against an ever-evolving context. However it is not clear whether a simple "arms race" is a sufficient perspective, or whether more complex and even abiotic factors may be more significant.
 
 - Evolution by itself is not particularly creative, and its importance may have been over-stated. A continuous generation of novel diversity, new characteristics, is essential to the theory of natural selection. However the theory does not account for how diversity arises, simply that there must be a mechanism, which usually operates during reproduction. 
 
@@ -126,13 +142,148 @@ The mechanisms of variation possible partly depend on the representation chosen.
 
 > Why use reproduction for evolution? In the face of an unpredictable environment, we cannot know which strategy will be best; we can try small variations, and hedge our bets by making very many of them (population diversity). An individual loss is not catastrophic, but a few successes can be learned from. Furthermore, the face of unpredictibility implies that what was true today may not be tomorrow, so the flexibility to avoid timeless commitment is also a good strategy; but the inheritance of choices is a useful option when the environment retains some stability. If the world were fully predictable, a rational, teleological, monothematic strategy would be preferable. But the world isn't totally random either (if it was, there would be no valid strategy worth pursuing.) 
 
-See the [red queen](http://en.wikipedia.org/wiki/Red_Queen_hypothesis) problem.
-
-As with temperature-like parameters we saw in CA, a crucial factor in evolution is the rate or probability of variation. Too much, and the population may never significantly diverge from a randomly initialized one; too little, and it may find itself stuck on the first solution it finds, with a largely homogenous population. It may be wise to have different mutation rates for different genes, or for different members of a population, or by fitness rank etc. It is likely desirable to gradually reduce mutation rates over time, unless the population appears to be stagnating. 
-
-See also simulated annealing.
+As with temperature-like parameters we saw in CA, a crucial factor in evolution is the rate or probability of variation. Too much, and the population may never significantly diverge from a randomly initialized one; too little, and it may find itself stuck on the first solution it finds, with a largely homogenous population. It may be wise to have different mutation rates for different genes, or for different members of a population, or by fitness rank etc. It is likely desirable to gradually reduce mutation rates over time, unless the population appears to be stagnating. (See also simulated annealing.)
 
 ----
+
+## A trivial string generator
+
+Just to practice the mechanics, we can start by evolving sentences toward a desired result. Each gene is an integer, which is mapped to a word from a predefined list:
+
+```javascript
+// the desired result:
+var target = "the quick brown fox jumped over the lazy dog";
+
+// the set of components:
+var dictionary = ["I", "a", "an", "bleep", "blown", "bog", "box", "broad", "brown", "bumped", "cat", "cog", "coloured", "colourful", "colourless", "crazy", "creep", "crown", "dig", "do", "dog", "door", "dot", "ever", "fit", "fix", "flick", "for", "fox", "frown", "glean", "great", "greed", "green", "greet", "hazy", "he", "hog", "ideas", "idols", "in", "it", "jumble", "jumped", "jumper", "jumps", "last", "lazy", "leaped", "lumped", "maze", "of", "offer", "ogre", "older", "on", "or", "over", "quick", "quite", "rapid", "she", "sheen", "sheep", "sick", "sleep", "slept", "slow", "spelt", "spilt", "the", "town", "under"];
+
+// initial:
+var geno = [];
+for (var i=0; i < 9; i++) {
+	geno[i] = random(dictionary.length);
+}
+// develop:
+var pheno = [];
+for (var i=0; i < geno.length; i++) {
+	pheno[i] = dictionary[ geno[i] ];
+}
+pheno = pheno.join(" ");
+```
+
+To evaluate, we could compare how many of the right characters are in the right places:
+
+```javascript
+var err = 0;
+for (var i=0; i < pheno.length; i++) {
+	if (pheno.substr(i, 1) != target.substr(i, 1)) {
+		err++;
+	}
+}
+// make it fair between long & short strings:
+err /= pheno.length;
+```
+
+To convert this error into a fitness, where fittest is 1 and least fit is zero, we could apply a ```1/(1+n)``` mapping:
+
+```javascript
+var fitness = 1 / (1 + err);
+```
+
+This gives us all the basic components we need to generate a random population as genotypes. We already know how to develop and evaluate such a genotype, and storing several in a population is trivial. 
+
+It is generally useful to sort a population by fitness, which can be done like so:
+
+```javascript
+// sort the population by comparing pairs
+// as a result, the fittest candidate will be in population[0]
+population.sort(function(a, b) { return b.fitness - a.fitness; });
+```
+
+> After sorting it is convenient to print out the candidates, their fitness, etc, so we can see how the evolution proceeds.
+
+After evaluating, we create a new generation of candidates, broadly derived from the previous, but with fitter candidates being more likely to be progenitors. The simplest method is to pick a parent at random, but biasing toward the lower indices. (A simple trick to do this is for the nth child to use a the parent at index ```random(n)```.)
+
+We must also introduce some variation (mutations) while generating new genotypes at this point. The simplest method is to introduce a branch with a predetermined probability to randomize a gene rather than copy from the parent, e.g.:
+
+```javascript
+// copy or mutate genes:
+for (var j = 0; j < gene_size; j++) {
+	// mutate?
+	if (random() < mutability) {
+		child[j] = random(gene_range); 
+	} else {
+		// copy:
+		child[j] = parent[j];
+	}
+}
+```
+
+Does it work? If not, can you think of ideas why -- and any ideas to improve it?
+
+## A simple math solver
+
+The string example was a little silly, but let's say we want to write a program (the phenotype) that can solve math problems. To start as simple as possible, we can restrict our programs to numerals and symbols of basic arithmetic:
+
+```javascript
+var symbols = ["+", "-", "*", "/", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+```
+
+To generate a random program, of say, length 10 characters, and run it, we would do something like this:
+
+```javascript
+// fill an array:
+var arr = [];
+for (var i=0; i<10; i++) {
+	// pick a symbol at random to add:
+	arr[i] = symbols[random(symbols.length)];
+}
+// convert the array of symbols to a string of code:
+var code = "return " + arr.join("");
+// convert to an executable function:
+var f = new Function(code);
+// run it to get the result
+console.log(f());
+```
+
+The chances are, the generated code is garbage, and might well throw an error, or return a meaningless result such as ```Infinity``` or ```NaN```. These errors could break or throw off our simulation, but we can trap them safely as follows:
+
+```javascript
+try {
+	// convert to an executable function:
+	var f = new Function(code);
+	// run it to get the result
+	var result = f();
+	if (result != Infinity && result != -Infinity && result == result) {
+		console.log(result);
+	}
+}
+```
+
+Now we can evaluate the fitness of our result, relative to a target number. We can take the absolute difference, and then put this through a ```1/(1+n)``` mapping as before. This mapping is somewhat arbitrary, but works for our purposes here:
+
+```javascript
+fitness = 1 / 1 + (Math.abs(result - target));
+```
+
+---
+
+With this in play, we should already see some clear evolutionary behaviour. You may notice punctuated equilibria. Run the simulation many times, and you may notice that the fittest candidate is not always converging to the same result. There are clearly multiple distant fitness peaks here. 
+
+You may notice that the code generated sometimes looks odd -- and that the evolution has discovered tricks such as adding numbers multiplied by zero, prefixing zeroes to numbers, and even placing two slashes to create a comment (followed by "junk DNA"), in order to get a result with the specific gene length. We could easily prevent this by turning our ```"/"``` symbol into a ```" / "``` symbol, but perhaps there is an advantage not to?
+
+Try changing the genome size, the population size, and the mutation rates, to see how it changes. 
+
+Try playing with the symbol list. What happens if you add the "." character? How about "(" and ")"?
+
+The mutation rate acts a bit like a temperature control -- too high and good results can't remain viable, too low and it takes to long to get anywhere. Larger populations help to generate more chances of leaping off a local peak. Too short genome sizes can be a tough challenge, but too long genomes make it less likely to find a result quickly -- and add more noise. Is there a way to make genome size variable, and give shorter results higher fitness? What other mutation methods could help? What other developmental models could be tried? Is there a better way to pick parents?
+
+Generally, by observing the behaviour, what insights can you draw, and what ideas have you for improving it?
+
+How would you be able to add operators such as ```Math.sin()```?  
+
+What other problems could you imagine addressing, other than calculating numbers? (What kinds of problems is this method suited for?)
+
+<!------
 
 ## Genetic Programming
 
@@ -224,7 +375,4 @@ For tree-like representations it becomes more complex and interesting: Mutations
 Meta-evolution: the mechanisms of evolution (including development, variation, etc.) are also subject to variation and selection. After all, sexual reproduction had to be *discovered*. It turns out that some parts of our genes have evolved to be far less volatile than others, for good reason. 
 
 Jurgen Schmidhuber proposed using GP to evolve GP (Meta-GP), since things like chromosomes, crossover etc. are themselves phenomena that have evolved. 
-
----
-
-There is an obvious analogy of the genotype-as-code and phenotype-as-running-program underlying most systems. Few systems provide full models of development and genetic transfer, assuming instead a relatively predictable translation. Some systems explicity encode numeric values in the genotype (this is not naturalistic). 
+-->

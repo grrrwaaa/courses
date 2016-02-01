@@ -245,6 +245,31 @@ var loadProgram = function(gl, shaders, opt_attribs, opt_locations) {
 	return program;
 };
 
+// Find the right method, call on correct element
+var requestFullscreen = function(element) {
+  if(element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if(element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if(element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  } else if(element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  }
+};
+
+// Whack fullscreen
+var exitFullscreen = function() {
+  if(document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if(document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if(document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  }
+};
+
+
 /**
 * Provides requestAnimationFrame in a cross browser way.
 */
@@ -272,23 +297,37 @@ cancelRequestAnimationFrame = (function() {
 })();
   
 var canvas = document.createElement('canvas');
+var overlay = document.createElement("div");
 var page_to_gl = mat3.create();
-
+var updating = true;
 
 var onresize = function() {
 	w = Math.min(innerWidth, innerHeight);
 	canvas.setAttribute("width", w);
 	canvas.setAttribute("height", w);
-
 	canvas.style.width = w + 'px';
 	canvas.style.height = w + 'px';
-
 	canvas.style.position = "absolute";
 	canvas.style.top = 0 + "px";
 	canvas.style.bottom = 0 + "px";
 	canvas.style.left = 0 + "px";
 	canvas.style.right = 0 + "px";
 	canvas.style.margin = "auto";
+	
+	overlay.setAttribute("width", w);
+	overlay.setAttribute("height", w);
+	overlay.style.width = w + 'px';
+	overlay.style.height = w + 'px';
+	overlay.style.position = "absolute";
+	overlay.style.top = 0 + "px";
+	overlay.style.bottom = 0 + "px";
+	overlay.style.left = 0 + "px";
+	overlay.style.right = 0 + "px";
+	overlay.style.margin = "auto";
+	overlay.style.color = "grey";
+	overlay.style["pointer-events"] = "none";
+	overlay.style["font-family"] = "monospace";
+	overlay.style["white-space"] = "pre-wrap";
 	
 	var canvas_rect = canvas.getBoundingClientRect();
 	
@@ -310,6 +349,7 @@ document.body.style.margin = "0px";
 document.body.style.padding = "0px";
 document.body.style.backgroundColor = "#888888";
 document.body.appendChild(canvas); // or document.getElementById('someBox').appendChild(canvas);
+document.body.appendChild(overlay);
 onresize();
 
 var mouseevent = function(event, name) {
@@ -391,6 +431,9 @@ var keyevent = function(event, name, callback) {
 
 window.addEventListener( "keydown", function(event) {
 	var k = event.key || event.keyCode;
+	
+	if (k == 27) requestFullscreen(document.body);
+	
 	if (typeof(key) === "function") key("down", k);
 	if (typeof(keydown) === "function") keydown(k);
 	// only printable characters:
@@ -433,6 +476,7 @@ window.addEventListener( "keyup", function(event) {
 
 window.addEventListener( "keypress", function(event) {
 	var c = String.fromCharCode(event.which).replace(/[^ -~]+/g, "");	
+	if (c == " ") updating = !updating;
 	if (c !== "" && typeof(key) === "function") key("press",c);
 	if (c !== "" && typeof(keypress) === "function") keypress(c);
 }, true);
@@ -1495,8 +1539,11 @@ field2D.prototype.deposit = function(value, x, y, channel) {
 	return this;
 };
 
+
+
 // change to a new value (change is interpolated between nearest cells)
 field2D.prototype.update = function(value, x, y, channel) {
+	var array = this.array;
 	if (typeof x == "object") {
 		channel = y;
 		y = x[1];
@@ -1504,10 +1551,30 @@ field2D.prototype.update = function(value, x, y, channel) {
 	}
 	if (typeof x !== "number" || typeof y !== "number") {
 		// or deposit to all cells?
-		error("attempt to get field cell with invalid coordinate type");
-		return 0;
+		
+		if (typeof(value) == "function") {
+			// normalized-sampling mapper:
+			var func = value;
+			var h = this.height;
+			var w = this.width;
+			var dw = 1/w;
+			var dh = 1/h;
+			var p = new vec2();
+			for (var yi = 0; yi < h; yi++) {
+				for (var xi = 0; xi < w; xi++) {
+					p[0] = (xi + 0.5)*dw;
+					p[1] = (yi + 0.5)*dh;
+					var idx = (yi * w + xi) * 4;
+					var old = array.subarray(idx, idx + 4);
+					this.setxy(func(old, p), xi, yi);
+				}
+			}
+			return this;
+			
+		} else {
+			return this.set(value);
+		}
 	}
-	var array = this.array;
 	x = wrap(((x * this.width) - 0.5), this.width);
 	y = wrap(((y * this.height) - 0.5), this.height);
 	var x0 = Math.floor(x);
@@ -1564,7 +1631,7 @@ field2D.prototype.setxy = function(value, x, y) {
 		// recursive call allows us to handle 
 		// functions that return different types
 		return this.setxy(value.call(this, x, y), x, y);
-	} else if (value instanceof Array) {
+	} else if (isarraylike(value)) {
 		// the "normal" case:
 		var offset = (y * this.width + x) * 4;
 		var v0 = value.length > 0 ? +value[0] : 0;
@@ -1818,8 +1885,18 @@ pose.prototype.update = function(translate, rotate, scale) {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
-requestAnimationFrame(render);
+var pretext = "";
 
+write = function() {
+	for(var i = 0, total = 0; i < arguments.length; i++) {
+        pretext += JSON.stringify(arguments[i]) + "\t";
+    }
+    pretext += "\n";
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+requestAnimationFrame(render);
 
 function render() {
 	requestAnimationFrame(render);
@@ -1828,7 +1905,11 @@ function render() {
 	draw2D_chroma = draw2D_chroma_default;
 	texture_current = texture_default;
 
-	if (typeof(update) === "function") update();
+	if (updating) {
+		if (typeof(update) === "function") {
+			update();
+		}
+	}
 	
 	// Set the viewport to match
 	gl.viewport(0, 0, canvas.width, canvas.height);
@@ -1844,4 +1925,8 @@ function render() {
 	if (typeof(draw) === "function") draw();
 	gl.useProgram(null);
 	
+	if (pretext !== "") {
+		overlay.innerHTML = pretext;
+		pretext = "";
+	}
 }
