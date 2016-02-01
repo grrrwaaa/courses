@@ -32,16 +32,31 @@
 <li>Provide a mechanism of selection </li>
 </ul>
 <p>The main systematic differences are that the underlying mechanisms specified by us in advance, as are the initial populations and environmental conditions (if any). Most importantly, <em>the mechanism of selection is usually predetermined</em>. And of course, artificial evolution occurs in a much simpler substrate than real chemistry.</p>
-<p>See <a href="http://www.karlsims.com/genetic-images.html">Karl Sims&#39; Genetic Images</a>.
-<a href="http://www.karlsims.com/papers/siggraph91.html">1991 Siggraph Paper</a></p>
-<p>Scott Draves, “Evolution and Collective Intelligence of the Electric Sheep,” The Art of Artificial Evolution, 2008.</p>
-<p><a href="http://boxcar2d.com/">Evolving 2D cars</a></p>
-<p><a href="https://www.youtube.com/watch?feature=player_embedded&amp;v=z9ptOeByLA4">Evolving soft robots</a></p>
+<p><a href="http://www.talkorigins.org/faqs/genalg/genalg.html#examples">A fantastic list of practical applications of genetic algorithm &amp; evolutionary programming</a> </p>
+<h3 id="some-inspiration">Some inspiration</h3>
+<p><a href="http://www.karlsims.com/genetic-images.html">Karl Sims&#39; Genetic Images</a> -- and the <a href="http://www.karlsims.com/papers/siggraph91.html">1991 Siggraph Paper</a></p>
+<p><a href="http://www.karlsims.com/evolved-virtual-creatures.html">Karl Sims: Evolving 3D Morphology and Behavior by Competition, 1994</a>:</p>
+<iframe width="420" height="315" src="https://www.youtube.com/embed/JBgG_VSP7f8" frameborder="0" allowfullscreen></iframe>
+
+<p><a href="http://draves.org/aoae07/draves-aoae07.pdf">Scott Draves, “Evolution and Collective Intelligence of the Electric Sheep,” The Art of Artificial Evolution, 2008.</a></p>
+<iframe src="https://player.vimeo.com/video/22469941" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p><a href="https://vimeo.com/22469941">High Fidelity Sample</a> from <a href="https://vimeo.com/user4921556">Scott Draves</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
+<a href="http://boxcar2d.com/">Evolving 2D cars</a>
+
+<a href="https://www.youtube.com/watch?feature=player_embedded&amp;v=z9ptOeByLA4">Evolving soft robots</a>
+
+Evolving neural networks to play Mario:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/S9Y_I9vY8Qw" frameborder="0" allowfullscreen></iframe>
+
 <p>An excellent discussion of <a href="http://www.youtube.com/watch?v=50-d_J0hKz0">the genetic algorithm in art and its relation to Deleuze, by Manuel Delanda</a></p>
 <h3 id="subtleties-and-misconceptions">Subtleties and misconceptions</h3>
 <p>Darwin&#39;s theory is sometimes misconceived as &quot;survival of the fittest&quot; or even the competitive &quot;law of the jungle&quot;, but evolution turns out to be quite a bit more subtle than this.</p>
 <ul>
 <li><p>First, the <em>notion of &quot;fittest&quot; is misleading</em>. It implies a static and absolute measure against which all individuals and species in the biological record can be compared. In natural evolution there can be no pre-defined (<em>a priori</em>) fitness measure. This is because the environmental conditions are highly dynamic, and thus selective criteria are quite contextual. The conditions in which we live evolve along with us, and the other species in our habitat, as we mutually influence each other. Evolution is an open-ended process. </p>
+</li>
+<li><p>The complication of living in an ever-changing environment means that no one strategy can be universally superior. This is sometimes referred to as the &quot;no free lunch&quot; theorem, which is more accurately stated that &quot;if an algorithm performs well on a certain class of problems then it necessarily pays for that with degraded performance on the set of all remaining problems.&quot; (Wolpert, D.H., Macready, W.G. (1997), &quot;No Free Lunch Theorems for Optimization&quot;, IEEE Transactions on Evolutionary Computation 1, 67.)</p>
 </li>
 <li><p>Since there is no absolute goal or progress, the most we can measure in natural evolution is the changing frequencies over time of individual species, or of individual characteristics of a population. More importantly, evolution cannot be said to have a singular direction. That is to say, it is goal-less (<em>non-teleological</em>), and thus, counter to common opinion, <em>natural evolution does not imply progress</em>. </p>
 </li>
@@ -51,7 +66,7 @@
 </li>
 <li><p>Evolution does not act on every facet of an organism, only those that directly influence viability (in the current environment). If a variation has neither positive or negative impact on the reproductive capability of an individual in the environment, this variation is called <strong>neutral</strong>. Since small variations are always occurring, neutral variations can tend to accumulate over time. Over time the gene pool may broaden and move quite far from its origin without causing any major changes in selective viability; this is called <strong>neutral drift</strong>.  This may be an important mechanism to escape evolutionary dead-ends (local minima in the fitness landscape). This is certainly true for many artificial evolutionary systems. It has also been hypothesized as an explanation for the long chunks of apparently unused DNA in our own genome, and also for punctuated equilibrium.</p>
 </li>
-<li><p>Competition turns out not to be the prime mode of interaction between species; most species are relatively independent, and the ones that do closely interact are more likely to be collaborative (symbiotic, parasitic, etc.) than competitive, as that is more likely to lead to viability. Like our society, the natural environment is complex enough to provide multiple methods of making a living. Evolution does not imply that individuals display selfish, competitive behavior. When Dawkins described evolution in terms of <a href="http://en.wikipedia.org/wiki/The_Selfish_Gene">selfish genes</a>, it indicates a gene-centric perspective on evolution that implies selfless and sometimes altruistic behavior in organisms.</p>
+<li><p>Competition turns out not to be the prime mode of interaction between species; most species are relatively independent, and the ones that do closely interact are more likely to be collaborative (symbiotic, parasitic, etc.) than competitive, as that is more likely to lead to viability. Like our society, the natural environment is complex enough to provide multiple methods of making a living. Evolution does not imply that individuals display selfish, competitive behavior. When Dawkins described evolution in terms of <a href="http://en.wikipedia.org/wiki/The_Selfish_Gene">selfish genes</a>, it indicates a gene-centric perspective on evolution that implies selfless and sometimes altruistic behavior in organisms. Nevertheless, there is a sense in which competition applies, as with <a href="http://en.wikipedia.org/wiki/Red_Queen_hypothesis">red queen</a> hypothesis: that organisms must constantly adapt, evolve, and proliferate not merely to gain advantage in reproductive viability, but also simply to survive while pitted against an ever-evolving context. However it is not clear whether a simple &quot;arms race&quot; is a sufficient perspective, or whether more complex and even abiotic factors may be more significant.</p>
 </li>
 <li><p>Evolution by itself is not particularly creative, and its importance may have been over-stated. A continuous generation of novel diversity, new characteristics, is essential to the theory of natural selection. However the theory does not account for how diversity arises, simply that there must be a mechanism, which usually operates during reproduction. </p>
 </li>
@@ -115,84 +130,198 @@
 <blockquote>
 <p>Why use reproduction for evolution? In the face of an unpredictable environment, we cannot know which strategy will be best; we can try small variations, and hedge our bets by making very many of them (population diversity). An individual loss is not catastrophic, but a few successes can be learned from. Furthermore, the face of unpredictibility implies that what was true today may not be tomorrow, so the flexibility to avoid timeless commitment is also a good strategy; but the inheritance of choices is a useful option when the environment retains some stability. If the world were fully predictable, a rational, teleological, monothematic strategy would be preferable. But the world isn&#39;t totally random either (if it was, there would be no valid strategy worth pursuing.) </p>
 </blockquote>
-<p>See the <a href="http://en.wikipedia.org/wiki/Red_Queen_hypothesis">red queen</a> problem.</p>
-<p>As with temperature-like parameters we saw in CA, a crucial factor in evolution is the rate or probability of variation. Too much, and the population may never significantly diverge from a randomly initialized one; too little, and it may find itself stuck on the first solution it finds, with a largely homogenous population. It may be wise to have different mutation rates for different genes, or for different members of a population, or by fitness rank etc. It is likely desirable to gradually reduce mutation rates over time, unless the population appears to be stagnating. </p>
-<p>See also simulated annealing.</p>
+<p>As with temperature-like parameters we saw in CA, a crucial factor in evolution is the rate or probability of variation. Too much, and the population may never significantly diverge from a randomly initialized one; too little, and it may find itself stuck on the first solution it finds, with a largely homogenous population. It may be wise to have different mutation rates for different genes, or for different members of a population, or by fitness rank etc. It is likely desirable to gradually reduce mutation rates over time, unless the population appears to be stagnating. (See also simulated annealing.)</p>
 <hr>
-<h2 id="genetic-programming">Genetic Programming</h2>
-<p>Genetic Programming was invented by Nigel Cramer in 1985, but greatly expanded through the work of John Koza. GP evolves programs; it is an example of <strong>metaprogramming</strong>.</p>
-<p>GP has been used to generate programs to solve hard problems, and to evolve control systems for artificial agents and robots. Karl Sims used GP for his genetic images, and for his evolving virtual creatures.</p>
-<ul>
-<li><a href="http://dces.essex.ac.uk/staff/rpoli/gp-field-guide/A_Field_Guide_to_Genetic_Programming.pdf">A field guide to GP</a></li>
-<li><a href="http://www.cs.montana.edu/~bwall/cs580/introduction_to_gp.pdf">An overview paper</a></li>
-<li><a href="http://www.geneticalgorithms.com/Tutorial/index.html">Very short tutorial</a></li>
-<li><a href="http://www.pawfal.org/Software/fastbreeder/">An example for audio</a></li>
-</ul>
-<p>The central concept is that the generating a phenotype is a process of generating <em>code</em>. Populations of generated programs can then be selected and evolved as usual. </p>
-<p>Typically the programs for GP follow a tree-like structure. The leaves of the tree are <em>terminals</em> and the branches are <em>functions</em>. Terminals have no inputs; typical terminals are constant numbers and global variable names. Non-terminal functions are specified according to their operator (such as mathematical addition, multiplication, cosine, etc.); they have one or more inputs, which maybe terminals or other functions. This structure is natural to LISP programs:</p>
-<pre><code class="lang-lisp">(<span class="hljs-name"><span class="hljs-builtin-name">*</span></span> <span class="hljs-number">6</span> (<span class="hljs-name"><span class="hljs-builtin-name">sin</span></span> (<span class="hljs-name"><span class="hljs-builtin-name">+</span></span> x <span class="hljs-number">2</span>)))
-</code></pre>
-<p>The above would be represented in Javascript code as follows:</p>
-<pre><code class="lang-javascript">return <span class="hljs-number">6</span> * (<span class="hljs-name">Math</span>.sin(<span class="hljs-name">x</span> + <span class="hljs-number">2</span>))
-</code></pre>
-<p>The <strong>Linear Genetic Programming</strong> variant represents programs as sequences of instructions rather than trees. It more closely resembles the procedural nature of widely-used programming languages, virtual machines, assembly and machine code. Each instruction uses a single function, with zero or more arguments (constants or registers), and assigns to a register. </p>
-<p>The above program could be linearized to normal form as follows:</p>
-<pre><code class="lang-javascript">(<span class="hljs-meta">function</span>() {
-    var <span class="hljs-built_in">r1</span> = <span class="hljs-number">2</span><span class="hljs-comment">;</span>
-    var <span class="hljs-built_in">r2</span> = x<span class="hljs-comment">;</span>
-    var <span class="hljs-built_in">r3</span> = <span class="hljs-built_in">r1</span> + <span class="hljs-built_in">r2</span><span class="hljs-comment">;</span>
-    var <span class="hljs-built_in">r4</span> = Math.sin(<span class="hljs-built_in">r3</span>)<span class="hljs-comment">;</span>
-    var <span class="hljs-built_in">r5</span> = <span class="hljs-number">6</span><span class="hljs-comment">;</span>
-    var <span class="hljs-built_in">r6</span> = <span class="hljs-built_in">r5</span> * <span class="hljs-built_in">r4</span><span class="hljs-comment">;</span>
-    return <span class="hljs-built_in">r6</span><span class="hljs-comment">;</span>
-})()<span class="hljs-comment">;</span>
-</code></pre>
-<p>The linear structure may appear more flexible, since it allows branches to reconnect; however the functional programming interpretation of the tree is provably equivalent so long as no operator carries history. Ultimately the choice depends on practical rather than theoretical questions.</p>
-<h3 id="genetic-representation">Genetic representation</h3>
-<p>It may be convenient to represent these programs as a data structure, from which the phenotype code is generated. Doing so makes crossover and mutation much easier. </p>
-<p>For example, integers can be used to specify which function or terminal type a node contains, and which nodes are used as arguments. Tree structures can nest their data directly, while linear structures can refer to nodes by integer register id (or register stack offset). Here is the above program as a list of instruction codes -- which is just a list of numbers!</p>
-<pre><code class="lang-javascript">// operator <span class="hljs-symbol">IDs</span>: [ <span class="hljs-string">"constant"</span>, <span class="hljs-string">"global"</span>, <span class="hljs-string">"add"</span>, <span class="hljs-string">"mul"</span>, <span class="hljs-string">"sin"</span> ];
-// global <span class="hljs-symbol">IDs</span>: [ <span class="hljs-string">"x"</span> ];
+<h2 id="a-trivial-string-generator">A trivial string generator</h2>
+<p>Just to practice the mechanics, we can start by evolving sentences toward a desired result. Each gene is an integer, which is mapped to a word from a predefined list:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// the desired result:</span>
+var target = <span class="hljs-string">"the quick brown fox jumped over the lazy dog"</span><span class="hljs-comment">;</span>
 
-var geno = {
-    [ <span class="hljs-number">0</span>, <span class="hljs-number">2</span> ],
-    [ <span class="hljs-number">2</span>, <span class="hljs-number">1</span> ],
-    [ <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span> ],
-    [ <span class="hljs-number">4</span>, <span class="hljs-number">3</span> ],
-    [ <span class="hljs-number">0</span>, <span class="hljs-number">6</span> ],
-    [ <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">4</span> ],
+<span class="hljs-comment">// the set of components:</span>
+var dictionary = [<span class="hljs-string">"I"</span>, <span class="hljs-string">"a"</span>, <span class="hljs-string">"an"</span>, <span class="hljs-string">"bleep"</span>, <span class="hljs-string">"blown"</span>, <span class="hljs-string">"bog"</span>, <span class="hljs-string">"box"</span>, <span class="hljs-string">"broad"</span>, <span class="hljs-string">"brown"</span>, <span class="hljs-string">"bumped"</span>, <span class="hljs-string">"cat"</span>, <span class="hljs-string">"cog"</span>, <span class="hljs-string">"coloured"</span>, <span class="hljs-string">"colourful"</span>, <span class="hljs-string">"colourless"</span>, <span class="hljs-string">"crazy"</span>, <span class="hljs-string">"creep"</span>, <span class="hljs-string">"crown"</span>, <span class="hljs-string">"dig"</span>, <span class="hljs-string">"do"</span>, <span class="hljs-string">"dog"</span>, <span class="hljs-string">"door"</span>, <span class="hljs-string">"dot"</span>, <span class="hljs-string">"ever"</span>, <span class="hljs-string">"fit"</span>, <span class="hljs-string">"fix"</span>, <span class="hljs-string">"flick"</span>, <span class="hljs-string">"for"</span>, <span class="hljs-string">"fox"</span>, <span class="hljs-string">"frown"</span>, <span class="hljs-string">"glean"</span>, <span class="hljs-string">"great"</span>, <span class="hljs-string">"greed"</span>, <span class="hljs-string">"green"</span>, <span class="hljs-string">"greet"</span>, <span class="hljs-string">"hazy"</span>, <span class="hljs-string">"he"</span>, <span class="hljs-string">"hog"</span>, <span class="hljs-string">"ideas"</span>, <span class="hljs-string">"idols"</span>, <span class="hljs-string">"in"</span>, <span class="hljs-string">"it"</span>, <span class="hljs-string">"jumble"</span>, <span class="hljs-string">"jumped"</span>, <span class="hljs-string">"jumper"</span>, <span class="hljs-string">"jumps"</span>, <span class="hljs-string">"last"</span>, <span class="hljs-string">"lazy"</span>, <span class="hljs-string">"leaped"</span>, <span class="hljs-string">"lumped"</span>, <span class="hljs-string">"maze"</span>, <span class="hljs-string">"of"</span>, <span class="hljs-string">"offer"</span>, <span class="hljs-string">"ogre"</span>, <span class="hljs-string">"older"</span>, <span class="hljs-string">"on"</span>, <span class="hljs-string">"or"</span>, <span class="hljs-string">"over"</span>, <span class="hljs-string">"quick"</span>, <span class="hljs-string">"quite"</span>, <span class="hljs-string">"rapid"</span>, <span class="hljs-string">"she"</span>, <span class="hljs-string">"sheen"</span>, <span class="hljs-string">"sheep"</span>, <span class="hljs-string">"sick"</span>, <span class="hljs-string">"sleep"</span>, <span class="hljs-string">"slept"</span>, <span class="hljs-string">"slow"</span>, <span class="hljs-string">"spelt"</span>, <span class="hljs-string">"spilt"</span>, <span class="hljs-string">"the"</span>, <span class="hljs-string">"town"</span>, <span class="hljs-string">"under"</span>]<span class="hljs-comment">;</span>
+
+<span class="hljs-comment">// initial:</span>
+var geno = []<span class="hljs-comment">;</span>
+<span class="hljs-keyword">for</span> (var i=<span class="hljs-number">0</span><span class="hljs-comment">; i &lt; 9; i++) {</span>
+    geno[i] = random(dictionary.<span class="hljs-keyword">length</span>)<span class="hljs-comment">;</span>
+}
+<span class="hljs-comment">// develop:</span>
+var pheno = []<span class="hljs-comment">;</span>
+<span class="hljs-keyword">for</span> (var i=<span class="hljs-number">0</span><span class="hljs-comment">; i &lt; geno.length; i++) {</span>
+    pheno[i] = dictionary[ geno[i] ]<span class="hljs-comment">;</span>
+}
+pheno = pheno.join(<span class="hljs-string">" "</span>)<span class="hljs-comment">;</span>
+</code></pre>
+<p>To evaluate, we could compare how many of the right characters are in the right places:</p>
+<pre><code class="lang-javascript">var <span class="hljs-keyword">err</span> = <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+<span class="hljs-keyword">for</span> (var i=<span class="hljs-number">0</span><span class="hljs-comment">; i &lt; pheno.length; i++) {</span>
+    <span class="hljs-keyword">if</span> (pheno.substr(i, <span class="hljs-number">1</span>) != target.substr(i, <span class="hljs-number">1</span>)) {
+        <span class="hljs-keyword">err</span>++<span class="hljs-comment">;</span>
+    }
+}
+<span class="hljs-comment">// make it fair between long &amp; short strings:</span>
+<span class="hljs-keyword">err</span> /= pheno.<span class="hljs-keyword">length</span><span class="hljs-comment">;</span>
+</code></pre>
+<p>To convert this error into a fitness, where fittest is 1 and least fit is zero, we could apply a <code>1/(1+n)</code> mapping:</p>
+<pre><code class="lang-javascript">var fitness = <span class="hljs-number">1</span> / (<span class="hljs-number">1</span> + <span class="hljs-keyword">err</span>)<span class="hljs-comment">;</span>
+</code></pre>
+<p>This gives us all the basic components we need to generate a random population as genotypes. We already know how to develop and evaluate such a genotype, and storing several in a population is trivial. </p>
+<p>It is generally useful to sort a population by fitness, which can be done like so:</p>
+<pre><code class="lang-javascript">// sort the population by comparing pairs
+// <span class="hljs-keyword">as</span> a <span class="hljs-literal">result</span>, the fittest candidate will be <span class="hljs-keyword">in</span> population[<span class="hljs-number">0</span>]
+population.sort(function(a, b) { <span class="hljs-keyword">return</span> b.fitness - a.fitness; });
+</code></pre>
+<blockquote>
+<p>After sorting it is convenient to print out the candidates, their fitness, etc, so we can see how the evolution proceeds.</p>
+</blockquote>
+<p>After evaluating, we create a new generation of candidates, broadly derived from the previous, but with fitter candidates being more likely to be progenitors. The simplest method is to pick a parent at random, but biasing toward the lower indices. (A simple trick to do this is for the nth child to use a the parent at index <code>random(n)</code>.)</p>
+<p>We must also introduce some variation (mutations) while generating new genotypes at this point. The simplest method is to introduce a branch with a predetermined probability to randomize a gene rather than copy from the parent, e.g.:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// copy or mutate genes:</span>
+<span class="hljs-keyword">for</span> (var <span class="hljs-keyword">j</span> = <span class="hljs-number">0</span>; <span class="hljs-keyword">j</span> &lt; gene_size; <span class="hljs-keyword">j</span>++) {
+    <span class="hljs-comment">// mutate?</span>
+    <span class="hljs-keyword">if</span> (random() &lt; mutability) {
+        child[<span class="hljs-keyword">j</span>] = random(gene_range); 
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// copy:</span>
+        child[<span class="hljs-keyword">j</span>] = parent[<span class="hljs-keyword">j</span>];
+    }
 }
 </code></pre>
-<h3 id="initialization">Initialization</h3>
-<p>Generating a seed tree can follow a recursive structure, starting from the root at depth 0, up to a maximum depth <code>m</code>:</p>
-<ul>
-<li>If depth equals <code>m</code> choose a terminal at random,</li>
-<li>Else select a function or terminal at random.<ul>
-<li>If the node type is a function, choose a random function. Each function has a specific number of children (e.g. the + function has two children); for each child node, repeat the algorithm with depth increased by one.</li>
-</ul>
-</li>
-</ul>
-<p>An alternative algorithm for linear GP, with <code>n</code> operations:</p>
-<ul>
-<li>Loop from 1 to <code>n</code>:<ul>
-<li>If <code>n</code> is less than the maximum number of arguments (typically 2 or 3), create a random terminal node.</li>
-<li>Else create a random terminal or a random function.<ul>
-<li>If the node type is a function, use a randomly selected previous node for each of the function arguments.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>The root (result) node is node <code>n</code>. </li>
-</ul>
-<h3 id="variation">Variation</h3>
-<p>For a linearized genotype representation, the genetic mutations and crossover operators are similar to other sequence-based evolutionary systems. </p>
-<p>For tree-like representations it becomes more complex and interesting: Mutations on a tree can include modifcation of instruction arguments, replacement of sub-trees, function mutation, etc. Cross-over can be implemented as swapping sub-trees of parents. </p>
+<p>Does it work? If not, can you think of ideas why -- and any ideas to improve it?</p>
+<h2 id="a-simple-math-solver">A simple math solver</h2>
+<p>The string example was a little silly, but let&#39;s say we want to write a program (the phenotype) that can solve math problems. To start as simple as possible, we can restrict our programs to numerals and symbols of basic arithmetic:</p>
+<pre><code class="lang-javascript"><span class="hljs-variable"><span class="hljs-keyword">var</span> symbols</span> = [<span class="hljs-string">"+"</span>, <span class="hljs-string">"-"</span>, <span class="hljs-string">"*"</span>, <span class="hljs-string">"/"</span>, <span class="hljs-string">"1"</span>, <span class="hljs-string">"2"</span>, <span class="hljs-string">"3"</span>, <span class="hljs-string">"4"</span>, <span class="hljs-string">"5"</span>, <span class="hljs-string">"6"</span>, <span class="hljs-string">"7"</span>, <span class="hljs-string">"8"</span>, <span class="hljs-string">"9"</span>, <span class="hljs-string">"0"</span>];
+</code></pre>
+<p>To generate a random program, of say, length 10 characters, and run it, we would do something like this:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// fill an array:</span>
+var arr = []<span class="hljs-comment">;</span>
+<span class="hljs-keyword">for</span> (var i=<span class="hljs-number">0</span><span class="hljs-comment">; i&lt;10; i++) {</span>
+    <span class="hljs-comment">// pick a symbol at random to add:</span>
+    arr[i] = symbols[random(symbols.<span class="hljs-keyword">length</span>)]<span class="hljs-comment">;</span>
+}
+<span class="hljs-comment">// convert the array of symbols to a string of code:</span>
+var code = <span class="hljs-string">"return "</span> + arr.join(<span class="hljs-string">""</span>)<span class="hljs-comment">;</span>
+<span class="hljs-comment">// convert to an executable function:</span>
+var f = new Function(code)<span class="hljs-comment">;</span>
+<span class="hljs-comment">// run it to get the result</span>
+console.log(f())<span class="hljs-comment">;</span>
+</code></pre>
+<p>The chances are, the generated code is garbage, and might well throw an error, or return a meaningless result such as <code>Infinity</code> or <code>NaN</code>. These errors could break or throw off our simulation, but we can trap them safely as follows:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">try</span> {
+    // convert to an executable function:
+    <span class="hljs-keyword">var</span> f = new <span class="hljs-type">Function</span>(code);
+    // run it to get the <span class="hljs-literal">result</span>
+    <span class="hljs-keyword">var</span> <span class="hljs-literal">result</span> = f();
+    <span class="hljs-keyword">if</span> (<span class="hljs-literal">result</span> != <span class="hljs-type">Infinity</span> &amp;&amp; <span class="hljs-literal">result</span> != -<span class="hljs-type">Infinity</span> &amp;&amp; <span class="hljs-literal">result</span> == <span class="hljs-literal">result</span>) {
+        console.log(<span class="hljs-literal">result</span>);
+    }
+}
+</code></pre>
+<p>Now we can evaluate the fitness of our result, relative to a target number. We can take the absolute difference, and then put this through a <code>1/(1+n)</code> mapping as before. This mapping is somewhat arbitrary, but works for our purposes here:</p>
+<pre><code class="lang-javascript">fitness = <span class="hljs-number">1</span> / <span class="hljs-number">1</span> + (<span class="hljs-type">Math</span>.abs(<span class="hljs-literal">result</span> - target));
+</code></pre>
 <hr>
-<p>Meta-evolution: the mechanisms of evolution (including development, variation, etc.) are also subject to variation and selection. After all, sexual reproduction had to be <em>discovered</em>. It turns out that some parts of our genes have evolved to be far less volatile than others, for good reason. </p>
-<p>Jurgen Schmidhuber proposed using GP to evolve GP (Meta-GP), since things like chromosomes, crossover etc. are themselves phenomena that have evolved. </p>
-<hr>
-<p>There is an obvious analogy of the genotype-as-code and phenotype-as-running-program underlying most systems. Few systems provide full models of development and genetic transfer, assuming instead a relatively predictable translation. Some systems explicity encode numeric values in the genotype (this is not naturalistic). </p>
+<p>With this in play, we should already see some clear evolutionary behaviour. You may notice punctuated equilibria. Run the simulation many times, and you may notice that the fittest candidate is not always converging to the same result. There are clearly multiple distant fitness peaks here. </p>
+<p>You may notice that the code generated sometimes looks odd -- and that the evolution has discovered tricks such as adding numbers multiplied by zero, prefixing zeroes to numbers, and even placing two slashes to create a comment (followed by &quot;junk DNA&quot;), in order to get a result with the specific gene length. We could easily prevent this by turning our <code>&quot;/&quot;</code> symbol into a <code>&quot; / &quot;</code> symbol, but perhaps there is an advantage not to?</p>
+<p>Try changing the genome size, the population size, and the mutation rates, to see how it changes. </p>
+<p>Try playing with the symbol list. What happens if you add the &quot;.&quot; character? How about &quot;(&quot; and &quot;)&quot;?</p>
+<p>The mutation rate acts a bit like a temperature control -- too high and good results can&#39;t remain viable, too low and it takes to long to get anywhere. Larger populations help to generate more chances of leaping off a local peak. Too short genome sizes can be a tough challenge, but too long genomes make it less likely to find a result quickly -- and add more noise. Is there a way to make genome size variable, and give shorter results higher fitness? What other mutation methods could help? What other developmental models could be tried? Is there a better way to pick parents?</p>
+<p>Generally, by observing the behaviour, what insights can you draw, and what ideas have you for improving it?</p>
+<p>How would you be able to add operators such as <code>Math.sin()</code>?  </p>
+<p>What other problems could you imagine addressing, other than calculating numbers? (What kinds of problems is this method suited for?)</p>
+<!------
 
+## Genetic Programming
+
+Genetic Programming was invented by Nigel Cramer in 1985, but greatly expanded through the work of John Koza. GP evolves programs; it is an example of **metaprogramming**.
+
+GP has been used to generate programs to solve hard problems, and to evolve control systems for artificial agents and robots. Karl Sims used GP for his genetic images, and for his evolving virtual creatures.
+
+- [A field guide to GP](http://dces.essex.ac.uk/staff/rpoli/gp-field-guide/A_Field_Guide_to_Genetic_Programming.pdf)
+- [An overview paper](http://www.cs.montana.edu/~bwall/cs580/introduction_to_gp.pdf)
+- [Very short tutorial](http://www.geneticalgorithms.com/Tutorial/index.html)
+- [An example for audio](http://www.pawfal.org/Software/fastbreeder/)
+
+The central concept is that the generating a phenotype is a process of generating *code*. Populations of generated programs can then be selected and evolved as usual. 
+
+Typically the programs for GP follow a tree-like structure. The leaves of the tree are *terminals* and the branches are *functions*. Terminals have no inputs; typical terminals are constant numbers and global variable names. Non-terminal functions are specified according to their operator (such as mathematical addition, multiplication, cosine, etc.); they have one or more inputs, which maybe terminals or other functions. This structure is natural to LISP programs:
+
+```lisp
+(* 6 (sin (+ x 2)))
+```
+
+The above would be represented in Javascript code as follows:
+
+```javascript
+return 6 * (Math.sin(x + 2))
+```
+
+The **Linear Genetic Programming** variant represents programs as sequences of instructions rather than trees. It more closely resembles the procedural nature of widely-used programming languages, virtual machines, assembly and machine code. Each instruction uses a single function, with zero or more arguments (constants or registers), and assigns to a register. 
+
+The above program could be linearized to normal form as follows:
+
+```javascript
+(function() {
+    var r1 = 2;
+    var r2 = x;
+    var r3 = r1 + r2;
+    var r4 = Math.sin(r3);
+    var r5 = 6;
+    var r6 = r5 * r4;
+    return r6;
+})();
+```
+
+The linear structure may appear more flexible, since it allows branches to reconnect; however the functional programming interpretation of the tree is provably equivalent so long as no operator carries history. Ultimately the choice depends on practical rather than theoretical questions.
+
+### Genetic representation
+
+It may be convenient to represent these programs as a data structure, from which the phenotype code is generated. Doing so makes crossover and mutation much easier. 
+
+For example, integers can be used to specify which function or terminal type a node contains, and which nodes are used as arguments. Tree structures can nest their data directly, while linear structures can refer to nodes by integer register id (or register stack offset). Here is the above program as a list of instruction codes -- which is just a list of numbers!
+
+```javascript
+// operator IDs: [ "constant", "global", "add", "mul", "sin" ];
+// global IDs: [ "x" ];
+
+var geno = {
+    [ 0, 2 ],
+    [ 2, 1 ],
+    [ 3, 1, 2 ],
+    [ 4, 3 ],
+    [ 0, 6 ],
+    [ 3, 5, 4 ],
+}
+```
+
+### Initialization 
+
+Generating a seed tree can follow a recursive structure, starting from the root at depth 0, up to a maximum depth ```m```:
+
+- If depth equals ```m``` choose a terminal at random,
+- Else select a function or terminal at random.
+    - If the node type is a function, choose a random function. Each function has a specific number of children (e.g. the + function has two children); for each child node, repeat the algorithm with depth increased by one.
+
+An alternative algorithm for linear GP, with ```n``` operations:
+
+- Loop from 1 to ```n```:
+    - If ```n``` is less than the maximum number of arguments (typically 2 or 3), create a random terminal node.
+    - Else create a random terminal or a random function.
+        - If the node type is a function, use a randomly selected previous node for each of the function arguments.
+- The root (result) node is node ```n```. 
+
+### Variation
+
+For a linearized genotype representation, the genetic mutations and crossover operators are similar to other sequence-based evolutionary systems. 
+
+For tree-like representations it becomes more complex and interesting: Mutations on a tree can include modifcation of instruction arguments, replacement of sub-trees, function mutation, etc. Cross-over can be implemented as swapping sub-trees of parents. 
+
+---
+
+Meta-evolution: the mechanisms of evolution (including development, variation, etc.) are also subject to variation and selection. After all, sexual reproduction had to be *discovered*. It turns out that some parts of our genes have evolved to be far less volatile than others, for good reason. 
+
+Jurgen Schmidhuber proposed using GP to evolve GP (Meta-GP), since things like chromosomes, crossover etc. are themselves phenomena that have evolved. 
+-->
 	</div>
 	<footer>&copy; 2016 Graham Wakefield</footer>
   </body>

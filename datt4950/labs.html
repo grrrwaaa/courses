@@ -73,52 +73,16 @@
 <p>For simulation updates, implement a function called <code>update()</code>. </p>
 <!-- delta time argument -->
 <p>To define how the canvas renders, implement a function called <code>draw()</code>. All graphics code should go into this callback.</p>
-<!-- gl context argument -->
-<!-- The ```reset()``` function is used to re-initialize variables, when the "reset" button on the HTML page is pressed.
-
-For example:
-
-```javascript
-var x = 0;
-
-function reset() {
-    x = 0;
+<h3 id="interaction">Interaction</h3>
+<p>Two additional callbacks exist to detect mouse and keyboard interaction respectively. </p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mouse</span>(<span class="hljs-params">event, point</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(event, point);
 }
 
-function draw (ctx) {
-    ctx.fillStyle = "green";
-    ctx.fillRect(x, 0.5, 0.1, 0.1);
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">key</span>(<span class="hljs-params">event, key</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(event, key);
 }
-
-function update(dt) {
-    x = x + dt*0.1;
-}
-```
-
-### Interaction
-
-Two additional callbacks exist to detect mouse and keyboard interaction respectively. 
-
-```javascript
-// event can be "down" or "up" for clicks,
-// or "drag" when moving with a mouse button pressed,
-// or "move" when moving with no button pressed,
-// event is "enter" when the mouse enters the canvas, and "exit" when the mouse goes outside it
-// button is the mouse button pressed (0 for left, 1 for right...)
-// in all the above cases, 
-// x and y are the mouse position from 0,0 (top left) to 1,1 (bottom right)
-
-function mouse(event, button, x, y) {
-    console.log(event, button, x, y);
-}
-
-// if event is "press", key is a single character string
-// if event is "down" or "up", key is a numeric code
-function key(event, key) {
-    console.log(event, key);
-}
-```
--->
+</code></pre>
 <h2 id="globals">Globals</h2>
 <p>The starter-kit provides a few extra global functions that are frequently needed:</p>
 <p><code>random()</code> can be used to generate random numbers. Without an argument it returns rational numbers between 0 and 1; with a numeric argument it returns integers in the given range (e.g. useful for picking within an array).</p>
@@ -127,6 +91,7 @@ function key(event, key) {
 <span class="hljs-built_in">random</span>(<span class="hljs-number">6</span>);       <span class="hljs-comment"> // an integer between 0 and 5</span>
 <span class="hljs-keyword">wrap</span>(<span class="hljs-number">-1</span>, <span class="hljs-number">4</span>);   <span class="hljs-comment"> // returns 3 (whereas -1 % 4 would return -1)</span>
 </code></pre>
+<p>The <code>write()</code> function will output text above the main canvas. It can be more useful than calling <code>console.log()</code> in certain situations, since the text will reset on each frame. </p>
 <h2 id="field2d">field2D</h2>
 <p>The <code>field2D</code> type represents a dense grids of cells of floating point numbers (typically but not necessarily in the range of zero to one). You can create a field like this:</p>
 <pre><code class="lang-javascript">var field = <span class="hljs-keyword">new</span> field2D(<span class="hljs-built_in">width</span>, <span class="hljs-built_in">height</span>);
