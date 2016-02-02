@@ -50,7 +50,6 @@ Marcos Novak elsewhere has maintained that [“the future of cinema is worldmaki
 [Documentation here](https://michaelscroggins.wordpress.com/topological-slide/), and the paper [Absolute Animation and Immersive VR](https://michaelscroggins.files.wordpress.com/2013/02/absolute_animation_and_immersive_vr.pdf).
 
 <iframe src="https://player.vimeo.com/video/137575437" width="720" height="540" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-<p><a href="https://vimeo.com/137575437">A Topological Slide</a> from <a href="https://vimeo.com/michaelscroggins">Michael Scroggins</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 
 ---
 
