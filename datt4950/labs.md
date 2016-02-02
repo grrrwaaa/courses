@@ -404,13 +404,42 @@ draw2D.pop();  // done drawing agent
 Basic shapes are as follows:
 
 ```javascript
+draw2D.circle([center_x, center_y], diameter);
 draw2D.circle(center_x, center_y, diameter);
+draw2D.circle([center_x, center_y], diameter_x, diameter_y);
 draw2D.circle(center_x, center_y, diameter_x, diameter_y);
 
-draw2D.rect(center_x, center_y, size);
-draw2D.rect(center_x, center_y, width, height);
+draw2D.rect([center_x, center_y], diameter);
+draw2D.rect(center_x, center_y, diameter);
+draw2D.rect([center_x, center_y], diameter_x, diameter_y);
+draw2D.rect(center_x, center_y, diameter_x, diameter_y);
+
+draw2D.triangle([center_x, center_y], diameter);
+draw2D.triangle(center_x, center_y, diameter);
+draw2D.triangle([center_x, center_y], diameter_x, diameter_y);
+draw2D.triangle(center_x, center_y, diameter_x, diameter_y);
 ```
 
+If you really need a different shape, there's a method for adding new ones. But this is expensive -- don't call this in ```draw()``` or ```update()```! Create an array of vertices (they could be arrays or vec2's) and pass them to the ```draw2D.shape()``` constructor; it will return a function you can use to draw your specific shape.
+
+```javascript
+// in the main body of the script (not in update() or draw()!)
+// construct a new shape
+// normally vertices range between -1 and 1
+var rightangletriangle = draw2D.shape([ 
+	new vec2(-1, -1), new vec2(1, -1), new vec2(1, 1)
+]);
+
+// use it in draw()
+function draw() {
+	draw2D.color("red");
+	rightangletriangle();
+	
+	// it takes position/size arguments just like circle, rect, triangle:
+	draw2D.color("yellow");
+	rightangletriangle([0.5, 0.5], 0.25);
+}
+```
 
 Graphics are drawn using whatever color is currently set, via ```draw2D.color()```. 
 

@@ -877,7 +877,7 @@ var draw2D_vertexshader = loadShader(gl, [
 	"void main() { ",
 	"vec3 p = u_modelView * vec3(a_position, 1.);",
 	"gl_Position = vec4(p, 1);",
-	"texCoord = a_texcoord; //a_position;",
+	"texCoord = a_position.xy + 0.5; //a_texcoord; //a_position;",
 	"}"
 ].join("\n"), gl.VERTEX_SHADER);
 
@@ -1126,9 +1126,9 @@ var makeshapedrawfunction = function(shapefunc) {
 	gl.bindBuffer(gl.ARRAY_BUFFER, vertices_buffer);
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(shape.vertices), gl.STATIC_DRAW);
 	
-	var texcoords_buffer = gl.createBuffer();
-	gl.bindBuffer(gl.ARRAY_BUFFER, texcoords_buffer);
-	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(shape.texcoords), gl.STATIC_DRAW);
+	//var texcoords_buffer = gl.createBuffer();
+	//gl.bindBuffer(gl.ARRAY_BUFFER, texcoords_buffer);
+	//gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(shape.texcoords), gl.STATIC_DRAW);
 	
 	var indices_buffer = gl.createBuffer();
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indices_buffer);
@@ -1195,9 +1195,9 @@ var makeshapedrawfunction = function(shapefunc) {
 		gl.enableVertexAttribArray(draw2D_positionLocation);
 		gl.vertexAttribPointer(draw2D_positionLocation, 2, gl.FLOAT, false, 0, 0);
 	
-		gl.bindBuffer(gl.ARRAY_BUFFER, texcoords_buffer);
-		gl.enableVertexAttribArray(draw2D_texcoordLocation);
-		gl.vertexAttribPointer(draw2D_texcoordLocation, 2, gl.FLOAT, false, 0, 0);
+		//gl.bindBuffer(gl.ARRAY_BUFFER, texcoords_buffer);
+		//gl.enableVertexAttribArray(draw2D_texcoordLocation);
+		//gl.vertexAttribPointer(draw2D_texcoordLocation, 2, gl.FLOAT, false, 0, 0);
 	
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indices_buffer);
 		
@@ -1238,6 +1238,22 @@ draw2D.rect = makeshapedrawfunction(function() {
 	};
 });
 
+draw2D.triangle = makeshapedrawfunction(function() {
+	return {
+		vertices: [
+			-0.5, -0.5,
+			0.5, 0.0, 
+			-0.5, 0.5,
+		],
+		texcoords: [
+			0, 0,
+			1, 0.5, 
+			0, 1,
+		],
+		indices: [0, 1, 2]
+	};
+});
+
 draw2D.circle = makeshapedrawfunction(function() {
 	var shape = {
 		vertices: [0, 0, 0.5, 0],
@@ -1266,6 +1282,29 @@ draw2D.circle = makeshapedrawfunction(function() {
 // aliases:
 draw2D.square = draw2D.rect;
 draw2D.ellipse = draw2D.circle;
+
+draw2D.shape = function(vertices) {
+	if (!isarraylike(vertices) || vertices.length < 3) {
+		console.error("draw2D.shape() requires an array of vertex positions");
+		return;
+	}
+	return makeshapedrawfunction(function() {
+		var shape = {
+			vertices: [],
+			texcoords: [],
+			indices: []
+		};
+		for (var i=0; i<vertices.length; i++) {
+			var v = vertices[i];
+			if (isarraylike(v)) {
+				shape.indices.push(shape.indices.length);
+				shape.vertices.push(typeof v[0] == "number" ? v[0] * 0.5 : 0.0);
+				shape.vertices.push(typeof v[1] == "number" ? v[1] * 0.5 : 0.0);
+			}
+		}
+		return shape;
+	});
+};
 
 /*
 draw2D.shape() should return a re-usable shape object that we can call similar methods on to extend its internal geometry
