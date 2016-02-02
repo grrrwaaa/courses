@@ -155,7 +155,14 @@ Just to practice the mechanics, we can start by evolving sentences toward a desi
 var target = "the quick brown fox jumped over the lazy dog";
 
 // the set of components:
-var dictionary = ["I", "a", "an", "bleep", "blown", "bog", "box", "broad", "brown", "bumped", "cat", "cog", "coloured", "colourful", "colourless", "crazy", "creep", "crown", "dig", "do", "dog", "door", "dot", "ever", "fit", "fix", "flick", "for", "fox", "frown", "glean", "great", "greed", "green", "greet", "hazy", "he", "hog", "ideas", "idols", "in", "it", "jumble", "jumped", "jumper", "jumps", "last", "lazy", "leaped", "lumped", "maze", "of", "offer", "ogre", "older", "on", "or", "over", "quick", "quite", "rapid", "she", "sheen", "sheep", "sick", "sleep", "slept", "slow", "spelt", "spilt", "the", "town", "under"];
+var dictionary = ["I", "a", "an", "bleep", "blown", "bog", "box", "broad", "brown", "bumped", 
+	"cat", "cog", "coloured", "colourful", "colourless", "crazy", "creep", "crown", "dig", 
+	"do", "dog", "door", "dot", "ever", "fit", "fix", "flick", "for", "fox", "frown", 
+	"glean", "great", "greed", "green", "greet", "hazy", "he", "hog", "ideas", "idols", 
+	"in", "it", "jumble", "jumped", "jumper", "jumps", "last", "lazy", "leaped", "lumped", 
+	"maze", "of", "offer", "ogre", "older", "on", "or", "over", "quick", "quite", "rapid", 
+	"she", "sheen", "sheep", "sick", "sleep", "slept", "slow", "spelt", "spilt", "the", 
+	"town", "under"];
 
 // initial:
 var geno = [];
@@ -220,6 +227,8 @@ for (var j = 0; j < gene_size; j++) {
 
 Does it work? If not, can you think of ideas why -- and any ideas to improve it?
 
+[Here's something like this in the editor](http://codepen.io/grrrwaaa/pen/yeqMYy?editors=001).
+
 ## A simple math solver
 
 The string example was a little silly, but let's say we want to write a program (the phenotype) that can solve math problems. To start as simple as possible, we can restrict our programs to numerals and symbols of basic arithmetic:
@@ -266,6 +275,8 @@ fitness = 1 / 1 + (Math.abs(result - target));
 ```
 
 ---
+
+[Here's something like this in the editor](http://codepen.io/grrrwaaa/pen/zrLZvK?editors=001).
 
 With this in play, we should already see some clear evolutionary behaviour. You may notice punctuated equilibria. Run the simulation many times, and you may notice that the fittest candidate is not always converging to the same result. There are clearly multiple distant fitness peaks here. 
 
