@@ -432,7 +432,11 @@ var keyevent = function(event, name, callback) {
 window.addEventListener( "keydown", function(event) {
 	var k = event.key || event.keyCode;
 	
-	if (k == 27) requestFullscreen(document.body);
+	if (k == 27) requestFullscreen(canvas.parentElement);
+	
+	//if (k == 27) requestFullscreen(document.body);
+	//if (k == 27) requestFullscreen(canvas);
+	//if (k == 27) requestFullscreen(canvas.parentNode);
 	
 	if (typeof(key) === "function") key("down", k);
 	if (typeof(keydown) === "function") keydown(k);
