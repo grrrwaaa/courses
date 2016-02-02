@@ -16,6 +16,8 @@ importance: 10
 **Website:** [http://grrrwaaa.github.io/courses/datt4950/](http://grrrwaaa.github.io/courses/datt4950/)   
 **Code materials:** [https://github.com/grrrwaaa/courses/tree/master/code](https://github.com/grrrwaaa/courses/tree/master/code)
 
+[**Gallery**](gallery/index.html)
+
 **Synopsis:** *This course addresses computation as a creative medium from a biologically-inspired standpoint to develop artworks, adaptive media and simulations approaching the fascinating complexity of nature.* 
 
 Artists, composers, designers and architects have always drawn inspiration from nature, but until recently only rarely have they been able to leverage nature’s creative mechanisms. From its origins computing has also found biological inspiration in pattern formation, self-construction and reproduction, intelligence, autonomy and collective behaviour. Frameworks explored in the course include complex dynamical systems, fractals, cellular automata, agent-based systems, evolutionary and developmental programming, artificial chemistries and ecosystems. 
