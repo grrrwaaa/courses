@@ -111,6 +111,29 @@ function update() {
 
 console.log(pop);
 
+var n = new field2D(10);
+n.set(function() { return random(); });
+
+var tri = draw2D.shape([ 
+	[-1, -1], [1, -1], [1, 1]
+]);
+
+function draw() {
+	draw2D.color("green");
+	//draw2D.push().translate([0.5, 0.5]).scale(0.5);
+	draw2D.triangle([0.5, 0.5]);
+	//draw2D.pop();
+	
+	draw2D.texture(n);
+	draw2D.color("red");
+	draw2D.triangle([0, 0], [1, 1], [1, 0]);
+	
+	
+	//draw2D.texture();
+	draw2D.color("yellow");
+	tri([0.5, 0.5]);
+}
+
 /*
 // the value we are trying to compute:
 var target = Math.PI;

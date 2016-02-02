@@ -310,11 +310,38 @@ draw2D.push()
 draw2D.pop()<span class="hljs-comment">;  // done drawing agent</span>
 </code></pre>
 <p>Basic shapes are as follows:</p>
-<pre><code class="lang-javascript">draw2D.<span class="hljs-keyword">circle</span>(center_x, center_y, diameter)<span class="hljs-comment">;</span>
-draw2D.<span class="hljs-keyword">circle</span>(center_x, center_y, diameter_x, diameter_y)<span class="hljs-comment">;</span>
+<pre><code class="lang-javascript"><span class="hljs-selector-tag">draw2D</span><span class="hljs-selector-class">.circle</span>(<span class="hljs-selector-attr">[center_x, center_y]</span>, <span class="hljs-selector-tag">diameter</span>);
+<span class="hljs-selector-tag">draw2D</span><span class="hljs-selector-class">.circle</span>(<span class="hljs-selector-tag">center_x</span>, <span class="hljs-selector-tag">center_y</span>, <span class="hljs-selector-tag">diameter</span>);
+<span class="hljs-selector-tag">draw2D</span><span class="hljs-selector-class">.circle</span>(<span class="hljs-selector-attr">[center_x, center_y]</span>, <span class="hljs-selector-tag">diameter_x</span>, <span class="hljs-selector-tag">diameter_y</span>);
+<span class="hljs-selector-tag">draw2D</span><span class="hljs-selector-class">.circle</span>(<span class="hljs-selector-tag">center_x</span>, <span class="hljs-selector-tag">center_y</span>, <span class="hljs-selector-tag">diameter_x</span>, <span class="hljs-selector-tag">diameter_y</span>);
 
-draw2D.rect(center_x, center_y, size)<span class="hljs-comment">;</span>
-draw2D.rect(center_x, center_y, <span class="hljs-keyword">width</span>, height)<span class="hljs-comment">;</span>
+<span class="hljs-selector-tag">draw2D</span><span class="hljs-selector-class">.rect</span>(<span class="hljs-selector-attr">[center_x, center_y]</span>, <span class="hljs-selector-tag">diameter</span>);
+<span class="hljs-selector-tag">draw2D</span><span class="hljs-selector-class">.rect</span>(<span class="hljs-selector-tag">center_x</span>, <span class="hljs-selector-tag">center_y</span>, <span class="hljs-selector-tag">diameter</span>);
+<span class="hljs-selector-tag">draw2D</span><span class="hljs-selector-class">.rect</span>(<span class="hljs-selector-attr">[center_x, center_y]</span>, <span class="hljs-selector-tag">diameter_x</span>, <span class="hljs-selector-tag">diameter_y</span>);
+<span class="hljs-selector-tag">draw2D</span><span class="hljs-selector-class">.rect</span>(<span class="hljs-selector-tag">center_x</span>, <span class="hljs-selector-tag">center_y</span>, <span class="hljs-selector-tag">diameter_x</span>, <span class="hljs-selector-tag">diameter_y</span>);
+
+<span class="hljs-selector-tag">draw2D</span><span class="hljs-selector-class">.triangle</span>(<span class="hljs-selector-attr">[center_x, center_y]</span>, <span class="hljs-selector-tag">diameter</span>);
+<span class="hljs-selector-tag">draw2D</span><span class="hljs-selector-class">.triangle</span>(<span class="hljs-selector-tag">center_x</span>, <span class="hljs-selector-tag">center_y</span>, <span class="hljs-selector-tag">diameter</span>);
+<span class="hljs-selector-tag">draw2D</span><span class="hljs-selector-class">.triangle</span>(<span class="hljs-selector-attr">[center_x, center_y]</span>, <span class="hljs-selector-tag">diameter_x</span>, <span class="hljs-selector-tag">diameter_y</span>);
+<span class="hljs-selector-tag">draw2D</span><span class="hljs-selector-class">.triangle</span>(<span class="hljs-selector-tag">center_x</span>, <span class="hljs-selector-tag">center_y</span>, <span class="hljs-selector-tag">diameter_x</span>, <span class="hljs-selector-tag">diameter_y</span>);
+</code></pre>
+<p>If you really need a different shape, there&#39;s a method for adding new ones. But this is expensive -- don&#39;t call this in <code>draw()</code> or <code>update()</code>! Create an array of vertices (they could be arrays or vec2&#39;s) and pass them to the <code>draw2D.shape()</code> constructor; it will return a function you can use to draw your specific shape.</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// in the main body of the script (not in update() or draw()!)</span>
+<span class="hljs-comment">// construct a new shape</span>
+<span class="hljs-comment">// normally vertices range between -1 and 1</span>
+<span class="hljs-keyword">var</span> rightangletriangle = draw2D.shape([ 
+    <span class="hljs-keyword">new</span> vec2(<span class="hljs-number">-1</span>, <span class="hljs-number">-1</span>), <span class="hljs-keyword">new</span> vec2(<span class="hljs-number">1</span>, <span class="hljs-number">-1</span>), <span class="hljs-keyword">new</span> vec2(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)
+]);
+
+<span class="hljs-comment">// use it in draw()</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> </span>{
+    draw2D.color(<span class="hljs-string">"red"</span>);
+    rightangletriangle();
+
+    <span class="hljs-comment">// it takes position/size arguments just like circle, rect, triangle:</span>
+    draw2D.color(<span class="hljs-string">"yellow"</span>);
+    rightangletriangle([<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>], <span class="hljs-number">0.25</span>);
+}
 </code></pre>
 <p>Graphics are drawn using whatever color is currently set, via <code>draw2D.color()</code>. </p>
 <pre><code class="lang-javascript">draw2D.<span class="hljs-keyword">color</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<span class="hljs-comment">; // red</span>
