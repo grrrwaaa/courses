@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<title>DATT4950 Gallery</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../style.css" type="text/css" />
+<style>
+#course {
+	color: white;
+	font-size: 1.5em;
+	writing-mode: vertical-rl;
+	text-orientation: sideways-right;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+#title {
+	color: white;
+	font-size: 1.5em;
+	writing-mode: vertical-rl;
+	text-orientation: sideways-right;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+</style>
+</head>
+<body>
+<script src="../../code/al.min.js"></script>
+<div id="course">DATT4950: Artificial Life, Generative Art and Creative Code</div>
+<div id="title"></div>
+<script>
+
+// Find the right method, call on correct element
+var requestFullscreen = function(element) {
+  if(element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if(element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if(element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  } else if(element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  }
+};
+
+title = "";
+author = "";
+var id = -1;
+
+function retitle() {
+	document.getElementById('title').innerText = title + " (" + author + ")";
+}
+
+function load() {
+
+	var r = random(17);
+	if (r != id) {
+	
+		id = r;
+	console.log(id);
+
+		var fileref=document.createElement('script');
+		fileref.setAttribute("type","text/javascript");
+		fileref.setAttribute("src", id + ".js");
+			
+		mouse = function(e, p) {
+			if (e == "down")
+				requestFullscreen(draw2D.gl.canvas.parentElement);
+		}
+	
+		if (typeof fileref!="undefined") {
+			document.getElementsByTagName("head")[0].appendChild(fileref);
+		
+			setTimeout(retitle, 100);
+		}
+	}
+	
+	// recursion:
+	setTimeout(load, 10000 * random(10));
+}
+
+load();
+
+</script>
+<body>
