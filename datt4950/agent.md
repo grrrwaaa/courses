@@ -352,6 +352,8 @@ if (agents[n].dead) {
 }
 ```
 
+> (Note that ```delete agents[n]``` won't work at all, it doesn't reshuffle the array to accommodate the gap, it just leaves the gap right there.)
+
 Similarly, if an agent gives birth, you might expect to add the child as follows:
 
 ```javascript
