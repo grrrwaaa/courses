@@ -342,6 +342,85 @@ But this time, our sugar field won't be dissipative -- we just need to create so
 
 [Here's a start in that direction](http://codepen.io/grrrwaaa/pen/gPeyPV?editors=001). 
 
+### Death Note: removing agents from an array
+
+If we want to extend our model to support death, such as being eaten by a predator, infected by a disease, starvation, poison, fire, etc., we will need a way to remove items from our array of agents. Assuming that we can mark death by some property (such as ```a.dead = true```), you might expect to remove it from the ```agents``` array as follows:
+
+```javascript
+if (agents[n].dead) {
+	agents.splice(n, 1);
+}
+```
+
+But in general, **removing from the array is not safe while iterating the array**, which is almost certainly the time that you would want to call it. The reason is that you may end up skipping an item, or trying to iterate over an item that no longer exists, because the exact positions of items have changed, and the array length has changed. This is one of the classic problems commonly encountered in many imperative programming languages (e.g. C++ too). **Birth note**: Similar problems appear when *adding* a newborn agent to an array (e.g. via ```agents.push(child)``` while iterating it. 
+
+Here are some possible solutions:
+
+1. Iterate backwards
+
+It is safe to splice while iterating backwards, because reshuffling an array only affects later items:
+
+```javascript
+// it is safe to push and splice while iterating backwards, 
+// because changes to the array only affect later items
+var i = agents.length;
+while (i--) {
+  var a = agents[i];
+  
+  //.. do stuff, possibly setting a.dead = true or creating a child
+  
+  // add a child?
+  if (child) agents.push(child);
+  // remove safely:
+  if (a.dead) agents.splice(i, 1);
+}
+```
+
+Note that in this case, new births will not be visited until the next frame. This is probably what you want, since otherwise you might end up creating an infinite loop!
+
+2. Regenerate the array while iterating
+
+Rather than modifying the array in-place, we build a new array on each iteration, and replace the original when done. This has the advantage of working with for-of loops. In a way, this is a kind of double-buffering:
+
+```javascript
+// create new array
+var newagents = [];
+for (var a of agents) {
+	
+	//.. do stuff, possibly setting a.dead = true or creating a child
+	
+	// preserve only living agents:
+	if (!a.dead) newagents.push(a);
+	
+	// add a child to visit on the next frame:
+	if (child) newagents.push(child);		
+}
+// replace original
+agents = [];
+```
+
+Note that new children are added to ```newagents```, ensuring they are visited next frame. If we added them to ```agents```, they would also be included in the iterating for loop on the current frame, which could potentially lead to an infinite loop. 
+
+3. Multiple passes (or a filter)
+
+The third method is to not modify the array while iterating, but only mark agents as dead, and instead have a second "sweep" phase to remove the dead ones safely. Here's an example:
+
+```javascript
+var children = [];
+for (var a of agents) {
+	
+	//.. do stuff, possibly setting a.dead = true or creating a child
+	
+	// add a child to visit on the next frame:
+	if (child) children.push(child);	
+	
+}
+// second pass removes all the dead ones and appends the new children:
+agents = agents.filter(function(a) {
+	return !a.dead;
+}).concat(children);
+```
+
 <!--
 
 ## Action selection systems

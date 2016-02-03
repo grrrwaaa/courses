@@ -75,7 +75,7 @@ Marcos Novak elsewhere has maintained that [“the future of cinema is worldmaki
 > Armed with cameras, we wander through a three-dimensional space. We encounter a war-torn landscape: destroyed buildings, armed militia, tanks, artillery, débris, the wounded, the mutilated. This selection of photographs and images - originating from many different conflict zones - comprise a universe saturated with a kind of tranquil violence. The soundscape evokes a world in which to breathe is to suffer. We become very aware that our presence, as spectators, could upset this chaotic equilibrium. And yet it’s our actions which will exacerbate the pain we see. We take photographs, and yet here, photography is a lethal weapon. 
 > The war-torn country doesn’t have borders. We visit the space like tourists; camera at the ready. We can all centre and capture a moment in this world of agony. But what we photograph thereby ceases to exist. Every photographed object disappears from the scene to be replaced by its white silhouette. The world gradually fades away as more and more photographs are taken. Each photographed image is printed. By the time it’s on paper, it’s no longer on the screen. Only its spectral outline remains; positioned according to the observer’s point of view, it haunts the photographs to come. Our progression through this universe reveals its infinite nature; we reassemble elements in the process of rediscovering them, forever different, chaotic, in an endless tragedy.  
 
-<iframe src="https://player.vimeo.com/video/86717517" width="720" height="540" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/86717517">World skin by Maurice Benayoun</a> from <a href="https://vimeo.com/user22871319">Le Pixel Blanc</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+<iframe src="https://player.vimeo.com/video/86717517" width="720" height="540" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 ---
 
@@ -85,7 +85,7 @@ Marcos Novak elsewhere has maintained that [“the future of cinema is worldmaki
 
 <iframe src="https://embed.vhx.tv/packages/2302" width="640" height="360" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 
-<iframe src="https://player.vimeo.com/video/42852185" width="720" height="405" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/42852185">Clouds: beta</a> from <a href="https://vimeo.com/deepspeed">Deepspeed media</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+<iframe src="https://player.vimeo.com/video/42852185" width="720" height="405" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 ---
 
@@ -110,7 +110,7 @@ See also: [Sir Richard Attenborough is working on a VR nature documentary](http:
 [Be Another Lab](http://www.themachinetobeanother.org)
 
 <iframe src="https://player.vimeo.com/video/84150219" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-<p><a href="https://vimeo.com/84150219">Gender Swap - Experiment with The Machine to Be Another</a> from <a href="https://vimeo.com/beanotherlab">BeAnotherLab</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
 
 > Gender Swap is an experiment that uses themachinetobeanother.org/ system as a platform for embodiment experience (a neuroscience technique in which users can feel themselves like if they were in a different body). In order to create the brain ilusion we use the immersive Head Mounted Display Oculus Rift, and first-person cameras. To create this perception, both users have to synchronize their movements. If one does not correspond to the movement of the other, the embodiment experience does not work. It means that both users have to constantly agree on every movement they make. Through out this experiment, we aim to investigate issues like Gender Identity, Queer Theory, feminist technoscience, Intimacy and Mutual Respect. 
 
