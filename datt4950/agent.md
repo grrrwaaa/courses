@@ -352,35 +352,42 @@ if (agents[n].dead) {
 }
 ```
 
-But in general, **removing from the array is not safe while iterating the array**, which is almost certainly the time that you would want to call it. The reason is that you may end up skipping an item, or trying to iterate over an item that no longer exists, because the exact positions of items have changed, and the array length has changed. This is one of the classic problems commonly encountered in many imperative programming languages (e.g. C++ too). **Birth note**: Similar problems appear when *adding* a newborn agent to an array (e.g. via ```agents.push(child)``` while iterating it. 
-
-Here are some possible solutions:
-
-1. Iterate backwards
-
-It is safe to splice while iterating backwards, because reshuffling an array only affects later items:
+Similarly, if an agent gives birth, you might expect to add the child as follows:
 
 ```javascript
-// it is safe to push and splice while iterating backwards, 
-// because changes to the array only affect later items
+if (child) {
+	agents.push(child);
+}
+```
+
+But in general, **adding to or removing from an array is not safe while iterating the array**, which is almost certainly the time that you would want to call it. The reason is that you may end up skipping an item, or trying to iterate over an item that no longer exists, or visiting an item twice, because the exact positions of items and the array length have changed. This is one of the classic problems commonly encountered in many imperative programming languages (e.g. C++ too). 
+
+Here are two suggested solutions:
+
+**Iterate backwards**
+
+It is safe to splice and push while iterating backwards, because reshuffling an array only affects later items:
+
+```javascript
 var i = agents.length;
 while (i--) {
-  var a = agents[i];
-  
-  //.. do stuff, possibly setting a.dead = true or creating a child
-  
-  // add a child?
-  if (child) agents.push(child);
-  // remove safely:
-  if (a.dead) agents.splice(i, 1);
+	var a = agents[i];
+
+	//.. do stuff, possibly setting a.dead = true or creating a child
+	
+	// remove safely:
+	if (a.dead) agents.splice(i, 1);
+
+	// add a child?
+	if (child) agents.push(child);
 }
 ```
 
 Note that in this case, new births will not be visited until the next frame. This is probably what you want, since otherwise you might end up creating an infinite loop!
 
-2. Regenerate the array while iterating
+**Double-buffer**
 
-Rather than modifying the array in-place, we build a new array on each iteration, and replace the original when done. This has the advantage of working with for-of loops. In a way, this is a kind of double-buffering:
+Rather than modifying the array in-place, we build a new array on each iteration, and replace the original when done. This has the advantage of working with for-of loops:
 
 ```javascript
 // create new array
@@ -392,7 +399,7 @@ for (var a of agents) {
 	// preserve only living agents:
 	if (!a.dead) newagents.push(a);
 	
-	// add a child to visit on the next frame:
+	// add a child?
 	if (child) newagents.push(child);		
 }
 // replace original
@@ -401,25 +408,6 @@ agents = [];
 
 Note that new children are added to ```newagents```, ensuring they are visited next frame. If we added them to ```agents```, they would also be included in the iterating for loop on the current frame, which could potentially lead to an infinite loop. 
 
-3. Multiple passes (or a filter)
-
-The third method is to not modify the array while iterating, but only mark agents as dead, and instead have a second "sweep" phase to remove the dead ones safely. Here's an example:
-
-```javascript
-var children = [];
-for (var a of agents) {
-	
-	//.. do stuff, possibly setting a.dead = true or creating a child
-	
-	// add a child to visit on the next frame:
-	if (child) children.push(child);	
-	
-}
-// second pass removes all the dead ones and appends the new children:
-agents = agents.filter(function(a) {
-	return !a.dead;
-}).concat(children);
-```
 
 <!--
 
