@@ -265,6 +265,9 @@ agent.vel.<span class="hljs-built_in">rotate</span>((<span class="hljs-built_in"
     <span class="hljs-built_in">agents</span>.splice(n, <span class="hljs-number">1</span>);
 }
 </code></pre>
+<blockquote>
+<p>(Note that <code>delete agents[n]</code> won&#39;t work at all, it doesn&#39;t reshuffle the array to accommodate the gap, it just leaves the gap right there.)</p>
+</blockquote>
 <p>Similarly, if an agent gives birth, you might expect to add the child as follows:</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">if</span> (child) {
     agents.<span class="hljs-keyword">push</span>(child);
