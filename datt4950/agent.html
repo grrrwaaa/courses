@@ -265,31 +265,31 @@ agent.vel.<span class="hljs-built_in">rotate</span>((<span class="hljs-built_in"
     <span class="hljs-built_in">agents</span>.splice(n, <span class="hljs-number">1</span>);
 }
 </code></pre>
-<p>But in general, <strong>removing from the array is not safe while iterating the array</strong>, which is almost certainly the time that you would want to call it. The reason is that you may end up skipping an item, or trying to iterate over an item that no longer exists, because the exact positions of items have changed, and the array length has changed. This is one of the classic problems commonly encountered in many imperative programming languages (e.g. C++ too). <strong>Birth note</strong>: Similar problems appear when <em>adding</em> a newborn agent to an array (e.g. via <code>agents.push(child)</code> while iterating it. </p>
-<p>Here are some possible solutions:</p>
-<ol>
-<li>Iterate backwards</li>
-</ol>
-<p>It is safe to splice while iterating backwards, because reshuffling an array only affects later items:</p>
-<pre><code class="lang-javascript"><span class="hljs-comment">// it is safe to push and splice while iterating backwards, </span>
-<span class="hljs-comment">// because changes to the array only affect later items</span>
-var i = agents.<span class="hljs-keyword">length</span><span class="hljs-comment">;</span>
+<p>Similarly, if an agent gives birth, you might expect to add the child as follows:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">if</span> (child) {
+    agents.<span class="hljs-keyword">push</span>(child);
+}
+</code></pre>
+<p>But in general, <strong>adding to or removing from an array is not safe while iterating the array</strong>, which is almost certainly the time that you would want to call it. The reason is that you may end up skipping an item, or trying to iterate over an item that no longer exists, or visiting an item twice, because the exact positions of items and the array length have changed. This is one of the classic problems commonly encountered in many imperative programming languages (e.g. C++ too). </p>
+<p>Here are two suggested solutions:</p>
+<p><strong>Iterate backwards</strong></p>
+<p>It is safe to splice and push while iterating backwards, because reshuffling an array only affects later items:</p>
+<pre><code class="lang-javascript">var i = agents.<span class="hljs-keyword">length</span><span class="hljs-comment">;</span>
 <span class="hljs-keyword">while</span> (i--) {
-  var a = agents[i]<span class="hljs-comment">;</span>
+    var a = agents[i]<span class="hljs-comment">;</span>
 
-  <span class="hljs-comment">//.. do stuff, possibly setting a.dead = true or creating a child</span>
+    <span class="hljs-comment">//.. do stuff, possibly setting a.dead = true or creating a child</span>
 
-  <span class="hljs-comment">// add a child?</span>
-  <span class="hljs-keyword">if</span> (child) agents.push(child)<span class="hljs-comment">;</span>
-  <span class="hljs-comment">// remove safely:</span>
-  <span class="hljs-keyword">if</span> (a.dead) agents.splice(i, <span class="hljs-number">1</span>)<span class="hljs-comment">;</span>
+    <span class="hljs-comment">// remove safely:</span>
+    <span class="hljs-keyword">if</span> (a.dead) agents.splice(i, <span class="hljs-number">1</span>)<span class="hljs-comment">;</span>
+
+    <span class="hljs-comment">// add a child?</span>
+    <span class="hljs-keyword">if</span> (child) agents.push(child)<span class="hljs-comment">;</span>
 }
 </code></pre>
 <p>Note that in this case, new births will not be visited until the next frame. This is probably what you want, since otherwise you might end up creating an infinite loop!</p>
-<ol>
-<li>Regenerate the array while iterating</li>
-</ol>
-<p>Rather than modifying the array in-place, we build a new array on each iteration, and replace the original when done. This has the advantage of working with for-of loops. In a way, this is a kind of double-buffering:</p>
+<p><strong>Double-buffer</strong></p>
+<p>Rather than modifying the array in-place, we build a new array on each iteration, and replace the original when done. This has the advantage of working with for-of loops:</p>
 <pre><code class="lang-javascript"><span class="hljs-comment">// create new array</span>
 var newagents = []<span class="hljs-comment">;</span>
 <span class="hljs-keyword">for</span> (var a of agents) {
@@ -299,31 +299,13 @@ var newagents = []<span class="hljs-comment">;</span>
     <span class="hljs-comment">// preserve only living agents:</span>
     <span class="hljs-keyword">if</span> (!a.dead) newagents.push(a)<span class="hljs-comment">;</span>
 
-    <span class="hljs-comment">// add a child to visit on the next frame:</span>
+    <span class="hljs-comment">// add a child?</span>
     <span class="hljs-keyword">if</span> (child) newagents.push(child)<span class="hljs-comment">;        </span>
 }
 <span class="hljs-comment">// replace original</span>
 agents = []<span class="hljs-comment">;</span>
 </code></pre>
 <p>Note that new children are added to <code>newagents</code>, ensuring they are visited next frame. If we added them to <code>agents</code>, they would also be included in the iterating for loop on the current frame, which could potentially lead to an infinite loop. </p>
-<ol>
-<li>Multiple passes (or a filter)</li>
-</ol>
-<p>The third method is to not modify the array while iterating, but only mark agents as dead, and instead have a second &quot;sweep&quot; phase to remove the dead ones safely. Here&#39;s an example:</p>
-<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> children = [];
-<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> a <span class="hljs-keyword">of</span> agents) {
-
-    <span class="hljs-comment">//.. do stuff, possibly setting a.dead = true or creating a child</span>
-
-    <span class="hljs-comment">// add a child to visit on the next frame:</span>
-    <span class="hljs-keyword">if</span> (child) children.push(child);    
-
-}
-<span class="hljs-comment">// second pass removes all the dead ones and appends the new children:</span>
-agents = agents.filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a</span>) </span>{
-    <span class="hljs-keyword">return</span> !a.dead;
-}).concat(children);
-</code></pre>
 <!--
 
 ## Action selection systems
