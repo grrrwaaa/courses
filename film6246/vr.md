@@ -48,11 +48,7 @@ The crucial addition for head-mounted VR is *head tracking*, which means we can 
 
 1838: Sir Charles Wheatstone invents [stereoscopic photography](https://www.youtube.com/watch?v=Pu6SOckMxT0&feature=youtu.be).
 
-
-
 ![Sword of Damocles](http://blog.modernmechanix.com/mags/qf/c/PopularScience/4-1971/med_vr_goggles.jpg)
-
-
 
 1968: Ivan Sutherland's Sword of Damocles, widely considered to be the first virtual reality (VR) and augmented reality (AR) head-mounted display (HMD) system. Ivan Sutherland, 1968, DARPA. Also read: [The Ultimate Display. Ivan E Sutherland, 1965](http://worrydream.com/refs/Sutherland%20-%20The%20Ultimate%20Display.pdf)
 
@@ -145,6 +141,16 @@ Oculus VR is acquired by Facebook for $2 billion, which isn't well received by m
 
 ![Oculus Menagerie](oculus_menagerie.jpg)   
 Image taken by author at the Unreal Summit, Seoul, May 2015.
+
+---
+
+So, are we in the beginning of the plateau of productivity, or in another hype cycle?
+
+![hype cycle](https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Gartner_Hype_Cycle.svg/559px-Gartner_Hype_Cycle.svg.png)
+
+[For more on hype cycles](http://www.gartner.com/newsroom/id/2575515) -- Gartner in 2013 placed the plateau for VR in the 5-10 year range:
+
+![Gartner 2013](http://na2.www.gartner.com/imagesrv/newsroom/images/hype-cycle-pr.png;wada20fd4bd7891509)
 
 ---
 
