@@ -17,7 +17,9 @@ These questions may be filtered according to a project theme, or considering the
 
 ### General
 
-Original artspaces as an experience to navigate through spaces? Unique games with rules in a reward oriented manner?
+- How do you contextualize the project? Original artspaces as an experience to navigate through? Unique games with rules in a reward oriented manner?
+
+- How does this idea respond to the question of the medium -- how is it specific to VR, and wouldn't make sense (or much less sense) without VR?
 
 - Where does it sit between the spectrum of a fixed narrative arc to a completely open interaction?
 	- Fixed time or interactively-paced?
@@ -26,9 +28,7 @@ Original artspaces as an experience to navigate through spaces? Unique games wit
 	
 - What is the overal tone of the experience (what primal emotions, physical and mental states are elicited, what kind of activities does it resemble, what kind of attitude is required)? 
 
-- What metaphors, allusions, poetics?
-
-- How does this idea respond to the question of the medium -- how is it specific to VR, and wouldn't make sense (or much less sense) without VR?
+- What metaphors, allusions, poetics of space or time?
 
 - What are the major influences, sources of inspiration, outside the medium?
 
@@ -36,11 +36,11 @@ Original artspaces as an experience to navigate through spaces? Unique games wit
 
 What is the general nature of the space -- how does it speak its poetry?
 
-- Is there a sense of up? 
-	- Things like a ground plane, physics of gravity, and visual references (buildings, trees, rooms etc) will anchor the sense of "upness". Take care to place the user at an appropriate height above ground (by default the space is measured in meters). 
+- Grounded or other?
+	- Is there a sense of up? Things like a ground plane, physics of gravity, and visual references (buildings, trees, rooms etc) will anchor the sense of "upness". Take care to place the user at an appropriate height above ground (by default the space is measured in meters). 
 	- The absence of gravity, ground planes, and well-oriented familiar objects will diminish the sense of "upness", lending instead a sense of space that could be non-terrestrial deep space, deep sea, microscopic space, mathematical or abstract space.
 	
-- An open (e.g. outdoor) or enclosed (e.g. indoor) space? Or both, or other?
+- An open (e.g. outdoor) or enclosed (e.g. indoor) space? Both, or other?
 	- Enclosed spaces are living environments, caves, dungeons, jungles, tunnels, tubes, vessels etc. Care must be taken to make sure navigation is limited within the enclosed space. There may be partitions between spaces (doors, portals, holes, etc.) In VR, getting scale correct is extremely important. Enclosed spaces can be comforting, but also claustrophobic. Mazes & labyrinths, narratives of hiding, searching, escaping.
 	- Open spaces are deserts, fields, mountain plateaus, the sea (on the surface or below), roadways, the air, deep space, abstract space. Open spaces can be more challenging to fill; it takes effort to ensure they do not primarily convey emptiness (unless that is the goal). If the space is freely navigable, how do you ensure there is something worth experiencing in any direction or location? Some experiences use "procedural generation", which means using an algorithm to generate content wherever the traveller wanders. Some simply repeat content. Most however give the visual impression of open space (via skyboxes for example), but actually limit the range of navigation to stay within certain boundaries, such as walls, cliffs, shores (the island is a very common motif), or some life-threatening danger. Narratives of exploration, journey, loss.
 	- Combine both: an open space with entrances to enclosed spaces, such as buildings or caves (e.g. Dear Esther, but also Minecraft). Narratives of discovery, quest, complexity. 
@@ -53,7 +53,7 @@ What is the general nature of the space -- how does it speak its poetry?
 	- Depends greatly on freedom of navigation; the more free the immersant, the more it becomes architecture rather than scenography. 
 	- Consider paths, affordances, balance, hierarchy, scale & proportion, symmetry & asymmetry, unity, rhythm & emphasis, densities, directions and radial balance, form & function etc.
 	- Static objects are cheaper than dynamic ones.
-	- Human-scale or other? 
+	- Human-scale, table-scale, or other? 
 	
 ### World-behaviour
 
@@ -74,14 +74,14 @@ What moves in the world -- what makes it more than a place? Or, is absence/loss 
 	- People/characters (or people-like things) -- very difficult to even get close to [uncanny valley](http://en.wikipedia.org/wiki/Uncanny_valley), never mind overcome it; but voices & videos are one way, non-realistic avatars are another. Even a tracking CCTV camera imparts life to the world. Simple logic/AI?
 	- Multiplayer?
 	
-- How do these mechanics and agences influence each other?
+- (How) do these mechanics and agencies influence each other, independently of the immersant?
 
 ### Interaction & Navigation
 
 What can we do there?
 
 - How does an immersant navigate?
-	- None -- you can only observe from a single fixed point
+	- None -- you can only observe from a single fixed point, though the world may change around you (e.g. Sightline)
 	- None -- but you are transported by cuts or continuously (e.g. Senza Peso)
 	- Path -- you can only move on a fixed path, but you can control the speed (e.g. [Way to Go](http://www.a-way-to-go.com))
 	- Jump/cut -- e.g. look at a location for long enough and you will jump there; or teleport somewhere
@@ -101,7 +101,7 @@ What can we do there?
 	- Actions modulate self, agencies, world, ...
 	- Play with anticipation, engagement, surprise, revelation, ...
 	
-- What is the driving meaning?
+- What is the driving meaning behind interaction?
 	- The act of uncovering/discovering... including mazes and confusions
 	- Unlocking secrets
 	- Collecting
@@ -109,7 +109,7 @@ What can we do there?
 	- Contemplation/meditation
 	- Others
 	
-- Do actions leave permanent traces? Even between sessions?
+- Do actions leave permanent traces? (Even between sessions?)
 
 ### The real & the virtual
 
@@ -161,7 +161,7 @@ What can we do there?
 
 ### What will you do about simulator sickness
 
-[See the notes on the design page](design.html)
+[See the notes here](design.html)
 
 ----
 

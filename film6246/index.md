@@ -96,8 +96,6 @@ Develop your first Unreal project level -- and bring it in next week (on a USB s
 
 Showing the first worlds, questions & discussion. 
 
-Game/not game inspiration.
-
 Engine: foliage, embedding media, event triggers, post volumes.
 
 **Tasks**
@@ -106,13 +104,33 @@ Continue working with the worlds. Begin sketching out ideas for a project propos
 
 ### 5. Feb 2
 
+Early VR art inspiration. 
+
+Game/not game inspiration.
+
+Project discussion.
+
 ### 6. Feb 9
+
+Recent VR art inspiration. 
+
+Game/not game inspiration.
+
+Project discussion.
+
+**Tasks**
+
+Complete a shared project design document, including synopsis, mood/inspiration images/links, plan (timeline, technical/content milestones, division of labour), etc. Respond to [the project design questions](project.html) as much as possible.
 
 ### 7. Feb 16
 
 **Reading week**
 
 ### 8. Feb 23
+
+Project design presentation. 
+
+Milestone foci.
 
 ### 9. Mar 1
 

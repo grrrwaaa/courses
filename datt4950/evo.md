@@ -294,7 +294,23 @@ How would you be able to add operators such as ```Math.sin()```?
 
 What other problems could you imagine addressing, other than calculating numbers? (What kinds of problems is this method suited for?)
 
+---
+
+
+![agent diagram](img/agent_diagram.png)
+![agent graph](img/agent_graph.png)
+
 <!------
+
+Next: rather than a number, evolve a program that can respond to inputs, and give fit output, e.g. fitting a curve. Or just jump directly into evolving agents?
+
+E.g take our vehicles model: two motors, two sensors, and some program to map them, see which ones survive. Use beetle diagram from AN.
+
+Inputs:
+- two sensors, energy-level, 
+
+
+---
 
 ## Genetic Programming
 
