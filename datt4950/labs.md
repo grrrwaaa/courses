@@ -105,8 +105,6 @@ The kit provides an event-based callback system, in which you implement speciall
 
 For simulation updates, implement a function called ```update()```. 
 
-<!-- delta time argument -->
-
 To define how the canvas renders, implement a function called ```draw()```. All graphics code should go into this callback.
 
 ### Interaction
@@ -138,6 +136,13 @@ wrap(-1, 4);	// returns 3 (whereas -1 % 4 would return -1)
 ```
 
 The ```write()``` function will output text above the main canvas. It can be more useful than calling ```console.log()``` in certain situations, since the text will reset on each frame. 
+
+There are also a couple of global variables, used to measure time:
+
+```javascript
+console.log(now);	// the time in seconds since the script started
+console.log(dt);	// the delta time in seconds between each update()
+```
 
 ## field2D
 
