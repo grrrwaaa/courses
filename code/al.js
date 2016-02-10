@@ -1939,6 +1939,11 @@ write = function() {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
+var t0 = Date.now() / 1000;
+
+t = 0;
+dt = 1/60;
+
 requestAnimationFrame(render);
 
 function render() {
@@ -1949,6 +1954,7 @@ function render() {
 	texture_current = texture_default;
 
 	if (updating) {
+		t += dt;
 		if (typeof(update) === "function") {
 			update();
 		}
@@ -1972,4 +1978,8 @@ function render() {
 		overlay.innerHTML = pretext;
 		pretext = "";
 	}
+	
+	var t1 = Date.now() / 1000;
+	dt = t1 - t0;
+	t0 = t1;
 }

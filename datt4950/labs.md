@@ -54,6 +54,38 @@ function draw() {
 
 ---
 
+- Cellular systems
+	- [1D automata](http://codepen.io/grrrwaaa/pen/meVoMo)
+	- [Game of Life](http://codepen.io/grrrwaaa/pen/EVPGOB)
+	- [Brian's brain](http://codepen.io/grrrwaaa/pen/WQrmGb)
+	- [Forest fire](http://codepen.io/grrrwaaa/pen/xwZBRP)
+	- [Forest fire in colour](http://codepen.io/grrrwaaa/pen/pgrrpo)
+	- [Langton's Ant](http://codepen.io/grrrwaaa/pen/RWrdoq)
+	- [Multiple ants](http://codepen.io/grrrwaaa/pen/MaKxJb)
+	- [Block rules](http://codepen.io/grrrwaaa/pen/NGxJpP)
+	- [Ising model](http://codepen.io/grrrwaaa/pen/dGzORw)
+	- [Hodgepodge](http://codepen.io/grrrwaaa/pen/LpGaxm)
+	- [Semi-continuous game of life](http://codepen.io/grrrwaaa/pen/RrZgxo)
+	- [Game of life + sweeper](http://codepen.io/grrrwaaa/pen/eJEegQ)
+	- [Week 2 lab](http://codepen.io/grrrwaaa/pen/wMqpME)
+- Agent systems
+	- [Random walker](http://codepen.io/grrrwaaa/pen/mVBBPQ)
+	- [Flockers](http://codepen.io/grrrwaaa/pen/LGzgpO)
+	- [Flockers + obstacles](http://codepen.io/grrrwaaa/pen/XXevBb)
+	- [Simple seek/flee vehicle](http://codepen.io/grrrwaaa/pen/xZPeNV)
+	- [Two-eye vehicles](http://codepen.io/grrrwaaa/pen/yeKWax)
+	- [Week 3 lab](http://codepen.io/grrrwaaa/pen/LGebzj)
+	- [Chemotaxis](http://codepen.io/grrrwaaa/pen/yepmvq)
+	- [Chemotaxis + mouse](http://codepen.io/grrrwaaa/pen/mVxowj)
+	- [Stigmergy](http://codepen.io/grrrwaaa/pen/OMvYRg)
+	- [Ants (work in progress)](http://codepen.io/grrrwaaa/pen/pgVEdP)
+	- [Birth & death](http://codepen.io/grrrwaaa/pen/PZxrbo)
+- Evolutionary systems
+	- [Evolving sentences](http://codepen.io/grrrwaaa/pen/yeqMYy)
+	- [Evolving math](http://codepen.io/grrrwaaa/pen/zrLZvK)
+
+---
+
 > If you haven't used JavaScript before, I've provided a [quick introduction here](js.html)
 
 Here's an example:
