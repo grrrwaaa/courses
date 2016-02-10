@@ -342,7 +342,11 @@ But this time, our sugar field won't be dissipative -- we just need to create so
 
 [Here's a start in that direction](http://codepen.io/grrrwaaa/pen/gPeyPV?editors=001). 
 
-### Death Note: removing agents from an array
+---
+
+## Energy exchange, birth and death
+
+### Death Note: adding/removing agents from an array
 
 If we want to extend our model to support death, such as being eaten by a predator, infected by a disease, starvation, poison, fire, etc., we will need a way to remove items from our array of agents. Assuming that we can mark death by some property (such as ```a.dead = true```), you might expect to remove it from the ```agents``` array as follows:
 
@@ -410,6 +414,20 @@ agents = [];
 
 Note that new children are added to ```newagents```, ensuring they are visited next frame. If we added them to ```agents```, they would also be included in the iterating for loop on the current frame, which could potentially lead to an infinite loop. 
 
+---
+
+Agents are also exchanging energy, which may be important to model in the simulation. Possible energetic transfers include:
+
+- Digestion. A gain in energy extracted from food that is consumed. A more elaborate simulation will distribute this process over time, rather than acting immediately upon ingestion. 
+- General metabolism. A continuous loss of energy even when no action is taken. Could be related to organism size or mass, perhaps also multiplied by the delta time.
+- Locomotion. One way is to compute the energy spent in terms of the forces applied. For a simple vehicle simulation, this is the proportional to the actual difference in velocity from frame to frame, perhaps also multiplied by the delta time.
+- Reproduction. At the very least, energy must be subtracted from the parent to give to the child, but in all likelihood an additional loss of energy should be included. 
+- Eating. It takes effort to consume and transform food from the environment into useful energy storage. This would likely be a proportion of the food's potential energy lost during mastication/digestion. 
+- Growth. If organisms increase in size (or complexity) from birth, these changes should also have an energetic cost.
+
+Each of these energetic costs is likely also multiplied by some scalar constant, such as a ```metabolism_cost```, ```locomotion_cost```, etc.
+
+> If we are careful to enumerate **all** the energetic gains and losses in this way, we can count the total energy lost in the system on each frame, and make that available as an energy input to the environment on the next frame. In this way, the total energy circulating in the system should remain constant. This total energy expenditure may also be a useful indicator of the liveliness of a system.
 
 <!--
 

@@ -296,22 +296,70 @@ What other problems could you imagine addressing, other than calculating numbers
 
 ---
 
+## Aesthetic selection of biomorphs
 
-![agent diagram](img/agent_diagram.png)
+Biomorphs are virtual entities that were devised by Richard Dawkins in his book The Blind Watchmaker as a way to visualize the power of evolution.
+
+---
+
+## Evolving agents
+
+For a more ambitious, but more interesting challenge, we can try to build up a population of evolving agents whose phenotypic behaviour is a unique *program*, which processes information from the environment through a number of internal "neural nodes", resulting in actions, or actuator potential signals that in turn cause actions in the exterior world. 
+
+![agent diagram](img/agent_diagram.png) 
+
+**Possible inputs include:**
+
+- Internal physiological states: At least, the current store of energy (the hungry/satiated axis), but possibly also other internal parametric states if they exist, such as temperature, digestive toxicity, ...
+- Smell/taste/pressure/humidity/electroreception/magnetoception: Detection of concentrations/intensities in local fields, at the center location of the agent.
+	- Alternatively, sensors on appendages: same as above, but at points removed from the center of the agent according to the bodily position of the sensor. E.g. eyestalks.
+- Touch: Detection of collision with objects in the environment. Could be a simple boolean true/false, could include a direction to the collided object, could include a magnitude according to the amount of overlap (i.e. a vector). 
+- Proximity/sight/hearing/echolocation: Detection of the number of agents/objects in close range. Could be converted to a loneliness/claustrophobia axis.
+	- Or perhaps the center-of-mass of objects/agents in close range (the *cohesion* and *separation* senses of the boids), or some other average property of nearby objects/agents (such as the *alignment* sense of the boids, or perhaps average color of nearby agents). 
+	- Could be refined to multiple senses, for different kinds of objects.
+- Proprioception/vestibular senses: The sense of motion from within, including balance, poise, etc. The simplest could be an accelerometer, reporting changes of velocity back to the agent. There could also be senses identifying the position or rate of movement of limbs.
+- Temporal senses (Chronoception): The simplest being a function of the agent's age since birth.
+- Pain (nociception), and perhaps other stimulations, triggered by other activity upon the agent, which dissipates over time.
+- Internal mental states, such as memory or dispositions: Could simply be a bank of memory "slots", that are written as one of the action outputs.
+
+**Possible outputs:**
+
+- Changing internal mental states, such as memory stores, or dispositions.
+- Locomotion. Ideally modeled as signals sent to simulated locomotory systems, rather than simple changes of velocity/orientation. 
+- Consumption. Extraction of materials from the environment, e.g. food. 
+	- Vice versa, expulsion of materials back into the environment, e.g. building, defecation. 
+- Communication. Pheromone deposits, noises, visual signals, etc.
+- Growth. Although this is not usually something under an organisms' control for larger organisms, it may be at the cellular level.
+- Reproduction. Clearly this is only an internal choice for organisms that reproduce asexually.
+
+It is likely necessary to conform inputs to ranges of sensitivity, such that external quantities are always mapped into internal ranges clamped in a unipolar 0..1 range, or perhaps a bipolar -1..1 range. Outputs may also need to map their intrinsic ranges (unipolar or bipolar) into useful ranges in the world. For example, a unipolar consumption range could be used as a proportion of available food that is actually ingested. Alternatively, it could be mapped to a range determined by the maximum eating rate an organism can sustain (a constant).
+
+For both inputs and outputs, we may need to distinguish between occasional "events" and more continuously varying "signals", though it is simpler if we do not need to. Event-like inputs can be treated as signals whose value is zero when no event is occurring. Event-like outputs can be treated as signals that pass a given threshold, or change by a significant margin.
+
+**Possible internal operations:**
+
+The middle layers between inputs & outputs may utilize a palette of mathematical mappings and simple signal-processing operators. For example, the set of "neural nodes" available in Karl Sims' [evolving virtual creatures](http://www.karlsims.com/papers/siggraph94.pdf) simulation included:
+
+> sum, product, divide, greater-than, sign-of, min, max, abs, if, interpolate, sin, cos, atan, log, expt, sigmoid, 
+
+Furthermore, a number of "stateful" operators, which include their own history/memory, were included:
+
+> sum-threshold, integrate, differentiate, smooth, oscillate-wave, and oscillate-saw.
+
+Sum-threshold refers to a unit that operates much like a real neuron, accumulating inputs until a threshold is reached, then outputting a pulse and relaxing to zero. Integrate is a simple counter, but it may be wise to make it "leaky", such that the accumulated value naturally decays over time. Smooth is a simple moving average, or low-pass filter, such as averaging the current and previous input. The oscillators are a combination of a counter with a trigonometric or modulo operation.
+
 ![agent graph](img/agent_graph.png)
+
 
 <!------
 
-Next: rather than a number, evolve a program that can respond to inputs, and give fit output, e.g. fitting a curve. Or just jump directly into evolving agents?
+Next: rather than a number, evolve a program that can respond to inputs, and give fit output, e.g. fitting a curve. 
 
-E.g take our vehicles model: two motors, two sensors, and some program to map them, see which ones survive. Use beetle diagram from AN.
+Or build biomorphs?
 
-Inputs:
-- two sensors, energy-level, 
+Or build fastbreeder?
 
-Outputs:
-- two motors (0..1)
-- energetic cost: 
+And finally agents. Here's a work-in-progress template: http://codepen.io/grrrwaaa/pen/obQrZJ?editors=001
 
 ---
 

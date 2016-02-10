@@ -685,6 +685,7 @@ vec2.clip = function(out, v, lo, hi) {
 	}
 	return vec2.max(out, vec2.min(out, v, hi), lo);
 };
+vec2.clamp = vec2.clip;
 
 vec2.mix = function(out, a, b, t) {
 	if (typeof t == "object") {
@@ -925,6 +926,8 @@ mat3.scale(modelView_default, modelView_default, [2, 2]);
 mat3.translate(modelView_default, modelView_default, [-0.5, -0.5]);
 var draw2D_modelView_stack = [];
 var draw2D_color_stack = [];
+
+var draw2D_linethickness = 1;
 
 var texture_default = (function() {
 	var id = gl.createTexture();
@@ -1309,6 +1312,93 @@ draw2D.shape = function(vertices) {
 		return shape;
 	});
 };
+
+
+// cheating a bit -- we're just going to draw a rect.
+draw2D.line = (function() {
+	// build an object with vertices, texcoords and indices buffers:	
+	var shape = {
+		vertices: [
+			0, -1,
+			1, -1, 
+			0, 1,
+			1, 1
+		],
+		texcoords: [
+			0, 0,
+			1, 0, 
+			0, 1,
+			1, 1
+		],
+		indices: [0, 1, 2, 2, 1, 3]
+	};
+	
+	// convert these to GPU buffers:
+	var vertices_buffer = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, vertices_buffer);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(shape.vertices), gl.STATIC_DRAW);
+	
+	//var texcoords_buffer = gl.createBuffer();
+	//gl.bindBuffer(gl.ARRAY_BUFFER, texcoords_buffer);
+	//gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(shape.texcoords), gl.STATIC_DRAW);
+	
+	var indices_buffer = gl.createBuffer();
+	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indices_buffer);
+	gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(shape.indices), gl.STATIC_DRAW);
+	
+	var shapelength = shape.indices.length;
+	
+	// those will all be upvalues of the actual draw function:
+	return function(A, B, thickness) {
+		
+		if (typeof A === "undefined") {
+			A = [1, 1];
+		}
+		if (typeof B === "undefined") {
+			B = [0, 0];
+		}
+		if (typeof thickness !== "number") {
+			thickness = 1;
+		}
+		
+		var AB = new vec2(B[0]-A[0], B[1]-A[1]);
+		var len = AB.len();
+		var radians = AB.angle();
+		
+		// make line thickness independent of current transform:
+		var width = thickness * (page_to_gl[0]*2)/(modelView[0]+modelView[4]);
+		
+		// create a local transformation matrix for these:
+		var mat_local = mat3.clone(modelView);
+		mat3.translate(mat_local, mat_local, A);
+		mat3.rotate(mat_local, mat_local, radians);
+		mat3.scale(mat_local, mat_local, [len, width]);
+		
+		// apply uniforms:
+		gl.uniform4fv(draw2D_colorLocation, draw2D_chroma.gl());
+		gl.uniformMatrix3fv(draw2D_modelViewLocation, false, mat_local);
+
+		// bind shape buffers:
+		gl.bindBuffer(gl.ARRAY_BUFFER, vertices_buffer);
+		gl.enableVertexAttribArray(draw2D_positionLocation);
+		gl.vertexAttribPointer(draw2D_positionLocation, 2, gl.FLOAT, false, 0, 0);
+	
+		//gl.bindBuffer(gl.ARRAY_BUFFER, texcoords_buffer);
+		//gl.enableVertexAttribArray(draw2D_texcoordLocation);
+		//gl.vertexAttribPointer(draw2D_texcoordLocation, 2, gl.FLOAT, false, 0, 0);
+	
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indices_buffer);
+		
+		// draw shape:
+		gl.drawElements(gl.TRIANGLES, shapelength, gl.UNSIGNED_SHORT, 0);
+
+		// clean up:
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+		gl.bindBuffer(gl.ARRAY_BUFFER, null);
+		return draw2D;
+	};
+})();
+
 
 /*
 draw2D.shape() should return a re-usable shape object that we can call similar methods on to extend its internal geometry
