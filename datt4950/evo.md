@@ -298,7 +298,33 @@ What other problems could you imagine addressing, other than calculating numbers
 
 ## Aesthetic selection of biomorphs
 
-Biomorphs are virtual entities that were devised by Richard Dawkins in his book The Blind Watchmaker as a way to visualize the power of evolution.
+Biomorphs are virtual entities that were devised by Richard Dawkins in his book [The Blind Watchmaker](https://en.wikipedia.org/wiki/The_Blind_Watchmaker) as a way to visualize the power of evolution. Dawkins used a simple symbolic rendering of lines at fixed angles, grown in a kind of tree structure, as his phenotypes. Of a given generation, he selected the biomorph he found most aesthetically pleasing, making this the parent of the next generation.
+
+![biomorph](https://upload.wikimedia.org/wikipedia/commons/f/fc/BiomorphBounce.png)
+
+> Adding new lines (or removing them) based on simple developmental rules offered a discrete set of possible new shapes (mutations), which were displayed on screen so that the user could choose between them. The chosen mutation would then be the basis for another generation of biomorph mutants to be chosen from, and so on. Thus, the user, by selection, could steer the evolution of biomorphs. This process often produced images which were reminiscent of real organisms for instance beetles, bats, or trees. Dawkins speculated that the unnatural selection role played by the user in this program could be replaced by a more natural agent if, for example, colourful biomorphs could be selected by butterflies or other insects, via a touch sensitive display set up in a garden.
+
+### Turtle graphics
+
+One of the simplest ways to create a biomorph is to interpret strings as instructions for another program. The genotype is a string of symbols, the phenotype is the graphics that result. The classic example is using them as instructions for a "turtle graphics" interpreter. Our alphabet & semantics could be something like this:
+
+- **F**: move forward one unit, drawing a line.
+- **f**: move forward half a unit, drawing a line.
+- **+**: turn a fixed amount to the left.
+- **-**: turn a fixed amount to the right.
+- **=**: spawn a new turtle, facing the opposite direction, and let both turtles continue following the instructions.
+- **.**: do nothing
+- etc.
+
+One of the advantages of using strings of symbols as genotypes is their readability, but another is the flexibility to perform different kinds of mutations:
+
+- Replace a symbol with another randomly chosen from the alphabet
+- At a random location, remove a symbol
+- At a random location, insert a symbol randomly chosen from the alphabet
+- Split the string into two parts, and join them the other way around
+- Reverse a section of the string
+
+Now we can show all members of a generation side-by-side, and use the mouse to choose the member we prefer to form the parent of the next generation.
 
 ---
 
