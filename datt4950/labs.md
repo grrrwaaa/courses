@@ -84,6 +84,7 @@ function draw() {
 	- [Evolving sentences](http://codepen.io/grrrwaaa/pen/yeqMYy)
 	- [Evolving math](http://codepen.io/grrrwaaa/pen/zrLZvK)
 	- [Evolving biomorphs](http://codepen.io/grrrwaaa/pen/BjvQLq?editors=001)
+	- [Evolving biomorphs (week 6)](http://codepen.io/grrrwaaa/pen/dGwWOz?editors=001)
 
 ---
 
