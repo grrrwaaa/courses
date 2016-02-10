@@ -59,6 +59,44 @@
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
 </code></pre><hr>
+<ul>
+<li>Cellular systems<ul>
+<li><a href="http://codepen.io/grrrwaaa/pen/meVoMo">1D automata</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/EVPGOB">Game of Life</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/WQrmGb">Brian&#39;s brain</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/xwZBRP">Forest fire</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/pgrrpo">Forest fire in colour</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/RWrdoq">Langton&#39;s Ant</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/MaKxJb">Multiple ants</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/NGxJpP">Block rules</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/dGzORw">Ising model</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/LpGaxm">Hodgepodge</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/RrZgxo">Semi-continuous game of life</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/eJEegQ">Game of life + sweeper</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/wMqpME">Week 2 lab</a></li>
+</ul>
+</li>
+<li>Agent systems<ul>
+<li><a href="http://codepen.io/grrrwaaa/pen/mVBBPQ">Random walker</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/LGzgpO">Flockers</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/XXevBb">Flockers + obstacles</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/xZPeNV">Simple seek/flee vehicle</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/yeKWax">Two-eye vehicles</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/LGebzj">Week 3 lab</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/yepmvq">Chemotaxis</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/mVxowj">Chemotaxis + mouse</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/OMvYRg">Stigmergy</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/pgVEdP">Ants (work in progress)</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/PZxrbo">Birth &amp; death</a></li>
+</ul>
+</li>
+<li>Evolutionary systems<ul>
+<li><a href="http://codepen.io/grrrwaaa/pen/yeqMYy">Evolving sentences</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/zrLZvK">Evolving math</a></li>
+</ul>
+</li>
+</ul>
+<hr>
 <blockquote>
 <p>If you haven&#39;t used JavaScript before, I&#39;ve provided a <a href="js.html">quick introduction here</a></p>
 </blockquote>
@@ -72,7 +110,6 @@
 <h2 id="callbacks">Callbacks</h2>
 <p>The kit provides an event-based callback system, in which you implement specially-named functions to handle specific events.</p>
 <p>For simulation updates, implement a function called <code>update()</code>. </p>
-<!-- delta time argument -->
 <p>To define how the canvas renders, implement a function called <code>draw()</code>. All graphics code should go into this callback.</p>
 <h3 id="interaction">Interaction</h3>
 <p>Two additional callbacks exist to detect mouse and keyboard interaction respectively. </p>
@@ -93,6 +130,10 @@
 <span class="hljs-keyword">wrap</span>(<span class="hljs-number">-1</span>, <span class="hljs-number">4</span>);   <span class="hljs-comment"> // returns 3 (whereas -1 % 4 would return -1)</span>
 </code></pre>
 <p>The <code>write()</code> function will output text above the main canvas. It can be more useful than calling <code>console.log()</code> in certain situations, since the text will reset on each frame. </p>
+<p>There are also a couple of global variables, used to measure time:</p>
+<pre><code class="lang-javascript">console.<span class="hljs-built_in">log</span>(now);    <span class="hljs-comment">// the time in seconds since the script started</span>
+console.<span class="hljs-built_in">log</span>(dt);    <span class="hljs-comment">// the delta time in seconds between each update()</span>
+</code></pre>
 <h2 id="field2d">field2D</h2>
 <p>The <code>field2D</code> type represents a dense grids of cells of floating point numbers (typically but not necessarily in the range of zero to one). You can create a field like this:</p>
 <pre><code class="lang-javascript">var field = <span class="hljs-keyword">new</span> field2D(<span class="hljs-built_in">width</span>, <span class="hljs-built_in">height</span>);
