@@ -1941,7 +1941,7 @@ write = function() {
 
 var t0 = Date.now() / 1000;
 
-t = 0;
+now = 0;
 dt = 1/60;
 
 requestAnimationFrame(render);
@@ -1954,9 +1954,9 @@ function render() {
 	texture_current = texture_default;
 
 	if (updating) {
-		t += dt;
+		now += dt;
 		if (typeof(update) === "function") {
-			update();
+			update(dt);
 		}
 	}
 	
