@@ -60,6 +60,9 @@ function geno_eval(geno) {
 }
 
 function update() {
+
+	console.log(dt, t);
+
 	// evaluate each member of the gene pool:
 	for (var i = 0; i < pop_size; i++) {
 		geno_eval(pop[i]);
