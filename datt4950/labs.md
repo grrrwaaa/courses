@@ -455,6 +455,9 @@ draw2D.triangle([center_x, center_y], diameter);
 draw2D.triangle(center_x, center_y, diameter);
 draw2D.triangle([center_x, center_y], diameter_x, diameter_y);
 draw2D.triangle(center_x, center_y, diameter_x, diameter_y);
+
+draw2D.line([x1, y1], [x2, y2]);	// default thickness is 1 pixel
+draw2D.line([x1, y1], [x2, y2], thickness);		
 ```
 
 If you really need a different shape, there's a method for adding new ones. But this is expensive -- don't call this in ```draw()``` or ```update()```! Create an array of vertices (they could be arrays or vec2's) and pass them to the ```draw2D.shape()``` constructor; it will return a function you can use to draw your specific shape.

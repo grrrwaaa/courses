@@ -1352,7 +1352,7 @@ draw2D.line = (function() {
 	return function(A, B, thickness) {
 		
 		if (typeof A === "undefined") {
-			A = [1, 1];
+			A = [1, 0];
 		}
 		if (typeof B === "undefined") {
 			B = [0, 0];
@@ -1361,18 +1361,19 @@ draw2D.line = (function() {
 			thickness = 1;
 		}
 		
-		var AB = new vec2(B[0]-A[0], B[1]-A[1]);
-		var len = AB.len();
-		var radians = AB.angle();
-		
+		// transform the points by the current modelView
+		var A1 = glvec2.transformMat3([], A, modelView);
+		var B1 = glvec2.transformMat3([], B, modelView);
+		// get the real line:
+		var AB1 = new vec2(B1[0]-A1[0], B1[1]-A1[1]);
 		// make line thickness independent of current transform:
-		var width = thickness * (page_to_gl[0]*2)/(modelView[0]+modelView[4]);
+		thickness *= (page_to_gl[0]*2);
 		
-		// create a local transformation matrix for these:
-		var mat_local = mat3.clone(modelView);
-		mat3.translate(mat_local, mat_local, A);
-		mat3.rotate(mat_local, mat_local, radians);
-		mat3.scale(mat_local, mat_local, [len, width]);
+		// create a local transformation matrix to turn a rect into a line:
+		var mat_local = mat3.create();
+		mat3.translate(mat_local, mat_local, A1);
+		mat3.rotate(mat_local, mat_local, AB1.angle());
+		mat3.scale(mat_local, mat_local, [AB1.len(), thickness]);
 		
 		// apply uniforms:
 		gl.uniform4fv(draw2D_colorLocation, draw2D_chroma.gl());
@@ -2022,7 +2023,12 @@ var pretext = "";
 
 write = function() {
 	for(var i = 0, total = 0; i < arguments.length; i++) {
-        pretext += JSON.stringify(arguments[i]) + "\t";
+        var term = arguments[i];
+        if (typeof term == "string") {
+        	pretext += term + "\t";
+        } else {
+        	pretext += JSON.stringify(term) + "\t";
+        }
     }
     pretext += "\n";
 };
@@ -2065,7 +2071,7 @@ function render() {
 	gl.useProgram(null);
 	
 	if (pretext !== "") {
-		overlay.innerHTML = pretext;
+		overlay.innerText = pretext;
 		pretext = "";
 	}
 	
