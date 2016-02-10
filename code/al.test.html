@@ -8,36 +8,239 @@
   <body>
     <script src="al.js"></script>
     <script>
-    
-mat3 = draw2D.gl.mat3;
-m = mat3.create();
-mat3.scale(m, m, [2, 3]);
 
-var p = [];
-var a = new vec2(0.3, 0.3);
-var b = new vec2(0.8, 0.5);
+var mutation_rate = 0.2;
+var geno_length = 25;
 
-var lim = 5;
+var angle1 = Math.PI/3;
+var angle2 = Math.PI/2;
+var alphabet = "FFFfff<>+-|=".split("");
 
-function draw() {
-	for (var i=0; i<lim; i++) {
-		draw2D.line(a, b);
-		draw2D.push().scale(0.5);
+function geno_random() {
+	var g = "";
+	for (var i=0; i<geno_length; i++) {
+		g += ( alphabet[ random(alphabet.length) ] );
+	}
+	return g;
+}
+
+function geno_child(parent) {
+	var g = "";
+	for (var i=0; i<parent.length; i++) {
+		var mutability = i/parent.length;
+		if (random() < mutability*mutation_rate) {
+			g += alphabet[ random(alphabet.length) ];
+		} else {
+			g += parent[i];
+		}
 	}
 	
-	for (var i=0; i<lim; i++) {
+	/*
+	// shuffle position of one item:
+	if (random() < mutation_rate) {
+		var cut = g.splice(random(g.length),1);
+		g.splice(random(g.length), 0, cut);
+	}
+	*/
+	return g;
+}
+
+var pop = [];
+for (var i=0; i<8; i++) {
+	pop.push( geno_random() );
+}
+
+
+function turtle() {
+	return {
+		pos: new vec2(),
+		dir: new vec2(1, 0),
+		spin: 1,
+	};
+}
+
+function turtle_reset(t) {
+	t.pos = new vec2();
+	t.dir = new vec2(1, 0);
+	t.spin = 1;
+}
+
+function turtle_copy(t) {
+	return {
+		pos: t.pos.clone(),
+		dir: t.dir.clone(),
+		spin: t.spin,
+	};
+}
+
+function turtle_draw(t, code) {
+	var i = 0;
+	while (i < code.length) {
+		var c = code.substr(i, 1);
+		if (c == "F") {
+			// drawline
+			var p2 = t.dir.clone().add(t.pos);
+			draw2D.line(t.pos, p2);
+			t.pos = p2;
+		} else if (c == "f") {
+			// drawline
+			var p2 = t.dir.clone().mul(0.5).add(t.pos);
+			draw2D.line(t.pos, p2);
+			t.pos = p2;
+		} else if (c == "+") {
+			// turn turtle:
+			t.dir.rotate(t.spin*angle1);
+		} else if (c == "-") {
+			// turn turtle:
+			t.dir.rotate(-t.spin*angle1);
+		} else if (c == ">") {
+			// turn turtle:
+			t.dir.rotate(t.spin*angle2);
+		} else if (c == "<") {
+			// turn turtle:
+			t.dir.rotate(-t.spin*angle2);
+		} else if (c == "|") {
+			// mirror turtle:
+			var t1 = turtle_copy(t);
+			t1.spin = -t1.spin;
+			var code1 = code.substr(i+1);
+			turtle_draw(t1, code1);
+		} else if (c == "=") {
+			// mirror turtle:
+			var t1 = turtle_copy(t);
+			t1.dir.negate();
+			var code1 = code.substr(i+1);
+			turtle_draw(t1, code1);
+		}
+		i++;
+	}
+}
+
+function update() {
+	angle1 = Math.PI/3 * Math.sin(now);
+	angle2 = Math.PI/8 * Math.cos(4*now);
+}
+
+var t = turtle();
+
+function draw() {
+	
+	for (var i=0; i<pop.length; i++) {
+		var g = pop[i];
+		
+		draw2D.push().translate((0.5+i)/pop.length, 0.5).rotate(Math.PI/2).scale(0.01);
+	
+		turtle_reset(t);
+	
+		write(g);
+		turtle_draw(t, g);
 		draw2D.pop();
 	}
 }
 
 function mouse(e, p) {
 	if (e == "down") {
-		a.set(p);
-	} else {
-		b.set(p);
+		var choice = Math.floor(p[0] * pop.length);
+		var parent = pop[choice];
+		
+		for (var i=0; i<pop.length; i++) {
+			pop[i] = geno_child(parent);
+		}
 	}
 }
 
+/*
+	scale N
+	rotate N
+	line 
+	branch (N?)
+	springy-line amp, rate, phase
+	rotator amp, rate, phase
+
+var g = [];
+for (var i=0; i<20; i++) {
+	g[i] = random(6);
+}
+
+var drawgene = function(g, i) {
+	if (i < g.length) {
+			draw2D.line();
+			draw2D.translate(1, 0);
+		var c = g[i];
+		if (c == 0) {
+			// branch:
+			write("branch");
+			draw2D.push();
+			drawgene(g, i+1);
+			draw2D.pop();
+			draw2D.scale(-1, 1);
+			draw2D.push();
+			drawgene(g, i+1);
+			draw2D.pop();
+		
+		} else if (c == 1) {
+			if (i+1 < g.length) {
+				var s = 1 / (1 + g[i+1]);
+				write("scale", s);
+				draw2D.scale(s);
+				drawgene(g, i+2);
+			}
+		
+		} else if (c == 2) {
+			if (i+1 < g.length) {
+				var s = Math.PI * 2 * g[i+1]/6;
+				write("rotate", s);
+				draw2D.rotate(s);
+				drawgene(g, i+2);
+			}
+		
+		} else if (c == 3) {
+			// branch:
+			write("branch");
+			draw2D.push();
+			drawgene(g, i+1);
+			draw2D.pop();
+			draw2D.scale(1, -1);
+			draw2D.push();
+			drawgene(g, i+1);
+			draw2D.pop();
+	
+		} else if (c == 4) {
+			if (i+3 < g.length) {
+				var s = Math.PI * Math.sin(g[i+1] + now * (1 + g[i+3])) / (1 + g[i+2]);
+				write("rotate", s);
+				draw2D.rotate(s);
+				drawgene(g, i+4);
+			}
+		
+		} else if (c == 5) {
+			if (i+3 < g.length) {
+				var s = 1 + (Math.sin(g[i+1] + now * (1 + g[i+3])) / (1 + g[i+2]));
+				write("scale", s);
+				draw2D.scale(s);
+				drawgene(g, i+4);
+			}
+		
+		} else {
+			// draw a line:
+			write("line");
+			drawgene(g, i+1);
+		} 
+	}
+}
+
+function draw() {
+	
+	draw2D.push().translate(0.5, 0.5).scale(0.03);
+	drawgene(g, 0);
+	draw2D.pop();
+}
+
+function mouse(e, p) {
+	//if (e == "down") a.set(p);
+	//else b.set(p);
+}
+*/
     </script>
   </body>
 </html>

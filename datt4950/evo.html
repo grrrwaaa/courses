@@ -240,20 +240,64 @@ console.log(f())<span class="hljs-comment">;</span>
 <p>How would you be able to add operators such as <code>Math.sin()</code>?  </p>
 <p>What other problems could you imagine addressing, other than calculating numbers? (What kinds of problems is this method suited for?)</p>
 <hr>
-<p><img src="img/agent_diagram.png" alt="agent diagram">
-<img src="img/agent_graph.png" alt="agent graph"></p>
+<h2 id="aesthetic-selection-of-biomorphs">Aesthetic selection of biomorphs</h2>
+<p>Biomorphs are virtual entities that were devised by Richard Dawkins in his book The Blind Watchmaker as a way to visualize the power of evolution.</p>
+<hr>
+<h2 id="evolving-agents">Evolving agents</h2>
+<p>For a more ambitious, but more interesting challenge, we can try to build up a population of evolving agents whose phenotypic behaviour is a unique <em>program</em>, which processes information from the environment through a number of internal &quot;neural nodes&quot;, resulting in actions, or actuator potential signals that in turn cause actions in the exterior world. </p>
+<p><img src="img/agent_diagram.png" alt="agent diagram"> </p>
+<p><strong>Possible inputs include:</strong></p>
+<ul>
+<li>Internal physiological states: At least, the current store of energy (the hungry/satiated axis), but possibly also other internal parametric states if they exist, such as temperature, digestive toxicity, ...</li>
+<li>Smell/taste/pressure/humidity/electroreception/magnetoception: Detection of concentrations/intensities in local fields, at the center location of the agent.<ul>
+<li>Alternatively, sensors on appendages: same as above, but at points removed from the center of the agent according to the bodily position of the sensor. E.g. eyestalks.</li>
+</ul>
+</li>
+<li>Touch: Detection of collision with objects in the environment. Could be a simple boolean true/false, could include a direction to the collided object, could include a magnitude according to the amount of overlap (i.e. a vector). </li>
+<li>Proximity/sight/hearing/echolocation: Detection of the number of agents/objects in close range. Could be converted to a loneliness/claustrophobia axis.<ul>
+<li>Or perhaps the center-of-mass of objects/agents in close range (the <em>cohesion</em> and <em>separation</em> senses of the boids), or some other average property of nearby objects/agents (such as the <em>alignment</em> sense of the boids, or perhaps average color of nearby agents). </li>
+<li>Could be refined to multiple senses, for different kinds of objects.</li>
+</ul>
+</li>
+<li>Proprioception/vestibular senses: The sense of motion from within, including balance, poise, etc. The simplest could be an accelerometer, reporting changes of velocity back to the agent. There could also be senses identifying the position or rate of movement of limbs.</li>
+<li>Temporal senses (Chronoception): The simplest being a function of the agent&#39;s age since birth.</li>
+<li>Pain (nociception), and perhaps other stimulations, triggered by other activity upon the agent, which dissipates over time.</li>
+<li>Internal mental states, such as memory or dispositions: Could simply be a bank of memory &quot;slots&quot;, that are written as one of the action outputs.</li>
+</ul>
+<p><strong>Possible outputs:</strong></p>
+<ul>
+<li>Changing internal mental states, such as memory stores, or dispositions.</li>
+<li>Locomotion. Ideally modeled as signals sent to simulated locomotory systems, rather than simple changes of velocity/orientation. </li>
+<li>Consumption. Extraction of materials from the environment, e.g. food. <ul>
+<li>Vice versa, expulsion of materials back into the environment, e.g. building, defecation. </li>
+</ul>
+</li>
+<li>Communication. Pheromone deposits, noises, visual signals, etc.</li>
+<li>Growth. Although this is not usually something under an organisms&#39; control for larger organisms, it may be at the cellular level.</li>
+<li>Reproduction. Clearly this is only an internal choice for organisms that reproduce asexually.</li>
+</ul>
+<p>It is likely necessary to conform inputs to ranges of sensitivity, such that external quantities are always mapped into internal ranges clamped in a unipolar 0..1 range, or perhaps a bipolar -1..1 range. Outputs may also need to map their intrinsic ranges (unipolar or bipolar) into useful ranges in the world. For example, a unipolar consumption range could be used as a proportion of available food that is actually ingested. Alternatively, it could be mapped to a range determined by the maximum eating rate an organism can sustain (a constant).</p>
+<p>For both inputs and outputs, we may need to distinguish between occasional &quot;events&quot; and more continuously varying &quot;signals&quot;, though it is simpler if we do not need to. Event-like inputs can be treated as signals whose value is zero when no event is occurring. Event-like outputs can be treated as signals that pass a given threshold, or change by a significant margin.</p>
+<p><strong>Possible internal operations:</strong></p>
+<p>The middle layers between inputs &amp; outputs may utilize a palette of mathematical mappings and simple signal-processing operators. For example, the set of &quot;neural nodes&quot; available in Karl Sims&#39; <a href="http://www.karlsims.com/papers/siggraph94.pdf">evolving virtual creatures</a> simulation included:</p>
+<blockquote>
+<p>sum, product, divide, greater-than, sign-of, min, max, abs, if, interpolate, sin, cos, atan, log, expt, sigmoid, </p>
+</blockquote>
+<p>Furthermore, a number of &quot;stateful&quot; operators, which include their own history/memory, were included:</p>
+<blockquote>
+<p>sum-threshold, integrate, differentiate, smooth, oscillate-wave, and oscillate-saw.</p>
+</blockquote>
+<p>Sum-threshold refers to a unit that operates much like a real neuron, accumulating inputs until a threshold is reached, then outputting a pulse and relaxing to zero. Integrate is a simple counter, but it may be wise to make it &quot;leaky&quot;, such that the accumulated value naturally decays over time. Smooth is a simple moving average, or low-pass filter, such as averaging the current and previous input. The oscillators are a combination of a counter with a trigonometric or modulo operation.</p>
+<p><img src="img/agent_graph.png" alt="agent graph"></p>
 <!------
 
-Next: rather than a number, evolve a program that can respond to inputs, and give fit output, e.g. fitting a curve. Or just jump directly into evolving agents?
+Next: rather than a number, evolve a program that can respond to inputs, and give fit output, e.g. fitting a curve. 
 
-E.g take our vehicles model: two motors, two sensors, and some program to map them, see which ones survive. Use beetle diagram from AN.
+Or build biomorphs?
 
-Inputs:
-- two sensors, energy-level, 
+Or build fastbreeder?
 
-Outputs:
-- two motors (0..1)
-- energetic cost: 
+And finally agents. Here's a work-in-progress template: http://codepen.io/grrrwaaa/pen/obQrZJ?editors=001
 
 ---
 
