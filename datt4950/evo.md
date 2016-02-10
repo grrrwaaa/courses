@@ -326,6 +326,13 @@ One of the advantages of using strings of symbols as genotypes is their readabil
 
 Now we can show all members of a generation side-by-side, and use the mouse to choose the member we prefer to form the parent of the next generation.
 
+Possible extensions:
+
+- Make the fixed amounts variable over time
+- Add "bracketed systems":
+	- By adding push "[" and pop "]" symbols to save/restore graphics state (position, orientation etc.), the graphics interpreter can render branched structures such as trees and ferns. The result is further improved by reducing the length of each line according to the bracketed recursion depth.
+- Extend into *rewriting systems*, such as L-systems, by embedding *production rules* -- we will return to this later in the course.
+
 ---
 
 ## Evolving agents
