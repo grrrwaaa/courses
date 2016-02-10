@@ -90,13 +90,13 @@ Reading week
 
 ### 8. Feb 24
 
-**Due:** [Assignment III (10%)](due.html#assignment-iii)
-
 **Quiz III** (10%)
 
 **Rewriting systems**. Development and grammars. L-systems, bracketed & context-sensitive, parametric, conditional.
 
 ### 9. Mar 2
+
+**Due:** [Assignment III (10%)](due.html#assignment-iii)
 
 **Artificial chemistries**. Bytecode worlds, Tierra, Alchemy.
 
