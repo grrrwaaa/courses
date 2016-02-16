@@ -149,6 +149,9 @@
 <p><a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/QuickStart/index.html">See documentation</a></p>
 <p>If this is a new level, delete the default floor. In the Modes panel select the Lanscapes mode. A green grid will show in the viewport.</p>
 <p>If this is the first time to use it, you will need to &quot;Create New&quot; to make a new landscape. It&#39;s a good idea to assign a landscape material before creating it. You can drag on the landscape&#39;s edges to make it cover more or less area.</p>
+<blockquote>
+<p>For recommended landscape sizes, see <a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/TechnicalGuide/index.html#recommendedlandscapesizes">https://docs.unrealengine.com/latest/INT/Engine/Landscape/TechnicalGuide/index.html#recommendedlandscapesizes</a></p>
+</blockquote>
 <p>Once created, you can start to Sculpt and Paint it.</p>
 <h3 id="sculpting">Sculpting</h3>
 <p>Ctrl-click to select areas.</p>
@@ -183,7 +186,13 @@
 <p>Another fairly easy thing to do is to then customize this landcape material by replacing the textures -- just double-click on the material in the browser to open the editor, find the texture nodes you want to replace, and drag in different textures from the content browser. Save, apply, and build again.</p>
 <h3 id="adding-water">Adding water</h3>
 <p>Place a BSP box into the world so that it lies above the lowest land. Drag on the &quot;M_Water_Lake&quot; material from the StarterContent/Materials folder in the content browser.</p>
-<p>It might seem weird that we can walk on water. <a href="https://wiki.unrealengine.com/Swimmable_Water_Volume_Tutorial">To make it swimmable, look here</a> -- or <a href="https://www.youtube.com/watch?v=LtyXjSb1P-4">this video tutorial</a>.</p>
+<p>It might seem weird that we can walk on water. <a href="https://wiki.unrealengine.com/Swimmable_Water_Volume_Tutorial">To make it swimmable, look here</a> -- or <a href="https://www.youtube.com/watch?v=LtyXjSb1P-4">this video tutorial</a>. </p>
+<p>Very likely you want to also place a post-processing volume under the water, so that the rendering has a watery style when swimming.</p>
+<h3 id="caves">Caves</h3>
+<p>It isn&#39;t possible for a single landscape to overhang itself, so you can&#39;t punch caves into a surface, but there are other ways of making caves.</p>
+<p>It is possible to make a hole in a landscape, so that they can be walked through, by sculpting with the visibility tool. Make a hole in the landscape using the visibility mask, <a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/Editing/SculptMode/index.html#visibility">as described here</a>. You will first need a Hole Material, <a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/Materials/index.html#landscapeholematerials">as described here</a>, which you can apply as the Hole Material in the landscape&#39;s details panel. </p>
+<p>You probably want to surround the hole with some meshes to mask it. You probably also need to edit the material of the landscape to enable two-sided lighting, so that it doesn&#39;t become transparent underneath.</p>
+<p>To fill out the cave underneath, either use BSPs &amp; meshes with collisions, or you can also create another landscape underneath the first (but you will still probably need BSPs &amp; meshes for the roof.)</p>
 <hr>
 <h2 id="-foliage-">&quot;Foliage&quot;</h2>
 <p>The foliage tool is really just a way to randomly disperse objects over a landscape -- typically used for trees, bushes, grassy areas etc., but in fact it can be used for any kinds of objects.</p>
@@ -325,6 +334,51 @@
 <ul>
 <li>Any object that will be moved in-game must have the &quot;movable&quot; option set in the transform Detail (rather than &quot;static&quot;). </li>
 </ul>
+<h4 id="adding-comments-to-remind-you-what-parts-of-a-blueprint-do">Adding comments to remind you what parts of a blueprint do</h4>
+<ul>
+<li>Right-click any node and edit the text in the Node Comments section, or</li>
+<li>Select a few nodes, Right-click and choose Create Comment from Selection, or</li>
+<li>Press &quot;C&quot; to create a new comment box</li>
+</ul>
+<h3 id="day-night-cycle">Day-night cycle</h3>
+<p>The default level creates sky and sun from the Light Source and Sky Sphere actors, but by default these are static. To make a changing day/night:</p>
+<ul>
+<li>In the Light Source details<ul>
+<li>set Movable to true, </li>
+<li>set Cast Static Shadows to false</li>
+</ul>
+</li>
+<li>In the Level Blueprint<ul>
+<li>drag references to both SkySphere and LightSource into the level blueprint</li>
+<li>create a new timeline (right-click and choose New Timeline)<ul>
+<li>name it Day-Night Cycle, </li>
+<li>set it to AutoPlay and Loop</li>
+<li>set the length of this timeline to be the length of the day/night in seconds</li>
+<li>add a float track<ul>
+<li>name it Sun Angle</li>
+<li>shift-click to create a keyframe at the start, and one at the end (at the timeline length)</li>
+<li>set the first keyframe value to zero, the second keyframe value to 360 (i.e. degrees)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>connect the Update outpin of the timeline to a new Set Actor Rotation node, and use the light source as its target</li>
+<li>Connect the Sun Angle outpin of the timeline to a new Make Rotator node&#39;s Y value, and connect its return value outpin to the New Rotation of the Set Actor Rotation created above</li>
+<li>From the sky sphere reference, drag out an Update Sun Direction node, and connect its exec inpin to the outpin of the Set Actor Rotation.</li>
+<li>Comple &amp; save the level blueprint!</li>
+</ul>
+</li>
+</ul>
+<p>You might also want to change details in the SkySphere actor, such as increasing the stars brightness.</p>
+<h3 id="large-worlds">Large worlds</h3>
+<p>Multiple levels can be joined together <a href="https://docs.unrealengine.com/latest/INT/Engine/LevelStreaming/WorldBrowser/">to create a larger world</a></p>
+<h3 id="teleportals">Teleportals</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=326pqXPQCgA">Simple teleporter</a></li>
+<li><a href="https://www.youtube.com/watch?v=LHmDoEMNbyE">Portal gun</a></li>
+</ul>
+<h3 id="weird-physics">Weird physics</h3>
+<p>There&#39;s not an easy way to make gravity change direction in different parts of space, but it <em>is</em> possible to do something similar with some blueprinting. The main idea is that when a character enters a trigger volume, the blueprint disables normal gravity on the character, and apples a constant force in a different direction. Perhaps there should also be a character/camera rotation applied at the same time. <a href="https://forums.unrealengine.com/showthread.php?8262-Rolling-Ball-Game">Here&#39;s a forum thread on applying this to a marble-rolling game</a>. </p>
 <hr>
 <h2 id="vr-in-unreal">VR in Unreal</h2>
 <ul>

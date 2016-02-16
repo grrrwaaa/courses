@@ -125,8 +125,8 @@ Evolving neural networks to play Mario:
 <p>The mechanisms of variation possible partly depend on the representation chosen. The two most common principles of variation in artificial evolution are naturally inspired:</p>
 <ul>
 <li>Random <strong>mutation</strong>; akin to errors copying DNA. If the genome is represented as a binary string, then random locations in the string may be replaced by new random characters. For example, a parent &quot;dog&quot; could produce children such as &quot;fog&quot;, &quot;dqg&quot;, and so on. Obviously some mutations will not create viable individuals.</li>
-<li>Sexual <strong>cross-over</strong> (or <strong>recombination</strong>): akin to sexual reproduction in biology. As a binary string, the child takes the first fraction from one parent, and the remainder from the other. For example, breeding the strings &quot;dog&quot; and &quot;cat&quot; could generate children such as &quot;dot&quot;, &quot;dat&quot;, &quot;cag&quot; and &quot;cog&quot;. </li>
-<li>Other variations (insertion, deletion, inversion) are less common, but have been used. A more flexible system might also permit &quot;doat&quot;, &quot;caog&quot;, &quot;dt&quot;, &quot;tac&quot;, etc. </li>
+<li>Sexual <strong>cross-over</strong>: akin to sexual reproduction in biology. As a binary string, the child takes the first fraction from one parent, and the remainder from the other. For example, breeding the strings &quot;dog&quot; and &quot;cat&quot; could generate children such as &quot;dot&quot;, &quot;dat&quot;, &quot;cag&quot; and &quot;cog&quot;. </li>
+<li>Other forms of fragment <strong>recombination</strong>, such as insertion, deletion, reversal. So a more flexible system might also permit &quot;doat&quot;, &quot;caog&quot;, &quot;dt&quot;, &quot;tac&quot;, etc. </li>
 </ul>
 <blockquote>
 <p>Why use reproduction for evolution? In the face of an unpredictable environment, we cannot know which strategy will be best; we can try small variations, and hedge our bets by making very many of them (population diversity). An individual loss is not catastrophic, but a few successes can be learned from. Furthermore, the face of unpredictibility implies that what was true today may not be tomorrow, so the flexibility to avoid timeless commitment is also a good strategy; but the inheritance of choices is a useful option when the environment retains some stability. If the world were fully predictable, a rational, teleological, monothematic strategy would be preferable. But the world isn&#39;t totally random either (if it was, there would be no valid strategy worth pursuing.) </p>
@@ -183,6 +183,9 @@ population.sort(function(a, b) { <span class="hljs-keyword">return</span> b.fitn
 <p>After sorting it is convenient to print out the candidates, their fitness, etc, so we can see how the evolution proceeds.</p>
 </blockquote>
 <p>After evaluating, we create a new generation of candidates, broadly derived from the previous, but with fitter candidates being more likely to be progenitors. The simplest method is to pick a parent at random, but biasing toward the lower indices. (A simple trick to do this is for the nth child to use a the parent at index <code>random(n)</code>.)</p>
+<blockquote>
+<p>This is called <em>stochastic universal sampling</em>: it draws samples from the entire range, but selects fitter individuals more often than less-fit candidates.</p>
+</blockquote>
 <p>We must also introduce some variation (mutations) while generating new genotypes at this point. The simplest method is to introduce a branch with a predetermined probability to randomize a gene rather than copy from the parent, e.g.:</p>
 <pre><code class="lang-javascript"><span class="hljs-comment">// copy or mutate genes:</span>
 <span class="hljs-keyword">for</span> (var <span class="hljs-keyword">j</span> = <span class="hljs-number">0</span>; <span class="hljs-keyword">j</span> &lt; gene_size; <span class="hljs-keyword">j</span>++) {
@@ -276,9 +279,29 @@ console.log(f())<span class="hljs-comment">;</span>
 <li>Extend into <em>rewriting systems</em>, such as L-systems, by embedding <em>production rules</em> -- we will return to this later in the course.</li>
 </ul>
 <hr>
+<h2 id="pause">Pause</h2>
+<p>At this point, it is becoming clear that the effectiveness of evolution depends very much on the genetic representation, and its semantics. It may be useful to consider this an <em>intermediate language</em>. What does this mean? A very common and very general method of solving problems (mathematical, computational, and otherwise), is to translate the problem into a more convenient language. We saw that our agents could reason about neighbours more easily when the neighbour poses where translated out of global space and into the coordinate space of the agent itself. Similarly, the turtle graphics language made it very easy to create simple line drawings, and with just a handful of special tokens quite complex structures, but there are still many shapes this language is unable or very unlikely to express. Simply, some languages work better than others for certain problems. This may related to the reason why so many species share huge sequences of the same DNA. </p>
+<p>We don&#39;t want to make our intermediate language to too restrictive, else it will not be powerful and extensible enough to encompass a wide enough range of expected and unexpected solutions. For example, we saw how creating an intermediate language of predefined words ensured we have readable (if nonsense) sentences, whereas translating into random numbers and arithmetic symbols opened the possibility of invalid expressions, but also was able to discover unexpected methods (such as using comment symbols for neutral drift). However, we also don&#39;t want our intermediate language so powerful and extensible that it becomes inefficient or intractable to actually apply, or upon which evolution has barely a chance to have impact. </p>
+<p>There are clearly two sides to this: the <em>syntax</em> of the language, which mainly affects how mutations can be applied, and what kinds of transformations result; and the <em>semantics</em> of the language, which define the basic primitive concepts from which phenotypes are produced, and the potential variety in the population.</p>
+<hr>
 <h2 id="evolving-agents">Evolving agents</h2>
 <p>For a more ambitious, but more interesting challenge, we can try to build up a population of evolving agents whose phenotypic behaviour is a unique <em>program</em>, which processes information from the environment through a number of internal &quot;neural nodes&quot;, resulting in actions, or actuator potential signals that in turn cause actions in the exterior world. </p>
 <p><img src="img/agent_diagram.png" alt="agent diagram"> </p>
+<p><strong>Possible outputs include:</strong></p>
+<ul>
+<li>Changing internal mental states, such as memory stores, or dispositions.</li>
+<li>Locomotion. Ideally modeled as signals sent to simulated locomotory systems, rather than simple changes of velocity/orientation. </li>
+<li>Consumption. Extraction of materials from the environment, e.g. food. <ul>
+<li>Vice versa, expulsion of materials back into the environment, e.g. building, defecation. </li>
+</ul>
+</li>
+<li>Communication. Pheromone deposits, noises, visual signals, etc.</li>
+<li>Growth. Although this is not usually something under an organisms&#39; control for larger organisms, it may be at the cellular level.</li>
+<li>Reproduction. Clearly this is only an internal choice for organisms that reproduce asexually.</li>
+</ul>
+<blockquote>
+<p>If it is helpful, you may imagine the buttons you can press to control a videogame character. Each button is an output.</p>
+</blockquote>
 <p><strong>Possible inputs include:</strong></p>
 <ul>
 <li>Internal physiological states: At least, the current store of energy (the hungry/satiated axis), but possibly also other internal parametric states if they exist, such as temperature, digestive toxicity, ...</li>
@@ -297,85 +320,57 @@ console.log(f())<span class="hljs-comment">;</span>
 <li>Pain (nociception), and perhaps other stimulations, triggered by other activity upon the agent, which dissipates over time.</li>
 <li>Internal mental states, such as memory or dispositions: Could simply be a bank of memory &quot;slots&quot;, that are written as one of the action outputs.</li>
 </ul>
-<p><strong>Possible outputs:</strong></p>
-<ul>
-<li>Changing internal mental states, such as memory stores, or dispositions.</li>
-<li>Locomotion. Ideally modeled as signals sent to simulated locomotory systems, rather than simple changes of velocity/orientation. </li>
-<li>Consumption. Extraction of materials from the environment, e.g. food. <ul>
-<li>Vice versa, expulsion of materials back into the environment, e.g. building, defecation. </li>
-</ul>
-</li>
-<li>Communication. Pheromone deposits, noises, visual signals, etc.</li>
-<li>Growth. Although this is not usually something under an organisms&#39; control for larger organisms, it may be at the cellular level.</li>
-<li>Reproduction. Clearly this is only an internal choice for organisms that reproduce asexually.</li>
-</ul>
 <p>It is likely necessary to conform inputs to ranges of sensitivity, such that external quantities are always mapped into internal ranges clamped in a unipolar 0..1 range, or perhaps a bipolar -1..1 range. Outputs may also need to map their intrinsic ranges (unipolar or bipolar) into useful ranges in the world. For example, a unipolar consumption range could be used as a proportion of available food that is actually ingested. Alternatively, it could be mapped to a range determined by the maximum eating rate an organism can sustain (a constant).</p>
-<p>For both inputs and outputs, we may need to distinguish between occasional &quot;events&quot; and more continuously varying &quot;signals&quot;, though it is simpler if we do not need to. Event-like inputs can be treated as signals whose value is zero when no event is occurring. Event-like outputs can be treated as signals that pass a given threshold, or change by a significant margin.</p>
+<p>For both inputs and outputs, we may need to distinguish between occasional &quot;events&quot; (think of buttons and impacts) and more continuously varying &quot;signals&quot; (think of knobs and rotations), though it is simpler if we do not need to. </p>
+<blockquote>
+<p>Event-like inputs can be treated as signals whose value is zero when no event is occurring. Event-like outputs can be treated as signals that pass a given threshold, or change by a significant margin. Thresholding is a general way to convert a signal to an event, possibly with some accumulation &amp; relaxation time, and sampling is a way to convert an event into a signal, possibly with some averaging/smoothing.</p>
+</blockquote>
 <p><strong>Possible internal operations:</strong></p>
 <p>The middle layers between inputs &amp; outputs may utilize a palette of mathematical mappings and simple signal-processing operators. For example, the set of &quot;neural nodes&quot; available in Karl Sims&#39; <a href="http://www.karlsims.com/papers/siggraph94.pdf">evolving virtual creatures</a> simulation included:</p>
 <blockquote>
 <p>sum, product, divide, greater-than, sign-of, min, max, abs, if, interpolate, sin, cos, atan, log, expt, sigmoid, </p>
 </blockquote>
-<p>Furthermore, a number of &quot;stateful&quot; operators, which include their own history/memory, were included:</p>
+<p>Furthermore, a number of more complex &quot;stateful&quot; operators (i.e. operators which include their own history/memory) were included:</p>
 <blockquote>
 <p>sum-threshold, integrate, differentiate, smooth, oscillate-wave, and oscillate-saw.</p>
 </blockquote>
 <p>Sum-threshold refers to a unit that operates much like a real neuron, accumulating inputs until a threshold is reached, then outputting a pulse and relaxing to zero. Integrate is a simple counter, but it may be wise to make it &quot;leaky&quot;, such that the accumulated value naturally decays over time. Smooth is a simple moving average, or low-pass filter, such as averaging the current and previous input. The oscillators are a combination of a counter with a trigonometric or modulo operation.</p>
+<p>Turning genomes into programs that map inputs to outputs through operators can be done via <em>genetic programming</em>. </p>
 <p><img src="img/agent_graph.png" alt="agent graph"></p>
+<h2 id="genetic-programming">Genetic Programming</h2>
+<p>Genetic Programming was invented by Nigel Cramer in 1985, but greatly expanded through the work of John Koza. GP evolves programs; it is an example of <strong>metaprogramming</strong>. GP has been used to generate programs to solve hard problems, and to evolve control systems for artificial agents and robots. Karl Sims used GP for his genetic images, and for his evolving virtual creatures.</p>
+<ul>
+<li><a href="http://dces.essex.ac.uk/staff/rpoli/gp-field-guide/A_Field_Guide_to_Genetic_Programming.pdf">A field guide to GP</a></li>
+<li><a href="http://www.cs.montana.edu/~bwall/cs580/introduction_to_gp.pdf">An overview paper</a></li>
+<li><a href="http://www.geneticalgorithms.com/Tutorial/index.html">Very short tutorial</a></li>
+<li><a href="http://www.pawfal.org/Software/fastbreeder/">An example for audio</a></li>
+</ul>
+<p>The central concept is that the generating a phenotype is a process of generating <em>code</em>. Populations of generated programs can then be selected and evolved as usual. </p>
+<p>Typically the programs for GP follow a tree-like structure. The leaves of the tree are <em>terminals</em> and the branches are <em>functions</em>. Terminals have no inputs; typical terminals are constant numbers and global variable names. Non-terminal functions are specified according to their operator (such as mathematical addition, multiplication, cosine, etc.); they have one or more inputs, which maybe terminals or other functions. This structure is natural to LISP programs:</p>
+<pre><code class="lang-lisp">(<span class="hljs-name"><span class="hljs-builtin-name">*</span></span> <span class="hljs-number">6</span> (<span class="hljs-name"><span class="hljs-builtin-name">sin</span></span> (<span class="hljs-name"><span class="hljs-builtin-name">+</span></span> x <span class="hljs-number">2</span>)))
+</code></pre>
+<p>An yet more elegant way of representing this is as a stack register language, in which values are pushed to a running stack (reading left to right), and operators consume values from this stack. Such languages are sometimes called concatenatative programming languages, since there is no punctuation and they can be split at any point. It looks like this:</p>
+<pre><code>x <span class="hljs-number">2</span> + <span class="hljs-built_in">sin</span> <span class="hljs-number">6</span> *
+</code></pre><p>The above could be represented in Javascript code as an expression:</p>
+<pre><code class="lang-javascript">return <span class="hljs-number">6</span> * (<span class="hljs-name">Math</span>.sin(<span class="hljs-name">x</span> + <span class="hljs-number">2</span>))
+</code></pre>
+<p>Or it could be represented as a linear series of single-operator instruction statements (which more closely resembles underlying assembly or machine code), each assigning to one temporary register:</p>
+<pre><code class="lang-javascript">(<span class="hljs-meta">function</span>() {
+    var <span class="hljs-built_in">r1</span> = <span class="hljs-number">2</span><span class="hljs-comment">;</span>
+    var <span class="hljs-built_in">r2</span> = x<span class="hljs-comment">;</span>
+    var <span class="hljs-built_in">r3</span> = <span class="hljs-built_in">r1</span> + <span class="hljs-built_in">r2</span><span class="hljs-comment">;</span>
+    var <span class="hljs-built_in">r4</span> = Math.sin(<span class="hljs-built_in">r3</span>)<span class="hljs-comment">;</span>
+    var <span class="hljs-built_in">r5</span> = <span class="hljs-number">6</span><span class="hljs-comment">;</span>
+    var <span class="hljs-built_in">r6</span> = <span class="hljs-built_in">r5</span> * <span class="hljs-built_in">r4</span><span class="hljs-comment">;</span>
+    return <span class="hljs-built_in">r6</span><span class="hljs-comment">;</span>
+})()<span class="hljs-comment">;</span>
+</code></pre>
+<p>The question is -- how do we turn a genetic code (as a single of numbers or symbols) into one of these programs, and how do we actually execute them? Which is easier to mutate/recombine, which is easier to generate (for the seed population), which is easier to execute in place, etc.?</p>
 <!------
-
-Next: rather than a number, evolve a program that can respond to inputs, and give fit output, e.g. fitting a curve. 
-
-Or build biomorphs?
 
 Or build fastbreeder?
 
 And finally agents. Here's a work-in-progress template: http://codepen.io/grrrwaaa/pen/obQrZJ?editors=001
-
----
-
-## Genetic Programming
-
-Genetic Programming was invented by Nigel Cramer in 1985, but greatly expanded through the work of John Koza. GP evolves programs; it is an example of **metaprogramming**.
-
-GP has been used to generate programs to solve hard problems, and to evolve control systems for artificial agents and robots. Karl Sims used GP for his genetic images, and for his evolving virtual creatures.
-
-- [A field guide to GP](http://dces.essex.ac.uk/staff/rpoli/gp-field-guide/A_Field_Guide_to_Genetic_Programming.pdf)
-- [An overview paper](http://www.cs.montana.edu/~bwall/cs580/introduction_to_gp.pdf)
-- [Very short tutorial](http://www.geneticalgorithms.com/Tutorial/index.html)
-- [An example for audio](http://www.pawfal.org/Software/fastbreeder/)
-
-The central concept is that the generating a phenotype is a process of generating *code*. Populations of generated programs can then be selected and evolved as usual. 
-
-Typically the programs for GP follow a tree-like structure. The leaves of the tree are *terminals* and the branches are *functions*. Terminals have no inputs; typical terminals are constant numbers and global variable names. Non-terminal functions are specified according to their operator (such as mathematical addition, multiplication, cosine, etc.); they have one or more inputs, which maybe terminals or other functions. This structure is natural to LISP programs:
-
-```lisp
-(* 6 (sin (+ x 2)))
-```
-
-The above would be represented in Javascript code as follows:
-
-```javascript
-return 6 * (Math.sin(x + 2))
-```
-
-The **Linear Genetic Programming** variant represents programs as sequences of instructions rather than trees. It more closely resembles the procedural nature of widely-used programming languages, virtual machines, assembly and machine code. Each instruction uses a single function, with zero or more arguments (constants or registers), and assigns to a register. 
-
-The above program could be linearized to normal form as follows:
-
-```javascript
-(function() {
-    var r1 = 2;
-    var r2 = x;
-    var r3 = r1 + r2;
-    var r4 = Math.sin(r3);
-    var r5 = 6;
-    var r6 = r5 * r4;
-    return r6;
-})();
-```
-
-The linear structure may appear more flexible, since it allows branches to reconnect; however the functional programming interpretation of the tree is provably equivalent so long as no operator carries history. Ultimately the choice depends on practical rather than theoretical questions.
 
 ### Genetic representation
 
