@@ -202,6 +202,8 @@ If this is a new level, delete the default floor. In the Modes panel select the 
 
 If this is the first time to use it, you will need to "Create New" to make a new landscape. It's a good idea to assign a landscape material before creating it. You can drag on the landscape's edges to make it cover more or less area.
 
+> For recommended landscape sizes, see https://docs.unrealengine.com/latest/INT/Engine/Landscape/TechnicalGuide/index.html#recommendedlandscapesizes
+
 Once created, you can start to Sculpt and Paint it.
 
 ### Sculpting
@@ -248,7 +250,21 @@ Another fairly easy thing to do is to then customize this landcape material by r
 
 Place a BSP box into the world so that it lies above the lowest land. Drag on the "M_Water_Lake" material from the StarterContent/Materials folder in the content browser.
 
-It might seem weird that we can walk on water. [To make it swimmable, look here](https://wiki.unrealengine.com/Swimmable_Water_Volume_Tutorial) -- or [this video tutorial](https://www.youtube.com/watch?v=LtyXjSb1P-4).
+It might seem weird that we can walk on water. [To make it swimmable, look here](https://wiki.unrealengine.com/Swimmable_Water_Volume_Tutorial) -- or [this video tutorial](https://www.youtube.com/watch?v=LtyXjSb1P-4). 
+
+Very likely you want to also place a post-processing volume under the water, so that the rendering has a watery style when swimming.
+
+### Caves
+
+It isn't possible for a single landscape to overhang itself, so you can't punch caves into a surface, but there are other ways of making caves.
+
+It is possible to make a hole in a landscape, so that they can be walked through, by sculpting with the visibility tool. Make a hole in the landscape using the visibility mask, [as described here](https://docs.unrealengine.com/latest/INT/Engine/Landscape/Editing/SculptMode/index.html#visibility). You will first need a Hole Material, [as described here](https://docs.unrealengine.com/latest/INT/Engine/Landscape/Materials/index.html#landscapeholematerials), which you can apply as the Hole Material in the landscape's details panel. 
+
+You probably want to surround the hole with some meshes to mask it. You probably also need to edit the material of the landscape to enable two-sided lighting, so that it doesn't become transparent underneath.
+
+To fill out the cave underneath, either use BSPs & meshes with collisions, or you can also create another landscape underneath the first (but you will still probably need BSPs & meshes for the roof.)
+
+
 
 --- 
 
@@ -420,6 +436,49 @@ A neat thing is to turn an existing geometry brush into a trigger. You can selec
 ### Scripting
 
 - Any object that will be moved in-game must have the "movable" option set in the transform Detail (rather than "static"). 
+
+#### Adding comments to remind you what parts of a blueprint do
+
+- Right-click any node and edit the text in the Node Comments section, or
+- Select a few nodes, Right-click and choose Create Comment from Selection, or
+- Press "C" to create a new comment box
+
+### Day-night cycle
+
+The default level creates sky and sun from the Light Source and Sky Sphere actors, but by default these are static. To make a changing day/night:
+
+- In the Light Source details
+	- set Movable to true, 
+	- set Cast Static Shadows to false
+- In the Level Blueprint
+	- drag references to both SkySphere and LightSource into the level blueprint
+	- create a new timeline (right-click and choose New Timeline)
+		- name it Day-Night Cycle, 
+		- set it to AutoPlay and Loop
+		- set the length of this timeline to be the length of the day/night in seconds
+		- add a float track
+			- name it Sun Angle
+			- shift-click to create a keyframe at the start, and one at the end (at the timeline length)
+			- set the first keyframe value to zero, the second keyframe value to 360 (i.e. degrees)
+	- connect the Update outpin of the timeline to a new Set Actor Rotation node, and use the light source as its target
+	- Connect the Sun Angle outpin of the timeline to a new Make Rotator node's Y value, and connect its return value outpin to the New Rotation of the Set Actor Rotation created above
+	- From the sky sphere reference, drag out an Update Sun Direction node, and connect its exec inpin to the outpin of the Set Actor Rotation.
+	- Comple & save the level blueprint!
+	
+You might also want to change details in the SkySphere actor, such as increasing the stars brightness.
+
+### Large worlds
+
+Multiple levels can be joined together [to create a larger world](https://docs.unrealengine.com/latest/INT/Engine/LevelStreaming/WorldBrowser/)
+
+### Teleportals
+
+- [Simple teleporter](https://www.youtube.com/watch?v=326pqXPQCgA)
+- [Portal gun](https://www.youtube.com/watch?v=LHmDoEMNbyE)
+
+### Weird physics
+
+There's not an easy way to make gravity change direction in different parts of space, but it *is* possible to do something similar with some blueprinting. The main idea is that when a character enters a trigger volume, the blueprint disables normal gravity on the character, and apples a constant force in a different direction. Perhaps there should also be a character/camera rotation applied at the same time. [Here's a forum thread on applying this to a marble-rolling game](https://forums.unrealengine.com/showthread.php?8262-Rolling-Ball-Game). 
 
 ---
 

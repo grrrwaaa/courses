@@ -253,6 +253,42 @@ Examples of the exploration of physics simulation for the sheer pleasure of it.
 
 ----
 
+The Vanishing of Ethan Carter
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/fVjaabZ_Zo8?rel=0" frameborder="0" allowfullscreen></iframe>
+
+Papa & Yo
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/wxDNLZZJ2Wg?rel=0" frameborder="0" allowfullscreen></iframe>
+
+Off Peak
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/e0aEfVWISXo?rel=0" frameborder="0" allowfullscreen></iframe>
+
+The Witness
+
+- as a puzzle:
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/rDSrYiheVow?rel=0" frameborder="0" allowfullscreen></iframe>
+
+Technolust
+
+(from Toronto-based IRIS VR!)
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/phFM0MJHOu0?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/DOn6m-uVWxY?rel=0" frameborder="0" allowfullscreen></iframe>
+
+Mind: Path to Thalamus
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/tBHO77OeB0M?rel=0" frameborder="0" allowfullscreen></iframe>
+
+Naissancee
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/uDSi1-lACNk?rel=0" frameborder="0" allowfullscreen></iframe>
+
+----
+
 ### Other encounters
 
 - [27 Games I Want to Play on the Oculus Rift](http://blog.ianiselsewhere.com/post/51243939314/27-games-i-want-to-play-on-the-oculus-rift)

@@ -9,6 +9,14 @@ importance: 4
 
 Making a world is a large effort. You may wish to create projects within smaller groups, or everybody contribute to a single project.
 
+Breaking up into roles, and/or levels (sub-worlds or regions)?
+
+Most generally speaking, building a world requires:
+- Design (concept, story, mechanics & interaction, directorial decision-making)
+- Engineering (implementation of mechanics, procedural elements, and working around constraints)
+- Art (visual, sonic, spatial etc. asset creation and placement)
+
+
 ## Points of departure
 
 Here are a set of questions that may help you come up with a design proposal for the project. Mainly these are questions specific to the interactive/VR nature of the medium, but of course concepts from other media (film, game, etc.) can be equally useful.
@@ -19,7 +27,7 @@ These questions may be filtered according to a project theme, or considering the
 
 - How do you contextualize the project? Original artspaces as an experience to navigate through? Unique games with rules in a reward oriented manner?
 
-- How does this idea respond to the question of the medium -- how is it specific to VR, and wouldn't make sense (or much less sense) without VR?
+- How does this idea respond to the question of the medium -- how is it specific to VR, and wouldn't make sense (or much less sense) without VR? How does it use the basic elements of the medium, and the engine, as fundamental to the message?
 
 - Where does it sit between the spectrum of a fixed narrative arc to a completely open interaction?
 	- Fixed time or interactively-paced?
@@ -32,7 +40,15 @@ These questions may be filtered according to a project theme, or considering the
 
 - What are the major influences, sources of inspiration, outside the medium?
 
-### Space
+- What are the arcs of time, beginnings & ends? Are there challenges & rewards/failures? What is the overall rhythm, flow, and temporal tone of the piece? Is it a branching narrative, are there time constraints/limits, is there circularity, or open-ness -- how would it look as a diagram?
+
+- What are the hooks? (Easily graspable and seductive uniqueness), Does it flip expectations?
+
+- What's the one-sentence elevator pitch / one-paragraph synopsis?
+
+- Why won't it be boring/dull/discordant/dysfunctional/etc. for all possible points of failure; how must all elements balance tension to create a whole? Remember that *elegance* or *wholeness* can defined in terms of [the avoidance of failure](http://www.arch.ksu.edu/seamon/Alexander%20as%20phenomenology%20of%20wholeness%20dec%2008.pdf). 
+
+### Environment/Space
 
 What is the general nature of the space -- how does it speak its poetry?
 
@@ -73,6 +89,8 @@ What moves in the world -- what makes it more than a place? Or, is absence/loss 
 	- Robots & Fauna -- mainly by motions that suggest intention: sudden changes of direction, responsiveness to nearby environment, etc.
 	- People/characters (or people-like things) -- very difficult to even get close to [uncanny valley](http://en.wikipedia.org/wiki/Uncanny_valley), never mind overcome it; but voices & videos are one way, non-realistic avatars are another. Even a tracking CCTV camera imparts life to the world. Simple logic/AI?
 	- Multiplayer?
+
+- Does the world itself embody some intelligence, maintaining certain balances or responding adaptively to the immersant?
 	
 - (How) do these mechanics and agencies influence each other, independently of the immersant?
 
