@@ -368,6 +368,8 @@ For a more ambitious, but more interesting challenge, we can try to build up a p
 
 > If it is helpful, you may imagine the buttons you can press to control a videogame character. Each button is an output.
 
+It may also be worth asking whether actions can occur concurrently, or whether activating one will suppress others. E.g. can you reproduce while in motion? Can you change direction when not in motion? The simplest technique here is to limit output to one action per frame.
+
 **Possible inputs include:**
 
 - Internal physiological states: At least, the current store of energy (the hungry/satiated axis), but possibly also other internal parametric states if they exist, such as temperature, digestive toxicity, ...
@@ -398,7 +400,9 @@ Furthermore, a number of more complex "stateful" operators (i.e. operators which
 
 > sum-threshold, integrate, differentiate, smooth, oscillate-wave, and oscillate-saw.
 
-Sum-threshold refers to a unit that operates much like a real neuron, accumulating inputs until a threshold is reached, then outputting a pulse and relaxing to zero. Integrate is a simple counter, but it may be wise to make it "leaky", such that the accumulated value naturally decays over time. Smooth is a simple moving average, or low-pass filter, such as averaging the current and previous input. The oscillators are a combination of a counter with a trigonometric or modulo operation.
+Sum-threshold refers to a unit that operates much like a real neuron, accumulating inputs until a threshold is reached, then outputting a pulse and relaxing to zero. That is, neural networks are often modeled using only the sum-threshold (or even simpler, sigmoid) operators. Integrate is a simple counter, but it may be wise to make it "leaky", such that the accumulated value naturally decays over time. Smooth is a simple moving average, or low-pass filter, such as averaging the current and previous input. The oscillators are a combination of a counter with a trigonometric or modulo operation.
+
+Other kinds of internal operations could be structural, such as creating a sequence of actions (and possibly including policies to abort a sequence if an action cannot be completed) or a sequence of options (taking the first one that can be executed). 
 
 Turning genomes into programs that map inputs to outputs through operators can be done via *genetic programming*. 
 
@@ -421,7 +425,7 @@ Typically the programs for GP follow a tree-like structure. The leaves of the tr
 (* 6 (sin (+ x 2)))
 ```
 
-An yet more elegant way of representing this is as a stack register language, in which values are pushed to a running stack (reading left to right), and operators consume values from this stack. Such languages are sometimes called concatenatative programming languages, since there is no punctuation and they can be split at any point. It looks like this:
+An yet more elegant way of representing this is as a stack register language, in which values are pushed to a running stack (reading left to right, in what is called *Reverse Polish Notation*), and operators consume values from this stack and push their results back on. Such languages are sometimes called concatenatative programming languages, since there is no punctuation and they can be split at any point. It looks like this:
 
 ```
 x 2 + sin 6 *
