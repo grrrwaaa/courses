@@ -302,6 +302,7 @@ console.log(f())<span class="hljs-comment">;</span>
 <blockquote>
 <p>If it is helpful, you may imagine the buttons you can press to control a videogame character. Each button is an output.</p>
 </blockquote>
+<p>It may also be worth asking whether actions can occur concurrently, or whether activating one will suppress others. E.g. can you reproduce while in motion? Can you change direction when not in motion? The simplest technique here is to limit output to one action per frame.</p>
 <p><strong>Possible inputs include:</strong></p>
 <ul>
 <li>Internal physiological states: At least, the current store of energy (the hungry/satiated axis), but possibly also other internal parametric states if they exist, such as temperature, digestive toxicity, ...</li>
@@ -334,7 +335,8 @@ console.log(f())<span class="hljs-comment">;</span>
 <blockquote>
 <p>sum-threshold, integrate, differentiate, smooth, oscillate-wave, and oscillate-saw.</p>
 </blockquote>
-<p>Sum-threshold refers to a unit that operates much like a real neuron, accumulating inputs until a threshold is reached, then outputting a pulse and relaxing to zero. Integrate is a simple counter, but it may be wise to make it &quot;leaky&quot;, such that the accumulated value naturally decays over time. Smooth is a simple moving average, or low-pass filter, such as averaging the current and previous input. The oscillators are a combination of a counter with a trigonometric or modulo operation.</p>
+<p>Sum-threshold refers to a unit that operates much like a real neuron, accumulating inputs until a threshold is reached, then outputting a pulse and relaxing to zero. That is, neural networks are often modeled using only the sum-threshold (or even simpler, sigmoid) operators. Integrate is a simple counter, but it may be wise to make it &quot;leaky&quot;, such that the accumulated value naturally decays over time. Smooth is a simple moving average, or low-pass filter, such as averaging the current and previous input. The oscillators are a combination of a counter with a trigonometric or modulo operation.</p>
+<p>Other kinds of internal operations could be structural, such as creating a sequence of actions (and possibly including policies to abort a sequence if an action cannot be completed) or a sequence of options (taking the first one that can be executed). </p>
 <p>Turning genomes into programs that map inputs to outputs through operators can be done via <em>genetic programming</em>. </p>
 <p><img src="img/agent_graph.png" alt="agent graph"></p>
 <h2 id="genetic-programming">Genetic Programming</h2>
@@ -349,7 +351,7 @@ console.log(f())<span class="hljs-comment">;</span>
 <p>Typically the programs for GP follow a tree-like structure. The leaves of the tree are <em>terminals</em> and the branches are <em>functions</em>. Terminals have no inputs; typical terminals are constant numbers and global variable names. Non-terminal functions are specified according to their operator (such as mathematical addition, multiplication, cosine, etc.); they have one or more inputs, which maybe terminals or other functions. This structure is natural to LISP programs:</p>
 <pre><code class="lang-lisp">(<span class="hljs-name"><span class="hljs-builtin-name">*</span></span> <span class="hljs-number">6</span> (<span class="hljs-name"><span class="hljs-builtin-name">sin</span></span> (<span class="hljs-name"><span class="hljs-builtin-name">+</span></span> x <span class="hljs-number">2</span>)))
 </code></pre>
-<p>An yet more elegant way of representing this is as a stack register language, in which values are pushed to a running stack (reading left to right), and operators consume values from this stack. Such languages are sometimes called concatenatative programming languages, since there is no punctuation and they can be split at any point. It looks like this:</p>
+<p>An yet more elegant way of representing this is as a stack register language, in which values are pushed to a running stack (reading left to right, in what is called <em>Reverse Polish Notation</em>), and operators consume values from this stack and push their results back on. Such languages are sometimes called concatenatative programming languages, since there is no punctuation and they can be split at any point. It looks like this:</p>
 <pre><code>x <span class="hljs-number">2</span> + <span class="hljs-built_in">sin</span> <span class="hljs-number">6</span> *
 </code></pre><p>The above could be represented in Javascript code as an expression:</p>
 <pre><code class="lang-javascript">return <span class="hljs-number">6</span> * (<span class="hljs-name">Math</span>.sin(<span class="hljs-name">x</span> + <span class="hljs-number">2</span>))
