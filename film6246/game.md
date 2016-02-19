@@ -253,6 +253,12 @@ Examples of the exploration of physics simulation for the sheer pleasure of it.
 
 <iframe width="640" height="360" src="http://www.youtube.com/embed/yaFOMCOgqUA?rel=0" frameborder="0" allowfullscreen></iframe>
 
+### The Beginner's Guide
+
+(From the maker of The Stanley Parable)
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/OPP9pdApRQE?rel=0" frameborder="0" allowfullscreen></iframe>
+
 ----
 
 The Vanishing of Ethan Carter
@@ -268,8 +274,6 @@ Off Peak
 <iframe width="640" height="360" src="https://www.youtube.com/embed/e0aEfVWISXo?rel=0" frameborder="0" allowfullscreen></iframe>
 
 The Witness
-
-- as a puzzle:
 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/rDSrYiheVow?rel=0" frameborder="0" allowfullscreen></iframe>
 
@@ -316,12 +320,6 @@ Orchids to Dusk
 Gardenarium
 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/c92MWml-Gyo?rel=0" frameborder="0" allowfullscreen></iframe>
-
-The Beginner's Guide
-
-(From the maker of The Stanley Parable)
-
-<iframe width="640" height="360" src="https://www.youtube.com/embed/OPP9pdApRQE?rel=0" frameborder="0" allowfullscreen></iframe>
 
 ----
 
