@@ -290,35 +290,3 @@ Pop-up alerts should also be in-world, but appear in the center of the current v
 Text should use thick and larger fonts, and not require head movement to read.
 
 Overly realistic environments can confuse immersants -- who may begin to expect that *everything* in the environment can be interacted with, and be disappointed when it isn't. 
-
----
-
-## Live action capture (or the lack of it)
-
-"Filming" for VR is an unsolved problem. 
-
-- Lightfield cameras
-	- https://www.lytro.com/immerge
-	- Incredibly expensive
-	- Viewer can't move
-- 360 camera arrays + stitching
-	- Google Jump, JauntVR, VRSE, **many** others -- a boom in 360 cameras right now
-	- Imperfect, and likely impossible to perfect
-	- Viewer can't move
-	- Recent guide here: [Various contributors (open source). Making 360. Github, ongoing.](http://making360.com)
-- MoCap & avatar rigging
-	- Used in cinema (but rarely for main characters), and games (especially cut-scenes)... but in VR the artificiality becomes more apparent
-- Point cloud captures
-	- Using cheap depth cameras plus DSLRs: http://depthkit.tv
-	- https://www.kickstarter.com/projects/specular/blackout-a-virtual-glimpse-into-the-lives-of-stran
-	- See [Clouds docu](http://cloudsdocumentary.com)
-	- [Suspect this is essentially the same thing](http://www.wired.com/2015/10/uncorporeal-vr-movies/)
-	- [And this](http://www.mimesysvr.com)
-	- We might be able to set something like this up in the lab -- but don't expect miracles
-
-![point clouds](http://57.media.tumblr.com/d9412a062bcf9e58847ffb2db7990839/tumblr_nzhs49wQUy1qamt2wo1_500.gif)
-
-A very important consideration for VR: captured actors won't be able to look at you, or respond to your presence -- unless they are real people interacting in real time...
-
-Of course, we can still bring human elements from traditional filming media into 3D worlds by placing them on surfaces. They could be regular TVs/projectors/billboards etc., or textured onto more unusual or abstract surfaces. This also includes stereoscopic video, though the depth effect will depend on the viewer's viewpoint.
-

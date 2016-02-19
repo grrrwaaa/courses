@@ -20,7 +20,9 @@ The above citation neatly captures the aims of this course. In 2016, twenty year
 
 At a major computer graphics convention (SIGGRAPH) panel ([The Future is Here](http://www.hollywoodreporter.com/behind-screen/siggraph-oculus-rift-creator-says-724481)), drawing together many key figures from these tech giants in late 2014, the pivotal nature of the moment was utterly clear. Palmer Luckey, Oculus CEO: "I think it will be VR content and software that will drive the industry long term" - Palmer Luckey, Oculus CEO. AR pioneer Steven Feiner of Columbia University emphasized that "entertainment is the next big thing in VR." ... and that those who are starting to create VR content "will be so far ahead when the hardware is ready." ... Calling this time the "Wild West" for VR, senior director at the Sony Magic Lab, Richard Marks agreed, saying "there are no established genres. You don't get that opportunity very often." 
 
-What can the development of cinema tell us about the the explosion of virtual reality (VR) in our imminent future? Theories, methods, and unique modes of expression have yet to be established by the collision of gaming technology with cinema. As with any emerging medium, a willingness to break rules, abandon habits and re-learn is necessary. 
+> "...in these early stages of the VR lifespan, a common mishap is occurring: content creators shoehorning old formats into new technologies. As we explore this new medium, we are building on the backs of film, theater, narrative games and visual art to takes cues as to what to create in VR." [Will Virtual Reality and 360° Film Experience an Industry Divide?](http://vrscout.com/news/virtual-reality-and-360-film/)
+
+Instead of shoehorning, what can earlier developments of cinema, game, performance and visual (and sonic) arts tell us about the the explosion of virtual reality (VR) in our imminent future? Theories, methods, and unique modes of expression have yet to be established by the collision of gaming technology with cinema. As with any emerging medium, a willingness to break rules, abandon habits and re-learn is necessary. 
 
 > "The future of VR lies in the unique experiences that get created in software, and if I knew what those would be, even in broad outline, I would be very happy." Michael Abrash, Chief Scientist, Oculus VR 
 
@@ -154,25 +156,6 @@ So, are we in the beginning of the plateau of productivity, or in another hype c
 
 ---
 
-## VR is or is not cinema...?
-
-Whereas through the 90's surge and earlier, the cinema industry has been more interested in VR as a plot device, it is now becoming increasingly interested in VR as a medium.
-
-[Hollywood Reporter: Fox Is Bullish on Virtual Reality, But Is It the "Real Deal" for Hollywood?](http://www.hollywoodreporter.com/behind-screen/ces-fox-is-bullish-virtual-760925) - Fox Home Entertainment worldwide president Mike Dunn projects that virtual-reality technology will go mainstream, potentially reaching 25 million households by 2017.
-
-[Filmmakers Look to Virtual Reality and Oculus as the Future of Storytelling](http://www.hollywoodreporter.com/news/filmmakers-look-virtual-reality-oculus-734500) - “I think the next step for us as filmmakers is to figure out what narrative filmmaking looks like in virtual reality,” said music video director Chris Milk... Now is the time to figure out how to tell human stories — and that involves questioning fundamental concepts... "I don’t think this is cinema," he said. "I think this is something completely new."
-
-> Saschka Unseld (The Blue Umbrella): "For the type of storytelling I’m currently interested in, I think interactivity is a problem. User-decided story threads are a problem. The audience is a horrible storyteller."
-
-> Pixar's Ed Catmull: [VR is not storytelling.](http://www.theguardian.com/technology/2015/dec/03/pixar-virtual-reality-storytelling-ed-catmull) "However, in an interview with the Guardian, he stressed that his caution on VR as a storytelling medium does not mean he sees the technology as a creative dead-end."
-
-A more integrated mixed-reality approach is being taken by [Industrial Light & Magic's xLAB](http://www.ilmxlab.com); [Intro video](https://www.youtube.com/watch?v=7T9Dv1aLMbw&feature=youtu.be); [Inside](http://www.theverge.com/2015/8/13/9131805/ilm-ilmxlab-interview-virtual-reality-star-wars-movies)
-
-Despite this, we should be cautious in naively bringing cinematic ideas to the medium. There are many quite fundamental differences, such as:
-
-- The immersant controls the camera (or else they will feel sick). How can framing make sense? What can cinematography tell us?
-- This means the immersant may also need to control time. Moreover, cuts almost never work in VR! What can editing tell us?
-- Although in cinema the camera is usually positioned in the world, we do not think of it existing in the world, and we don't think of ourselves as part of the world -- the fourth wall must not be broken. But in VR there is no fourth wall, we are inside. Can we identify with characters in this situation? Are we also characters? If not, what are we?
 
 
 

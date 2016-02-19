@@ -287,6 +287,18 @@ Naissancee
 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/uDSi1-lACNk?rel=0" frameborder="0" allowfullscreen></iframe>
 
+A Light in Chorus
+
+[Point-cloud based world](http://www.alightinchorus.com)
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/RuDTWvaqsEw?rel=0" frameborder="0" allowfullscreen></iframe>
+
+Scanner
+
+[Nice feature giving detail on the meshing of technique and story on KillScreen](https://killscreen.com/articles/upcoming-videogame-explore-world-visual-scanner/).
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/W0uhjXwEQY0?rel=0" frameborder="0" allowfullscreen></iframe>
+
 ----
 
 ### Other encounters
