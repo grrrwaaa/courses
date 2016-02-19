@@ -290,3 +290,7 @@ Pop-up alerts should also be in-world, but appear in the center of the current v
 Text should use thick and larger fonts, and not require head movement to read.
 
 Overly realistic environments can confuse immersants -- who may begin to expect that *everything* in the environment can be interacted with, and be disappointed when it isn't. 
+
+Alternatively, let all things be interactive:
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/_TPXop3ONPk?rel=0" frameborder="0" allowfullscreen></iframe>

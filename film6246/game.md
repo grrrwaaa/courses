@@ -156,6 +156,8 @@ A space exploration game featuring 18,446,744,073,709,551,616 procedurally-gener
 
 > “There’s nothing more cool and sci-fi than VR and a big procedural universe. I think that, for the people who want to just explore, and even for the space combat and things like that, it would be a good fit. Let’s put it that way.” -[Sean Murray, creator of No Man’s Sky, 2015](http://www.australianetworknews.com/no-mans-sky-release-oculus-rift-project-morpheus-new-trailer-ps4/)
 
+[Detailed interview/history](https://killscreen.com/articles/the-birth-of-no-mans-sky/)
+
 ### Portal
 
 The game primarily comprises a series of puzzles that must be solved by teleporting the player's character and simple objects using "the Aperture Science Handheld Portal Device", a device that can create inter-spatial portals between two flat planes. Portal was acclaimed as one of the most original games of 2007.
@@ -298,6 +300,28 @@ Scanner
 [Nice feature giving detail on the meshing of technique and story on KillScreen](https://killscreen.com/articles/upcoming-videogame-explore-world-visual-scanner/).
 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/W0uhjXwEQY0?rel=0" frameborder="0" allowfullscreen></iframe>
+
+Places
+
+[Places are small and atmospheric 3D painting where one can walk around and spend a few minutes.](http://jlv.sdf.org/pub/p/places/)
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/ysFT_mDO-Cc?rel=0" frameborder="0" allowfullscreen></iframe>
+
+Orchids to Dusk
+
+[Lets you find a quiet place to die](https://killscreen.com/articles/orchids-to-dusk-lets-you-find-a-quiet-place-to-die/)
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/CWqamSu3qFA?rel=0" frameborder="0" allowfullscreen></iframe>
+
+Gardenarium
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/c92MWml-Gyo?rel=0" frameborder="0" allowfullscreen></iframe>
+
+The Beginner's Guide
+
+(From the maker of The Stanley Parable)
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/OPP9pdApRQE?rel=0" frameborder="0" allowfullscreen></iframe>
 
 ----
 
