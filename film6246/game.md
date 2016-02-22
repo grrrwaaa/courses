@@ -255,9 +255,11 @@ Examples of the exploration of physics simulation for the sheer pleasure of it.
 
 ### The Beginner's Guide
 
-(From the maker of The Stanley Parable)
-
 <iframe width="640" height="360" src="https://www.youtube.com/embed/OPP9pdApRQE?rel=0" frameborder="0" allowfullscreen></iframe>
+
+(From the maker of The Stanley Parable:)
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/gblvOhnv2k0?rel=0" frameborder="0" allowfullscreen></iframe>
 
 ----
 

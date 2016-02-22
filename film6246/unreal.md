@@ -431,11 +431,13 @@ The "[" and "]" keys change the snapping size.
 
 A neat thing is to turn an existing geometry brush into a trigger. You can select a BSP geometry brush in a level, duplicate it, then in the Details panel, the Actor section, you can choose "Convert Actor" and turn it into a "Trigger Volume". 
 
-- Blueprint **timelines** are ways we can make a sequence of events happen -- and we can also make them happen in reverse. 
+- Blueprint **timelines** are ways we can make a sequence of events happen -- and we can also make them happen in reverse. See day/night example below.
 
 ### Scripting
 
 - Any object that will be moved in-game must have the "movable" option set in the transform Detail (rather than "static"). 
+
+A blueprint's **Construction Script** can be used to configure the properties of a blueprint, such as enabling the visibility of a light source, or even generating procedural objects, which can be configured via variables.  [A couple of simple examples here](https://www.youtube.com/watch?v=6RqDo3012YA)
 
 #### Adding comments to remind you what parts of a blueprint do
 
