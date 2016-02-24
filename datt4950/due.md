@@ -64,17 +64,43 @@ Course grade contribution: 10%
 
 **Evolutionary system**
 
+For this assignment, you can either create a new system or re-use your assignment I or II, or one of the CA or agent-based systems from the labs. The crucial addition you must make is to demonstrate an evolving population. You can choose a pre-defined fitness function (for problem-solving), or a more general viability condition (as in ecological models), or use interaction to select fitter candidates manually (as in aesthetic selection). More important is to identify some novel way of applying what we've learned -- maybe some idea sparked in your mind that you'd like to try -- if so, comment on how you addressed the idea, what challenges you find, etc. (rather than whether it works). Comment also on the impact of evolution on your system. Is it converging on better results? Is it consistent each time you restart the simulation, or does it vary widely? Did you try different mutation rates, mutation/recombination operations, different genome or population sizes, etc.? 
+
+For this assignment, you can either use the same starter-kit from the [labs](lab.html), or you can use another programming environment if you prefer (but only if you feel confident to translate the necessary code quickly enough). If you choose another environment, please make sure I can access the code and you can explain where it is -- perhaps best to talk to me to confirm details first. 
+
+Otherwise, submission details remain as before.
+
+[Submit via this online form.](https://docs.google.com/forms/d/1Ej_SZ_nnZ-FiGrUV1B3ot4jxhEWMX1ii0JQd7bWiEBs/viewform)
+
+**Due Mar 2nd**. 
+
 Course grade contribution: 10%
 
 ---
 
 # Assignment IV
 
+**Final project prototype**
+
+The fourth assignment is to identify your final project concept and outline the design, and produce initial sketches (at least two) toward it. See the description below for the final project expectations.  
+
+- You should have an overall design document, outlining the motivations and inspirations, the primary goal or problem, the methods you are choosing to address them, the technologies and platforms to use, and how you will evaluate its success or failure. 
+- You should also have working prototypes of some of the components, as proofs-of-concept through which any unexpected challenges will be revealed.
+- If the project is team-based, you should identify specifically your roles. 
+
+**Due Mar 16th** -- I will visit each of you during the class to discuss the proposal and assist with progress. There will only be two weeks after this to complete.
+
 Course grade contribution: 10%
 
 ---
 
 # Final project
+
+Your final project should incorporate more than one class of system, building upon previous assignments, ideas we have worked through in labs, or models that you independently researched from the reading matter or online. You are also encouraged to integrate the systems we have explored with other media systems or research-creation projects you are using from outside the class. You are encouraged to move beyond the lab starter kit and integrate your project into a more general platform if this will improve your result. You may work in teams, but roles and expectations must be clearly explained. 
+
+We will develop projects over the last few weeks of class, in order to result in significant and original pieces of work suitable for public exhibition or presentation. You will also be required to submit a short paper description (2 pages, refined from assignment IV) as well as an edited video excerpt (around 1 minute length). More details will follow shortly.
+
+**Due Mar 30th -- no free extensions possible**.
 
 Course grade contribution: 30%
 

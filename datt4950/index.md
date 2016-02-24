@@ -82,7 +82,7 @@ Agents and fields. Chemotaxis, stigmergy, social models.
 
 ### 6. Feb 10
 
-Genetic programming. Ecology and ecosystem.
+Evolution continued; ecology and ecosystem, aesthetic selection & biomorphs.
 
 ### 7. Feb 17
 
@@ -92,7 +92,7 @@ Reading week
 
 **Quiz III** (10%)
 
-**Rewriting systems**. Development and grammars. L-systems, bracketed & context-sensitive, parametric, conditional.
+Genetic programming. 
 
 ### 9. Mar 2
 
@@ -102,13 +102,11 @@ Reading week
 
 ### 10. Mar 9
 
-**Due:** [Assignment IV (10%)](due.html#assignment-iv)
-
-**Virtual worlds.**
+**Rewriting systems**. Development and grammars. L-systems, bracketed & context-sensitive, parametric, conditional.
 
 ### 11. Mar 16
 
-Other/advanced topics.
+**Due:** [Assignment IV (10%)](due.html#assignment-iv)
 
 Final project/portfolio assistance.
 

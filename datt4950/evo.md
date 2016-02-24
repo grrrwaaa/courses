@@ -339,22 +339,261 @@ Possible extensions:
 
 ## Pause
 
-At this point, it is becoming clear that the effectiveness of evolution depends very much on the genetic representation, and its semantics. It may be useful to consider this an *intermediate language*. What does this mean? A very common and very general method of solving problems (mathematical, computational, and otherwise), is to translate the problem into a more convenient language. We saw that our agents could reason about neighbours more easily when the neighbour poses where translated out of global space and into the coordinate space of the agent itself. Similarly, the turtle graphics language made it very easy to create simple line drawings, and with just a handful of special tokens quite complex structures, but there are still many shapes this language is unable or very unlikely to express. Simply, some languages work better than others for certain problems. This may related to the reason why so many species share huge sequences of the same DNA. 
+At this point, it is becoming clear that the effectiveness of evolution depends very much on both the genetic representation as well as its behaviour in producing phenotypes. If we consider the genetic representation as a *language*, then the evolutionary effectiveness depends both on the *syntax* and the *semantics*. 
 
-We don't want to make our intermediate language to too restrictive, else it will not be powerful and extensible enough to encompass a wide enough range of expected and unexpected solutions. For example, we saw how creating an intermediate language of predefined words ensured we have readable (if nonsense) sentences, whereas translating into random numbers and arithmetic symbols opened the possibility of invalid expressions, but also was able to discover unexpected methods (such as using comment symbols for neutral drift). However, we also don't want our intermediate language so powerful and extensible that it becomes inefficient or intractable to actually apply, or upon which evolution has barely a chance to have impact. 
+The syntax determines how a phenotype is encoded, what kinds of mutations are likely/unlikely/impossible, and what transformations these result in, how much space it takes up, the potential of redundancy and neutral data, and so on. 
 
-There are clearly two sides to this: the *syntax* of the language, which mainly affects how mutations can be applied, and what kinds of transformations result; and the *semantics* of the language, which define the basic primitive concepts from which phenotypes are produced, and the potential variety in the population.
+The semantics define the basic primitive concepts from which phenotypes are produced, and thus what kinds of phenotypes are likely/unlikely/impossible, including the overal size of the set of all possible phenotypes, the resolution of variations between them, and so forth. Put another way: A very common and very general method of solving problems (mathematical, computational, and otherwise), is to translate the problem into a more convenient language. We saw that our agents could reason about neighbours more easily when the neighbour poses where translated out of global space and into the coordinate space of the agent itself. Similarly, the turtle graphics language made it very easy to create simple line drawings, and with just a handful of special tokens quite complex structures, but there are still many shapes this language is unable or very unlikely to express. Simply, some languages work better than others for certain problems. (This may related to the reason why so many species share huge sequences of the same DNA.)
 
- 
+A good genetic representation should consider both syntax and semantics. We don't want to make our intermediate language to too restrictive, else it will not be powerful and extensible enough to encompass a wide enough range of expected and unexpected solutions. For example, we saw how creating an intermediate language of predefined words ensured we have readable (if nonsense) sentences, whereas translating into random numbers and arithmetic symbols opened the possibility of invalid expressions, but also was able to discover unexpected methods (such as using comment symbols for neutral drift). However, we also don't want our intermediate language so powerful and extensible that it becomes inefficient or intractable to actually apply, or upon which evolution has barely a chance to have impact. 
+
+Our math & turtle graphics examples demonstrated how using a programming language as intermediate representation can achieve great power/diversity with succinct syntax. We'll explore that in more detail via *genetic programming*. 
 
 ---
+
+## Genetic Programming
+
+Genetic Programming was invented by Nigel Cramer in 1985, but greatly expanded through the work of John Koza. GP evolves programs; it is an example of **metaprogramming**. GP has been used to generate programs to solve hard problems, and to evolve control systems for artificial agents and robots. Karl Sims used GP for his genetic images as well as for his evolving virtual creatures. 
+
+In GP that the generating a phenotype is a process of generating *programs*, however programs are usually expressed as syntax *trees* rather than as lines of code. The leaves of the tree are *terminals*, while the non-terminal branches are *functions*. Terminals have no inputs; typical terminals are constant numbers and external/global variable names, but this set can also include zero-argument functions such as "random()" or context-sensing such as "get_orientation()". Non-terminal functions are specified according to their operator (such as mathematical addition, multiplication, cosine, etc.); they have one or more inputs (the number of inputs is the *arity*), which may be filled by terminals or other functions. The set of all possible terminals and non-terminal functions constitutes the *primitive set* of a GP system (a union of the *terminal set* and the *function set*). 
+
+This structure is natural to LISP programs:
+
+```lisp
+(* (sin (+ x 2)) (cos x))
+```
+
+In this case, the terminal set appears to include integers and "x", the function set includes "sin", "cos", and binary operators such as "+", and "*". 
+
+Javascript does not have this representational succinctness, but can get close to it by nested arrays:
+
+```javascript
+["*", ["sin", ["+", "x", 2]], ["cos", "x"]]
+```
+
+Or more graphically:
+
+```javascript
+[
+	"*", 
+	[
+		"sin", 
+		[
+			"+", 
+			"x", 
+			2]
+	], 
+	[
+		"cos", 
+		"x"
+	]
+]
+```
+
+Note that our representation is more brittle than a simple string of symbols: any array beginning with "sin" must have one more element following it as the argument; any array beginning with "+" must have two elements (array length 3) following it as arguments. Moreover, those arguments must either be *terminal* nodes such as "x" or numbers, or they must be arrays -- that is, operator symbols like "sin" and "+" can only occupy the first position. Since we know that our operators require *at most* two arguments, we could simply give all functions two arguments, and ignore the un-used ones as neutral junk genetic data, e.g.:
+
+```javascript
+[
+	"*", 
+	[
+		"sin", 
+		[
+			"+", 
+			"x", 
+			2], 
+		5		// junk
+	], 
+	[
+		"cos", 
+		"x", 
+		"x"		// junk
+	]
+]
+```
+
+### Interpretation (development)
+
+To turn this *data* into something we can actually run as *code*, we could spell it out as an expression:
+
+```javascript
+return (Math.sin(x + 2) * Math.cos(x));
+```
+
+Here's a recursive solution:
+
+```javascript
+function develop(node) {
+	// terminals:
+	if (typeof node == "string" || typeof node == "number") {
+		return node;
+	}
+	// non-terminals:
+	var op = node[0];
+	var a = node[1];
+	var b = node[2];
+	if (op == "sin" || op == "cos") {
+		// unary Math function call:
+		return "Math." + op + "(" + develop(a) + ")";
+	} else if (op == "+" || op == "*" || op == "-" || op == "/" || op == "%") {
+		// binary operator:
+		return "(" + develop(a) + op + develop(b) + ")";
+	}
+}
+```
+
+### Choice of primitive set
+
+A couple of things to watch out for here: 
+
+- It is assumed that all functions return one value
+- It is assumed that returned values are of a type that can be used in other functions. This gets trickier when introducing conditional functions (e.g. ```(if x y)```), since numeric values need to be converted to booleans. More complex systems may introduce type metadata into the tree.
+- Functions should not throw errors or cause invalid behaviour, so often "protected" versions of operations are used. For example, divide (or modulo) by zero may be detected and avoided, reducing the number of run-time exceptions to trap.
+- There should be enough scope in the primitive set to generate satisfactory solutions to the problem
+
+### Seed generation
+
+To generate a random seed genotype, we can also use a recursive procedure. **One thing to watch out for: we need to make sure we don't spawn infinitely large genotypes!** To do that, we'll need to pass some information through the recursion to bail out at a certain depth, or when the genome has a certain size. For example, we could limit the recursive depth as follows:
+
+```javascript
+var ops = ["sin", "cos", "+", "-", "*", "/", "%"];
+
+function pick_random_operator() {
+	return ops[random(ops.length)];
+}
+function make_random_terminal() {
+	return random(2) ? "time" : Math.random()*1000;
+}
+
+function generate(depth) {
+	// forces use of terminal when depth == 1, randomized otherwise:
+	if (random(depth) == 0) {
+		return make_random_terminal();
+	} else {
+		return [
+			pick_random_operator(), 
+			generate(depth-1), 
+			generate(depth-1)
+		];
+	}
+}
+
+// generate with maximum depth 6:
+var data = generate(6);
+
+// print out nicely:
+console.log(JSON.stringify(data, null, " "));
+```
+
+Koza also recommends creating a seed population with a variety of depths, which we can easily do by randomizing the initial argument to ```generate()```. 
+
+### Selection
+
+We could continue using the *fitness-proportionate* selection as before, via stochastic universal sampling, however most GP systems use a different form of selection known as **tournament selection**, in which a number of individuals are chosen at random from the population, and the fittest is chosen as parent to create a new individual. In pseudo-code:
+
+```psuedocode
+	new_population = []
+	for each child {
+		set = []	
+		for i = 0, n {
+			set.push( get_random_item(population) )
+		}
+		set.sort(fitness_comparator)
+		parent = set[0]
+		child = clone(parent)
+		// apply mutations
+		new_population.push(child)
+	}
+	population = new_population
+```
+
+### Mutations and recombinations
+
+GP departs significantly from other evolutionary algorithms in the implementation of mutation and recombination. It is not just individual terminal symbols that can be mutated, but also entire branches. 
+Extra care has to be taken here to prune genomes that are getting too large (or to avoid then getting too small!). Some possible mutations include:
+
+- Replace a terminal with another random terminal. A good variation of this is to offset a constant terminal by a small amount.
+- Replace the operator name of a function
+- Replace a random function with a terminal
+- Swap the argument order of a function
+- Replace a function with a copy of another function within the same genome (including all subtrees)
+- Replace entire genome with one of its subtrees. (This will make it smaller).
+- Replace a function with a randomly-generated function (including subtrees). We may introduce a condition to make sure the replacement has a similar size as the item replaced.
+- In sexual reproduction, the most common variant is *sub-tree crossover*: Parent A is cloned, but a random subtree is chosen to be replaced with another randomly-chosen subtree from Parent B. Typically sexual cross-over is utilized more when populations number in the hundreds, thousands or more, whereas mutation is more widely utilized in smaller populations.
+
+A tricky point -- most of these mutations depend on choosing a random non-terminal. How can we pick one randomly? And how can we ensure that the genomes stay of a reasonable size? The solutions to these problems are not trivial enough to work through in our labs.
+
+
+### Alternative representations
+
+Many GP systems today assume that all non-terminal functions have the same arity (the same no. of arguments). By doing so, it turns out that the brackets become redundant, and trees can efficiently be represented as simple linear sequences. The above example can be simply listed as:
+
+```
+* sin + x 2 5 cos x x
+```
+
+Clearly this makes some mutations easier -- we can pick random items in the list and replace them with equivalents, e.g. replacing terminals with terminals, operators with operators. We can easily see the genome size, and use that as a selection factor. But it is still not so trivial to make replacements and ensure the whole genome still generates a complete program. 
+
+---
+
+Another variant, called "linear genetic programming", also uses a flat list of nodes, but in a format closer to a register language (in fact, closer to the underlying architecture of modern PCs). Each node in this list has an operator, to determine what kind of instruction it is (e.g. "+", "sin", "var", etc.), followed by some values to specify which existing "registers", that is, previously-computed values, are to be used as arguments to the operation. Each operation will then produce a new register in turn. So, the code generated will look something like this:
+
+```javascript
+var r1 = x;
+var r2 = 2;
+var r3 = r1 + r2;
+var r4 = Math.sin(r3);
+var r5 = x;
+var r6 = Math.cos(r5);
+var r7 = r4 * r6;
+return r7;
+```
+
+A genetic representation might be something like this:
+
+```
+[
+	[ "var", "x" ],
+	[ "num", 2 ],
+	[ "+", 1, 0 ],
+	[ "sin", 0 ],
+	[ "var", "x" ],
+	[ "cos", 0 ],
+	[ "*", 2, 0 ],
+]
+```
+
+Notice how registers are stored as offsets back from the currently-assigning register. So, an argument of ```0``` means the last-computed-register, ```1``` means the one computed before that, etc. This kind of relative indexing makes the representation far more robust -- less likely to be malformed after mutation. Even greater safety can be ensured by wrapping register indices within the available range. For a linearized genotype representation, the genetic mutations and crossover operators are similar to other sequence-based evolutionary systems. 
+
+[An example using a kind of linear-GP, somewhat akin Karl Sims' evolving images, is in the lab editor here](http://codepen.io/grrrwaaa/pen/YwmerM?editors=001)
+
+---
+
+Yet another very different but related approach is **gramatical evolution**. In GE, genomes are simply lists of integers, for example in the range 0-99. The possible shape of programs is determined by a grammar. The generator follows each rule of the grammar in turn, and when multiple options are possible, the next genome integer is used to determine the choice (modulo the number of choices). This not only guarantees that all generated programs are formally correct (no matter how complex the grammar involved), it also seems to lend some advantages with respect to mutations. Grammatical evolution has been very successful and is widely used.
+  
+---
+
+### Development & meta-evolution
+
+In some cases, there may be several stages of code development. For example, it may be advantageous to create code that has some built-in symmetries, or modular structures, as are frequently found in nature. Sims' evolved virtual creatures had a genotype that encoded a LISP function, which when run would produce a body shape (the developmental system), but also produced an executable function for behaviour (the neural system). That is, the genetic code produces a developmental program that produces a neural program. More generally, since we are evolving code, we may want to the genome to produce re-usable subroutines that can be used multiple times within the main phenotype program. 
+
+Think back to the turtle example, with its powerful mirroring and other duplication operators, and imagine that instead of drawing lines, it is generating more code. One interesting result here is that the program being produced is valid and can be run at each step of development, meaning we can model the gradual increase in complexity of an organism from embryo to adult. 
+
+Taken to the most general form, it allows us to explore models in which the mechanisms of evolution are also subject to evolutionary pressures; see [Spector, Lee. "Autoconstructive evolution: Push, pushGP, and pushpop." Proceedings of the Genetic and Evolutionary Computation Conference (GECCO-2001). Vol. 137. 2001.](http://faculty.hampshire.edu/lspector/pubs/ace.pdf). This is meta-evolution: that the mechanisms of evolution (including development, variation, etc.) are also subject to variation and selection. After all, sexual reproduction had to be *discovered*. It turns out that some parts of our genes have evolved to be far less volatile than others, for good reason. Jurgen Schmidhuber also proposed using GP to evolve GP (Meta-GP), since things like chromosomes, crossover etc. are themselves phenomena that have evolved. 
+
+Further reading:
+
+- [A field guide to GP](http://dces.essex.ac.uk/staff/rpoli/gp-field-guide/A_Field_Guide_to_Genetic_Programming.pdf)
+- [An overview paper](http://www.cs.montana.edu/~bwall/cs580/introduction_to_gp.pdf)
+- [Very short tutorial](http://www.geneticalgorithms.com/Tutorial/index.html)
+
+---
+
 
 ## Evolving agents
 
 For a more ambitious, but more interesting challenge, we can try to build up a population of evolving agents whose phenotypic behaviour is a unique *program*, which processes information from the environment through a number of internal "neural nodes", resulting in actions, or actuator potential signals that in turn cause actions in the exterior world. 
 
 ![agent diagram](img/agent_diagram.png) 
-
 
 **Possible outputs include:**
 
@@ -408,102 +647,9 @@ Turning genomes into programs that map inputs to outputs through operators can b
 
 ![agent graph](img/agent_graph.png)
 
-## Genetic Programming
 
-Genetic Programming was invented by Nigel Cramer in 1985, but greatly expanded through the work of John Koza. GP evolves programs; it is an example of **metaprogramming**. GP has been used to generate programs to solve hard problems, and to evolve control systems for artificial agents and robots. Karl Sims used GP for his genetic images, and for his evolving virtual creatures.
+<!---
 
-- [A field guide to GP](http://dces.essex.ac.uk/staff/rpoli/gp-field-guide/A_Field_Guide_to_Genetic_Programming.pdf)
-- [An overview paper](http://www.cs.montana.edu/~bwall/cs580/introduction_to_gp.pdf)
-- [Very short tutorial](http://www.geneticalgorithms.com/Tutorial/index.html)
-- [An example for audio](http://www.pawfal.org/Software/fastbreeder/)
+Here's a work-in-progress template: http://codepen.io/grrrwaaa/pen/obQrZJ?editors=001
 
-The central concept is that the generating a phenotype is a process of generating *code*. Populations of generated programs can then be selected and evolved as usual. 
-
-Typically the programs for GP follow a tree-like structure. The leaves of the tree are *terminals* and the branches are *functions*. Terminals have no inputs; typical terminals are constant numbers and global variable names. Non-terminal functions are specified according to their operator (such as mathematical addition, multiplication, cosine, etc.); they have one or more inputs, which maybe terminals or other functions. This structure is natural to LISP programs:
-
-```lisp
-(* 6 (sin (+ x 2)))
-```
-
-An yet more elegant way of representing this is as a stack register language, in which values are pushed to a running stack (reading left to right, in what is called *Reverse Polish Notation*), and operators consume values from this stack and push their results back on. Such languages are sometimes called concatenatative programming languages, since there is no punctuation and they can be split at any point. It looks like this:
-
-```
-x 2 + sin 6 *
-```
-
-The above could be represented in Javascript code as an expression:
-
-```javascript
-return 6 * (Math.sin(x + 2))
-```
-
-Or it could be represented as a linear series of single-operator instruction statements (which more closely resembles underlying assembly or machine code), each assigning to one temporary register:
-
-```javascript
-(function() {
-	var r1 = 2;
-	var r2 = x;
-	var r3 = r1 + r2;
-	var r4 = Math.sin(r3);
-	var r5 = 6;
-	var r6 = r5 * r4;
-	return r6;
-})();
-```
-
-The question is -- how do we turn a genetic code (as a single of numbers or symbols) into one of these programs, and how do we actually execute them? Which is easier to mutate/recombine, which is easier to generate (for the seed population), which is easier to execute in place, etc.?
-
-<!------
-
-Or build fastbreeder?
-
-And finally agents. Here's a work-in-progress template: http://codepen.io/grrrwaaa/pen/obQrZJ?editors=001
-
-### Genetic representation
-
-It may be convenient to represent these programs as a data structure, from which the phenotype code is generated. Doing so makes crossover and mutation much easier. 
-
-For example, integers can be used to specify which function or terminal type a node contains, and which nodes are used as arguments. Tree structures can nest their data directly, while linear structures can refer to nodes by integer register id (or register stack offset). Here is the above program as a list of instruction codes -- which is just a list of numbers!
-
-```javascript
-// operator IDs: [ "constant", "global", "add", "mul", "sin" ];
-// global IDs: [ "x" ];
-
-var geno = {
-	[ 0, 2 ],
-	[ 2, 1 ],
-	[ 3, 1, 2 ],
-	[ 4, 3 ],
-	[ 0, 6 ],
-	[ 3, 5, 4 ],
-}
-```
-
-### Initialization 
-
-Generating a seed tree can follow a recursive structure, starting from the root at depth 0, up to a maximum depth ```m```:
-
-- If depth equals ```m``` choose a terminal at random,
-- Else select a function or terminal at random.
-	- If the node type is a function, choose a random function. Each function has a specific number of children (e.g. the + function has two children); for each child node, repeat the algorithm with depth increased by one.
-
-An alternative algorithm for linear GP, with ```n``` operations:
-
-- Loop from 1 to ```n```:
-	- If ```n``` is less than the maximum number of arguments (typically 2 or 3), create a random terminal node.
-	- Else create a random terminal or a random function.
-		- If the node type is a function, use a randomly selected previous node for each of the function arguments.
-- The root (result) node is node ```n```. 
-
-### Variation
-
-For a linearized genotype representation, the genetic mutations and crossover operators are similar to other sequence-based evolutionary systems. 
-
-For tree-like representations it becomes more complex and interesting: Mutations on a tree can include modifcation of instruction arguments, replacement of sub-trees, function mutation, etc. Cross-over can be implemented as swapping sub-trees of parents. 
-
----
-
-Meta-evolution: the mechanisms of evolution (including development, variation, etc.) are also subject to variation and selection. After all, sexual reproduction had to be *discovered*. It turns out that some parts of our genes have evolved to be far less volatile than others, for good reason. 
-
-Jurgen Schmidhuber proposed using GP to evolve GP (Meta-GP), since things like chromosomes, crossover etc. are themselves phenomena that have evolved. 
 -->
