@@ -564,6 +564,8 @@ A genetic representation might be something like this:
 
 Notice how registers are stored as offsets back from the currently-assigning register. So, an argument of ```0``` means the last-computed-register, ```1``` means the one computed before that, etc. This kind of relative indexing makes the representation far more robust -- less likely to be malformed after mutation. Even greater safety can be ensured by wrapping register indices within the available range. For a linearized genotype representation, the genetic mutations and crossover operators are similar to other sequence-based evolutionary systems. 
 
+[An example using this scheme to generate random video feedback systems, in the lab editor](http://codepen.io/grrrwaaa/pen/pyzJLe?editors=001)
+
 [An example using a kind of linear-GP, somewhat akin Karl Sims' evolving images, is in the lab editor here](http://codepen.io/grrrwaaa/pen/YwmerM?editors=001)
 
 ---
