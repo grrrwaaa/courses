@@ -647,7 +647,31 @@ Sum-threshold refers to a unit that operates much like a real neuron, accumulati
 
 Other kinds of internal operations could be structural, such as creating a sequence of actions (and possibly including policies to abort a sequence if an action cannot be completed) or a sequence of options (taking the first one that can be executed). 
 
-Turning genomes into programs that map inputs to outputs through operators can be done via *genetic programming*. 
+----
+
+## An ecosystemic, evolving agent-environment world
+
+For example, take a look at the agent model here:
+
+[Starter agent model for continuous evolution](http://codepen.io/grrrwaaa/pen/obQrZJ?editors=001)
+
+The agent has a locomotion model based on a two-wheel engine, like Braitenberg vehicles. For movement, the agent has only two output signals -- the rates of turning of each wheel (stored in the property ```wheel_rate```, which is a vec2). The ```agent_locomotion()``` method turns these wheel_rate signals into actual movement. 
+
+The agent also has two external sensors to detect local fields, whose values are computed in the ```agent_sensing()``` method.
+
+**Energy preservation** is essential to the ecosystemic viability model of selection here. Every action an agent takes must cost energy, and insufficient energy must result in death.
+
+- The locomotion model incorporates this in terms of the force actually applied (i.e. the acceleration -- as difference between the current and new velocities -- multiplied by the mass).
+- There is also a fixed mass-dependent metabolism cost, applied on each frame regardless whether the agent is moving.
+- There is also a digestion cost, modeled simply as a certain portion of consumed food's energy being lost.
+
+Inevitably this means that over time, energy is being lost from the world. We can calculate how much energy is active in the system by adding up the total in each field cell (by ```field.sum()```) as well as the energy stored in each agent. When this total energy level drops below our chosen carrying capacity for the world, we can then introduce energy back in, to ensure that the whole system doesn't wind down to zero. Exactly how this energy is re-introduced can have quite drastic effect on the adaptive conditions -- since effectively organisms are trying to evolve strategies to be more viable, the distribution of energy in the world is the primary factor. The simplest option is to reintroduce the energy immediately, spread uniformly over the space, e.g. ```field.add(energy_deficit/(field.width*field.height))```. More interesting behaviours can emerge when energy is redistributed more gradually and non-uniformly in space.
+
+The population can shrink and grow by the double-buffer technique. Thus **population control** is also essential at both ends. Clearly if the population ever drops to zero, we will never see any organisms again. Methods to overcome this include preventing death, or introducing new randomly seeded organisms (perhaps out of view) at low population sizes, as well as adaptively varying the reproduction cost/threshold. At the other end, a population that grows excessively large can slow down the simulation, perhaps even crash it. In theory the conservation of energy can prevent this, but in practice a hard limit may also be necessary. 
+
+As organisms evolve better strategies, they can better utilize the finite energy resources of the world, and thus support greater populations. An adaptive *difficulty*, perhaps applied to the metabolism cost, or applied generally to the available energy in the world, may help keep selection pressure effective at maintaining population size. For example, we can gradually decrease the total energy in the ecosystem while populations are large, and increase it again while populations are small.
+
+----
 
 ![agent graph](img/agent_graph.png)
 
