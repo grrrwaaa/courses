@@ -72,7 +72,7 @@ Otherwise, submission details remain as before.
 
 [Submit via this online form.](https://docs.google.com/forms/d/1Ej_SZ_nnZ-FiGrUV1B3ot4jxhEWMX1ii0JQd7bWiEBs/viewform)
 
-**Due Mar 2nd**. 
+**Due Mar 4th**. 
 
 Course grade contribution: 10%
 
