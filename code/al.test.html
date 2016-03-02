@@ -8,39 +8,34 @@
   <body>
     <script src="al.js"></script>
     <script>
-var dim = 200;	// the field resolution    
+var dim = 100;	// the field resolution    
 
-var max_speed = 1/400;
+var max_speed = 1/1000;
 var max_steer = 0.1;
-var max_population = 500;
+var max_population = 100;
 
-var metabolism_cost = 0.01;
+var metabolism_cost = 1/150;
 var reproduction_threshold = 2;
 var agents = [];
 var initial_population_size = 10;
 var digestion_efficiency = 0.1;
 
-var world_energy = dim*dim*0.25;
+var max_world_energy = dim*dim*0.25;
+var energy_deficit = 0;
 
 var food_diffusion = 0.001;
 
-var sensor_size = 0.5;
-
-// used for double-buffering the agent population
-// (for safe insertion & removal while traversing)
-var newagents = [];
+var sensor_size = 0.7;
 
 // initialize a field of food:
 var food = new field2D(dim);
+food.set(0.5);
 var food_back = food.clone();
-food.set(function() { return random(2); });
-food.diffuse(food, 10);
-food.normalize().mul(0.45);
 
 
 function agent_new() {
   return {
-    size: 0.01,
+    size: 1/70,
     mass: 1,
     hue: random(),
     pos: new vec2(random(), random()),
@@ -54,7 +49,6 @@ function agent_new() {
     food: 0,
     // outputs:
     wheel_rate: new vec2(random(), random()),
-    eat_rate: 1,
   }
 }	
 
@@ -85,8 +79,6 @@ function agent_locomotion(a) {
 function agent_eating(a) {
 	// eating:
 	var f = Math.max(0, food.sample(a.pos));
-	// scale by eat_rate (clamped in 0..1)
-    var f = f * Math.max(Math.min(1, (0, a.eat_rate)));
     // remove from world:
     food.deposit(-f, a.pos);
     // add to agent:
@@ -95,11 +87,10 @@ function agent_eating(a) {
 
 // detect the environment:
 function agent_sensing(a) {
-  // TODO: add additional sensors here
-  
   // get sensor locations in world-space:
-    var sensor1 = new vec2(sensor_size, sensor_size).mul(a.size).rotate(a.dir).add(a.pos);
-    var sensor2 = new vec2(sensor_size, -sensor_size).mul(a.size).rotate(a.dir).add(a.pos);
+  var sensor1 = new vec2(sensor_size, sensor_size).mul(a.size).rotate(a.dir).add(a.pos);
+  var sensor2 = new vec2(sensor_size, -sensor_size).mul(a.size).rotate(a.dir).add(a.pos);
+  
   // get food concentration at these locations:
   a.sensor[0] = food.sample(sensor1);
   a.sensor[1] = food.sample(sensor2);
@@ -112,24 +103,36 @@ function agent_process(a) {
   // TODO: limit *change* of wheel rates?
   //a.wheel_rate.set( Math.sin(now), Math.cos(now * 3));
   var v1 = 1-a.food;
-  var v2 = (a.sensor[1] - a.sensor[0])*3;
-  a.wheel_rate[0] = v1-v2;
-  a.wheel_rate[1] = v1+v2;
+  var v2 = (a.sensor[1] - a.sensor[0])*-1;
+  a.wheel_rate[0] = 0.5+a.sensor[0]*2;
+  a.wheel_rate[1] = 0.5+a.sensor[1]*2;
 }
 
 
 function update() {
-  write("time:", now);
+  // get the total energy in the system:
+  var energy = food.sum();
+  for (var a of agents) {
+  	energy += a.energy;
+  }
+  write("system energy", energy);
   
+  // re-energize?
+  // if total system energy is low, put some back in:
+  energy_deficit = max_world_energy - energy;
+  //food.add(energy_deficit/(dim*dim));
+
+  // run a CA that can redistribute this energy:
+/*
   var tmp = food_back;
   food_back = food;
   food = food_back;
-  food.diffuse(food_back, food_diffusion);
-  
-  newagents = [];
+  */
   
   // simulation code here
-  for (var a of agents) {
+  var i = agents.length;
+  while (i--) {	
+  	  var a = agents[i]; 
       a.age += dt;
       a.energy -= metabolism_cost * a.mass;
       
@@ -140,8 +143,6 @@ function update() {
       agent_locomotion(a);
       
       if (a.energy > 0) {
-      	// still living for the next iteration:
-      	newagents.push(a);
       	if (a.energy > reproduction_threshold) {
       		if (agents.length < max_population) {
 				// give birth!
@@ -153,37 +154,23 @@ function update() {
 				a.energy *= 0.25;
 				child.energy = a.energy;
 				// add to new population:
-				newagents.push(child);
+				agents.push(child);
 			} else {
 				//write("too many agents!");
 			}
       	}
+      } else {
+      	// dead:
+      	agents.splice(i, 1);
       }
   }
-  // update with new population:
-  agents = newagents;
   
   // re-seed?
   if (agents.length < 1) {
-  	agents.push(agent_new());
+  	var seed = agent_new();
+  	seed.energy = 1;	// give them a good chance of surviving
+  	agents.push(seed);
   }
-  
-  // get the total energy in the system:
-  var energy = food.sum();
-  for (var a of agents) {
-  	energy += a.energy;
-  }
-  write("total", energy);
-  
-  // now redistribute the entropy to the world:
-  var energy_deficit = Math.max(0, world_energy - energy);
-  var max_deposit = 10;
-  while (energy_deficit > max_deposit) {
-  	food.deposit(max_deposit, new vec2((now * 0.1) % 1, random()));
-  	//food.add(10/(dim*dim));
-  	energy_deficit -= max_deposit;
-  }
-  
   write("population", agents.length);
 }
 
