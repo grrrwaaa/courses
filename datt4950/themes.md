@@ -263,12 +263,15 @@ Design I/O - [Connected Worlds](http://www.creativeapplications.net/openframewor
 
 Andy Lomas - [Morphogenetic Creations](http://www.andylomas.com)
 
-<iframe src="https://player.vimeo.com/video/93056665" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/93056665">Cellular Forms HD</a> from <a href="https://vimeo.com/andylomas">Andy Lomas</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+<iframe src="https://player.vimeo.com/video/93056665" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 > The animations use digital simulation of a simplified biological model of morphogenesis, with three-dimensional structures generated out of interconnected particles to represent cells.
 Each form starts with a initial spherical cluster of cells which is incrementally developed over time by adding iterative layers of complexity to the structure. The aim is to create forms emergently: exploring generic similarities between many different shapes in nature rather than emulating any particular organism, revealing universal archetypal forms that can come from growth-like processes rather than top-down externally engineered design. Cell division is controlled by accumulated nutrient levels. When the level in a cell exceeds a given threshold the cell divides, and various parameters control how both the parent and daughter cells re-connect to their immediate neighbours. New nutrient can be created by photons in cells hit by incident light rays. Nutrient can also be allowed to flow to adjacent cells. The simulation process is repeated over thousands of iterations and millions of particles, with each of the final structures comprising over fifty million cells.
 
+
 The procedure is fully detailed in [his paper "Cellular Forms: an Artistic Exploration of Morphogenesis"](http://www.andylomas.com/extra/andylomas_paper_cellular_forms_aisb50.pdf). It's worth reading this paper and considering the similarities and differences with the flocking algorithm, for example.
+
+
 
 Tom Betts - [nullpointer](http://www.nullpointer.co.uk/content/research-hub/)
 

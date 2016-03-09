@@ -96,13 +96,11 @@ Genetic programming.
 
 ### 9. Mar 2
 
-**Due:** [Assignment III (10%)](due.html#assignment-iii)
-
-**Artificial chemistries**. Bytecode worlds, Tierra, Alchemy.
+Lab assistance for [Assignment III (10%)](due.html#assignment-iii)
 
 ### 10. Mar 9
 
-**Rewriting systems**. Development and grammars. L-systems, bracketed & context-sensitive, parametric, conditional.
+**Rewriting systems and artificial chemistries**. L-Systems, Tierra, Alchemy.
 
 ### 11. Mar 16
 
