@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Rewriting Systems</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+  </head>
+  <body>
+  	<nav>
+	<ul>
+	<li><a href="index.html" alt="DATT4950">DATT4950</a></li>
+<li><a href="gallery.html" alt="Gallery">Gallery</a></li>
+<li><a href="due.html" alt="Deliverables">Deliverables</a></li>
+<li><a href="themes.html" alt="Themes">Themes</a></li>
+<li><a href="cellular.html" alt="Cellular Systems">Cellular Systems</a></li>
+<li><a href="code.html" alt="Rewriting Systems">Rewriting Systems</a></li>
+<li><a href="agent.html" alt="Agent-Based Systems">Agent-Based Systems</a></li>
+<li><a href="evo.html" alt="Evolutionary Systems">Evolutionary Systems</a></li>
+<li><a href="labs.html" alt="Labs">Labs</a></li>
+<li><a href="integration.html" alt="Integrations">Integrations</a></li>
+<li><a href="js.html" alt="JavaScript">JavaScript</a></li>
+	</ul>
+	</nav>	
+	<div id="main">
+	<h1 id="rewriting-systems-bytecode-soups-and-algorithmic-chemistries">Rewriting systems, bytecode soups, and algorithmic chemistries</h1>
+<h2 id="development-and-l-systems">Development and L-systems</h2>
+<iframe src="https://player.vimeo.com/video/93056665" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+<p>The structure of a multi-cellular organisms develops in a gradual process from a single fertilized cell (the <em>zygote</em>) through progressive steps of cell duplication and specialization in a process called <em>development</em>; an active area of scientific research today. We know that each cell responds to chemical signals from its neighbors and other environmental conditions in order to know how to <em>differentiate</em> (to become a specific kind of cell in the body), according to the processes of the genome. The zygote does not contain a blueprint for the final organism, simply genotypic instructions for responding to environmental stimuli, which happen (in most cases) to produce the fully developed phenotype. </p>
+<p>A compact developmental representation can result in a more complex developed organism by relying on the self-organizing tendencies of the chemical substrate (such as the chemical pattern formation we saw with reaction-diffusion systems), the creative re-use of instructions (leading to the <em>modularity</em> and <em>symmetry</em> widely found in biology), and careful control over the ordering, when and for how long particular instructions operate (<em>heterochrony</em>). Development is clearly <em>parallel</em>, <em>decentralized</em>, granting some <em>robustness</em>, and yet it is also <em>context dependent</em>. It is also <em>self-limiting</em>, such that most developmental processes halt after the embryonic phase (though some may continue through the organism&#39;s lifetime, such as the <em>regeneration</em> of lost limbs).</p>
+<p>In 1968 biologist Astrid Lindenmeyer proposed to model several aspects of developmental systems (cell division, cell differentiation and cell death) using rewriting systems on symbolic strings. The analogy is that each symbol represents a cell in a particular state, and the rules of transformation represent the processes of differentiating from one state to another, dividing into two cells, or of programmed cell death.</p>
+<p><img src="https://blog.adafruit.com/wp-content/uploads/2013/10/NervousSystemHyphaeLampClose-2.jpg" alt="nervous system lamp"></p>
+<blockquote>
+<p>Above is an example of a 3D-printed lampshade whose form is the product of a developmental simulation, by the <a href="http://n-e-r-v-o-u-s.com">Nervous System design studio.</a></p>
+</blockquote>
+<h2 id="rewriting-systems">Rewriting systems</h2>
+<p>A rewriting system defines rules for the transformation of structures, typically strings of symbols. It is closely related to the formal notion of grammar. A system comprises:</p>
+<ul>
+<li>A set of possible symbols (A), called the <em>alphabet</em></li>
+<li>An initial symbol (S), called the <em>axiom</em></li>
+<li>A set (P) of <em>rewriting</em> or <em>production rules</em> to specify how each symbol is transformed to other symbols, at each production step. A rule converts a <em>predecessor</em> symbol into <em>successor</em> symbols.</li>
+<li>A process of applying these rules in parallel, step by step until no more productions can be applied.</li>
+</ul>
+<p>For example:</p>
+<ul>
+<li><strong>alphabet</strong>: <code>{ &quot;B&quot;, &quot;F&quot;, &quot;+&quot;, &quot;-&quot;, &quot;[&quot;, &quot;]&quot; }</code>, </li>
+<li><strong>rules</strong>: <ul>
+<li><code>F -&gt; FF</code> </li>
+<li><code>B -&gt; F[-B]+B</code></li>
+</ul>
+</li>
+<li><strong>start symbol</strong>: <code>B</code> </li>
+</ul>
+<p>Then a sequence of productions could proceed as follows:</p>
+<pre><code>B                        
+// apply <span class="hljs-keyword">rule</span> 1:
+F<span class="hljs-comment">[-B]</span>+B                    
+// apply <span class="hljs-keyword">rule</span> 1 (twice), and <span class="hljs-keyword">rule</span> 2:
+FF<span class="hljs-comment">[-F<span class="hljs-comment">[-B]</span>+B]</span>+F<span class="hljs-comment">[-B]</span>+B        
+// apply <span class="hljs-keyword">rule</span> 1 three times, <span class="hljs-keyword">rule</span> 1 four times:
+FFFF<span class="hljs-comment">[-FF<span class="hljs-comment">[-F<span class="hljs-comment">[-B]</span>+B]</span>+F<span class="hljs-comment">[-B]</span>+B]</span>+FF<span class="hljs-comment">[-F<span class="hljs-comment">[-B]</span>+B]</span>+F<span class="hljs-comment">[-B]</span>+B        
+// etc.
+</code></pre><p>Notice that any symbol that is not a predecessor of a production rule is passed through unchanged (it is not removed). </p>
+<h3 id="turtle-graphics">Turtle graphics</h3>
+<p>One of the simplest ways to use rewriting sytems for art and design is to interpret the produced strings as instructions for another program. The classic example is using them as instructions for a &quot;turtle graphics&quot; interpreter. </p>
+<p>For example, using the following system:</p>
+<pre><code class="lang-javascript">    // just one rule: <span class="hljs-keyword">replace</span> <span class="hljs-string">"F"</span> <span class="hljs-keyword">with</span> <span class="hljs-string">"F+F--F+F"</span>
+    <span class="hljs-keyword">rules</span>[<span class="hljs-string">"F"</span>] = <span class="hljs-string">"F+F--F+F"</span>
+    // <span class="hljs-keyword">start</span> <span class="hljs-keyword">with</span>:
+    S = <span class="hljs-string">"F"</span>
+</code></pre>
+<p>If we interpret the &quot;F&quot; symbol to mean &quot;move forward&quot;, and the &quot;+&quot; and &quot;-&quot; symbols to mean turn left and right by 60 degrees, then each successive application of this rule generates a successive iteration of the Koch curve fractal:</p>
+<p><img src="img/koch.jpg" alt="Iterations of the Koch curve fractal"></p>
+<h3 id="bracketed-systems">Bracketed systems</h3>
+<p>By adding push <code>&quot;[&quot;</code> and pop <code>&quot;]&quot;</code> symbols to save/restore graphics state (position, orientation etc.), the graphics interpreter can render branched structures such as trees and ferns. The result is further improved by reducing the length of each line according to the bracketed recursion depth, and embellishing with more context-sensitivity:</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Dragon_trees.jpg" alt="trees"></p>
+<h3 id="context-sensitive-formal-languages">Context-sensitive formal languages</h3>
+<p>An alphabet and production rules specify a formal language. In 1959 Noam Chomsky identified a hierarchy of four types of formal languages. They rest on the concept of <em>terminal</em> and <em>non-terminal</em> symbols, where a symbol is terminal if it cannot be further rewritten. Nonterminal symbols, which can be further rewritten, are normally indicated using upper case letters (A, B, C) and terminal symbols by lowercase letters (a, b, c). </p>
+<p>Each set in the hierarchy contains those above it:</p>
+<ol>
+<li><strong>Regular (Type-3):</strong> the predecessors of rules are a single nonterminal, the successors are a single terminal possibly followed by a single nonterminal, e.g. A -&gt; Ab or A -&gt; B.</li>
+<li><strong>Context-free (Type-2):</strong> the predecessors are a single nonterminal, and the sucessors can be any string of terminals and nonterminals. </li>
+<li><strong>Context-sensitive (Type-1):</strong> the predecessors contain multiple symbols (including at least one nonterminal), and the sucessor is a copy with the nonterminal replaced by an arbitrary string of nonterminals. E.g. aBc -&gt; aBbc, Ab -&gt; aaab, abcD -&gt; abcF, etc. They are therefore akin to Type-2 rules except with additional conditions regarding neighboring symbols (which remain unchanged).</li>
+<li><strong>Unrestricted (Type-0):</strong> predecessors and successors can both be any finite sequence of symbols without restriction.</li>
+</ol>
+<p>So far we have considered only regular and context-free formal languages, since we have been restricted to single nonterminal symbols on the left-hand side (predecessors). Clearly, as a biological model (where the string is the phenotype and the production rules are genotype), our system should be context sensitive. Context would imply environmental conditions as well as neighbor cell signaling. </p>
+<p>In order to support context-sensitive languages, we will need more powerful pattern-matching capabilities, and need extra care to handle ambiguous situations. E.g. we must be careful to consider longer patterns before shorter ones, to ensure that e.g. <code>aba</code> matches a rule <code>aba -&gt; abba</code> rather than the rule <code>a -&gt; b</code>. That is, our set of rules must now form a list (rather than a set), which is ordered by <em>priority</em>. </p>
+<h3 id="parametric-systems">Parametric systems</h3>
+<p>A <strong>parametric</strong> L-system embeds parameters (such as line length and rotation angle) into the symbols, and sucessors may modify these parameter values. For example, the rule <code>F(x) -&gt; F(x*2)</code> transforms a forward step into a forward step of twice the length.</p>
+<p>A <strong>conditional parametric</strong> L-system extends this to incorporate conditions, such that the subsitution only occurs if the condition is true. For example, <code>F(x : x &lt; 10) -&gt; F(x*2)</code> transforms a forward step into a forward step of twice the length, only if the initial length was less than 10. </p>
+<p>In both cases, our pattern matching system now needs to be able to handle classes of symbols (or at least, ignore anything between parentheses). </p>
+<h3 id="stochastic-systems">Stochastic systems</h3>
+<p>So far our systems are deterministic, and will always reproduce the same results after a fixed number of steps. To create a more natural-looking result, we can introduce non-determinism:</p>
+<ul>
+<li>Into the interpreter (by adding small deviations to the turtle, for example). This will remove the stark repetition, but still preserves topological symmetry.</li>
+<li>Into the production rules. This can generate new topologies. </li>
+</ul>
+<p>A <strong>stochastic</strong> L-system does the latter: for a given non-terminal predecessor, there may be several successor strings which are selected at random (possibly according to weights). Or, if the rules are listed by priority, each rule can have a probablity of being ignored.</p>
+<h2 id="evo-devo">Evo-Devo</h2>
+<p>L-Systems are difficult to predict and control: it is difficult to infer from an L-system definition and interpreter what the results will be, since (like cellular systems) the interactions are local but the consequences are global. Note that nature faces the same challenge: it cannot predict what changes to a genotype will result is viable or better phenotypes, and must proceed by trial and error (within the scope offered by development). Biologists exploring the mechanisms of development and generation of variation within it, and the relationship with evolutionary selection, work within the relatively new discipline of <em>evolutionary development</em> or &quot;evo-devo&quot;. </p>
+<p>The role of development in the generation of variation is equally important for artificial evolution, however it has been less thoroughly explored. Two lessons from the biologists:</p>
+<ul>
+<li>Development is not just a compact representation of a phenotype, but can be crucial to the generation of complex systems.</li>
+<li>The recent discovery that widely different species re-use the same developmental genes and mechanisms. This perhaps suggests that finding a good set of re-usable mechanisms for long-term evolvability (continuous generation of selectable novelty) is not an easy task. </li>
+<li>Development is not a one-way process, under command of the genome: factors in the environment can activate or inhibit parts of the genome (and parts of a genome can activate and inhibit other parts) in a complex <em>regulatory network</em>, and the state of the environment can affect the results of actions of the genome. In some cases the genome itself may not even be fixed. In part this environment is also inherited from an organisms&#39; parents. </li>
+<li>Development is ultimately working within the limits of a physical, chemical system, with entropic tendencies, self-organizing potential, noisy behavior, etc.</li>
+</ul>
+<p>Artificial Evo-Devo systems could be categorized as follows:</p>
+<ul>
+<li>The developmental process is hand-written, and evolution only works on parameters for this system. This is amounts to a simple genotype-phenotype map. </li>
+<li>Mechanims of development are encoded in the genotype, but in a fixed sequence (a fixed order with a fixed number of applications). This is suitable for evolving optimal L-systems for a given pattern, for example.</li>
+<li>The genotype encodes the sequence of applications of hand-written development mechanisms, as used for example in genetic programming.</li>
+<li>Both the basic mechanisms and the sequence of applications are encoded in the genotype and are therefore subject to evolution. Obviously the space of exploration is much larger and less predictable, but the challenge of finding suitable primitives and representations is difficult.</li>
+</ul>
+<p>Whether it is parameters, sequence, mechanisms (or several) that are to be evolved, they must all be represented in the genome in forms that can be inherited, with additional mechanisms for generating variation (e.g. mutations). That is, each one of these elements must be represented symbolically as data (e.g. as strings, trees or matrices of symbols, which may be as low-level as binary form or as high-level as readable text). </p>
+<hr>
+<h2 id="bytecode-ecosystems">Bytecode ecosystems</h2>
+<p>Perhaps the most abstract and deeply computational artificial life models are those in which the organisms <em>are</em> the code, serving as environments for each other. This approach plays most directly upon the fundamental insight that <strong>code is data</strong>. </p>
+<p>We generally assume that DNA also functions as both data and behaviour, but it has sometimes been overlooked that this is a <em>material process</em>. In bytecode soups, the code is not only data, it is the material on which code acts: fragments of code can react with each other, consume and produce each other, match or subvert each other, compete with each other for CPU time or memory resources, and thus evolve. These are the most digital of the artificial life organisms.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Core_War_PMars_Screenshot.png" alt="Core war"></p>
+<p>Since at least the early 1960&#39;s people have enjoyed creating virtual machines to explore the possibility of programs competing for control of the virtual machine processors and memory. The earliest example is the game Darwin, developed in 1961, in which programs competed to stop each other from executing. Later in <em>Core War</em>, another programming game in which programs (written in an abstract assembly language called &quot;redcode&quot;) battle for control of a virtual computer, players discovered that rapid self-replication was a powerful strategy. (Virus and anti-virus systems have been modeled in these terms, although they also draw upon theories of immune systems and operate outside of protected environments.)</p>
+<p>Steen Rasmussen took this idea and added genetic algorithms to evolve digital organisms in his <em>Coreworld</em> project; however complex evolution did not ensue, apparently because the assembly language was too brittle: mutations to code were far too likely to completely destroy a program. This problem of brittleness was overcome by the Tierra project.</p>
+<h2 id="thomas-ray-s-tierra">Thomas Ray&#39;s Tierra</h2>
+<p>&quot;We can think of evolution as an artist...&quot; - Tom Ray, The Tierra Video</p>
+<ul>
+<li><a href="http://life.ou.edu/Video/Tierra.html">The Tierra Video</a>, or <a href="https://www.youtube.com/watch?v=Wl5rRGVD0QI">here on youtube</a></li>
+</ul>
+<p>Tom Ray was an evolutionary biologist working in tropical rainforests for 20 years, but frustrated with the difficulty of studying evolution in the natural world, due to the restriction of using fossil records left over millions of years. So he decided to try exploring evolution in a computer, where it can operate much faster, and offer alternative models of life to study.</p>
+<p>Although he didn&#39;t really know anything about how computers work, he decided to write very simple self-replicating organisms in machine language. But rather than real machine code, he created a byte code language for a virtual computer -- since he was afraid that with real machine code it might break out and infect the internet like a recent Worm virus). </p>
+<p>Nobody thought it would work, but remarkably, in his first ever run of the system, starting from a simple prototype organism, these organisms improved themselves multiple times, spawned parasites and hyperparasites, immune systems, symbiotic relationships, and more. Tierra found its way into Science, Scientific American, Economist, etc. It may have been the first Von Neuman computer designed for and showing evidence of evolvability.</p>
+<blockquote>
+<p>The Tierra C source code creates a virtual computer and its Darwinian operating system, whose architecture has been designed in such a way that the executable machine codes are evolvable. This means that the machine code can be mutated (by flipping bits at random) or recombined (by swapping segments of code between algorithms), and the resulting code remains functional enough. Along with the C source code which generates the virtual computer, we provide programs written in the assembler code of the virtual computer, written by a human, and which do nothing more than make copies of themselves in the RAM of the virtual computer. This system results in the production of synthetic organisms based on a computer metaphor of organic life in which CPU time is the <code>energy&#39;&#39; resource and memory is the</code>material&#39;&#39; resource. Memory is organized into informational patterns that exploit CPU time for self-replication. Mutation generates new forms, and evolution proceeds by natural selection as different genotypes compete for CPU time and memory space. <a href="http://life.ou.edu/tierra/whatis.html">Adapted from &quot;What Tierra Is&quot;</a></p>
+</blockquote>
+<p>An organism is a program of code that occupies memory, and to be a viable organism this code must achieve self-replication, copying itself into another location in memory. One of the visualizations of Tierra represents the virtual memory visually as a sequence of bars, in which organisms are notated with specific colors.</p>
+<p><img src="http://life.ou.edu/pic/almonda3.jpg" alt="Almond visualization"></p>
+<blockquote>
+<p>Each image represents a soup of 60,000 bytes, divided into 60 segments of 1000 bytes each. Each individual creature is represented by a colored bar, colors correspond to genome size (e.g., red = 80, yellow = 45, blue = 79). -- <a href="http://life.ou.edu/pubs/images/">As described here</a></p>
+</blockquote>
+<p>The environment however is volatile: </p>
+<ul>
+<li>From time to time bits or bytes are randomly modified as if hit by cosmic rays, causing mutations. </li>
+<li>Moreover, once the memory is filled, a &quot;reaper&quot; process moves through the memory deleting programs that are old or defective (unable to run or replicate).</li>
+</ul>
+<p>By this combination of a population, mutation, replication with heredity, and selection pressures of viability, the entire bytecode system creates artificial evolution.</p>
+<h3 id="darwinian-os-components">Darwinian OS components</h3>
+<p>Tierra inherits many ideas from Core War, including circular memory, small instruction sets, instruction-level time sharing, and prevention of external access. However in other regards it differs with biological goals.</p>
+<p>Effectively, the virtual computer is an example of a virtual &quot;chemical soup&quot; with unique &quot;algorithmic chemistry&quot;, in which organisms are both code and data.</p>
+<ul>
+<li><p>Soup (RAM): A fixed-size, circular ring, typically seeded with at least one functional organism.</p>
+</li>
+<li><p>Organisms: Each organism is a virtual CPU, operating in a simulated parallel fashion via the Slicer. Each CPU has its own set of 4 registers and 10 stack slots for temporary calculations (attempts to use more slots will wrap around), as well as the current instruction pointer and stack pointer. </p>
+</li>
+<li><p>Slicer (timesharing/threading service): A circular queue of organisms (processes). It allocates CPU time to each process in the queue in succession. Each processes&#39; time slice can be a fixed length, or a uniform random variate, determined by the genome length, etc. When a new organism is born it is added to the queue behind its mother.</p>
+</li>
+<li><p>Reaper: A linear queue of organisms (processes). Processes enter the bottom of the queue at birth. If the memory is full, the Reaper kills processes at the top of the queue, removing them from both Reaper and Slicer. (A killed process could have its memory zeroed, randomized, or left as-is.) Older processes generally die first. When a process generates an error, it moves one position up the Reaper queue, while a successful birth of an offspring moves the process one position down.</p>
+</li>
+<li><p>Memory allocator: An organism (process) is born with memory given to it by the parent. It may have read, write, or execute protection (the default is write protection only, such that other processes may not write to the block). A process may only spawn one offspring at a time, and may only reserve one memory block for each (an additional memory request before giving birth frees the offspring memory block without giving birth and allocates a new one, and instructions copied to the old block are not used). The memory allocator could be configured to locate available space by first fit, better fit, random preference, near mother&#39;s address, and suggested address. The allocator is connected to the Reaper: when a memory request cannot be fulfilled because a block of the requested size is not available, the Reaper kills processes until a block of the requested size becomes available. The size of memory requests are limited.</p>
+</li>
+<li><p>Volatile conditions: </p>
+<ul>
+<li>sporadic mutations, e.g. randomly selected memory slot is randomized</li>
+<li>mutations at birth</li>
+<li>mutations while copying code</li>
+<li>gene splicing at birth -- crossover, insertion, deletion, possibly at or not at template boundaries (see documentation for details)</li>
+<li>flaws during execution, e.g. +1 or -1 error during addition</li>
+<li>sporadic killing of organisms at random</li>
+</ul>
+</li>
+</ul>
+<p>Instruction set:</p>
+<p>In designing his virtual computer and its machine code, Ray asked: why can you randomly alter DNA, but you can&#39;t randomly alter a computer program? So he designed his bytecode instruction set to make it more robust:</p>
+<ul>
+<li>Tierra originally had only 32 instructions (closer to the 20 amino-acid symbols of DNA than the much larger sets common in real PC architectures.) This makes random code  far more likely to be valid.</li>
+<li>Jump addresses described as templates, rather than fixed numbers (which would be likely to break under mutations). Template-matching is akin to the shape-matching used at microbiological levels. So, for example, the instruction sequence <code>jmp nop0 nop0 nop1</code> causes execution of the program to jump to the nearest occurrence of the instruction sequence <code>nop1 nop1 nop0</code>. The complementarity (001 finds 110) ensures that the jump will not find a copy of itself.</li>
+<li>Apart from template-using instructions, all other instructions are atomic, requiring almost no syntax constraints. This also makes random code far more likely to be valid.</li>
+<li><p>No instruction can generate an error that would crash the virtual machine. Other errors are ignored (the instruction has no effect), but may reduce organism fitness (moving down the reaper list).</p>
+</li>
+<li><p>pushA, pushB, pushC, pushD: copy register values onto stack</p>
+</li>
+<li>popA, popB, popC, popD: remove &amp; copy stack values onto registers</li>
+<li>movcd, movab: copy one register to another</li>
+<li>movii: copy from memory[A] to memory[B]</li>
+<li>subCAB, subAAC, incA, incB, decC, zero etc.: simple arithmetic</li>
+<li>not0, sh1: bit flip/shift</li>
+<li>ifz: skip next instruction if C is zero</li>
+<li>jmp, jmpb: jump to template (forward or backward)</li>
+<li>call: push instruction pointer onto stack then jump to template</li>
+<li>ret: jump to instruction according to stack value</li>
+<li>adrf, adrb: search (fwd/back) for template, put address &amp; template size in register C</li>
+<li>mal: allocate memory of size C</li>
+<li>divide: create a child</li>
+<li>nop0, nop1: do nothing -- these serve only as labels for template matching</li>
+</ul>
+<p>Ray&#39;s first ancestor organism looked like this:</p>
+<pre><code>nop1    ; <span class="hljs-number">110</span> <span class="hljs-number">01</span>   <span class="hljs-number">0</span> beginning marker
+nop1    ; <span class="hljs-number">110</span> <span class="hljs-number">01</span>   <span class="hljs-number">1</span> beginning marker
+nop1    ; <span class="hljs-number">110</span> <span class="hljs-number">01</span>   <span class="hljs-number">2</span> beginning marker
+nop1    ; <span class="hljs-number">110</span> <span class="hljs-number">01</span>   <span class="hljs-number">3</span> beginning marker
+zero    ; <span class="hljs-number">110</span> <span class="hljs-number">04</span>   <span class="hljs-number">4</span> put zero <span class="hljs-keyword">in</span> cx
+not0    ; <span class="hljs-number">110</span> <span class="hljs-number">02</span>   <span class="hljs-number">5</span> put <span class="hljs-number">1</span> <span class="hljs-keyword">in</span> first bit <span class="hljs-keyword">of</span> cx
+<span class="hljs-keyword">shl</span>     ; <span class="hljs-number">110</span> <span class="hljs-number">03</span>   <span class="hljs-number">6</span> shift left cx (cx = <span class="hljs-number">2</span>)
+<span class="hljs-keyword">shl</span>     ; <span class="hljs-number">110</span> <span class="hljs-number">03</span>   <span class="hljs-number">7</span> shift left cx (cx = <span class="hljs-number">4</span>)
+movDC   ; <span class="hljs-number">110</span> <span class="hljs-number">18</span>   <span class="hljs-number">8</span> move cx <span class="hljs-keyword">to</span> dx (dx = <span class="hljs-number">4</span>)
+adrb    ; <span class="hljs-number">110</span> <span class="hljs-number">1</span>c   <span class="hljs-number">9</span> get (backward) address <span class="hljs-keyword">of</span> beginning marker -&gt; ax
+nop0    ; <span class="hljs-number">100</span> <span class="hljs-number">00</span>  <span class="hljs-number">10</span> complement <span class="hljs-keyword">to</span> beginning marker
+nop0    ; <span class="hljs-number">100</span> <span class="hljs-number">00</span>  <span class="hljs-number">11</span> complement <span class="hljs-keyword">to</span> beginning marker
+nop0    ; <span class="hljs-number">100</span> <span class="hljs-number">00</span>  <span class="hljs-number">12</span> complement <span class="hljs-keyword">to</span> beginning marker
+nop0    ; <span class="hljs-number">100</span> <span class="hljs-number">00</span>  <span class="hljs-number">13</span> complement <span class="hljs-keyword">to</span> beginning marker
+subAAC  ; <span class="hljs-number">110</span> <span class="hljs-number">07</span>  <span class="hljs-number">14</span> subtract cx from ax, result <span class="hljs-keyword">in</span> ax
+movBA   ; <span class="hljs-number">110</span> <span class="hljs-number">19</span>  <span class="hljs-number">15</span> move ax <span class="hljs-keyword">to</span> bx, bx now contains start address <span class="hljs-keyword">of</span> mother
+adrf    ; <span class="hljs-number">110</span> <span class="hljs-number">1</span>d  <span class="hljs-number">16</span> get (forward) address <span class="hljs-keyword">of</span> <span class="hljs-keyword">end</span> marker -&gt; ax
+nop0    ; <span class="hljs-number">100</span> <span class="hljs-number">00</span>  <span class="hljs-number">17</span> complement <span class="hljs-keyword">to</span> <span class="hljs-keyword">end</span> marker
+nop0    ; <span class="hljs-number">100</span> <span class="hljs-number">00</span>  <span class="hljs-number">18</span> complement <span class="hljs-keyword">to</span> <span class="hljs-keyword">end</span> marker
+nop0    ; <span class="hljs-number">100</span> <span class="hljs-number">00</span>  <span class="hljs-number">19</span> complement <span class="hljs-keyword">to</span> <span class="hljs-keyword">end</span> marker
+nop1    ; <span class="hljs-number">100</span> <span class="hljs-number">01</span>  <span class="hljs-number">20</span> complement <span class="hljs-keyword">to</span> <span class="hljs-keyword">end</span> marker
+incA    ; <span class="hljs-number">110</span> <span class="hljs-number">08</span>  <span class="hljs-number">21</span> increment ax, <span class="hljs-keyword">to</span> include dummy instruction at <span class="hljs-keyword">end</span>
+subCAB  ; <span class="hljs-number">110</span> <span class="hljs-number">06</span>  <span class="hljs-number">22</span> subtract bx from ax <span class="hljs-keyword">to</span> get size, result <span class="hljs-keyword">in</span> cx
+nop1    ; <span class="hljs-number">110</span> <span class="hljs-number">01</span>  <span class="hljs-number">23</span> reproduction loop marker
+nop1    ; <span class="hljs-number">110</span> <span class="hljs-number">01</span>  <span class="hljs-number">24</span> reproduction loop marker
+nop0    ; <span class="hljs-number">110</span> <span class="hljs-number">00</span>  <span class="hljs-number">25</span> reproduction loop marker
+nop1    ; <span class="hljs-number">110</span> <span class="hljs-number">01</span>  <span class="hljs-number">26</span> reproduction loop marker
+mal     ; <span class="hljs-number">110</span> <span class="hljs-number">1</span>e  <span class="hljs-number">27</span> allocate space (cx) <span class="hljs-keyword">for</span> daughter, address <span class="hljs-keyword">to</span> ax
+call    ; <span class="hljs-number">110</span> <span class="hljs-number">16</span>  <span class="hljs-number">28</span> call template below (copy <span class="hljs-function"><span class="hljs-keyword">procedure</span>)
+<span class="hljs-title">nop0</span>    ;</span> <span class="hljs-number">100</span> <span class="hljs-number">00</span>  <span class="hljs-number">29</span> copy <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">complement</span>
+<span class="hljs-title">nop0</span>    ;</span> <span class="hljs-number">100</span> <span class="hljs-number">00</span>  <span class="hljs-number">30</span> copy <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">complement</span>
+<span class="hljs-title">nop1</span>    ;</span> <span class="hljs-number">100</span> <span class="hljs-number">01</span>  <span class="hljs-number">31</span> copy <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">complement</span>
+<span class="hljs-title">nop1</span>    ;</span> <span class="hljs-number">100</span> <span class="hljs-number">01</span>  <span class="hljs-number">32</span> copy <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">complement</span>
+<span class="hljs-title">divide</span>  ;</span> <span class="hljs-number">110</span> <span class="hljs-number">1</span>f  <span class="hljs-number">33</span> create independent daughter cell
+jmpo    ; <span class="hljs-number">110</span> <span class="hljs-number">14</span>  <span class="hljs-number">34</span> jump <span class="hljs-keyword">to</span> template below (reproduction loop)
+nop0    ; <span class="hljs-number">100</span> <span class="hljs-number">00</span>  <span class="hljs-number">35</span> reproduction loop complement
+nop0    ; <span class="hljs-number">100</span> <span class="hljs-number">00</span>  <span class="hljs-number">36</span> reproduction loop complement
+nop1    ; <span class="hljs-number">100</span> <span class="hljs-number">01</span>  <span class="hljs-number">37</span> reproduction loop complement
+nop0    ; <span class="hljs-number">100</span> <span class="hljs-number">00</span>  <span class="hljs-number">38</span> reproduction loop complement
+ifz     ; <span class="hljs-number">000</span> <span class="hljs-number">05</span>  <span class="hljs-number">39</span> dummy instruction <span class="hljs-keyword">to</span> separate templates
+nop1    ; <span class="hljs-number">110</span> <span class="hljs-number">01</span>  <span class="hljs-number">40</span> copy <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">template</span>
+<span class="hljs-title">nop1</span>    ;</span> <span class="hljs-number">110</span> <span class="hljs-number">01</span>  <span class="hljs-number">41</span> copy <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">template</span>
+<span class="hljs-title">nop0</span>    ;</span> <span class="hljs-number">110</span> <span class="hljs-number">00</span>  <span class="hljs-number">42</span> copy <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">template</span>
+<span class="hljs-title">nop0</span>    ;</span> <span class="hljs-number">110</span> <span class="hljs-number">00</span>  <span class="hljs-number">43</span> copy <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">template</span>
+<span class="hljs-title">pushA</span>   ;</span> <span class="hljs-number">110</span> <span class="hljs-number">0</span>c  <span class="hljs-number">44</span> push ax onto stack
+pushB   ; <span class="hljs-number">110</span> <span class="hljs-number">0</span>d  <span class="hljs-number">45</span> push bx onto stack
+pushC   ; <span class="hljs-number">110</span> <span class="hljs-number">0</span>e  <span class="hljs-number">46</span> push cx onto stack
+nop1    ; <span class="hljs-number">110</span> <span class="hljs-number">01</span>  <span class="hljs-number">47</span> copy loop template
+nop0    ; <span class="hljs-number">110</span> <span class="hljs-number">00</span>  <span class="hljs-number">48</span> copy loop template
+nop1    ; <span class="hljs-number">110</span> <span class="hljs-number">01</span>  <span class="hljs-number">49</span> copy loop template
+nop0    ; <span class="hljs-number">110</span> <span class="hljs-number">00</span>  <span class="hljs-number">50</span> copy loop template
+movii   ; <span class="hljs-number">110</span> <span class="hljs-number">1</span>a  <span class="hljs-number">51</span> move contents <span class="hljs-keyword">of</span> [bx] <span class="hljs-keyword">to</span> [ax] (copy one instruction)
+decC    ; <span class="hljs-number">110</span> <span class="hljs-number">0</span>a  <span class="hljs-number">52</span> decrement cx (size)
+ifz     ; <span class="hljs-number">110</span> <span class="hljs-number">05</span>  <span class="hljs-number">53</span> <span class="hljs-keyword">if</span> cx == <span class="hljs-number">0</span> perform next instruction, otherwise skip it
+jmpo    ; <span class="hljs-number">110</span> <span class="hljs-number">14</span>  <span class="hljs-number">54</span> jump <span class="hljs-keyword">to</span> template below (copy <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">exit</span>)
+<span class="hljs-title">nop0</span>    ;</span> <span class="hljs-number">110</span> <span class="hljs-number">00</span>  <span class="hljs-number">55</span> copy <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">exit</span> <span class="hljs-title">complement</span>
+<span class="hljs-title">nop1</span>    ;</span> <span class="hljs-number">110</span> <span class="hljs-number">01</span>  <span class="hljs-number">56</span> copy <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">exit</span> <span class="hljs-title">complement</span>
+<span class="hljs-title">nop0</span>    ;</span> <span class="hljs-number">110</span> <span class="hljs-number">00</span>  <span class="hljs-number">57</span> copy <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">exit</span> <span class="hljs-title">complement</span>
+<span class="hljs-title">nop0</span>    ;</span> <span class="hljs-number">110</span> <span class="hljs-number">00</span>  <span class="hljs-number">58</span> copy <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">exit</span> <span class="hljs-title">complement</span>
+<span class="hljs-title">incA</span>    ;</span> <span class="hljs-number">110</span> <span class="hljs-number">08</span>  <span class="hljs-number">59</span> increment ax (address <span class="hljs-keyword">in</span> daughter <span class="hljs-keyword">to</span> copy <span class="hljs-keyword">to</span>)
+incB    ; <span class="hljs-number">110</span> <span class="hljs-number">09</span>  <span class="hljs-number">60</span> increment bx (address <span class="hljs-keyword">in</span> mother <span class="hljs-keyword">to</span> copy from)
+jmpo    ; <span class="hljs-number">110</span> <span class="hljs-number">14</span>  <span class="hljs-number">61</span> bi-directional jump <span class="hljs-keyword">to</span> template below (copy loop)
+nop0    ; <span class="hljs-number">100</span> <span class="hljs-number">00</span>  <span class="hljs-number">62</span> copy loop complement
+nop1    ; <span class="hljs-number">100</span> <span class="hljs-number">01</span>  <span class="hljs-number">63</span> copy loop complement
+nop0    ; <span class="hljs-number">100</span> <span class="hljs-number">00</span>  <span class="hljs-number">64</span> copy loop complement
+nop1    ; <span class="hljs-number">100</span> <span class="hljs-number">01</span>  <span class="hljs-number">65</span> copy loop complement
+ifz     ; <span class="hljs-number">000</span> <span class="hljs-number">05</span>  <span class="hljs-number">66</span> this is a dummy instruction <span class="hljs-keyword">to</span> separate templates
+nop1    ; <span class="hljs-number">110</span> <span class="hljs-number">01</span>  <span class="hljs-number">67</span> copy <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">exit</span> <span class="hljs-title">template</span>
+<span class="hljs-title">nop0</span>    ;</span> <span class="hljs-number">110</span> <span class="hljs-number">00</span>  <span class="hljs-number">68</span> copy <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">exit</span> <span class="hljs-title">template</span>
+<span class="hljs-title">nop1</span>    ;</span> <span class="hljs-number">110</span> <span class="hljs-number">01</span>  <span class="hljs-number">69</span> copy <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">exit</span> <span class="hljs-title">template</span>
+<span class="hljs-title">nop1</span>    ;</span> <span class="hljs-number">110</span> <span class="hljs-number">01</span>  <span class="hljs-number">70</span> copy <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">exit</span> <span class="hljs-title">template</span>
+<span class="hljs-title">popC</span>    ;</span> <span class="hljs-number">110</span> <span class="hljs-number">12</span>  <span class="hljs-number">71</span> pop cx off stack (size)
+popB    ; <span class="hljs-number">110</span> <span class="hljs-number">11</span>  <span class="hljs-number">72</span> pop bx off stack (start address <span class="hljs-keyword">of</span> mother)
+popA    ; <span class="hljs-number">110</span> <span class="hljs-number">10</span>  <span class="hljs-number">73</span> pop ax off stack (start address <span class="hljs-keyword">of</span> daughter)
+ret     ; <span class="hljs-number">110</span> <span class="hljs-number">17</span>  <span class="hljs-number">74</span> return from copy <span class="hljs-function"><span class="hljs-keyword">procedure</span>
+<span class="hljs-title">nop1</span>    ;</span> <span class="hljs-number">100</span> <span class="hljs-number">01</span>  <span class="hljs-number">75</span> <span class="hljs-keyword">end</span> template
+</code></pre><p>Visualization (ALMond):</p>
+<blockquote>
+<p>In addition, the operating system provides a very elaborate observational system that keeps a record of births and deaths, sequences the code of every creature, and maintains a genebank of successful genomes. The operating system also provides facilities for automating the ecological analysis, that is, for recording the kinds of interactions taking place between creatures. <a href="http://life.ou.edu/tierra/whatis.html">Adapted from &quot;What Tierra Is&quot;</a></p>
+</blockquote>
+<h3 id="more-information-">More information:</h3>
+<ul>
+<li><a href="http://life.ou.edu/tierra/">The Tierra homepage</a></li>
+<li><a href="http://tierra.lolwh.at">Instructions on how to build the Tierra system on a Linux computer</a></li>
+<li>A direct descendent of Tierra, and one which has continued to have impact in artificial life research, is <a href="https://en.wikipedia.org/wiki/Avida">Avida</a>. </li>
+</ul>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/1/14/Avida_2.6_screenshot.png" alt="Avida"></p>
+<a href="!--
+http://codepen.io/grrrwaaa/pen/JXXowe?editors=001
+--">!--
+http://codepen.io/grrrwaaa/pen/JXXowe?editors=001
+--</a>
+<hr>
+<h2 id="artificial-chemistries">Artificial chemistries</h2>
+<p>One of the most enduring questions facing biology (and artificial life) regards how life itself emerged from non-life, and how that boundary continues to be bridged (&quot;protobiology&quot;). The emergence of life has not yet been observed in physical materials, however there are many hypotheses offered. In general the problem is how life-like behavior and organization emerges from simpler physical chemical systems; or at the very least, how new orders of structure emerge from simpler chemical models. Artificial chemistries (AC) are systems with similarities to models of physics and chemistry which can be used to explore these speculative models with more rigor.</p>
+<p>AC&#39;s were proposed by John McCaskill, but probably the best known example (&quot;AlChemy&quot;, described below) was created by Walter Fontana and Leo Buss, presented at the second Artificial Life conference. Hideaki Suzuki and Takashi Ikegami pursued the concept in Japan (with &quot;systems of machines and tapes&quot;, referencing both Turing&#39;s and von Neumann&#39;s early work). <a href="http://www.cs.mun.ca/~banzhaf/papers/alchemistry_review_MIT.pdf">Banzhaf, Dittrich and Ziegler present an excellent review here</a>. See also <a href="http://www.mitpressjournals.org/doi/abs/10.1162/artl.2009.15.1.15100?journalCode=artl">Artificial Chemistry. Hideaki Suzuki, Peter Dittrich. Artificial Life 2009, Vol. 15, No. 1.</a></p>
+<p>Like artificial life, in artificial chemistries the assumption holds that organization (information) is the most essential component. One of the central insights stems from a clear analogy between life and computation: organisms are created by organisms, just as programs can create programs. The ease of mapping of code and data mirrors a relationship between physical structure and behavior (form and function). </p>
+<p>Artificial chemistries are also one possible attractive option to overcome the &#39;over-specified&#39; nature of most artificial evolutionary and / or developmental systems: a mechanism by which new features come into being, new behaviors, new sensors, new evolutionary pathways, even new modes of evolution. They have also been applied to optimization problems, and to the modeling of social systems. </p>
+<h2 id="walter-fontana-s-algorithmic-chemistry">Walter Fontana&#39;s Algorithmic Chemistry</h2>
+<p>Fontana&#39;s basic conjecture was that adaptive systems are characterized by self-referential processes, in which combinatorial objects encode functions that act back on those same objects. He addressed this by taking two inspirations from chemistry:</p>
+<ul>
+<li>the collision-reaction of two molecules can create a new molecule</li>
+<li>many different reactants can yield the same stable product</li>
+</ul>
+<p>His insight was to treat fragments of code as equivalent to chemical molecules, and metaprogramming rewrites as equivalent to chemical reactions. That is, code that reacts by modifying itself. Fontana described his system as a &quot;function gas&quot; or &quot;Turing gas&quot;, inspired by chemical flowmreactors, in that a large vessel of code fragments are agitated such that fragments randomly collide, and when they do, one is executed using the other as its input. That is, the code fragments are strings of executable code, that take other strings of code as input, and produce new strings of code as output.  And thus, programs are the material objects of the world.</p>
+<blockquote>
+<p>This is admittedly somewhat mind-boggling, and gets more so as his papers admit, however perhaps one way to get a grasp on it is to consider how we made an interpreter of a simple character language to generate graphical patterns as we created Biomorphs. Now imagine that rather than generating line segments, we are generating strings of code in the same character language. A crucial difference, which makes this more interesting, is that in Fontana&#39;s work it is not one string that is interpreted, but a pair of strings, where one is being inserted in the other during interpretation. You might observe that this is similar to what our <em>evolutionary</em> process of creating a new generation (rather than the <em>developmental</em> process of interpretation) achieved -- especially in the case of crossover recombination! However an important result of Fontana&#39;s work is that this evolutionary process emerges naturally from the chemistry itself, rather than being imposed from outside.</p>
+</blockquote>
+<p>Importantly, <strong>there is no control over the order of the chemical reactions</strong> -- code fragments collide at random. The reaction process is thus:</p>
+<ul>
+<li>select one code fragment at random to execute (i.e. interpet as program)</li>
+<li>select another at random to pass in as the input argument (i.e. interpret as data)</li>
+<li>the result of the execution is another code fragment</li>
+<li>if this code fragment meets some minimal viability conditions (avoiding unreactive or trivial programs), it is added back into the soup, replacing some other randomly chosen code fragment (preserving total population size)</li>
+</ul>
+<p>This total system showed a remarkable ability to quickly self-organize from populations of random functions to highly specific functions with cooperative characteristics, reliably increasing internal order and complexity. The system showed adaptability to perturbations, and led to a complex set of organizational architectures including catalytic loops, hypercycles, and self-replicating structures.</p>
+<blockquote>
+<p>&quot;If syntactically legal strings of characters are combinatorial objects and if all legal strings define functions that transform legal strings into lega; strings, then we have an exceedingly simple instance of a combinatorial loop between objects and functions: an algorithmic chemistry, or AlChemy for short.&quot; <a href="http://www.santafe.edu/media/workingpapers/90-011.pdf">Walter Fontana. Algorithmic Chemistry: a model for functional self-organization. 1990</a></p>
+</blockquote>
+<p>Fontana&#39;s &quot;AlChemy&quot; language was designed for:</p>
+<ul>
+<li>combinatorial, modular flexibility </li>
+<li>lack of syntactic restrictions: that almost any randomly-produced combination of symbols is a legal program</li>
+<li>to be unable to cause errors or enter infinite loops</li>
+</ul>
+<p>It is very simple, consisting of expressions that are either atoms or lists of expressions (including lists of lists of atoms, etc.) Atoms can be one of 11 pre-defined operators, or the symbol &quot;a&quot; to represent the current input variable. </p>
+<blockquote>
+<p>This language is thus similar to LISP. LISP&#39;s simplicity makes it easy to manipulate through metaprogramming, and it is fairly unique in that data and programs look the same. It builds upon Alonzo Church&#39;s lambda-calculus, which is a functional formulation of computation yet still equivalent to the contemporaneous procedural Turing machine formulation.</p>
+</blockquote>
+<p>Some example AlChemy molecules:</p>
+<pre><code>((<span class="hljs-name">-a</span>)a(|(<span class="hljs-name">=aaa</span>)a)(<span class="hljs-name">-a</span>))
+(<span class="hljs-name">aaa</span>(<span class="hljs-name">%a</span>))
+(<span class="hljs-name">a</span>(<span class="hljs-name"><span class="hljs-builtin-name">+</span></span>(<span class="hljs-name">+a</span>))(<span class="hljs-name">&gt;a</span>)(<span class="hljs-name">&lt;a</span>))
+(<span class="hljs-name">a</span>(<span class="hljs-name">%a</span>)a(<span class="hljs-symbol">'a</span>))
+(<span class="hljs-name">a</span>(<span class="hljs-name"><span class="hljs-builtin-name">&gt;</span></span>(<span class="hljs-name"><span class="hljs-builtin-name">=</span></span>(<span class="hljs-name">&gt;a</span>)(<span class="hljs-name">-a</span>)(<span class="hljs-name">*aa</span>)))('(<span class="hljs-name"><span class="hljs-builtin-name">=</span></span>(<span class="hljs-name"><span class="hljs-builtin-name">*</span></span>(<span class="hljs-name">&lt;a</span>)a)aa))(<span class="hljs-name"><span class="hljs-builtin-name">&lt;</span></span>(<span class="hljs-name"><span class="hljs-builtin-name">&gt;</span></span>(<span class="hljs-name">!aa</span>))))
+</code></pre><p>The pre-defined operators consume fixed numbers of arguments and return a value result. Other lists produce &quot;functions&quot;, that are applied to the atom immediately to their right (the argument). That is, all the &quot;a&quot; symbols in the function are replaced by the argument, then the function is evaluated to produce its result. The value of a list is defined recursively in terms of the values of its elements. This continues until all elements of the list have been evaluated, typically leaving as a result another list.</p>
+<p>Because functions are evaluated and then applied to subsequent arguments there is a high risk of infinite recursions of limitless depth. In AlChemy, expressions are only allowed to recurse to a maximum depth of 10 to prevent this possibility. A time limit was also applied to each interaction.</p>
+<h3 id="primitives">Primitives</h3>
+<p>The &quot;(&quot; and &quot;)&quot; characters are used to identify lists. </p>
+<p>The &quot;a&quot; atom represents the input argument.</p>
+<p>&quot;&#39;&quot; this quote operator returns the argument without evaluating it</p>
+<p>&quot;%&quot; returns the argument evaluated with the input being null (so long as the depth limit is not reached)</p>
+<p>&quot;+&quot; return the first expression of a list (if input is an atom, just return the atom).</p>
+<p>&quot;-&quot; return a list with the first expression deleted (if input is an atom, just return the atom).</p>
+<p>&quot;&gt;&quot; and &quot;&lt;&quot; are the inverse of &quot;+&quot; and &quot;-&quot;</p>
+<p>&quot;*&quot; (2 arguments): if the second arg is a list, then return a copy of this list with the first argument inserted at its head. Otherwise just return the first argument.</p>
+<p>&quot;|&quot; (2 arguments): the longer argument is shortened by the length of the shorter argument, and is then returned.</p>
+<p>&quot;=&quot; (3 arguments): if first two arguments are identical strings, evaluate &amp; return the third.</p>
+<p>&quot;/&quot; (3 arguments): if the length of the first argument is odd, return the second, else the third argument.</p>
+<hr>
+<h2 id="further-afield">Further afield</h2>
+<p>Here is a <a href="http://chorasimilarity.github.io/chemlambda-gui/dynamic/demos.html">remarkable collection of browser-based demos</a> of the ChemLambda system, which has strong influences from Fontana&#39;s work.</p>
+<iframe width="480" height="360" src="https://www.youtube.com/embed/6LZvIkM6JqY?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<h2 id="general-properties-of-artificial-chemistries">General properties of artificial chemistries</h2>
+<p>A typical artificial chemistry includes:</p>
+<ul>
+<li>A set <strong>S</strong> of possible molecule types. This set could be finite or infinite (as far as we know, the set of possible molecules in the universe is infinite.) Molecules could be represented in the program as symbols, character strings, numbers, lambda-expressions, trees, etc.</li>
+<li>A set <strong>R</strong> of possible reaction rules, in which input combinations of input molecules produce combinations of output molecules; e.g. <code>A + B -&gt; 2C</code> or <code>A + 2B -&gt; A + D</code>. Note that the second example is a <em>catalytic</em> reaction, since one of the inputs (<code>A</code>) is preserved unchanged. A reaction may also have other conditions, such as ambient temperature; and may have an associated probability (&quot;rate constant&quot;) and energetic cost. </li>
+<li>A population <strong>P</strong> of molecules (drawn from <strong>S</strong>) that exist at any moment. </li>
+<li>An algorithm <strong>A</strong> specifying how to apply reactions to the population <strong>P</strong> and thus update to the population of the next instant (<strong>P&#39;</strong>), following reaction rules as described below. A reaction may also have other conditions, such as ambient temperature; and may have an associated probability (&quot;rate constant&quot;) and energetic cost. The reaction algorithm could take into account spatial proximity, or it could assume that all chemicals rapidly disperse (the &quot;well-stirred reactor&quot; model), in which reactions are selected stochastically. On the other hand, if concentrations of molecules are represented as continuous numbers, differential equations may be used. </li>
+</ul>
+<p>An important design choice is how to define the reaction rules. For a finite system these could be designed by hand (or to model a well-known physical system). For an infinite system they must be derived on demand; this could be done programatically according to reactant structures, in an approximation to molecule bonding mechanisms (or protein folding). For example, a simple demonstration AC uses integer division to define reactions: each molecule type is an integer (greater than one), and two molecules can react if they leave no remainder after division (the long-term behavior of this system tends to increase the concentration of prime numbers). Another possibility is to generate reactions and rates randomly as needed. </p>
+<p>The algorithm may also include a source and sink: the source is a continuous input of new (base) molecules, and a sink is a gradual removal of molecules to maintain population size. In addition, certain reactions may be filtered to make the whole system more interesting (e.g. discarding reactions that produce nothing more than one of their inputs).</p>
+<blockquote>
+<p>There are clearly similarities with rewriting systems (where the active population is the item being rewritten, made of molecule <em>terms</em> and reaction <em>productions</em>). There can also be similarities found with evolutionary, cellular and dynamical systems. Alternatively, AC&#39;s can be viewed as a special case of agent systems, in which each agent belongs to a molecule-class, and reactions are a result of agent interacitons (in which interactions usually lead to the creation and destruction of agents). </p>
+</blockquote>
+
+	</div>
+	<footer>&copy; 2016 Graham Wakefield</footer>
+  </body>
+</html>

@@ -8,198 +8,239 @@
   <body>
     <script src="al.js"></script>
     <script>
-var dim = 100;	// the field resolution    
+/* http://codepen.io/grrrwaaa/pen/QNbOLL?editors=001 */
+    
+// the alphabet of possible symbols:
+var alphabet = "FFFfff<>+-|=".split("");
+var mutation_rate = 0.2;
+var agent_scale = 1 / 200;
 
-var max_speed = 1/1000;
-var max_steer = 0.1;
-var max_population = 100;
+// now the population:
+var pop = [];
 
-var metabolism_cost = 1/150;
-var reproduction_threshold = 2;
-var agents = [];
-var initial_population_size = 10;
-var digestion_efficiency = 0.1;
+var turtle = {};
+var angle1 = Math.PI / 2;
+var angle2 = Math.PI / 3;
 
-var max_world_energy = dim*dim*0.25;
-var energy_deficit = 0;
+function sign(n) {
+  return n > 0 ? 1 : n < 0 ? -1 : 0;
+}
 
-var food_diffusion = 0.001;
+function turtle_reset(t) {
+  t.pos = new vec2();
+  t.dir = new vec2(1, 0);
+  t.spin = 1;
+}
+turtle_reset(turtle);
 
-var sensor_size = 0.7;
-
-// initialize a field of food:
-var food = new field2D(dim);
-food.set(0.5);
-var food_back = food.clone();
-
-
-function agent_new() {
+function turtle_clone(t) {
   return {
-    size: 1/70,
-    mass: 1,
-    hue: random(),
-    pos: new vec2(random(), random()),
-    dir: random() * Math.PI * 2,
-    vel: vec2.random(max_speed),
-    // states (also senses)
-    age: 0,
-    energy: random(),
-    // senses:
-    sensor: new vec2(),
-    food: 0,
-    // outputs:
-    wheel_rate: new vec2(random(), random()),
+    pos: t.pos.clone(),
+    dir: t.dir.clone(),
+    spin: t.spin,
+  };
+}
+
+/*
+  Another way.
+  +FFF and FFF+ should show almost the same visual result
+  each F should add a some weight to the total avg rotation
+  the whole should be unrotated by this avg
+  (maybe also take into account t.spin)
+  clearly FFFF has no rotation
+*/
+
+// given a string of instructions, draw it:
+function turtle_develop(t, code, lines) {
+  for (var i = 0; i < code.length; i++) {
+    var c = code.substr(i, 1);
+    if (c == "F") {
+      // drawline
+      var p2 = t.dir.clone().add(t.pos);
+      //draw2D.line(t.pos, p2);
+      lines.push([t.pos.clone(), p2]);
+      t.pos = p2;
+    } else if (c == "f") {
+      // drawline
+      var p2 = t.dir.clone().mul(0.5).add(t.pos);
+      //draw2D.line(t.pos, p2);
+      lines.push([t.pos.clone(), p2]);
+      t.pos = p2;
+    } else if (c == "+") {
+      // turn turtle:
+      t.dir.rotate(t.spin * angle1);
+    } else if (c == "-") {
+      // turn turtle:
+      t.dir.rotate(-t.spin * angle1);
+    } else if (c == ">") {
+      // turn turtle:
+      t.dir.rotate(t.spin * angle2);
+    } else if (c == "<") {
+      // turn turtle:
+      t.dir.rotate(-t.spin * angle2);
+    } else if (c == "|") {
+      // mirror turtle:
+      var t1 = turtle_clone(t);
+      // flip it around:
+      t1.spin = -t1.spin;
+      var code1 = code.substr(i + 1);
+      turtle_develop(t1, code1, lines);
+    } else if (c == "=") {
+      // flip it around:
+      var t1 = turtle_clone(t);
+      t1.dir.negate();
+      var code1 = code.substr(i + 1);
+      turtle_develop(t1, code1, lines);
+    }
   }
-}	
-
-// initialize a population:
-for (var i=0; i<initial_population_size; i++) {
-  agents.push(agent_new());
 }
 
-// implement the locomotion model:
-function agent_locomotion(a) {
-  // limit to 0..1 range (no backpedaling):
-  a.wheel_rate.clip(1); 
-  // convert wheel rates to velocity:
-  var steer = a.wheel_rate[0] - a.wheel_rate[1];
-  a.dir += steer * max_steer;
-  var speed = (a.wheel_rate[0] + a.wheel_rate[1]) * 0.5;
-  var vel = vec2.fromPolar(speed * max_speed, a.dir);
-  // compute acceleration, as force applied
-  // subtract this from energy store as effort/work done
-  var force = a.vel.sub(vel).mag() * a.mass;
-  a.energy -= force;
-  // update velocity:
-  a.vel = vel;
-  // apply to position:
-  a.pos.add(a.vel).wrap(1);
-}
+var demo = [
+  "=FFF",
+  "+FFFFFF",
+  "F+FFFFFF",
+  "FFFFFF+F",
+  "=+FFFF+FF",
+  "+=FFFF+FF",
+  "|+FFFFFF",
+  "F+F+F+F+F+F",
+];
 
-function agent_eating(a) {
-	// eating:
-	var f = Math.max(0, food.sample(a.pos));
-    // remove from world:
-    food.deposit(-f, a.pos);
-    // add to agent:
-    a.energy += f * digestion_efficiency;
+function reset() {
+  var popsize = 20; //demo.length+6;
+  pop = [];
+  for (var i = 0; i < popsize; i++) {
+    var g = demo[i];
+    if (g == undefined) {
+      g = "";
+      for (var j = 0; j < 20; j++) {
+        g += alphabet[random(alphabet.length)];
+      }
+    }
+    var a = {
+      // world-space:
+      pos: new vec2(random(), random()),
+      //pos: new vec2((i + 0.5) / popsize, 0.5),
+      vel: new vec2(),
+      acc: new vec2(),
+      dir: Math.PI * 2 * random(),
+      // object-space:
+      lines: [], // all the segments
+      // adaptive terms to keep the shape centered:
+      recenter: new vec2(),
+      realign: new vec2(1, 0),
+      // non-physical:
+      genome: g
+    };
+    pop.push(a);
+    turtle_develop(turtle, a.genome, a.lines);
+  }
 }
+reset();
 
-// detect the environment:
-function agent_sensing(a) {
-  // get sensor locations in world-space:
-  var sensor1 = new vec2(sensor_size, sensor_size).mul(a.size).rotate(a.dir).add(a.pos);
-  var sensor2 = new vec2(sensor_size, -sensor_size).mul(a.size).rotate(a.dir).add(a.pos);
-  
-  // get food concentration at these locations:
-  a.sensor[0] = food.sample(sensor1);
-  a.sensor[1] = food.sample(sensor2);
-  a.food = food.sample(a.pos);
-}
- 
-// decision-making:
-function agent_process(a) {
-  // TODO: this should be genetically-determined
-  // TODO: limit *change* of wheel rates?
-  //a.wheel_rate.set( Math.sin(now), Math.cos(now * 3));
-  var v1 = 1-a.food;
-  var v2 = (a.sensor[1] - a.sensor[0])*-1;
-  a.wheel_rate[0] = 0.5+a.sensor[0]*2;
-  a.wheel_rate[1] = 0.5+a.sensor[1]*2;
-}
+function geno_child(parent) {
+  var g = parent.genome;
 
+  if (random() < 0.1) {
+    // reshuffle:
+    var cut0 = random(g.length);
+    var cut1 = random(g.length);
+    var a = g.slice(0, cut0);
+    var b = g.slice(cut1);
+    g = b + a;
+  } else {
+    // mutate one gene:
+    var c = alphabet[random(alphabet.length)];
+    var cut = random(g.length);
+    g = g.substring(0, cut) + c + g.substring(cut + 1);
+  }
+  return g
+}
 
 function update() {
-  // get the total energy in the system:
-  var energy = food.sum();
-  for (var a of agents) {
-  	energy += a.energy;
-  }
-  write("system energy", energy);
-  
-  // re-energize?
-  // if total system energy is low, put some back in:
-  energy_deficit = max_world_energy - energy;
-  //food.add(energy_deficit/(dim*dim));
+  angle1 = Math.PI / 2 * Math.sin(now);
+  angle2 = Math.PI / 8 * (1 + Math.cos(4 * now));
 
-  // run a CA that can redistribute this energy:
-/*
-  var tmp = food_back;
-  food_back = food;
-  food = food_back;
-  */
-  
-  // simulation code here
-  var i = agents.length;
-  while (i--) {	
-  	  var a = agents[i]; 
-      a.age += dt;
-      a.energy -= metabolism_cost * a.mass;
+  for (var a of pop) {
+    var lines = [];
+    turtle_reset(turtle);
+    turtle.pos.set(a.recenter);
+    turtle.dir.set(a.realign);
+    turtle_develop(turtle, a.genome, lines);
+
+    var recenter = new vec2();
+    var realign = new vec2();
+    var mass = 0;
+    var rdiv = 0;
+    for (var i = 0; i < lines.length; i++) {
+      // get the line points:
+      var next = lines[i];
+      var n0 = next[0];
+      var n1 = next[1];
+      var n = n1.clone().sub(n0);
+      var mn = n.len();
+
       
-      agent_sensing(a);
-      agent_process(a);
-      
-      agent_eating(a);
-      agent_locomotion(a);
-      
-      if (a.energy > 0) {
-      	if (a.energy > reproduction_threshold) {
-      		if (agents.length < max_population) {
-				// give birth!
-				var child = agent_new();
-				// right next to us:
-				child.pos = a.pos.clone();
-				child.hue = wrap(a.hue + 0.1*(random()-0.5), 1);
-				// share energy:
-				a.energy *= 0.25;
-				child.energy = a.energy;
-				// add to new population:
-				agents.push(child);
-			} else {
-				//write("too many agents!");
-			}
-      	}
+      // segments behind the center have opposing influence:
+      if (n1[0] - a.recenter[0] < 0) {
+        realign.sub(n);
       } else {
-      	// dead:
-      	agents.splice(i, 1);
+        realign.add(n);
       }
+      // simplest center of mass
+      recenter.add(
+        n0.clone().add(n1).mul(mn*0.5)
+      );
+      mass += mn;
+    }
+    // adaptive recentering:
+    recenter.mul(-0.25 / mass);
+    a.recenter.add(recenter);
+    // adaptive realignment:
+    realign.div(mass);
+    var turn = realign.angle();
+    turn = sign(turn) * Math.min(Math.abs(turn), Math.PI / 8);
+    a.realign.rotate(-0.25 * turn).normalize();
+
+    // fake movement -- TODO replace with something physical:
+    a.dir += 0.01;
+    a.vel.fromPolar(agent_scale * 0.1, a.dir);
+
+    // final update:
+    a.pos.add(a.vel).wrap(1);
+    a.vel.mul(0.9); // inertia
+    a.lines = lines;
   }
-  
-  // re-seed?
-  if (agents.length < 1) {
-  	var seed = agent_new();
-  	seed.energy = 1;	// give them a good chance of surviving
-  	agents.push(seed);
-  }
-  write("population", agents.length);
 }
 
 function draw() {
-  food.draw();
+  draw2D.blend(true);
+  for (var i = 0; i < pop.length; i++) {
+    var a = pop[i];
+    write(i, a.genome);
 
-  for (var a of agents) {
     draw2D.push()
       .translate(a.pos)
       .rotate(a.dir)
-      .scale(a.size);
-    // use hue, saturation, lightness to show state:
-    draw2D.hsl(a.hue, a.energy, 0.5)
-      .triangle();
-    // sensor (shows current state by color)
-    draw2D.hsl(a.hue, a.sensor[0], 0.5)
-  	  .circle([sensor_size, sensor_size], 0.5);
-    draw2D.hsl(a.hue, a.sensor[1], 0.5)
-  	  .circle([sensor_size,-sensor_size], 0.5);
+      .scale(agent_scale)
+
+    // background:
+    draw2D.color("white", 0.5).circle(0, 0, 10);
+    // show direction:
+    draw2D.color("red").line([0, 0], [10, 0]);
+
+    //draw2D.color("green").line([0, 0], a.realign.clone().mul(10));
+
+    draw2D.color("white");
+    for (var l of a.lines) {
+      draw2D.line(l[0], l[1]);
+    }
     draw2D.pop();
   }
 }
 
 function mouse(e, p) {
-	if (e == "down") {
-		var seed = agent_new();
-		seed.pos.set(p);
-		agents.push(seed);
-	}
+  if (e == "down") reset();
 }
     </script>
   </body>
