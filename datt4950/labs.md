@@ -80,13 +80,14 @@ function draw() {
 	- [Stigmergy](http://codepen.io/grrrwaaa/pen/OMvYRg)
 	- [Ants (work in progress)](http://codepen.io/grrrwaaa/pen/pgVEdP)
 	- [Birth & death](http://codepen.io/grrrwaaa/pen/PZxrbo)
-- Evolutionary systems
+- Rewriting & evolutionary systems
+	- [Koch curve](http://codepen.io/grrrwaaa/pen/xVVpea?editors=001)
 	- [Evolving sentences](http://codepen.io/grrrwaaa/pen/yeqMYy)
 	- [Evolving math](http://codepen.io/grrrwaaa/pen/zrLZvK)
 	- [Evolving biomorphs](http://codepen.io/grrrwaaa/pen/BjvQLq?editors=001)
 	- [Evolving biomorphs (week 6)](http://codepen.io/grrrwaaa/pen/dGwWOz?editors=001)
 	- [Evolving images](http://codepen.io/grrrwaaa/pen/YwmerM?editors=001)
-	- [Random video feedback](http://codepen.io/grrrwaaa/pen/pyzJLe?editors=001)
+	- [Random video feedback](http://codepen.io/grrrwaaa/pen/pyzJLe?editors=001)	
 	
 ---
 
