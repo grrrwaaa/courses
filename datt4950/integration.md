@@ -157,7 +157,6 @@ F43aA4PtbZU1LWsmo.6oGiQn81L3TjxdaBb6sAvc3l+V2a7a6uouIuy+6M+e
 -----------end_max5_patcher-----------
 </code></pre>
 
-
 [Some more examples by Jer Stewart here](http://jerstewart.com/software.html)
 
 ## Evolutionary audio in Max/MSP using gen~
