@@ -401,6 +401,41 @@ Movement speed: 24 meters per second</p>
 <p>Normal mapping won&#39;t look as effective in VR; use &quot;Parallax mapping&quot;  or &quot;Tessellation Shader Displacement&quot; instead.</p>
 <p>Some blueprint functions under &quot;head mounted display&quot; menu in the blueprint editor</p>
 <p><a href="https://www.youtube.com/watch?v=L-uK0zIY28g">Mitch&#39;s VR tutorial</a></p>
+<h2 id="what-s-wrong-with-the-default-3rd-person-vr-in-unreal-and-how-to-fix-it">What&#39;s wrong with the default 3rd person VR in Unreal, and how to fix it</h2>
+<p><a href="https://www.youtube.com/watch?v=YU3TEu_jT6Y">Tutorial</a></p>
+<p>Need to make our own player controller &amp; camera manager classes.</p>
+<p>In project&#39;s blueprints folder:</p>
+<ul>
+<li>right click, create a new blueprint of Player Controller type, call it VRPlayerController</li>
+<li><p>right click, create a new blueprint of Player Camera Manager type, call it VRPlayerCameraManager</p>
+</li>
+<li><p>dbl-click on VRPlayerController to open the Class Defaults</p>
+<ul>
+<li>set Player Camera Manager Class to VRPlayerCameraManager</li>
+<li>compile, save, &amp; close</li>
+</ul>
+</li>
+<li><p>dbl-click on VRPlayerCameraManager  to open the Class Defaults</p>
+<ul>
+<li>check the Follow HMD Orientation option </li>
+<li>compile, save, &amp; close</li>
+</ul>
+</li>
+<li><p>dbl click on FirstPersonGameMode blueprint, open Defaults panel</p>
+<ul>
+<li>change player controller class to VRPlayerController </li>
+<li>compile, save, &amp; close</li>
+</ul>
+</li>
+<li><p>in top toolbar, under Settings choose World Settings (will open a new tab next to Details)</p>
+<ul>
+<li>In Game Mode section, change Game Mode Override to your FirstPersonGameMode blueprint</li>
+<li>Probably want to close the World Settings tab again</li>
+</ul>
+</li>
+</ul>
+<p>We can also adjust the camera location from within the main Character blueprint, and in the viewport adjust the camera&#39;s location.</p>
+<p>Also, we probably want to implement the &quot;F12 to recenter the Rift&quot; feature, <a href="https://youtu.be/2Yc_Lz-uRdU?t=107">as described here</a>.</p>
 
 	</div>
 	<footer>&copy; 2016 Graham Wakefield</footer>
