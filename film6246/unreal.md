@@ -510,3 +510,32 @@ Normal mapping won't look as effective in VR; use "Parallax mapping"  or "Tessel
 Some blueprint functions under "head mounted display" menu in the blueprint editor
 
 [Mitch's VR tutorial](https://www.youtube.com/watch?v=L-uK0zIY28g)
+
+## What's wrong with the default 3rd person VR in Unreal, and how to fix it
+
+[Tutorial](https://www.youtube.com/watch?v=YU3TEu_jT6Y)
+
+Need to make our own player controller & camera manager classes.
+
+In project's blueprints folder:
+- right click, create a new blueprint of Player Controller type, call it VRPlayerController
+- right click, create a new blueprint of Player Camera Manager type, call it VRPlayerCameraManager
+
+- dbl-click on VRPlayerController to open the Class Defaults
+	- set Player Camera Manager Class to VRPlayerCameraManager
+	- compile, save, & close
+- dbl-click on VRPlayerCameraManager  to open the Class Defaults
+	- check the Follow HMD Orientation option 
+	- compile, save, & close
+	
+- dbl click on FirstPersonGameMode blueprint, open Defaults panel
+	- change player controller class to VRPlayerController 
+	- compile, save, & close
+	
+- in top toolbar, under Settings choose World Settings (will open a new tab next to Details)
+	- In Game Mode section, change Game Mode Override to your FirstPersonGameMode blueprint
+	- Probably want to close the World Settings tab again
+	
+We can also adjust the camera location from within the main Character blueprint, and in the viewport adjust the camera's location.
+
+Also, we probably want to implement the "F12 to recenter the Rift" feature, [as described here](https://youtu.be/2Yc_Lz-uRdU?t=107).
