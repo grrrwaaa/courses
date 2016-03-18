@@ -1,22 +1,5 @@
 author = "Lu Li";
-title = "Diversity in Stable Pond Ecosystem"
-
-// replacement for setInterval:
-// (see also update() function)
-var scheduler = [];
-function updateInterval(func, ms) {
-  // convert interval to frame count
-  // (assumes update() happens every 60ms)
-  var interval = ms * 60/1000;
-  var count = 0;
-  scheduler.push(function() {
-    count++;
-    if (count > interval) {
-      count -= interval;
-      func();
-    }
-  });
-}
+title = "Pond Ecosystem"
 
 // changing these parameters can strongly affect emergent behaviour
 var max_speed = 0.004;
@@ -47,7 +30,7 @@ var cellDifTotal = 30; // Difference between previous cell total and now, postiv
 var interval = 3000; // update time for wave and seaweed and environmental control
 var addingmaker = true; // weather need to add more crab
 var chanceInheritformfather = 0.65; //chance to inherit someappearance of father
-var birthrate = 1.8; //how much energy son absord will produce a son
+var birthrate = 8; //how much energy son absord will produce a son
 var MaxValueofAgent = 100;
 //seaweed
 light.set(0.5);
@@ -103,10 +86,14 @@ function make_son() {
     vel: vec2.random(0.001),
     size: (random() + 1) / 80,
     energy: random(),
+    acceleration: new vec2(),
+    make: random() * agent2make,
+    consume: random() * ageent1consume,
     // consume: (random()-0.5)*2 * soneatmake,
-    eye: random(4),
+    eye: random(4), //eye,tail body and behavior as geno 
     tail: random(4),
-    body: random(3)
+    body: random(3),
+    behavior: random(3)
   };
   son.push(a);
   return a;
@@ -121,6 +108,7 @@ function make_agents1() {
     eye: 1,
     body: 1,
     tail: 0,
+    behavior: 1,
     consume: random() * ageent1consume
   };
   agents1.push(a);
@@ -144,8 +132,7 @@ var agents = [];
 // some obstacles:
 var obstacles = [];
 //seet the seeweed positon change evey 2 s
-//setInterval(radomPos, interval);
-updateInterval(radomPos, interval);
+setInterval(radomPos, interval);
 
 function make_agent() {
   var a = {
@@ -179,67 +166,64 @@ function make_obstacle() {
 for (var i = 0; i < 5; i++) make_obstacle();
 
 //another agent behavior squre two eyes
-function agents1_behavior() {
-  var i = agents1.length;
-  while (i--) {
-    // get world-space locations of my eyes:
-    // eat the seaweed
-    //
-    a = agents1[i];
-    var f = light.sample(a.pos);
-    // sanity check
-    f = Math.max(f, 0);
-    // remove from field
-    light.deposit(-f, a.pos);
-    a.energy += f * 0.2;
+function agents1_behavior(a) {
+  // get world-space locations of my eyes:
+  // eat the seaweed
+  //
+  var f = light.sample(a.pos);
+  // sanity check
+  f = Math.max(f, 0);
+  // remove from field
+  light.deposit(-f, a.pos);
+  a.energy += f * 0.2;
 
-    if (a.energy > 2) {
-      // console.log("energy",a.energy);
-      a.energy = a.energy * 0.1;
-      var temp = make_son();
-      temp.pos = a.pos.clone();
-      //same eyes inherit from father
-      if (random() < chanceInheritformfather) {
-        temp.eye = a.eye;
-      }
-      //same body inherit from father
-      if (random() < chanceInheritformfather) {
-        temp.body = a.body;
-      }
-      //same Tail inherit from father
-      if (random() < chanceInheritformfather) {
-        temp.tail = a.tail;
-      }
+  if (a.energy > 2) {
+    // console.log("energy",a.energy);
+    a.energy = a.energy * 0.1;
+    var temp = make_son();
+    temp.pos = a.pos.clone();
+    //same eyes inherit from father
+    if (random() < chanceInheritformfather) {
+      temp.eye = a.eye;
     }
-    // lose energy due to effort of moving:
-    a.energy *= 0.95;
-    var dir = a.vel.angle();
-    var e1 = eyepos1.clone()
-      .mul(a.size)
-      .rotate(dir)
-      .add(a.pos);
-    var e2 = eyepos2.clone()
-      .mul(a.size)
-      .rotate(dir)
-      .add(a.pos);
-    // get light intensity at these locations:
-    // (relative to expected intensity)
-    var s1 = light.sample(e1) - 0.5;
-    var s2 = light.sample(e2) - 0.5;
-
-    // steering:
-    var w1 = -s1;
-    var w2 = -s2;
-
-    // locomotion:
-    var turn = w2 - w1;
-    var speed = (w1 + w2) / 10;
-    // sanity limit:
-    speed = Math.max(0.01, speed);
-
-    a.vel.rotate(turn).len(0.1 * speed);
-    a.pos.add(a.vel).wrap(1);
+    //same body inherit from father
+    if (random() < chanceInheritformfather) {
+      temp.body = a.body;
+    }
+    //same Tail inherit from father
+    if (random() < chanceInheritformfather) {
+      temp.tail = a.tail;
+    }
   }
+  // lose energy due to effort of moving:
+  a.energy *= 0.95;
+  var dir = a.vel.angle();
+  var e1 = eyepos1.clone()
+    .mul(a.size)
+    .rotate(dir)
+    .add(a.pos);
+  var e2 = eyepos2.clone()
+    .mul(a.size)
+    .rotate(dir)
+    .add(a.pos);
+  // get light intensity at these locations:
+  // (relative to expected intensity)
+  var s1 = light.sample(e1) - 0.5;
+  var s2 = light.sample(e2) - 0.5;
+
+  // steering:
+  var w1 = -s1;
+  var w2 = -s2;
+
+  // locomotion:
+  var turn = w2 - w1;
+  var speed = (w1 + w2) / 10;
+  // sanity limit:
+  speed = Math.max(0.01, speed);
+
+  a.vel.rotate(turn).len(0.1 * speed);
+  a.pos.add(a.vel).wrap(1);
+
 }
 
 function son_behavior() {
@@ -250,39 +234,52 @@ function son_behavior() {
     // sanity check
     f = Math.max(f, 0);
     // remove from field
-    light.deposit(-f, a.pos);
-    // gain energy from food:
-    a.energy += f * 0.2;
-    // die?
-    if (a.energy <= 0.1) {
-      son.splice(i, 1);
-    } else {
-      if (a.energy > birthrate) {
-        // console.log("energy",a.energy);
-        a.energy = a.energy * 0.1;
-        var temp = make_son();
-        temp.pos = a.pos.clone();
-        //same eyes inherit from father
-        if (random() < chanceInheritformfather) {
-          temp.eye = a.eye;
-        }
-        //same body inherit from father
-        if (random() < chanceInheritformfather) {
-          temp.body = a.body;
-        }
-        //same Tail inherit from father
-        if (random() < chanceInheritformfather) {
-          temp.tail = a.tail;
+    if (a.behavior != 2) {
+      light.deposit(-f, a.pos);
+      // gain energy from food:
+      a.energy += f * 0.1;
+      // die?
+
+      if (a.energy <= 0.1) {
+        son.splice(i, 1);
+      } else {
+        if (a.energy > birthrate) {
+          // console.log("energy",a.energy);
+          a.energy = a.energy * 0.1;
+          var temp = make_son();
+          temp.pos = a.pos.clone();
+          //same eyes inherit from father
+          if (random() < chanceInheritformfather) {
+            temp.eye = a.eye;
+          }
+          //same body inherit from father
+          if (random() < chanceInheritformfather) {
+            temp.body = a.body;
+          }
+          //same Tail inherit from father
+          if (random() < chanceInheritformfather) {
+            temp.tail = a.tail;
+          }
+          if (random() < 0.3) {
+            temp.behavior = a.behavior;
+          }
         }
       }
     }
-
-    // random walk
-    a.vel.rotate(0.4 * (random() - 0.5));
-    // locomotion
-    // lose energy due to effort of moving:
-    a.energy *= 0.95;
-    a.pos.add(a.vel).wrap(1);
+    if (a.behavior == 0) {
+      // random walk
+      a.vel.rotate(0.4 * (random() - 0.5));
+      // locomotion
+      // lose energy due to effort of moving:
+      a.energy *= 0.2;
+      a.pos.add(a.vel).wrap(1);
+    } else if (a.behavior == 1) {
+      agents1_behavior(a)
+    } else if (a.behavior == 2) {
+      update_agent(a);
+      move_agent(a);
+      light.deposit(a.make, a.pos);
+    }
   }
 }
 
@@ -429,8 +426,8 @@ function radomPos() {
   previusCellSum = cellSum;
   cellSum = light.sum();
   var dif = cellSum - previusCellSum;
-  //console.log(dif);
-  //console.log(cellSum);
+  console.log(dif);
+  console.log(cellSum);
   if (cellSum >= 25000) { //total resouce too much
     make_agents1();
     make_agents1();
@@ -459,7 +456,7 @@ function radomPos() {
 
   if (cellDifTotal < dif) { //intersting to change less than or more rhan  different behavior
     //need more eater
-    //write("add eater");
+    console.log("add eater");
     make_agents1();
     kill_agent();
   } else {
@@ -468,11 +465,11 @@ function radomPos() {
       var a = make_agent();
     }
     // kill_agents1(); 
-    //write("addmaker");
+    console.log("addmaker");
     if (random() > 0.8) {
       kill_son();
     } else {
-      kill_agents1(); //80% kill fater if too less food 
+      kill_agents1; //80% kill fater if too less food 
     }
   }
   //random seaweed position
@@ -484,14 +481,7 @@ function radomPos() {
 
 }
 
-var count = 0;
-
 function update() {
-  // run the scheduler:
-  for (var f of scheduler) {
-    f();
-  }
-
   // light.diffuse(light.clone(),0.01);
   // to separate passes to prevent artefacts 
   // (similar to double-buffering)
@@ -505,13 +495,13 @@ function update() {
   source.pos.add(source.vel).wrap(1);
   son_behavior();
   // some removals for water:
-
   //for (var i = 0; i < 500; i++) {
   // light.set(0, random(), random());
   //}
-
-  agents1_behavior();
-
+  var i = agents1.length;
+  while (i--) {
+    agents1_behavior(agents1[i]);
+  }
   for (var a of agents) {
     update_agent(a);
   }
