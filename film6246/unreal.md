@@ -9,7 +9,15 @@ Unreal has long been used in many "AAA" (large-scale/high-production value/high-
 
 Note: you will need [a reasonably fast PC or Mac](https://docs.unrealengine.com/latest/INT/GettingStarted/RecommendedSpecifications/#recommendedhardware) to run Unreal comfortably. Mac users will also need a mouse with at least two buttons.
 
-> If you need it, you can request a lab card to access the workstations/laptops in the Digital Media Art and Technology Learning Laboratory (ACW 102). Lab cards are $20 for a semester. The Digital Media Lab Card can be purchased in the Digital Media office, located in Rm. 232, Goldfarb Centre for Fine Arts. The office is open Monday to Friday, 8:30am-4:30pm.
+## Some quick inspiration
+
+On Youtube there are now plenty of examples of high-speed video captures of level design using game engines such as Unreal -- and [here's an interesting article speculating how the emergence of VR is adding fuel to the fire, with many examples](http://thegrue.com/how-vr-is-creating-a-new-market-and-community-for-level-design-pointless-places/) -- such as:
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/UCOww2sdsTM?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/67NToSkW2vs?rel=0" frameborder="0" allowfullscreen></iframe>
+
+We cover nearly all of the tools used in these clips during the labs.
 
 ## Getting Unreal
 
