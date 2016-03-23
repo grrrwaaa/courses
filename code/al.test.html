@@ -8,100 +8,22 @@
   <body>
     <script src="al.js"></script>
     <script>
-    
-var angle = Math.PI/3;
-var scale = 3/2;
+// in the main body of the script (not in update() or draw()!)
+// construct a new shape
+// normally vertices range between -1 and 1
+var rightangletriangle = draw2D.shape([ 
+    new vec2(-1, -1), new vec2(1, -1), new vec2(1, 1)
+]);
 
-function make_turtle() {
-	return {
-		pos: new vec2(),
-		dir: new vec2(1, 0),
-	};
-}
-function turtle_copy(t) {
-	return {
-		pos: t.pos.clone(),
-		dir: t.dir.clone(),
-	};
-}
-
-function turtle_interpret(t, str, lines) {
-	var i=0;
-	while (i<str.length) {
-		var c = str.substr(i, 1);
-		if (c == "F") {
-			var p2 = t.pos.clone().add(t.dir);
-			lines.push({ from: t.pos.clone(), to: p2.clone() });
-			t.pos = p2;
-		} else if (c == "+") {
-			t.dir.rotate(angle);
-		} else if (c == "-") {
-			t.dir.rotate(-angle);
-		} else if (c == "*") {
-			t.dir.mul(scale);
-		} else if (c == "/") {
-			t.dir.div(scale);
-		} else if (c == "[") {
-			var t1 = turtle_copy(t);
-			i += turtle_interpret(t1, str.substr(i+1), lines);
-		} else if (c == "]") {
-			return i+1;
-		}
-		i++;
-	}
-}
-
-var str = "F+F--F+F";
-var lines = [];
-
-turtle_interpret(make_turtle(), str, lines);
-
-var rules = {
-	"--": "-[/F+F--F+F]-",
-};
-
-function lsystem_interpret(str) {
-	var res = "";
-	for (var i=0; i<str.length; i++) {
-		// assume by default that the next character will not be replaced:
-		var replacement = str.substr(i, 1);
-		// but try to match a rule:
-		for (k in rules) {
-			// does this match?
-			if (k == str.substr(i, k.length)) {
-				// then get the new replacement:
-				replacement = rules[k];
-				break;	// no need to check more rules
-			}
-		}
-		res += replacement;
-	}
-	// convert result into a string:
-	return res; 
-}
-
-t = now;
-function update() {
-	if (now - t > 1) {
-		if (str.length > 1000) {
-			str = "F+F--F+F";
-		} else {
-			str = lsystem_interpret(str);
-			lines = [];
-			turtle_interpret(make_turtle(), str, lines);
-			write(str);
-			t = now;
-		}
-	}	
-}
-
+// use it in draw()
 function draw() {
-	draw2D.translate(0.5, 0.5).scale(0.04);
-	for (var l of lines) {
-		draw2D.line(l.from, l.to);
-	}
-}
+    draw2D.color("red");
+    rightangletriangle();
 
+    // it takes position/size arguments just like circle, rect, triangle:
+    draw2D.color("yellow");
+    rightangletriangle([0.5, 0.5], 0.25);
+}
     </script>
   </body>
 </html>
