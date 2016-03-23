@@ -1301,13 +1301,14 @@ draw2D.shape = function(vertices) {
 			texcoords: [],
 			indices: []
 		};
+	
 		for (var i=0; i<vertices.length; i++) {
 			var v = vertices[i];
-			if (isarraylike(v)) {
-				shape.indices.push(shape.indices.length);
-				shape.vertices.push(typeof v[0] == "number" ? v[0] * 0.5 : 0.0);
-				shape.vertices.push(typeof v[1] == "number" ? v[1] * 0.5 : 0.0);
-			}
+			
+			shape.indices.push(shape.indices.length);
+			shape.vertices.push(typeof v[0] == "number" ? v[0] * 0.5 : 0.0);
+			shape.vertices.push(typeof v[1] == "number" ? v[1] * 0.5 : 0.0);
+		
 		}
 		return shape;
 	});
