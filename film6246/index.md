@@ -96,7 +96,7 @@ Develop your first Unreal project level -- and bring it in next week (on a USB s
 
 Showing the first worlds, questions & discussion. 
 
-Engine: foliage, embedding media, event triggers, post volumes.
+Engine: foliage, embedding media, event triggers, post-processing volumes.
 
 **Tasks**
 
@@ -114,7 +114,7 @@ Project discussion.
 
 Recent VR art inspiration. 
 
-Game/not game inspiration.
+Further game/not game inspiration.
 
 Project discussion.
 
@@ -132,16 +132,12 @@ Project design presentation.
 
 Milestone foci.
 
-### 9. Mar 1
+### 9. Mar 1 - Mar 22 (four sessions)
 
-### 10. Mar 8
-
-### 11. Mar 15
-
-### 12. Mar 22
+Project development labs
 
 ### 13. Mar 29
 
-**Due Mar 30:** Final project
-
 Final project presentation & discussion, open lab.
+
+Final distribution-ready project due April 13.
