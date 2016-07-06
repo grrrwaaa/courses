@@ -306,6 +306,8 @@ Biomorphs are virtual entities that were devised by Richard Dawkins in his book 
 
 > Adding new lines (or removing them) based on simple developmental rules offered a discrete set of possible new shapes (mutations), which were displayed on screen so that the user could choose between them. The chosen mutation would then be the basis for another generation of biomorph mutants to be chosen from, and so on. Thus, the user, by selection, could steer the evolution of biomorphs. This process often produced images which were reminiscent of real organisms for instance beetles, bats, or trees. Dawkins speculated that the unnatural selection role played by the user in this program could be replaced by a more natural agent if, for example, colourful biomorphs could be selected by butterflies or other insects, via a touch sensitive display set up in a garden.
 
+[Check out this biomorphs recreation online!](http://www.mountimprobable.com)
+
 ### Turtle graphics
 
 One of the simplest ways to create a biomorph is to interpret strings as instructions for another program. The genotype is a string of symbols, the phenotype is the graphics that result. The classic example is using them as instructions for a "turtle graphics" interpreter. Our alphabet & semantics could be something like this:

@@ -241,7 +241,9 @@ See the [Simulator Sickness questionnaire](https://www.twentymilliseconds.com/ht
 
 > When we started tinkering with the DK1 back in the beginning of 2014, the VR scene was pretty much two things: first-person view horror games and rollercoasters. A lot of people saw the future of VR entertainment as that kind of experiences. - [Locomotion and the fear of VR](http://fatedblog.com/2015/08/06/locomotion-simulation-sickness-and-the-fear-of-vr/)
 
+---
 
+News: [Maybe Mayo Clinic solved VR sickness?](http://ir.net/news/virtual-reality/124021/mayo-clinic-vr-nausea/)
 
 ---
 

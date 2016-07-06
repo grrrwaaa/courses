@@ -47,6 +47,7 @@ The main panel is the 3D **viewport**, showing a preview of the world. You can n
 - Mouse-scroll to zoom in and out (not the same as moving!!)
 - Keys: with any mouse button (usually the right) held down, keys W, A, S, D, Q and E move around. 
 - Select an object by clicking on it, then press "F" to focus on it (or, double-click an item in the World Outliner)
+- Press G to turn nonvisible items (e.g. lights) on and off
 - Alt+mouse ("maya style") pivots and dollys around the focused object.
 
 On the left, the Modes panel selects different task workflows, such as placing objects, creating geometry, painting meshes, generating trees, etc. Most of the time we stay in the initial "placement mode" -- which allows us to drop basic items such as default lights into the scene.
@@ -441,9 +442,79 @@ A neat thing is to turn an existing geometry brush into a trigger. You can selec
 
 - Blueprint **timelines** are ways we can make a sequence of events happen -- and we can also make them happen in reverse. See day/night example below.
 
-### Scripting
+---
 
-- Any object that will be moved in-game must have the "movable" option set in the transform Detail (rather than "static"). 
+## Blueprints
+
+"Blueprint" is the visual scripting system in Unreal, which means you can do programming by connecting up visual flow charts rather than writing code. (You can also write C++ code if you want...)
+
+The most common places that you will do blueprints are: 
+
+1. The **Level blueprint**, where you can write behaviours that are global to a level. Typically this is where you would put mouse/keyboard etc. interactions, for example. 
+
+You can open the level blueprint from the Blueprints large tool item above the viewport.
+
+2. **Class blueprints** are ways that you can add scripted behaviour to objects that can be spawned during a game, or which you can make multiple instances of while editing. In this case the script is contained within each instance. Class blueprints therefore also have a viewport, and can have other components such as meshes embedded. They also have a Construction Script.
+
+You can open class blueprints from in the Content Browser, or by following links in the World Outliner. You can create new Class Blueprints from the Content Browser.  The benefit of using class BPs is that you can create many many instances of them throughout your level.
+
+Here's a gentle introduction:
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/8WeE4q6Ba40?list=PLZlv_N0_O1gaCL2XjKluO7N2Pmmw9pvhE" frameborder="0" allowfullscreen></iframe>
+
+Generally the form of blueprints is that there are events that can trigger functions, and there are references to objects that these functions can operate over. 
+To add a new node to a blueprint you right-click in the background of the blueprint window, or you drag a wire off one of the pins in an existing node, to pull up the menu of nodes. The nodes that you can choose may depend on what objects you have selected in the editor. 
+
+Wire colors tell you what kind of data is going down the wire. Red is booleans, green is floats, blue are objects, etc. The most important are white wires, which are execution wires -- things that actually make stuff happen. A special thing about white wires is that they can only have one destination. If you want to trigger two things from one event, you have to connect the Exec output of the event to Exec input of the first function, and then take the Exec output of that to the Exec input of the second function, and so forth. 
+
+> Although white wires are the 'execution' wires, and flow left-to-right, when they trigger an operation with non-white 'data' wire inputs, they may cause execution to run back up that path right-to-left in order to calculate the actual value at that moment.
+
+Within a class blueprint, the **construction** script is for events that fire whenever your object is created (or transformed, etc.) within the editor. This is where procedural generation can happen, for example!
+
+
+
+Some useful events
+- "EventBeginPlay" is for events that should fire when the level begins.
+- OnActorBeginOverlap / OnActorEndOverlap -- typically for collisions, typically for the player actor entering and leaving a trigger volume
+- You can also create custom events, that can then be called as if they were functions
+
+Some useful functions:
+- Branch (conditionally execute paths, depending if the condition is true or false)
+- Delay
+- Enable Input -- set true/false to enable player input (keyboard etc.) for a particular class blueprint, e.g. disabling input when not within a trigger box volume.
+
+#### Debugging
+
+You can right-click and add a breakpoint on any event, and this will call up the blueprint editor when the event triggers in-game. At that point you can step through node by node to see exactly what is happening.
+
+You can also add "Log" (or "Print") nodes in a blueprint, which will write text onto the viewport during the game.
+
+#### Variables
+
+- We can add **variables** to the blueprint using the +variable toolbar item (for example), and set the type and name of the variable. Once created, variables can be dragged into the editor (as a getter or setter reference), and used to store state within the script. Use a variable to store some data, of whatever data. Or, to send some data to another graph within the same blueprint or another blueprint. Or, to make something configurable on a class blueprint with instances. etc.
+
+- Note that Set variable nodes must also have an Exec input to take effect.
+
+- Many input and output pins can be turned into a variable -- right click the pin and select "Promote To Variable" -- set the name, compile, set the default, done!
+
+- Any variable can be made **editable** -- just tick the editable option in the details window, or, click the eyeball icon next to the variable name. This will now be editable in the details of any instance in the world. 
+
+> Vector variables can also be 3D editable, which means they can be manipulated right in the main scene editor!
+
+- A special type is the **struct** type, which combines multiple types into a single element. Dragging an out-pin of a struct type gives the option to "Break" the struct into its components.
+
+- Object type variables can be used to store references to other actors in the game. This is what you need to refer to an object that already exists in your scene.
+
+- Class type variables are only for when you need to remember the **type** of an object. It is not as often needed, but it will be needed if you want to spawn new objects that don't yet exist in the level. 
+
+- Array type variables are lists in which all members have the same type. However, the number of items can vary. These lists are indexed from 0, which means the first item is at index 0, the second item is at index 1, etc. Any variable can be turned into an array of that variable type by clicking the grid icon at the right of the *Variable Type* field. Then you can set multiple default values accordingly. You can iterate over a list using the ForEachLoop function for example. You can also Add items, Clear the array, Get items, get the LastIndex, CallFunctionForEach, etc. etc. You might also end up with arrays in your blueprint by using functions such as GetAllActorsOfClass.
+
+#### Tips
+
+- The blueprint editor is highly context sensitive. Whatever item you have selected in the viewport or content browser, relevant blueprint actions will come top in the blueprint context menu.
+
+
+- Any object that will be moved in-game must have the "movable" option set in the transform Detail (rather than "static"). **Weirdly, the same is also true for lights. So for example, if you want to turn a light on and off dynamically, you also need to set the "movable" option to true**. Yeah.
 
 A blueprint's **Construction Script** can be used to configure the properties of a blueprint, such as enabling the visibility of a light source, or even generating procedural objects, which can be configured via variables.  [A couple of simple examples here](https://www.youtube.com/watch?v=6RqDo3012YA)
 
@@ -452,6 +523,8 @@ A blueprint's **Construction Script** can be used to configure the properties of
 - Right-click any node and edit the text in the Node Comments section, or
 - Select a few nodes, Right-click and choose Create Comment from Selection, or
 - Press "C" to create a new comment box
+
+---
 
 ### Day-night cycle
 
@@ -518,6 +591,8 @@ Normal mapping won't look as effective in VR; use "Parallax mapping"  or "Tessel
 Some blueprint functions under "head mounted display" menu in the blueprint editor
 
 [Mitch's VR tutorial](https://www.youtube.com/watch?v=L-uK0zIY28g)
+
+Really useful: [UE VR settings / performance](https://www.youtube.com/watch?v=2Yc_Lz-uRdU)
 
 ## What's wrong with the default 3rd person VR in Unreal, and how to fix it
 
