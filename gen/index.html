@@ -84,6 +84,119 @@
 </ul>
 <h2 id="patchers-from-the-tacit-group-sessions-">Patchers from the Tacit Group sessions:</h2>
 <p><a href="https://github.com/grrrwaaa/courses/tree/master/gen">Download from here</a></p>
+<hr>
+<h2 id="tacit-group-sessions-2016">Tacit Group Sessions 2016</h2>
+<h3 id="what-s-new-">What&#39;s new?</h3>
+<ul>
+<li>Now there&#39;s a <a href="https://www.facebook.com/groups/gen.max.msp.maxforlive/">facebook group</a></li>
+<li>A bit of gen in the <a href="https://www.kadenze.com/courses/programming-max-structuring-interactive-software-for-digital-arts-i/info">Max Kadenze course</a> -- free admission without support</li>
+<li>Some awesome antialiased oscillators from <a href="http://www.yofiel.com/software/cycling-74-patches/antialiased-oscillators">Yofiel</a></li>
+<li>Other examples...</li>
+</ul>
+<hr>
+<h3 id="gibberwocky">Gibberwocky</h3>
+<p>Gibberwocky integrates the Ableton Live digital audio workstation with a browser-based textual coding environment derived from the Gibber project. The live-coding interface emphasizes sequencing of events and parameter changes as opposed to audio synthesis, but also affords rapid construction of audio graphs to modulate any parameter in Ableton Live with much greater resolution than is typically found in live-coding systems outputting MIDI. </p>
+<p><a href="https://github.com/charlieroberts/gibberwocky">Grab it from here</a></p>
+<h4 id="basic-demo-">Basic demo:</h4>
+<ul>
+<li>Put a <code>gibberwocky.amxd</code> MIDI effect onto the instrument track you want to live code</li>
+<li>Start Live playing (easy to forget!)</li>
+<li>Pop open the Browser window (the <code>Browser</code> button)</li>
+<li>There&#39;s some demo code in there which will trigger notes (or drums on an Impulse instrument)</li>
+<li><code>alt-enter</code> to execute block</li>
+<li><code>ctrl-enter</code> to execute line or selection</li>
+<li><code>ctrl-.</code> to stop all running sequencers</li>
+</ul>
+<p>The end-user programming language for Gibberwocky is JavaScript, and its API is derived from abstractions for musical programming found in the online Gibber environment. The API focuses on creating and manipulating musical patterns that are combined into musical sequences; these sequences schedule output to devices in the current Ableton Live set. A small set of methods can be sequenced to generate MIDI output:</p>
+<ul>
+<li>note - note can accept strings providing note names, accidentals, and octaves (such as ‘c4&#39; or ‘Fbb5&#39;) or scale positions into a global scale object (0 would indicate the root of the current global scale)</li>
+<li>chord - output a cluster of notes simultaneously, notated by either a string indicating root and quality (such as C#dim7) or an array of integers indicating zero-indexed indices in the current global scale object. For example, given a current global scale of C Major, the chord description [0,2,4,6] would indicate a C major-7th chord (root, third, fifth and seventh).</li>
+<li>midinote - output a note message using a MIDI pitch (0–127) and the current velocity and duration</li>
+<li>midichord - output a cluster of notes simultaneously, notated as an array of MIDI pitches. </li>
+<li>velocity - set the velocity of subsequently outputted notes</li>
+<li>duration - set the duration of subsequently outputted notes</li>
+</ul>
+<p>These methods can be easily sequenced by appending calls to .seq after their name. The two arguments to seq specify a pattern of values to output, and a pattern of timings. Below are examples of creating sequences:</p>
+<pre><code>// repeat the note c4 every quarter note
+this.note.se<span class="hljs-string">q( 'c4', 1/4 )</span>
+
+// repeat an upward series of notes, alternating between quarter <span class="hljs-keyword">and</span> eighth notes
+this.note.se<span class="hljs-string">q( [ 0, 2, 4, 6 ], [ 1/4, 1/8 ] )</span>
+</code></pre><p>To control a different track:</p>
+<pre><code>// tracks count from <span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>...
+tracks[<span class="hljs-number">1</span>].note.se<span class="hljs-string">q( [0, 1, 3, 4].rnd()</span>, [<span class="hljs-number">1</span>/<span class="hljs-number">8</span>, <span class="hljs-number">1</span>/<span class="hljs-number">16</span>] )
+</code></pre><p>Arbitrary JavaScript functions can be used to generate either the output or the scheduling for any call to .seq. There
+are also convenience functions for randomization:</p>
+<pre><code>// randomly <span class="hljs-keyword">select</span> an <span class="hljs-keyword">output</span> <span class="hljs-keyword">of</span> <span class="hljs-number">0</span>,<span class="hljs-number">3</span>, <span class="hljs-keyword">or</span> <span class="hljs-number">5</span> every <span class="hljs-keyword">quarter</span> note
+this.note.seq( [ <span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span> ].rnd(), <span class="hljs-number">1</span>/<span class="hljs-number">4</span> )
+
+// Randomly <span class="hljs-keyword">choose</span> an <span class="hljs-built_in">integer</span> <span class="hljs-keyword">between</span> <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> <span class="hljs-number">15</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">index</span> the <span class="hljs-keyword">global</span> scale 
+// Randomly <span class="hljs-keyword">trigger</span> <span class="hljs-keyword">output</span> <span class="hljs-keyword">using</span> timings <span class="hljs-keyword">of</span> either a <span class="hljs-number">1</span>/<span class="hljs-number">2</span>, <span class="hljs-number">1</span>/<span class="hljs-number">4</span>, <span class="hljs-keyword">or</span> <span class="hljs-number">1</span>/<span class="hljs-number">8</span> note 
+this.note.seq( Rndi( <span class="hljs-number">0</span>, <span class="hljs-number">15</span> ), [ <span class="hljs-number">1</span>/<span class="hljs-number">2</span>, <span class="hljs-number">1</span>/<span class="hljs-number">4</span>, <span class="hljs-number">1</span>/<span class="hljs-number">8</span> ].rnd() )
+</code></pre><p>Multiple, independent sequences can be created to call a particular method by appending a unique ID number to the end of a call to .seq; if no number is appended, the default ID is 0. The example below creates independent melodic lines creating a polyrhythmic texture:</p>
+<pre><code>this.note.se<span class="hljs-string">q( [ 2,4,6,5,3 ], 1/8 )</span> // default id <span class="hljs-comment">#0 </span>
+this.note.se<span class="hljs-string">q( [ 7,9 ], 1/6, 1 )</span> // id <span class="hljs-comment">#1 </span>
+this.note.se<span class="hljs-string">q( [ 11,3,14,5,16 ], 1/5, 2 )</span> // id <span class="hljs-comment">#2</span>
+</code></pre><p>Each sequence is stored as an array-indexed property of the method it is sequencing; the above example creates sequences at <code>this.note[0]</code>, <code>this.note[1]</code>, and <code>this.note[2]</code>. Independent access to each of these sequences enables them to be selectively started and stopped, and also provides a reference for pattern manipulation. </p>
+<p>Transformations to patterns can also be easily sequenced in Gibberwocky, enabling performers / composers to treat patterns in a serialist or evolutionary fashion, and live coders to tersely express complex sequences of musical output that vary over time. For any given sequence, the scheduling information is stored in its timings pattern, while the output is stored in its values pattern.</p>
+<pre><code>this<span class="hljs-selector-class">.note</span><span class="hljs-selector-class">.seq</span>( [ <span class="hljs-number">0</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span>, <span class="hljs-number">9</span>, <span class="hljs-number">8</span>, <span class="hljs-number">7</span> ], <span class="hljs-number">1</span>/<span class="hljs-number">8</span> ) <span class="hljs-comment">// a basic pattern of notes </span>
+this<span class="hljs-selector-class">.note</span>[<span class="hljs-number">0</span>]<span class="hljs-selector-class">.values</span><span class="hljs-selector-class">.transpose</span>( <span class="hljs-number">1</span> ) <span class="hljs-comment">// transpose values by +1</span>
+this<span class="hljs-selector-class">.note</span>[<span class="hljs-number">0</span>]<span class="hljs-selector-class">.values</span><span class="hljs-selector-class">.transpose</span><span class="hljs-selector-class">.seq</span>( [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,-<span class="hljs-number">2</span>], <span class="hljs-number">1</span> ) <span class="hljs-comment">// sequence transpositions to occur each measure </span>
+this<span class="hljs-selector-class">.note</span>[<span class="hljs-number">0</span>]<span class="hljs-selector-class">.values</span><span class="hljs-selector-class">.rotate</span><span class="hljs-selector-class">.seq</span>( <span class="hljs-number">1</span>,<span class="hljs-number">1</span> ) <span class="hljs-comment">// rotate the pattern every measure</span>
+</code></pre><p>In addition to programming patterns, Gibberwocky comes with a number of pattern generators built-in, such as an arpeggiator (<code>Arp</code>) and a Euclidean rhythm generator (<code>Euclid</code>). These enable the quick generation of more complex patterns that are still subject to all the diverse pattern transformations that Gibberwocky offers. As a higher-level temporal construct, Gibberwocky provides a <code>Score</code> object enabling programmers to place functions on a timeline that will automatically be executed. The Score object can be started, stopped, rewound and paused at will; by default these actions occur in sync with the transport in Ableton Live. A step-sequencer, <code>Steps</code>, provides a quick way to sequence drum beats and other polyrhythmic patterns. </p>
+<p>Although there are Ableton Live and Max For Live plugins that possess similar functionality, the patterns that these plugins create cannot typically be manipulated algorithmically. For example, after the Euclid function generates a Gibberwocky pattern, that pattern can easily be transformed over time; this is also true for patterns generated by the Arp and Steps objects. This enables users to easily define morphing patterns and avoid static repetition.</p>
+<pre><code>a = Steps({
+  [<span class="hljs-number">60</span>]: <span class="hljs-string">'3.3f..4..8.5...f'</span>,
+  [<span class="hljs-number">62</span>]: <span class="hljs-string">'7.9.f4.....6f...'</span>,
+  [<span class="hljs-number">64</span>]: <span class="hljs-string">'........7.9.c..d'</span>,
+  [<span class="hljs-number">65</span>]: <span class="hljs-string">'..6..78..b......'</span>,
+  [<span class="hljs-number">67</span>]: <span class="hljs-string">'.f..3.........f.'</span>,  
+  [<span class="hljs-number">71</span>]: <span class="hljs-string">'e.a.e.a.e.a.a...'</span>,  
+  [<span class="hljs-number">72</span>]: <span class="hljs-string">'..............e.'</span>,
+})
+
+// rotate one pattern in step sequencer
+// every measure
+a[<span class="hljs-number">71</span>].rotate.se<span class="hljs-string">q( 1,1 )</span>
+
+// <span class="hljs-keyword">reverse</span> all steps <span class="hljs-keyword">each</span> measure
+a.<span class="hljs-keyword">reverse</span>.se<span class="hljs-string">q( null, 2 )</span>
+</code></pre><p>A list of all parameters for every device and track in an Ableton Live set,  each with a unique identifier, is accessible from within the code editors to assign values to parameters of Ableton Live devices, and to easily sequence them, as shown below. Note that Ableton Live parameters expect to receive values in the range {0,1}, which will be automatically mapped to their actual ranges; this makes it easy to re-use code for different parameters.</p>
+<pre><code>// store a reference to the impulse device on the plugin's track
+impulse = this.devices['Impulse 606']
+
+// <span class="hljs-keyword">set</span> the <span class="hljs-keyword">value</span> <span class="hljs-keyword">of</span> <span class="hljs-keyword">Global</span> <span class="hljs-keyword">Time</span> property, which temporally stretches / compresses <span class="hljs-keyword">sample</span> playback <span class="hljs-keyword">using</span> 
+// granular techniques. All Ableton Live <span class="hljs-keyword">parameters</span> expect a <span class="hljs-keyword">value</span> <span class="hljs-keyword">in</span> the <span class="hljs-keyword">range</span> <span class="hljs-keyword">of</span> {<span class="hljs-number">0</span>,<span class="hljs-number">1</span>},
+// which <span class="hljs-keyword">is</span> automatically mapped <span class="hljs-keyword">to</span> their <span class="hljs-built_in">real</span> <span class="hljs-keyword">range</span>.
+impulse[‘<span class="hljs-keyword">Global</span> <span class="hljs-keyword">Time</span><span class="hljs-string">']( .25 )
+
+//sequence the same property
+impulse['</span><span class="hljs-keyword">Global</span> <span class="hljs-keyword">Time</span><span class="hljs-string">'].seq( [.1, .25,.5,.75, .9], [1/4,1/2] )</span>
+</code></pre><p>The primitive functions and operators supported by gen~ have JavaScript representations in Gibberwocky. These functions can easily be combined to create graphs for modulation. For example, in the following code slithy returns a graph that represents the absolute value of an 8Hz sine wave:</p>
+<pre><code>slithy = abs(<span class="hljs-name">cycle</span>(<span class="hljs-number">8</span>))
+</code></pre><p>This is translated fairly directly into equivalent textual code for gen~, however any numeric arguments are replaced with named param objects so that they can be readily modified and sequenced after creation:</p>
+<pre><code><span class="hljs-comment">// the gen~ expression language equivalent of the above Gibberwocky code: Param p0(8);</span>
+out1 = <span class="hljs-keyword">abs</span>(cycle(p0))<span class="hljs-comment">;</span>
+</code></pre><p>A few additional functions can be used in the graph that expand into more complex gen~ code, such as the <code>beats(n)</code> function, which produces a ramp synchronized to a multiple (or division) of Ableton Live&#39;s meter. In the example below, we assume that an instance of the Gibberwocky plugin has been placed on a track in front of an instance of Ableton Live&#39;s &quot;Impulse 606&quot; sample playback device. We assign an LFO (low frequency oscillator) to control the transpose parameter of this device, which controls the pitch of sample playback via granular synthesis techniques. Finally, we sequence the LFO using the same syntax previously discussed in this section:</p>
+<pre><code>// store a reference to the impulse device
+impulse = this.devices['Impulse 606']
+
+// <span class="hljs-keyword">create</span> a <span class="hljs-keyword">function</span> that outputs a ramp <span class="hljs-keyword">in</span> the <span class="hljs-keyword">range</span> {<span class="hljs-number">0</span>,<span class="hljs-number">1</span>} <span class="hljs-keyword">at</span> <span class="hljs-number">0.15</span>Hz <span class="hljs-keyword">and</span> <span class="hljs-keyword">store</span> a <span class="hljs-keyword">reference</span>
+gyre  = phasor( <span class="hljs-number">.15</span> )
+
+// lfo() accepts frequency, amplitude (<span class="hljs-keyword">defaults</span> <span class="hljs-keyword">to</span> <span class="hljs-number">1</span>) <span class="hljs-keyword">and</span> bias (<span class="hljs-keyword">defaults</span> <span class="hljs-keyword">to</span> <span class="hljs-number">.5</span>) arguments 
+// <span class="hljs-keyword">create</span> a <span class="hljs-keyword">compound</span> parameter modulator <span class="hljs-keyword">using</span> our previous ramp <span class="hljs-keyword">function</span>
+gymble = lfo( <span class="hljs-number">2</span>, <span class="hljs-number">0.5</span>, gyre )
+
+// assign the modulator <span class="hljs-keyword">to</span> the <span class="hljs-keyword">global</span> transposition parameter <span class="hljs-keyword">of</span> the Impulse device
+impulse[<span class="hljs-string">'Global Transpose'</span>]( gymble )
+
+// <span class="hljs-keyword">sequence</span> the <span class="hljs-keyword">first</span> parameter <span class="hljs-keyword">of</span> the <span class="hljs-keyword">cycle</span> <span class="hljs-keyword">function</span> <span class="hljs-keyword">in</span> our lfo, which corresponds <span class="hljs-keyword">to</span> its frequency
+gyre[<span class="hljs-number">0</span>].seq( [ <span class="hljs-number">.1</span>, <span class="hljs-number">.5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span> ], <span class="hljs-number">1</span> )
+</code></pre><p>Of course LFOs can also be created that are far more complex than what is typically provided by a DAW – to the point where they approach the complexity of simple synthesizers:</p>
+<pre><code class="lang-js">vorpal = mod(<span class="hljs-name">add</span>(<span class="hljs-name">mul</span>(<span class="hljs-name">noise</span>(), lfo(<span class="hljs-number">1</span>, <span class="hljs-number">0.01</span>, <span class="hljs-number">0.01</span>)), max(<span class="hljs-name">beats</span>(<span class="hljs-number">2</span>), mul(<span class="hljs-name">lfo</span>(<span class="hljs-number">2</span>, <span class="hljs-number">0.5</span>, lfo(<span class="hljs-number">8</span>)),<span class="hljs-number">2</span>))),<span class="hljs-number">1</span>)
+</code></pre>
+<p>The list of supported gen~ operators currently includes: <code>&#39;noise&#39;, &#39;phasor&#39;, &#39;cycle&#39;, &#39;beats&#39;, &#39;lfo&#39;, &#39;abs&#39;,&#39;acos&#39;,&#39;acosh&#39;,&#39;asin&#39;,&#39;asinh&#39;,&#39;atan&#39;,&#39;atan2&#39;,&#39;atanh&#39;,&#39;cos&#39;,&#39;cosh&#39;,&#39;degrees&#39;, &#39;fastcos&#39;,&#39;fastsin&#39;,&#39;fasttan&#39;,&#39;hypot&#39;,&#39;radians&#39;,&#39;sin&#39;,&#39;sinh&#39;,&#39;tan&#39;,&#39;tanh&#39;, &#39;min&#39;,&#39;max&#39;,&#39;add&#39;,&#39;sub&#39;,&#39;mul&#39;,&#39;div&#39;,&#39;rdiv&#39;,&#39;mod&#39;,&#39;rsub&#39;,&#39;rmod&#39;,&#39;absdiff&#39;, &#39;and&#39;,&#39;or&#39;,&#39;gt&#39;,&#39;eq&#39;,&#39;eqp&#39;,&#39;gte&#39;,&#39;gtep&#39;,&#39;gtp&#39;,&#39;lt&#39;,&#39;lte&#39;,&#39;ltep&#39;,&#39;ltp&#39;,&#39;neq&#39;, &#39;step&#39;, &#39;rate&#39;,</code></p>
 
 	</div>
 	<footer>&copy; 2016 Graham Wakefield</footer>
