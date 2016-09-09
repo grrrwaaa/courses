@@ -71,7 +71,6 @@ Pr&eacute;cis, Chapter 1, [Reality is Broken. Jane McGonigal. 2001](http://janem
 
 ![Mario Runner](http://i.kinja-img.com/gawker-media/image/upload/s--9tFMzc-3--/c_fit,fl_progressive,q_80,w_636/18zn2cbev4oycjpg.jpg)
 
-
 Erik Zimmerman's article [on Kotaku](http://kotaku.com/manifesto-the-21st-century-will-be-defined-by-games-1275355204), formed as a manifesto, argues for games as the defining medium of the current century:
 
 > The last century's media was based on information communication: linear, often unidirectional; creating bureaucratic systems. This century's media is non-linear, systemic, modular, participatory, customizable, playful. Environmental: immersive, inhabitable, explorable. Complex systems thinking. 
@@ -157,6 +156,10 @@ A space exploration game featuring 18,446,744,073,709,551,616 procedurally-gener
 > “There’s nothing more cool and sci-fi than VR and a big procedural universe. I think that, for the people who want to just explore, and even for the space combat and things like that, it would be a good fit. Let’s put it that way.” -[Sean Murray, creator of No Man’s Sky, 2015](http://www.australianetworknews.com/no-mans-sky-release-oculus-rift-project-morpheus-new-trailer-ps4/)
 
 [Detailed interview/history](https://killscreen.com/articles/the-birth-of-no-mans-sky/)
+
+However... many fans felt that the game was over-hyped, and the result contained [far less than was originally promised](https://www.reddit.com/r/NoMansSkyTheGame/comments/4y046e/wheres_the_nms_we_were_sold_on_heres_a_big_list/). Here's one of the more interesting worlds discovered in the first few weeks:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/J9iN6T0v__8" frameborder="0" allowfullscreen></iframe>
 
 ### Portal
 
@@ -261,6 +264,17 @@ Examples of the exploration of physics simulation for the sheer pleasure of it.
 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/gblvOhnv2k0?rel=0" frameborder="0" allowfullscreen></iframe>
 
+
+### Naissancee
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/uDSi1-lACNk?rel=0" frameborder="0" allowfullscreen></iframe>
+
+Made with Unreal. Featuring soundtrack composed by Pauline Olivieros, renowned since the 1960's. 
+
+Inspired by Tsutomu Nihei's famous [Blame!](https://en.wikipedia.org/wiki/Blame!) manga of endless corridors. 
+
+Another Blame-inspired game that looks interesting [in development here](http://bac9.tumblr.com). Here's [his project blueprint](http://imgur.com/gwdkMgg).
+
 ----
 
 The Vanishing of Ethan Carter
@@ -290,10 +304,6 @@ Technolust
 Mind: Path to Thalamus
 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/tBHO77OeB0M?rel=0" frameborder="0" allowfullscreen></iframe>
-
-Naissancee
-
-<iframe width="640" height="360" src="https://www.youtube.com/embed/uDSi1-lACNk?rel=0" frameborder="0" allowfullscreen></iframe>
 
 A Light in Chorus
 

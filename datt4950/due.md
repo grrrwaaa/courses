@@ -28,7 +28,7 @@ It will ask for:
 
 **Due Jan 20th**.
 
-Course grade contribution: 10%
+Course grade contribution: 15%
 
 ---
 
@@ -53,10 +53,7 @@ It will ask for:
 - A description of the **technical realization**. (Perhaps you tried a few different algorithms until it worked as expected?) If you were inspired by another system, mention it.
 - Ideas for possible **future extensions** of the project.
 
-**Due Feb 3rd**.
-
-Course grade contribution: 10%
-
+Course grade contribution: 15%
 
 ---
 
@@ -72,25 +69,7 @@ Otherwise, submission details remain as before.
 
 [Submit via this online form.](https://docs.google.com/forms/d/1Ej_SZ_nnZ-FiGrUV1B3ot4jxhEWMX1ii0JQd7bWiEBs/viewform)
 
-**Due Mar 4th**. 
-
-Course grade contribution: 10%
-
----
-
-# Assignment IV
-
-**Final project prototype**
-
-The fourth assignment is to identify your final project concept and outline the design, and produce initial sketches (at least two) toward it. See the description below for the final project expectations.  
-
-- You should have an overall design document, outlining the motivations and inspirations, the primary goal or problem, the methods you are choosing to address them, the technologies and platforms to use, and how you will evaluate its success or failure. 
-- You should also have working prototypes of some of the components, as proofs-of-concept through which any unexpected challenges will be revealed.
-- If the project is team-based, you should identify specifically your roles. 
-
-**Due Mar 16th** -- I will visit each of you during the class to discuss the proposal and assist with progress. There will only be two weeks after this to complete.
-
-Course grade contribution: 10%
+Course grade contribution: 15%
 
 ---
 
@@ -98,11 +77,16 @@ Course grade contribution: 10%
 
 Your final project should incorporate more than one class of system, building upon previous assignments, ideas we have worked through in labs, or models that you independently researched from the reading matter or online. You are also encouraged to integrate the systems we have explored with other media systems or research-creation projects you are using from outside the class. You are encouraged to move beyond the lab starter kit and integrate your project into a more general platform if this will improve your result. You may work in teams, but roles and expectations must be clearly explained. 
 
-We will develop projects over the last few weeks of class, in order to result in significant and original pieces of work suitable for public exhibition or presentation. You will also be required to submit a short paper description (2 pages, refined from assignment IV) as well as an edited video excerpt (around 1 minute length). More details will follow shortly.
+We will develop projects over the last few weeks of class, in order to result in significant and original pieces of work suitable for public exhibition or presentation. 
 
-**Due Mar 30th -- no free extensions possible**.
+In the first phase, establish your groups and project concept, outline the design and produce initial sketches (at least two). I will visit each of you during the class to discuss the proposal and assist with progress. At this point you should have:
+- You should have an overall design document, outlining the motivations and inspirations, the primary goal or problem, the methods you are choosing to address them, the technologies and platforms to use, and how you will evaluate its success or failure. 
+- You should also have working prototypes of some of the components, as proofs-of-concept through which any unexpected challenges will be revealed.
+- If the project is team-based, you should identify specifically your roles. 
 
-Course grade contribution: 30%
+You will also be required to submit a short paper description (2 pages) as well as an edited video excerpt (around 1 minute length). 
+
+Course grade contribution: 40%
 
 ---
 

@@ -280,3 +280,9 @@ PhD research in procedural generation for games, and generative music, etc.
 Shape of the World
 
 <iframe width="720" height="480" src="https://www.youtube.com/embed/L2WqxTV-CIU?rel=0" frameborder="0" allowfullscreen></iframe>
+
+No Man's Sky
+
+> Despite the numerous problems, and disappointments with the game on launch, there are some interesting places to find.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/J9iN6T0v__8" frameborder="0" allowfullscreen></iframe>
