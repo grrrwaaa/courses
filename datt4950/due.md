@@ -26,8 +26,6 @@ It will ask for:
 - A description of the **technical realization**. (Perhaps you tried a few different algorithms until it worked as expected?) If you were inspired by another system, mention it.
 - Ideas for possible **future extensions** of the project.
 
-**Due Jan 20th**.
-
 Course grade contribution: 15%
 
 ---
