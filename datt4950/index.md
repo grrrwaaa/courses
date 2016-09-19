@@ -56,7 +56,11 @@ Content may vary from this plan according to needs and interests of students.
 
 CA variations: non-homogeneity, stochastics, asynchrony, unbounded states. Continuous, reaction-diffusion. Particle/block rule. Multi-scale systems.
 
+
 ### 3. Sep 26
+
+CA variations: non-homogeneity, stochastics, asynchrony, unbounded states. Continuous, reaction-diffusion. Particle/block rule. Multi-scale systems.
+
 
 **Due:** [Assignment I (15%)](due.html#assignment-i)
 
