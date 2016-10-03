@@ -11,6 +11,7 @@ importance: 10
 **When:** Fall 2016, Mondays 10:00 - 13:30    
 **Where:** GCFA, ACW 103   
 **Instructor:** Graham Wakefield    
+**Email:** grrrwaaa at yorku dot ca
 **Prerequisite:** LE/EECS 1030 3.0, FA/DATT 2050 3.0, or permission of course director.   
 **Website:** [http://grrrwaaa.github.io/courses/datt4950/](http://grrrwaaa.github.io/courses/datt4950/)   
 **Code materials:** [https://github.com/grrrwaaa/courses/tree/master/code](https://github.com/grrrwaaa/courses/tree/master/code)
