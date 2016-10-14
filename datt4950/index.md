@@ -69,10 +69,12 @@ CA variations: non-homogeneity, stochastics, asynchrony, unbounded states. Conti
 
 **Agent-based modelling**. Turtles and tortoises, vehicles, steering models, random walks.
 
+### 5. Oct 17
+
 Boids, subsumption architectures.   
 Agents and fields. Chemotaxis, stigmergy, social models. 
 
-### 5. Oct 17
+### 6. Oct 24
 
 **Due:** [Assignment II (15%)](due.html#assignment-ii)
 
@@ -80,11 +82,9 @@ Agents and fields. Chemotaxis, stigmergy, social models.
 
 **Evolution** (natural and artificial). Selection models, mutation models, population models. 
 
-### 6. Oct 24
+### 7. Oct 31 
 
 Evolution continued; ecology and ecosystem, aesthetic selection & biomorphs.
-
-### 7. Oct 31 
 
 Genetic programming. 
 
