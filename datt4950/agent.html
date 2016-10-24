@@ -310,10 +310,11 @@ var newagents = []<span class="hljs-comment">;</span>
     <span class="hljs-keyword">if</span> (child) newagents.push(child)<span class="hljs-comment">;        </span>
 }
 <span class="hljs-comment">// replace original</span>
-agents = []<span class="hljs-comment">;</span>
+agents = newagents<span class="hljs-comment">;</span>
 </code></pre>
 <p>Note that new children are added to <code>newagents</code>, ensuring they are visited next frame. If we added them to <code>agents</code>, they would also be included in the iterating for loop on the current frame, which could potentially lead to an infinite loop. </p>
 <hr>
+<h3 id="energy-dynamics">Energy dynamics</h3>
 <p>Agents are also exchanging energy, which may be important to model in the simulation. Possible energetic transfers include:</p>
 <ul>
 <li>Digestion. A gain in energy extracted from food that is consumed. A more elaborate simulation will distribute this process over time, rather than acting immediately upon ingestion. </li>
@@ -326,7 +327,9 @@ agents = []<span class="hljs-comment">;</span>
 <p>Each of these energetic costs is likely also multiplied by some scalar constant, such as a <code>metabolism_cost</code>, <code>locomotion_cost</code>, etc.</p>
 <blockquote>
 <p>If we are careful to enumerate <strong>all</strong> the energetic gains and losses in this way, we can count the total energy lost in the system on each frame, and make that available as an energy input to the environment on the next frame. In this way, the total energy circulating in the system should remain constant. This total energy expenditure may also be a useful indicator of the liveliness of a system.</p>
+<p>Another (perhaps less bug-prone) way is to count all the energy in the system and compare the the &#39;ideal&#39; level of energy. If there&#39;s an environmental field, you can use <code>field.sum()</code> to return a total. Then iterate the list of agents and add their energy levels too. Then expenditure is the difference of this total between frames.</p>
 </blockquote>
+<p><a href="http://codepen.io/grrrwaaa/pen/PZxrbo?editors=0010">Example</a></p>
 <!--
 
 ## Action selection systems
