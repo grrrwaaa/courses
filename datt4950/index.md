@@ -76,35 +76,34 @@ Agents and fields. Chemotaxis, stigmergy, social models.
 
 ### 6. Oct 24
 
-**Due:** [Assignment II (15%)](due.html#assignment-ii)
-
 **Quiz II** (5%)
 
-**Evolution** (natural and artificial). Selection models, mutation models, population models. 
+More on agents and environment. Vehicles again; stigmergy; life, death & resources.
 
 ### 7. Oct 31 
 
-Evolution continued; ecology and ecosystem, aesthetic selection & biomorphs.
+**Due:** [Assignment II (15%)](due.html#assignment-ii)
 
-Genetic programming. 
+**Evolution** (natural and artificial). Selection models, mutation models, population models. 
 
 ### 8. Nov 7 
 
-**Due:** [Assignment III (15%)](due.html#assignment-iii)
+Evolution continued; ecology and ecosystem, aesthetic selection & biomorphs.
+Genetic programming. 
 
 **Quiz III** (5%)
 
-**Rewriting systems and artificial chemistries**. L-Systems, Tierra, Alchemy.
-
 ### 9. Nov 14
 
-**Due:** [First drafts of final project](due.html#final-project)
+**Due:** [Assignment III (15%)](due.html#assignment-iii)
 
-Final project/portfolio assistance.
+Final project discussion.
 
-Other advanced topics.
+**Rewriting systems and artificial chemistries**. L-Systems, Tierra, Alchemy.
 
 ### 10. Nov 21
+
+**Due:** [Work-in-progress of final project](due.html#final-project)
 
 Final project/portfolio assistance.
 
