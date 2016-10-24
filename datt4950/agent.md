@@ -433,6 +433,8 @@ Each of these energetic costs is likely also multiplied by some scalar constant,
 
 > Another (perhaps less bug-prone) way is to count all the energy in the system and compare the the 'ideal' level of energy. If there's an environmental field, you can use ```field.sum()``` to return a total. Then iterate the list of agents and add their energy levels too. Then expenditure is the difference of this total between frames.
 
+[Example](http://codepen.io/grrrwaaa/pen/PZxrbo?editors=0010)
+
 <!--
 
 ## Action selection systems
