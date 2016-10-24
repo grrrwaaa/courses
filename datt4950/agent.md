@@ -416,6 +416,8 @@ Note that new children are added to ```newagents```, ensuring they are visited n
 
 ---
 
+### Energy dynamics
+
 Agents are also exchanging energy, which may be important to model in the simulation. Possible energetic transfers include:
 
 - Digestion. A gain in energy extracted from food that is consumed. A more elaborate simulation will distribute this process over time, rather than acting immediately upon ingestion. 
@@ -428,6 +430,8 @@ Agents are also exchanging energy, which may be important to model in the simula
 Each of these energetic costs is likely also multiplied by some scalar constant, such as a ```metabolism_cost```, ```locomotion_cost```, etc.
 
 > If we are careful to enumerate **all** the energetic gains and losses in this way, we can count the total energy lost in the system on each frame, and make that available as an energy input to the environment on the next frame. In this way, the total energy circulating in the system should remain constant. This total energy expenditure may also be a useful indicator of the liveliness of a system.
+
+> Another (perhaps less bug-prone) way is to count all the energy in the system and compare the the 'ideal' level of energy. If there's an environmental field, you can use ```field.sum()``` to return a total. Then iterate the list of agents and add their energy levels too. Then expenditure is the difference of this total between frames.
 
 <!--
 
