@@ -409,7 +409,7 @@ for (var a of agents) {
 	if (child) newagents.push(child);		
 }
 // replace original
-agents = [];
+agents = newagents;
 ```
 
 Note that new children are added to ```newagents```, ensuring they are visited next frame. If we added them to ```agents```, they would also be included in the iterating for loop on the current frame, which could potentially lead to an infinite loop. 
