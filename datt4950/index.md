@@ -76,11 +76,17 @@ Agents and fields. Chemotaxis, stigmergy, social models.
 
 ### 6. Oct 24
 
-**Quiz II** (5%)
-
 More on agents and environment. Vehicles again; stigmergy; life, death & resources.
 
+http://codepen.io/grrrwaaa/pen/Zpwkxw?editors=0010
+
+http://codepen.io/grrrwaaa/pen/pEGXNE?editors=0010
+
+http://codepen.io/grrrwaaa/pen/EgrYgV?editors=0010
+
 ### 7. Oct 31 
+
+**Quiz II** (5%)
 
 **Due:** [Assignment II (15%)](due.html#assignment-ii)
 
