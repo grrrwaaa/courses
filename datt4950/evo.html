@@ -202,6 +202,13 @@ population.sort(function(a, b) { <span class="hljs-keyword">return</span> b.fitn
 </code></pre>
 <p>Does it work? If not, can you think of ideas why -- and any ideas to improve it?</p>
 <p><a href="http://codepen.io/grrrwaaa/pen/yeqMYy?editors=001">Here&#39;s something like this in the editor</a>.</p>
+<blockquote>
+<p>Does it sometimes seem to get stuck? Can you suggest why? Can you think of any way to modify the mutation, evaluation, or even the genetic representation to overcome this?</p>
+</blockquote>
+<p><a href="http://codepen.io/grrrwaaa/pen/OReXaa?editors=0010">Here&#39;s a variant, using the concept of the <em>longest common substring</em> as the measure of fitness</a></p>
+<blockquote>
+<p>As an extension, can you imagine working from a much larger lexicon of words, and coming up with a fitness measure that evaluates according to how much sense a randomized sentence makes? Perhaps take a look at n-grams, and/or grammar parsing, and/or methods used in <a href="https://en.wikipedia.org/wiki/Natural_language_generation">natural language generation</a>. Or, since English syntax and semantics are pretty hard, how about generating random but syntactically correct programs?</p>
+</blockquote>
 <h2 id="a-simple-math-solver">A simple math solver</h2>
 <p>The string example was a little silly, but let&#39;s say we want to write a program (the phenotype) that can solve math problems. To start as simple as possible, we can restrict our programs to numerals and symbols of basic arithmetic:</p>
 <pre><code class="lang-javascript"><span class="hljs-variable"><span class="hljs-keyword">var</span> symbols</span> = [<span class="hljs-string">"+"</span>, <span class="hljs-string">"-"</span>, <span class="hljs-string">"*"</span>, <span class="hljs-string">"/"</span>, <span class="hljs-string">"1"</span>, <span class="hljs-string">"2"</span>, <span class="hljs-string">"3"</span>, <span class="hljs-string">"4"</span>, <span class="hljs-string">"5"</span>, <span class="hljs-string">"6"</span>, <span class="hljs-string">"7"</span>, <span class="hljs-string">"8"</span>, <span class="hljs-string">"9"</span>, <span class="hljs-string">"0"</span>];

@@ -5,7 +5,7 @@ npm install -g minify
 npm install ndarray zeros
 // etc.
 
-browserify node_modules/al.libs.js -o _site/alife/al.js && minify _site/alife/al.js 
+browserify node_modules/al.libs.js -o _site/code/al.js && minify _site/code/al.js 
 
 && rm al.js && ./push.sh
 */
