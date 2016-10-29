@@ -48,6 +48,7 @@ shuffle = function (a) {
         a[i - 1] = a[j];
         a[j] = x;
     }
+    return a;
 }
 
 // a modulo operation that handles negative n more appropriately
@@ -1392,6 +1393,107 @@ draw2D.line = (function() {
 		// apply uniforms:
 		gl.uniform4fv(draw2D_colorLocation, draw2D_chroma.gl());
 		gl.uniformMatrix3fv(draw2D_modelViewLocation, false, mat_local);
+
+		// bind shape buffers:
+		gl.bindBuffer(gl.ARRAY_BUFFER, vertices_buffer);
+		gl.enableVertexAttribArray(draw2D_positionLocation);
+		gl.vertexAttribPointer(draw2D_positionLocation, 2, gl.FLOAT, false, 0, 0);
+	
+		//gl.bindBuffer(gl.ARRAY_BUFFER, texcoords_buffer);
+		//gl.enableVertexAttribArray(draw2D_texcoordLocation);
+		//gl.vertexAttribPointer(draw2D_texcoordLocation, 2, gl.FLOAT, false, 0, 0);
+	
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indices_buffer);
+		
+		// draw shape:
+		gl.drawElements(gl.TRIANGLES, shapelength, gl.UNSIGNED_SHORT, 0);
+
+		// clean up:
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+		gl.bindBuffer(gl.ARRAY_BUFFER, null);
+		return draw2D;
+	};
+})();
+
+// cheating a bit -- we're just going to draw a rect.
+draw2D.lines = (function() {
+	var vertices_buffer = gl.createBuffer();
+	//var texcoords_buffer = gl.createBuffer();
+	var indices_buffer = gl.createBuffer();
+	var no_transform = mat3.create();
+		
+	// those will all be upvalues of the actual draw function:
+	// array here is a list of point pairs (like GL_LINES)
+	return function(points, thickness) {
+		
+		if (typeof points === "undefined") {
+			points = [ [1, 0], [0, 0] ];
+		}
+		if (typeof thickness !== "number") {
+			thickness = 1;
+		}
+		// make line thickness independent of current transform:
+		thickness *= (page_to_gl[0]*2);
+		
+		var shape = {
+			vertices: [],
+			texcoords: [],
+			indices: []
+		};
+		
+		// transform the points by the current modelView
+		for (var i=0; i+1<points.length; i+=2) {
+			var A1 = glvec2.transformMat3([], points[i], modelView);
+			var B1 = glvec2.transformMat3([], points[i+1], modelView);
+			// get the real line:
+			var AB1 = new vec2(B1[0]-A1[0], B1[1]-A1[1]);
+			
+			// create a local transformation matrix to turn a rect into a line:
+			var mat_local = mat3.create();
+			mat3.translate(mat_local, mat_local, A1);
+			mat3.rotate(mat_local, mat_local, AB1.angle());
+			mat3.scale(mat_local, mat_local, [AB1.len(), thickness]);
+		
+			var base = shape.vertices.length / 2;
+			
+			var p0 = glvec2.transformMat3([], [0, -1], mat_local);
+			var p1 = glvec2.transformMat3([], [1, -1], mat_local);
+			var p2 = glvec2.transformMat3([], [0, 1], mat_local);
+			var p3 = glvec2.transformMat3([], [1, 1], mat_local);
+			
+			shape.vertices.push(p0[0]);	shape.vertices.push(p0[1]);
+			shape.vertices.push(p1[0]);	shape.vertices.push(p1[1]);
+			shape.vertices.push(p2[0]);	shape.vertices.push(p2[1]);
+			shape.vertices.push(p3[0]);	shape.vertices.push(p3[1]);
+			
+			shape.texcoords.push(0);	shape.texcoords.push(0);
+			shape.texcoords.push(1);	shape.texcoords.push(0);
+			shape.texcoords.push(0);	shape.texcoords.push(1);
+			shape.texcoords.push(1);	shape.texcoords.push(1);
+			
+			shape.indices.push(base  );
+			shape.indices.push(base+1);
+			shape.indices.push(base+2);
+			shape.indices.push(base+2);
+			shape.indices.push(base+1);
+			shape.indices.push(base+3);
+		}
+		
+		// apply uniforms:
+		gl.uniform4fv(draw2D_colorLocation, draw2D_chroma.gl());
+		gl.uniformMatrix3fv(draw2D_modelViewLocation, false, no_transform);
+
+		// convert these to GPU buffers:
+		gl.bindBuffer(gl.ARRAY_BUFFER, vertices_buffer);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(shape.vertices), gl.STATIC_DRAW);
+	
+		//gl.bindBuffer(gl.ARRAY_BUFFER, texcoords_buffer);
+		//gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(shape.texcoords), gl.STATIC_DRAW);
+	
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indices_buffer);
+		gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(shape.indices), gl.STATIC_DRAW);
+	
+		var shapelength = shape.indices.length;
 
 		// bind shape buffers:
 		gl.bindBuffer(gl.ARRAY_BUFFER, vertices_buffer);

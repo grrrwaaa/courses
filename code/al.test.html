@@ -17,12 +17,21 @@ var rightangletriangle = draw2D.shape([
 
 // use it in draw()
 function draw() {
-    draw2D.color("red");
-    rightangletriangle();
+    //draw2D.color("red");
+    //rightangletriangle();
 
     // it takes position/size arguments just like circle, rect, triangle:
-    draw2D.color("yellow");
-    rightangletriangle([0.5, 0.5], 0.25);
+    //draw2D.color("yellow");
+    //rightangletriangle([0.5, 0.5], 0.25);
+    
+    var lines = [];
+    for (var i=0; i<2+random(10); i++) {
+    	lines.push([random(), random()]);
+    
+    }
+    
+    draw2D.color("white");
+    draw2D.lines(lines);
 }
     </script>
   </body>
