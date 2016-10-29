@@ -257,6 +257,8 @@ Walking around a world is really counter intuitive, as you have to think about t
 
 The immersant is free to look in any direction they choose -- you need to make sure all directions are valid, potentially valuable, and that nothing essential will be missed because 'they were looking the wrong way'. 
 
+[Here's a collection of locomotion/navigation options](http://ignite-vr.com/blog/2016/09/24/locomotion-in-vr/)
+
 ### Physical devices
 
 Devices can't been seen while wearing a headset. The keyboard in particular is almost impossible to use. Use head-movement for control as much as possible, and hand-held devices otherwise, and place more interaction via in-world manipulation.

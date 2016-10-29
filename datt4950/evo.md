@@ -231,6 +231,12 @@ Does it work? If not, can you think of ideas why -- and any ideas to improve it?
 
 [Here's something like this in the editor](http://codepen.io/grrrwaaa/pen/yeqMYy?editors=001).
 
+> Does it sometimes seem to get stuck? Can you suggest why? Can you think of any way to modify the mutation, evaluation, or even the genetic representation to overcome this?
+
+[Here's a variant, using the concept of the *longest common substring* as the measure of fitness](http://codepen.io/grrrwaaa/pen/OReXaa?editors=0010)
+
+> As an extension, can you imagine working from a much larger lexicon of words, and coming up with a fitness measure that evaluates according to how much sense a randomized sentence makes? Perhaps take a look at n-grams, and/or grammar parsing, and/or methods used in [natural language generation](https://en.wikipedia.org/wiki/Natural_language_generation). Or, since English syntax and semantics are pretty hard, how about generating random but syntactically correct programs?
+
 ## A simple math solver
 
 The string example was a little silly, but let's say we want to write a program (the phenotype) that can solve math problems. To start as simple as possible, we can restrict our programs to numerals and symbols of basic arithmetic:

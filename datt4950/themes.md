@@ -251,6 +251,10 @@ Anders Hoff - [Generative Algorithms](http://inconvergent.net/generative/)
 
 > A great collection of personal experiments, some of which have become installed artworks, recreating biological behaviours. A lot of it is also available on GitHub.
 
+[Studio Otoro (Tokyo)](http://otoro.net)
+
+> Our goal is to develop curious and creative machines.
+
 Design I/O - [Connected Worlds](http://www.creativeapplications.net/openframeworks/connected-worlds-interactive-ecosystem-for-nysci-by-design-io/)
 
 > Created by Cambridge (US) based creative studio Design I/O (Theo Watson, Emily Gobeille and Nick Hardeman), Connected Worlds is a large scale immersive, interactive ecosystem developed for the New York Hall of Science. The installation is comprised of six interactive ecosystems spread out across the walls of the Great Hall and connected together by a 3000 sqft interactive floor and a 45ft high waterfall. Visitors can use physical logs to divert water flowing across the floor from the waterfall into the different environments, where children can then use their hands to plant seeds. As the different environments bloom creatures appear based on the health of the environment and the type of plants growing in it. If multiple environments are healthy creatures will migrate between them causing interesting chain reactions of behaviours.
