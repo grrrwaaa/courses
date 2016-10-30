@@ -1,5 +1,4 @@
 title = "Strange Attractor - Points"
-
 author = "Rose Zhou";
 
 var pop = [];
