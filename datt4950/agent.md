@@ -435,6 +435,11 @@ Each of these energetic costs is likely also multiplied by some scalar constant,
 
 [Example](http://codepen.io/grrrwaaa/pen/PZxrbo?editors=0010)
 
+The population can shrink and grow (safely, because the main update loop iterates backwards). But over time, energy is being lost from the world. We can calculate how much energy is active in the system by adding up the total in each field cell (by ```field.sum()```) as well as the energy stored in each agent. When this total energy level drops below our chosen carrying capacity for the world, we can then introduce energy back in, to ensure that the whole system doesn't wind down to zero. 
+
+Still, **population control** can be essential at both ends. Clearly if the population ever drops to zero, we will never see any organisms again. Methods to overcome this include preventing death, or introducing new randomly seeded organisms (perhaps out of view) at low population sizes. At the other end, a population that grows excessively large can slow down the simulation, perhaps even crash it. In theory the conservation of energy can prevent this, but in practice a hard limit may also be necessary. 
+
+
 <!--
 
 ## Action selection systems

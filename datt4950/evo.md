@@ -302,6 +302,16 @@ How would you be able to add operators such as ```Math.sin()```?
 
 What other problems could you imagine addressing, other than calculating numbers? (What kinds of problems is this method suited for?)
 
+### Tournament Selection
+
+We can continue using the *fitness-proportionate* selection as before, via stochastic universal sampling, however many systems use a different form of selection known as **tournament selection**, in which a number of individuals are chosen at random from the population to create a temporary neighbourhood set, and the fittest of this neighbourhood set is chosen as parent to create a new individual. (Or sometimes, a weighted probability veering toward the fittest in the neighbourhood set, to make it less deterministic.)
+
+In part this helps to mirror the spatial/network effects of populations, in that it is unlikely for every member of a population to meet every other; selection is made on the somewhat random subset of the population that is encountered.
+
+Selection pressure is easily adjusted by changing the tournament neighbourhood set size. If the size is larger, weak individuals have a smaller chance to be selected. 
+
+[Here's the Pi hunting example modified to use probabilistic tournament selection](http://codepen.io/grrrwaaa/pen/zrLZvK?editors=001)
+
 ---
 
 ## Aesthetic selection of biomorphs
@@ -338,30 +348,127 @@ Now we can show all members of a generation side-by-side, and use the mouse to c
 
 See this example of [evolving biomorphs](http://codepen.io/grrrwaaa/pen/BjvQLq?editors=001)
 
+[Here's a variation of the biomorphs example that displays candidates on a grid](http://codepen.io/grrrwaaa/pen/dGwWOz?editors=001)
+
 Possible extensions:
 
 - Make the fixed amounts variable over time
 - Add "bracketed systems":
 	- By adding push "[" and pop "]" symbols to save/restore graphics state (position, orientation etc.), the graphics interpreter can render branched structures such as trees and ferns. The result is further improved by reducing the length of each line according to the bracketed recursion depth.
-- Extend into *rewriting systems*, such as L-systems, by embedding *production rules* -- we will return to this later in the course.
+- Extend into [*rewriting systems*, such as L-systems, by embedding *production rules*](code.html)
 
-	- [Evolving biomorphs (week 6)](http://codepen.io/grrrwaaa/pen/dGwWOz?editors=001)
-	
+#### Examples from previous classes
+
+- [Malevich Generator by Sophie Roginsky](http://codepen.io/grrrwaaa/pen/mrZqoK?editors=0010)
+- [Strange Attractor by Rose Zhou](http://codepen.io/grrrwaaa/pen/vXqWwj?editors=0010)
+
+## Development & meta-evolution
+
+In some cases, there may be several stages of code development. The biomorphs example hints at this, and already grants built-in symmetries and modular structures as are frequently found in nature -- this is partly why we respond to them. But the developmental approach can be taken much further. Sims' evolved virtual creatures had a genotype that encoded a LISP function, which when run would produce a body shape (the developmental system), but also produced an executable function for behaviour (the neural system). That is, the genetic code produces a developmental program that produces a neural program. More generally, since we are evolving code, we may want to the genome to produce re-usable subroutines that can be used multiple times within the main phenotype program. 
+
+Think back to the turtle example, with its powerful mirroring and other duplication operators, and imagine that instead of drawing lines, it is generating more code. [Here's a variation of the biomorphs example that does just that: it generates code once rather than interpreting the genome on each frame](http://codepen.io/grrrwaaa/pen/yadVLP?editors=001) -- and this could be used as a template on which to add more behaviour than simply drawing, for example. 
+
+Another interesting result is that the developmental program could also be gradual, meaning we can model the increase in complexity of an organism from embryo to adult through the rewriting of its behavioural programs.
+
+> Taken to the most general form, it allows us to explore models in which the mechanisms of evolution are also subject to evolutionary pressures; see [Spector, Lee. "Autoconstructive evolution: Push, pushGP, and pushpop." Proceedings of the Genetic and Evolutionary Computation Conference (GECCO-2001). Vol. 137. 2001.](http://faculty.hampshire.edu/lspector/pubs/ace.pdf). This is **meta-evolution**: that the mechanisms of evolution (including development, variation, etc.) are also subject to variation and selection. After all, sexual reproduction had to be *discovered*. It turns out that some parts of our genes have evolved to be far less volatile than others, for good reason. Jurgen Schmidhuber also proposed using genetic programming (GP) to evolve GP (meta-GP), since things like chromosomes, crossover etc. are themselves phenomena that have evolved. 
+
 ---
 
-## Pause
+## Viability-based selection and ecosystemic evolution
 
-At this point, it is becoming clear that the effectiveness of evolution depends very much on both the genetic representation as well as its behaviour in producing phenotypes. If we consider the genetic representation as a *language*, then the evolutionary effectiveness depends both on the *syntax* and the *semantics*. 
+So far we have replaced entire generations at a time, but of course in the real world creatures' life spans interleave in all kinds of ways, with population booms and busts. Moreover we have rather artificially tested candidates against a pre-defined function, or against the whims of an interacting user or participant. But this isn't how nature works most of the time. As noted above, *viability-based selection* depends only on fundamental internal processes and exchanges with an environment (including other creatures of various species) to determine whether a creature can survive, and reproduce. Naturally this has led to models of ecological or ecosystemic basis.
+
+A simple starting point may be to take [the agent-based example of variable populations with energy-exchange and preservation](http://codepen.io/grrrwaaa/pen/PZxrbo?editors=0010), and add genetics. In this case viability is principally determined by energy maintenance, so we have to take extra care in modeling this well. Every action an agent takes must cost energy, and this should be proportionate to the action taken. Sprinting takes more energy than sauntering. Locomotion models can estimate energy cost from the force actually applied; which is exactly the acceleration multiplied by the mass. We can approximate this by taking the difference between current & new velocities (after all clamping) and multiplying by the organism size. It may also be wise to have a basic metabolism cost to remain alive, that perhaps may increase with size, and with age.
+
+When a new creature is created from nothing, as happens at the start of the simulation, and also as a fail-safe if the population ever dwindles away, a randomized genome must be added to the agent. When an agent spawns a child, the child also needs a genome, created by mutation of the parent's. Of course this could be extended by adding sexual reproduction, only occurring when agents meet, and implemented with crossover as well as mutation.
+
+But most importantly, parts of the genome must determine behavioural properties of the agent -- how it behaves and interacts with the world -- else there's no selection at all. (It can be useful to also modify how the agent appears graphically, but this has no effect on evolution.) 
+
+### Parametric variation
+
+A good starting point may be to have the genome modify *parameters* of the agent; for example, the amount of random walk, ranges of sensing, the reproduction threshold, thresholds of probability for selecting different actions, etc. Be careful with features like speed -- you might want to model an energetic cost to go with it for realism (and to avoid breeding supersonic agents!). 
+
+Also be careful not to oversimplify. Making a parameter of "energy efficiency" is clearly going to evolve toward maximum efficiency; there's nothing interesting about this. Things get more interesting when there are multiple constraints in play; if increasing one parameter weakens another, for example. 
+
+Similarly, a direct mapping of each gene in the genome to each parameter is likely less interesting than a more complex mapping, in which multiple processes are applied to the genome data to determine the parameters. This is exactly why the evolution of math functions was more interesting than the evolution of text: the outcome of the math function is a very complex mapping of the genes that go in. Complex enough to have surprises.
+
+Another way of achieving this complexity in the mapping is to have the parameters drive features that have non-obvious effects or that depend on other parameters. For example, one could model a swimming organism by the speed it flaps its tail, the range it flaps over, and the average direction. Only together do these three parameters produce an arc of motion. Multiple such tails can lead to very complex motions. Similarly, taking Braitenberg's vehicles model, one could imagine placing a wire between every sensor and every motor, where the evolved parameters are the amplification weights on the wires.
+
+### Adaptive constraints
+
+As organisms evolve better strategies, they can better utilize the finite energy resources of the world, and thus support greater populations. An adaptive *difficulty*, perhaps applied to the metabolism cost, or applied generally to the available energy in the world, may help keep selection pressure effective at maintaining population size. For example, we can gradually decrease the total energy in the ecosystem while populations are large, and increase it again while populations are small.
+
+Note that exactly how new energy is introduced can have quite drastic effect on the adaptive conditions -- since effectively organisms are trying to evolve strategies to be more viable, the distribution of energy in the world is the primary factor. The simplest option is to reintroduce the energy immediately, spread uniformly over the space, e.g. ```field.add(energy_deficit/(field.width*field.height))```. More interesting behaviours can emerge when energy is redistributed more gradually and non-uniformly in space.
+
+### The Genetic Representation
+
+At this point, should be clear that the effectiveness of evolution depends very much on both the genetic representation as well as its behaviour in producing phenotypes. If we consider the genetic representation as a *language*, then the evolutionary effectiveness depends both on the *syntax* and the *semantics*. 
 
 The syntax determines how a phenotype is encoded, what kinds of mutations are likely/unlikely/impossible, and what transformations these result in, how much space it takes up, the potential of redundancy and neutral data, and so on. 
 
 The semantics define the basic primitive concepts from which phenotypes are produced, and thus what kinds of phenotypes are likely/unlikely/impossible, including the overal size of the set of all possible phenotypes, the resolution of variations between them, and so forth. Put another way: A very common and very general method of solving problems (mathematical, computational, and otherwise), is to translate the problem into a more convenient language. We saw that our agents could reason about neighbours more easily when the neighbour poses where translated out of global space and into the coordinate space of the agent itself. Similarly, the turtle graphics language made it very easy to create simple line drawings, and with just a handful of special tokens quite complex structures, but there are still many shapes this language is unable or very unlikely to express. Simply, some languages work better than others for certain problems. (This may related to the reason why so many species share huge sequences of the same DNA.)
 
-A good genetic representation should consider both syntax and semantics. We don't want to make our intermediate language to too restrictive, else it will not be powerful and extensible enough to encompass a wide enough range of expected and unexpected solutions. For example, we saw how creating an intermediate language of predefined words ensured we have readable (if nonsense) sentences, whereas translating into random numbers and arithmetic symbols opened the possibility of invalid expressions, but also was able to discover unexpected methods (such as using comment symbols for neutral drift). However, we also don't want our intermediate language so powerful and extensible that it becomes inefficient or intractable to actually apply, or upon which evolution has barely a chance to have impact. 
+A good genetic representation should consider both syntax and semantics. We don't want to make our intermediate language to too restrictive, else it will not be powerful and extensible enough to encompass a wide enough range of expected and unexpected solutions. For example, we saw how creating an intermediate language of predefined words ensured we have readable (if nonsense) sentences, whereas translating into random numbers and arithmetic symbols opened the possibility of invalid expressions, but also was able to discover unexpected methods (such as using comment symbols for neutral drift). However, we also don't want our intermediate language so powerful and extensible that it becomes inefficient or intractable to actually apply, or upon which evolution has barely a chance to have impact. Our math & turtle graphics examples demonstrated how using a programming language as intermediate representation can achieve great power/diversity with succinct syntax. 
 
-Our math & turtle graphics examples demonstrated how using a programming language as intermediate representation can achieve great power/diversity with succinct syntax. We'll explore that in more detail via *genetic programming*. 
+### Programmatic variation
 
----
+For a more ambitious, but more interesting challenge, we can try to build up a population of evolving agents whose phenotypic behaviour is a unique *program*. That is, the "update" routine for each agent is different because it has different code, not just different parametric values. The biomorphs were a good example of this. Arguably this permits a vaster range of possible behaviours, because less of an organism's architecture is fixed for all time.
+
+One model to achieve this is to think of the agent as comprising a collection of sensors, a collection of internal nodes of computing, and a number of output nodes (as actuator potentials) that cause actions in the world:
+
+![agent diagram](img/agent_diagram.png) 
+
+**Possible outputs include:**
+
+- Locomotion. Ideally modeled as signals sent to simulated locomotory systems, rather than simple changes of velocity/orientation. 
+- Consumption. Extraction of materials from the environment, e.g. food. 
+	- Vice versa, expulsion of materials back into the environment, e.g. building, defecation. 
+- Changing internal mental states, such as memory stores, or dispositions.
+- Communication. Pheromone deposits, noises, visual signals, etc.
+- Growth. Although this is not usually something under an organisms' control for larger organisms, it may be at the cellular level.
+- Reproduction. Clearly this is only an internal choice for organisms that reproduce asexually.
+
+> If it is helpful, you may imagine the buttons you can press to control a videogame character. Each button is an output.
+
+It may also be worth asking whether actions can occur concurrently, or whether activating one will suppress others. E.g. can you reproduce while in motion? Can you change direction when not in motion? The simplest technique here is to limit output to one action per frame.
+
+**Possible inputs include:**
+
+- Internal physiological states: At least, the current store of energy (the hungry/satiated axis), but possibly also other internal parametric states if they exist, such as temperature, digestive toxicity, ...
+- Smell/taste/pressure/humidity/electroreception/magnetoception: Detection of concentrations/intensities in local fields, at the center location of the agent.
+	- Alternatively, sensors on appendages: same as above, but at points removed from the center of the agent according to the bodily position of the sensor. E.g. eyestalks.
+- Touch: Detection of collision with objects in the environment. Could be a simple boolean true/false, could include a direction to the collided object, could include a magnitude according to the amount of overlap (i.e. a vector). 
+- Proximity/sight/hearing/echolocation: Detection of the number of agents/objects in close range. Could be converted to a loneliness/claustrophobia axis.
+	- Or perhaps the center-of-mass of objects/agents in close range (the *cohesion* and *separation* senses of the boids), or some other average property of nearby objects/agents (such as the *alignment* sense of the boids, or perhaps average color of nearby agents). 
+	- Could be refined to multiple senses, for different kinds of objects.
+- Proprioception/vestibular senses: The sense of motion from within, including balance, poise, etc. The simplest could be an accelerometer, reporting changes of velocity back to the agent. There could also be senses identifying the position or rate of movement of limbs.
+- Temporal senses (Chronoception): The simplest being a function of the agent's age since birth.
+- Pain (nociception), and perhaps other stimulations, triggered by other activity upon the agent, which dissipates over time.
+- Internal mental states, such as memory or dispositions: Could simply be a bank of memory "slots", that are written as one of the action outputs.
+
+It is likely necessary to conform inputs to ranges of sensitivity, such that external quantities are always mapped into internal ranges clamped in a unipolar 0..1 range, or perhaps a bipolar -1..1 range. Outputs may also need to map their intrinsic ranges (unipolar or bipolar) into useful ranges in the world. For example, a unipolar consumption range could be used as a proportion of available food that is actually ingested. Alternatively, it could be mapped to a range determined by the maximum eating rate an organism can sustain (a constant).
+
+For both inputs and outputs, we may need to distinguish between occasional "events" (think of buttons and impacts) and more continuously varying "signals" (think of knobs and rotations), though it is simpler if we do not need to. 
+
+> Event-like inputs can be treated as signals whose value is zero when no event is occurring. Event-like outputs can be treated as signals that pass a given threshold, or change by a significant margin. Thresholding is a general way to convert a signal to an event, possibly with some accumulation & relaxation time, and sampling is a way to convert an event into a signal, possibly with some averaging/smoothing.
+
+**Possible internal operations:**
+
+The middle layers between inputs & outputs may utilize a palette of mathematical mappings and simple signal-processing operators. For example, the set of "neural nodes" available in Karl Sims' [evolving virtual creatures](http://www.karlsims.com/papers/siggraph94.pdf) simulation included:
+
+> sum, product, divide, greater-than, sign-of, min, max, abs, if, interpolate, sin, cos, atan, log, expt, sigmoid, 
+
+Furthermore, a number of more complex "stateful" operators (i.e. operators which include their own history/memory) were included:
+
+> sum-threshold, integrate, differentiate, smooth, oscillate-wave, and oscillate-saw.
+
+Sum-threshold refers to a unit that operates much like a real neuron, accumulating inputs until a threshold is reached, then outputting a pulse and relaxing to zero. That is, neural networks are often modeled using only the sum-threshold (or even simpler, sigmoid) operators. Integrate is a simple counter, but it may be wise to make it "leaky", such that the accumulated value naturally decays over time. Smooth is a simple moving average, or low-pass filter, such as averaging the current and previous input. The oscillators are a combination of a counter with a trigonometric or modulo operation.
+
+Other kinds of internal operations could be structural, such as creating a sequence of actions (and possibly including policies to abort a sequence if an action cannot be completed) or a sequence of options (taking the first one that can be executed). 
+
+----
+
+![agent graph](img/agent_graph.png)
 
 ## Genetic Programming
 
@@ -498,25 +605,6 @@ console.log(JSON.stringify(data, null, " "));
 
 Koza also recommends creating a seed population with a variety of depths, which we can easily do by randomizing the initial argument to ```generate()```. 
 
-### Selection
-
-We could continue using the *fitness-proportionate* selection as before, via stochastic universal sampling, however most GP systems use a different form of selection known as **tournament selection**, in which a number of individuals are chosen at random from the population, and the fittest is chosen as parent to create a new individual. In pseudo-code:
-
-```psuedocode
-	new_population = []
-	for each child {
-		set = []	
-		for i = 0, n {
-			set.push( get_random_item(population) )
-		}
-		set.sort(fitness_comparator)
-		parent = set[0]
-		child = clone(parent)
-		// apply mutations
-		new_population.push(child)
-	}
-	population = new_population
-```
 
 ### Mutations and recombinations
 
@@ -586,110 +674,8 @@ Notice how registers are stored as offsets back from the currently-assigning reg
 
 Yet another very different but related approach is **gramatical evolution**. In GE, genomes are simply lists of integers, for example in the range 0-99. The possible shape of programs is determined by a grammar. The generator follows each rule of the grammar in turn, and when multiple options are possible, the next genome integer is used to determine the choice (modulo the number of choices). This not only guarantees that all generated programs are formally correct (no matter how complex the grammar involved), it also seems to lend some advantages with respect to mutations. Grammatical evolution has been very successful and is widely used.
   
----
-
-### Development & meta-evolution
-
-In some cases, there may be several stages of code development. For example, it may be advantageous to create code that has some built-in symmetries, or modular structures, as are frequently found in nature. Sims' evolved virtual creatures had a genotype that encoded a LISP function, which when run would produce a body shape (the developmental system), but also produced an executable function for behaviour (the neural system). That is, the genetic code produces a developmental program that produces a neural program. More generally, since we are evolving code, we may want to the genome to produce re-usable subroutines that can be used multiple times within the main phenotype program. 
-
-Think back to the turtle example, with its powerful mirroring and other duplication operators, and imagine that instead of drawing lines, it is generating more code. One interesting result here is that the program being produced is valid and can be run at each step of development, meaning we can model the gradual increase in complexity of an organism from embryo to adult. 
-
-Taken to the most general form, it allows us to explore models in which the mechanisms of evolution are also subject to evolutionary pressures; see [Spector, Lee. "Autoconstructive evolution: Push, pushGP, and pushpop." Proceedings of the Genetic and Evolutionary Computation Conference (GECCO-2001). Vol. 137. 2001.](http://faculty.hampshire.edu/lspector/pubs/ace.pdf). This is meta-evolution: that the mechanisms of evolution (including development, variation, etc.) are also subject to variation and selection. After all, sexual reproduction had to be *discovered*. It turns out that some parts of our genes have evolved to be far less volatile than others, for good reason. Jurgen Schmidhuber also proposed using GP to evolve GP (Meta-GP), since things like chromosomes, crossover etc. are themselves phenomena that have evolved. 
-
 Further reading:
 
 - [A field guide to GP](http://dces.essex.ac.uk/staff/rpoli/gp-field-guide/A_Field_Guide_to_Genetic_Programming.pdf)
 - [An overview paper](http://www.cs.montana.edu/~bwall/cs580/introduction_to_gp.pdf)
 - [Very short tutorial](http://www.geneticalgorithms.com/Tutorial/index.html)
-
----
-
-
-## Evolving agents
-
-For a more ambitious, but more interesting challenge, we can try to build up a population of evolving agents whose phenotypic behaviour is a unique *program*, which processes information from the environment through a number of internal "neural nodes", resulting in actions, or actuator potential signals that in turn cause actions in the exterior world. 
-
-![agent diagram](img/agent_diagram.png) 
-
-**Possible outputs include:**
-
-- Changing internal mental states, such as memory stores, or dispositions.
-- Locomotion. Ideally modeled as signals sent to simulated locomotory systems, rather than simple changes of velocity/orientation. 
-- Consumption. Extraction of materials from the environment, e.g. food. 
-	- Vice versa, expulsion of materials back into the environment, e.g. building, defecation. 
-- Communication. Pheromone deposits, noises, visual signals, etc.
-- Growth. Although this is not usually something under an organisms' control for larger organisms, it may be at the cellular level.
-- Reproduction. Clearly this is only an internal choice for organisms that reproduce asexually.
-
-> If it is helpful, you may imagine the buttons you can press to control a videogame character. Each button is an output.
-
-It may also be worth asking whether actions can occur concurrently, or whether activating one will suppress others. E.g. can you reproduce while in motion? Can you change direction when not in motion? The simplest technique here is to limit output to one action per frame.
-
-**Possible inputs include:**
-
-- Internal physiological states: At least, the current store of energy (the hungry/satiated axis), but possibly also other internal parametric states if they exist, such as temperature, digestive toxicity, ...
-- Smell/taste/pressure/humidity/electroreception/magnetoception: Detection of concentrations/intensities in local fields, at the center location of the agent.
-	- Alternatively, sensors on appendages: same as above, but at points removed from the center of the agent according to the bodily position of the sensor. E.g. eyestalks.
-- Touch: Detection of collision with objects in the environment. Could be a simple boolean true/false, could include a direction to the collided object, could include a magnitude according to the amount of overlap (i.e. a vector). 
-- Proximity/sight/hearing/echolocation: Detection of the number of agents/objects in close range. Could be converted to a loneliness/claustrophobia axis.
-	- Or perhaps the center-of-mass of objects/agents in close range (the *cohesion* and *separation* senses of the boids), or some other average property of nearby objects/agents (such as the *alignment* sense of the boids, or perhaps average color of nearby agents). 
-	- Could be refined to multiple senses, for different kinds of objects.
-- Proprioception/vestibular senses: The sense of motion from within, including balance, poise, etc. The simplest could be an accelerometer, reporting changes of velocity back to the agent. There could also be senses identifying the position or rate of movement of limbs.
-- Temporal senses (Chronoception): The simplest being a function of the agent's age since birth.
-- Pain (nociception), and perhaps other stimulations, triggered by other activity upon the agent, which dissipates over time.
-- Internal mental states, such as memory or dispositions: Could simply be a bank of memory "slots", that are written as one of the action outputs.
-
-It is likely necessary to conform inputs to ranges of sensitivity, such that external quantities are always mapped into internal ranges clamped in a unipolar 0..1 range, or perhaps a bipolar -1..1 range. Outputs may also need to map their intrinsic ranges (unipolar or bipolar) into useful ranges in the world. For example, a unipolar consumption range could be used as a proportion of available food that is actually ingested. Alternatively, it could be mapped to a range determined by the maximum eating rate an organism can sustain (a constant).
-
-For both inputs and outputs, we may need to distinguish between occasional "events" (think of buttons and impacts) and more continuously varying "signals" (think of knobs and rotations), though it is simpler if we do not need to. 
-
-> Event-like inputs can be treated as signals whose value is zero when no event is occurring. Event-like outputs can be treated as signals that pass a given threshold, or change by a significant margin. Thresholding is a general way to convert a signal to an event, possibly with some accumulation & relaxation time, and sampling is a way to convert an event into a signal, possibly with some averaging/smoothing.
-
-**Possible internal operations:**
-
-The middle layers between inputs & outputs may utilize a palette of mathematical mappings and simple signal-processing operators. For example, the set of "neural nodes" available in Karl Sims' [evolving virtual creatures](http://www.karlsims.com/papers/siggraph94.pdf) simulation included:
-
-> sum, product, divide, greater-than, sign-of, min, max, abs, if, interpolate, sin, cos, atan, log, expt, sigmoid, 
-
-Furthermore, a number of more complex "stateful" operators (i.e. operators which include their own history/memory) were included:
-
-> sum-threshold, integrate, differentiate, smooth, oscillate-wave, and oscillate-saw.
-
-Sum-threshold refers to a unit that operates much like a real neuron, accumulating inputs until a threshold is reached, then outputting a pulse and relaxing to zero. That is, neural networks are often modeled using only the sum-threshold (or even simpler, sigmoid) operators. Integrate is a simple counter, but it may be wise to make it "leaky", such that the accumulated value naturally decays over time. Smooth is a simple moving average, or low-pass filter, such as averaging the current and previous input. The oscillators are a combination of a counter with a trigonometric or modulo operation.
-
-Other kinds of internal operations could be structural, such as creating a sequence of actions (and possibly including policies to abort a sequence if an action cannot be completed) or a sequence of options (taking the first one that can be executed). 
-
-----
-
-## An ecosystemic, evolving agent-environment world
-
-For example, take a look at the agent model here:
-
-[Starter agent model for continuous evolution](http://codepen.io/grrrwaaa/pen/obQrZJ?editors=001)
-
-The agent has a locomotion model based on a two-wheel engine, like Braitenberg vehicles. For movement, the agent has only two output signals -- the rates of turning of each wheel (stored in the property ```wheel_rate```, which is a vec2). The ```agent_locomotion()``` method turns these wheel_rate signals into actual movement. 
-
-The agent also has two external sensors to detect local fields, whose values are computed in the ```agent_sensing()``` method.
-
-**Energy preservation** is essential to the ecosystemic viability model of selection here. Every action an agent takes must cost energy, and insufficient energy must result in death.
-
-- The locomotion model incorporates this in terms of the force actually applied (i.e. the acceleration -- as difference between the current and new velocities -- multiplied by the mass).
-- There is also a fixed mass-dependent metabolism cost, applied on each frame regardless whether the agent is moving.
-- There is also a digestion cost, modeled simply as a certain portion of consumed food's energy being lost.
-
-Inevitably this means that over time, energy is being lost from the world. We can calculate how much energy is active in the system by adding up the total in each field cell (by ```field.sum()```) as well as the energy stored in each agent. When this total energy level drops below our chosen carrying capacity for the world, we can then introduce energy back in, to ensure that the whole system doesn't wind down to zero. Exactly how this energy is re-introduced can have quite drastic effect on the adaptive conditions -- since effectively organisms are trying to evolve strategies to be more viable, the distribution of energy in the world is the primary factor. The simplest option is to reintroduce the energy immediately, spread uniformly over the space, e.g. ```field.add(energy_deficit/(field.width*field.height))```. More interesting behaviours can emerge when energy is redistributed more gradually and non-uniformly in space.
-
-The population can shrink and grow (safely, because the main update loop iterates backwards). Still, **population control** is also essential at both ends. Clearly if the population ever drops to zero, we will never see any organisms again. Methods to overcome this include preventing death, or introducing new randomly seeded organisms (perhaps out of view) at low population sizes, as well as adaptively varying the reproduction cost/threshold. At the other end, a population that grows excessively large can slow down the simulation, perhaps even crash it. In theory the conservation of energy can prevent this, but in practice a hard limit may also be necessary. 
-
-As organisms evolve better strategies, they can better utilize the finite energy resources of the world, and thus support greater populations. An adaptive *difficulty*, perhaps applied to the metabolism cost, or applied generally to the available energy in the world, may help keep selection pressure effective at maintaining population size. For example, we can gradually decrease the total energy in the ecosystem while populations are large, and increase it again while populations are small.
-
-----
-
-![agent graph](img/agent_graph.png)
-
-
-<!---
-
-Here's a work-in-progress template: http://codepen.io/grrrwaaa/pen/obQrZJ?editors=001
-
--->

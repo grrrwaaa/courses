@@ -314,11 +314,6 @@ Visualization (ALMond):
 
 ![Avida](https://upload.wikimedia.org/wikipedia/commons/1/14/Avida_2.6_screenshot.png)
 
-
-<!--
-http://codepen.io/grrrwaaa/pen/JXXowe?editors=001
--->
-
 ---
 
 ## Artificial chemistries
