@@ -134,10 +134,13 @@ The starter-kit provides a few extra global functions that are frequently needed
 
 ```wrap()``` applies a Euclidean modulo (remainder after division) in such a way that the result is always positive and without reflections.
 
+```shuffle(arr)``` randomly re-orders the array 'arr'. It modifies the array in-place, and also returns it.
+
 ```javascript
 random(); 		// a floating-point number between 0 and 1
 random(6);		// an integer between 0 and 5
 wrap(-1, 4);	// returns 3 (whereas -1 % 4 would return -1)
+shuffle([a, b, c]); // returns [b, a, c] or [c, b, a] or [a, b, c] etc.
 ```
 
 The ```write()``` function will output text above the main canvas. It can be more useful than calling ```console.log()``` in certain situations, since the text will reset on each frame. 
@@ -203,7 +206,13 @@ field.min();	// returns the lowest cell value in the array
 field.max();	// returns the highest cell value in the array
 field.sum();	// adds up all cell values and returns the total
 
-field.scale(n); // multiply all cells by n
+field.scale(n); // multiply all cells by n; AKA field.mul(n);
+```
+
+Normally fields render their cells with hard edges, but you can render the field more smoothly by setting:
+
+```javascript
+field.smooth = true;
 ```
 
 ### Normalized sampling
@@ -465,7 +474,18 @@ draw2D.line([x1, y1], [x2, y2]);	// default thickness is 1 pixel
 draw2D.line([x1, y1], [x2, y2], thickness);		
 ```
 
-If you really need a different shape, there's a method for adding new ones. But this is expensive -- don't call this in ```draw()``` or ```update()```! Create an array of vertices (they could be arrays or vec2's) and pass them to the ```draw2D.shape()``` constructor; it will return a function you can use to draw your specific shape.
+There's also an optimized method for when you want to draw lots of lines -- just pass in an array of points (either vec2's or arrays of two numbers). Each pair of points will make a line:
+
+```
+// draw line AB and line CD
+A = new vec2(random(), random());
+B = new vec2(random(), random());
+C = [random(), random()];
+D = [random(), random()];
+draw2D.lines([A, B, C, D]);
+```
+
+If you need a different shape, there's a method for defining new ones. But this is expensive -- don't call this in ```draw()``` or ```update()```! Create an array of vertices (they could be arrays or vec2's) and pass them to the ```draw2D.shape()``` constructor; it will return a function you can use to draw your specific shape.
 
 ```javascript
 // in the main body of the script (not in update() or draw()!)
