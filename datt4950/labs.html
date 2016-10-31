@@ -132,9 +132,11 @@
 <p>The starter-kit provides a few extra global functions that are frequently needed:</p>
 <p><code>random()</code> can be used to generate random numbers. Without an argument it returns rational numbers between 0 and 1; with a numeric argument it returns integers in the given range (e.g. useful for picking within an array).</p>
 <p><code>wrap()</code> applies a Euclidean modulo (remainder after division) in such a way that the result is always positive and without reflections.</p>
+<p><code>shuffle(arr)</code> randomly re-orders the array &#39;arr&#39;. It modifies the array in-place, and also returns it.</p>
 <pre><code class="lang-javascript"><span class="hljs-built_in">random</span>();        <span class="hljs-comment"> // a floating-point number between 0 and 1</span>
 <span class="hljs-built_in">random</span>(<span class="hljs-number">6</span>);       <span class="hljs-comment"> // an integer between 0 and 5</span>
 <span class="hljs-keyword">wrap</span>(<span class="hljs-number">-1</span>, <span class="hljs-number">4</span>);   <span class="hljs-comment"> // returns 3 (whereas -1 % 4 would return -1)</span>
+shuffle([<span class="hljs-keyword">a</span>, b, c]);<span class="hljs-comment"> // returns [b, a, c] or [c, b, a] or [a, b, c] etc.</span>
 </code></pre>
 <p>The <code>write()</code> function will output text above the main canvas. It can be more useful than calling <code>console.log()</code> in certain situations, since the text will reset on each frame. </p>
 <p>There are also a couple of global variables, used to measure time:</p>
@@ -175,7 +177,10 @@ field.<span class="hljs-keyword">min</span>();    <span class="hljs-comment">// 
 field.<span class="hljs-keyword">max</span>();    <span class="hljs-comment">// returns the highest cell value in the array</span>
 field.sum();    <span class="hljs-comment">// adds up all cell values and returns the total</span>
 
-field.<span class="hljs-keyword">scale</span>(n); <span class="hljs-comment">// multiply all cells by n</span>
+field.<span class="hljs-keyword">scale</span>(n); <span class="hljs-comment">// multiply all cells by n; AKA field.mul(n);</span>
+</code></pre>
+<p>Normally fields render their cells with hard edges, but you can render the field more smoothly by setting:</p>
+<pre><code class="lang-javascript">field.<span class="hljs-keyword">smooth</span> = <span class="hljs-literal">true</span>;
 </code></pre>
 <h3 id="normalized-sampling">Normalized sampling</h3>
 <p>There are some methods for interpolated reading/writing/modifying fields. These methods use x and y indices in a normalized 0..1 floating-point range rather than 0..width or 0..height integer range:</p>
@@ -377,7 +382,14 @@ draw2D.triangle(center_x, center_y, diameter_x, diameter_y)<span class="hljs-com
 draw2D.<span class="hljs-keyword">line</span>([x1, y1], [x2, y2])<span class="hljs-comment">;    // default thickness is 1 pixel</span>
 draw2D.<span class="hljs-keyword">line</span>([x1, y1], [x2, y2], thickness)<span class="hljs-comment">;</span>
 </code></pre>
-<p>If you really need a different shape, there&#39;s a method for adding new ones. But this is expensive -- don&#39;t call this in <code>draw()</code> or <code>update()</code>! Create an array of vertices (they could be arrays or vec2&#39;s) and pass them to the <code>draw2D.shape()</code> constructor; it will return a function you can use to draw your specific shape.</p>
+<p>There&#39;s also an optimized method for when you want to draw lots of lines -- just pass in an array of points (either vec2&#39;s or arrays of two numbers). Each pair of points will make a line:</p>
+<pre><code><span class="hljs-comment">// draw line AB and line CD</span>
+A = <span class="hljs-keyword">new</span> vec2(<span class="hljs-built_in">random</span>(), <span class="hljs-built_in">random</span>());
+B = <span class="hljs-keyword">new</span> vec2(<span class="hljs-built_in">random</span>(), <span class="hljs-built_in">random</span>());
+C = [<span class="hljs-built_in">random</span>(), <span class="hljs-built_in">random</span>()];
+D = [<span class="hljs-built_in">random</span>(), <span class="hljs-built_in">random</span>()];
+draw2D.lines([A, B, C, D]);
+</code></pre><p>If you need a different shape, there&#39;s a method for defining new ones. But this is expensive -- don&#39;t call this in <code>draw()</code> or <code>update()</code>! Create an array of vertices (they could be arrays or vec2&#39;s) and pass them to the <code>draw2D.shape()</code> constructor; it will return a function you can use to draw your specific shape.</p>
 <pre><code class="lang-javascript"><span class="hljs-comment">// in the main body of the script (not in update() or draw()!)</span>
 <span class="hljs-comment">// construct a new shape</span>
 <span class="hljs-comment">// normally vertices range between -1 and 1</span>
