@@ -15,6 +15,18 @@ var rightangletriangle = draw2D.shape([
     new vec2(-1, -1), new vec2(1, -1), new vec2(1, 1)
 ]);
 
+var parser = pegjs.generate(`
+S = items:(F / .)+ { return items.join(""); }
+F = "F" { return "F+F--F+F" };
+`);
+
+s = "F";
+for (var i=0; i<4; i++) {
+	write(s);
+	s = parser.parse(s); // returns ["a", "b", "b", "a"]
+}
+//parser.parse("abbd"); // returns ["a", "b", "b", "a"]
+
 // use it in draw()
 function draw() {
     //draw2D.color("red");
