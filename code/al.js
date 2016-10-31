@@ -1,7 +1,9 @@
 /*
-TODO:
-- making it easier to embed in a page
+
+browserify code/al.js -o _site/code/al.js && minify _site/code/al.js
+
 */
+
 
 var glMatrix = require("gl-matrix");
 var mat2 = glMatrix.mat2;
@@ -13,6 +15,15 @@ var glvec3 = glMatrix.vec3;
 var glvec4 = glMatrix.vec4;
 var chroma = require("chroma-js");
 var seedrandom = require("seedrandom");
+pegjs = require("pegjs");
+
+// light wrapper around peg.js:
+parser = function(g, options) {
+	var p = pegjs.generate(g, options);
+	return function(text, options) {
+		return p.parse(text, options);
+	}
+}
 
 // return integer in 0..(n-1)
 random = (function() {
@@ -36,6 +47,17 @@ srandom = function(n) {
 		return random()*2-1; 
 	}
 };
+
+shuffle = function (a) {
+    var j, x, i;
+    for (i = a.length; i; i--) {
+        j = Math.floor(Math.random() * i);
+        x = a[i - 1];
+        a[i - 1] = a[j];
+        a[j] = x;
+    }
+    return a;
+}
 
 // a modulo operation that handles negative n more appropriately
 // e.g. wrap(-1, 3) returns 2
@@ -1401,6 +1423,107 @@ draw2D.line = (function() {
 	};
 })();
 
+// cheating a bit -- we're just going to draw a rect.
+draw2D.lines = (function() {
+	var vertices_buffer = gl.createBuffer();
+	//var texcoords_buffer = gl.createBuffer();
+	var indices_buffer = gl.createBuffer();
+	var no_transform = mat3.create();
+		
+	// those will all be upvalues of the actual draw function:
+	// array here is a list of point pairs (like GL_LINES)
+	return function(points, thickness) {
+		
+		if (typeof points === "undefined") {
+			points = [ [1, 0], [0, 0] ];
+		}
+		if (typeof thickness !== "number") {
+			thickness = 1;
+		}
+		// make line thickness independent of current transform:
+		thickness *= (page_to_gl[0]*2);
+		
+		var shape = {
+			vertices: [],
+			texcoords: [],
+			indices: []
+		};
+		
+		// transform the points by the current modelView
+		for (var i=0; i+1<points.length; i+=2) {
+			var A1 = glvec2.transformMat3([], points[i], modelView);
+			var B1 = glvec2.transformMat3([], points[i+1], modelView);
+			// get the real line:
+			var AB1 = new vec2(B1[0]-A1[0], B1[1]-A1[1]);
+			
+			// create a local transformation matrix to turn a rect into a line:
+			var mat_local = mat3.create();
+			mat3.translate(mat_local, mat_local, A1);
+			mat3.rotate(mat_local, mat_local, AB1.angle());
+			mat3.scale(mat_local, mat_local, [AB1.len(), thickness]);
+		
+			var base = shape.vertices.length / 2;
+			
+			var p0 = glvec2.transformMat3([], [0, -1], mat_local);
+			var p1 = glvec2.transformMat3([], [1, -1], mat_local);
+			var p2 = glvec2.transformMat3([], [0, 1], mat_local);
+			var p3 = glvec2.transformMat3([], [1, 1], mat_local);
+			
+			shape.vertices.push(p0[0]);	shape.vertices.push(p0[1]);
+			shape.vertices.push(p1[0]);	shape.vertices.push(p1[1]);
+			shape.vertices.push(p2[0]);	shape.vertices.push(p2[1]);
+			shape.vertices.push(p3[0]);	shape.vertices.push(p3[1]);
+			
+			shape.texcoords.push(0);	shape.texcoords.push(0);
+			shape.texcoords.push(1);	shape.texcoords.push(0);
+			shape.texcoords.push(0);	shape.texcoords.push(1);
+			shape.texcoords.push(1);	shape.texcoords.push(1);
+			
+			shape.indices.push(base  );
+			shape.indices.push(base+1);
+			shape.indices.push(base+2);
+			shape.indices.push(base+2);
+			shape.indices.push(base+1);
+			shape.indices.push(base+3);
+		}
+		
+		// apply uniforms:
+		gl.uniform4fv(draw2D_colorLocation, draw2D_chroma.gl());
+		gl.uniformMatrix3fv(draw2D_modelViewLocation, false, no_transform);
+
+		// convert these to GPU buffers:
+		gl.bindBuffer(gl.ARRAY_BUFFER, vertices_buffer);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(shape.vertices), gl.STATIC_DRAW);
+	
+		//gl.bindBuffer(gl.ARRAY_BUFFER, texcoords_buffer);
+		//gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(shape.texcoords), gl.STATIC_DRAW);
+	
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indices_buffer);
+		gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(shape.indices), gl.STATIC_DRAW);
+	
+		var shapelength = shape.indices.length;
+
+		// bind shape buffers:
+		gl.bindBuffer(gl.ARRAY_BUFFER, vertices_buffer);
+		gl.enableVertexAttribArray(draw2D_positionLocation);
+		gl.vertexAttribPointer(draw2D_positionLocation, 2, gl.FLOAT, false, 0, 0);
+	
+		//gl.bindBuffer(gl.ARRAY_BUFFER, texcoords_buffer);
+		//gl.enableVertexAttribArray(draw2D_texcoordLocation);
+		//gl.vertexAttribPointer(draw2D_texcoordLocation, 2, gl.FLOAT, false, 0, 0);
+	
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indices_buffer);
+		
+		// draw shape:
+		gl.drawElements(gl.TRIANGLES, shapelength, gl.UNSIGNED_SHORT, 0);
+
+		// clean up:
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+		gl.bindBuffer(gl.ARRAY_BUFFER, null);
+		return draw2D;
+	};
+})();
+
 
 /*
 draw2D.shape() should return a re-usable shape object that we can call similar methods on to extend its internal geometry
@@ -1462,6 +1585,7 @@ field2D = function(width, height) {
 	this.dim = [width, height];
 	this.width = width;
 	this.height = height;
+	this.smooth = false;
 	//this.array = zeros(this.dim);
 
 	// 4 floats per cells, 4 bytes per float
@@ -1497,8 +1621,13 @@ field2D.prototype.bindtexture = function() {
 	gl.bindTexture(gl.TEXTURE_2D, this.tex);
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+	if (this.smooth) {
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+	} else {
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+	}
 	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, this.width, this.height, 0, gl.RGBA, gl.FLOAT, this.array);
 };
 

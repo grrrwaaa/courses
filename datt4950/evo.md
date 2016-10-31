@@ -382,6 +382,8 @@ A simple starting point may be to take [the agent-based example of variable popu
 
 When a new creature is created from nothing, as happens at the start of the simulation, and also as a fail-safe if the population ever dwindles away, a randomized genome must be added to the agent. When an agent spawns a child, the child also needs a genome, created by mutation of the parent's. Of course this could be extended by adding sexual reproduction, only occurring when agents meet, and implemented with crossover as well as mutation.
 
+[Here's a start in this direction](http://codepen.io/grrrwaaa/pen/amgjbb?editors=0010)
+
 But most importantly, parts of the genome must determine behavioural properties of the agent -- how it behaves and interacts with the world -- else there's no selection at all. (It can be useful to also modify how the agent appears graphically, but this has no effect on evolution.) 
 
 ### Parametric variation
