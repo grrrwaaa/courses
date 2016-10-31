@@ -8,42 +8,111 @@
   <body>
     <script src="al.js"></script>
     <script>
-// in the main body of the script (not in update() or draw()!)
-// construct a new shape
-// normally vertices range between -1 and 1
-var rightangletriangle = draw2D.shape([ 
-    new vec2(-1, -1), new vec2(1, -1), new vec2(1, 1)
-]);
+// try increasing this, see if long antennae are a good idea!
+var sensor_size = 4/5; 
+var min_sense = 0.01; // sensors never report zero
 
-var parser = pegjs.generate(`
-S = items:(F / .)+ { return items.join(""); }
-F = "F" { return "F+F--F+F" };
-`);
+var max_steer = 0.1;
+var base_speed = 1/200;
+var min_speed = base_speed/10;
 
-s = "F";
-for (var i=0; i<4; i++) {
-	write(s);
-	s = parser.parse(s); // returns ["a", "b", "b", "a"]
+// create a field of sugar concentrations
+var light = new field2D(64);
+var light_old = light.clone();
+
+// create some vehicles
+var agents = [];
+for (var i=0; i<40; i++) {
+	agents.push({
+		pos: new vec2(random(), random()),
+		vel: vec2.random(min_speed),
+		size: 1/(50 + random(50)),
+	});
 }
-//parser.parse("abbd"); // returns ["a", "b", "b", "a"]
 
-// use it in draw()
+// a sugar deposit point
+var source = {
+  pos: new vec2(0.5, 0.5),
+	vel: vec2.random(),
+};
+
+// mouse moves source:
+function mouse(e, pt) {
+  source.pos.set(pt);
+}
+
+function update() {
+  
+  // apply source agent to sugar:
+  light.deposit(2, source.pos);
+  // and then move it (random walk):
+  source.vel.rotate(random()-0.5).len(random()*0.006);
+  source.pos.add(source.vel).wrap(1);
+  
+  // update field:
+  var tmp = light_old;
+  light_old = light;
+  light = tmp;
+  light_old.mul(0.99);
+  // diffuse it:
+  light.diffuse(light_old, 0.1);
+  
+  // nervous system:
+	for (var a of agents) {
+    // get agent heading:
+    var dir = a.vel.angle();
+    // get sensor locations:
+    var sensor1 = new vec2(sensor_size, sensor_size).mul(a.size).rotate(dir).add(a.pos);
+    var sensor2 = new vec2(sensor_size, -sensor_size).mul(a.size).rotate(dir).add(a.pos);
+    
+    // get the sugar levels at these locations:
+		var sense1 = light.sample(sensor1);
+		var sense2 = light.sample(sensor2);
+    
+    // clamp:
+    sense1 = Math.max(Math.min(sense1, 1), min_sense);
+    sense2 = Math.max(Math.min(sense2, 1), min_sense);
+    
+    // convert to locomotion (direct wiring):
+    a.wheel1 = sense2;
+    a.wheel2 = sense1;
+  }
+  
+  // implement locomotion
+  for (var a of agents) {
+    var speed = base_speed * (a.wheel1 + a.wheel2)/2;
+    
+    var steer = (a.wheel2 - a.wheel1) / (a.wheel1 + a.wheel2);
+    // add a little random walk:
+    steer += srandom()*0.1;
+    // limit:
+    if (speed < min_speed) { speed = min_speed; }
+    if (steer > max_steer) { steer = max_steer; }
+    else if (steer < -max_steer) { steer = -max_steer; }
+    
+    // apply (TODO -- as desired force...):
+    a.vel.rotate(steer).len(speed);		
+    // locomotion
+		a.pos.add(a.vel).wrap(1);
+	}
+}
+  
 function draw() {
-    //draw2D.color("red");
-    //rightangletriangle();
-
-    // it takes position/size arguments just like circle, rect, triangle:
-    //draw2D.color("yellow");
-    //rightangletriangle([0.5, 0.5], 0.25);
-    
-    var lines = [];
-    for (var i=0; i<2+random(10); i++) {
-    	lines.push([random(), random()]);
-    
-    }
-    
-    draw2D.color("white");
-    draw2D.lines(lines);
+  // draw field
+  light.smooth = true;  // don't want pixels
+  light.draw();
+  // draw agents
+  for (var a of agents) {
+  	draw2D.push().translate(a.pos).rotate(a.vel).scale(a.size);
+    // sensor (shows current state by color)
+    draw2D.color(1, 0.5, 0.5)
+  	  .circle([sensor_size, sensor_size], 0.5)
+  	  .circle([sensor_size,-sensor_size], 0.5);
+  	// body
+    draw2D.color("darkred")
+  		.rect([0., 0], 1.5, 1);
+  	draw2D.pop();
+  }
 }
     </script>
   </body>
