@@ -452,9 +452,10 @@ var keyevent = function(event, name, callback) {
 };
 
 window.addEventListener( "keydown", function(event) {
+	//console.log("keydown", event.key, event.keyCode);
 	var k = event.key || event.keyCode;
 	
-	if (k == 27) requestFullscreen(canvas.parentElement);
+	if (k === "Escape" || k === 27) requestFullscreen(canvas.parentElement);
 	
 	//if (k == 27) requestFullscreen(document.body);
 	//if (k == 27) requestFullscreen(canvas);
