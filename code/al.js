@@ -1,6 +1,8 @@
 /*
 
-browserify code/al.js -o _site/code/al.js && minify _site/code/al.js
+browserify code/al.js -o _site/code/al.js 
+minify _site/code/al.js 
+cp _site/code/al.min.js _site/datt4950/gallery/
 
 */
 
@@ -16,6 +18,45 @@ var glvec4 = glMatrix.vec4;
 var chroma = require("chroma-js");
 var seedrandom = require("seedrandom");
 pegjs = require("pegjs");
+
+
+/*
+	Improve persist structure
+	
+	- recover classes (e.g. vec2->vec2 not vec2->[], field2D, etc.)
+		- need to identify item's class
+	
+	- handle multiple references
+	
+	- handle functions
+*/
+if (window.localStorage) {
+	window.addEventListener("load", function(event) {
+		if (typeof(load) === "function") {
+			try {
+				var o = window.localStorage.getItem("al_persistence");
+				if (o !== undefined && o !== null) { 
+					load(JSON.parse(o));
+				}
+			} catch (e) {
+				console.log(e);
+			}
+		}
+	});
+
+	window.addEventListener("beforeunload", function(event) {
+		if (typeof(save) === "function") {
+			try {
+				var o = save();
+				if (o !== undefined && o !== null) { 
+					window.localStorage.setItem("al_persistence", JSON.stringify(o));
+				}
+			} catch (e) {
+				console.log(e);
+			}
+		}
+	});
+}
 
 // light wrapper around peg.js:
 parser = function(g, options) {
@@ -376,7 +417,7 @@ onresize();
 
 var mouseevent = function(event, name) {
 	if (typeof(mouse) === "function") {
-		var m = [event.pageX, event.pageY];
+		var m = new vec2(event.pageX, event.pageY);
 		glvec2.transformMat3(m, m, page_to_gl);
 		mouse(name, m);
 	}
@@ -408,7 +449,7 @@ canvas.addEventListener("mouseover", function(event) {
 var touchevent = function(event, name) {
 	if (typeof(touch) === "function") {
 		event.preventDefault();
-		var m = [event.targetTouches[0].pageX, targetTouches[0].pageY];
+		var m = new vec2(event.targetTouches[0].pageX, targetTouches[0].pageY);
 		glvec2.transformMat3(m, m, page_to_gl);
 		touch(name, m);
 	}
@@ -523,7 +564,7 @@ gl.mat3 = mat3;
 gl.mat4 = mat4;
 gl.mat2d = mat2d;
 
-vec2 = function(x, y) {
+vec2 = function vec2(x, y) {
 	this[0] = x || 0;
 	this[1] = (y !== undefined) ? y : this[0];
 };
@@ -1581,7 +1622,7 @@ function draw2D.shape() {
 ///////////////////
 
 // assumes 4-plane currently
-field2D = function(width, height) {
+field2D = function field2D(width, height) {
 	if (typeof width == "undefined") width = 64;
 	if (typeof height == "undefined") height = width;
 	this.dim = [width, height];

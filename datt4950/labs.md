@@ -130,6 +130,43 @@ function key(event, key) {
 }
 ```
 
+### Persistence
+
+Sometimes you want state of a simulation to persist between edits, so the world doesn't always begin from scratch. We have two more callbacks to help with this. 
+
+First, implement the ```save()``` method to store all of the information you want to preserve between edits. It should return an object that can be properly encoded as JSON. 
+
+```javascript
+function save() {
+	// create your 'data' object here to save:
+	return data;
+}
+```
+
+To recover this data when the page is reloaded (e.g. after an edit), implement the ```save()``` method, whose argument will contain a new copy of the stored data:
+
+```javascript
+function load(data) {
+	// do stuff with data
+}
+```
+
+Important limits on this system:
+
+- The object stored will be encoded as JSON, which means:
+	- Object keys can only be strings (other types will be converted to string).
+	- Values can only be objects, arrays, numbers, strings, booleans, or null (**no functions!**)
+	- Objects will not keep their class. E.g. vec2 objects will become simple arrays.
+	- Objects/arrays cannot have circular structures -- e.g. an object can't have a reference to its parent -- i.e. objects/arrays must be unambiguous trees.
+	- If you have the same object twice in the tree -- it will become two different objects in ```load()```. 
+	
+That means, you need to design your persistent state in ```save()``` in a way that represents the important parts of your simulation, and design a method for creating a new simulation in ```load()``` based on this data.
+	
+- Data is stored in a persistent localStorage linked to the URL and the browser, which means:
+	- Loading in a different browser, or using http instead of http for example, will not restore the same data.
+
+
+
 ## Globals
 
 The starter-kit provides a few extra global functions that are frequently needed:
