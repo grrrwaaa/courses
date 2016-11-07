@@ -97,9 +97,9 @@ http://codepen.io/grrrwaaa/pen/EgrYgV?editors=0010
 Evolution continued; ecology and ecosystem, aesthetic selection & biomorphs.
 Genetic programming. 
 
-**Quiz III** (5%)
-
 ### 9. Nov 14
+
+**Quiz III** (5%)
 
 **Due:** [Assignment III (15%)](due.html#assignment-iii)
 
