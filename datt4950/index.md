@@ -95,7 +95,9 @@ http://codepen.io/grrrwaaa/pen/EgrYgV?editors=0010
 ### 8. Nov 7 
 
 Evolution continued; ecology and ecosystem, aesthetic selection & biomorphs.
-Genetic programming. 
+Genetic programming.
+
+[Biomorphs created in the lab today](http://codepen.io/grrrwaaa/pen/PbqYOX?editors=0010) 
 
 ### 9. Nov 14
 
