@@ -132,6 +132,37 @@
     <span class="hljs-built_in">console</span>.log(event, key);
 }
 </code></pre>
+<h3 id="persistence">Persistence</h3>
+<p>Sometimes you want state of a simulation to persist between edits, so the world doesn&#39;t always begin from scratch. We have two more callbacks to help with this. </p>
+<p>First, implement the <code>save()</code> method to store all of the information you want to preserve between edits. It should return an object that can be properly encoded as JSON. </p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">save</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// create your 'data' object here to save:</span>
+    <span class="hljs-keyword">return</span> data;
+}
+</code></pre>
+<p>To recover this data when the page is reloaded (e.g. after an edit), implement the <code>save()</code> method, whose argument will contain a new copy of the stored data:</p>
+<pre><code class="lang-javascript">function <span class="hljs-keyword">load</span>(<span class="hljs-keyword">data</span>) {
+    // <span class="hljs-keyword">do</span> <span class="hljs-keyword">stuff</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">data</span>
+}
+</code></pre>
+<p>Important limits on this system:</p>
+<ul>
+<li>The object stored will be encoded as JSON, which means:<ul>
+<li>Object keys can only be strings (other types will be converted to string).</li>
+<li>Values can only be objects, arrays, numbers, strings, booleans, or null (<strong>no functions!</strong>)</li>
+<li>Objects will not keep their class. E.g. vec2 objects will become simple arrays.</li>
+<li>Objects/arrays cannot have circular structures -- e.g. an object can&#39;t have a reference to its parent -- i.e. objects/arrays must be unambiguous trees.</li>
+<li>If you have the same object twice in the tree -- it will become two different objects in <code>load()</code>. </li>
+</ul>
+</li>
+</ul>
+<p>That means, you need to design your persistent state in <code>save()</code> in a way that represents the important parts of your simulation, and design a method for creating a new simulation in <code>load()</code> based on this data.</p>
+<ul>
+<li>Data is stored in a persistent localStorage linked to the URL and the browser, which means:<ul>
+<li>Loading in a different browser, or using http instead of http for example, will not restore the same data.</li>
+</ul>
+</li>
+</ul>
 <h2 id="globals">Globals</h2>
 <p>The starter-kit provides a few extra global functions that are frequently needed:</p>
 <p><code>random()</code> can be used to generate random numbers. Without an argument it returns rational numbers between 0 and 1; with a numeric argument it returns integers in the given range (e.g. useful for picking within an array).</p>
