@@ -15,6 +15,8 @@ A compact developmental representation can result in a more complex developed or
 
 In 1968 biologist Astrid Lindenmeyer proposed to model several aspects of developmental systems (cell division, cell differentiation and cell death) using rewriting systems on symbolic strings. The analogy is that each symbol represents a cell in a particular state, and the rules of transformation represent the processes of differentiating from one state to another, dividing into two cells, or of programmed cell death.
 
+(Cellular automata can also be used to model developmental processes, and arguably langton's reproducing loop does so, but rewriting systems offer a very simple and abstract model that can support growth. Sims' evolving creatures used a substitution method closely equivalent rewriting to generate their body structures, for example.)
+
 ![nervous system lamp](https://blog.adafruit.com/wp-content/uploads/2013/10/NervousSystemHyphaeLampClose-2.jpg)
 
 > Above is an example of a 3D-printed lampshade whose form is the product of a developmental simulation, by the [Nervous System design studio.](http://n-e-r-v-o-u-s.com)

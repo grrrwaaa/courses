@@ -330,9 +330,14 @@ One of the simplest ways to create a biomorph is to interpret strings as instruc
 
 - **F**: move forward one unit, drawing a line.
 - **f**: move forward half a unit, drawing a line.
-- **+**: turn a fixed amount to the left.
-- **-**: turn a fixed amount to the right.
-- **=**: spawn a new turtle, facing the opposite direction, and let both turtles continue following the instructions.
+- **<**: turn a certain amount to the left.
+- **>**: turn a certain amount to the right.
+- **+**: turn a different amount to the left.
+- **-**: turn a different amount to the right.
+- **(**: "push": spawn a clone of the turtle and continue interpreting
+- **)**: "pop": stop interpreting with the current turtle and return to its parent turtle
+- **=**: face the opposite direction; (possibly also push with a copy of the remaining code for symmetry)
+- **|**: swap left/right chirality; (possibly also push with a copy of the remaining code for symmetry)
 - **.**: do nothing
 - etc.
 
@@ -342,8 +347,11 @@ One of the advantages of using strings of symbols as genotypes is their readabil
 - At a random location, remove a symbol
 - At a random location, insert a symbol randomly chosen from the alphabet
 - Split the string into two parts, and join them the other way around
-- Reverse a section of the string
+- Repeat a subsection of the string
+- Reverse, or shuffle, a subsection of the string
 	
+> Some of these mutations can change the length of the string. It may be advisable to add limits on the minimum or maximum length of the string mutations can produce.
+
 Now we can show all members of a generation side-by-side, and use the mouse to choose the member we prefer to form the parent of the next generation.
 
 See this example of [evolving biomorphs](http://codepen.io/grrrwaaa/pen/BjvQLq?editors=001)
@@ -352,21 +360,23 @@ See this example of [evolving biomorphs](http://codepen.io/grrrwaaa/pen/BjvQLq?e
 
 Possible extensions:
 
-- Make the fixed amounts variable over time
-- Add "bracketed systems":
-	- By adding push "[" and pop "]" symbols to save/restore graphics state (position, orientation etc.), the graphics interpreter can render branched structures such as trees and ferns. The result is further improved by reducing the length of each line according to the bracketed recursion depth.
-- Extend into [*rewriting systems*, such as L-systems, by embedding *production rules*](code.html)
+- Make the fixed amounts (segment angles, lengths) variable over time, for animated biomorphs
+- Extend the alphabet with more drawing components
+- Show the creatures growth by interpreting less than the whole string during a childhood period
+- Extend into more complex [*rewriting systems*, such as L-systems, by embedding *production rules*](code.html), to create evolutionary-developmental systems! I.e., the genome isn't interpreted immediately into graphics, but instead/also into the production of more code for interpreting. 
 
-#### Examples from previous classes
+The past point is important to consider. A convincing form of bilateral symmetry (something found in many organisms) can be achieved by L-system production rules, rather than by embedding this into the interpreter. 
+
+### Examples of aesthetic selection from previous classes
 
 - [Malevich Generator by Sophie Roginsky](http://codepen.io/grrrwaaa/pen/mrZqoK?editors=0010)
 - [Strange Attractor by Rose Zhou](http://codepen.io/grrrwaaa/pen/vXqWwj?editors=0010)
 
 ## Development & meta-evolution
 
-In some cases, there may be several stages of code development. The biomorphs example hints at this, and already grants built-in symmetries and modular structures as are frequently found in nature -- this is partly why we respond to them. But the developmental approach can be taken much further. Sims' evolved virtual creatures had a genotype that encoded a LISP function, which when run would produce a body shape (the developmental system), but also produced an executable function for behaviour (the neural system). That is, the genetic code produces a developmental program that produces a neural program. More generally, since we are evolving code, we may want to the genome to produce re-usable subroutines that can be used multiple times within the main phenotype program. 
+In some cases, there may be several stages of code development. The biomorphs example hints at this, and already grants built-in symmetries and modular structures as are frequently found in nature -- this is partly why we respond to them. But the developmental approach can be taken much further. Sims' evolved virtual creatures had a genotype that encoded a LISP function (the developmental system), which when run would produce a body shape, but also produced an executable function for behaviour (the neural system). That is, the genetic code produces a developmental program that produces a neural program. More generally, since we are evolving code, we may want to the genome to produce re-usable subroutines that can be used multiple times within the main phenotype program. 
 
-Think back to the turtle example, with its powerful mirroring and other duplication operators, and imagine that instead of drawing lines, it is generating more code. [Here's a variation of the biomorphs example that does just that: it generates code once rather than interpreting the genome on each frame](http://codepen.io/grrrwaaa/pen/yadVLP?editors=001) -- and this could be used as a template on which to add more behaviour than simply drawing, for example. 
+Think back to the turtle example. Imagine that instead of drawing lines, it is generating richer code. [Here's a variation of the biomorphs example that does just that: it generates code once rather than interpreting the genome on each frame](http://codepen.io/grrrwaaa/pen/yadVLP?editors=001) -- and this could be used as a template on which to add more behaviour than simply drawing, for example. 
 
 Another interesting result is that the developmental program could also be gradual, meaning we can model the increase in complexity of an organism from embryo to adult through the rewriting of its behavioural programs.
 
@@ -374,13 +384,13 @@ Another interesting result is that the developmental program could also be gradu
 
 ---
 
-## Viability-based selection and ecosystemic evolution
+## Agent-based evolution
 
-So far we have replaced entire generations at a time, but of course in the real world creatures' life spans interleave in all kinds of ways, with population booms and busts. Moreover we have rather artificially tested candidates against a pre-defined function, or against the whims of an interacting user or participant. But this isn't how nature works most of the time. As noted above, *viability-based selection* depends only on fundamental internal processes and exchanges with an environment (including other creatures of various species) to determine whether a creature can survive, and reproduce. Naturally this has led to models of ecological or ecosystemic basis.
+### Viability-based selection and ecosystemic evolution
 
-A simple starting point may be to take [the agent-based example of variable populations with energy-exchange and preservation](http://codepen.io/grrrwaaa/pen/PZxrbo?editors=0010), and add genetics. In this case viability is principally determined by energy maintenance, so we have to take extra care in modeling this well. Every action an agent takes must cost energy, and this should be proportionate to the action taken. Sprinting takes more energy than sauntering. Locomotion models can estimate energy cost from the force actually applied; which is exactly the acceleration multiplied by the mass. We can approximate this by taking the difference between current & new velocities (after all clamping) and multiplying by the organism size. It may also be wise to have a basic metabolism cost to remain alive, that perhaps may increase with size, and with age.
+So far we have replaced entire generations at a time, but of course in the real world creatures' life spans interleave in all kinds of ways, with population booms and busts. Moreover we have rather artificially tested candidates against a pre-defined function, or against the whims of an interacting user or participant. But this isn't how nature works most of the time. As noted already, *viability-based selection* depends only on fundamental internal processes and exchanges with an environment (including other creatures of various species) to determine whether a creature can survive, and reproduce. Often this approach involves populations of [agents](agent.html). 
 
-When a new creature is created from nothing, as happens at the start of the simulation, and also as a fail-safe if the population ever dwindles away, a randomized genome must be added to the agent. When an agent spawns a child, the child also needs a genome, created by mutation of the parent's. Of course this could be extended by adding sexual reproduction, only occurring when agents meet, and implemented with crossover as well as mutation.
+When a new agent is created from nothing, as happens at the start of the simulation, and also as a fail-safe if the population ever dwindles away, a randomized genome must be added to the agent. When an agent spawns a child, the child also needs a genome, created by mutation of the parent's. This could be extended by adding sexual reproduction, only occurring when agents meet, and implemented with crossover as well as mutation.
 
 But most importantly, parts of the genome must determine behavioural properties of the agent -- how it behaves and interacts with the world -- else there's no selection at all. (It can be useful to also modify how the agent appears graphically, but this has no effect on evolution.) 
 
@@ -388,15 +398,21 @@ But most importantly, parts of the genome must determine behavioural properties 
 
 A good starting point may be to have the genome modify *parameters* of the agent; for example, the amount of random walk, ranges of sensing, the reproduction threshold, thresholds of probability for selecting different actions, etc. Be careful with features like speed -- you might want to model an energetic cost to go with it for realism (and to avoid breeding supersonic agents!). 
 
-[Here's a start in this direction](http://codepen.io/grrrwaaa/pen/amgjbb?editors=0010)
-
 Also be careful not to oversimplify. Making a parameter of "energy efficiency" is clearly going to evolve toward maximum efficiency; there's nothing interesting about this. Things get more interesting when there are multiple constraints in play; if increasing one parameter weakens another, for example. 
 
 Similarly, a direct mapping of each gene in the genome to each parameter is likely less interesting than a more complex mapping, in which multiple processes are applied to the genome data to determine the parameters. This is exactly why the evolution of math functions was more interesting than the evolution of text: the outcome of the math function is a very complex mapping of the genes that go in. Complex enough to have surprises.
 
 Another way of achieving this complexity in the mapping is to have the parameters drive features that have non-obvious effects or that depend on other parameters. For example, one could model a swimming organism by the speed it flaps its tail, the range it flaps over, and the average direction. Only together do these three parameters produce an arc of motion. Multiple such tails can lead to very complex motions. Similarly, taking Braitenberg's vehicles model, one could imagine placing a wire between every sensor and every motor, where the evolved parameters are the amplification weights on the wires.
 
-### Adaptive constraints
+![sticky feet](http://www.cc.gatech.edu/home/turk/stickyfeet/zoo_scaled.png)
+
+For example, see [Sticky Feet: Evolution in a Multi-Creature Physical Simulation](http://www.cc.gatech.edu/home/turk/stickyfeet/index.html) -- including the [video](http://www.cc.gatech.edu/home/turk/stickyfeet/sticky_feet.mp4). In this example, the genome determines the structure of an organism as a set of point masses connected by springs. The springs are muscle-like in that their rest lengths oscillate, and the point masses also oscillate in their 'stickiness' (environmental friction) in order to support locomotion. Each organism has a heart and a mouth -- if the mouth of one agent touches the heart of another, it can eat it, and is rewarded by reproduction. Organisms may also have antennae attached to a spring segment, which detect either mouths or hearts, and modulate the spring length or stickiness. (A simple 3-segment creature with two sensors can very easily result in similar behaviour to the Braitenberg vehicles.)
+
+### Energy conservation and global adaptive constraints
+
+Naturally environmentally-based viability selection has also led to models of ecological or ecosystemic basis. A simple starting point may be to take [the agent-based example of variable populations with energy-exchange and preservation](http://codepen.io/grrrwaaa/pen/PZxrbo?editors=0010), and add genetics. In this case viability is principally determined by energy maintenance, so we have to take extra care in modeling this well. Every action an agent takes must cost energy, and this should be proportionate to the action taken. Sprinting takes more energy than sauntering. Locomotion models can estimate energy cost from the force actually applied; which is exactly the acceleration multiplied by the mass. We can approximate this by taking the difference between current & new velocities (after all clamping) and multiplying by the organism size. It may also be wise to have a basic metabolism cost to remain alive, that perhaps may increase with size, and with age.
+
+[Here's a start in this direction](http://codepen.io/grrrwaaa/pen/amgjbb?editors=0010)
 
 As organisms evolve better strategies, they can better utilize the finite energy resources of the world, and thus support greater populations. An adaptive *difficulty*, perhaps applied to the metabolism cost, or applied generally to the available energy in the world, may help keep selection pressure effective at maintaining population size. For example, we can gradually decrease the total energy in the ecosystem while populations are large, and increase it again while populations are small.
 
