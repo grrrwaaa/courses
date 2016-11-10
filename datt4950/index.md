@@ -119,9 +119,14 @@ Other advanced topics.
 
 ### 11. Nov 28
 
+Final project/portfolio assistance.
+
+### 12. Dec 5
+
 **Due:** [Final project (40%)](due.html#final-project)
 
 Final project presentation & discussion, open lab.
+
 
 ---
 
