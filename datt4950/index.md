@@ -103,21 +103,19 @@ Genetic programming.
 
 **Quiz III** (5%)
 
-**Due:** [Assignment III (15%)](due.html#assignment-iii)
-
-Final project discussion.
-
-**Rewriting systems and artificial chemistries**. L-Systems, Tierra, Alchemy.
+Assignment III discussion/assistance.
 
 ### 10. Nov 21
 
-**Due:** [Work-in-progress of final project](due.html#final-project)
+**Due:** [Assignment III (15%)](due.html#assignment-iii)
 
-Final project/portfolio assistance.
+**Rewriting systems and artificial chemistries**. Tierra, Alchemy.
 
-Other advanced topics.
+Final project/portfolio discussion.
 
 ### 11. Nov 28
+
+**Due (in class):** [Work-in-progress of final project](due.html#final-project)
 
 Final project/portfolio assistance.
 
@@ -125,7 +123,7 @@ Final project/portfolio assistance.
 
 **Due:** [Final project (40%)](due.html#final-project)
 
-Final project presentation & discussion, open lab.
+Final project presentations, open lab.
 
 
 ---
