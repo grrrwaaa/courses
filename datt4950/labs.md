@@ -335,6 +335,24 @@ field.deposit(0.1, agent.position, channel);
 field.deposit([1, 0.5, 0.1], agent.position);
 ```
 
+### Images
+
+You can also load PNG images into a field2D. 
+
+```javascript
+field.png("https://upload.wikimedia.org/wikipedia/commons/1/17/ArtificialFictionBrain.png");
+```
+
+Note: images will be resized to fit the field, not vice versa. Transparent PNGs are supported (the opacity information is in channel 4 of the field).
+
+Note: images can take a little time to load. If you want something to happen only after the image is loaded, add a callback:
+
+```javascript
+field.png("https://upload.wikimedia.org/wikipedia/commons/1/17/ArtificialFictionBrain.png", function() {
+	write("image is loaded!");
+});
+```
+
 ## vec2
 
 The ```vec2``` type gives us a useful abstraction of two-component vectors. Here are some ways of creating a vec2:

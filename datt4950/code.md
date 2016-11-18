@@ -400,6 +400,8 @@ The "a" atom represents the input argument.
 
 ---
 
+[Progress toward alchemy](http://codepen.io/grrrwaaa/pen/YpGGXa?editors=001)
+
 ## Further afield
 
 Here is a [remarkable collection of browser-based demos](http://chorasimilarity.github.io/chemlambda-gui/dynamic/demos.html) of the ChemLambda system, which has strong influences from Fontana's work.

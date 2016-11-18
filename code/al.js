@@ -1,8 +1,10 @@
 /*
 
-browserify code/al.js -o _site/code/al.js 
-minify _site/code/al.js 
+
+(cat code/pngtoy.min.js; browserify code/al.js) > _site/code/al.js 
+minify _site/code/al.js
 cp _site/code/al.min.js _site/datt4950/gallery/
+
 
 */
 
@@ -1639,6 +1641,70 @@ field2D = function field2D(width, height) {
 
 	this.tex = gl.createTexture();
 };
+
+field2D.prototype.png = function(url, callback) {
+	var pngtoy = new PngToy();
+	var png_error = function (err) { 
+		console.error("failed to parse PNG:", url, err); 
+	}
+	
+	var dst = this;
+
+	pngtoy.fetch(url).then(function(bmp) {	
+	  pngtoy.decode(bmp).then(function(bmp) {
+		//console.log(bmp);
+		var w = bmp.width;
+		var h = bmp.height;
+		var planes = bmp.pixelWidth;
+		var arr = bmp.bitmap;
+	
+		for (var y = 0; y < dst.height; ++y) {
+			for (var x = 0; x < dst.width; ++x) {
+				var uv = new vec2((x+0.5)/dst.width, (y+0.5)/dst.height);
+				uv[1] = 1-uv[1]; // flip Y
+				
+				// wrap or clamp, in this case?
+				var u = wrap(((uv[0] * w) - 0.5), w); 
+				var v = wrap(((uv[1] * h) - 0.5), h);
+				// get nearest cells:
+				var x0 = Math.floor(u);
+				var y0 = Math.floor(v);
+				var x1 = wrap(x0 + 1, w);
+				var y1 = wrap(y0 + 1, h);
+				// get interp factors:
+				var xb = u - x0;
+				var yb = v - y0;
+				var xa = 1 - xb;
+				var ya = 1 - yb;
+				// get indices into bmp:
+				var i00 = (y0 * w + x0) * planes;
+				var i10 = (y0 * w + x1) * planes;
+				var i01 = (y1 * w + x0) * planes;
+				var i11 = (y1 * w + x1) * planes;
+				// get index into destination:
+				var dstindex = (y * dst.width + x) * 4;
+				
+				// for each channel:
+				for (var channel = 0; channel < 4; channel++) {
+					// get values:
+					var v00 = arr[i00 + channel];
+					var v10 = arr[i10 + channel];
+					var v01 = arr[i01 + channel];
+					var v11 = arr[i11 + channel];
+					// interpolate:
+					var v = (v00 * xa * ya + v10 * xb * ya + v01 * xa * yb + v11 * xb * yb);
+					v = v / 255; // UInt8 to Float
+					
+					dst.array[dstindex + channel] = v;
+				}
+			}
+		}
+		
+		if (callback && typeof callback == "function") callback();
+	
+	  }, png_error);
+	}, png_error);
+}
 
 field2D.prototype.clone = function() {
 	var result = new field2D(this.width, this.height);
