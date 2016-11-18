@@ -273,6 +273,16 @@ field.deposit(<span class="hljs-number">0.1</span>, <span class="hljs-built_in">
 <span class="hljs-comment">// to update several channels:</span>
 field.deposit([<span class="hljs-number">1</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.1</span>], <span class="hljs-built_in">agent</span>.<span class="hljs-built_in">position</span>);
 </code></pre>
+<h3 id="images">Images</h3>
+<p>You can also load PNG images into a field2D. </p>
+<pre><code class="lang-javascript">field.png(<span class="hljs-string">"https://upload.wikimedia.org/wikipedia/commons/1/17/ArtificialFictionBrain.png"</span>)<span class="hljs-comment">;</span>
+</code></pre>
+<p>Note: images will be resized to fit the field, not vice versa. Transparent PNGs are supported (the opacity information is in channel 4 of the field).</p>
+<p>Note: images can take a little time to load. If you want something to happen only after the image is loaded, add a callback:</p>
+<pre><code class="lang-javascript">field.png(<span class="hljs-string">"https://upload.wikimedia.org/wikipedia/commons/1/17/ArtificialFictionBrain.png"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+    write(<span class="hljs-string">"image is loaded!"</span>);
+});
+</code></pre>
 <h2 id="vec2">vec2</h2>
 <p>The <code>vec2</code> type gives us a useful abstraction of two-component vectors. Here are some ways of creating a vec2:</p>
 <pre><code class="lang-javascript"><span class="hljs-variable"><span class="hljs-keyword">var</span> v0</span> = new vec2(x, y);

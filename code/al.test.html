@@ -9,51 +9,392 @@
     <script src="al.js"></script>
     <script>
 
-a = { 
-	x: [1, vec2.random()], 
-	f: new field2D(2),
-}
-a.f.set(function(r, c) { return random(); });
+var path = "https://upload.wikimedia.org/wikipedia/commons/a/a8/Awaren_skull.png";
+var dst = new field2D(400);
 
+dst.png(path);
 
-serialize = {
-	vec2: true,
-	field2D: function(o) {
-		var f1 = o.clone();
-		f1.array = Array.prototype.slice.call(f1.array);
-		return f1;
-	},
-};
-
-deserialize = {
-	vec2: function(o) {
-		return new vec2(o[0], o[1]);
-	},
-	field2D: function(o) {
-		var b = new field2D(o.width, o.height);
-		b.smooth = o.smooth;
-		b.array.set(o.array);
-		return b;
-	}
-};
-
-function save() { 
-	console.log("save:", a);
-	return a; 
-}
-
-function load(data) {
-	console.log("load:", data);
-	a = data;
-
-	save();
-}
 
 function draw() {
-	a.f.draw();
+  dst.draw();
 }
-    
-console.log("ok");
+
+/*
+	BYTECODE SOUP
+	
+	maybe, have a cpu have a read and write pointer as well as an instruction pointer, and a copying state
+	when copying is enabled, the rp and wp are also stepped forward on each instruction, and soup[wp] = soup[rp]
+	so to copy we can enable copying, then loop until wp reaches an end, or a counter comes to zero, etc.
+	
+	maybe, the malloc instruction actually creates a child (with an ip), and the fork instruction activates & releases the child
+	
+	but the more it gets automated like this, the less scope there is for discovery...
+
+
+var dim = 128;
+var len = dim*dim;
+var display = new field2D(dim);
+var owner = display.clone();
+var cpu_steps = 10;
+var pop_max = 50;
+var stack_max = 10;
+var lexicon = "[](){}!?abcdeABCDE1234567890+-*^vmrw@".split("");
+
+
+var seed = "[84*3+AamB]CbD(crdwc^Cd^DavAa)?b@]!";
+
+console.log(seed.length, 4*8+3);
+//while(seed.length < dim) seed += " ";
+
+var soup = [];
+if (0) {
+	for (var i=0; i<dim; i++) {
+		for (var j=0; j<dim; j++) {
+			soup.push(
+				lexicon[random(lexicon.length)]
+			);
+		}
+	}
+} else {
+	//while (soup.length <= len-seed.length) {
+		soup = soup.concat(seed.split(""));
+	//}
+}
+while (soup.length < len) {
+	//soup.push( lexicon[random(lexicon.length)] );
+	soup.push(" ");
+}
+console.log(soup.join(""));
+
+function make_cpu() {
+	return {
+		ip: random(soup.length), // instruction pointer
+		stack: [0, 0, 0, 0, 0],
+		sp: 0,
+		symbol: " ",
+		a: 0,
+		b: 0,
+		c: 0,
+		d: 0,
+		e: 0,
+		hue: random(),
+	}
+}
+
+var pop = [];
+for (var i=0; i<1; i++) {
+	var parent = make_cpu();
+	parent.ip = i*dim; //find_prev("[", parent.ip);
+	pop.push(parent);
+}
+
+function find_prev(c, ip) {
+	var i = ip;
+	while (i--) {
+		if (soup[i] == c) return i;
+	}
+	i = soup.length;
+	while (i-- > ip) {
+		if (soup[i] == c) return i;
+	}
+}
+function find_next(c, ip) {
+	var i = ip;
+	while (++i < len) {
+		if (soup[i] == c) return i;
+	}
+	i = -1;
+	while (++i < ip) {
+		if (soup[i] == c) return i;
+	}
+}
+
+function request_memory(cpu_index, size) {
+	if (size > dim) size = dim;
+	// TODO: be careful
+	
+	// cycle through soup until we find 'size' worth of empty space
+	// if not found, defer to reaper to get space by replacing oldest organisms
+	var idx = random(len);
+	for (var i=idx; i<idx+size; i++) {
+		soup[i % len] = " ";
+	}
+	//return dim*random(dim);
+	return idx;
+}
+
+function cpu_push(cpu, v) {
+	cpu.sp++;
+	if (cpu.sp >= cpu.stack.length) cpu.sp = 0;
+	cpu.stack[cpu.sp] = v;
+	//console.log("push", cpu.sp);
+}
+
+function cpu_top(cpu, idx) {
+	if (idx == undefined) idx = 0;
+	idx += cpu.sp;
+	while (idx >= cpu.stack.length) idx -= cpu.stack.length;
+	while (idx < 0) idx += cpu.stack.length;
+	var v = cpu.stack[idx];
+	//cpu.sp--;
+	//if (cpu.sp <= 0) cpu.sp = cpu.stack.length-1;
+	//console.log("pop", cpu.sp);
+	return v;
+}
+
+function step(cpu, pop_index) {
+	// get next instruction:
+	var cmd = soup[cpu.ip];
+	//write(pop_index, cmd);
+	
+	switch(cmd) {
+	case "a":
+	case "b":
+	case "c":
+	case "d":
+	case "e":
+		// get register
+		var v = cpu[cmd];
+		cpu_push(cpu, v);
+		break;
+	case "A":
+	case "B":
+	case "C":
+	case "D":
+	case "E":
+		// set register
+		var v = cpu_top(cpu);
+		cpu[cmd.toLowerCase()] = v;
+		break;
+	case "0":
+	case "1":
+	case "2":
+	case "3":
+	case "4":
+	case "5":
+	case "6":
+	case "7":
+	case "8":
+	case "9":
+		// raw number:
+		cpu_push(cpu, +cmd);
+		break;
+	case "+":
+		var a = cpu_top(cpu);
+		var b = cpu_top(cpu, -1);
+		cpu_push(cpu, a+b);
+		break;
+	case "-":
+		var a = cpu_top(cpu);
+		var b = cpu_top(cpu, -1);
+		cpu_push(cpu, a-b);
+		break;
+	case "*":
+		var a = cpu_top(cpu);
+		var b = cpu_top(cpu, -1);
+		cpu_push(cpu, a*b);
+		break;
+	case "^":
+		var a = cpu_top(cpu);
+		cpu_push(cpu, a+1);
+		break;
+	case "v":
+		var a = cpu_top(cpu);
+		cpu_push(cpu, a-1);
+		break;
+	case "[": 
+		//var ip = find_next("]", cpu.ip);
+		//if (typeof ip != "number") return cmd+" not number";
+		//cpu_push(cpu, ip);
+		break;
+	case "(": 
+		//var ip = find_next(")", cpu.ip);
+		//if (typeof ip != "number") return cmd+" not number";
+		//cpu_push(cpu, ip);
+		break;
+	case "{": 
+		//var ip = find_next("}", cpu.ip);
+		//if (typeof ip != "number") return cmd+" not number";
+		//cpu_push(cpu, ip);
+		break;
+	case "]":
+		// jump back to previous:
+		var ip = find_prev("[", cpu.ip);
+		if (typeof ip != "number") return cmd+" not number";
+		cpu_push(cpu, ip);
+		break;
+	case ")":
+		// jump back to previous:
+		var ip = find_prev("(", cpu.ip);
+		if (typeof ip != "number") return cmd+" not number";
+		cpu_push(cpu, ip);
+		break;
+	case "}":
+		// jump back to previous:
+		var ip = find_prev("{", cpu.ip);
+		if (typeof ip != "number") return cmd+" not number";
+		cpu_push(cpu, ip);
+		break;
+	case "!":
+		var ip = cpu_top(cpu);
+		if (typeof ip != "number") return cmd+" not number";
+		ip = wrap(ip, len-1);
+		if (ip < 0 || ip >= soup.length) return cmd+" bad address "+ip;
+		cpu.ip = ip;
+		break;
+	case "?":
+		var ip = cpu_top(cpu);
+		var cond = cpu_top(cpu, -1);
+		if (typeof ip != "number") return cmd+" not number";
+		ip = wrap(ip, len-1);
+		if (ip < 0 || ip >= soup.length) return cmd+" bad address "+ip;
+		if (typeof cond != "number") return cmd+" not number";
+		//console.log(cpu);
+		if (cond > 0) cpu.ip = ip;
+		break;
+	case "r":
+		// read
+		var ip = cpu_top(cpu);
+		if (typeof ip != "number") return cmd+" not number";
+		ip = wrap(ip, len-1);
+		if (ip < 0 || ip >= soup.length) return cmd+" bad address";
+		cpu.symbol = soup[ip];
+		//console.log("read", ip, cpu.symbol);
+		break;
+	case "w":
+		// write
+		var ip = cpu_top(cpu);
+		if (typeof ip != "number") return cmd+" not number";
+		ip = wrap(ip, len-1);
+		if (ip < 0 || ip >= soup.length) return cmd+" bad address";
+		// barrier:
+		//if (soup[ip] != " ") return cmd+" memory is occupied";
+		soup[ip] = cpu.symbol;
+		
+		// convert ip into x,y
+		var x = (ip % dim);
+		var y = Math.floor(ip/dim);
+		owner.set(cpu.hue, x, y);
+		
+		//console.log("write", ip, cpu.symbol, soup[ip]);
+		break;
+	case "m":
+		// request memory
+		var size = cpu_top(cpu);
+		if (typeof size != "number") return cmd+" not number";
+		if (size > dim) size = dim;
+		
+		// TODO: be careful
+	
+		// cycle through soup until we find 'size' worth of empty space
+		// if not found, defer to reaper to get space by replacing oldest organisms
+		var ip = random(len);
+		if (typeof ip != "number") return cmd+" not number";
+		ip = wrap(ip, len-1);
+		if (ip < 0 || ip >= soup.length) return cmd+" bad address";
+		
+		// clear:
+		//for (var i=ip; i<ip+size; i++) { soup[i % len] = " "; }
+		
+		cpu_push(cpu, ip);
+		
+		//console.log("m", ip);
+		
+		break;
+	case "@":
+		// fork
+		var ip = cpu_top(cpu);
+		if (typeof ip != "number") return cmd+" not number";
+		ip = wrap(ip, len-1);
+		if (ip < 0 || ip >= soup.length) return cmd+" bad address";
+		
+		if (true || pop.length < pop_max) {
+			var child = make_cpu();
+			child.ip = ip;
+			child.hue = wrap(cpu.hue + 0.1*srandom(), 1);
+			pop.push(child);
+		} else {
+			// population saturated; become the child instead:
+			cpu.ip = ip;
+		}
+		
+		break;
+	default:
+		
+	}
+	
+	return;
+}
+
+function update() {
+
+	while (pop.length > pop_max) {
+		pop.shift();
+	}
+
+	// slicer
+	var i=pop.length;
+	while (i--) {
+		var cpu = pop[i];
+		for (var j=0; j<cpu_steps; j++) {
+			var err = step(cpu, i);
+			
+			// by default, step onward:
+			cpu.ip++; 
+			if (cpu.ip >= len) cpu.ip = 0;
+
+			if (err) {
+				// kill it
+				console.log(err);
+				pop.splice(i, 1);
+				break;
+			}
+		}
+	}
+	
+	// mutations:
+	if (random() < 1/dim) soup[random(soup.length)] = lexicon[random(lexicon.length)];
+	
+	// reaper
+	
+	
+	// set up field based on soup:
+	display.set(function(r, c) {
+		var idx = r + c*dim;
+		var cmd = soup[idx];
+		switch(cmd) {
+		case "[":
+		case "]":
+			return 1;
+		case "(":
+		case ")":
+		case "{":
+		case "}":
+			return 0.7;
+		case " ":
+			return 0.;
+		default: 
+			return 0.2 + 0.2*soup[idx].charCodeAt(0)/128;
+		}
+	});
+	
+	
+}
+
+
+function draw() {
+	
+	draw2D.hsl(0, 0.5, 0.75);
+	display.draw();
+	
+	for (var cpu of pop) {
+		var x = ((cpu.ip % dim)+0.5)/dim;
+		var y = (Math.floor(cpu.ip/dim)+0.5)/dim;
+		draw2D.hsl(0.25, cpu.hue, 0.75);
+		draw2D.triangle([x, y], 1/dim);
+	}
+}
+*/
     </script>
   </body>
 </html>
