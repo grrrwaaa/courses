@@ -353,6 +353,8 @@ field.png("https://upload.wikimedia.org/wikipedia/commons/1/17/ArtificialFiction
 });
 ```
 
+[See this demo in the editor](http://codepen.io/grrrwaaa/pen/gLLjXW?editors=0010)
+
 ## vec2
 
 The ```vec2``` type gives us a useful abstraction of two-component vectors. Here are some ways of creating a vec2:
