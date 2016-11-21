@@ -111,7 +111,7 @@ Assignment III discussion/assistance.
 
 **Due:** [Assignment III (15%)](due.html#assignment-iii)
 
-Special topic: [beyond the lab environment.](https://github.com/grrrwaaa/courses/tree/55d31947351bbfa7e8d0a1e56e1a012df1a0a849/code)
+Special topic: [beyond the lab environment.](https://github.com/grrrwaaa/courses/tree/gh-pages/code)
 
 Final project/portfolio discussion.
 
