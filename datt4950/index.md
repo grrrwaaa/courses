@@ -107,15 +107,21 @@ Assignment III discussion/assistance.
 
 ### 10. Nov 21
 
+[Course evaluation](http://courseevaluations.yorku.ca)
+
 **Due:** [Assignment III (15%)](due.html#assignment-iii)
 
-**Rewriting systems and artificial chemistries**. Tierra, Alchemy.
+Special topic: beyond the lab environment.
 
 Final project/portfolio discussion.
+
+**Quiz III** (5%)
 
 ### 11. Nov 28
 
 **Due (in class):** [Work-in-progress of final project](due.html#final-project)
+
+**Rewriting systems and artificial chemistries**. Tierra, Alchemy.
 
 Final project/portfolio assistance.
 
