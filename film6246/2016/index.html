@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Future Cinema II</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+  </head>
+  <body>
+  	<nav>
+	<ul>
+	<li><a href="index.html" alt="Future Cinema II">Future Cinema II</a></li>
+<li><a href="vr.html" alt="VR">VR</a></li>
+<li><a href="works.html" alt="Works">Works</a></li>
+<li><a href="cinema.html" alt="Cinema">Cinema</a></li>
+<li><a href="game.html" alt="Game">Game</a></li>
+<li><a href="osmose.html" alt="Osmose">Osmose</a></li>
+<li><a href="design.html" alt="Design">Design</a></li>
+<li><a href="reading.html" alt="Reading">Reading</a></li>
+<li><a href="project.html" alt="Project">Project</a></li>
+<li><a href="unreal.html" alt="Unreal">Unreal</a></li>
+	</ul>
+	</nav>	
+	<div id="main">
+	<h1 id="future-cinema-ii-applied-theory">Future Cinema II: Applied Theory</h1>
+<p><a href="http://arstechnica.com/tech-policy/2010/05/ralph-124c-41-a-century-later/"><img src="http://cdn.arstechnica.net/wp-content/uploads/2010/04/tvglasses.jpg" alt="Personal Television from Life Magazine."></a><br>Hugo Gernsback (of &quot;Hugo Awards&quot; fame), wearing his TV Glasses in a 1963 Life magazine shoot.</p>
+<p><strong>Course:</strong> FILM 6246<br><strong>Class time:</strong> Tuesdays 10:00am - 1:00pm<br><strong>Open lab/office hours:</strong> Tuesdays 2:00-4:00pm (optional)<br><strong>Location:</strong> 309 GCFA</p>
+<p><strong>Course director:</strong> Graham Wakefield<br><strong>Office:</strong> 303C GCFA<br><strong>Email:</strong> grrrwaaa at yorku dot ca    </p>
+<p>This hands-on course gives you an opportunity to learn about new screen technologies, approaches and techniques in a lab environment, and participate in the evolution of emerging media. In 2015-2016, the course will give you the opportunity to engage with wearable immersive virtual reality <a href="vr.html">(VR)</a> technology via the Oculus Rift headset on both practical and theoretical levels to understand, create and imagine new kinds of worlds. </p>
+<p>You will work in the lab to build prototypes that will function as a testing ground. You are encouraged to be both theorists and practical experimenters, to research while doing, understanding that the process of exploring firsthand is an important step toward the kinds of knowledge and ways of knowing enabled and encouraged by these evocative new digital technologies, and suggest new ways to think about future forms of the moving image, from new literacies to new audiences. The course will expose you to the imperfect software support for building worlds, and encourage you to think about and beyond their limits. Our work is put into context and guided by a century of preceding theory and practice even as we try, collectively, to imagine moving images and screens of the future, through discussions interwoven with the individual and group projects.</p>
+<p>Students with backgrounds in film, digital media, design, theatre, music, architecture, video production, and visual storytelling are welcome, as are students with programming, human-computer interaction, or computer graphics backgrounds. Knowledge of Max/MSP/Jitter, Unity/Unreal, Cinder/OpenFrameworks, or related software will be at an advantage, but is not required. The labs aim to accelerate development such that the technology need not be so difficult to penetrate. Above all, creative thinking with and through technology is the most important asset that you can bring to this course. This seminar and its associated lab component are understood to be very much an experimental think tank whose success very much depends on your collective enthusiasm and active engagement.</p>
+<hr>
+<h2 id="labs">Labs</h2>
+<p>We will be using the Oculus Rift DK2, unless we are lucky enough to get a <a href="https://www.youtube.com/watch?v=asduqdRizqs">CV1](</a> before the 
+semester ends.</p>
+<p>Although there is great excitement in producing 360&#39; films for VR, this is not what we will be doing in this course. Practically, we do not have access to a 360&#39; camera rig. Moreover, 360&#39; filmmaking is arguably (at least with current technology) unable to leverage some of the fundamental capabilities of VR -- such as positional head-tracking -- and thus does not grant a full exploration of the medium&#39;s inherent message. Instead, we will rely more on software to create worlds.</p>
+<p>Creating a virtual world requires high-performance computer graphics -- for VR, the equivalent of at least HD resolution, but at 60 or more frames per second (90 for the Oculus CV1). This is supported by low-level drivers and libraries, but few creators want to work at this level. A number of higher-level programming frameworks exist -- for new media artists these might still use a lower level language such as C++ (openFrameworks, Cinder being two good examples), or might present a completely different high-level interface such as the visual programming of Max/MSP/Jitter, VVVV, etc. But these can still present a significant barrier to entry.</p>
+<p>The majority of VR projects being created for today&#39;s headsets are written using <em>game engines</em>. The most widely used and freely available game engines are currently <a href="http://unity3d.com">Unity</a> and <a href="https://www.unrealengine.com/blog">Unreal</a>. Game engines can get you a long way by just importing assets, dragging &amp; dropping, tweaking parameters etc. without having to ever see code, and some incorporate some kind of scripting or visual programming option too. Though they might not grant the full freedom of a programming framework, the learning curve is gentler. Compared to many frameworks, game engines have much more built-in features (lighting models, terrain, physics, etc.). The danger is that these engines and their editors are permeated by game-oriented concepts, terminology, workflows etc, and the result is often recognizably the product of a game engine. They also benefit from the largest VR communities at present.</p>
+<p>As an alternative to creating an <em>app</em>, some VR creators are focusing on the <em>web browser</em> as primary medium. Unity and Unreal also offer options to export to web, but this might not yet be VR-capable. Alternatively, numerous 3D graphics frameworks exist for browser-based JavaScript (e.g. Three.js), which can be combined with <a href="http://mozvr.com">MozVR</a> for Firefox or <a href="http://webvr.info">WebVR</a> for Firefox &amp; Chrome.</p>
+<p>Another option is to avoid software development altogether, and work within a sandbox platform: a game or game-like world that already exists, but which can be redefined by its users to build and design &quot;user generated content&quot; (such as SecondLife -- see <a href="http://secondlife.com/destinations/oculus">this collection of Rift-oriented examples</a>). Obviously this may appear the easiest, but is also the most constrained of the available options.</p>
+<p>For our labs we will begin with the game engine route, with the <a href="unreal.html">Unreal Engine</a> in particular.</p>
+<hr>
+<h2 id="schedule">Schedule</h2>
+<p>Content may vary from this plan according to needs and interests of students.</p>
+<h3 id="1-jan-5">1. Jan 5</h3>
+<p><strong>Course overview</strong>. </p>
+<p>Introduction to the field, the themes and objectives, the hardware and software. </p>
+<p><strong>Tasks</strong></p>
+<p>Part 1:</p>
+<ul>
+<li>In-class: try out one of the VR experiences, and write down as many of your immediate impressions as you can -- whatever they may be.</li>
+<li>After class, reflect on your first impressions of VR some more, and note down any further insights, observations, or ideas you have.</li>
+<li>Research online to find a VR project, or a project you think would be suitable for VR, that you would most like to experience. Some suggested places to explore are listed below, but please don&#39;t limit yourself to these:<ul>
+<li><a href="https://share.oculus.com">Oculus Share</a></li>
+<li><a href="https://play.google.com/store/apps/collection/promotion_3001011_cardboard_featured_apps?hl=en">Apps for Google Cardboard</a></li>
+<li><a href="https://docs.unrealengine.com/latest/INT/Resources/Showcases/index.html">Unreal feature examples</a></li>
+<li><a href="http://www.vrapplist.de">VR app list</a></li>
+<li><a href="http://ca.ign.com/articles/2013/12/01/10-games-thatll-make-you-want-an-oculus-rift">A typical indie game/VR list</a> -- and <a href="http://blog.ianiselsewhere.com/post/51243939314/27-games-i-want-to-play-on-the-oculus-rift">a more interesting one</a></li>
+</ul>
+</li>
+<li>Submit your responses and research via <a href="https://docs.google.com/forms/d/1RF_6YI1hTLUdHhsctx972J5qYbH9zNNZc98wZkItNiw/viewform">this survey form here</a>, by Saturday 9th, so that I have time to collate results and install whatever projects I can.</li>
+</ul>
+<p>Part 2:</p>
+<ul>
+<li>Download &amp; install the Unreal Engine, editor, and content examples <a href="unreal.html#getting-unreal">according to the instructions here</a>. <ul>
+<li>Work through at least the first two <a href="https://wiki.unrealengine.com/Videos?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl">UE4 Editor Tutorial Videos</a>, following along with your own copy.</li>
+<li>If you can, try working through some of the steps of the Level Designer Quick Start Tutorial <a href="https://docs.unrealengine.com/latest/INT/Engine/QuickStart/1/index.html">starting here</a>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-jan-12">2. Jan 12</h3>
+<p>Recap &amp; discussion. More VR experiences. Getting to know Unreal.</p>
+<p><strong>Tasks</strong></p>
+<ul>
+<li>Watch the <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=57MxoF4sy84">geometry layout</a> tutorial, no further than part 7, and follow along to create your first project and level.</li>
+</ul>
+<h3 id="3-jan-19">3. Jan 19</h3>
+<p>Simulator sickness. </p>
+<p>Engine: level-building/roughing-out tutorial.</p>
+<p><strong>Tasks</strong></p>
+<p>Develop your first Unreal project level -- and bring it in next week (on a USB stick) to show. Keep a record of any questions you have, and any ideas that come that you&#39;d like to know whether is possible / how to do, what you&#39;d like to do next, and/or how you might like people to experience this space. We can discuss these ideas as you show it.</p>
+<h3 id="4-jan-26">4. Jan 26</h3>
+<p>Showing the first worlds, questions &amp; discussion. </p>
+<p>Engine: foliage, embedding media, event triggers, post-processing volumes.</p>
+<p><strong>Tasks</strong></p>
+<p>Continue working with the worlds. Begin sketching out ideas for a project proposal. Collect questions -- what would you like to try?</p>
+<h3 id="5-feb-2">5. Feb 2</h3>
+<p>Early VR art inspiration. </p>
+<p>Game/not game inspiration.</p>
+<p>Project discussion.</p>
+<h3 id="6-feb-9">6. Feb 9</h3>
+<p>Recent VR art inspiration. </p>
+<p>Further game/not game inspiration.</p>
+<p>Project discussion.</p>
+<p><strong>Tasks</strong></p>
+<p>Complete a shared project design document, including synopsis, mood/inspiration images/links, plan (timeline, technical/content milestones, division of labour), etc. Respond to <a href="project.html">the project design questions</a> as much as possible.</p>
+<h3 id="7-feb-16">7. Feb 16</h3>
+<p><strong>Reading week</strong></p>
+<h3 id="8-feb-23">8. Feb 23</h3>
+<p>Project design presentation. </p>
+<p>Milestone foci.</p>
+<h3 id="9-mar-1-mar-22-four-sessions-">9. Mar 1 - Mar 22 (four sessions)</h3>
+<p>Project development labs</p>
+<h3 id="13-mar-29">13. Mar 29</h3>
+<p>Final project presentation &amp; discussion, open lab.</p>
+<p>Final distribution-ready project due April 13.</p>
+
+	</div>
+	<footer>&copy; 2016 Graham Wakefield</footer>
+  </body>
+</html>

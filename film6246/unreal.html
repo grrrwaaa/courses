@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Unreal</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+  </head>
+  <body>
+  	<nav>
+	<ul>
+	<li><a href="index.html" alt="Future Cinema II">Future Cinema II</a></li>
+<li><a href="unreal.html" alt="Unreal">Unreal</a></li>
+	</ul>
+	</nav>	
+	<div id="main">
+	<h1 id="unreal-engine">Unreal Engine</h1>
+<p>Unreal has <a href="https://en.wikipedia.org/wiki/List_of_Unreal_Engine_games">long been used in many &quot;AAA&quot; (large-scale/high-production value/high-budget) games</a>, but was open-sourced with an amenable license in early 2015; and now has built-in support for VR, including the Oculus Rift, HTC Vive, and OSVR. Some better-known games created in Unreal include:
+Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantasy, Hellblade, Kingdom Hearts, Mass Effect, Mirror&#39;s Edge, etc. A significant percentage of experiences available for the Oculus Rift and HTC Vive were authored in Unreal.</p>
+<h2 id="some-quick-inspiration">Some quick inspiration</h2>
+<p>On Youtube there are now plenty of examples of high-speed video captures of level design using game engines such as Unreal -- and <a href="http://thegrue.com/how-vr-is-creating-a-new-market-and-community-for-level-design-pointless-places/">here&#39;s an interesting article speculating how the emergence of VR is adding fuel to the fire, with many examples</a> -- such as:</p>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/UCOww2sdsTM?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/67NToSkW2vs?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<p>We cover nearly all of the tools used in these clips during the labs.</p>
+<h2 id="getting-started">Getting Started</h2>
+<p>For Winter 2017 we will be using Unreal Engine version 4.14, which you can <a href="https://www.unrealengine.com/what-is-unreal-engine-4">download from here</a>. However, be aware that Unreal needs <a href="https://docs.unrealengine.com/latest/INT/GettingStarted/RecommendedSpecifications/#recommendedhardware">a reasonably fast PC or Mac</a> to run comfortably. Mac users will also need a mouse with at least two buttons. It also will eat up gigabytes of disk space!</p>
+<ul>
+<li>Go to <a href="https://www.unrealengine.com">https://www.unrealengine.com</a> and follow the &quot;Get Unreal&quot; link to register an account and then download the launcher application. </li>
+<li>Run this launcher (you will need to sign in again), and then under the &quot;Unreal&quot; tab download the Unreal Engine. This will take a while!</li>
+<li>From the launcher also get the &quot;content examples&quot;, and perhaps any other of the free samples you find interesting. Warning -- these examples can eat even more <em>gigabytes</em> of disk space!!</li>
+</ul>
+<p>Once Unreal is installed, we can also create a new project. Unless things go very much awry, you should only have to do this once. Open the editor directly, or via the launcher. It should open with the &#39;project browser&#39; / &#39;new project&#39; window. </p>
+<ul>
+<li>In the <code>New Project</code> tab:<ul>
+<li>Choose the Blueprint tab (not C++)</li>
+<li>Choose the <code>Virtual Reality</code> template</li>
+<li>Choose <code>Desktop</code> target, <code>Maximum Quality</code>, and <code>With Starter Content</code></li>
+<li>Set the project path (e.g. <code>E:\Unreal Projects</code> )</li>
+<li>Set the project name</li>
+<li>Press &#39;Create Project&#39;</li>
+<li>After a few moments, the new project will open in the editor</li>
+</ul>
+</li>
+</ul>
+<p>In future, you can go ahead and open your existing project from the launcher, or the editor&#39;s project browser. I recommend that you only create one project, and just make new &quot;levels&quot; within that project whenever you want to try a new idea out. This will make it easier to manage assets and will save disk space.</p>
+<blockquote>
+<p>Unreal&#39;s VR template, offers support for both gamepad (e.g. Xbox controller) and motion controllers (e.g. Oculus Touch or HTC Vive wands). The template comes with a number of rendering optimizations for VR. <a href="http://www.tomlooman.com/vrtemplate/">The template is described in detail here, including how to navigate it</a>.</p>
+</blockquote>
+<hr>
+<h2 id="worldmaking-with-unreal">Worldmaking with Unreal</h2>
+<h3 id="basic-concepts">Basic concepts</h3>
+<p>See <a href="https://docs.unrealengine.com/latest/INT/GettingStarted/index.html?utm_source=launcher&amp;utm_medium=ue&amp;utm_campaign=uelearn">Getting started with UE4</a>.</p>
+<p>You use the <em>Unreal Editor</em> application to author your world. Ultimately you will export it as a distributable application (.exe on windows), but most of the time you will edit and also playtest the world via the Editor. A <em>Project</em> is actually a whole folder of files on your disk, including a <code>.uproject</code> file that keeps the global settings together. You also see these files via the Content Browser in the Unreal editor.</p>
+<p>Each project has one or more <em>Levels</em> (sometimes also called <strong>Maps</strong>), which are independent 3D scenes or locations into which you place objects to define the world experienced. Each level is saved as a separate <code>.umap</code> file.</p>
+<blockquote>
+<p>I recommend that you do all your development in a single project. You can create new levels to try different ideas out, but keeping it all in a single project will make it easier to copy items between levels, and reduce disk space required. There are also methods to &#39;teleport&#39; between levels to build a larger world.</p>
+</blockquote>
+<p>Any object (a player, character, geometry mesh, light, etc.) that is placed in 3D space (with position/translation, rotation/orientation, scale etc.) is an <em>Actor</em>. A <em>Pawn</em> is a special kind of actor that serves as an avatar or persona. </p>
+<p>Remember that <em>Assets</em> in the content browser are the resources you can place into the world, while <em>Actors</em> are instances of resources. There can be many instance Actors of a single Asset in a world. Modifying an asset will change all the actors based upon it. </p>
+<p>At its most basic level, creating levels boils down to placing Actors in space. Actors can also be created dynamically (&quot;spawned&quot;) by scripts, e.g. the arrows launched by a bow. </p>
+<p>Actors may be made of several <em>Components</em>. A <em>Component</em> is a piece of functionality that can be added to an Actor. Components cannot exist by themselves. For example, a Spot Light Component will allow your Actor to emit light like a spot light.</p>
+<blockquote>
+<p>In summary: A Project has many Assets, including multiple Levels (maps). Each Level (map) has a number of Actors, based on the Assets, and modified with instance-specific parameters such as location. Actors can come in different kinds, and may include a number of Components.</p>
+</blockquote>
+<h3 id="activities">Activities</h3>
+<p>Unreal is primarily designed for building games, and although it is also used for creating other kinds of experiences including artworks, education, data visualizations, architectural previews, etc., a lot of influence from its gaming origins is present in the language and the workflows it presents. Games are usually products of teams with different specializations, such as artists (who spend a lot of time using software such as Maya to create 3D models and animations), developers (who spend a lot of time working in coding environments such as Visual Studio), and level designers (who spend more time in editors like Unreal). We will be operating more like level designers.</p>
+<p>Like any major production, everything starts with planning and sketching; with some interesting overlaps and differences from film, architecture, design, composition, etc. A good idea is to start with an idea of the overall size and locations of the space, and how one moves between them. Drawing a map on paper can help, but don&#39;t forget that the 3rd dimension! (Also, it&#39;s important to recall the limitations of VR, particularly of navigation; creating a large space that requires a lot of navigation to traverse (whether walking or teleporting) is going to be tiresome or nauseating for the immersant.) This initial sketch can be &#39;roughed-in&#39; in Unreal by placing simple objects into space, allowing you to start testing it&#39;s movement and flow as soon as possible -- long before spending time on creating details. After testing &amp; refining, you spend more time refining details, converting geometries to meshes, adding lighting and other elements of the world, testing continually, up to the last stages of polishing up.</p>
+<blockquote>
+<p>See also the <a href="https://docs.unrealengine.com/latest/INT/Engine/QuickStart/index.html">Level Designer Quick Start</a> documentation.</p>
+</blockquote>
+<hr>
+<h2 id="editing">Editing</h2>
+<h3 id="the-editor-panels">The editor panels</h3>
+<p>Watch the <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=w4XlBKeE46E">video tutorial here</a>.</p>
+<p>The main panel is the 3D <strong>viewport</strong>, showing a preview of the world. You can navigate around the world and also modify objects (actors) in here.</p>
+<p>Above the viewport is a <em>toolbar</em> with which you can trigger builds and preview (run) your project in different ways, including within a VR headset.</p>
+<p>On the left, the <strong>Modes panel</strong> selects different task workflows, such as placing objects, creating geometry, painting meshes, generating trees, etc. Mostly we stay in the initial &quot;placement mode&quot;.</p>
+<p>At the bottom, the <strong>Content Browser</strong> is where you can manage the <em>Assets</em> used in your project. With this you can also drop any existing assets into the scene. You can also double-click on some items in this browser to modify them in special editors.</p>
+<p>On the right, the <strong>World Outliner</strong> panel shows all the <em>Actors</em> involved in the current level. You can select them here, or in the 3D viewport, to modify them. You can also use this to &quot;parent&quot; one object to another, so that they always are positioned together (drag one item onto another to set it as parent). Below that, the <strong>Details panel</strong> is used to modify properties of whatever actor is currently selected, and also to add additional components to them.</p>
+<blockquote>
+<p>Tip: Hold Control+Alt and mouse-over any Editor feature to see a help window about it.</p>
+</blockquote>
+<h3 id="viewport-navigating">Viewport navigating</h3>
+<p>See the <a href="https://docs.unrealengine.com/latest/INT/Engine/QuickStart/2/index.html">documentation</a> or the <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=j2CKS6G3G2k">video tutorial</a>. Quick notes:</p>
+<ul>
+<li>Left mouse: move forward/backward/turn</li>
+<li>Right mouse: look around</li>
+<li>Both buttons (or middle button): vertical &amp; strafe movement</li>
+<li>Mouse-scroll to zoom in and out (not the same as moving!!)</li>
+<li>Keys: with any mouse button (usually the right) held down, keys W, A, S, D, Q and E move around. C and Z will do a temporary zoom in/out.</li>
+<li>Select an object by clicking on it, then press &quot;F&quot; to focus on it (or, double-click an item in the World Outliner)</li>
+<li>Alt+left mouse (&quot;maya style&quot;) pivots around the focused object.</li>
+<li>Alt+right mouse can dolly toward/away from the object.</li>
+<li>Press G to turn nonvisible items (e.g. lights) on and off</li>
+</ul>
+<h3 id="placing-objects">Placing objects</h3>
+<p>A new level begins fairly empty. Ways of adding content (<a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=01BL2bWeJSA">see tutorial</a>):</p>
+<ol>
+<li>We can drag basic objects &amp; actors from the &#39;place mode&#39; palette at the left. You can drag objects from the browser into the viewport, and also materials right onto objects in the viewport. And also more abstract items such as lights, triggers, and other classes. </li>
+<li>We can drag objects from the Content Browser below.</li>
+<li>Right-click in the viewport and choosing &#39;place actor&#39;, then selecting the time to add.</li>
+<li>&quot;alt drag&quot; to make a copy of an actor</li>
+</ol>
+<h3 id="spatial-transforms">Spatial transforms</h3>
+<p>Once placed, objects can be moved <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=wHJCv-Ph6zU">(see tutorial)</a>, rotated <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=ralshA7aWag">(see tutorial)</a>, and scaled <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=rqJoX8orsUM">(see tutorial)</a>. Quick tips:</p>
+<ul>
+<li>Press &quot;w&quot; to enable the move tool. The red, green, and blue arrows represent the X, Y, and Z axes respectively. Click &amp; drag an arrow to move the object.<ul>
+<li>Press the &quot;end&quot; key with an object selected and it will drop down to sit on the floor.</li>
+<li>Press &quot;ctrl end&quot; to snap an object to the current snapping grid.</li>
+<li>Hold down &quot;shift&quot; while moving an object, and it will also move the camera at the same time.</li>
+</ul>
+</li>
+<li>Press &quot;e&quot; to enable the rotation tool. Click on one of the arcs to start rotating, and it will show you how much you are rotating in degrees. </li>
+<li>Press &quot;r&quot; to enable the scale tool. To scale in one axis choose the corresponding red, green, or blue box, or to scale in all axes grab the white cube in the center.</li>
+</ul>
+<p>The top-right toolbar shows which tool is enabled. The globe icon (after the scale tool) chooses between world-space and object local-space to move &amp; rotate in. (Ctrl ~). After this there are icons for setting the snapping options for each of move, rotate, and scale. Snap to grid is useful for creating buildings -- making sure there are no gaps between walls!  The &quot;[&quot; and &quot;]&quot; keys change the snapping size.</p>
+<p>Position, rotation &amp; scale can also be modified numerically from the object&#39;s details panel. Unreal measures in centimeters, and the Z axis points up.</p>
+<p>Press &quot;ctrl g&quot; to group items, &quot;shift g&quot; to ungroup. Grouping is helpful to move a bloc of items together en masse.</p>
+<h3 id="more-advanced-viewport-options">More advanced viewport options</h3>
+<p><strong><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=RoiQOwCg-4Q">Orthographic views</a>:</strong></p>
+<p>In the top-right corner of viewport there is a small &#39;min/max&#39; button which will alternate between a maximized 3D view, and a 4-up set of views for top, left, and front &quot;orthographic&quot; (non-perspective) views as well as the regular perspective one. Right-click &amp; drag to move in these views, and mouse-scroll to zoom.</p>
+<p><strong><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=7UjP6gr44dc">View modes &amp; show flags</a></strong>:</p>
+<p>By default the viewport uses full lighting (&quot;lit&quot;) -- other modes are unlit (raw materials), wireframe (raw meshes), detail lighting (lighting effects only), reflections, etc. Next to this option is the <strong>Show</strong> drop-down, where you can enable and disable different kinds of content in the viewport.</p>
+<p><strong>Selecting translucent objects</strong>: The &quot;t&quot; key will enable/disable the ability to select translucent objects. If it is off, you will select whatever object is seen <em>through</em> the translucent object.</p>
+<p><strong>We can <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=Z7OqNjFpy6U">lock the viewport to an actor</a></strong> by right-clicking on an object and selecting the &quot;pilot&quot; option. This fixes our viewport&#39;s perspective to the object itself, and we can use the standard viewport movement controls to reposition the object. This is especially useful for positioning lights and cameras, for example.</p>
+<p><strong>Viewing the Frame rate</strong>: Command+Shift+H (or the dropdown top-right of the viewport)</p>
+<h3 id="managing-assets">Managing Assets</h3>
+<p>Some assets are created within the Unreal Editor, others you import from outside. All the assets in a project can be found in the Content Browser <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=tG2KML-CDRo">(tutorial here)</a>, which mirrors the directory structure on disk. Some of these are files that can be edited externally (e.g. editing texture images using Photoshop, or mesh geometry in a 3D modeling software) -- when these files are modified externally, Unreal will automatically re-import them into the world.</p>
+<p>You can use the <strong>add new</strong> button to create new simple assets or content packs. You can <strong>import</strong> external assets to the content browser. Assets can also be duplicated, and many can be edited <em>before</em> bringing them into the level. Double-click the asset and it will open a special sub-editor in which it can be modified.</p>
+<p>Projects can end up with very many assets. It is a good idea to organize them, and name them, very carefully. You can create new folders to organize assets better. There is a search tool and options to filter assets by type. You can also open multiple content browser panels, and lock them to different sub-folders of your project.</p>
+<h3 id="creating-geometry">Creating Geometry</h3>
+<p>A <em>Geometry Brush</em>, also sometimes called &quot;BSPs&quot; <a href="https://docs.unrealengine.com/latest/INT/Engine/Actors/Brushes/index.html">(see documentation)</a>, is a great way to start filling in and carving out volumes of space in a level. They can be used to rapid-prototype a level where static meshes have not yet been created. </p>
+<p>In the Placement mode tab, choose the BSP (also known as <em>geometry brush</em>). Now we can drag different kinds of brushes into the level, such as boxes, cylinders, and stairs (though remember -- stairs can be nauseous in VR!). After dragging it in we can resize it. Be careful to use a snapping grid to make sure geometry snaps to tight alignment, and set the size accordingly (e.g. 10cm may be too small for laying out buildings!). </p>
+<p>Using the <strong>Geometry Editing Mode</strong>, very simple 3D modeling can be performed, modifying the faces and vertices (corners) of objects.  </p>
+<p><strong>Creating holes and indentations</strong>: A geometry brush&#39;s settings can be set to &quot;Subtractive&quot; type, which will carve out holes in other brushes -- however the order of brushes is important. For example, to create an opening in a wall, we can duplicate the wall, reduce its size, set its brush type to &quot;subtractive&quot; (in the details panel), then drag it back into the wall. </p>
+<p><strong>Updating lighting etc.</strong> Hit &quot;Build&quot; in the top toolbar to apply the changes, and rebuild lighting models etc. This can be especially important when building enclosed spaces with holes for light to come through.</p>
+<p><strong>Applying materials</strong>: You can simply drag &amp; drop materials from the Content Browser onto geometry brushes. By default, materials will drag onto a single face. To drag onto all faces of a geometry brush, first press &quot;shift+b&quot; to select all the faces (or, if you select a wall, pressing &quot;shift+w&quot; will select all adjacent walls).</p>
+<p><strong>Aligning materials/textures (to avoid seams):</strong> Select all adjoining panels (with &quot;ctrl&quot;) and in the details panel, set Geometry / Alignment / Align surface planar to make sure there are no seams between them.</p>
+<p><strong>Convert brush to mesh</strong>: After modeling, you can convert a brush into a regular StaticMeshActor from the Brush settings. It&#39;s geometry will no longer be editable, but the performance and lighting qualities will improve. It is also helpful when you want to assign different properties or behaviors that BSPs don&#39;t support, or to use them as reusable assets for building blueprints, or with foliage, etc.</p>
+<p>By default, a static mesh created this way has no collision hull, so a character will fall right through it. To add a collision hull:</p>
+<pre><code>- double-click <span class="hljs-keyword">the</span> mesh <span class="hljs-built_in">to</span> <span class="hljs-built_in">open</span> <span class="hljs-keyword">the</span> mesh editor, 
+- <span class="hljs-built_in">to</span> generate <span class="hljs-keyword">the</span> hull automatically:
+    - <span class="hljs-built_in">from</span> <span class="hljs-keyword">the</span> Collision menu choose Auto Convex Collision
+    - <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> details panel that opens, <span class="hljs-built_in">set</span> <span class="hljs-keyword">the</span> accuracy options, <span class="hljs-keyword">and</span> click Apply
+    - <span class="hljs-keyword">a</span> visualization <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> collision hull will appear <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> viewport
+- otherwise, <span class="hljs-keyword">with</span> other options <span class="hljs-keyword">in</span> this menu you can build <span class="hljs-keyword">a</span> hull <span class="hljs-keyword">by</span> hand
+- <span class="hljs-keyword">finally</span>, save <span class="hljs-keyword">and</span> <span class="hljs-built_in">close</span> <span class="hljs-keyword">the</span> mesh editor    
+</code></pre><p><strong>Adding feature and prop meshes, lights, etc.</strong>: After adding the brushes and dropping in materials, we can start adding some more detailed meshes, improve the lighting, etc. The starter content has a few good architectural items to work with, such as a &quot;glass window&quot; panel that can be used for all kinds of glass panels. </p>
+<hr>
+<h2 id="projects-and-assets">Projects and assets</h2>
+<h3 id="levels">Levels</h3>
+<p>You can make a new level at any time from File-&gt;New Level. </p>
+<p>To set the default level (the one that opens when a project launches), go to Project Settings</p>
+<p><strong>Copying actors between levels (maps) of the same project</strong>: Just select what you want to copy in the Outliner and Ctrl-C to copy, then switch to the destination level, and Ctrl-V to paste.</p>
+<p>To set where the immersant will start a level (and what direction they face) when the level runs, move and rotate the &quot;Player Start&quot; actor. If you don&#39;t have a Player Start actor in the level, you can drag one in from the starter content collection. However it&#39;s common while editing a level to remove the Player Start, so that it will run from wherever you where editing from. </p>
+<h3 id="getting-more-assets">Getting more assets</h3>
+<p><strong>From other Unreal projects</strong>. The easiest place to get more assets (more than what the starter content pack gives you) is to grab them from other Unreal projects. There&#39;s a very generous set of example projects available through the Unreal Launcher&#39;s Library tab, for example. Once these are downloaded you can open them up, navigate through their Content Browsers and see if there&#39;s anything you want to take. Getting them into your own project however takes a few steps, and is called <em>migrating assets</em> <a href="https://wiki.unrealengine.com/Migrate_content_between_projects">(see the documentation here)</a>. Migrating an asset will also migrate everything that it depends on (textures, materials, blueprints, etc.):</p>
+<ol>
+<li>In the source project, locate the content in the Content Browser, right-click and choose &quot;Migrate&quot;</li>
+<li>Confirm all the assets to migrate</li>
+<li>Locate the project &quot;Content&quot; folder (on disk) of the destination project to migrate to (not a subfolder!)</li>
+<li>Now those files should also appear in the destination project. You may want to move them into appropriate subfolders of your project now. </li>
+</ol>
+<p><strong>From the Unreal Marketplace</strong>. The Unreal Launcher&#39;s Marketplace tab also has a range of assets that can be downloaded (though most are not free). At the time of writing, some decent looking free packages include:</p>
+<ul>
+<li><a href="https://www.unrealengine.com/marketplace/profile/Epic%20Games">Epic games content</a></li>
+<li><a href="https://www.unrealengine.com/marketplace/lightroom-interior-day-light">architectural visualization scene</a> and <a href="https://www.unrealengine.com/marketplace/xoio-berlin-flat">here&#39;s another</a>, but might not be compatible with Unreal 4.14</li>
+<li><a href="https://www.unrealengine.com/marketplace/gametextures-material-pack">materials</a></li>
+</ul>
+<p><strong>From anywhere else.</strong> Assets can also be imported from other sources. For sounds, images, videos, 3D models etc. any compatible format file can be simply imported to the Content Browser. </p>
+<p>Below are some other places where free 3D models can be downloaded. Depending on what your intended use for the project is, pay special attention to the licensing terms of these models -- this is intellectual property.</p>
+<ul>
+<li><a href="https://3dwarehouse.sketchup.com/?redirect=1">Google 3D Warehouse</a></li>
+<li><a href="http://tf3dm.com">3D models for free</a> </li>
+<li><a href="http://www.turbosquid.com/Search/?KEYWORD=Free">Turbosquid</a></li>
+<li><a href="http://www.exchange3d.com/Free%203D%20Models/cat_35.html">Exchange 3D</a></li>
+<li><a href="http://www.3dvia.com/search/?search%5Bquery%5D=free&amp;search%5Bresults_per_page%5D=12&amp;search%5Bsort_order%5D=Rank&amp;search%5Bfile_types%5D=1">3DVia</a></li>
+</ul>
+<p><a href="https://www.unrealengine.com/marketplace/playup-tools-plugin-for-ue4">This plugin</a> lets you import scenes from SketchUp&#39;s PlayUp.</p>
+<hr>
+<h2 id="landscaping">Landscaping</h2>
+<p><a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/QuickStart/index.html">See documentation</a>.</p>
+<p>Unreal has built-in tools for creating rich, undulating landscapes. In the Modes panel select the <strong>Lanscapes</strong> mode. A green grid will show in the viewport. If this is the first time to use it, you will need to &quot;Create New&quot; to make a new landscape. It&#39;s a good idea to assign a landscape material before creating it. You can drag on the landscape&#39;s edges to make it cover more or less area. Note: if necessary, a level can have more than one landscape.</p>
+<blockquote>
+<p>For recommended landscape sizes, see <a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/TechnicalGuide/index.html#recommendedlandscapesizes">https://docs.unrealengine.com/latest/INT/Engine/Landscape/TechnicalGuide/index.html#recommendedlandscapesizes</a></p>
+</blockquote>
+<p>Once created, you can start to Sculpt and Paint it.</p>
+<h3 id="sculpting">Sculpting</h3>
+<p>Ctrl-click to select areas.</p>
+<p>With the default sculpt tool, left click to increase elevation, shift-click to decrease.</p>
+<p>There are lots of other tools, for smoothing, flattening, eroding, etc. the land. Smoothing &amp; flattening is good for VR, as it feels more comfortable to walk on. Flattening can also be good for making rivers and roads.</p>
+<p>Use the brush options to change the size &amp; strength.</p>
+<p>Make sure that your Player Start object is above your terrain or else you will fall through the world. If this does happen, drag the player to start up on top of the terrain and hit the End key for it to start on the ground.</p>
+<h3 id="painting">Painting</h3>
+<p>We can just drop in a single material, but we can also use Paint mode to blend multiple materials on the landscape. </p>
+<p>Creating landscape materials is a little more complex (<a href="https://www.youtube.com/watch?v=tsXVP0fykBM">there&#39;s a tutorial here</a>), but we can migrate some from other example projects or content packs available through the Epic community (via the Launcher app).</p>
+<p>For example: </p>
+<ul>
+<li>open the ExampleContent project, </li>
+<li>navigate in the content browser to Content/Landscapes/Materials, </li>
+<li>right-click on M_LandscapeMaterial_Inst, </li>
+<li>choose Asset Actions &gt; Migrate...</li>
+<li>click OK to select all dependencies</li>
+<li>navigate to &amp; select your project&#39;s Content folder on disk (e.g. Documents/UnrealProjects/MyProject/Content) &amp; OK</li>
+<li>open your project </li>
+<li>File &gt; New Level, choose default, OK</li>
+<li>delete the ground box</li>
+<li>switch to Landscape tool</li>
+<li>in the content browser, navigate to ExampleContent/Landscapes/Materials</li>
+<li>drag the M_LandscapeMaterial_Inst into the Material option of the New Landscape tool </li>
+<li>set the size &amp; create landscape</li>
+<li>switch to the landscape tool&#39;s paint mode</li>
+<li>scroll down to the tool&#39;s target layers</li>
+<li>for each of Soil, Grass, and Snow layers, click on the + button to create layer instances (choose the &quot;Weighted Layer&quot; option, and save these in a sensible location, e.g. also in the ExampleContent/Landscapes)</li>
+<li>Now you can paint the materials</li>
+<li>After painting, click Build in the big toolbar to rebuild the lighting for the level</li>
+</ul>
+<p>Another fairly easy thing to do is to then customize this landcape material by replacing the textures -- just double-click on the material in the browser to open the editor, find the texture nodes you want to replace, and drag in different textures from the content browser. Save, apply, and build again.</p>
+<h3 id="adding-water">Adding water</h3>
+<p>Place a BSP box into the world so that it lies above the lowest land. Drag on the &quot;M_Water_Lake&quot; material from the StarterContent/Materials folder in the content browser.</p>
+<p>It might seem weird that we can walk on water. <a href="https://wiki.unrealengine.com/Swimmable_Water_Volume_Tutorial">To make it swimmable, look here</a> -- or <a href="https://www.youtube.com/watch?v=LtyXjSb1P-4">this video tutorial</a>. </p>
+<p>Very likely you want to also place a post-processing volume under the water, so that the rendering has a watery style when swimming.</p>
+<h3 id="caves">Caves</h3>
+<p>It isn&#39;t possible for a single landscape to overhang itself, but there are other ways of making caves.</p>
+<p>It is possible to make a hole in a landscape, so that they can be walked through, by sculpting with the visibility tool. Make a hole in the landscape using the visibility mask, <a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/Editing/SculptMode/index.html#visibility">as described here</a>. You will first need a Hole Material, <a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/Materials/index.html#landscapeholematerials">as described here</a>, which you can apply as the Hole Material in the landscape&#39;s details panel. </p>
+<p>You probably want to surround the hole with some meshes to mask it. You probably also need to edit the material of the landscape to enable two-sided lighting, so that it doesn&#39;t become transparent underneath.</p>
+<p>To fill out the cave underneath, either use BSPs &amp; meshes with collisions, or you can also create another landscape underneath the first (but you will still probably need BSPs &amp; meshes for the roof.)</p>
+<hr>
+<h2 id="-foliage-">&quot;Foliage&quot;</h2>
+<p>The foliage tool is really just a way to randomly disperse objects over a landscape -- typically used for trees, bushes, grassy areas etc., but in fact it can be used for any kinds of objects.</p>
+<p>You&#39;ll need some ground to start with, whether a giant BSP, mesh, or a landscape, to place objects on. Then switch to the Foliage Mode tool.</p>
+<p>In the Paint option, drag one or more objects (meshes) into the Foliage Type box. Be very careful not to bring in very complex meshes or other complex (heavy) items that when duplicated many times could severely affect frame rate. Also, if you want meshes that can&#39;t be walked through, make sure they have a proper collision mesh applied first.</p>
+<p>Now click and drag in the viewport to paint randomized scatterings of these meshes on your ground. If you placed too many, you can also remove them by shift-clicking. </p>
+<p>The paint options can be used to set the area over which meshes are added, and how densely (and the shift-click erase density). The Reapply tool can be used to change parameters of existing instances. The selection tool can be used to grab individual instances for moving and deleting. With the Lasso tool, you can drag to select many instances.</p>
+<p>You can also vary the properties of each mesh type in the foliage tool -- select the mesh, and the details panel appear below. Common settings would be varying the scale, increasing the radius (spacing between objects), random yaw (random rotations), collision option (i.e. whether you can walk through them -- as BlockAll -- or not -- as NoCollision). There are many other options. Align to normal will rotate objects on sloped surfaces, ground slope angle will not place objects on extreme slopes, etc.</p>
+<blockquote>
+<p>Note that there is a newer, more experimental <a href="https://docs.unrealengine.com/latest/INT/Engine/OpenWorldTools/ProceduralFoliage/QuickStart/index.html">foliage creation system described here.</a></p>
+</blockquote>
+<hr>
+<h2 id="embedding-sound">Embedding sound</h2>
+<p><a href="https://docs.unrealengine.com/latest/INT/Engine/Audio/index.html">See documentation</a></p>
+<p>You can import .wav audio files into the Content Browser like any other content -- they become &quot;Sound Wave&quot; assets. A handy place to find free audio files is <a href="http://freesound.org">freesound.org</a> (but check licensing first!). The simplest way to then add the Sound Wave to your world is to drag it from the content browser to the viewport. </p>
+<p>More complex sounds can be created as &quot;Sound Cues&quot;, which have their own editor similar to the material editor or blueprint editor. With this editor multiple sounds can be mixed together, with different modulation and other effects.</p>
+<p>When sound waves or sound cues are added to a level, they are known as &quot;ambient sound actors&quot;. </p>
+<ul>
+<li>Generally these will get louder as you approach them, and quieter as you move away.</li>
+<li>You can either have them play continuously and loop (enable looping in the sound wave or sound cue asset, and enable &quot;Auto Activate&quot; in the ambient sound actor details), or trigger them from e.g. box triggers.</li>
+<li>In the Attenuation of an ambient sound actor&#39;s details, you can control if and how the sound is spatialized. </li>
+</ul>
+<p>You can also create an &quot;Audio Volume&quot; (from the &quot;Volumes&quot; option of the placing mode tool), a region of space with specific audio properties, and then assign a Reverb Effect to this space with particular properties like the echo density, overall reverb gain, air absorption, and more, to craft its unique sonic character.</p>
+<hr>
+<h2 id="embedding-videos">Embedding videos</h2>
+<p>TODO: update for 4.14</p>
+<hr>
+<h2 id="volumes">Volumes</h2>
+<p><em>Volumes</em> define a 3D area for certain purposes, often invisible (such as blocking volumes to prevent actors leaving the area, pain causing volumes to inflict damage on any actor within the area, trigger volumes that cause events when an actor enters or exits them). </p>
+<p>For example, a <strong>box trigger</strong> can cause events to happen when a player enters or leaves the region of the (invisible) box region. </p>
+<p>A neat thing is to turn an existing geometry brush into a trigger. You can select a BSP geometry brush in a level, duplicate it, then in the Details panel, the Actor section, you can choose &quot;Convert Actor&quot; and turn it into a &quot;Trigger Volume&quot;. </p>
+<h3 id="post-effects-volumes">Post effects volumes</h3>
+<p>From among the Volumes that can be dragged in, the post effects volume can be used to change the rendering style. It can also be used to define a completely new post rendering material, for more dramatic effects.</p>
+<p>Care needs to be taken with these however: the result experienced in VR may be quite different than how it is experienced on screen, where there is less depth and immersion.</p>
+<hr>
+<h2 id="blueprints">Blueprints</h2>
+<p>&quot;Blueprint&quot; is the visual scripting system in Unreal, which means you can do programming by connecting up visual flow charts rather than writing code. (You can also write C++ code if you want...)</p>
+<p>Here&#39;s a gentle introduction:</p>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/8WeE4q6Ba40?list=PLZlv_N0_O1gaCL2XjKluO7N2Pmmw9pvhE" frameborder="0" allowfullscreen></iframe>
+
+<p>Generally the form of blueprints is that there are events that can trigger functions, and there are references to objects that these functions can operate over. 
+To add a new node to a blueprint you right-click in the background of the blueprint window, or you drag a wire off one of the pins in an existing node, to pull up the menu of nodes. The nodes that you can choose may depend on what objects you have selected in the editor. </p>
+<p>Wire colors tell you what kind of data is going down the wire. Red is booleans, green is floats, blue are objects, etc. The most important are white wires, which are execution wires -- things that actually make stuff happen. A special thing about white wires is that they can only have one destination. If you want to trigger two things from one event, you have to connect the Exec output of the event to Exec input of the first function, and then take the Exec output of that to the Exec input of the second function, and so forth. </p>
+<p>The most common places that you will do blueprints are: </p>
+<ol>
+<li>The <strong>Level blueprint</strong>, where you can write behaviours that are global to a level. Typically this is where you would put mouse/keyboard etc. interactions, for example. </li>
+</ol>
+<p>You can open the level blueprint from the Blueprints large tool item above the viewport.</p>
+<ol>
+<li><strong>Class blueprints</strong> are ways that you can add scripted behaviour to objects that can be spawned during a game, or which you can make multiple instances of while editing. In this case the script is contained within each instance. Class blueprints therefore also have a viewport, and can have other components such as meshes embedded. </li>
+</ol>
+<p>They also have a Construction Script. Within a class blueprint, the <strong>Construction Script</strong> is for events that fire whenever your object is created (or transformed, etc.) within the editor.  It can be used to configure the properties of a blueprint, such as enabling the visibility of a light source, or even generating procedural objects, which can be configured via variables.  <a href="https://www.youtube.com/watch?v=6RqDo3012YA">A couple of simple examples here</a></p>
+<p>You can open class blueprints from in the Content Browser, or by following links in the World Outliner. You can create new Class Blueprints from the Content Browser.  The benefit of using class BPs is that you can create many many instances of them throughout your level.</p>
+<h3 id="variables">Variables</h3>
+<ul>
+<li><p>We can add <strong>variables</strong> to the blueprint using the +variable toolbar item (for example), and set the type and name of the variable. Once created, variables can be dragged into the editor (as a getter or setter reference), and used to store state within the script. Use a variable to store some data, of whatever data. Or, to send some data to another graph within the same blueprint or another blueprint. Or, to make something configurable on a class blueprint with instances. etc.</p>
+</li>
+<li><p>Note that Set variable nodes must also have an Exec input to take effect.</p>
+</li>
+<li><p>Many input and output pins can be turned into a variable -- right click the pin and select &quot;Promote To Variable&quot; -- set the name, compile, set the default, done!</p>
+</li>
+<li><p>Any variable can be made <strong>editable</strong> -- just tick the editable option in the details window, or, click the eyeball icon next to the variable name. This will now be editable in the details of any instance in the world. </p>
+</li>
+</ul>
+<blockquote>
+<p>Vector variables can also be 3D editable, which means they can be manipulated right in the main scene editor!</p>
+</blockquote>
+<ul>
+<li><p>Object type variables can be used to store references to other actors in the game. This is what you need to refer to an object that already exists in your scene.</p>
+</li>
+<li><p>Class type variables are only for when you need to remember the <strong>type</strong> of an object. It is needed if you want to spawn new objects that don&#39;t yet exist in the level. </p>
+</li>
+</ul>
+<h3 id="tips">Tips</h3>
+<ul>
+<li>The blueprint editor is highly context sensitive. Whatever item you have selected in the viewport or content browser, relevant blueprint actions will come top in the blueprint context menu.</li>
+</ul>
+<ul>
+<li>Any object that will be moved in-game must have the &quot;movable&quot; option set in the transform Detail (rather than &quot;static&quot;). <strong>Weirdly, the same is also true for lights. So for example, if you want to turn a light on and off dynamically, you also need to set the &quot;movable&quot; option to true</strong>. Yeah.</li>
+</ul>
+<h3 id="adding-comments-to-remind-you-what-parts-of-a-blueprint-do">Adding comments to remind you what parts of a blueprint do</h3>
+<ul>
+<li>Right-click any node and edit the text in the Node Comments section, or</li>
+<li>Select a few nodes, Right-click and choose Create Comment from Selection, or</li>
+<li>Press &quot;C&quot; to create a new comment box</li>
+</ul>
+<h3 id="debugging">Debugging</h3>
+<p>You can right-click and add a breakpoint on any event, and this will call up the blueprint editor when the event triggers in-game. At that point you can step through node by node to see exactly what is happening.</p>
+<p>You can also add &quot;Log&quot; (or &quot;Print&quot;) nodes in a blueprint, which will write text onto the viewport during the game.</p>
+<hr>
+<p>TODO CHECK <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=57MxoF4sy84">See geometry layout -- part 2</a>.
+<a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=RGxf2SiUBt8">Part 3</a>
+<a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=v5yCcP9EnT8">Part 4</a>
+<a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=dSckAxhy_4I">Part 5</a>, <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=xVDq-9kSD74">Part 6</a>, <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=xzGWuW_iWPM">Part 7</a></p>
+<p>TODO CHECK Alternatively, when starting from the <strong>blank template</strong> you&#39;ll probably want to add some floor, light, atmospheric fog, Lightmass Importance Volume, etc. as <a href="https://docs.unrealengine.com/latest/INT/Engine/QuickStart/4/index.html">described here</a>.
+TODO CHECK It can be useful to make new levels to test out ideas quickly without breaking work done in your main level(s). We can create a new level (File -&gt; new level), and likely choose the default map. Delete the &quot;player start&quot; for now. Maybe also delete the floor if we&#39;ll be making our own.</p>
+<p>VR specific:
+The best interaction space is 75 to 350cm from the player</p>
+<h2 id="unlocated-tips">unlocated tips</h2>
+<p>You can right-click actor(s) in the level viewport and convert their current state to a new Static Mesh asset.</p>
+<p>You can also merge mesh actors together right in the level viewport. This allows you to reduce draw calls to get better performance.</p>
+<p>Any mesh props can be made to simulate physics simply by selecting them and ticking the &quot;simulate physics&quot; option in the Details tab.</p>
+<p>Whenever we add or modify a light source, we will need to rebuild the lighting model (press Build in the big toolbar). </p>
+<p>Dynamic shadows are usually a costly feature. However, this cost can be cut in half by enabling “Single Sample Shadow from Stationary Lights” on your movable Actors. This feature makes shadow receiving on dynamic objects much cheaper at the cost of some quality. It doesn’t work for all scenarios, but is worth playing around with for your dynamic objects for potentially great performance gains.</p>
+<p>Input devices: Edit &gt; Project Settings… and browse to category Input. </p>
+<p>look into:</p>
+<ul>
+<li>sequencer (introduced in <a href="https://www.unrealengine.com/blog/unreal-engine-4-12-released">https://www.unrealengine.com/blog/unreal-engine-4-12-released</a>)</li>
+<li>vr editor (introduced in <a href="https://www.unrealengine.com/blog/unreal-engine-4-12-released">https://www.unrealengine.com/blog/unreal-engine-4-12-released</a>)</li>
+<li>procedural mesh &amp; slicing</li>
+<li>decals</li>
+<li>cables</li>
+<li>COOKING BLUEPRINTS TO C++</li>
+<li>GRASS AND FOLIAGE SCALABILITY</li>
+<li>FULL SCENE IMPORTER</li>
+<li>LIGHTMASS PORTALS</li>
+<li>large worlds</li>
+</ul>
+<p>redo Day-night cycle
+redo teleportals</p>
+<p>still true?
+When playing: Alt+Enter to switch between VR mode
+Control+R to reset the forward view</p>
+<ul>
+<li>Blueprint <strong>timelines</strong> are ways we can make a sequence of events happen -- and we can also make them happen in reverse. See day/night example below.</li>
+</ul>
+<p>vr: <a href="http://www.tomlooman.com/getting-started-with-vr/">http://www.tomlooman.com/getting-started-with-vr/</a></p>
+<p>VR editing:</p>
+<ul>
+<li>landscaping, mesh painting, foliage, </li>
+</ul>
+<p>checkout unreal.js (<a href="https://www.unrealengine.com/marketplace/unrealjs">https://www.unrealengine.com/marketplace/unrealjs</a>)
+and <a href="https://www.unrealengine.com/marketplace/runtime-mesh-component">https://www.unrealengine.com/marketplace/runtime-mesh-component</a>
+and <a href="https://www.unrealengine.com/marketplace/varest-plugin">https://www.unrealengine.com/marketplace/varest-plugin</a></p>
+
+	</div>
+	<footer>&copy; 2016 Graham Wakefield</footer>
+  </body>
+</html>
