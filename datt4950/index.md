@@ -131,7 +131,7 @@ Final project/portfolio assistance.
 
 The 40% is broken into:
 
-- 15/40% final project presentation (Dec 5th), in which you must be able to show both concept and some working prototypes of progress
+- 15/40% Final project presentation (Dec 5th), in which you must be able to show both concept and some working prototypes of progress. Also feel free to make use of prior assignments in making your presentation.
 - 25/40% final project file submission, including code, paper, and video (extensions will be granted up to Dec 19th but absolutely no further), of which:
 	- 7/40%: Technical completeness
 	- 7/40%: Aesthetic qualities
