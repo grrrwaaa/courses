@@ -129,8 +129,16 @@ Final project/portfolio assistance.
 
 **Due:** [Final project (40%)](due.html#final-project)
 
-Final project presentations, open lab.
+The 40% is broken into:
 
+- 15/40% final project presentation (Dec 5th)
+- 25/40% final project file submission, including code, paper, and video (extensions will be granted up to Dec 19th but absolutely no further), of which:
+	- 7/40%: Technical completeness
+	- 7/40%: Aesthetic qualities
+	- 7/40%: Novel contribution
+	- 4/40%: Execution & effort
+
+(See [the deliverables page](due.html) for more details).
 
 ---
 
