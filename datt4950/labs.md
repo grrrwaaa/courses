@@ -121,18 +121,39 @@ To define how the canvas renders, implement a function called ```draw()```. All 
 Additional callbacks exist to detect mouse/touch and keyboard interaction respectively. 
 
 ```javascript
-function mouse(event, point) {
-	console.log(event, point);
+function mouse(event, point, id) {
+	write(event, point, id);
 }
 
-function touch(event, point) {
-	console.log(event, point);
+function touch(event, point, id) {
+	write(event, point, id);
 }
 
 function key(event, key) {
 	console.log(event, key);
 }
 ```
+
+The events details are:
+
+- mouse:
+	- "down": a button was pressed. 
+	- "up": a button was pressed. 
+	- "move": mouse was moved (or dragged).
+	- the ```point``` argument is a vec2 in the range 0,0 to 1,1 
+	- the ```id``` argument identifies which the button(s) pressed
+- touch (for touch-screen devices):
+	- "start": a touch started 
+	- "end" or "cancel": a touch was released
+	- "move": a touch moved
+	- the ```point``` argument is a vec2 in the range 0,0 to 1,1 
+	- the ```id``` argument identifies touches in the case of multitouch
+- key:
+	- "down": a key was pressed.
+	- "up": a key was released.
+	- the ```key``` argument can be a string representation of the character pressed, such as "a", "2", "Z", ">" etc., or special strings such as "Shift", "Control", "Alt", "Meta", "Enter", "Backspace" etc.
+	
+There are also some global key bindings: The Spacebar will pause or resume simulation (the update() callback). The Escape key will toggle fullscreen view.
 
 ### Persistence
 
