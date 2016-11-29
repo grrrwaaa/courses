@@ -123,15 +123,45 @@
 <p>For simulation updates, implement a function called <code>update()</code>. </p>
 <p>To define how the canvas renders, implement a function called <code>draw()</code>. All graphics code should go into this callback.</p>
 <h3 id="interaction">Interaction</h3>
-<p>Two additional callbacks exist to detect mouse and keyboard interaction respectively. </p>
-<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mouse</span>(<span class="hljs-params">event, point</span>) </span>{
-    <span class="hljs-built_in">console</span>.log(event, point);
+<p>Additional callbacks exist to detect mouse/touch and keyboard interaction respectively. </p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span></span> mouse(event, point, id) {
+    <span class="hljs-built_in">write</span>(event, point, id);
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">key</span>(<span class="hljs-params">event, key</span>) </span>{
-    <span class="hljs-built_in">console</span>.log(event, key);
+<span class="hljs-function"><span class="hljs-keyword">function</span></span> <span class="hljs-keyword">touch</span>(event, point, id) {
+    <span class="hljs-built_in">write</span>(event, point, id);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span></span> key(event, key) {
+    console.<span class="hljs-built_in">log</span>(event, key);
 }
 </code></pre>
+<p>The events details are:</p>
+<ul>
+<li>mouse:<ul>
+<li>&quot;down&quot;: a button was pressed. </li>
+<li>&quot;up&quot;: a button was pressed. </li>
+<li>&quot;move&quot;: mouse was moved (or dragged).</li>
+<li>the <code>point</code> argument is a vec2 in the range 0,0 to 1,1 </li>
+<li>the <code>id</code> argument identifies which the button(s) pressed</li>
+</ul>
+</li>
+<li>touch (for touch-screen devices):<ul>
+<li>&quot;start&quot;: a touch started </li>
+<li>&quot;end&quot; or &quot;cancel&quot;: a touch was released</li>
+<li>&quot;move&quot;: a touch moved</li>
+<li>the <code>point</code> argument is a vec2 in the range 0,0 to 1,1 </li>
+<li>the <code>id</code> argument identifies touches in the case of multitouch</li>
+</ul>
+</li>
+<li>key:<ul>
+<li>&quot;down&quot;: a key was pressed.</li>
+<li>&quot;up&quot;: a key was released.</li>
+<li>the <code>key</code> argument can be a string representation of the character pressed, such as &quot;a&quot;, &quot;2&quot;, &quot;Z&quot;, &quot;&gt;&quot; etc., or special strings such as &quot;Shift&quot;, &quot;Control&quot;, &quot;Alt&quot;, &quot;Meta&quot;, &quot;Enter&quot;, &quot;Backspace&quot; etc.</li>
+</ul>
+</li>
+</ul>
+<p>There are also some global key bindings: The Spacebar will pause or resume simulation (the update() callback). The Escape key will toggle fullscreen view.</p>
 <h3 id="persistence">Persistence</h3>
 <p>Sometimes you want state of a simulation to persist between edits, so the world doesn&#39;t always begin from scratch. We have two more callbacks to help with this. </p>
 <p>First, implement the <code>save()</code> method to store all of the information you want to preserve between edits. It should return an object that can be properly encoded as JSON. </p>
