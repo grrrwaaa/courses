@@ -424,17 +424,20 @@ document.body.appendChild(overlay);
 onresize();
 
 var mouseevent = function(event, name) {
-	if (typeof(mouse) === "function") {
-		var m = new vec2(event.pageX, event.pageY);
-		glvec2.transformMat3(m, m, page_to_gl);
-		var id = 0;
-		if ("buttons" in event) {
-        	id = event.buttons;
-    	} else {
-    		id = event.which || event.button;
-    	}
-		mouse(name, m, id);
+	if (typeof(mouse) !== "function") return;
+
+	// stop browser from processing this further (incl stopping mouse events)
+	event.preventDefault();
+
+	var m = new vec2(event.pageX, event.pageY);
+	glvec2.transformMat3(m, m, page_to_gl);
+	var id = 0;
+	if ("buttons" in event) {
+		id = event.buttons;
+	} else {
+		id = event.which || event.button;
 	}
+	mouse(name, m, id);
 };
 
 canvas.addEventListener("mousedown", function(event) {
@@ -458,14 +461,12 @@ canvas.addEventListener("mouseover", function(event) {
 }, false);
 
 var touchevent = function(event, name) {
+	var handler = touch;
+	if (typeof(handler) !== "function") handler = mouse;
+	if (typeof(handler) !== "function") return;
 	
 	// stop browser from processing this further (incl stopping mouse events)
 	event.preventDefault();
-	
-	
-	var handler = touch;
-	//if (typeof(handler) !== "function") handler = mouse;
-	if (typeof(handler) !== "function") return;
 	
 	var touches = event.changedTouches;      
 	for (var i = 0; i < touches.length; i++) {
