@@ -458,11 +458,15 @@ canvas.addEventListener("mouseover", function(event) {
 }, false);
 
 var touchevent = function(event, name) {
+	
+	// stop browser from processing this further (incl stopping mouse events)
+	event.preventDefault();
+	
+	
 	var handler = touch;
-	if (typeof(handler) !== "function") handler = mouse;
+	//if (typeof(handler) !== "function") handler = mouse;
 	if (typeof(handler) !== "function") return;
 	
-	event.preventDefault();
 	var touches = event.changedTouches;      
 	for (var i = 0; i < touches.length; i++) {
 		var m = new vec2(touches[i].pageX, touches[i].pageY);
