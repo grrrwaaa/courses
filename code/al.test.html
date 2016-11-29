@@ -17,7 +17,7 @@ f = new field2D(256);
 
 function mouse(event, p, id) {
 	console.log("mouse", event, p, id);
-	f.deposit([0, 0, 1], p);
+	f.deposit([0, 1, 1], p);
 }
 
 function touch(event, p, id) {
@@ -25,7 +25,7 @@ function touch(event, p, id) {
 	write("touch", event, p, id);
 	
 	//if (event == "move") {
-		f.deposit([1, 0, 0], p);
+		f.deposit([1, 1, 0], p);
 	//}
 }
 
