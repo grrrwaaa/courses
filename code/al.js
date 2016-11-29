@@ -457,21 +457,18 @@ canvas.addEventListener("mouseover", function(event) {
 	mouseevent(event, "in");
 }, false);
 
-// default touch handler just forwards to mouse:
-function touch(event, name, id) {
-	if (typeof(mouse) === "function") { mouse(event, name, id); }
-}
-
 var touchevent = function(event, name) {
-	if (typeof(touch) === "function") {
-		event.preventDefault();
-		var touches = event.changedTouches;      
-		for (var i = 0; i < touches.length; i++) {
-			var m = new vec2(touches[i].pageX, touches[i].pageY);
-			glvec2.transformMat3(m, m, page_to_gl);
-  			var id = touches[i].identifier;
-  			touch(name, m, id);
-		}
+	var handler = touch;
+	if (typeof(handler) !== "function") handler = mouse;
+	if (typeof(handler) !== "function") return;
+	
+	event.preventDefault();
+	var touches = event.changedTouches;      
+	for (var i = 0; i < touches.length; i++) {
+		var m = new vec2(touches[i].pageX, touches[i].pageY);
+		glvec2.transformMat3(m, m, page_to_gl);
+		var id = touches[i].identifier;
+		handler(name, m, id);
 	}
 };
 
