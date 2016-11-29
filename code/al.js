@@ -421,7 +421,13 @@ var mouseevent = function(event, name) {
 	if (typeof(mouse) === "function") {
 		var m = new vec2(event.pageX, event.pageY);
 		glvec2.transformMat3(m, m, page_to_gl);
-		mouse(name, m);
+		var id = 0;
+		if ("buttons" in event) {
+        	id = event.buttons;
+    	} else {
+    		id = event.which || event.button;
+    	}
+		mouse(name, m, id);
 	}
 };
 
@@ -445,15 +451,21 @@ canvas.addEventListener("mouseover", function(event) {
 	mouseevent(event, "in");
 }, false);
 
-// TODO: refine Touch events
-// https://developer.mozilla.org/en-US/docs/Web/API/Touch_events#Example
+// default touch handler just forwards to mouse:
+function touch(event, name, id) {
+	if (typeof(mouse) === "function") { mouse(event, name, id); }
+}
 
 var touchevent = function(event, name) {
 	if (typeof(touch) === "function") {
 		event.preventDefault();
-		var m = new vec2(event.targetTouches[0].pageX, targetTouches[0].pageY);
-		glvec2.transformMat3(m, m, page_to_gl);
-		touch(name, m);
+		var touches = event.changedTouches;      
+		for (var i = 0; i < touches.length; i++) {
+			var m = new vec2(touches[i].pageX, touches[i].pageY);
+			glvec2.transformMat3(m, m, page_to_gl);
+  			var id = touches[i].identifier;
+  			touch(name, m, id);
+		}
 	}
 };
 

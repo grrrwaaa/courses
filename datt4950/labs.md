@@ -118,10 +118,14 @@ To define how the canvas renders, implement a function called ```draw()```. All 
 
 ### Interaction
 
-Two additional callbacks exist to detect mouse and keyboard interaction respectively. 
+Additional callbacks exist to detect mouse/touch and keyboard interaction respectively. 
 
 ```javascript
 function mouse(event, point) {
+	console.log(event, point);
+}
+
+function touch(event, point) {
 	console.log(event, point);
 }
 
