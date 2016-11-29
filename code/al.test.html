@@ -13,18 +13,22 @@
 	testing mouse and touch
 */
 
-f = new field2D(512);
+f = new field2D(256);
 
 function mouse(event, p, id) {
 	console.log("mouse", event, p, id);
 	
 	if (event == "move") {
-		f.deposit(1, p);
+		f.deposit([0, 0, 1], p);
 	}
 }
 
 function touch(event, p, id) {
 	console.log("touch", event, p, id);
+	
+	if (event == "move") {
+		f.deposit([1, 0, 0], p);
+	}
 }
 
 function draw() {
