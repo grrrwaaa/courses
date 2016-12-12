@@ -9,9 +9,8 @@ importance: 10
 Hugo Gernsback (of "Hugo Awards" fame), wearing his TV Glasses in a 1963 Life magazine shoot.
 
 **Course:** FILM 6246   
-**Class time:** Thursdays 10:00am - 1:00pm   
-**Open lab/office hours:** Tuesdays 1:30-4:30pm (optional & professor's schedule permitting)  
-**Location:** 309 GCFA
+**Class/lab time:** Thursdays 10:00am - 2:00pm   
+**Location:** 309 GCFA (*not 303 as listed in the YorkU system!*)
 
 **Course director:** Graham Wakefield   
 **Office:** 303C GCFA   
