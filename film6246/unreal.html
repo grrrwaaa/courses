@@ -8,9 +8,14 @@
   	<nav>
 	<ul>
 	<li><a href="index.html" alt="Future Cinema II">Future Cinema II</a></li>
+<li><a href="log.html" alt="Log">Log</a></li>
+<li><a href="vr.html" alt="Virtual Reality">Virtual Reality</a></li>
+<li><a href="osmose.html" alt="Osmose">Osmose</a></li>
 <li><a href="reading.html" alt="Reading">Reading</a></li>
-<li><a href="unreal.html" alt="Unreal">Unreal</a></li>
 <li><a href="lab.html" alt="Lab">Lab</a></li>
+<li><a href="unreal.html" alt="Unreal">Unreal</a></li>
+<li><a href="max.html" alt="Max">Max</a></li>
+<li><a href="real.html" alt="Reality Capture">Reality Capture</a></li>
 	</ul>
 	</nav>	
 	<div id="main">
@@ -21,7 +26,7 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <p>On Youtube there are now plenty of examples of high-speed video captures of level design using game engines such as Unreal -- and <a href="http://thegrue.com/how-vr-is-creating-a-new-market-and-community-for-level-design-pointless-places/">here&#39;s an interesting article speculating how the emergence of VR is adding fuel to the fire, with many examples</a> -- such as:</p>
 <iframe width="640" height="360" src="https://www.youtube.com/embed/UCOww2sdsTM?rel=0" frameborder="0" allowfullscreen></iframe>
 
-<iframe width="640" height="360" src="https://www.youtube.com/embed/67NToSkW2vs?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/-l7ia1M1r1E?rel=0" frameborder="0" allowfullscreen></iframe>
 
 <p>We cover nearly all of the tools used in these clips during the labs.</p>
 <h2 id="getting-started">Getting Started</h2>
@@ -29,13 +34,17 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <ul>
 <li>Go to <a href="https://www.unrealengine.com">https://www.unrealengine.com</a> and follow the &quot;Get Unreal&quot; link to register an account and then download the launcher application. </li>
 <li>Run this launcher (you will need to sign in again), and then under the &quot;Unreal&quot; tab download the Unreal Engine. This will take a while!</li>
-<li>From the launcher also get the &quot;content examples&quot;, and perhaps any other of the free samples you find interesting. Warning -- these examples can eat even more <em>gigabytes</em> of disk space!!</li>
+<li>From the launcher also get the &quot;content examples&quot;, and perhaps any other of the free samples you find interesting. Warning -- these examples can eat even more <em>gigabytes</em> of disk space!! </li>
 </ul>
-<p>Once Unreal is installed, we can also create a new project. Unless things go very much awry, you should only have to do this once. Open the editor directly, or via the launcher. It should open with the &#39;project browser&#39; / &#39;new project&#39; window. </p>
+<p>Once Unreal is installed, we can also create a new project. Open the editor directly, or via the launcher. It should open with the &#39;project browser&#39; / &#39;new project&#39; window. </p>
+<p>For a VR project:</p>
 <ul>
 <li>In the <code>New Project</code> tab:<ul>
 <li>Choose the Blueprint tab (not C++)</li>
-<li>Choose the <code>Virtual Reality</code> template</li>
+<li>For a VR project choose the <code>Virtual Reality</code> template<ul>
+<li>Else for  screen-based work, choose either the first or third-person template</li>
+</ul>
+</li>
 <li>Choose <code>Desktop</code> target, <code>Maximum Quality</code>, and <code>With Starter Content</code></li>
 <li>Set the project path (e.g. <code>E:\Unreal Projects</code> )</li>
 <li>Set the project name</li>
@@ -52,15 +61,11 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <h2 id="worldmaking-with-unreal">Worldmaking with Unreal</h2>
 <h3 id="basic-concepts">Basic concepts</h3>
 <p>See <a href="https://docs.unrealengine.com/latest/INT/GettingStarted/index.html?utm_source=launcher&amp;utm_medium=ue&amp;utm_campaign=uelearn">Getting started with UE4</a>.</p>
-<p>You use the <em>Unreal Editor</em> application to author your world. Ultimately you will export it as a distributable application (.exe on windows), but most of the time you will edit and also playtest the world via the Editor. A <em>Project</em> is actually a whole folder of files on your disk, including a <code>.uproject</code> file that keeps the global settings together. You also see these files via the Content Browser in the Unreal editor.</p>
-<p>Each project has one or more <em>Levels</em> (sometimes also called <strong>Maps</strong>), which are independent 3D scenes or locations into which you place objects to define the world experienced. Each level is saved as a separate <code>.umap</code> file.</p>
+<p>You use the <em>Unreal Editor</em> application to author your world. Ultimately you will export it as a distributable application (.exe on windows), but most of the time you will edit and also playtest the world via the Editor. A <em>Project</em> is actually a whole folder of files on your disk, including a <code>.uproject</code> file that keeps the global settings together. You also see these files via the Content Browser in the Unreal editor. Each project has one or more <strong>Levels</strong> (sometimes also called <strong>Maps</strong>), which are independent 3D scenes or locations into which you place objects to define the world experienced. Each level is saved as a separate <code>.umap</code> file.</p>
 <blockquote>
 <p>I recommend that you do all your development in a single project. You can create new levels to try different ideas out, but keeping it all in a single project will make it easier to copy items between levels, and reduce disk space required. There are also methods to &#39;teleport&#39; between levels to build a larger world.</p>
 </blockquote>
-<p>Any object (a player, character, geometry mesh, light, etc.) that is placed in 3D space (with position/translation, rotation/orientation, scale etc.) is an <em>Actor</em>. A <em>Pawn</em> is a special kind of actor that serves as an avatar or persona. </p>
-<p>Remember that <em>Assets</em> in the content browser are the resources you can place into the world, while <em>Actors</em> are instances of resources. There can be many instance Actors of a single Asset in a world. Modifying an asset will change all the actors based upon it. </p>
-<p>At its most basic level, creating levels boils down to placing Actors in space. Actors can also be created dynamically (&quot;spawned&quot;) by scripts, e.g. the arrows launched by a bow. </p>
-<p>Actors may be made of several <em>Components</em>. A <em>Component</em> is a piece of functionality that can be added to an Actor. Components cannot exist by themselves. For example, a Spot Light Component will allow your Actor to emit light like a spot light.</p>
+<p>Any object (a player, character, geometry mesh, light, etc.) that is placed in 3D space (with position/translation, rotation/orientation, scale etc.) is an <strong>Actor</strong>. A <em>Pawn</em> is a special kind of actor that serves as an avatar or persona. <strong>Assets</strong> (in the content browser) are the resources you can place into the world, while Actors are instances of resources. There can be many instance Actors of a single Asset in a world. Modifying an asset will change all the actors based upon it. At its most basic level, creating levels boils down to placing Actors in space. Actors can also be created dynamically (&quot;spawned&quot;) by scripts, e.g. the arrows launched by a bow. Actors may be made of several <strong>Components</strong>. A Component is a piece of functionality that can be added to an Actor. Components cannot exist by themselves. For example, a Spot Light Component will allow your Actor to emit light like a spot light.</p>
 <blockquote>
 <p>In summary: A Project has many Assets, including multiple Levels (maps). Each Level (map) has a number of Actors, based on the Assets, and modified with instance-specific parameters such as location. Actors can come in different kinds, and may include a number of Components.</p>
 </blockquote>
@@ -85,15 +90,15 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <h3 id="viewport-navigating">Viewport navigating</h3>
 <p>See the <a href="https://docs.unrealengine.com/latest/INT/Engine/QuickStart/2/index.html">documentation</a> or the <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=j2CKS6G3G2k">video tutorial</a>. Quick notes:</p>
 <ul>
-<li>Left mouse: move forward/backward/turn</li>
-<li>Right mouse: look around</li>
-<li>Both buttons (or middle button): vertical &amp; strafe movement</li>
-<li>Mouse-scroll to zoom in and out (not the same as moving!!)</li>
-<li>Keys: with any mouse button (usually the right) held down, keys W, A, S, D, Q and E move around. C and Z will do a temporary zoom in/out.</li>
-<li>Select an object by clicking on it, then press &quot;F&quot; to focus on it (or, double-click an item in the World Outliner)</li>
-<li>Alt+left mouse (&quot;maya style&quot;) pivots around the focused object.</li>
-<li>Alt+right mouse can dolly toward/away from the object.</li>
-<li>Press G to turn nonvisible items (e.g. lights) on and off</li>
+<li><strong>Left mouse</strong>: move forward/backward/turn</li>
+<li><strong>Right mouse</strong>: look around</li>
+<li><strong>Both buttons</strong> (or middle button): vertical &amp; strafe movement</li>
+<li><strong>Mouse-scroll</strong> to zoom in and out (not the same as moving!!)</li>
+<li>Keys: with any mouse button (usually the right) held down, keys <strong>W, A, S, D, Q and E</strong> move around. <strong>C and Z</strong> will do a temporary zoom in/out.</li>
+<li>Select an object by clicking on it, then press <strong>F</strong> to focus on it (or, double-click an item in the World Outliner)</li>
+<li><strong>Alt+left mouse</strong> (&quot;maya style&quot;) pivots around the focused object.</li>
+<li><strong>Alt+right mouse</strong> can dolly toward/away from the object.</li>
+<li>Press <strong>G</strong> to turn nonvisible items (e.g. lights) on and off</li>
 </ul>
 <h3 id="placing-objects">Placing objects</h3>
 <p>A new level begins fairly empty. Ways of adding content (<a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=01BL2bWeJSA">see tutorial</a>):</p>
@@ -101,23 +106,27 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <li>We can drag basic objects &amp; actors from the &#39;place mode&#39; palette at the left. You can drag objects from the browser into the viewport, and also materials right onto objects in the viewport. And also more abstract items such as lights, triggers, and other classes. </li>
 <li>We can drag objects from the Content Browser below.</li>
 <li>Right-click in the viewport and choosing &#39;place actor&#39;, then selecting the time to add.</li>
-<li>&quot;alt drag&quot; to make a copy of an actor</li>
+<li><strong>alt-drag</strong> to make a copy of an actor</li>
 </ol>
 <h3 id="spatial-transforms">Spatial transforms</h3>
 <p>Once placed, objects can be moved <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=wHJCv-Ph6zU">(see tutorial)</a>, rotated <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=ralshA7aWag">(see tutorial)</a>, and scaled <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=rqJoX8orsUM">(see tutorial)</a>. Quick tips:</p>
 <ul>
-<li>Press &quot;w&quot; to enable the move tool. The red, green, and blue arrows represent the X, Y, and Z axes respectively. Click &amp; drag an arrow to move the object.<ul>
-<li>Press the &quot;end&quot; key with an object selected and it will drop down to sit on the floor.</li>
-<li>Press &quot;ctrl end&quot; to snap an object to the current snapping grid.</li>
-<li>Hold down &quot;shift&quot; while moving an object, and it will also move the camera at the same time.</li>
+<li>Press <strong>w</strong> to enable the move tool. The red, green, and blue arrows represent the X, Y, and Z axes respectively. Click &amp; drag an arrow to move the object.<ul>
+<li>Press the <strong>end</strong> key with an object selected and it will drop down to sit on the floor.</li>
+<li>Press <strong>ctrl end</strong> to snap an object to the current snapping grid.</li>
+<li>Hold down <strong>shift</strong> while moving an object, and it will also move the camera at the same time.</li>
 </ul>
 </li>
-<li>Press &quot;e&quot; to enable the rotation tool. Click on one of the arcs to start rotating, and it will show you how much you are rotating in degrees. </li>
-<li>Press &quot;r&quot; to enable the scale tool. To scale in one axis choose the corresponding red, green, or blue box, or to scale in all axes grab the white cube in the center.</li>
+<li>Press <strong>e</strong> to enable the rotation tool. Click on one of the arcs to start rotating, and it will show you how much you are rotating in degrees. </li>
+<li>Press <strong>r</strong> to enable the scale tool. To scale in one axis choose the corresponding red, green, or blue box, or to scale in all axes grab the white cube in the center.</li>
 </ul>
-<p>The top-right toolbar shows which tool is enabled. The globe icon (after the scale tool) chooses between world-space and object local-space to move &amp; rotate in. (Ctrl ~). After this there are icons for setting the snapping options for each of move, rotate, and scale. Snap to grid is useful for creating buildings -- making sure there are no gaps between walls!  The &quot;[&quot; and &quot;]&quot; keys change the snapping size.</p>
+<p>The top-right toolbar shows which tool is enabled. </p>
+<ul>
+<li>The globe icon (after the scale tool) chooses between world-space and object local-space to move &amp; rotate in. (<strong>Ctrl ~</strong>). </li>
+<li>After this there are icons for setting the snapping options for each of move, rotate, and scale. Snap to grid is useful for creating buildings -- making sure there are no gaps between walls!  The <strong>[</strong> and <strong>]</strong> keys change the snapping size.</li>
+</ul>
 <p>Position, rotation &amp; scale can also be modified numerically from the object&#39;s details panel. Unreal measures in centimeters, and the Z axis points up.</p>
-<p>Press &quot;ctrl g&quot; to group items, &quot;shift g&quot; to ungroup. Grouping is helpful to move a bloc of items together en masse.</p>
+<p>Press <strong>ctrl g</strong> to group items, <strong>shift g</strong> to ungroup. Grouping is helpful to move a bloc of items together en masse.</p>
 <h3 id="more-advanced-viewport-options">More advanced viewport options</h3>
 <p><strong><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=RoiQOwCg-4Q">Orthographic views</a>:</strong></p>
 <p>In the top-right corner of viewport there is a small &#39;min/max&#39; button which will alternate between a maximized 3D view, and a 4-up set of views for top, left, and front &quot;orthographic&quot; (non-perspective) views as well as the regular perspective one. Right-click &amp; drag to move in these views, and mouse-scroll to zoom.</p>
@@ -129,7 +138,7 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <h3 id="managing-assets">Managing Assets</h3>
 <p>Some assets are created within the Unreal Editor, others you import from outside. All the assets in a project can be found in the Content Browser <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=tG2KML-CDRo">(tutorial here)</a>, which mirrors the directory structure on disk. Some of these are files that can be edited externally (e.g. editing texture images using Photoshop, or mesh geometry in a 3D modeling software) -- when these files are modified externally, Unreal will automatically re-import them into the world.</p>
 <p>You can use the <strong>add new</strong> button to create new simple assets or content packs. You can <strong>import</strong> external assets to the content browser. Assets can also be duplicated, and many can be edited <em>before</em> bringing them into the level. Double-click the asset and it will open a special sub-editor in which it can be modified.</p>
-<p>Projects can end up with very many assets. It is a good idea to organize them, and name them, very carefully. You can create new folders to organize assets better. There is a search tool and options to filter assets by type. You can also open multiple content browser panels, and lock them to different sub-folders of your project.</p>
+<p>Projects can end up with hundreds of assets. <strong>It is essential to create meaningful names for assets, and place them in organized folders in the content browser</strong>. There is a search tool and options to filter assets by type. You can also open multiple content browser panels, and lock them to different sub-folders of your project.</p>
 <h3 id="creating-geometry">Creating Geometry</h3>
 <p>A <em>Geometry Brush</em>, also sometimes called &quot;BSPs&quot; <a href="https://docs.unrealengine.com/latest/INT/Engine/Actors/Brushes/index.html">(see documentation)</a>, is a great way to start filling in and carving out volumes of space in a level. They can be used to rapid-prototype a level where static meshes have not yet been created. </p>
 <p>In the Placement mode tab, choose the BSP (also known as <em>geometry brush</em>). Now we can drag different kinds of brushes into the level, such as boxes, cylinders, and stairs (though remember -- stairs can be nauseous in VR!). After dragging it in we can resize it. Be careful to use a snapping grid to make sure geometry snaps to tight alignment, and set the size accordingly (e.g. 10cm may be too small for laying out buildings!). </p>
@@ -140,14 +149,18 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <p><strong>Aligning materials/textures (to avoid seams):</strong> Select all adjoining panels (with &quot;ctrl&quot;) and in the details panel, set Geometry / Alignment / Align surface planar to make sure there are no seams between them.</p>
 <p><strong>Convert brush to mesh</strong>: After modeling, you can convert a brush into a regular StaticMeshActor from the Brush settings. It&#39;s geometry will no longer be editable, but the performance and lighting qualities will improve. It is also helpful when you want to assign different properties or behaviors that BSPs don&#39;t support, or to use them as reusable assets for building blueprints, or with foliage, etc.</p>
 <p>By default, a static mesh created this way has no collision hull, so a character will fall right through it. To add a collision hull:</p>
-<pre><code>- double-click <span class="hljs-keyword">the</span> mesh <span class="hljs-built_in">to</span> <span class="hljs-built_in">open</span> <span class="hljs-keyword">the</span> mesh editor, 
-- <span class="hljs-built_in">to</span> generate <span class="hljs-keyword">the</span> hull automatically:
-    - <span class="hljs-built_in">from</span> <span class="hljs-keyword">the</span> Collision menu choose Auto Convex Collision
-    - <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> details panel that opens, <span class="hljs-built_in">set</span> <span class="hljs-keyword">the</span> accuracy options, <span class="hljs-keyword">and</span> click Apply
-    - <span class="hljs-keyword">a</span> visualization <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> collision hull will appear <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> viewport
-- otherwise, <span class="hljs-keyword">with</span> other options <span class="hljs-keyword">in</span> this menu you can build <span class="hljs-keyword">a</span> hull <span class="hljs-keyword">by</span> hand
-- <span class="hljs-keyword">finally</span>, save <span class="hljs-keyword">and</span> <span class="hljs-built_in">close</span> <span class="hljs-keyword">the</span> mesh editor    
-</code></pre><p><strong>Adding feature and prop meshes, lights, etc.</strong>: After adding the brushes and dropping in materials, we can start adding some more detailed meshes, improve the lighting, etc. The starter content has a few good architectural items to work with, such as a &quot;glass window&quot; panel that can be used for all kinds of glass panels. </p>
+<ul>
+<li>double-click the mesh to open the mesh editor, </li>
+<li>to generate the hull automatically:<ul>
+<li>from the Collision menu choose Auto Convex Collision</li>
+<li>in the details panel that opens, set the accuracy options, and click Apply</li>
+<li>a visualization of the collision hull will appear in the viewport</li>
+</ul>
+</li>
+<li>otherwise, with other options in this menu you can build a hull by hand</li>
+<li>finally, save and close the mesh editor    </li>
+</ul>
+<p><strong>Adding feature and prop meshes, lights, etc.</strong>: After adding the brushes and dropping in materials, we can start adding some more detailed meshes, improve the lighting, etc. The starter content has a few good architectural items to work with, such as a &quot;glass window&quot; panel that can be used for all kinds of glass panels. </p>
 <hr>
 <h2 id="projects-and-assets">Projects and assets</h2>
 <h3 id="levels">Levels</h3>
