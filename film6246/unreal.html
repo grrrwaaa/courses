@@ -39,11 +39,8 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <p>Once Unreal is installed, we can create a new project. Open the editor directly, or via the launcher. It should open with the &#39;project browser&#39; / &#39;new project&#39; window. </p>
 <ul>
 <li>In the <code>New Project</code> tab:<ul>
-<li>Choose the Blueprint tab (not C++)<ul>
-<li>For a VR project choose the <code>Virtual Reality</code> template</li>
-<li>Else for  screen-based work, choose either the first or third-person template</li>
-</ul>
-</li>
+<li>Choose the Blueprint tab (not C++)</li>
+<li>For working outside the lab, choose the &quot;First Person&quot; template (we&#39;ll migrate your work to a Virtual Reality template in the lab later)</li>
 <li>Choose <code>Desktop</code> target, <code>Maximum Quality</code>, and <code>With Starter Content</code></li>
 <li>Set the project path (e.g. <code>E:\Unreal Projects</code> )</li>
 <li>Set the project name</li>
@@ -53,9 +50,6 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 </li>
 </ul>
 <p>In future, you can go ahead and open your existing project from the launcher, or the editor&#39;s project browser. </p>
-<blockquote>
-<p>Unreal&#39;s VR template offers support for both gamepad (e.g. Xbox controller) and motion controllers (e.g. Oculus Touch or HTC Vive wands). The template comes with a number of rendering optimizations for VR. <a href="http://www.tomlooman.com/vrtemplate/">The template is described in detail here, including how to navigate it</a>.</p>
-</blockquote>
 <hr>
 <h2 id="worldmaking-with-unreal">Worldmaking with Unreal</h2>
 <h3 id="activities">Activities</h3>
@@ -125,6 +119,18 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 </ul>
 <p>Position, rotation &amp; scale can also be modified numerically from the object&#39;s details panel. Unreal measures in centimeters, and the Z axis points up.</p>
 <p>Press <strong>ctrl g</strong> to group items, <strong>shift g</strong> to ungroup. Grouping is helpful to move a bloc of items together en masse.</p>
+<h3 id="hiding-the-first-person-template-s-person">Hiding the First Person Template&#39;s person</h3>
+<ul>
+<li>In the Content Browser navigate to Content/FirstPersonBP/Blueprints and double-click the &quot;First Person Character&quot; to open the blueprint editor</li>
+<li>Switch over to the Viewport tab, and select the gun</li>
+<li>In the Details panel, type in &quot;owner&quot; in the search box, and then check &quot;Owner No See&quot; underneath.</li>
+<li>Do the same for the arms</li>
+<li><p>Save and close</p>
+</li>
+<li><p>Now in the Content Browser navigate to Content/FirstPersonBP/Blueprints and double-click the &quot;FirstPerson GameMode&quot; to open the property editor</p>
+</li>
+<li>In the &quot;HUD Class&quot; drop-down, choose &quot;None&quot;</li>
+</ul>
 <h3 id="managing-assets">Managing Assets</h3>
 <p>Some assets are created within the Unreal Editor, others you import from outside. All the assets in a project can be found in the Content Browser <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=tG2KML-CDRo">(tutorial here)</a>, which mirrors the directory structure on disk. Some of these are files that can be edited externally (e.g. editing texture images using Photoshop, or mesh geometry in a 3D modeling software) -- when these files are modified externally, Unreal will automatically re-import them into the world.</p>
 <p>You can use the <strong>add new</strong> button to create new simple assets or content packs. You can <strong>import</strong> external assets to the content browser. Assets can also be duplicated, and many can be edited <em>before</em> bringing them into the level. Double-click the asset and it will open a special sub-editor in which it can be modified.</p>
@@ -177,7 +183,16 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <li>otherwise, with other options in this menu you can build a hull by hand</li>
 <li>finally, save and close the mesh editor    </li>
 </ul>
-<p><strong>Adding feature and prop meshes, lights, etc.</strong>: After adding the brushes and dropping in materials, we can start adding some more detailed meshes, improve the lighting, etc. The starter content has a few good architectural items to work with, such as a &quot;glass window&quot; panel that can be used for all kinds of glass panels. </p>
+<p><strong>Adding feature and prop meshes, lights, etc.</strong>: After adding the brushes and dropping in materials, we can start adding some more detailed meshes, improve the lighting, etc. The starter content has a few good architectural items to work with, such as a &quot;glass window&quot; panel that can be used for all kinds of glass panels.</p>
+<hr>
+<h2 id="vr-notes">VR notes</h2>
+<p>Unreal&#39;s VR template offers support for both gamepad (e.g. Xbox controller) and motion controllers (e.g. Oculus Touch or HTC Vive wands). The template comes with a number of rendering optimizations for VR. <a href="http://www.tomlooman.com/vrtemplate/">The template is described in detail here, including how to navigate it</a>.</p>
+<h3 id="turning-a-first-person-project-into-a-vr-project">Turning a First Person project into a VR project</h3>
+<p>This is currently clunky. Because of various factors (including specific rendering settings) it makes more sense to import your content into the a new project based on the VR template. But it may be more comfortable to edit via the First Person template when not in the lab.</p>
+<p>So long as you are careful in how you organize your content, it should be possible to migrate the same world between two different templates. </p>
+<blockquote>
+<p>Otherwise, it <em>is</em> possible to migrate the player pawns between VR and FPS template projects, in the same way as migrating other assets. However they won&#39;t work until the Input mappings are copied too, which has to be done manually. Moreover, for the First Person Character, you may also need to set the Default Game Mode to First Person Game Mode (either in Project Settings or your level&#39;s World Settings). Then you can drop &quot;HMD Locomotion Pawn&quot; and &quot;First Person Character&quot; into the same world, just make sure that only one of them has the &quot;Auto Possess Player&quot; set to &quot;Player 0&quot; in the details pane. </p>
+</blockquote>
 <hr>
 <h3 id="more-advanced-viewport-options">More advanced viewport options</h3>
 <p><strong><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=RoiQOwCg-4Q">Orthographic views</a>:</strong></p>
