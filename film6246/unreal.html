@@ -36,12 +36,11 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <li>Run this launcher (you will need to sign in again), and then under the &quot;Unreal&quot; tab download the Unreal Engine. This will take a while!</li>
 <li>From the launcher also get the &quot;content examples&quot;, and perhaps any other of the free samples you find interesting. Warning -- these examples can eat even more <em>gigabytes</em> of disk space!! </li>
 </ul>
-<p>Once Unreal is installed, we can also create a new project. Open the editor directly, or via the launcher. It should open with the &#39;project browser&#39; / &#39;new project&#39; window. </p>
-<p>For a VR project:</p>
+<p>Once Unreal is installed, we can create a new project. Open the editor directly, or via the launcher. It should open with the &#39;project browser&#39; / &#39;new project&#39; window. </p>
 <ul>
 <li>In the <code>New Project</code> tab:<ul>
-<li>Choose the Blueprint tab (not C++)</li>
-<li>For a VR project choose the <code>Virtual Reality</code> template<ul>
+<li>Choose the Blueprint tab (not C++)<ul>
+<li>For a VR project choose the <code>Virtual Reality</code> template</li>
 <li>Else for  screen-based work, choose either the first or third-person template</li>
 </ul>
 </li>
@@ -53,12 +52,18 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 </ul>
 </li>
 </ul>
-<p>In future, you can go ahead and open your existing project from the launcher, or the editor&#39;s project browser. I recommend that you only create one project, and just make new &quot;levels&quot; within that project whenever you want to try a new idea out. This will make it easier to manage assets and will save disk space.</p>
+<p>In future, you can go ahead and open your existing project from the launcher, or the editor&#39;s project browser. </p>
 <blockquote>
-<p>Unreal&#39;s VR template, offers support for both gamepad (e.g. Xbox controller) and motion controllers (e.g. Oculus Touch or HTC Vive wands). The template comes with a number of rendering optimizations for VR. <a href="http://www.tomlooman.com/vrtemplate/">The template is described in detail here, including how to navigate it</a>.</p>
+<p>Unreal&#39;s VR template offers support for both gamepad (e.g. Xbox controller) and motion controllers (e.g. Oculus Touch or HTC Vive wands). The template comes with a number of rendering optimizations for VR. <a href="http://www.tomlooman.com/vrtemplate/">The template is described in detail here, including how to navigate it</a>.</p>
 </blockquote>
 <hr>
 <h2 id="worldmaking-with-unreal">Worldmaking with Unreal</h2>
+<h3 id="activities">Activities</h3>
+<p>Unreal is primarily designed for building games, and although it is also used for creating other kinds of experiences including artworks, education, data visualizations, architectural previews, etc., a lot of influence from its gaming origins is present in the language and the workflows it presents. Games are usually products of teams with different specializations, such as artists (who spend a lot of time using software such as Maya to create 3D models and animations), developers (who spend a lot of time working in coding environments such as Visual Studio), and level designers (who spend more time in editors like Unreal). We will be operating more like level designers.</p>
+<p>Like any major production, everything starts with planning and sketching; with some interesting overlaps and differences from film, architecture, design, composition, etc. A good idea is to start with an idea of the overall size and locations of the space, and how one moves between them. Drawing a map on paper can help, but don&#39;t forget that the 3rd dimension! (Also, it&#39;s important to recall the limitations of VR, particularly of navigation; creating a large space that requires a lot of navigation to traverse (whether walking or teleporting) is going to be tiresome or nauseating for the immersant.) This initial sketch can be &#39;roughed-in&#39; in Unreal by placing simple objects into space, allowing you to start testing it&#39;s movement and flow as soon as possible -- long before spending time on creating details. After testing &amp; refining, you spend more time refining details, converting geometries to meshes, adding lighting and other elements of the world, testing continually, up to the last stages of polishing up.</p>
+<blockquote>
+<p>See also the <a href="https://docs.unrealengine.com/latest/INT/Engine/QuickStart/index.html">Level Designer Quick Start</a> documentation.</p>
+</blockquote>
 <h3 id="basic-concepts">Basic concepts</h3>
 <p>See <a href="https://docs.unrealengine.com/latest/INT/GettingStarted/index.html?utm_source=launcher&amp;utm_medium=ue&amp;utm_campaign=uelearn">Getting started with UE4</a>.</p>
 <p>You use the <em>Unreal Editor</em> application to author your world. Ultimately you will export it as a distributable application (.exe on windows), but most of the time you will edit and also playtest the world via the Editor. A <em>Project</em> is actually a whole folder of files on your disk, including a <code>.uproject</code> file that keeps the global settings together. You also see these files via the Content Browser in the Unreal editor. Each project has one or more <strong>Levels</strong> (sometimes also called <strong>Maps</strong>), which are independent 3D scenes or locations into which you place objects to define the world experienced. Each level is saved as a separate <code>.umap</code> file.</p>
@@ -69,13 +74,6 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <blockquote>
 <p>In summary: A Project has many Assets, including multiple Levels (maps). Each Level (map) has a number of Actors, based on the Assets, and modified with instance-specific parameters such as location. Actors can come in different kinds, and may include a number of Components.</p>
 </blockquote>
-<h3 id="activities">Activities</h3>
-<p>Unreal is primarily designed for building games, and although it is also used for creating other kinds of experiences including artworks, education, data visualizations, architectural previews, etc., a lot of influence from its gaming origins is present in the language and the workflows it presents. Games are usually products of teams with different specializations, such as artists (who spend a lot of time using software such as Maya to create 3D models and animations), developers (who spend a lot of time working in coding environments such as Visual Studio), and level designers (who spend more time in editors like Unreal). We will be operating more like level designers.</p>
-<p>Like any major production, everything starts with planning and sketching; with some interesting overlaps and differences from film, architecture, design, composition, etc. A good idea is to start with an idea of the overall size and locations of the space, and how one moves between them. Drawing a map on paper can help, but don&#39;t forget that the 3rd dimension! (Also, it&#39;s important to recall the limitations of VR, particularly of navigation; creating a large space that requires a lot of navigation to traverse (whether walking or teleporting) is going to be tiresome or nauseating for the immersant.) This initial sketch can be &#39;roughed-in&#39; in Unreal by placing simple objects into space, allowing you to start testing it&#39;s movement and flow as soon as possible -- long before spending time on creating details. After testing &amp; refining, you spend more time refining details, converting geometries to meshes, adding lighting and other elements of the world, testing continually, up to the last stages of polishing up.</p>
-<blockquote>
-<p>See also the <a href="https://docs.unrealengine.com/latest/INT/Engine/QuickStart/index.html">Level Designer Quick Start</a> documentation.</p>
-</blockquote>
-<hr>
 <h2 id="editing">Editing</h2>
 <h3 id="the-editor-panels">The editor panels</h3>
 <p>Watch the <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=w4XlBKeE46E">video tutorial here</a>.</p>
@@ -90,7 +88,7 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <h3 id="viewport-navigating">Viewport navigating</h3>
 <p>See the <a href="https://docs.unrealengine.com/latest/INT/Engine/QuickStart/2/index.html">documentation</a> or the <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=j2CKS6G3G2k">video tutorial</a>. Quick notes:</p>
 <ul>
-<li><strong>Left mouse</strong>: move forward/backward/turn</li>
+<li><strong>Left mouse</strong>: &quot;walk mode&quot; move forward/backward/turn... </li>
 <li><strong>Right mouse</strong>: look around</li>
 <li><strong>Both buttons</strong> (or middle button): vertical &amp; strafe movement</li>
 <li><strong>Mouse-scroll</strong> to zoom in and out (not the same as moving!!)</li>
@@ -105,7 +103,7 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <ol>
 <li>We can drag basic objects &amp; actors from the &#39;place mode&#39; palette at the left. You can drag objects from the browser into the viewport, and also materials right onto objects in the viewport. And also more abstract items such as lights, triggers, and other classes. </li>
 <li>We can drag objects from the Content Browser below.</li>
-<li>Right-click in the viewport and choosing &#39;place actor&#39;, then selecting the time to add.</li>
+<li>Right-click in the viewport and choosing &#39;place actor&#39;, then selecting the type to add.</li>
 <li><strong>alt-drag</strong> to make a copy of an actor</li>
 </ol>
 <h3 id="spatial-transforms">Spatial transforms</h3>
@@ -127,47 +125,10 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 </ul>
 <p>Position, rotation &amp; scale can also be modified numerically from the object&#39;s details panel. Unreal measures in centimeters, and the Z axis points up.</p>
 <p>Press <strong>ctrl g</strong> to group items, <strong>shift g</strong> to ungroup. Grouping is helpful to move a bloc of items together en masse.</p>
-<h3 id="more-advanced-viewport-options">More advanced viewport options</h3>
-<p><strong><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=RoiQOwCg-4Q">Orthographic views</a>:</strong></p>
-<p>In the top-right corner of viewport there is a small &#39;min/max&#39; button which will alternate between a maximized 3D view, and a 4-up set of views for top, left, and front &quot;orthographic&quot; (non-perspective) views as well as the regular perspective one. Right-click &amp; drag to move in these views, and mouse-scroll to zoom.</p>
-<p><strong><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=7UjP6gr44dc">View modes &amp; show flags</a></strong>:</p>
-<p>By default the viewport uses full lighting (&quot;lit&quot;) -- other modes are unlit (raw materials), wireframe (raw meshes), detail lighting (lighting effects only), reflections, etc. Next to this option is the <strong>Show</strong> drop-down, where you can enable and disable different kinds of content in the viewport.</p>
-<p><strong>Selecting translucent objects</strong>: The &quot;t&quot; key will enable/disable the ability to select translucent objects. If it is off, you will select whatever object is seen <em>through</em> the translucent object.</p>
-<p><strong>We can <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=Z7OqNjFpy6U">lock the viewport to an actor</a></strong> by right-clicking on an object and selecting the &quot;pilot&quot; option. This fixes our viewport&#39;s perspective to the object itself, and we can use the standard viewport movement controls to reposition the object. This is especially useful for positioning lights and cameras, for example.</p>
-<p><strong>Viewing the Frame rate</strong>: Command+Shift+H (or the dropdown top-right of the viewport)</p>
 <h3 id="managing-assets">Managing Assets</h3>
 <p>Some assets are created within the Unreal Editor, others you import from outside. All the assets in a project can be found in the Content Browser <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=tG2KML-CDRo">(tutorial here)</a>, which mirrors the directory structure on disk. Some of these are files that can be edited externally (e.g. editing texture images using Photoshop, or mesh geometry in a 3D modeling software) -- when these files are modified externally, Unreal will automatically re-import them into the world.</p>
 <p>You can use the <strong>add new</strong> button to create new simple assets or content packs. You can <strong>import</strong> external assets to the content browser. Assets can also be duplicated, and many can be edited <em>before</em> bringing them into the level. Double-click the asset and it will open a special sub-editor in which it can be modified.</p>
 <p>Projects can end up with hundreds of assets. <strong>It is essential to create meaningful names for assets, and place them in organized folders in the content browser</strong>. There is a search tool and options to filter assets by type. You can also open multiple content browser panels, and lock them to different sub-folders of your project.</p>
-<h3 id="creating-geometry">Creating Geometry</h3>
-<p>A <em>Geometry Brush</em>, also sometimes called &quot;BSPs&quot; <a href="https://docs.unrealengine.com/latest/INT/Engine/Actors/Brushes/index.html">(see documentation)</a>, is a great way to start filling in and carving out volumes of space in a level. They can be used to rapid-prototype a level where static meshes have not yet been created. </p>
-<p>In the Placement mode tab, choose the BSP (also known as <em>geometry brush</em>). Now we can drag different kinds of brushes into the level, such as boxes, cylinders, and stairs (though remember -- stairs can be nauseous in VR!). After dragging it in we can resize it. Be careful to use a snapping grid to make sure geometry snaps to tight alignment, and set the size accordingly (e.g. 10cm may be too small for laying out buildings!). </p>
-<p>Using the <strong>Geometry Editing Mode</strong>, very simple 3D modeling can be performed, modifying the faces and vertices (corners) of objects.  </p>
-<p><strong>Creating holes and indentations</strong>: A geometry brush&#39;s settings can be set to &quot;Subtractive&quot; type, which will carve out holes in other brushes -- however the order of brushes is important. For example, to create an opening in a wall, we can duplicate the wall, reduce its size, set its brush type to &quot;subtractive&quot; (in the details panel), then drag it back into the wall. </p>
-<p><strong>Updating lighting etc.</strong> Hit &quot;Build&quot; in the top toolbar to apply the changes, and rebuild lighting models etc. This can be especially important when building enclosed spaces with holes for light to come through.</p>
-<p><strong>Applying materials</strong>: You can simply drag &amp; drop materials from the Content Browser onto geometry brushes. By default, materials will drag onto a single face. To drag onto all faces of a geometry brush, first press &quot;shift+b&quot; to select all the faces (or, if you select a wall, pressing &quot;shift+w&quot; will select all adjacent walls).</p>
-<p><strong>Aligning materials/textures (to avoid seams):</strong> Select all adjoining panels (with &quot;ctrl&quot;) and in the details panel, set Geometry / Alignment / Align surface planar to make sure there are no seams between them.</p>
-<p><strong>Convert brush to mesh</strong>: After modeling, you can convert a brush into a regular StaticMeshActor from the Brush settings. It&#39;s geometry will no longer be editable, but the performance and lighting qualities will improve. It is also helpful when you want to assign different properties or behaviors that BSPs don&#39;t support, or to use them as reusable assets for building blueprints, or with foliage, etc.</p>
-<p>By default, a static mesh created this way has no collision hull, so a character will fall right through it. To add a collision hull:</p>
-<ul>
-<li>double-click the mesh to open the mesh editor, </li>
-<li>to generate the hull automatically:<ul>
-<li>from the Collision menu choose Auto Convex Collision</li>
-<li>in the details panel that opens, set the accuracy options, and click Apply</li>
-<li>a visualization of the collision hull will appear in the viewport</li>
-</ul>
-</li>
-<li>otherwise, with other options in this menu you can build a hull by hand</li>
-<li>finally, save and close the mesh editor    </li>
-</ul>
-<p><strong>Adding feature and prop meshes, lights, etc.</strong>: After adding the brushes and dropping in materials, we can start adding some more detailed meshes, improve the lighting, etc. The starter content has a few good architectural items to work with, such as a &quot;glass window&quot; panel that can be used for all kinds of glass panels. </p>
-<hr>
-<h2 id="projects-and-assets">Projects and assets</h2>
-<h3 id="levels">Levels</h3>
-<p>You can make a new level at any time from File-&gt;New Level. </p>
-<p>To set the default level (the one that opens when a project launches), go to Project Settings</p>
-<p><strong>Copying actors between levels (maps) of the same project</strong>: Just select what you want to copy in the Outliner and Ctrl-C to copy, then switch to the destination level, and Ctrl-V to paste.</p>
-<p>To set where the immersant will start a level (and what direction they face) when the level runs, move and rotate the &quot;Player Start&quot; actor. If you don&#39;t have a Player Start actor in the level, you can drag one in from the starter content collection. However it&#39;s common while editing a level to remove the Player Start, so that it will run from wherever you where editing from. </p>
 <h3 id="getting-more-assets">Getting more assets</h3>
 <p><strong>From other Unreal projects</strong>. The easiest place to get more assets (more than what the starter content pack gives you) is to grab them from other Unreal projects. There&#39;s a very generous set of example projects available through the Unreal Launcher&#39;s Library tab, for example. Once these are downloaded you can open them up, navigate through their Content Browsers and see if there&#39;s anything you want to take. Getting them into your own project however takes a few steps, and is called <em>migrating assets</em> <a href="https://wiki.unrealengine.com/Migrate_content_between_projects">(see the documentation here)</a>. Migrating an asset will also migrate everything that it depends on (textures, materials, blueprints, etc.):</p>
 <ol>
@@ -195,6 +156,44 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <li><a href="http://www.3dvia.com/search/?search%5Bquery%5D=free&amp;search%5Bresults_per_page%5D=12&amp;search%5Bsort_order%5D=Rank&amp;search%5Bfile_types%5D=1">3DVia</a></li>
 </ul>
 <p><a href="https://www.unrealengine.com/marketplace/playup-tools-plugin-for-ue4">This plugin</a> lets you import scenes from SketchUp&#39;s PlayUp.</p>
+<h3 id="creating-geometry">Creating Geometry</h3>
+<p>A <em>Geometry Brush</em>, also sometimes called &quot;BSPs&quot; <a href="https://docs.unrealengine.com/latest/INT/Engine/Actors/Brushes/index.html">(see documentation)</a>, is a great way to start filling in and carving out volumes of space in a level. They can be used to rapid-prototype a level where static meshes have not yet been created. </p>
+<p>In the Placement mode tab, choose the BSP (also known as <em>geometry brush</em>). Now we can drag different kinds of brushes into the level, such as boxes, cylinders, and stairs (though remember -- stairs can be nauseous in VR!). After dragging it in we can resize it. Be careful to use a snapping grid to make sure geometry snaps to tight alignment, and set the size accordingly (e.g. 10cm may be too small for laying out buildings!). </p>
+<p>Using the <strong>Geometry Editing Mode</strong>, very simple 3D modeling can be performed, modifying the faces and vertices (corners) of objects.  </p>
+<p><strong>Creating holes and indentations</strong>: A geometry brush&#39;s settings can be set to &quot;Subtractive&quot; type, which will carve out holes in other brushes -- however the order of brushes is important. For example, to create an opening in a wall, we can duplicate the wall, reduce its size, set its brush type to &quot;subtractive&quot; (in the details panel), then drag it back into the wall. </p>
+<p><strong>Updating lighting etc.</strong> Hit &quot;Build&quot; in the top toolbar to apply the changes, and rebuild lighting models etc. This can be especially important when building enclosed spaces with holes for light to come through.</p>
+<p><strong>Applying materials</strong>: You can simply drag &amp; drop materials from the Content Browser onto geometry brushes. By default, materials will drag onto a single face. To drag onto all faces of a geometry brush, first press &quot;shift+b&quot; to select all the faces (or, if you select a wall, pressing &quot;shift+w&quot; will select all adjacent walls).</p>
+<p><strong>Aligning materials/textures (to avoid seams):</strong> Select all adjoining panels (with &quot;ctrl&quot;) and in the details panel, set Geometry / Alignment / Align surface planar to make sure there are no seams between them.</p>
+<p><strong>Convert brush to mesh</strong>: After modeling, you can convert a brush into a regular StaticMeshActor from the Brush settings. It&#39;s geometry will no longer be editable, but the performance and lighting qualities will improve. It is also helpful when you want to assign different properties or behaviors that BSPs don&#39;t support, or to use them as reusable assets for building blueprints, or with foliage, etc.</p>
+<p>By default, a static mesh created this way has no collision hull, so a character will fall right through it. To add a collision hull:</p>
+<ul>
+<li>double-click the mesh to open the mesh editor, </li>
+<li>to generate the hull automatically:<ul>
+<li>from the Collision menu choose Auto Convex Collision</li>
+<li>in the details panel that opens, set the accuracy options, and click Apply</li>
+<li>a visualization of the collision hull will appear in the viewport</li>
+</ul>
+</li>
+<li>otherwise, with other options in this menu you can build a hull by hand</li>
+<li>finally, save and close the mesh editor    </li>
+</ul>
+<p><strong>Adding feature and prop meshes, lights, etc.</strong>: After adding the brushes and dropping in materials, we can start adding some more detailed meshes, improve the lighting, etc. The starter content has a few good architectural items to work with, such as a &quot;glass window&quot; panel that can be used for all kinds of glass panels. </p>
+<hr>
+<h3 id="more-advanced-viewport-options">More advanced viewport options</h3>
+<p><strong><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=RoiQOwCg-4Q">Orthographic views</a>:</strong></p>
+<p>In the top-right corner of viewport there is a small &#39;min/max&#39; button which will alternate between a maximized 3D view, and a 4-up set of views for top, left, and front &quot;orthographic&quot; (non-perspective) views as well as the regular perspective one. Right-click &amp; drag to move in these views, and mouse-scroll to zoom.</p>
+<p><strong><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=7UjP6gr44dc">View modes &amp; show flags</a></strong>:</p>
+<p>By default the viewport uses full lighting (&quot;lit&quot;) -- other modes are unlit (raw materials), wireframe (raw meshes), detail lighting (lighting effects only), reflections, etc. Next to this option is the <strong>Show</strong> drop-down, where you can enable and disable different kinds of content in the viewport.</p>
+<p><strong>Selecting translucent objects</strong>: The &quot;t&quot; key will enable/disable the ability to select translucent objects. If it is off, you will select whatever object is seen <em>through</em> the translucent object.</p>
+<p><strong>We can <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=Z7OqNjFpy6U">lock the viewport to an actor</a></strong> by right-clicking on an object and selecting the &quot;pilot&quot; option. This fixes our viewport&#39;s perspective to the object itself, and we can use the standard viewport movement controls to reposition the object. This is especially useful for positioning lights and cameras, for example.</p>
+<p><strong>Viewing the Frame rate</strong>: Command+Shift+H (or the dropdown top-right of the viewport)</p>
+<hr>
+<h2 id="projects-and-assets">Projects and assets</h2>
+<h3 id="levels">Levels</h3>
+<p>You can make a new level at any time from File-&gt;New Level. </p>
+<p>To set the default level (the one that opens when a project launches), go to Project Settings</p>
+<p><strong>Copying actors between levels (maps) of the same project</strong>: Just select what you want to copy in the Outliner and Ctrl-C to copy, then switch to the destination level, and Ctrl-V to paste.</p>
+<p>To set where the immersant will start a level (and what direction they face) when the level runs, move and rotate the &quot;Player Start&quot; actor. If you don&#39;t have a Player Start actor in the level, you can drag one in from the starter content collection. However it&#39;s common while editing a level to remove the Player Start, so that it will run from wherever you where editing from. </p>
 <hr>
 <h2 id="landscaping">Landscaping</h2>
 <p><a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/QuickStart/index.html">See documentation</a>.</p>
