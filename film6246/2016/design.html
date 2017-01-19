@@ -114,7 +114,6 @@
 <li>Sideways movement (strafing / tracking) can be particularly nauseous. </li>
 <li>Moving backwards is much worse than moving forwards.</li>
 <li>Moving over uneven ground can create unexpected vertical movements. Either steady the movement, or soften the ground.</li>
-<li>For some reason, stairs are especially unpleasant (both going up and down). Use elevators, or ramps with very shallow inclines.</li>
 </ul>
 <blockquote>
 <p>Avoid visuals that upset the user’s sense of stability in their environment. Rotating or moving the horizon line or other large components of the user’s environment in conflict with the user’s real-world self-motion (or lack thereof) can be discomforting.  - <a href="https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/">Best practices, Oculus</a> </p>
@@ -171,27 +170,6 @@
 <p><strong>Limit field of view</strong></p>
 <p>Sim sickness is much less prevalent when the field of view is lesser, however this also reduces immersion &amp; presence. Some suggest reducing FOV only in those moments that could be particularly nauseating -- though changes of FOV may also be triggers. </p>
 <p>Limiting FOV may be another reason why cockpit views are less nauseating.</p>
-<p><strong>Lighting, texturing, effects</strong></p>
-<ul>
-<li>Avoid very bright lights, flickering lights, and areas of high contrast -- especially in peripheral vision.</li>
-<li>Avoid flicking and flashing, especially in peripheral vision.</li>
-</ul>
-<blockquote>
-<p>Refrain from using any high-contrast flashing or alternating colors that change with a frequency in the 1-30 hz range. This can trigger seizures in individuals with photosensitive epilepsy. - <a href="https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/">Best practices, Oculus</a></p>
-</blockquote>
-<ul>
-<li>Avoid untextured surfaces, as the lack of detail provides less distance cue and weakens the perceptual illusion, making other conflicting signals more problematic.</li>
-<li>On the other hand, avoid high-contrast textures, which are more likely to cause flickering due to aliasing noise.</li>
-<li>Avoid textures that are obviously repetitive, like tiling patterns. Any high-spatial frequency repetition can give discomforting perceptual signals. They can also trigger photosensitive epilepsy.</li>
-<li><p>For the same reason, avoid very thin objects, and avoid very regular or straight objects -- irregular/random/organic shapes are more comfortable.</p>
-</li>
-<li><p>Do not use motion blur or depth of field post-processing effects</p>
-</li>
-<li>No post-production effects that are computed over multiple frames, as these would add to latency.</li>
-</ul>
-<blockquote>
-<p>The images presented to each eye should differ only in terms of viewpoint; post-processing effects (e.g., light distortion, bloom) must be applied to both eyes consistently as well as rendered in z-depth correctly to create a properly fused image. - <a href="https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/">Best practices, Oculus</a></p>
-</blockquote>
 <p><strong>Experiment</strong></p>
 <p>Try other ideas out. Try them out on lots of people. Just because it feels OK for you doesn&#39;t mean it will for others -- and this is more true the more time you spend in VR.</p>
 <p>Give people the option to control the intensity of effects that can induce nausea.</p>

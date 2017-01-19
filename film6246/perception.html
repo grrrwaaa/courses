@@ -80,7 +80,7 @@
 <blockquote>
 <p>The rendered image must correspond directly with the user&#39;s physical movements; do not manipulate the gain of the virtual camera’s movements. - <a href="https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/">Best practices, Oculus</a></p>
 </blockquote>
-<p>The golden rule for designers is that we must <strong>never take away control of the camera from the viewer</strong>, not even for a moment. This means no fixed-view &#39;cinematics&#39;, no full-screen imagery, no lens and framing control, etc. </p>
+<p>The golden rule for designers is that we must <strong>never take away control of the camera from the viewer</strong>, not even for a moment. This means no fixed-view cut-scenes or &#39;cinematics&#39;, no full-screen imagery, no lens and framing control, etc. Also no motion blur, depth of field effects etc. (still takes away viewer control).</p>
 <p>Which is to say, <strong>everything should be in-world</strong>. Nothing should &quot;stick&quot; to the viewer&#39;s headset -- not even messages/menus, head-up displays, etc. User interface elements are uncomfortable if they are stuck to the headset, better if they are transparent overlays that keep the world&#39;s orientation, and best if they are actually objects in the world.</p>
 <blockquote>
 <p>Maintain VR immersion from start to finish—don’t affix an image in front of the user (such as a full-field splash screen that does not respond to head movements), as this can be disorienting... Even in menus, when the game is paused, or during cutscenes, users should be able to look around. - <a href="https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/">Best practices, Oculus</a></p>
@@ -145,6 +145,8 @@
 <p><strong>Instant transitions (AKA teleport)</strong></p>
 <p>Vive&#39;s introductory content The Lab uses this method extensively. It is very low in terms of nausea, but relatively immersion breaking. It also depends on developing a method to identify valid locations to teleport to. </p>
 <p><a href="https://www.engadget.com/2016/10/07/why-teleportation-makes-sense-in-virtual-reality/">It has been argued that we can handle teleports in VR in a similar way that we can handle cuts in TV</a></p>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/nmR8iqXSspA?rel=0" frameborder="0" allowfullscreen></iframe>
+
 <p>It can also become a game mechanic:</p>
 <iframe width="640" height="360" src="https://www.youtube.com/embed/gbp7xX9QPOc?rel=0" frameborder="0" allowfullscreen></iframe>
 
@@ -175,21 +177,34 @@
 <blockquote>
 <p>When it comes to modeling player avatars in VR, abstract trumps the real. Malaika says Valve has found that players tend to feel less immersed in games that try to model hands realistically, and more immersed in games with cartoony hands. - <a href="http://www.gamasutra.com/view/news/250362/Valve_shares_advice_on_designing_great_VR_game_interactions.php">Valve advice for VR</a></p>
 </blockquote>
+<p><strong>Redirected walking</strong></p>
+<p>The notion here is that while walking in the real space, the virtual world is slightly rotated (below perceptual levels). Although we feel we are walking in a straight line in the virtual space, we are in fact walking in circles in the real world. Problem: still requires much larger spaces than most rooms.</p>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/KVQBRkAq6OY?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<p><strong>Displacement of motor functions</strong></p>
+<p>Disturbance is reduced if some body actions accompany a movement. Some games use a &#39;paddling with the hands&#39; behaviour to trigger walking in the virtual space, or swimming etc.:</p>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/MjwNItck_Vg?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<p>Other experiences use the direction of the hands or fingers to indicate direction of motion, which appears to reduce nausea.</p>
 <hr>
+<p>Overview of locomotion methods:</p>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/p0YxzgQG2-E?rel=0" frameborder="0" allowfullscreen></iframe>
+
 <p>Many of these solutions are utilized in EagleFlightVR, which has had <a href="http://www.roadtovr.com/eagle-flight-review-vr-psvr-htc-vive-oculus-rift/">very strong reviews commenting about the lack of nausea</a>.</p>
 <h2 id="other-forms-of-disturbance">Other forms of disturbance</h2>
 <blockquote>
 <p>Avoid visuals that upset the user’s sense of stability in their environment. Rotating or moving the horizon line or other large components of the user’s environment in conflict with the user’s real-world self-motion (or lack thereof) can be discomforting.  - <a href="https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/">Best practices, Oculus</a> </p>
 </blockquote>
-<p><strong><em>Scale</em></strong></p>
+<p><strong><em>Spatial</em></strong></p>
 <ul>
 <li>The head-height above ground should be consistent with the immersant&#39;s own height, whether sitting or standing. </li>
 <li>Real-world movement is more comfortable. Humans walk at ~1.4 meters per second (this is much slower than &#39;walking&#39; in most video games).</li>
 <li>Objects drawn from the real-world should have consistent and usually accurate scale.</li>
 <li>On the other hand, miniature worlds work well -- about table-sized + 3rd person view</li>
 <li>Avoid confined spaces.</li>
+<li>No image-based effects such as particles, as they can look flat and break stereoscopy.</li>
 </ul>
-<p><strong>Lighting, texturing, effects</strong></p>
+<p><strong>Lighting &amp; texturing</strong></p>
 <ul>
 <li>Avoid very bright lights, flickering lights, and areas of high contrast -- especially in peripheral vision.</li>
 <li>Avoid flicking and flashing, especially in peripheral vision.</li>
@@ -201,17 +216,14 @@
 <li>Avoid untextured surfaces, as the lack of detail provides less distance cue and weakens the perceptual illusion, making other conflicting signals more problematic.</li>
 <li>On the other hand, avoid high-contrast textures, which are more likely to cause flickering due to aliasing noise.</li>
 <li>Avoid textures that are obviously repetitive, like tiling patterns. Any high-spatial frequency repetition can give discomforting perceptual signals. They can also trigger photosensitive epilepsy.</li>
-<li><p>For the same reason, avoid very thin objects, and avoid very regular or straight objects -- irregular/random/organic shapes are more comfortable.</p>
-</li>
-<li><p>Do not use motion blur or depth of field post-processing effects</p>
-</li>
-<li>No post-production effects that are computed over multiple frames, as these would add to latency.</li>
+<li>For the same reason, avoid very thin objects, and avoid very regular or straight objects -- irregular/random/organic shapes are more comfortable.</li>
 </ul>
 <blockquote>
 <p>The images presented to each eye should differ only in terms of viewpoint; post-processing effects (e.g., light distortion, bloom) must be applied to both eyes consistently as well as rendered in z-depth correctly to create a properly fused image. - <a href="https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/">Best practices, Oculus</a></p>
 </blockquote>
 <p><strong>Uncanny content</strong></p>
-<p>The closer we get to experiences we have every day (e.g. walking), the higher the risk of creating perceptual cues that do not match reality. This may be related to the <em>uncanny valley</em>. More abstract worlds are less likely to cause such conflicts.</p>
+<p>The closer we get to experiences we have every day (e.g. walking), the higher the risk of creating perceptual cues that do not match reality. This may be related to the <em>uncanny valley</em>. More abstract worlds are less likely to cause such conflicts; non-photorealistic environments in many ways have advantages.</p>
+<p>Characters not looking at you / not responding to you properly can be particularly disturbing.</p>
 <p><strong>Muscle fatigue</strong></p>
 <blockquote>
 <p>People will typically move their heads/bodies if they have to shift their gaze and hold it on a point farther than 15-20° of visual angle away from where they are currently looking. Avoid forcing the user to make such large shifts to prevent muscle fatigue and discomfort. - <a href="https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/">Best practices, Oculus</a> </p>
