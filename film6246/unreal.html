@@ -10,6 +10,7 @@
 	<li><a href="index.html" alt="Future Cinema II">Future Cinema II</a></li>
 <li><a href="log.html" alt="Log">Log</a></li>
 <li><a href="vr.html" alt="Virtual Reality">Virtual Reality</a></li>
+<li><a href="perception.html" alt="Perception">Perception</a></li>
 <li><a href="osmose.html" alt="Osmose">Osmose</a></li>
 <li><a href="reading.html" alt="Reading">Reading</a></li>
 <li><a href="lab.html" alt="Lab">Lab</a></li>
@@ -185,6 +186,13 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 </ul>
 <p><strong>Adding feature and prop meshes, lights, etc.</strong>: After adding the brushes and dropping in materials, we can start adding some more detailed meshes, improve the lighting, etc. The starter content has a few good architectural items to work with, such as a &quot;glass window&quot; panel that can be used for all kinds of glass panels.</p>
 <hr>
+<h2 id="projects-and-assets">Projects and assets</h2>
+<h3 id="levels">Levels</h3>
+<p>You can make a new level at any time from File-&gt;New Level. </p>
+<p>To set the default level (the one that opens when a project launches), go to Project Settings</p>
+<p><strong>Copying actors between levels (maps) of the same project</strong>: Just select what you want to copy in the Outliner and Ctrl-C to copy, then switch to the destination level, and Ctrl-V to paste.</p>
+<p>To set where the immersant will start a level (and what direction they face) when the level runs, move and rotate the &quot;Player Start&quot; actor. If you don&#39;t have a Player Start actor in the level, you can drag one in from the starter content collection. However it&#39;s common while editing a level to remove the Player Start, so that it will run from wherever you where editing from. </p>
+<hr>
 <h2 id="vr-notes">VR notes</h2>
 <p>Unreal&#39;s VR template offers support for both gamepad (e.g. Xbox controller) and motion controllers (e.g. Oculus Touch or HTC Vive wands). The template comes with a number of rendering optimizations for VR. <a href="http://www.tomlooman.com/vrtemplate/">The template is described in detail here, including how to navigate it</a>.</p>
 <h3 id="turning-a-first-person-project-into-a-vr-project">Turning a First Person project into a VR project</h3>
@@ -193,6 +201,25 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <blockquote>
 <p>Otherwise, it <em>is</em> possible to migrate the player pawns between VR and FPS template projects, in the same way as migrating other assets. However they won&#39;t work until the Input mappings are copied too, which has to be done manually. Moreover, for the First Person Character, you may also need to set the Default Game Mode to First Person Game Mode (either in Project Settings or your level&#39;s World Settings). Then you can drop &quot;HMD Locomotion Pawn&quot; and &quot;First Person Character&quot; into the same world, just make sure that only one of them has the &quot;Auto Possess Player&quot; set to &quot;Player 0&quot; in the details pane. </p>
 </blockquote>
+<hr>
+<h2 id="materials">Materials</h2>
+<p>Materials are assets that can be applied to geometry and meshes, and determine how light plays off them. The starter content comes with a few examples of materials, including brick, grass, chromes, plastics, etc. </p>
+<p><strong>Applying a material to an object</strong> can be as simple as dragging the material from the content browser onto the object in the viewport. However, some objects can carry more than one material (this is evident from their details panel) -- it could be for example a lamp that uses a glassy material for the shade and a different material for the stand. In this case you can drag materials to each of the material slots in the details panel.</p>
+<p><strong>Modifying materials by instancing:</strong> Some materials also have <strong>parameters</strong>, which can be modified by using <strong>Material Instances</strong>. You can right-click on any Material to select &quot;Create Material Instance&quot;, and save the instance in the content browser. Material Instances can be used wherever a Material was used. The main difference is that when you double-click it opens the Material Instance editor, which lists the parameters in the material and allows us to edit them. Also each one has a checkbox, which when ticked, makes them appear in the object&#39;s details panel, allowing us to customize the instance per object. Instancing is much cheaper than creating new materials, and also allows you to change properties without needing to recompile the underlying shaders.</p>
+<p>Instance parameters can also be modified in-game via Blueprints, see <a href="https://docs.unrealengine.com/latest/INT/Videos/PLZlv_N0_O1gbQjgY0nDwZNYe_N8IcYWS-/srUSDU1u0og/index.html">tutorial</a>.</p>
+<p><strong>Creating new materials:</strong> You can create new materials by selecting &quot;New Material&quot; in the content browser menu (or by right-clicking in the content browser), and you can duplicate existing materials like any other asset. You can edit a material by double-clicking on it, which will open the Material Editor. This editor allows you to define the material properties via a data-flow graph, <a href="https://docs.unrealengine.com/latest/INT/Videos/PLZlv_N0_O1gbQjgY0nDwZNYe_N8IcYWS-/lngF4VVNER4/index.html">as described in the tutorial here</a>. Materials in Unreal are mainly defined in terms of:</p>
+<ul>
+<li>Base color (the underlying colour or coloured texture of the object)</li>
+<li>Metallic (whether shinyness is metal-like or plastic-like, usually just the value 0 or 1)</li>
+<li>Roughness (a roughness of 0 is like a perfect mirror, a roughness of 1 is not reflective at all)</li>
+<li>Specular (how bright or prominent reflective shines are)</li>
+<li>Emissive colour (usually zero/black, but can be increased if this material emits light, like an LED)</li>
+<li>Normal (emulates small deviations in the surface, such as grout between bricks; usually requires specific normal map textures)</li>
+</ul>
+<h2 id="particles">Particles</h2>
+<p>Particle systems are used to create a wide variety of effects, such as smoke, fire, fireworks, electric sparks, dust, explosions, etc. There are quite a few particle system example assets in the starter content and other free projects (especially &quot;Particle Effects&quot; project!)</p>
+<p>Your world can have a number of <strong>Emitter</strong> actors, each of which refer to a <strong>Particle System</strong> asset (specified by the emitter&#39;s &quot;Template&quot; property in the details panel). Particle system <em>components</em> can also be added to Blueprint objects. Particle systems themselves can be edited through a built-in editor called &quot;Cascade&quot;.</p>
+<p>See the <a href="https://docs.unrealengine.com/latest/INT/Videos/PLZlv_N0_O1gbQjgY0nDwZNYe_N8IcYWS-/srUSDU1u0og/index.html">tutorials</a>.</p>
 <hr>
 <h3 id="more-advanced-viewport-options">More advanced viewport options</h3>
 <p><strong><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=RoiQOwCg-4Q">Orthographic views</a>:</strong></p>
@@ -203,12 +230,6 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <p><strong>We can <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=Z7OqNjFpy6U">lock the viewport to an actor</a></strong> by right-clicking on an object and selecting the &quot;pilot&quot; option. This fixes our viewport&#39;s perspective to the object itself, and we can use the standard viewport movement controls to reposition the object. This is especially useful for positioning lights and cameras, for example.</p>
 <p><strong>Viewing the Frame rate</strong>: Command+Shift+H (or the dropdown top-right of the viewport)</p>
 <hr>
-<h2 id="projects-and-assets">Projects and assets</h2>
-<h3 id="levels">Levels</h3>
-<p>You can make a new level at any time from File-&gt;New Level. </p>
-<p>To set the default level (the one that opens when a project launches), go to Project Settings</p>
-<p><strong>Copying actors between levels (maps) of the same project</strong>: Just select what you want to copy in the Outliner and Ctrl-C to copy, then switch to the destination level, and Ctrl-V to paste.</p>
-<p>To set where the immersant will start a level (and what direction they face) when the level runs, move and rotate the &quot;Player Start&quot; actor. If you don&#39;t have a Player Start actor in the level, you can drag one in from the starter content collection. However it&#39;s common while editing a level to remove the Player Start, so that it will run from wherever you where editing from. </p>
 <hr>
 <h2 id="landscaping">Landscaping</h2>
 <p><a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/QuickStart/index.html">See documentation</a>.</p>
