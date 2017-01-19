@@ -22,6 +22,8 @@ Which is to say, *virtual worlds can be dangerous!* See this 1996 NBC special:
 
 In fact simulator sickness has been known about since the earliest flight simulators of the 1950's, but is still not fully understood. It is clearly triggered by "cue conflicts", whereby what some parts of the visual system are reporting does not match what other sensory components (such as proprioceptive systems) are reporting. 
 
+(Some researchers hope to alleviate VR nausea by galvanic vestibular stimulation, [for example the Mayo Clinic](http://ir.net/news/virtual-reality/124021/mayo-clinic-vr-nausea/), but as yet this hasn't convinced the industry.)
+
 Some people are far more or less susceptible than others. It generally affects younger people less, and tends to reduce with increased exposure (getting your "VR legs"). People with a history of MS, alcohol/drug abuse, etc. also tend to be more susceptible.
 
 > Around 5% of all individuals will never acclimate regardless how much they try to build a resistance to it meaning there is a confirmed minority of individuals who will never be able to us Virtual Reality as a mainstream product over their lifetime. - [Sim Sickness guide on Oculus forums](https://forums.oculus.com/viewtopic.php?t=170)
@@ -40,7 +42,7 @@ To some extent this is a hardware problem -- and recent advances in VR hardware 
 	
 - Anything that can potentially interrupt or slow down rendering, or delay the motion-to-photon pathway, has to be avoided to prevent nausea. The need for low-latency and high-framerate is one of the reasons why certain visual details and effects common in video games are eschewed in VR. When the world surrounds in you stereoscopy, geometry is often more important than screen-based post-processing. In particular, many effects popular in games are actually rendered across several frames -- this is simply not viable for VR. The Unreal VR template disables such effects by default. 
 
-> A related issue is image persistence: a low-persistence image has a longer black interval between presenting frames, which reduces the smear/blur/ghosting when moving your head. This is mainly a display screen technology issue and largely resolved in current generation hardware. 
+- A related issue is image persistence: a low-persistence image has a longer black interval between presenting frames, which reduces the smear/blur/ghosting when moving your head. This is mainly a display screen technology issue and largely resolved in current generation hardware. 
 
 ![Persistence](https://lh5.googleusercontent.com/bS3bZRKphnYPK1IAP7DwYN6e3Y_7y6-8RnHVutmm15S_wjzkf4M1vDR0OczN0kHx6PVd-10jd4vmhDFNhY0I18_31ovaKI2s6X_noyC9jk0AutfhEM4BIvnNyFjS6Q)
 
@@ -62,13 +64,15 @@ It is helpful to **think of the HMD as the camera** into a virtual world that is
 
 > The rendered image must correspond directly with the user's physical movements; do not manipulate the gain of the virtual camera’s movements. - [Best practices, Oculus](https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/)
 
-The golden rule for designers is that we must **never take away control of the camera from the viewer**, not even for a moment. This means no fixed-view cut-scenes or 'cinematics', no full-screen imagery, no lens and framing control, etc. Also no motion blur, depth of field effects etc. (still takes away viewer control).
+The golden rule for designers is that we must **never take away control of the camera from the viewer**, not even for a moment. This means no fixed-view cut-scenes or 'cinematics', no full-screen imagery, no lens and framing control, etc. Also no motion blur, depth of field effects etc. (still takes away viewer control). 
 
 Which is to say, **everything should be in-world**. Nothing should "stick" to the viewer's headset -- not even messages/menus, head-up displays, etc. User interface elements are uncomfortable if they are stuck to the headset, better if they are transparent overlays that keep the world's orientation, and best if they are actually objects in the world.
 
 > Maintain VR immersion from start to finish—don’t affix an image in front of the user (such as a full-field splash screen that does not respond to head movements), as this can be disorienting... Even in menus, when the game is paused, or during cutscenes, users should be able to look around. - [Best practices, Oculus](https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/)
 
 > One of the big challenges with VR storytelling lies within the constraints on camera movement forced upon us by this tiny detail called simulator sickness. Quick zoom in to focus on a detail – nope, not possible, you can’t zoom in VR. Nice dolly shot moving around the scene – be careful or the viewer might have a look at what he had for breakfast instead of comfortably watching your experience... the safest bet is not having continuous camera movement at all. - [The limbo method](http://uploadvr.com/introducing-limbo-a-vr-camera-movement-technique-by-the-developers-of-colosse/)
+
+Since the immersant is free to look in any direction they choose, you need to make sure all directions are valid, potentially valuable, and that nothing essential will be missed because 'they were looking the wrong way'. 
 
 ### When is camera movement OK?
 
@@ -106,6 +110,7 @@ Even being able to turn around to face behind you (rather than looking over your
 - Moving over uneven ground can create unexpected vertical movements. Either steady the movement, or soften the ground.
 - Stairs can be especially unpleasant (both going up and down). Use elevators, or ramps with very shallow inclines.
 
+Finally, walking around a world is really counter intuitive, as you may have to think about two different spaces simultaneously -- the space you can physically move around in, and the space you can navigate around in. 
 
 ### Some solutions / compromises
 
@@ -181,11 +186,23 @@ The notion here is that while walking in the real space, the virtual world is sl
 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/KVQBRkAq6OY?rel=0" frameborder="0" allowfullscreen></iframe>
 
+A related method is 1:X motion, in which moving 1 meter in the real world may move you more than 1 meter in the virtual space. Horizontal exaggeration appears to not induce nausea, but vertical movement should remain 1:1.
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/At_Zac4Xezw?rel=0" frameborder="0" allowfullscreen></iframe>
+
 **Displacement of motor functions**
 
-Disturbance is reduced if some body actions accompany a movement. Some games use a 'paddling with the hands' behaviour to trigger walking in the virtual space, or swimming etc.:
+Disturbance is reduced if some body actions accompany a movement. Some games use a 'running in place' or 'paddling with the hands' behaviour to trigger walking in the virtual space:
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/15lvlAEHXww?rel=0" frameborder="0" allowfullscreen></iframe>
+
+Or swimming etc.:
 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/MjwNItck_Vg?rel=0" frameborder="0" allowfullscreen></iframe>
+
+Or grappling hooks:
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/3Ore5DG1qT0?rel=0" frameborder="0" allowfullscreen></iframe>
 
 Other experiences use the direction of the hands or fingers to indicate direction of motion, which appears to reduce nausea.
 
@@ -195,7 +212,11 @@ Overview of locomotion methods:
 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/p0YxzgQG2-E?rel=0" frameborder="0" allowfullscreen></iframe>
 
+[Another overview here](http://ignite-vr.com/blog/2016/09/24/locomotion-in-vr/)
+
 Many of these solutions are utilized in EagleFlightVR, which has had [very strong reviews commenting about the lack of nausea](http://www.roadtovr.com/eagle-flight-review-vr-psvr-htc-vive-oculus-rift/).
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/4TJdTB5qQjA?rel=0" frameborder="0" allowfullscreen></iframe>
 
 ## Other forms of disturbance
 
@@ -226,6 +247,8 @@ Many of these solutions are utilized in EagleFlightVR, which has had [very stron
 
 **Uncanny content**
 
+> VR is an immersive medium. It creates the sensation of being entirely transported into a virtual (or real, but digitally reproduced) three-dimensional world, and it can provide a far more visceral experience than screen-based media. Enabling the mind’s continual suspension of disbelief requires particular attention to detail...  - [Best practices, Oculus](https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/)
+
 The closer we get to experiences we have every day (e.g. walking), the higher the risk of creating perceptual cues that do not match reality. This may be related to the *uncanny valley*. More abstract worlds are less likely to cause such conflicts; non-photorealistic environments in many ways have advantages.
 
 Characters not looking at you / not responding to you properly can be particularly disturbing.
@@ -233,6 +256,10 @@ Characters not looking at you / not responding to you properly can be particular
 **Muscle fatigue**
 
 > People will typically move their heads/bodies if they have to shift their gaze and hold it on a point farther than 15-20° of visual angle away from where they are currently looking. Avoid forcing the user to make such large shifts to prevent muscle fatigue and discomfort. - [Best practices, Oculus](https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/) 
+
+Keep most content at a comfortable viewing angle. It is uncomfortable to look up or down for very long, or to twist sideways frequently or for sustained time. 
+
+And if you expect people to sit through the experience, remember that they will only rarely (if at all) see things behind them.
 
 **Experiment**
 
@@ -268,6 +295,52 @@ Hardly a solution, but there are a few techniques that people susceptible to sim
 See the [Simulator Sickness questionnaire](https://www.twentymilliseconds.com/html/ssq-scoring.html)
 
 ---
+
+## Space and the body 
+
+- We cannot focus on objects closer than ~5cm, for some people as much as 20cm, so it is good to avoid placing virtual content too close to the head. And in general it is disturbing for objects to intersect the body (whether a virtual body exists or not). Static objects are usually fine as most people will naturally move around them, but dynamic objects may need to be aware of where the person is.
+
+> Converging the eyes on objects closer than the comfortable distance range above can cause the lenses of the eyes to misfocus, making clearly rendered objects appear blurry as well as lead to eyestrain. - [Best practices, Oculus](https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/)
+
+- Shocking/scary etc. content is much more powerful in VR, as it can approach the body and trigger physiological responses in a way that past media could not. For example, too much action of flying bullets, explosions, moving vehicles etc. around the user can be distressing, where it would be quite acceptable in a screen-based film/game. For good reason a lot of early VR experiences are in the horror genre. Compare the slow-motion time of the Showdown demo.
+
+> When we started tinkering with the DK1 back in the beginning of 2014, the VR scene was pretty much two things: first-person view horror games and rollercoasters. A lot of people saw the future of VR entertainment as that kind of experiences. - [Locomotion and the fear of VR](http://fatedblog.com/2015/08/06/locomotion-simulation-sickness-and-the-fear-of-vr/)
+
+- You may need to consider the physical limits of the space in which tracking works (and in which it is safe for a blind person to move around). Again, the hardware's drivers are beginning incorporate features to automatically show the tracking limits (e.g. the blue grid that becomes visible in the Vive).
+
+> Provide the user with warnings as they approach (but well before they reach) the edges of the position camera’s tracking volume as well as feedback for how they can re-position themselves to avoid losing tracking. We recommend you do not leave the virtual environment displayed on the Rift screen if the user leaves the camera’s tracking volume, where positional tracking is disabled. It is far less discomforting to have the scene fade to black or otherwise attenuate the image (such as dropping brightness and/or contrast) before tracking is lost. - [Best practices, Oculus](https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/)
+
+- 3D depth perception is extremely powerful at short range, and effective within a range of a few meters. Beyond 10 meters, stereopsis ceases to be the most important depth cue, and parallax (i.e. moving via position tracking), texture, size, lighting etc. take precedence. It therefore makes sense to place significant content and interaction in this range. For this reason, user interface overlays are usually positioned 1-3 meters away. Several HMDs have their optics (lenses etc.) designed to make it most comfortable to view virtual objects within a handful of meters. 
+
+- [Beyond around 60m](https://forums.oculus.com/viewtopic.php?f=33&t=4155),  there is virtually no distinguishable stereopsis effect at all, and it can be effectively rendered in mono (may be more efficient).
+
+- Spatializing audio is much more important -- presenting audio in mono, or worse, in a single speaker, breaks immersion. Headphone audio should also use head orientation, and located sounds should get significantly louder when you lean toward them closely. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
