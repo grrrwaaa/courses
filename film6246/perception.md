@@ -3,7 +3,7 @@ importance: 7
 
 ----
 
-# Nausea and Simulator Sickness
+## Nausea and Simulator Sickness
 
 > Simulation Sickness is a syndrome, which can result in eyestrain, headaches, problems standing up (postural instability), sweating, disorientation, vertigo, loss of colour to the skin, nausea, and - the most famous effect - vomiting. It is similar in effects to motion sickness, although technically a different thing. Simulation sickness can occur during simulator or VR equipment use and can sometimes persist for hours afterwards... If VR experiences ignore fundamental best practices, they can lead to simulator sickness—a combination of symptoms clustered around eyestrain, disorientation, and nausea. - [Article on Gamasutra - by Ben Lewis-Evans on 04/04/14](http://www.gamasutra.com/blogs/BenLewisEvans/20140404/214732/Simulation_Sickness_and_VR__What_is_it_and_what_can_developers_and_players_do_to_reduce_it.php)
 
@@ -22,7 +22,8 @@ Which is to say, *virtual worlds can be dangerous!* See this 1996 NBC special:
 
 In fact simulator sickness has been known about since the earliest flight simulators of the 1950's, but is still not fully understood. It is clearly triggered by "cue conflicts", whereby what some parts of the visual system are reporting does not match what other sensory components (such as proprioceptive systems) are reporting. 
 
-(Some researchers hope to alleviate VR nausea by galvanic vestibular stimulation, [for example the Mayo Clinic](http://ir.net/news/virtual-reality/124021/mayo-clinic-vr-nausea/), but as yet this hasn't convinced the industry.)
+(Some researchers hope to alleviate VR nausea by galvanic vestibular stimulation, [for example the Mayo Clinic](http://ir.net/news/virtual-reality/124021/mayo-clinic-vr-nausea/), but as yet this hasn't convinced the industry. [See also this](http://uploadvr.com/vr-sim-sickness-combated/
+).)
 
 Some people are far more or less susceptible than others. It generally affects younger people less, and tends to reduce with increased exposure (getting your "VR legs"). People with a history of MS, alcohol/drug abuse, etc. also tend to be more susceptible.
 
@@ -66,13 +67,21 @@ It is helpful to **think of the HMD as the camera** into a virtual world that is
 
 The golden rule for designers is that we must **never take away control of the camera from the viewer**, not even for a moment. This means no fixed-view cut-scenes or 'cinematics', no full-screen imagery, no lens and framing control, etc. Also no motion blur, depth of field effects etc. (still takes away viewer control). 
 
-Which is to say, **everything should be in-world**. Nothing should "stick" to the viewer's headset -- not even messages/menus, head-up displays, etc. User interface elements are uncomfortable if they are stuck to the headset, better if they are transparent overlays that keep the world's orientation, and best if they are actually objects in the world.
-
-> Maintain VR immersion from start to finish—don’t affix an image in front of the user (such as a full-field splash screen that does not respond to head movements), as this can be disorienting... Even in menus, when the game is paused, or during cutscenes, users should be able to look around. - [Best practices, Oculus](https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/)
-
 > One of the big challenges with VR storytelling lies within the constraints on camera movement forced upon us by this tiny detail called simulator sickness. Quick zoom in to focus on a detail – nope, not possible, you can’t zoom in VR. Nice dolly shot moving around the scene – be careful or the viewer might have a look at what he had for breakfast instead of comfortably watching your experience... the safest bet is not having continuous camera movement at all. - [The limbo method](http://uploadvr.com/introducing-limbo-a-vr-camera-movement-technique-by-the-developers-of-colosse/)
 
 Since the immersant is free to look in any direction they choose, you need to make sure all directions are valid, potentially valuable, and that nothing essential will be missed because 'they were looking the wrong way'. 
+
+It also means that **everything should be in-world**. Nothing should "stick" to the viewer's headset -- not even messages/menus, head-up displays, etc. 
+
+> Maintain VR immersion from start to finish—don’t affix an image in front of the user (such as a full-field splash screen that does not respond to head movements), as this can be disorienting... Even in menus, when the game is paused, or during cutscenes, users should be able to look around. - [Best practices, Oculus](https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/)
+
+User interface elements are uncomfortable if they are stuck to the headset, better if they are transparent overlays that keep the world's orientation, and best if they are actually objects in the world. They could be:
+
+- on walls ![walls](https://twentymilliseconds.com/screenshots/ui-walls-example.png)
+- on objects, on screens in world ![screens](https://twentymilliseconds.com/screenshots/vr_typing_hud.png)
+- or cockpit, 
+- or floating over its subject ![coins](https://twentymilliseconds.com/screenshots/lucky/coins-ui.gif)
+
 
 ### When is camera movement OK?
 
@@ -166,7 +175,7 @@ Placing a reference frame around the point of view can help stabilize the senses
 
 [However it might be possible that the reference frame is semi-transparent, and even that it is not present for much of the time.](https://www.reddit.com/r/oculus/comments/3yihao/i_solved_vr_sickness_maybe/) -- more research is needed. See also the "canvas mode" [here](http://tore-knabe.com/virtual-reality#MovementExperiments)
 
-**Given them a body?**
+**Give them a body?**
 
 Many people report it disturbing to look down and see no body, especially for sedentary experiences. This may be related to giving a reference frame that has a *logical* anchor in the world. However, some say that looking down and seeing somebody else's body is equally disturbing, and others have shown that even a reference frame with no ontological sense can help. More research needed!
 
@@ -249,15 +258,21 @@ Many of these solutions are utilized in EagleFlightVR, which has had [very stron
 
 > VR is an immersive medium. It creates the sensation of being entirely transported into a virtual (or real, but digitally reproduced) three-dimensional world, and it can provide a far more visceral experience than screen-based media. Enabling the mind’s continual suspension of disbelief requires particular attention to detail...  - [Best practices, Oculus](https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/)
 
-The closer we get to experiences we have every day (e.g. walking), the higher the risk of creating perceptual cues that do not match reality. This may be related to the *uncanny valley*. More abstract worlds are less likely to cause such conflicts; non-photorealistic environments in many ways have advantages.
+The closer we get to experiences we have every day (e.g. walking), the higher the risk of creating perceptual cues that do not match reality. This may be related to the *uncanny valley*. Characters not looking at you / not responding to you properly can be particularly disturbing.
 
-Characters not looking at you / not responding to you properly can be particularly disturbing.
+More abstract worlds are less likely to cause such conflicts; non-photorealistic environments in many ways have advantages. Overly realistic environments can also confuse immersants -- who may begin to expect that *everything* in the environment can be interacted with, and be disappointed when it isn't. 
+
+Alternatively, let all things be interactive:
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/_TPXop3ONPk?rel=0" frameborder="0" allowfullscreen></iframe>
 
 **Muscle fatigue**
 
 > People will typically move their heads/bodies if they have to shift their gaze and hold it on a point farther than 15-20° of visual angle away from where they are currently looking. Avoid forcing the user to make such large shifts to prevent muscle fatigue and discomfort. - [Best practices, Oculus](https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/) 
 
 Keep most content at a comfortable viewing angle. It is uncomfortable to look up or down for very long, or to twist sideways frequently or for sustained time. 
+
+> Don’t require the user to swivel their eyes in their sockets to see the UI. Ideally, your UI should fit inside the middle 1/3rd of the user’s viewing area; otherwise, they should be able to examine it with head movements. - [Best practices, Oculus](https://developer.oculus.com/documentation/intro-vr/latest/concepts/bp_intro/)
 
 And if you expect people to sit through the experience, remember that they will only rarely (if at all) see things behind them.
 
@@ -285,15 +300,6 @@ Hardly a solution, but there are a few techniques that people susceptible to sim
 - Eat ginger (a long known remedy for motion sickness). Some also recommend a little alcohol, while others say that this makes it worse. Do not try VR when sick, hungover, etc. 
 > A popular household remedy in Asia is rub eucalypti leaves together and inhale the scent produced from them. - [Sim Sickness guide on Oculus forums](https://forums.oculus.com/viewtopic.php?t=170)
 
-**See also:**
-
-	
-(Elements borrowed from [Kevin Burke's guide](https://kev.inburke.com/slides/virtual-reality/), [Simulator Sickness](http://www.gamasutra.com/blogs/BenLewisEvans/20140404/214732/Simulation_Sickness_and_VR__What_is_it_and_what_can_developers_and_players_do_to_reduce_it.php))
-
-[Tips from a team who ported a base-jumping game to VR](https://youtu.be/DqZZKi4UHuo?list=PLckFgM6dUP2hc4iy-IdKFtqR9TeZWMPjm&t=228)
-
-See the [Simulator Sickness questionnaire](https://www.twentymilliseconds.com/html/ssq-scoring.html)
-
 ---
 
 ## Space and the body 
@@ -316,6 +322,15 @@ See the [Simulator Sickness questionnaire](https://www.twentymilliseconds.com/ht
 
 - Spatializing audio is much more important -- presenting audio in mono, or worse, in a single speaker, breaks immersion. Headphone audio should also use head orientation, and located sounds should get significantly louder when you lean toward them closely. 
 
+- Until headsets go wireless (perhaps 2017) the tethering cable to the headset can limit certain motions.
+
+- Physical interaction devices can't been seen while wearing a headset. The keyboard in particular is almost impossible to use. 
+
+> “In VR, you don’t have a keyboard full of hotkeys,” says Malaika. “The buttons on a controller are much more limited, so you have to think about how to provide the same number of choices…and manage the number of choices a user has.”   - [Valve advice for VR](http://www.gamasutra.com/view/news/250362/Valve_shares_advice_on_designing_great_VR_game_interactions.php)
+
+- Even with tracked hand-held devices, or tracking via Leap Motion or the Kinect, there is still no haptic feedback -- no sense of touch. For some reason, gloves are not in fashion for VR this time around (as they were in the 90's). For Leap Motion in particular, [here are some accumulated best practices.](https://developer.leapmotion.com/assets/Leap%20Motion%20VR%20Best%20Practices%20Guidelines.pdf). There has been some research into using ultrasonic haptic displays, but the effective range is low. The state of the art in touch is to put physical objects in space:
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/NSCZxsd-9hA?rel=0" frameborder="0" allowfullscreen></iframe>
 
 
 
@@ -347,3 +362,13 @@ See the [Simulator Sickness questionnaire](https://www.twentymilliseconds.com/ht
 
 
 
+**See also:**
+
+	
+(Elements borrowed from [Kevin Burke's guide](https://kev.inburke.com/slides/virtual-reality/), [Simulator Sickness](http://www.gamasutra.com/blogs/BenLewisEvans/20140404/214732/Simulation_Sickness_and_VR__What_is_it_and_what_can_developers_and_players_do_to_reduce_it.php))
+
+[Tips from a team who ported a base-jumping game to VR](https://youtu.be/DqZZKi4UHuo?list=PLckFgM6dUP2hc4iy-IdKFtqR9TeZWMPjm&t=228)
+
+See the [Simulator Sickness questionnaire](https://www.twentymilliseconds.com/html/ssq-scoring.html)
+
+- [Valve advice in interaction in VR](http://www.gamasutra.com/view/news/250362/Valve_shares_advice_on_designing_great_VR_game_interactions.php)
