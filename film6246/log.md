@@ -72,12 +72,24 @@ Things you want to see:
 
 ### 3. Jan 19
 
+- Announcements.
+
 - Introductions from everyone (backgrounds and interests in pursuing in the course), including optional ~5 minute presentations from anyone with an idea already in place.
 - Discussion regarding how to self-organize groups.
 
 - Viewing your first Unreal "maps" in VR.
 
 - Nausea
+
+- [Projects shared Google doc](https://docs.google.com/document/d/1_gRshxJ3okTv0ntoa-_3kIqzgqwKZY8qTuicOCxOS-k/edit)
+
+### 4. Jan 26
+
+- Announcements.
+
+- 
+
+- Perception continued.
 
 <!--
 
