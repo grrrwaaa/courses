@@ -221,7 +221,7 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <p>Your world can have a number of <strong>Emitter</strong> actors, each of which refer to a <strong>Particle System</strong> asset (specified by the emitter&#39;s &quot;Template&quot; property in the details panel). Particle system <em>components</em> can also be added to Blueprint objects. Particle systems themselves can be edited through a built-in editor called &quot;Cascade&quot;.</p>
 <p>See the <a href="https://docs.unrealengine.com/latest/INT/Videos/PLZlv_N0_O1gbQjgY0nDwZNYe_N8IcYWS-/srUSDU1u0og/index.html">tutorials</a>.</p>
 <hr>
-<h3 id="more-advanced-viewport-options">More advanced viewport options</h3>
+<h2 id="more-advanced-viewport-options">More advanced viewport options</h2>
 <p><strong><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=RoiQOwCg-4Q">Orthographic views</a>:</strong></p>
 <p>In the top-right corner of viewport there is a small &#39;min/max&#39; button which will alternate between a maximized 3D view, and a 4-up set of views for top, left, and front &quot;orthographic&quot; (non-perspective) views as well as the regular perspective one. Right-click &amp; drag to move in these views, and mouse-scroll to zoom.</p>
 <p><strong><a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=7UjP6gr44dc">View modes &amp; show flags</a></strong>:</p>
@@ -230,62 +230,81 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <p><strong>We can <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&amp;video=Z7OqNjFpy6U">lock the viewport to an actor</a></strong> by right-clicking on an object and selecting the &quot;pilot&quot; option. This fixes our viewport&#39;s perspective to the object itself, and we can use the standard viewport movement controls to reposition the object. This is especially useful for positioning lights and cameras, for example.</p>
 <p><strong>Viewing the Frame rate</strong>: Command+Shift+H (or the dropdown top-right of the viewport)</p>
 <hr>
-<hr>
 <h2 id="landscaping">Landscaping</h2>
 <p><a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/QuickStart/index.html">See documentation</a>.</p>
-<p>Unreal has built-in tools for creating rich, undulating landscapes. In the Modes panel select the <strong>Lanscapes</strong> mode. A green grid will show in the viewport. If this is the first time to use it, you will need to &quot;Create New&quot; to make a new landscape. It&#39;s a good idea to assign a landscape material before creating it. You can drag on the landscape&#39;s edges to make it cover more or less area. Note: if necessary, a level can have more than one landscape.</p>
+<p>Unreal has built-in tools for creating rich, undulating landscapes. These are ground surfaces that can have a broad variety of different features. Technically they are achieved by &quot;height maps&quot; -- for each XY position in space, there is an associated height value, just like geographical elevation maps. Areas can be flat, shallowly or steeply sloped; the only restriction is that they cannot overhang (though there are ways to deal with that if needed, see below). A level can have more than one landscape, if needed.</p>
+<p>To create or edit a landscape, in the Modes panel select the <strong>Landscapes</strong> mode. </p>
+<p>If this is the first time to use the Lanscape mode, a green grid will show in the viewport. You can drag on the landscape&#39;s edges to make it cover more or less area. The default is huge -- for VR we don&#39;t want to travel such large distances. Reducing the number of sections to 2x2 or 4x4 might be enough.</p>
 <blockquote>
 <p>For recommended landscape sizes, see <a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/TechnicalGuide/index.html#recommendedlandscapesizes">https://docs.unrealengine.com/latest/INT/Engine/Landscape/TechnicalGuide/index.html#recommendedlandscapesizes</a></p>
 </blockquote>
-<p>Once created, you can start to Sculpt and Paint it.</p>
-<h3 id="sculpting">Sculpting</h3>
-<p>Ctrl-click to select areas.</p>
-<p>With the default sculpt tool, left click to increase elevation, shift-click to decrease.</p>
-<p>There are lots of other tools, for smoothing, flattening, eroding, etc. the land. Smoothing &amp; flattening is good for VR, as it feels more comfortable to walk on. Flattening can also be good for making rivers and roads.</p>
-<p>Use the brush options to change the size &amp; strength.</p>
-<p>Make sure that your Player Start object is above your terrain or else you will fall through the world. If this does happen, drag the player to start up on top of the terrain and hit the End key for it to start on the ground.</p>
-<h3 id="painting">Painting</h3>
-<p>We can just drop in a single material, but we can also use Paint mode to blend multiple materials on the landscape. </p>
-<p>Creating landscape materials is a little more complex (<a href="https://www.youtube.com/watch?v=tsXVP0fykBM">there&#39;s a tutorial here</a>), but we can migrate some from other example projects or content packs available through the Epic community (via the Launcher app).</p>
-<p>For example: </p>
+<p>It&#39;s a good idea to assign a landscape material before creating the landscape itself. The starter content doesn&#39;t have a good landscape material, but you can either create a new one or migrate one from another project. Creating landscape materials is a little more complex (<a href="https://www.youtube.com/watch?v=tsXVP0fykBM">there&#39;s a tutorial here</a>), but we can migrate some from other example projects or content packs available through the Epic community (via the Launcher app). For example: </p>
 <ul>
-<li>open the ExampleContent project, </li>
+<li>open the LandscapeMountains project, </li>
 <li>navigate in the content browser to Content/Landscapes/Materials, </li>
 <li>right-click on M_LandscapeMaterial_Inst, </li>
 <li>choose Asset Actions &gt; Migrate...</li>
 <li>click OK to select all dependencies</li>
-<li>navigate to &amp; select your project&#39;s Content folder on disk (e.g. Documents/UnrealProjects/MyProject/Content) &amp; OK</li>
-<li>open your project </li>
-<li>File &gt; New Level, choose default, OK</li>
-<li>delete the ground box</li>
-<li>switch to Landscape tool</li>
-<li>in the content browser, navigate to ExampleContent/Landscapes/Materials</li>
-<li>drag the M_LandscapeMaterial_Inst into the Material option of the New Landscape tool </li>
-<li>set the size &amp; create landscape</li>
+<li>navigate to &amp; select your project&#39;s Content folder on disk (e.g. E:/UnrealProjects/MyProject/Content) &amp; OK</li>
+<li>back in your project, locate the /Assets/Landscape/M_LandscapeMaterial_Inst in the content browser, and drag it into the Material option of the Landscape Mode&#39;s New Landscape panel.</li>
+</ul>
+<p>Then &quot;Create New&quot; to instantiate the new landscape. Once instantiated, you can start to Sculpt and Paint it.</p>
+<h3 id="sculpting">Sculpting</h3>
+<p>With the default sculpt tool, left click to increase elevation, shift-click to decrease. Use the brush options to change the size &amp; strength.</p>
+<p>Under the Sculpt tool menu there are many other tools: smooth, flatten, ramp, erosion, hyrdo erosion, etc. Smoothing &amp; flattening is good for VR, as it feels more comfortable to walk on. Flattening can also be good for making rivers and roads.</p>
+<p>Make sure that your Player Start object (if you have one) is above your terrain or else you will fall through the world. If this does happen, drag the player to start up on top of the terrain and hit the End key for it to start on the ground. Bear in mind that if a slope is too steep, the character will not be able walk up it.</p>
+<h3 id="creating-landscape-from-existing-data">Creating landscape from existing data</h3>
+<p><a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/Custom/index.html">See tutorial</a></p>
+<p>A new landscape can be created from an existing height map image by choosing &quot;Import from File&quot; instead of &quot;Create New&quot; when creating a landscape.</p>
+<p>Any landscape layer can be exported to a file, edited, and re-imported.</p>
+<p>In Sculpt mode, right-click on Heightmap and choose Export to File. Once you have done this, you can edit the PNG elsewhere. Then right-click on the Heightmap and choose Reimport or Import to bring the new data back in.</p>
+<p>In Paint mode, this method can also be used to define the regions of each paint layer of a landscape.</p>
+<h3 id="painting">Painting</h3>
+<p>We can just drop in a single material, but we can also use Paint mode to blend multiple materials on the landscape. </p>
+<ul>
 <li>switch to the landscape tool&#39;s paint mode</li>
 <li>scroll down to the tool&#39;s target layers</li>
-<li>for each of Soil, Grass, and Snow layers, click on the + button to create layer instances (choose the &quot;Weighted Layer&quot; option, and save these in a sensible location, e.g. also in the ExampleContent/Landscapes)</li>
+<li>for each material layer, click on the + button to create layer instances (choose the &quot;Weighted Layer&quot; option, and save these in a sensible location)</li>
 <li>Now you can paint the materials</li>
 <li>After painting, click Build in the big toolbar to rebuild the lighting for the level</li>
 </ul>
-<p>Another fairly easy thing to do is to then customize this landcape material by replacing the textures -- just double-click on the material in the browser to open the editor, find the texture nodes you want to replace, and drag in different textures from the content browser. Save, apply, and build again.</p>
+<p>Again, there are many painting tool options to explore. </p>
+<p>Once built, a landscape material instance can be customized by double-clicking on it to open the editor. There are many parameters to test, and textures that can be replaced --- but it&#39;s recommended to do this <em>after</em> the landscape is created.</p>
 <h3 id="adding-water">Adding water</h3>
 <p>Place a BSP box into the world so that it lies above the lowest land. Drag on the &quot;M_Water_Lake&quot; material from the StarterContent/Materials folder in the content browser.</p>
 <p>It might seem weird that we can walk on water. <a href="https://wiki.unrealengine.com/Swimmable_Water_Volume_Tutorial">To make it swimmable, look here</a> -- or <a href="https://www.youtube.com/watch?v=LtyXjSb1P-4">this video tutorial</a>. </p>
 <p>Very likely you want to also place a post-processing volume under the water, so that the rendering has a watery style when swimming.</p>
 <h3 id="caves">Caves</h3>
 <p>It isn&#39;t possible for a single landscape to overhang itself, but there are other ways of making caves.</p>
-<p>It is possible to make a hole in a landscape, so that they can be walked through, by sculpting with the visibility tool. Make a hole in the landscape using the visibility mask, <a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/Editing/SculptMode/index.html#visibility">as described here</a>. You will first need a Hole Material, <a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/Materials/index.html#landscapeholematerials">as described here</a>, which you can apply as the Hole Material in the landscape&#39;s details panel. </p>
-<p>You probably want to surround the hole with some meshes to mask it. You probably also need to edit the material of the landscape to enable two-sided lighting, so that it doesn&#39;t become transparent underneath.</p>
+<p>It is possible to make a hole in a landscape, so that they can be walked through, by sculpting with the visibility tool. You will first need a Hole Material, <a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/Materials/index.html#landscapeholematerials">as described here</a>, which you can apply as the Hole Material in the landscape&#39;s details panel. </p>
+<ul>
+<li>Open the M_Landscape_Master material</li>
+<li>In the Material panel, set &quot;Blend Mode&quot; from &quot;Opaque&quot; to &quot;Masked&quot;</li>
+<li>In the graph editor, drag a cord from the Opacity Mask node and release the mouse</li>
+<li>Search for &quot;vis&quot; and select &quot;Landscape Visibility Mask&quot;</li>
+<li>Apply, save, and close the material editor</li>
+<li>Drag the MI_Landscape_Inst onto the &quot;Landscape Hole Material&quot; option of the lanscape&#39;s panel</li>
+</ul>
+<p>Then make a hole in the landscape using the visibility mask, <a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/Editing/SculptMode/index.html#visibility">as described here</a>. </p>
+<ul>
+<li>In Sculpt mode, select the Visibility Tool, and draw the hole(s) as needed</li>
+<li>You will need to rebuild lighting again.</li>
+</ul>
+<p>You probably want to surround the hole with some rocks or other meshes to mask it. You probably also need to edit the material instance of the landscape to enable two-sided lighting, so that it doesn&#39;t become transparent underneath.</p>
 <p>To fill out the cave underneath, either use BSPs &amp; meshes with collisions, or you can also create another landscape underneath the first (but you will still probably need BSPs &amp; meshes for the roof.)</p>
 <hr>
 <h2 id="-foliage-">&quot;Foliage&quot;</h2>
 <p>The foliage tool is really just a way to randomly disperse objects over a landscape -- typically used for trees, bushes, grassy areas etc., but in fact it can be used for any kinds of objects.</p>
 <p>You&#39;ll need some ground to start with, whether a giant BSP, mesh, or a landscape, to place objects on. Then switch to the Foliage Mode tool.</p>
-<p>In the Paint option, drag one or more objects (meshes) into the Foliage Type box. Be very careful not to bring in very complex meshes or other complex (heavy) items that when duplicated many times could severely affect frame rate. Also, if you want meshes that can&#39;t be walked through, make sure they have a proper collision mesh applied first.</p>
+<p>In the Paint option, drag one or more objects (meshes) into the Foliage Type box. Be very careful not to bring in very complex meshes or other complex (heavy) items that when duplicated many times could severely affect frame rate. </p>
 <p>Now click and drag in the viewport to paint randomized scatterings of these meshes on your ground. If you placed too many, you can also remove them by shift-clicking. </p>
 <p>The paint options can be used to set the area over which meshes are added, and how densely (and the shift-click erase density). The Reapply tool can be used to change parameters of existing instances. The selection tool can be used to grab individual instances for moving and deleting. With the Lasso tool, you can drag to select many instances.</p>
-<p>You can also vary the properties of each mesh type in the foliage tool -- select the mesh, and the details panel appear below. Common settings would be varying the scale, increasing the radius (spacing between objects), random yaw (random rotations), collision option (i.e. whether you can walk through them -- as BlockAll -- or not -- as NoCollision). There are many other options. Align to normal will rotate objects on sloped surfaces, ground slope angle will not place objects on extreme slopes, etc.</p>
+<p>You can also vary the properties of each mesh type in the foliage tool -- select the mesh, and the details panel appear below. Common settings would be varying the scale, increasing the radius (spacing between objects), random yaw (random rotations). There are many other options. Align to normal will rotate objects on sloped surfaces, ground slope angle will not place objects on extreme slopes, etc.</p>
+<p>If you want meshes that can&#39;t be walked through: </p>
+<ul>
+<li>make sure they have a proper collision mesh applied first (you can check this by double-clicking on the mesh, and pressing the &quot;Collision&quot; toolbar option -- you shoudl see a wireframe of the collision bounds appear). </li>
+<li>In the foliage panel select the mesh, and in the below Instance Settings / Collision Presets choose &quot;BlockAllDynamic&quot;</li>
+</ul>
 <blockquote>
 <p>Note that there is a newer, more experimental <a href="https://docs.unrealengine.com/latest/INT/Engine/OpenWorldTools/ProceduralFoliage/QuickStart/index.html">foliage creation system described here.</a></p>
 </blockquote>
