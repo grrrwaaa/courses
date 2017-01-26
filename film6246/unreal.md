@@ -462,7 +462,7 @@ You can also create an "Audio Volume" (from the "Volumes" option of the placing 
 
 ---
 
-## Embedding videos
+## Embedding video
 
 [See documentation here](https://docs.unrealengine.com/latest/INT/Engine/MediaFramework/HowTo/)
 
@@ -527,7 +527,7 @@ You can open class blueprints from in the Content Browser, or by following links
 - The blueprint editor is highly context sensitive. Whatever item you have selected in the viewport or content browser, relevant blueprint actions will come top in the blueprint context menu.
 
 
-- Any object that will be moved in-game must have the "movable" option set in the transform Detail (rather than "static"). **Weirdly, the same is also true for lights. So for example, if you want to turn a light on and off dynamically, you also need to set the "movable" option to true**. Yeah.
+- Any object that will be moved in-game must have the "movable" option set in the transform Detail (rather than "static"). **Weirdly, the same is also true for lights. So for example, if you want to turn a light on and off dynamically, you also need to set the "movable" option to 'stationary'**. Yeah.
 
 ### Adding comments to remind you what parts of a blueprint do
 
@@ -544,20 +544,6 @@ You can also add "Log" (or "Print") nodes in a blueprint, which will write text 
 
 ---
 
-
-TODO CHECK [See geometry layout -- part 2](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=57MxoF4sy84).
-[Part 3](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=RGxf2SiUBt8)
-[Part 4](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=v5yCcP9EnT8)
-[Part 5](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=dSckAxhy_4I), [Part 6](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=xVDq-9kSD74), [Part 7](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&video=xzGWuW_iWPM)
-
-TODO CHECK Alternatively, when starting from the **blank template** you'll probably want to add some floor, light, atmospheric fog, Lightmass Importance Volume, etc. as [described here](https://docs.unrealengine.com/latest/INT/Engine/QuickStart/4/index.html).
-TODO CHECK It can be useful to make new levels to test out ideas quickly without breaking work done in your main level(s). We can create a new level (File -> new level), and likely choose the default map. Delete the "player start" for now. Maybe also delete the floor if we'll be making our own.
-
-
-VR specific:
-The best interaction space is 75 to 350cm from the player
-
-
 ## unlocated tips
 
 You can right-click actor(s) in the level viewport and convert their current state to a new Static Mesh asset.
@@ -573,7 +559,7 @@ Dynamic shadows are usually a costly feature. However, this cost can be cut in h
 
 Input devices: Edit > Project Settings… and browse to category Input. 
 
-
+<!--
 look into:
 - sequencer (introduced in https://www.unrealengine.com/blog/unreal-engine-4-12-released)
 - vr editor (introduced in https://www.unrealengine.com/blog/unreal-engine-4-12-released)
@@ -592,6 +578,7 @@ redo teleportals
 still true?
 When playing: Alt+Enter to switch between VR mode
 Control+R to reset the forward view
+-->
 
 - Blueprint **timelines** are ways we can make a sequence of events happen -- and we can also make them happen in reverse. See day/night example below.
 
