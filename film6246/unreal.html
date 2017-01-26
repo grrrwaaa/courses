@@ -259,6 +259,7 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <p>Any landscape layer can be exported to a file, edited, and re-imported.</p>
 <p>In Sculpt mode, right-click on Heightmap and choose Export to File. Once you have done this, you can edit the PNG elsewhere. Then right-click on the Heightmap and choose Reimport or Import to bring the new data back in.</p>
 <p>In Paint mode, this method can also be used to define the regions of each paint layer of a landscape.</p>
+<p>For very large landscapes however, it is recommended to do streaming level world composition <a href="https://docs.unrealengine.com/latest/INT/Engine/LevelStreaming/WorldBrowser/">as described here</a></p>
 <h3 id="painting">Painting</h3>
 <p>We can just drop in a single material, but we can also use Paint mode to blend multiple materials on the landscape. </p>
 <ul>
@@ -309,6 +310,52 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <p>Note that there is a newer, more experimental <a href="https://docs.unrealengine.com/latest/INT/Engine/OpenWorldTools/ProceduralFoliage/QuickStart/index.html">foliage creation system described here.</a></p>
 </blockquote>
 <hr>
+<h2 id="lighting-visual-effects">Lighting &amp; Visual effects</h2>
+<p>Add lights by:</p>
+<ul>
+<li><p>Dragging a light in from the placement mode lights panel. Note that by default these lights are &quot;stationary&quot; rather than &quot;static&quot;, which can cause problems with overlap (see below).</p>
+</li>
+<li><p>Point lights diffuse in all directions</p>
+</li>
+<li>Spot lights diffuse over a cone shape</li>
+<li>Directional lights point in only one direction, as if from a huge distance, like the sun</li>
+</ul>
+<p>Once added, lights can be moved, rotated etc. like any other actor.</p>
+<p>Often you may wish to </p>
+<p>In the Transform panel, Lights also have a Mobility option. Lights can be &quot;static&quot; , &quot;stationary&quot; or &quot;movable&quot;. </p>
+<ul>
+<li>Static lights are always on, and can&#39;t move. They are &quot;baked&quot; into the world when built, so they are effectively free. However they do not cast shadows from any moving objects. </li>
+<li>Stationary lights can&#39;t move, but can change properties like on/off, colour etc. No more than four non-static lights can overlap for shadowing to work -- and bear in mind that sunlight counts as one.</li>
+<li>Movable lights are completely dynamic, and the most expensive to use.</li>
+</ul>
+<p>Common properties of interest:</p>
+<ul>
+<li>Intensity (brightness), colour, attenuation radius (how large an area it affects)</li>
+<li>Source radius/length are important for the shape of specular highlights, if used with shiny materials</li>
+</ul>
+<p>Tips:</p>
+<ul>
+<li><p><strong>Sky lights</strong> are used to capture the light coming from content in the world at large distances, such as the skybox or distant geometry. It is useful for emulating cloudy days, for example.</p>
+</li>
+<li><p>To improve the lighting quality drag in a <strong>Lightmass Importance Volume</strong> and resize it to cover all of our objects of interest. This is especially important for VR. </p>
+</li>
+</ul>
+<p>The <strong>Atmospheric Fog</strong> and <strong>Exponential Height Fog</strong> visual effects simulate the light scattering effects of the air. Exponential Height Fog tends to make the fog denser closer to the ground, like haze. </p>
+<ul>
+<li>To improve realism, add <strong>Reflection Capture</strong> actors to any important spaces in which shiny surfaces should respect the surrounding space. Frequently you would put a reflection capture in each room, for example. Box reflection captures are good for ordinary rooms, sphere reflection captures for most other spaces. Be careful not to place them too close to any particular object, or that object will dominate the reflections. Note that these reflection capture objects are very cheap, as they are pre-baked when building the project. However they won&#39;t reflect dynamic objects.</li>
+</ul>
+<blockquote>
+<p>To create a true mirror, we can use <a href="https://docs.unrealengine.com/latest/INT/Engine/Rendering/LightingAndShadows/PlanarReflections/">Planar Reflection</a> objects. This is very expensive though. </p>
+<p>Another method to make mirrors uses screen capture objects. Txhere&#39;s an example of this in the Content Examples project, <a href="https://docs.unrealengine.com/latest/INT/Resources/ContentExamples/Reflections/1_7/index.html">see docs</a>. </p>
+</blockquote>
+<p>The <strong>Post effects volume</strong> can be used to change the rendering style. It can also be used to define a completely new post rendering material, for more dramatic effects. The post visual effects are only applied when the camera is within the volume&#39;s bounds. Care needs to be taken with these however: the result experienced in VR may be quite different than how it is experienced on screen, where there is less depth and immersion. See <a href="https://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/index.html#postprocesssettings">the docs here</a> for examples of some of the effects applicable.</p>
+<p>Even more radical changes can be achieved using <strong>Post Process Materials</strong>: <a href="https://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/PostProcessMaterials/">see docs</a></p>
+<hr>
+<h2 id="volumes">Volumes</h2>
+<p><em>Volumes</em> define a 3D area for certain purposes, often invisible (such as blocking volumes to prevent actors leaving the area, pain causing volumes to inflict damage on any actor within the area, trigger volumes that cause events when an actor enters or exits them). </p>
+<p>For example, a <strong>box trigger</strong> can cause events to happen when a player enters or leaves the region of the (invisible) box region. </p>
+<p>A neat thing is to turn an existing geometry brush into a trigger. You can select a BSP geometry brush in a level, duplicate it, then in the Details panel, the Actor section, you can choose &quot;Convert Actor&quot; and turn it into a &quot;Trigger Volume&quot;. </p>
+<hr>
 <h2 id="embedding-sound">Embedding sound</h2>
 <p><a href="https://docs.unrealengine.com/latest/INT/Engine/Audio/index.html">See documentation</a></p>
 <p>You can import .wav audio files into the Content Browser like any other content -- they become &quot;Sound Wave&quot; assets. A handy place to find free audio files is <a href="http://freesound.org">freesound.org</a> (but check licensing first!). The simplest way to then add the Sound Wave to your world is to drag it from the content browser to the viewport. </p>
@@ -322,15 +369,14 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <p>You can also create an &quot;Audio Volume&quot; (from the &quot;Volumes&quot; option of the placing mode tool), a region of space with specific audio properties, and then assign a Reverb Effect to this space with particular properties like the echo density, overall reverb gain, air absorption, and more, to craft its unique sonic character.</p>
 <hr>
 <h2 id="embedding-videos">Embedding videos</h2>
-<p>TODO: update for 4.14</p>
-<hr>
-<h2 id="volumes">Volumes</h2>
-<p><em>Volumes</em> define a 3D area for certain purposes, often invisible (such as blocking volumes to prevent actors leaving the area, pain causing volumes to inflict damage on any actor within the area, trigger volumes that cause events when an actor enters or exits them). </p>
-<p>For example, a <strong>box trigger</strong> can cause events to happen when a player enters or leaves the region of the (invisible) box region. </p>
-<p>A neat thing is to turn an existing geometry brush into a trigger. You can select a BSP geometry brush in a level, duplicate it, then in the Details panel, the Actor section, you can choose &quot;Convert Actor&quot; and turn it into a &quot;Trigger Volume&quot;. </p>
-<h3 id="post-effects-volumes">Post effects volumes</h3>
-<p>From among the Volumes that can be dragged in, the post effects volume can be used to change the rendering style. It can also be used to define a completely new post rendering material, for more dramatic effects.</p>
-<p>Care needs to be taken with these however: the result experienced in VR may be quite different than how it is experienced on screen, where there is less depth and immersion.</p>
+<p><a href="https://docs.unrealengine.com/latest/INT/Engine/MediaFramework/HowTo/">See documentation here</a></p>
+<p><a href="https://docs.unrealengine.com/latest/INT/Engine/MediaFramework/HowTo/FileMediaSource/index.html">Playing a video in a level</a></p>
+<p>For the best compatibility and performance, it is recommended that the .mp4 file extension in H.264 be used. </p>
+<p>Create a Movies folder in the content browser, and open it on disk. Copy your mp4 files into this folder. 
+Inside Unreal Engine and your project, Right-click in the Movies folder and under Media select File Media Source. Open it, and set the file path to your MP4 file. </p>
+<blockquote>
+<p>Videos can be streamed from the web, but file references are recommended.</p>
+</blockquote>
 <hr>
 <h2 id="blueprints">Blueprints</h2>
 <p>&quot;Blueprint&quot; is the visual scripting system in Unreal, which means you can do programming by connecting up visual flow charts rather than writing code. (You can also write C++ code if you want...)</p>
