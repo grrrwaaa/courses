@@ -87,23 +87,15 @@ Things you want to see:
 
 - Announcements.
 
-- 
+- Unreal: Landscapes & foliage
+
+### 5. Feb 2
 
 - Perception continued.
 
-<!--
+- Inspiration from not-games.
 
-## Schedule
-
-Content may vary from this plan according to needs of progress and interests of students.
-
-
-
-
-
-### 4. Jan 26
-
-### 5. Feb 2
+- Unreal: lighting
 
 ### 6. Feb 9
 
@@ -123,7 +115,14 @@ Content may vary from this plan according to needs of progress and interests of 
 
 ### 13. Mar 30
 
-Final project presentation & discussion, open lab.
+Final project presentation & discussion, open lab?
+
+<!--
+
+## Schedule
+
+Content may vary from this plan according to needs of progress and interests of students.
+
 
 
 
