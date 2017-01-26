@@ -528,7 +528,7 @@ You can open class blueprints from in the Content Browser, or by following links
 
 
 - Any object that will be moved in-game must have the "movable" option set in the transform Detail (rather than "static"). **Weirdly, the same is also true for lights. So for example, if you want to turn a light on and off dynamically, you also need to set the "movable" option to 'stationary'**. Yeah.
-
+	
 ### Adding comments to remind you what parts of a blueprint do
 
 - Right-click any node and edit the text in the Node Comments section, or
