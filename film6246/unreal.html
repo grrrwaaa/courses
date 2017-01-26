@@ -368,7 +368,7 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 </ul>
 <p>You can also create an &quot;Audio Volume&quot; (from the &quot;Volumes&quot; option of the placing mode tool), a region of space with specific audio properties, and then assign a Reverb Effect to this space with particular properties like the echo density, overall reverb gain, air absorption, and more, to craft its unique sonic character.</p>
 <hr>
-<h2 id="embedding-videos">Embedding videos</h2>
+<h2 id="embedding-video">Embedding video</h2>
 <p><a href="https://docs.unrealengine.com/latest/INT/Engine/MediaFramework/HowTo/">See documentation here</a></p>
 <p><a href="https://docs.unrealengine.com/latest/INT/Engine/MediaFramework/HowTo/FileMediaSource/index.html">Playing a video in a level</a></p>
 <p>For the best compatibility and performance, it is recommended that the .mp4 file extension in H.264 be used. </p>
@@ -421,7 +421,7 @@ To add a new node to a blueprint you right-click in the background of the bluepr
 <li>The blueprint editor is highly context sensitive. Whatever item you have selected in the viewport or content browser, relevant blueprint actions will come top in the blueprint context menu.</li>
 </ul>
 <ul>
-<li>Any object that will be moved in-game must have the &quot;movable&quot; option set in the transform Detail (rather than &quot;static&quot;). <strong>Weirdly, the same is also true for lights. So for example, if you want to turn a light on and off dynamically, you also need to set the &quot;movable&quot; option to true</strong>. Yeah.</li>
+<li>Any object that will be moved in-game must have the &quot;movable&quot; option set in the transform Detail (rather than &quot;static&quot;). <strong>Weirdly, the same is also true for lights. So for example, if you want to turn a light on and off dynamically, you also need to set the &quot;movable&quot; option to &#39;stationary&#39;</strong>. Yeah.</li>
 </ul>
 <h3 id="adding-comments-to-remind-you-what-parts-of-a-blueprint-do">Adding comments to remind you what parts of a blueprint do</h3>
 <ul>
@@ -433,14 +433,6 @@ To add a new node to a blueprint you right-click in the background of the bluepr
 <p>You can right-click and add a breakpoint on any event, and this will call up the blueprint editor when the event triggers in-game. At that point you can step through node by node to see exactly what is happening.</p>
 <p>You can also add &quot;Log&quot; (or &quot;Print&quot;) nodes in a blueprint, which will write text onto the viewport during the game.</p>
 <hr>
-<p>TODO CHECK <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=57MxoF4sy84">See geometry layout -- part 2</a>.
-<a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=RGxf2SiUBt8">Part 3</a>
-<a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=v5yCcP9EnT8">Part 4</a>
-<a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=dSckAxhy_4I">Part 5</a>, <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=xVDq-9kSD74">Part 6</a>, <a href="https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gak1_FoAJVrEGiLIploeF3F&amp;video=xzGWuW_iWPM">Part 7</a></p>
-<p>TODO CHECK Alternatively, when starting from the <strong>blank template</strong> you&#39;ll probably want to add some floor, light, atmospheric fog, Lightmass Importance Volume, etc. as <a href="https://docs.unrealengine.com/latest/INT/Engine/QuickStart/4/index.html">described here</a>.
-TODO CHECK It can be useful to make new levels to test out ideas quickly without breaking work done in your main level(s). We can create a new level (File -&gt; new level), and likely choose the default map. Delete the &quot;player start&quot; for now. Maybe also delete the floor if we&#39;ll be making our own.</p>
-<p>VR specific:
-The best interaction space is 75 to 350cm from the player</p>
 <h2 id="unlocated-tips">unlocated tips</h2>
 <p>You can right-click actor(s) in the level viewport and convert their current state to a new Static Mesh asset.</p>
 <p>You can also merge mesh actors together right in the level viewport. This allows you to reduce draw calls to get better performance.</p>
@@ -448,24 +440,26 @@ The best interaction space is 75 to 350cm from the player</p>
 <p>Whenever we add or modify a light source, we will need to rebuild the lighting model (press Build in the big toolbar). </p>
 <p>Dynamic shadows are usually a costly feature. However, this cost can be cut in half by enabling “Single Sample Shadow from Stationary Lights” on your movable Actors. This feature makes shadow receiving on dynamic objects much cheaper at the cost of some quality. It doesn’t work for all scenarios, but is worth playing around with for your dynamic objects for potentially great performance gains.</p>
 <p>Input devices: Edit &gt; Project Settings… and browse to category Input. </p>
-<p>look into:</p>
-<ul>
-<li>sequencer (introduced in <a href="https://www.unrealengine.com/blog/unreal-engine-4-12-released">https://www.unrealengine.com/blog/unreal-engine-4-12-released</a>)</li>
-<li>vr editor (introduced in <a href="https://www.unrealengine.com/blog/unreal-engine-4-12-released">https://www.unrealengine.com/blog/unreal-engine-4-12-released</a>)</li>
-<li>procedural mesh &amp; slicing</li>
-<li>decals</li>
-<li>cables</li>
-<li>COOKING BLUEPRINTS TO C++</li>
-<li>GRASS AND FOLIAGE SCALABILITY</li>
-<li>FULL SCENE IMPORTER</li>
-<li>LIGHTMASS PORTALS</li>
-<li>large worlds</li>
-</ul>
-<p>redo Day-night cycle
-redo teleportals</p>
-<p>still true?
+<!--
+look into:
+- sequencer (introduced in https://www.unrealengine.com/blog/unreal-engine-4-12-released)
+- vr editor (introduced in https://www.unrealengine.com/blog/unreal-engine-4-12-released)
+- procedural mesh & slicing
+- decals
+- cables
+- COOKING BLUEPRINTS TO C++
+- GRASS AND FOLIAGE SCALABILITY
+- FULL SCENE IMPORTER
+- LIGHTMASS PORTALS
+- large worlds
+
+redo Day-night cycle
+redo teleportals
+
+still true?
 When playing: Alt+Enter to switch between VR mode
-Control+R to reset the forward view</p>
+Control+R to reset the forward view
+-->
 <ul>
 <li>Blueprint <strong>timelines</strong> are ways we can make a sequence of events happen -- and we can also make them happen in reverse. See day/night example below.</li>
 </ul>
