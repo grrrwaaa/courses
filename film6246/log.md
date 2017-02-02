@@ -91,11 +91,9 @@ Things you want to see:
 
 ### 5. Feb 2
 
-- Perception continued.
-
 - Inspiration from not-games.
 
-- Unreal: lighting
+- Unreal: lighting, first blueprints.
 
 ### 6. Feb 9
 

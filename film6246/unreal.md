@@ -405,8 +405,8 @@ Often you may wish to
 
 In the Transform panel, Lights also have a Mobility option. Lights can be "static" , "stationary" or "movable". 
 - Static lights are always on, and can't move. They are "baked" into the world when built, so they are effectively free. However they do not cast shadows from any moving objects. 
-- Stationary lights can't move, but can change properties like on/off, colour etc. No more than four non-static lights can overlap for shadowing to work -- and bear in mind that sunlight counts as one.
-- Movable lights are completely dynamic, and the most expensive to use.
+- Stationary lights are better in that they can also cast shadows on moving objects. No more than four non-static lights can overlap for shadowing to work -- and bear in mind that sunlight counts as one.
+- Movable lights are completely dynamic in position and properties, and the most expensive to use.
 
 Common properties of interest:
 
@@ -440,6 +440,65 @@ Even more radical changes can be achieved using **Post Process Materials**: [see
 For example, a **box trigger** can cause events to happen when a player enters or leaves the region of the (invisible) box region. 
 
 A neat thing is to turn an existing geometry brush into a trigger. You can select a BSP geometry brush in a level, duplicate it, then in the Details panel, the Actor section, you can choose "Convert Actor" and turn it into a "Trigger Volume". 
+
+---
+
+
+## Blueprints
+
+"Blueprint" is the visual scripting system in Unreal, which means you can do programming by connecting up visual flow charts rather than writing code. (You can also write C++ code if you want...)
+
+Here's a gentle introduction:
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/8WeE4q6Ba40?list=PLZlv_N0_O1gaCL2XjKluO7N2Pmmw9pvhE" frameborder="0" allowfullscreen></iframe>
+
+Generally the form of blueprints is that there are events that can trigger functions, and there are references to objects that these functions can operate over. 
+To add a new node to a blueprint you right-click in the background of the blueprint window, or you drag a wire off one of the pins in an existing node, to pull up the menu of nodes. The nodes that you can choose may depend on what objects you have selected in the editor. 
+
+Wire colors tell you what kind of data is going down the wire. Red is booleans, green is floats, blue are objects, etc. The most important are white wires, which are execution wires -- things that actually make stuff happen. A special thing about white wires is that they can only have one destination. If you want to trigger two things from one event, you have to connect the Exec output of the event to Exec input of the first function, and then take the Exec output of that to the Exec input of the second function, and so forth. 
+
+The most common places that you will do blueprints are: 
+
+1. The **Level blueprint**, where you can write behaviours that are global to a level. Typically this is where you would put mouse/keyboard etc. interactions, for example. You can open the level blueprint from the Blueprints large tool item above the viewport.
+
+2. **Class blueprints** are ways that you can add scripted behaviour to objects that can be spawned during a game, or which you can make multiple instances of while editing. In this case the script is contained within each instance. Class blueprints therefore also have a viewport, and can have other components such as meshes embedded.    
+They also have a Construction Script. Within a class blueprint, the **Construction Script** is for events that fire whenever your object is created (or transformed, etc.) within the editor.  It can be used to configure the properties of a blueprint, such as enabling the visibility of a light source, or even generating procedural objects, which can be configured via variables.  [A couple of simple examples here](https://www.youtube.com/watch?v=6RqDo3012YA)   
+You can open class blueprints from in the Content Browser, or by following links in the World Outliner. You can create new Class Blueprints from the Content Browser.  The benefit of using class BPs is that you can create many many instances of them throughout your level.
+
+### Variables
+
+- We can add **variables** to the blueprint using the +variable toolbar item (for example), and set the type and name of the variable. Once created, variables can be dragged into the editor (as a getter or setter reference), and used to store state within the script. Use a variable to store some data, of whatever data. Or, to send some data to another graph within the same blueprint or another blueprint. Or, to make something configurable on a class blueprint with instances. etc.
+
+- Note that Set variable nodes must also have an Exec input to take effect.
+
+- Many input and output pins can be turned into a variable -- right click the pin and select "Promote To Variable" -- set the name, compile, set the default, done!
+
+- Any variable can be made **editable** -- just tick the editable option in the details window, or, click the eyeball icon next to the variable name. This will now be editable in the details of any instance in the world. 
+
+> Vector variables can also be 3D editable, which means they can be manipulated right in the main scene editor!
+
+- Object type variables can be used to store references to other actors in the game. This is what you need to refer to an object that already exists in your scene.
+
+- Class type variables are only for when you need to remember the **type** of an object. It is needed if you want to spawn new objects that don't yet exist in the level. 
+
+### Tips
+
+- The blueprint editor is highly context sensitive. Whatever item you have selected in the viewport or content browser, relevant blueprint actions will come top in the blueprint context menu.
+
+
+- Any object that will be moved in-game must have the "movable" option set in the transform Detail (rather than "static"). **Weirdly, the same is also true for lights. So for example, if you want to turn a light on and off dynamically, you also need to set the "movable" option.**. Yeah.
+	
+### Adding comments to remind you what parts of a blueprint do
+
+- Right-click any node and edit the text in the Node Comments section, or
+- Select a few nodes, Right-click and choose Create Comment from Selection, or
+- Press "C" to create a new comment box
+
+### Debugging
+
+You can right-click and add a breakpoint on any event, and this will call up the blueprint editor when the event triggers in-game. At that point you can step through node by node to see exactly what is happening.
+
+You can also add "Log" (or "Print") nodes in a blueprint, which will write text onto the viewport during the game.
 
 
 ---
@@ -481,68 +540,6 @@ Inside Unreal Engine and your project, Right-click in the Movies folder and unde
 
 
 
-## Blueprints
-
-"Blueprint" is the visual scripting system in Unreal, which means you can do programming by connecting up visual flow charts rather than writing code. (You can also write C++ code if you want...)
-
-Here's a gentle introduction:
-
-<iframe width="640" height="360" src="https://www.youtube.com/embed/8WeE4q6Ba40?list=PLZlv_N0_O1gaCL2XjKluO7N2Pmmw9pvhE" frameborder="0" allowfullscreen></iframe>
-
-Generally the form of blueprints is that there are events that can trigger functions, and there are references to objects that these functions can operate over. 
-To add a new node to a blueprint you right-click in the background of the blueprint window, or you drag a wire off one of the pins in an existing node, to pull up the menu of nodes. The nodes that you can choose may depend on what objects you have selected in the editor. 
-
-Wire colors tell you what kind of data is going down the wire. Red is booleans, green is floats, blue are objects, etc. The most important are white wires, which are execution wires -- things that actually make stuff happen. A special thing about white wires is that they can only have one destination. If you want to trigger two things from one event, you have to connect the Exec output of the event to Exec input of the first function, and then take the Exec output of that to the Exec input of the second function, and so forth. 
-
-The most common places that you will do blueprints are: 
-
-1. The **Level blueprint**, where you can write behaviours that are global to a level. Typically this is where you would put mouse/keyboard etc. interactions, for example. 
-
-You can open the level blueprint from the Blueprints large tool item above the viewport.
-
-2. **Class blueprints** are ways that you can add scripted behaviour to objects that can be spawned during a game, or which you can make multiple instances of while editing. In this case the script is contained within each instance. Class blueprints therefore also have a viewport, and can have other components such as meshes embedded. 
-
-They also have a Construction Script. Within a class blueprint, the **Construction Script** is for events that fire whenever your object is created (or transformed, etc.) within the editor.  It can be used to configure the properties of a blueprint, such as enabling the visibility of a light source, or even generating procedural objects, which can be configured via variables.  [A couple of simple examples here](https://www.youtube.com/watch?v=6RqDo3012YA)
-
-You can open class blueprints from in the Content Browser, or by following links in the World Outliner. You can create new Class Blueprints from the Content Browser.  The benefit of using class BPs is that you can create many many instances of them throughout your level.
-
-### Variables
-
-- We can add **variables** to the blueprint using the +variable toolbar item (for example), and set the type and name of the variable. Once created, variables can be dragged into the editor (as a getter or setter reference), and used to store state within the script. Use a variable to store some data, of whatever data. Or, to send some data to another graph within the same blueprint or another blueprint. Or, to make something configurable on a class blueprint with instances. etc.
-
-- Note that Set variable nodes must also have an Exec input to take effect.
-
-- Many input and output pins can be turned into a variable -- right click the pin and select "Promote To Variable" -- set the name, compile, set the default, done!
-
-- Any variable can be made **editable** -- just tick the editable option in the details window, or, click the eyeball icon next to the variable name. This will now be editable in the details of any instance in the world. 
-
-> Vector variables can also be 3D editable, which means they can be manipulated right in the main scene editor!
-
-- Object type variables can be used to store references to other actors in the game. This is what you need to refer to an object that already exists in your scene.
-
-- Class type variables are only for when you need to remember the **type** of an object. It is needed if you want to spawn new objects that don't yet exist in the level. 
-
-### Tips
-
-- The blueprint editor is highly context sensitive. Whatever item you have selected in the viewport or content browser, relevant blueprint actions will come top in the blueprint context menu.
-
-
-- Any object that will be moved in-game must have the "movable" option set in the transform Detail (rather than "static"). **Weirdly, the same is also true for lights. So for example, if you want to turn a light on and off dynamically, you also need to set the "movable" option to 'stationary'**. Yeah.
-	
-### Adding comments to remind you what parts of a blueprint do
-
-- Right-click any node and edit the text in the Node Comments section, or
-- Select a few nodes, Right-click and choose Create Comment from Selection, or
-- Press "C" to create a new comment box
-
-### Debugging
-
-You can right-click and add a breakpoint on any event, and this will call up the blueprint editor when the event triggers in-game. At that point you can step through node by node to see exactly what is happening.
-
-You can also add "Log" (or "Print") nodes in a blueprint, which will write text onto the viewport during the game.
-
-
----
 
 ## unlocated tips
 
