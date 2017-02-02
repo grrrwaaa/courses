@@ -232,34 +232,6 @@ So long as you are careful in how you organize your content, it should be possib
 
 --- 
 
-## Materials
-
-Materials are assets that can be applied to geometry and meshes, and determine how light plays off them. The starter content comes with a few examples of materials, including brick, grass, chromes, plastics, etc. 
-
-**Applying a material to an object** can be as simple as dragging the material from the content browser onto the object in the viewport. However, some objects can carry more than one material (this is evident from their details panel) -- it could be for example a lamp that uses a glassy material for the shade and a different material for the stand. In this case you can drag materials to each of the material slots in the details panel.
-
-**Modifying materials by instancing:** Some materials also have **parameters**, which can be modified by using **Material Instances**. You can right-click on any Material to select "Create Material Instance", and save the instance in the content browser. Material Instances can be used wherever a Material was used. The main difference is that when you double-click it opens the Material Instance editor, which lists the parameters in the material and allows us to edit them. Also each one has a checkbox, which when ticked, makes them appear in the object's details panel, allowing us to customize the instance per object. Instancing is much cheaper than creating new materials, and also allows you to change properties without needing to recompile the underlying shaders.
-
-Instance parameters can also be modified in-game via Blueprints, see [tutorial](https://docs.unrealengine.com/latest/INT/Videos/PLZlv_N0_O1gbQjgY0nDwZNYe_N8IcYWS-/srUSDU1u0og/index.html).
-
-**Creating new materials:** You can create new materials by selecting "New Material" in the content browser menu (or by right-clicking in the content browser), and you can duplicate existing materials like any other asset. You can edit a material by double-clicking on it, which will open the Material Editor. This editor allows you to define the material properties via a data-flow graph, [as described in the tutorial here](https://docs.unrealengine.com/latest/INT/Videos/PLZlv_N0_O1gbQjgY0nDwZNYe_N8IcYWS-/lngF4VVNER4/index.html). Materials in Unreal are mainly defined in terms of:
-- Base color (the underlying colour or coloured texture of the object)
-- Metallic (whether shinyness is metal-like or plastic-like, usually just the value 0 or 1)
-- Roughness (a roughness of 0 is like a perfect mirror, a roughness of 1 is not reflective at all)
-- Specular (how bright or prominent reflective shines are)
-- Emissive colour (usually zero/black, but can be increased if this material emits light, like an LED)
-- Normal (emulates small deviations in the surface, such as grout between bricks; usually requires specific normal map textures)
-
-## Particles
-
-Particle systems are used to create a wide variety of effects, such as smoke, fire, fireworks, electric sparks, dust, explosions, etc. There are quite a few particle system example assets in the starter content and other free projects (especially "Particle Effects" project!)
-
-Your world can have a number of **Emitter** actors, each of which refer to a **Particle System** asset (specified by the emitter's "Template" property in the details panel). Particle system *components* can also be added to Blueprint objects. Particle systems themselves can be edited through a built-in editor called "Cascade".
-
-See the [tutorials](https://docs.unrealengine.com/latest/INT/Videos/PLZlv_N0_O1gbQjgY0nDwZNYe_N8IcYWS-/srUSDU1u0og/index.html).
-
----
-
 ## More advanced viewport options
 
 **[Orthographic views](https://wiki.unrealengine.com/Videos/Player?series=PLZlv_N0_O1gasd4IcOe9Cx9wHoBB7rxFl&video=RoiQOwCg-4Q):**
@@ -408,7 +380,7 @@ The simplest way to add lights by dragging a light in from the placement mode li
 - Spot lights diffuse over a cone shape
 - Directional lights point in only one direction, as if from a huge distance, like the sun
 
-Once added, lights can be moved, rotated etc. like any other actor.
+Once added, lights can be moved, rotated etc. like any other actor. Whenever we add or modify a light or rendering feature, or even a new material, we will need to rebuild the lighting model (press Build in the big toolbar). Unreal will tell you that lighting needs to be rebuilt.
 
 In the Transform panel, Lights also have a Mobility option. Lights can be "static" , "stationary" (the default), or "movable". 
 - Static lights are always on, and can't move. They are "baked" into the world when built, so they are effectively free. However they do not cast shadows from any moving objects. 
@@ -438,6 +410,35 @@ Aside from point/spot/directional lights, there are several other asset types th
 
 ---
 
+## Materials
+
+Materials are assets that can be applied to geometry and meshes, and determine how light plays off them. The starter content comes with a few examples of materials, including brick, grass, chromes, plastics, etc. 
+
+**Applying a material to an object** can be as simple as dragging the material from the content browser onto the object in the viewport. However, some objects can carry more than one material (this is evident from their details panel) -- it could be for example a lamp that uses a glassy material for the shade and a different material for the stand. In this case you can drag materials to each of the material slots in the details panel.
+
+**Modifying materials by instancing:** Some materials also have **parameters**, which can be modified by using **Material Instances**. You can right-click on any Material to select "Create Material Instance", and save the instance in the content browser. Material Instances can be used wherever a Material was used. The main difference is that when you double-click it opens the Material Instance editor, which lists the parameters in the material and allows us to edit them. Also each one has a checkbox, which when ticked, makes them appear in the object's details panel, allowing us to customize the instance per object. Instancing is much cheaper than creating new materials, and also allows you to change properties without needing to recompile the underlying shaders.
+
+Instance parameters can also be modified in-game via Blueprints, see [tutorial](https://docs.unrealengine.com/latest/INT/Videos/PLZlv_N0_O1gbQjgY0nDwZNYe_N8IcYWS-/srUSDU1u0og/index.html).
+
+**Creating new materials:** You can create new materials by selecting "New Material" in the content browser menu (or by right-clicking in the content browser), and you can duplicate existing materials like any other asset. You can edit a material by double-clicking on it, which will open the Material Editor. This editor allows you to define the material properties via a data-flow graph, [as described in the tutorial here](https://docs.unrealengine.com/latest/INT/Videos/PLZlv_N0_O1gbQjgY0nDwZNYe_N8IcYWS-/lngF4VVNER4/index.html). Materials in Unreal are mainly defined in terms of:
+- Base color (the underlying colour or coloured texture of the object)
+- Metallic (whether shinyness is metal-like or plastic-like, usually just the value 0 or 1)
+- Roughness (a roughness of 0 is like a perfect mirror, a roughness of 1 is not reflective at all)
+- Specular (how bright or prominent reflective shines are)
+- Emissive colour (usually zero/black, but can be increased if this material emits light, like an LED)
+- Normal (emulates small deviations in the surface, such as grout between bricks; usually requires specific normal map textures)
+
+---
+
+## Particles
+
+Particle systems are used to create a wide variety of effects, such as smoke, fire, fireworks, electric sparks, dust, explosions, etc. There are quite a few particle system example assets in the starter content and other free projects (especially "Particle Effects" project!)
+
+Your world can have a number of **Emitter** actors, each of which refer to a **Particle System** asset (specified by the emitter's "Template" property in the details panel). Particle system *components* can also be added to Blueprint objects. Particle systems themselves can be edited through a built-in editor called "Cascade".
+
+See the [tutorials](https://docs.unrealengine.com/latest/INT/Videos/PLZlv_N0_O1gbQjgY0nDwZNYe_N8IcYWS-/srUSDU1u0og/index.html).
+
+---
 
 ## Blueprints
 
@@ -447,18 +448,20 @@ Here's a gentle introduction:
 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/8WeE4q6Ba40?list=PLZlv_N0_O1gaCL2XjKluO7N2Pmmw9pvhE" frameborder="0" allowfullscreen></iframe>
 
-Generally the form of blueprints is that there are events that can trigger functions, and there are references to objects that these functions can operate over. 
-To add a new node to a blueprint you right-click in the background of the blueprint window, or you drag a wire off one of the pins in an existing node, to pull up the menu of nodes. The nodes that you can choose may depend on what objects you have selected in the editor. 
+Generally the form of blueprints is that **there are events that can trigger functions, and there are references to objects** that these functions can operate over. 
 
-Wire colors tell you what kind of data is going down the wire. Red is booleans, green is floats, blue are objects, etc. The most important are white wires, which are execution wires -- things that actually make stuff happen. A special thing about white wires is that they can only have one destination. If you want to trigger two things from one event, you have to connect the Exec output of the event to Exec input of the first function, and then take the Exec output of that to the Exec input of the second function, and so forth. 
+To add a new node to a blueprint you right-click in the background of the blueprint window, or you drag a wire off one of the pins in an existing node, to pull up the menu of nodes. The nodes that you can choose may depend on what objects you have selected in the editor. Wire colors tell you what kind of data is going down the wire. Red is booleans, green is floats, blue are objects, etc. 
+
+The most important are white wires, which are execution wires -- things that actually make stuff happen. A special thing about white wires is that they can only have one destination. If you want to trigger two things from one event, you have to connect the Exec output of the event to Exec input of the first function, and then take the Exec output of that to the Exec input of the second function, and so forth. 
 
 The most common places that you will do blueprints are: 
 
 1. The **Level blueprint**, where you can write behaviours that are global to a level. Typically this is where you would put mouse/keyboard etc. interactions, for example. You can open the level blueprint from the Blueprints large tool item above the viewport.
 
 2. **Class blueprints** are ways that you can add scripted behaviour to objects that can be spawned during a game, or which you can make multiple instances of while editing. In this case the script is contained within each instance. Class blueprints therefore also have a viewport, and can have other components such as meshes embedded.    
-They also have a Construction Script. Within a class blueprint, the **Construction Script** is for events that fire whenever your object is created (or transformed, etc.) within the editor.  It can be used to configure the properties of a blueprint, such as enabling the visibility of a light source, or even generating procedural objects, which can be configured via variables.  [A couple of simple examples here](https://www.youtube.com/watch?v=6RqDo3012YA)   
-You can open class blueprints from in the Content Browser, or by following links in the World Outliner. You can create new Class Blueprints from the Content Browser.  The benefit of using class BPs is that you can create many many instances of them throughout your level.
+
+	- They also have a Construction Script. Within a class blueprint, the **Construction Script** is for events that fire whenever your object is created (or transformed, etc.) within the editor.  It can be used to configure the properties of a blueprint, such as enabling the visibility of a light source, or even generating procedural objects, which can be configured via variables.  [A couple of simple examples here](https://www.youtube.com/watch?v=6RqDo3012YA)  
+	- You can open class blueprints from in the Content Browser, or by following links in the World Outliner. You can create new Class Blueprints from the Content Browser.  The benefit of using class BPs is that you can create many many instances of them throughout your level.
 
 ### Variables
 
@@ -479,7 +482,6 @@ You can open class blueprints from in the Content Browser, or by following links
 ### Tips
 
 - The blueprint editor is highly context sensitive. Whatever item you have selected in the viewport or content browser, relevant blueprint actions will come top in the blueprint context menu.
-
 
 - Any object that will be moved in-game must have the "movable" option set in the transform Detail (rather than "static"). **Weirdly, the same is also true for lights. So for example, if you want to turn a light on and off dynamically, you also need to set the "movable" option.**. Yeah.
 	
@@ -535,6 +537,7 @@ Inside Unreal Engine and your project, Right-click in the Movies folder and unde
 
 
 
+<!--
 
 ## unlocated tips
 
@@ -551,7 +554,6 @@ Dynamic shadows are usually a costly feature. However, this cost can be cut in h
 
 Input devices: Edit > Project Settings… and browse to category Input. 
 
-<!--
 look into:
 - sequencer (introduced in https://www.unrealengine.com/blog/unreal-engine-4-12-released)
 - vr editor (introduced in https://www.unrealengine.com/blog/unreal-engine-4-12-released)
@@ -570,9 +572,8 @@ redo teleportals
 still true?
 When playing: Alt+Enter to switch between VR mode
 Control+R to reset the forward view
--->
 
-- Blueprint **timelines** are ways we can make a sequence of events happen -- and we can also make them happen in reverse. See day/night example below.
+- Blueprint **timelines** are ways we can make a sequence of events happen -- and we can also make them happen in reverse. See day/night example.
 
 vr: http://www.tomlooman.com/getting-started-with-vr/
 -> Edit > Editor Preferences / General: Experimental / VR / Enable VR Editing (tick)
@@ -583,3 +584,6 @@ VR editing:
 checkout unreal.js (https://www.unrealengine.com/marketplace/unrealjs)
 and https://www.unrealengine.com/marketplace/runtime-mesh-component
 and https://www.unrealengine.com/marketplace/varest-plugin
+
+
+-->
