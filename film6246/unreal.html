@@ -11,6 +11,7 @@
 <li><a href="log.html" alt="Log">Log</a></li>
 <li><a href="vr.html" alt="Virtual Reality">Virtual Reality</a></li>
 <li><a href="perception.html" alt="Perception">Perception</a></li>
+<li><a href="notgame.html" alt="(not-)game">(not-)game</a></li>
 <li><a href="osmose.html" alt="Osmose">Osmose</a></li>
 <li><a href="reading.html" alt="Reading">Reading</a></li>
 <li><a href="lab.html" alt="Lab">Lab</a></li>
@@ -325,8 +326,8 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <p>In the Transform panel, Lights also have a Mobility option. Lights can be &quot;static&quot; , &quot;stationary&quot; or &quot;movable&quot;. </p>
 <ul>
 <li>Static lights are always on, and can&#39;t move. They are &quot;baked&quot; into the world when built, so they are effectively free. However they do not cast shadows from any moving objects. </li>
-<li>Stationary lights can&#39;t move, but can change properties like on/off, colour etc. No more than four non-static lights can overlap for shadowing to work -- and bear in mind that sunlight counts as one.</li>
-<li>Movable lights are completely dynamic, and the most expensive to use.</li>
+<li>Stationary lights are better in that they can also cast shadows on moving objects. No more than four non-static lights can overlap for shadowing to work -- and bear in mind that sunlight counts as one.</li>
+<li>Movable lights are completely dynamic in position and properties, and the most expensive to use.</li>
 </ul>
 <p>Common properties of interest:</p>
 <ul>
@@ -356,28 +357,6 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <p>For example, a <strong>box trigger</strong> can cause events to happen when a player enters or leaves the region of the (invisible) box region. </p>
 <p>A neat thing is to turn an existing geometry brush into a trigger. You can select a BSP geometry brush in a level, duplicate it, then in the Details panel, the Actor section, you can choose &quot;Convert Actor&quot; and turn it into a &quot;Trigger Volume&quot;. </p>
 <hr>
-<h2 id="embedding-sound">Embedding sound</h2>
-<p><a href="https://docs.unrealengine.com/latest/INT/Engine/Audio/index.html">See documentation</a></p>
-<p>You can import .wav audio files into the Content Browser like any other content -- they become &quot;Sound Wave&quot; assets. A handy place to find free audio files is <a href="http://freesound.org">freesound.org</a> (but check licensing first!). The simplest way to then add the Sound Wave to your world is to drag it from the content browser to the viewport. </p>
-<p>More complex sounds can be created as &quot;Sound Cues&quot;, which have their own editor similar to the material editor or blueprint editor. With this editor multiple sounds can be mixed together, with different modulation and other effects.</p>
-<p>When sound waves or sound cues are added to a level, they are known as &quot;ambient sound actors&quot;. </p>
-<ul>
-<li>Generally these will get louder as you approach them, and quieter as you move away.</li>
-<li>You can either have them play continuously and loop (enable looping in the sound wave or sound cue asset, and enable &quot;Auto Activate&quot; in the ambient sound actor details), or trigger them from e.g. box triggers.</li>
-<li>In the Attenuation of an ambient sound actor&#39;s details, you can control if and how the sound is spatialized. </li>
-</ul>
-<p>You can also create an &quot;Audio Volume&quot; (from the &quot;Volumes&quot; option of the placing mode tool), a region of space with specific audio properties, and then assign a Reverb Effect to this space with particular properties like the echo density, overall reverb gain, air absorption, and more, to craft its unique sonic character.</p>
-<hr>
-<h2 id="embedding-video">Embedding video</h2>
-<p><a href="https://docs.unrealengine.com/latest/INT/Engine/MediaFramework/HowTo/">See documentation here</a></p>
-<p><a href="https://docs.unrealengine.com/latest/INT/Engine/MediaFramework/HowTo/FileMediaSource/index.html">Playing a video in a level</a></p>
-<p>For the best compatibility and performance, it is recommended that the .mp4 file extension in H.264 be used. </p>
-<p>Create a Movies folder in the content browser, and open it on disk. Copy your mp4 files into this folder. 
-Inside Unreal Engine and your project, Right-click in the Movies folder and under Media select File Media Source. Open it, and set the file path to your MP4 file. </p>
-<blockquote>
-<p>Videos can be streamed from the web, but file references are recommended.</p>
-</blockquote>
-<hr>
 <h2 id="blueprints">Blueprints</h2>
 <p>&quot;Blueprint&quot; is the visual scripting system in Unreal, which means you can do programming by connecting up visual flow charts rather than writing code. (You can also write C++ code if you want...)</p>
 <p>Here&#39;s a gentle introduction:</p>
@@ -388,14 +367,11 @@ To add a new node to a blueprint you right-click in the background of the bluepr
 <p>Wire colors tell you what kind of data is going down the wire. Red is booleans, green is floats, blue are objects, etc. The most important are white wires, which are execution wires -- things that actually make stuff happen. A special thing about white wires is that they can only have one destination. If you want to trigger two things from one event, you have to connect the Exec output of the event to Exec input of the first function, and then take the Exec output of that to the Exec input of the second function, and so forth. </p>
 <p>The most common places that you will do blueprints are: </p>
 <ol>
-<li>The <strong>Level blueprint</strong>, where you can write behaviours that are global to a level. Typically this is where you would put mouse/keyboard etc. interactions, for example. </li>
+<li><p>The <strong>Level blueprint</strong>, where you can write behaviours that are global to a level. Typically this is where you would put mouse/keyboard etc. interactions, for example. You can open the level blueprint from the Blueprints large tool item above the viewport.</p>
+</li>
+<li><p><strong>Class blueprints</strong> are ways that you can add scripted behaviour to objects that can be spawned during a game, or which you can make multiple instances of while editing. In this case the script is contained within each instance. Class blueprints therefore also have a viewport, and can have other components such as meshes embedded.<br>They also have a Construction Script. Within a class blueprint, the <strong>Construction Script</strong> is for events that fire whenever your object is created (or transformed, etc.) within the editor.  It can be used to configure the properties of a blueprint, such as enabling the visibility of a light source, or even generating procedural objects, which can be configured via variables.  <a href="https://www.youtube.com/watch?v=6RqDo3012YA">A couple of simple examples here</a><br>You can open class blueprints from in the Content Browser, or by following links in the World Outliner. You can create new Class Blueprints from the Content Browser.  The benefit of using class BPs is that you can create many many instances of them throughout your level.</p>
+</li>
 </ol>
-<p>You can open the level blueprint from the Blueprints large tool item above the viewport.</p>
-<ol>
-<li><strong>Class blueprints</strong> are ways that you can add scripted behaviour to objects that can be spawned during a game, or which you can make multiple instances of while editing. In this case the script is contained within each instance. Class blueprints therefore also have a viewport, and can have other components such as meshes embedded. </li>
-</ol>
-<p>They also have a Construction Script. Within a class blueprint, the <strong>Construction Script</strong> is for events that fire whenever your object is created (or transformed, etc.) within the editor.  It can be used to configure the properties of a blueprint, such as enabling the visibility of a light source, or even generating procedural objects, which can be configured via variables.  <a href="https://www.youtube.com/watch?v=6RqDo3012YA">A couple of simple examples here</a></p>
-<p>You can open class blueprints from in the Content Browser, or by following links in the World Outliner. You can create new Class Blueprints from the Content Browser.  The benefit of using class BPs is that you can create many many instances of them throughout your level.</p>
 <h3 id="variables">Variables</h3>
 <ul>
 <li><p>We can add <strong>variables</strong> to the blueprint using the +variable toolbar item (for example), and set the type and name of the variable. Once created, variables can be dragged into the editor (as a getter or setter reference), and used to store state within the script. Use a variable to store some data, of whatever data. Or, to send some data to another graph within the same blueprint or another blueprint. Or, to make something configurable on a class blueprint with instances. etc.</p>
@@ -421,7 +397,7 @@ To add a new node to a blueprint you right-click in the background of the bluepr
 <li>The blueprint editor is highly context sensitive. Whatever item you have selected in the viewport or content browser, relevant blueprint actions will come top in the blueprint context menu.</li>
 </ul>
 <ul>
-<li>Any object that will be moved in-game must have the &quot;movable&quot; option set in the transform Detail (rather than &quot;static&quot;). <strong>Weirdly, the same is also true for lights. So for example, if you want to turn a light on and off dynamically, you also need to set the &quot;movable&quot; option to &#39;stationary&#39;</strong>. Yeah.</li>
+<li>Any object that will be moved in-game must have the &quot;movable&quot; option set in the transform Detail (rather than &quot;static&quot;). <strong>Weirdly, the same is also true for lights. So for example, if you want to turn a light on and off dynamically, you also need to set the &quot;movable&quot; option.</strong>. Yeah.</li>
 </ul>
 <h3 id="adding-comments-to-remind-you-what-parts-of-a-blueprint-do">Adding comments to remind you what parts of a blueprint do</h3>
 <ul>
@@ -432,6 +408,28 @@ To add a new node to a blueprint you right-click in the background of the bluepr
 <h3 id="debugging">Debugging</h3>
 <p>You can right-click and add a breakpoint on any event, and this will call up the blueprint editor when the event triggers in-game. At that point you can step through node by node to see exactly what is happening.</p>
 <p>You can also add &quot;Log&quot; (or &quot;Print&quot;) nodes in a blueprint, which will write text onto the viewport during the game.</p>
+<hr>
+<h2 id="embedding-sound">Embedding sound</h2>
+<p><a href="https://docs.unrealengine.com/latest/INT/Engine/Audio/index.html">See documentation</a></p>
+<p>You can import .wav audio files into the Content Browser like any other content -- they become &quot;Sound Wave&quot; assets. A handy place to find free audio files is <a href="http://freesound.org">freesound.org</a> (but check licensing first!). The simplest way to then add the Sound Wave to your world is to drag it from the content browser to the viewport. </p>
+<p>More complex sounds can be created as &quot;Sound Cues&quot;, which have their own editor similar to the material editor or blueprint editor. With this editor multiple sounds can be mixed together, with different modulation and other effects.</p>
+<p>When sound waves or sound cues are added to a level, they are known as &quot;ambient sound actors&quot;. </p>
+<ul>
+<li>Generally these will get louder as you approach them, and quieter as you move away.</li>
+<li>You can either have them play continuously and loop (enable looping in the sound wave or sound cue asset, and enable &quot;Auto Activate&quot; in the ambient sound actor details), or trigger them from e.g. box triggers.</li>
+<li>In the Attenuation of an ambient sound actor&#39;s details, you can control if and how the sound is spatialized. </li>
+</ul>
+<p>You can also create an &quot;Audio Volume&quot; (from the &quot;Volumes&quot; option of the placing mode tool), a region of space with specific audio properties, and then assign a Reverb Effect to this space with particular properties like the echo density, overall reverb gain, air absorption, and more, to craft its unique sonic character.</p>
+<hr>
+<h2 id="embedding-video">Embedding video</h2>
+<p><a href="https://docs.unrealengine.com/latest/INT/Engine/MediaFramework/HowTo/">See documentation here</a></p>
+<p><a href="https://docs.unrealengine.com/latest/INT/Engine/MediaFramework/HowTo/FileMediaSource/index.html">Playing a video in a level</a></p>
+<p>For the best compatibility and performance, it is recommended that the .mp4 file extension in H.264 be used. </p>
+<p>Create a Movies folder in the content browser, and open it on disk. Copy your mp4 files into this folder. 
+Inside Unreal Engine and your project, Right-click in the Movies folder and under Media select File Media Source. Open it, and set the file path to your MP4 file. </p>
+<blockquote>
+<p>Videos can be streamed from the web, but file references are recommended.</p>
+</blockquote>
 <hr>
 <h2 id="unlocated-tips">unlocated tips</h2>
 <p>You can right-click actor(s) in the level viewport and convert their current state to a new Static Mesh asset.</p>
