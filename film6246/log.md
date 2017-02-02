@@ -91,9 +91,11 @@ Things you want to see:
 
 ### 5. Feb 2
 
-- Inspiration from not-games.
+- Progress updates / VR testing of projects.
 
-- Unreal: lighting, first blueprints.
+- Inspiration from games/not-games.
+
+- Unreal: Volumes, lighting, first blueprint interactivity.
 
 ### 6. Feb 9
 
