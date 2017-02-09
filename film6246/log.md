@@ -79,7 +79,7 @@ Things you want to see:
 
 - Viewing your first Unreal "maps" in VR.
 
-- Nausea
+- [Nausea](perception.html)
 
 - [Projects shared Google doc](https://docs.google.com/document/d/1_gRshxJ3okTv0ntoa-_3kIqzgqwKZY8qTuicOCxOS-k/edit)
 
@@ -87,7 +87,7 @@ Things you want to see:
 
 - Announcements.
 
-- Unreal: Landscapes & foliage
+- [Unreal](unreal.html): Landscapes & foliage
 
 ### 5. Feb 2
 
@@ -95,9 +95,17 @@ Things you want to see:
 
 - Inspiration from games/not-games.
 
-- Unreal: Volumes, lighting, first blueprint interactivity.
+- [Unreal](unreal.html): Volumes, lighting, first blueprint interactivity.
 
 ### 6. Feb 9
+
+- [Osmose](osmose.html)
+
+- Design questions for final [projects](project.html)
+
+- Progress updates / VR testing of projects.
+
+- [Unreal](unreal.html) continued.
 
 ### 7. Feb 16
 
@@ -110,12 +118,14 @@ Things you want to see:
 ### 10. Mar 9 
 
 ### 11. Mar 16
+
+Pre-screening / alpha-test / play-test presentations.
  
 ### 12. Mar 23
 
 ### 13. Mar 30
 
-Final project presentation & discussion, open lab?
+Final project presentation & discussion, open lab.
 
 <!--
 
