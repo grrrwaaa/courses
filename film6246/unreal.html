@@ -417,25 +417,66 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <hr>
 <h2 id="embedding-sound">Embedding sound</h2>
 <p><a href="https://docs.unrealengine.com/latest/INT/Engine/Audio/index.html">See documentation</a></p>
-<p>You can import .wav audio files into the Content Browser like any other content -- they become &quot;Sound Wave&quot; assets. A handy place to find free audio files is <a href="http://freesound.org">freesound.org</a> (but check licensing first!). The simplest way to then add the Sound Wave to your world is to drag it from the content browser to the viewport. </p>
-<p>More complex sounds can be created as &quot;Sound Cues&quot;, which have their own editor similar to the material editor or blueprint editor. With this editor multiple sounds can be mixed together, with different modulation and other effects.</p>
-<p>When sound waves or sound cues are added to a level, they are known as &quot;ambient sound actors&quot;. </p>
+<p>You can import audio files into the Content Browser like any other content -- they become <strong>Sound Wave</strong> assets. </p>
+<blockquote>
+<p>A handy place to find free audio files is <a href="http://freesound.org">freesound.org</a> (but check licensing first!). </p>
+</blockquote>
+<p>Audio files should be in the WAV format (you&#39;ll have to use other software to convert files to WAV if they are e.g. MP3 format). Just press the &quot;Import&quot; button in the content browser, or drag them from a windows explorer into the content browser. </p>
+<p>The simplest way to then add the Sound Wave to your world is to drag it from the content browser to the viewport. This will create an <strong>AmbientSound</strong> Actor, indicated by a loudspeaker icon in the world. </p>
+<p>However it will normally just play once at the level start. To make it play continuously, double-clock the SoundWave in the content browser and set the <strong>Looping</strong> property to true. (Watch out though, to make a continuous ambience you may need to edit the soundfile to have good loop points using an external audio editor such as <a href="http://www.audacityteam.org">Audacity</a>.) </p>
+<p>The AmbientSound actor has several properties in the details panel that can be useful to modify, such as the Sound to be played, the Volume multiplier (a way to change loudness), and Spatialization.</p>
+<h3 id="spatialization-attenuation-">Spatialization (Attenuation)</h3>
+<p>Spatialization makes sounds seem to emanate from the correct directions as you move around the world. Attenuation specifies how a sound gets more subdued as you move away from the source.</p>
+<p>By default, most AmbientSound actors have spatialization enabled (see the Attenuation properties in the actor&#39;s details panel). However the default attenuation settings do not have much effect. You can either:</p>
 <ul>
-<li>Generally these will get louder as you approach them, and quieter as you move away.</li>
-<li>You can either have them play continuously and loop (enable looping in the sound wave or sound cue asset, and enable &quot;Auto Activate&quot; in the ambient sound actor details), or trigger them from e.g. box triggers.</li>
-<li>In the Attenuation of an ambient sound actor&#39;s details, you can control if and how the sound is spatialized. </li>
+<li>Override the settings on a specific AmbientSound actor (only recommended for special cases), or</li>
+<li>Assign a <strong><a href="https://docs.unrealengine.com/latest/INT/Engine/Audio/DistanceModelAttenuation/index.html">Sound Attentuation</a></strong> asset. Click on the Attenuation Settings option in the actor&#39;s details panel, and either pick an existing one, or press &quot;Create New Asset: Sound Attenuation&quot; in the menu. The asset is created in the content browser and you can then double-click to assign settings. The benefit of creating an asset this way is that you can re-use it many times in a world.</li>
 </ul>
-<p>You can also create an &quot;Audio Volume&quot; (from the &quot;Volumes&quot; option of the placing mode tool), a region of space with specific audio properties, and then assign a Reverb Effect to this space with particular properties like the echo density, overall reverb gain, air absorption, and more, to craft its unique sonic character.</p>
+<p>In either case there are many options. The most important:</p>
+<ul>
+<li>Radius (min radius): Within this distance (in cm) the sound plays at full volume.</li>
+<li>Falloff Distane (max radius): at this distance (in cm) the sound is no longer heard. </li>
+<li>Distance Algorithm: determines how quickly the sound becomes quiet as you move away.     <ul>
+<li>Use &quot;Linear&quot; for general looping ambience and low-detail background sounds, and large radius background sounds. Use &quot;Logarithmic&quot; when accuracy is important -- they&#39;ll only draw attention when very near. Or use &quot;NaturalSound&quot; as a softer alternative for this. Use &quot;LogReverse&quot; for sounds that should seem loud anywhere near. </li>
+</ul>
+</li>
+<li>The attenuation shape determines the shape of the space the sound fills. It is displayed as an orange frame around the sound actor. Generally use Sphere, but other shapes may be useful for large objects.</li>
+</ul>
+<h3 id="triggering">Triggering</h3>
+<p>Within a level blueprint, we can drag an AmbientSound actor in to get a reference, and then trigger from events (such as OnActorOverlap of box triggers) to call the &quot;Play&quot; function referencing this sound. It&#39;s also possible to spawn sound events (search for &quot;Spawn Sound&quot; in the blueprint editor), which can be useful for short sound effects associated with other actions in the world.</p>
+<p>For more interesting triggered sounds we&#39;d want to use a Class Blueprint.</p>
+<ul>
+<li>Let&#39;s make a simple cylinder in the world. Drag in Cylinder from the Basic section of the Placement Mode panel. </li>
+<li>Now in the details panel, select the blue button Blueprint/Add, and choose where in the content browser to save it, and give it a more useful name.</li>
+<li>In the blueprint editor&#39;s viewport, click +Add Component and choose Box Collision. Scale this up so that it is larger than the cylinder. </li>
+<li>In the details panel, scroll down to Events, and press the + button for &quot;On Component Begin Overlap&quot;. This opens the blueprint editor.</li>
+<li>Again press +Add Component, but this time select Audio. This is like an AmbientSound actor, but within a Class blueprint it is called Audio Component. In the details panel, choose a Sound to play, Attenuation settings, etc. as normal. Turn the &quot;Activation: Auto Activate&quot; property off.</li>
+<li>Now drag the audio component into the blueprint editor to create a reference. Drag a line from the outpin, and under Audio/Components/Audio choose &quot;Play&quot;. Drag a white line from the OnComponentBeginOverlap white outpin to the white pin of &quot;Play&quot;.</li>
+<li>Now save the blueprint &amp; go back to the main level editor. </li>
+</ul>
+<p>Now you can make many copies of this object in the world, and edit them all in one place.</p>
+<p>To take this further, let&#39;s make it possible to change the sound associated with each instance. </p>
+<ul>
+<li>In the class blueprint editor open the Construction script tab.  </li>
+<li>Drag in a reference to the Audio component, and drag a line of it. Choose the Audio/Component/Audio/Set Sound function. </li>
+<li>Connect the White exec pin of the Construction Script node to the Set Sound node. </li>
+<li>On the Set Sound node&#39;s &quot;New Sound&quot; pin, right click and choose &quot;promote to variable&quot;. This makes a new variable node appear. </li>
+<li>In the details panel, change the name of this node to something sensible (e.g. &quot;sound to play&quot;), and tick the Editable box. Also, in the Default Value option, set a sound to play.</li>
+<li>Compile &amp; save the blueprint, then return to the level. You should now be able to create copies of the actor, and in the details panel, see &amp; change the &quot;sound to play&quot; variable of each one independently.</li>
+</ul>
+<h3 id="more-complex-sounds">More complex sounds</h3>
+<p>The AmbientSound actor also has a &quot;Modulation&quot; property set, which can be used to set ranges of pitch (rate) and volume (loudness) over which triggered sounds may randomly vary. This can enrich the soundscape relatively easily.</p>
+<p>More complex sound sources than simple SoundWaves can be created as <a href="https://docs.unrealengine.com/latest/INT/Engine/Audio/SoundCues/Editor/index.html">Sound Cues</a>, which have their own editor similar to the material editor or blueprint editor, and can have additional instance properties. With this editor multiple sounds can be mixed together, with different modulation and other effects. Sound Cues can be used anywhere instead of a Sound Wave (i.e. in AmbientSound actors and class blueprint Audio components.</p>
+<p>You can also create an &quot;Audio Volume&quot; (from the &quot;Volumes&quot; option of the placing mode tool, see <a href="https://docs.unrealengine.com/latest/INT/Engine/Actors/Volumes/index.html">here</a>), a region of space with specific audio properties such as how a space creates reverberation, rather like how the Post Effects volume can change visual properties.  See the details panel under Reverb, and choose or create a Reverb Effect. Reverb effects have properties like the echo density, overall reverb gain, air absorption, and more, to craft its unique sonic character. Also, Audio Volumes can be useful to define the effect of sounds being inside or outside enclosed spaces, using the Ambient Zone settings. </p>
 <hr>
 <h2 id="embedding-video">Embedding video</h2>
 <p><a href="https://docs.unrealengine.com/latest/INT/Engine/MediaFramework/HowTo/">See documentation here</a></p>
-<p><a href="https://docs.unrealengine.com/latest/INT/Engine/MediaFramework/HowTo/FileMediaSource/index.html">Playing a video in a level</a></p>
 <p>For the best compatibility and performance, it is recommended that the .mp4 file extension in H.264 be used. </p>
-<p>Create a Movies folder in the content browser, and open it on disk. Copy your mp4 files into this folder. 
-Inside Unreal Engine and your project, Right-click in the Movies folder and under Media select File Media Source. Open it, and set the file path to your MP4 file. </p>
+<p><strong>Adding movie files to a project:</strong> Create a Movies folder in the content browser, and open it on disk in Windows Explorer. Copy your mp4 files into this folder using Windows Explorer, then drag them back into the Content Browser. </p>
 <blockquote>
 <p>Videos can be streamed from the web, but file references are recommended.</p>
 </blockquote>
+<p><strong>Placing a video texture onto an object</strong>: See <a href="https://docs.unrealengine.com/latest/INT/Engine/MediaFramework/HowTo/FileMediaSource/index.html">Playing a video in a level</a> documentation.</p>
 <hr>
 <!--
 
