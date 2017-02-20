@@ -173,19 +173,6 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <p><strong>Updating lighting etc.</strong> Hit &quot;Build&quot; in the top toolbar to apply the changes, and rebuild lighting models etc. This can be especially important when building enclosed spaces with holes for light to come through.</p>
 <p><strong>Applying materials</strong>: You can simply drag &amp; drop materials from the Content Browser onto geometry brushes. By default, materials will drag onto a single face. To drag onto all faces of a geometry brush, first press &quot;shift+b&quot; to select all the faces (or, if you select a wall, pressing &quot;shift+w&quot; will select all adjacent walls).</p>
 <p><strong>Aligning materials/textures (to avoid seams):</strong> Select all adjoining panels (with &quot;ctrl&quot;) and in the details panel, set Geometry / Alignment / Align surface planar to make sure there are no seams between them.</p>
-<p><strong>Convert brush to mesh</strong>: After modeling, you can convert a brush into a regular StaticMeshActor from the Brush settings. It&#39;s geometry will no longer be editable, but the performance and lighting qualities will improve. It is also helpful when you want to assign different properties or behaviors that BSPs don&#39;t support, or to use them as reusable assets for building blueprints, or with foliage, etc.</p>
-<p>By default, a static mesh created this way has no collision hull, so a character will fall right through it. To add a collision hull:</p>
-<ul>
-<li>double-click the mesh to open the mesh editor, </li>
-<li>to generate the hull automatically:<ul>
-<li>from the Collision menu choose Auto Convex Collision</li>
-<li>in the details panel that opens, set the accuracy options, and click Apply</li>
-<li>a visualization of the collision hull will appear in the viewport</li>
-</ul>
-</li>
-<li>otherwise, with other options in this menu you can build a hull by hand</li>
-<li>finally, save and close the mesh editor    </li>
-</ul>
 <p><strong>Adding feature and prop meshes, lights, etc.</strong>: After adding the brushes and dropping in materials, we can start adding some more detailed meshes, improve the lighting, etc. The starter content has a few good architectural items to work with, such as a &quot;glass window&quot; panel that can be used for all kinds of glass panels.</p>
 <hr>
 <h2 id="projects-and-assets">Projects and assets</h2>
@@ -338,6 +325,7 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 </ul>
 </li>
 </ul>
+<p>Dynamic shadows are usually a costly feature. However, this cost can be cut in half by enabling “Single Sample Shadow from Stationary Lights” on your movable Actors. This feature makes shadow receiving on dynamic objects much cheaper at the cost of some quality. It doesn’t work for all scenarios, but is worth playing around with for your dynamic objects for potentially great performance gains.</p>
 <hr>
 <h2 id="materials">Materials</h2>
 <p>Materials are assets that can be applied to geometry and meshes, and determine how light plays off them. The starter content comes with a few examples of materials, including brick, grass, chromes, plastics, etc. </p>
@@ -478,20 +466,112 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 </blockquote>
 <p><strong>Placing a video texture onto an object</strong>: See <a href="https://docs.unrealengine.com/latest/INT/Engine/MediaFramework/HowTo/FileMediaSource/index.html">Playing a video in a level</a> documentation.</p>
 <hr>
+<h2 id="converting-brush-to-mesh-actors-to-blueprint-">Converting: Brush to Mesh, Actors to Blueprint, ...</h2>
+<p><strong>Brush to Mesh</strong>: Although it can be convenient to mark up a level using BSPs (&quot;Geometry Brushes&quot;), it is not recommended to keep them in the final project, as they can slow down performance, reduce the quality of lighting, etc. You might also want to convert a brush to mesh so that you can use it in blueprints, for foliage, and other places where BSPs cannot be used.</p>
+<p>You can convert any BSP into a mesh in the Details Panel / Brush Settings / Create Static Mesh. Note however that after conversion, the geometry will no longer be editable. </p>
+<p>You can also convert multiple BSPs into a single mesh by selecting them all, right-clicking, and choosing Convert Actors to Static Mesh</p>
+<p>You might also need to then edit the new mesh to create a collision profile for it. To check whether you need to, either play the level and see if you can run through the object, or edit the new Mesh and enable the Collision button in the toolbar. If no purple collision lines show up, you can add a new collision hull like this:</p>
+<ul>
+<li>double-click the mesh to open the mesh editor, </li>
+<li>to generate the hull automatically:<ul>
+<li>from the Collision menu choose a collision option<ul>
+<li>For regular shapes, a sphere/capsule/box collision might be good enough</li>
+<li>For most other cases, use Auto Convex Collision<ul>
+<li>in the details panel that opens, set the accuracy options, and click Apply</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>a visualization of the collision hull will appear in the viewport</li>
+</ul>
+</li>
+<li>otherwise, with other options in this menu you can build a hull by hand</li>
+<li>finally, save and close the mesh editor<br><a href="https://docs.unrealengine.com/latest/INT/Engine/Content/Types/StaticMeshes/HowTo/SettingCollision/">See here for more on mesh collision options</a></li>
+</ul>
+<p><strong>Actors to Blueprint</strong>: You create new blueprints from an object in the scene by hitting the blueprint button at the top of the details panel. But you can also convert <strong>multiple</strong> actors into a single blueprint:</p>
+<ul>
+<li>Select the objects in the viewport</li>
+<li>In the main toolbar above the viewport, under Blueprints / Convert Selected Components to Blueprint Class...&quot; </li>
+</ul>
+<p>Note that you also need to convert brushes to meshes first if you want to use them in a blueprint!</p>
+<p><strong>Merge multiple actors to single actor</strong>: Reducing the number of actors can improve performance in large projects. You can merge mesh actors together right in the level viewport. This allows you to reduce draw calls to get better performance. <a href="https://docs.unrealengine.com/latest/INT/Engine/Actors/Merging/">See docs</a></p>
+<ul>
+<li>Select actors to merge</li>
+<li>Window / Developer Tools / Merge Actors</li>
+</ul>
+<p><strong>Convert actor to static mesh:</strong> Sometimes you might have a complex object or actor that you want to simply grab as a plain mesh. On the actor in the viewport right-click and choose &quot;Convert to Static Mesh&quot;. As usual it asks where to place this new mesh asset in the content browser. An example of where you might want to do this is in creating a manikin mesh from a character blueprint.</p>
+<hr>
+<h1 id="basic-ai-">Basic &quot;AI&quot;</h1>
+<p>The model of artificial intelligence for agents (or Non-Player Characters, NPCs) provided by Unreal comprises a loop of Sensing, Decision-making, and Acting:</p>
+<ul>
+<li><p><strong>Sensing</strong>: represented in Unreal as a &quot;Blackboard&quot;, this is simply a set of variables that are updated often at fairly low frequencies, and remain available for the agent&#39;s decision making processing. It&#39;s a bit like short-term memory, in both echoic and working memory forms. Sensing may involve things like navigation mesh queries, physics queries, detecting nearby objects/agents, etc. and thus can sometimes be quite expensive. It can also represent internal states or persistent knowledge of the agent, such as whether it knows somebody, whether it is hungry, etc. Blackboards could be updated via Services, AI Components, or general Blueprints. Basically, the blackboard needs to contain all the data, or facts, upon which decisions are made.</p>
+</li>
+<li><p><strong>Decision-making</strong>: represented in Unreal via <em>Behaviour Trees</em>. These are a kind of flow-chart of tasks driven mainly by conditional logic on task success or failure. Nodes are either tasks, or composites that can trigger multiple tasks, and can have a number of conditions determining whether they can be executed. They&#39;re very cheap, but design-intensive. Some decisions will react/respond to external stimuli; others respond to internal goals etc. But generally, behaviour trees are designed around a kind of prioritized list of condition-action pairs.</p>
+</li>
+<li><p><strong>Action execution</strong>: represented in Unreal via <em>Tasks</em>, making the agent do something in the world. Tasks often take some time to complete, and can be usually defined as either running or completed (successfully or not). Generally when a task completes, the success status returns to the behaviour tree to figure out what task to start next.</p>
+</li>
+</ul>
+<p>Building an AI agent requires a few components:</p>
+<ul>
+<li><p>An <strong>AI Character</strong> blueprint, which is the container you see in the world; the &quot;body&quot;. It may also contain animation blueprints etc. for animating the character model. </p>
+</li>
+<li><p>An <strong>AI Controller</strong> blueprint, the &quot;head&quot;, which stores the blueprints for behaviour, including the <strong>Behaviour Tree</strong>, which forms the &quot;brain&quot;, including the <strong>Blackboard</strong>, which stands in for memory, and any <strong>Tasks</strong> involved. </p>
+</li>
+</ul>
+<p>One way of thinking it is that a Character asset could more or less be controlled either by a player or by an AI Controller; in that regard the AI Controller is a bit like a brain behind a virtual joystick. Breaking up the AI into all these parts makes them interchangeable. So, lots of agents can be made from the same character, lots of agents can use the same AI controller, different controllers can use the same Tasks, etc. But, it also means there&#39;s quite a few steps to wire up just to get started:</p>
+<ul>
+<li>Create a Blackboard first, and then a Behaviour Tree, by right-clicking in the Content Browser and selecting each of these types in turn. Remember to name these assets well!<ul>
+<li>Open up the Behaviour Tree to make sure it is using the correct Blackboard you just made.</li>
+</ul>
+</li>
+<li>Create a Controller by making a new blueprint in the content browser, and making sure to set the parent class to &quot;AIController&quot;. Now we need to tell this controller to start using our behaviour tree when the level begins:<ul>
+<li>Open up the Controller&#39;s blueprint event graph</li>
+<li>create an Event Begin Play node, </li>
+<li>drag a cable out to create a Run Behaviour Tree node, </li>
+<li>set it to use your new Behaviour Tree.</li>
+</ul>
+</li>
+<li>Now you just need a character. A quick way to make a new character is to duplicate and modify the player character, then:<ul>
+<li>open up event graph and delete everything, and also delete the camera/boom components</li>
+<li>under details, Pawn, AI Controller class, set to the controller blueprint you just made.</li>
+</ul>
+</li>
+</ul>
+<p>At this point, the jobs to do include:</p>
+<ul>
+<li>adding some &#39;keys&#39; to the blackboard. A simple example would be a location, to where the actor should walk.</li>
+<li>adding blueprints to the controller event graph to populate these blackboard keys using various Set Blackboard functions in the event graph. There should be at least including one driven by Event Begin Play, but of course these can be updated by other events. For our example above, it could be by getting the location of a <em>Target Point</em> actor in the world, or the location of the player, etc.</li>
+<li>adding nodes to the behaviour tree to determine actions to perform according to blackboard values</li>
+<li>adding Services to the behaviour tree that update blackboard values</li>
+<li>adding Tasks to the behaviour tree that define new actions</li>
+</ul>
+<blockquote>
+<p>Other commonly used asset/actor types include <em>Target Points</em>, which give us a way to identify a place in the world that can be referred to in blueprints/tasks/etc.</p>
+</blockquote>
+<p><a href="http://www.gamasutra.com/blogs/JakobRasmussen/20160427/271188/Are_Behavior_Trees_a_Thing_of_the_Past.php">Are Behaviour Trees a thing of the past?</a></p>
 <!--
 
-## unlocated tips
 
-You can right-click actor(s) in the level viewport and convert their current state to a new Static Mesh asset.
 
-You can also merge mesh actors together right in the level viewport. This allows you to reduce draw calls to get better performance.
 
+
+
+- create a new blueprint based on the AIController class
+
+- duplicate the 3rd person character with a new name for the NPC
+- open up event graph and delete everything
+- select camera/boom components, delete
+- under details, Pawn, AI Controller class, set to the blueprint created above
+
+- drag navigation bounds volume into scene & resize to cover available area
+- press P to toggle viewing the navigable area
+
+
+
+Gameplay:
+https://docs.unrealengine.com/latest/INT/Gameplay/index.html
 
 Any mesh props can be made to simulate physics simply by selecting them and ticking the "simulate physics" option in the Details tab.
-
-Whenever we add or modify a light source, we will need to rebuild the lighting model (press Build in the big toolbar). 
-
-Dynamic shadows are usually a costly feature. However, this cost can be cut in half by enabling “Single Sample Shadow from Stationary Lights” on your movable Actors. This feature makes shadow receiving on dynamic objects much cheaper at the cost of some quality. It doesn’t work for all scenarios, but is worth playing around with for your dynamic objects for potentially great performance gains.
 
 Input devices: Edit > Project Settings… and browse to category Input. 
 
@@ -517,7 +597,7 @@ Control+R to reset the forward view
 - Blueprint **timelines** are ways we can make a sequence of events happen -- and we can also make them happen in reverse. See day/night example.
 
 vr: http://www.tomlooman.com/getting-started-with-vr/
--> Edit > Editor Preferences / General: Experimental / VR / Enable VR Editing (tick)
+Edit / Editor Preferences / General: Experimental / VR / Enable VR Editing (tick)
 
 VR editing:
 - landscaping, mesh painting, foliage, 
@@ -528,6 +608,7 @@ and https://www.unrealengine.com/marketplace/varest-plugin
 
 
 -->
+
 	</div>
 	<footer>&copy; 2016 Graham Wakefield</footer>
   </body>
