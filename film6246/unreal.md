@@ -643,9 +643,9 @@ At this point, the jobs to do include:
 - adding Services to the behaviour tree that update blackboard values
 - adding Tasks to the behaviour tree that define new actions
 
-> Other commonly used asset/actor types include *Target Points*, which give us a way to identify a place in the world that can be referred to in blueprints/tasks/etc.
+> Tip: if you are using any Move To nodes/functions in the AI behaviour, make sure to create a Navigation Volume in the level that covers your area. You can use the P key in the viewport to toggle whether the navigable area is shown or not.
 
-[Are Behaviour Trees a thing of the past?](http://www.gamasutra.com/blogs/JakobRasmussen/20160427/271188/Are_Behavior_Trees_a_Thing_of_the_Past.php)
+However... [are Behaviour Trees a thing of the past?](http://www.gamasutra.com/blogs/JakobRasmussen/20160427/271188/Are_Behavior_Trees_a_Thing_of_the_Past.php)
 
 <!--
 
@@ -663,7 +663,6 @@ At this point, the jobs to do include:
 
 - drag navigation bounds volume into scene & resize to cover available area
 - press P to toggle viewing the navigable area
-
 
 
 Gameplay:
