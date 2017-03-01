@@ -666,15 +666,15 @@ There are other VR templates and plugins available for Unreal, that may also be 
 
 - [Here](https://forums.unrealengine.com/showthread.php?137399-VIVE-and-probably-occulus-VR-intereractable-physic-objects) are some expansions to the Unreal VR template that add more VR-interactive objects, such as handles, levers, doors, keys, etc.
 
-<iframe width="1280" height="720" src="https://www.youtube.com/embed/MymMZNzzGGw?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/MymMZNzzGGw?rel=0" frameborder="0" allowfullscreen></iframe>
 
 - [Here](https://forums.unrealengine.com/showthread.php?133957-Single-Multiplayer-Touch-amp-Vive-Proteus-blueprint-only-Template) is a modification of the Unreal VR Template that adds hands, monitors, optimizations, head, force feedback, network modes, and more. 
 
-<iframe width="1280" height="720" src="https://www.youtube.com/embed/ml2xgiQ41BY?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/ml2xgiQ41BY?rel=0" frameborder="0" allowfullscreen></iframe>
 
 - [Here](https://bitbucket.org/mordentral/vrexpansionplugin) is an alternative VR plugin for Unreal that provides a huge range of different features. 
 
-<iframe width="1280" height="720" src="https://www.youtube.com/embed/pCuRWdLsCYE?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/pCuRWdLsCYE?rel=0" frameborder="0" allowfullscreen></iframe>
 
 
 ---
