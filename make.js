@@ -197,7 +197,7 @@ function generate_html(fileobj, nav) {
 		// save:
 		var dst = path.join(config.dst, fileobj.dir, fileobj.base + ".html");
 		fs.writeFileSync(dst, html);
-		//console.log("wrote", dst);
+		console.log("wrote", dst);
 	}
 }
 
