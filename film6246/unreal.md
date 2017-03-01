@@ -203,21 +203,6 @@ To set the default level (the one that opens when a project launches), go to Pro
 
 To set where the immersant will start a level (and what direction they face) when the level runs, move and rotate the "Player Start" actor. If you don't have a Player Start actor in the level, you can drag one in from the starter content collection. However it's common while editing a level to remove the Player Start, so that it will run from wherever you where editing from. 
 
----
-
-## VR notes
-
-Unreal's VR template offers support for both gamepad (e.g. Xbox controller) and motion controllers (e.g. Oculus Touch or HTC Vive wands). The template comes with a number of rendering optimizations for VR. [The template is described in detail here, including how to navigate it](http://www.tomlooman.com/vrtemplate/).
-
-### Turning a First Person project into a VR project
-
-This is currently clunky. Because of various factors (including specific rendering settings) it makes more sense to import your content into the a new project based on the VR template. But it may be more comfortable to edit via the First Person template when not in the lab.
-
-So long as you are careful in how you organize your content, it should be possible to migrate the same world between two different templates. 
-
-> Otherwise, it *is* possible to migrate the player pawns between VR and FPS template projects, in the same way as migrating other assets. However they won't work until the Input mappings are copied too, which has to be done manually. Moreover, for the First Person Character, you may also need to set the Default Game Mode to First Person Game Mode (either in Project Settings or your level's World Settings). Then you can drop "HMD Locomotion Pawn" and "First Person Character" into the same world, just make sure that only one of them has the "Auto Possess Player" set to "Player 0" in the details pane. 
-
-
 --- 
 
 ## More advanced viewport options
@@ -647,6 +632,128 @@ At this point, the jobs to do include:
 
 However... [are Behaviour Trees a thing of the past?](http://www.gamasutra.com/blogs/JakobRasmussen/20160427/271188/Are_Behavior_Trees_a_Thing_of_the_Past.php)
 
+---
+
+## Beyond static meshes
+
+### Instanced meshes
+
+Using Instanced Static Meshes (ISMs) or Hierarchical Instanced Static Meshes (HISMs) allows vastly larger numbers of objects in a scene with little performance penalty. This is a bit like how the Foliage tool works. The limitations are that instances should all be the same mesh & material, with only transform (position, rotation, scale) being different. There's a way to use blueprints to create them. The HISM variant adds level of detail (LOD) mesh variants, which can also make a massive performance gain by reducing mesh detail for more distant objects. Of course, you need to create the lower poly meshes first!
+
+[See this video here](https://www.youtube.com/watch?v=oMIbV2rQO4k)
+
+### Procedural meshes
+
+You can add Procedural Mesh Component to an Actor and provide Vertices, Triangles and UVs to generate a mesh that is rendered at the actors location. Or you can use the Copy from Static Mesh function to initialize it, then start modulating it. One of the cool things you can do with a procedural mesh is to *slice* it dynamically, as if cutting cheese. 
+
+[Docs](https://docs.unrealengine.com/latest/INT/BlueprintAPI/Components/ProceduralMesh/index.html)
+
+---
+
+## VR notes
+
+Unreal's VR template offers support for both gamepad (e.g. Xbox controller) and motion controllers (e.g. Oculus Touch or HTC Vive wands). The template comes with a number of rendering optimizations for VR. [The template is described in detail here, including how to navigate it](http://www.tomlooman.com/vrtemplate/).
+
+### Getting an existing world into a VR project
+
+Because of various factors (including specific rendering settings) it makes more sense to create a new project based on the VR template, and migrate your existing world's content into it. So long as you are careful in how you organize your content, it should be possible. It's often a good idea therefore to keep the number of files/folders at the top-level of your Content to a minimum. Bear in mind that not all of a project can be migrated; things like project settings need to be manually duplicated if needed. 
+
+> For example, it *is* possible to migrate player pawns between VR and FPS template projects, in the same way as migrating other assets. However they won't work until the Input mappings are copied too, which has to be done manually in the project settings. Moreover, for the First Person Character, you may also need to set the Default Game Mode to First Person Game Mode (either in Project Settings or your level's World Settings). Then you can drop "HMD Locomotion Pawn" and "First Person Character" into the same world, just make sure that only one of them has the "Auto Possess Player" set to "Player 0" in the details pane. 
+
+### Other VR plugins/templates
+
+There are other VR templates and plugins available for Unreal, that may also be worth looking into:
+
+- [Here](https://forums.unrealengine.com/showthread.php?137399-VIVE-and-probably-occulus-VR-intereractable-physic-objects) are some expansions to the Unreal VR template that add more VR-interactive objects, such as handles, levers, doors, keys, etc.
+
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/MymMZNzzGGw?rel=0" frameborder="0" allowfullscreen></iframe>
+
+- [Here](https://forums.unrealengine.com/showthread.php?133957-Single-Multiplayer-Touch-amp-Vive-Proteus-blueprint-only-Template) is a modification of the Unreal VR Template that adds hands, monitors, optimizations, head, force feedback, network modes, and more. 
+
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/ml2xgiQ41BY?rel=0" frameborder="0" allowfullscreen></iframe>
+
+- [Here](https://bitbucket.org/mordentral/vrexpansionplugin) is an alternative VR plugin for Unreal that provides a huge range of different features. 
+
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/pCuRWdLsCYE?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+---
+
+## Using C++
+
+[Main documentation entry point is here](https://docs.unrealengine.com/latest/INT/Programming/index.html)
+
+To be able to use C++ features, on Windows, Visual Studio 2015 needs to be installed; on OSX, Xcode needs to be installed. Both have free versions, both are big downloads. Generally, the idea is to use C++ to build classes that can then be used by designers in ordinary Blueprints. Typically you want to add C++ features either to improve performance in critical parts of a game, or to add features that are not provided by Unreal already.
+
+If you want/need C++ in a project, and your project was a Blueprints-only project (i.e. you haven't added any C++ classes yet), you can convert it to a C++ project by simply adding a new C++ class. 
+
+Add a new C++ class to a UE4 project by going to File > New C++ Class. Pick a base class (e.g. Actor) and it will create all the files we need, including a Visual Studio solution, and a Source folder, in your project; and it will open Visual Studio automatically. After editing code, compile either by Build in Visual Studio, or Compile in Unreal Editor. 
+
+The actor show now show up in the Content Browser under the C++ Classes section. We can drag it into the world, add components, etc. 
+
+[We can now also create new Blueprints that derive from our C++ class](https://docs.unrealengine.com/latest/INT/Gameplay/ClassCreation/CodeAndBlueprints/index.html) (create new blueprint as normal, set the C++ class as the base class for the blueprint). Or, we can create blueprints that modify specific instances of a C++ actor (With a C++ actor instance selected in the world,  click the Blueprint/Add Script button in the Details Panel.) While editing the new blueprint's graph, C++ implemented events and functions become available for use.
+
+
+### Adding a property
+
+```
+	UPROPERTY(EditAnywhere) int32 TotalDamage;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Damage") int32 TotalDamage;
+```
+
+Remember to also initialize the property in the class constructor.
+
+> [See here for all the property options](https://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/Reference/Properties/Specifiers/index.html)
+
+### Adding functions/events
+
+Expose a function to be callable via blueprints:
+
+```
+	UFUNCTION(BlueprintCallable) void CalculateValues();
+```
+
+Expose an event to blueprints (i.e. a way to call back from C++ into a blueprint):
+
+```
+	UFUNCTION(BlueprintImplementableEvent, Category="Damage") void CalledFromCpp();
+```
+
+Expose a function to be both callable (with a default implementation) but also overrideable (replacing implementation) in blueprints:å
+
+```
+	// if you want to also provide a default C++ implementation, where user did not provide one via blueprint:
+	UFUNCTION(BlueprintNativeEvent, Category="Damage") void CalledFromCpp();
+	void CalledFromCpp_Implementation() { ... }
+```
+
+To just bind static functions to blueprints, rather than objects & methods, see the [blueprint function library docs](https://docs.unrealengine.com/latest/INT/Programming/BlueprintFunctionLibraries/index.html)
+
+### Base classes / concepts
+
+**UObject**: most basic class provides reflection, serialization, & networking of properties and methods, etc. Marked by UCLASS(). 
+
+**UStruct**: simpler than UObject, it does not provide garbage collection etc., but does allow plain-old-data structs to be exposed to blueprints, serialization, networking etc. Marked by USTRUCT(). 
+
+**AActor**: a UObject intended to be placed or [spawned](https://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/Actors/Spawning/index.html) in a level, and which contains Components. The RootComponent holds a UActorComponent or USceneComponent which can contain many other UActorComponents. Actors themselves do not have transforms, and thus do not have locations, rotations, or scales. Instead, they rely on the transforms of their Components; more specifically, their RootComponent. Actors have events such as BeginPlay, Tick, EndPlay. [See docs](https://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/Actors/index.html). Actors can be removed by calling Destroy().
+
+**UActorComponent**: are attached to Actors on creation. USceneComponent is a specialization that has a spatial transform relative to its parent. UPrimitiveComponents are USceneComponents that also have a visible representation. etc. All of these components can have their own TickComponent() events, etc. [See this tutorial for how to add components to an actor via code](https://docs.unrealengine.com/latest/INT/Programming/Tutorials/Components/index.html)
+
+### Binding 3rd party libraries
+
+- When building libraries:
+	- Build for Multi-threaded DLL (/MD) with 32- and 64-bit versions
+- In the Unreal project:
+	- add folder /ThirdParty/libraryname and inside add /include and /lib
+
+[Unreal has its own build system, documented here](https://docs.unrealengine.com/latest/INT/Programming/UnrealBuildSystem/index.html). To configure to add a library to the build system, [there are some suggestions here](https://answers.unrealengine.com/questions/396982/cant-build-project-in-ue-412.html).
+
+Beyond simple cases, it might be worth packaging the library binding as a [plugin](https://docs.unrealengine.com/latest/INT/Programming/Plugins/index.html), so that it can be re-used in many projects.
+
+[Example: binding OpenCV to Unreal](https://wiki.unrealengine.com/Integrating_OpenCV_Into_Unreal_Engine_4). [Another example](https://github.com/shadowmint/ue4-static-plugin/).
+
+> Possibly useful: UE4 gives callbacks right after dll load and before unload. 
+
 <!--
 
 
@@ -705,3 +812,9 @@ and https://www.unrealengine.com/marketplace/varest-plugin
 
 
 -->
+
+---
+
+## Random tips
+
+Transparent materials in Unreal are rendered separately from all other objects, and this can cause some issues such as improper material look, wrong objects showing through, etc. An interesting workaround using noisy masking instead of transparency is presented [here](https://www.youtube.com/watch?v=ieHpTG_P8Q0). This won't work well for VR because the mask is fixed to the screen, but a little modification to the material to make this dynamic might be very workable.
