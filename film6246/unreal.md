@@ -565,17 +565,7 @@ You can convert any BSP into a mesh in the Details Panel / Brush Settings / Crea
 
 You can also convert multiple BSPs into a single mesh by selecting them all, right-clicking, and choosing Convert Actors to Static Mesh
 
-You might also need to then edit the new mesh to create a collision profile for it. To check whether you need to, either play the level and see if you can run through the object, or edit the new Mesh and enable the Collision button in the toolbar. If no purple collision lines show up, you can add a new collision hull like this:
-- double-click the mesh to open the mesh editor, 
-- to generate the hull automatically:
-	- from the Collision menu choose a collision option
-		- For regular shapes, a sphere/capsule/box collision might be good enough
-		- For most other cases, use Auto Convex Collision
-			- in the details panel that opens, set the accuracy options, and click Apply
-	- a visualization of the collision hull will appear in the viewport
-- otherwise, with other options in this menu you can build a hull by hand
-- finally, save and close the mesh editor	
-[See here for more on mesh collision options](https://docs.unrealengine.com/latest/INT/Engine/Content/Types/StaticMeshes/HowTo/SettingCollision/)
+You might also need to then edit the new mesh to create a collision profile for it (see physics below).
 
 **Actors to Blueprint**: You create new blueprints from an object in the scene by hitting the blueprint button at the top of the details panel. But you can also convert **multiple** actors into a single blueprint:
 - Select the objects in the viewport
@@ -588,6 +578,87 @@ Note that you also need to convert brushes to meshes first if you want to use th
 - Window / Developer Tools / Merge Actors
 
 **Convert actor to static mesh:** Sometimes you might have a complex object or actor that you want to simply grab as a plain mesh. On the actor in the viewport right-click and choose "Convert to Static Mesh". As usual it asks where to place this new mesh asset in the content browser. An example of where you might want to do this is in creating a manikin mesh from a character blueprint.
+
+## Beyond static meshes
+
+### Instanced meshes
+
+Using Instanced Static Meshes (ISMs) or Hierarchical Instanced Static Meshes (HISMs) allows vastly larger numbers of objects in a scene with little performance penalty. This is a bit like how the Foliage tool works. The limitations are that instances should all be the same mesh & material, with only transform (position, rotation, scale) being different. There's a way to use blueprints to create them. The HISM variant adds level of detail (LOD) mesh variants, which can also make a massive performance gain by reducing mesh detail for more distant objects. Of course, you need to create the lower poly meshes first!
+
+[See this video here](https://www.youtube.com/watch?v=oMIbV2rQO4k)
+
+### Procedural meshes
+
+You can add Procedural Mesh Component to an Actor and provide Vertices, Triangles and UVs to generate a mesh that is rendered at the actors location. Or you can use the Copy from Static Mesh function to initialize it, then start modulating it. Some methods of interest:
+- ```Copy Procedural Mesh from Static Mesh Component```: with this function you can create a procedural mesh from any existing mesh. 
+- ```Slice Procedural Mesh```: with this players can cut a mesh into pieces, as if cutting cheese. 
+
+[Docs](https://docs.unrealengine.com/latest/INT/BlueprintAPI/Components/ProceduralMesh/index.html)
+
+---
+
+## Physics
+
+[See main docs](https://docs.unrealengine.com/latest/INT/Engine/Physics/index.html)
+
+Physics simulations can add a lot of immersive *agency* to a world, especially when coupled with VR controllers allowing you to pick things up, swing things, throw things, balance things, and so on. 
+
+A static mesh actor can have physics enabled by ticking the box in the Details panel. If this button is greyed out, it might be that you need to change the mobility option to Moveable (just under the position/rotation/scale transform). Or it may be greyed out if the object doesn't have a collision profile defined. To check whether a mesh has a collision profile, edit the mesh and enable the Collision button in the toolbar. If no purple collision lines show up, you can add a new collision hull like this:
+- double-click the mesh to open the mesh editor, 
+- to generate the hull automatically:
+	- from the Collision menu choose a collision option
+		- For regular shapes, a sphere/capsule/box collision might be good enough
+		- For most other cases, use Auto Convex Collision
+			- in the details panel that opens, set the accuracy options, and click Apply
+	- a visualization of the collision hull will appear in the viewport
+- otherwise, with other options in this menu you can build a hull by hand
+- finally, save and close the mesh editor	
+[See here for more on mesh collision options](https://docs.unrealengine.com/latest/INT/Engine/Content/Types/StaticMeshes/HowTo/SettingCollision/)
+
+Gravity can be enabled or turned off on each object's details panel, and the mass of objects (in kg) can be set. Lock position/lock rotation options limit a physics object's movements to planes/lines/points, and rotational axes. The Collision Complexity option can be set to Complex for more accurate shape collisions (rather than using the simplified collision profiles). 
+
+Also damping can be applied (simulating drag, to limit accelerations). There are both Linear Dampling and Angular Damping. For reference, a Linear Damping value of 30 is enough to counteract gravity.  
+
+You can also apply different Physical Materials to physics objects; Physical Materials can define friction, restitution (i.e. bounciness), among [other properties](https://docs.unrealengine.com/latest/INT/Engine/Physics/PhysicalMaterials/Reference/index.html).
+
+### Collision types and events
+
+Collisions can generate three kinds of events:
+- Ignore: objects pass through each other, and no events are created
+- Overlap: objects can pass through each other, but generate ReceiveBeginOverlap and ReceiveEndOverlap events (like with the box trigger, for example), if both actors' Generate Overlap Events options are ticked.
+- Block: objects cannot pass through each other, and may generate ReceiveHit or OnComponentHit  events if the  Simulation Generates Hit Events option is ticked. 
+
+There are many types of objects, each can have different Ignore/Overlap/Block options with other types. See the Details panel Collision Preset, and expand it to see what each preset implies. [More on collision](https://docs.unrealengine.com/latest/INT/Engine/Physics/Collision/Overview/index.html)
+
+### Constraints
+
+Physics Constraint Actors can be used to limit to motion of physics objects in specific ways. You can find them in the All Classes section of Placement Mode. 
+
+Constraint *Components* can also be added to a Blueprint object, in a similar way.  
+
+In the details pane, select two actors for Constraint Actor 1 and 2. At least one of these actors must have physics enabled.
+Then choose what kinds of constraints you want to apply (see [here](https://docs.unrealengine.com/latest/INT/Engine/Physics/Constraints/ConstraintsReference/index.html) for a full list). This can limit motion along a plane or line, limit rotation to certain angles, etc. It can also be used to apply a motor to drive motion or rotation to the constraint.
+
+A good place to check out the options is in the [Content Examples](https://docs.unrealengine.com/latest/INT/Resources/ContentExamples/Physics/index.html) project's Physics map.
+
+Constraints can also have [damping settings](https://docs.unrealengine.com/latest/INT/Engine/Physics/Constraints/DampingAndFriction/index.html).
+
+### Destructibles
+
+- Right-click on any Static Mesh asset in the content browser and select 'Create Destructible Mesh'. 
+- Open up the new destructible mesh by double-clicking.
+- Choose the number of cells to divide into (under Voronoi in the Details panel)
+- Also in details, select Enable Impact Damage (so that physics collisions will make it break)
+- Set the Impact Damage (e.g. 1.0) needed to make it break
+- Set Impact Damage Depth to 0  
+- press Fracture Mesh in the tool bar to see how it looks
+- Drag it into the level somewhere above ground, and enable physics on it. 
+
+[For more advanced destructible behaviour, look at the Content Examples' Destructible map](https://docs.unrealengine.com/latest/INT/Resources/ContentExamples/Destructables/index.html)
+
+### Traces (Raycasts)
+
+Sometimes you want to know what the user (or another actor) is looking at, or whether something can be seen. This is easily accessible from within blueprints, as [described here](https://docs.unrealengine.com/latest/INT/Engine/Physics/Tracing/index.html).
 
 ---
 
@@ -634,20 +705,6 @@ However... [are Behaviour Trees a thing of the past?](http://www.gamasutra.com/b
 
 ---
 
-## Beyond static meshes
-
-### Instanced meshes
-
-Using Instanced Static Meshes (ISMs) or Hierarchical Instanced Static Meshes (HISMs) allows vastly larger numbers of objects in a scene with little performance penalty. This is a bit like how the Foliage tool works. The limitations are that instances should all be the same mesh & material, with only transform (position, rotation, scale) being different. There's a way to use blueprints to create them. The HISM variant adds level of detail (LOD) mesh variants, which can also make a massive performance gain by reducing mesh detail for more distant objects. Of course, you need to create the lower poly meshes first!
-
-[See this video here](https://www.youtube.com/watch?v=oMIbV2rQO4k)
-
-### Procedural meshes
-
-You can add Procedural Mesh Component to an Actor and provide Vertices, Triangles and UVs to generate a mesh that is rendered at the actors location. Or you can use the Copy from Static Mesh function to initialize it, then start modulating it. One of the cool things you can do with a procedural mesh is to *slice* it dynamically, as if cutting cheese. 
-
-[Docs](https://docs.unrealengine.com/latest/INT/BlueprintAPI/Components/ProceduralMesh/index.html)
-
 ---
 
 ## VR notes
@@ -664,15 +721,15 @@ Because of various factors (including specific rendering settings) it makes more
 
 There are other VR templates and plugins available for Unreal, that may also be worth looking into:
 
-- [Here](https://forums.unrealengine.com/showthread.php?137399-VIVE-and-probably-occulus-VR-intereractable-physic-objects) are some expansions to the Unreal VR template that add more VR-interactive objects, such as handles, levers, doors, keys, etc.
+- **VR Essential Kit**: [Described here](https://forums.unrealengine.com/showthread.php?137399-VIVE-and-probably-occulus-VR-intereractable-physic-objects) are some expansions to the Unreal VR template that add more VR-interactive objects, such as handles, levers, doors, keys, etc. It is downloadable as an [Unreal project](https://www.dropbox.com/s/3nxjpmqwg1gjbul/VR_Essential_Kit.rar?dl=0), but you'll need a program like WinRAR or 7-Zip to unpack it first. Mainly it provides some robot hands and various examples of doors, levers, wheels, and locks that can be interacted with, which can serve as source materials for making other interactive objects. It worked perfectly well for me (though the doors all felt a bit small and the hands a bit too big). 
 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/MymMZNzzGGw?rel=0" frameborder="0" allowfullscreen></iframe>
 
-- [Here](https://forums.unrealengine.com/showthread.php?133957-Single-Multiplayer-Touch-amp-Vive-Proteus-blueprint-only-Template) is a modification of the Unreal VR Template that adds hands, monitors, optimizations, head, force feedback, network modes, and more. 
+- **Proteus**: [Here](https://forums.unrealengine.com/showthread.php?133957-Single-Multiplayer-Touch-amp-Vive-Proteus-blueprint-only-Template) is a modification of the Unreal VR Template that adds hands, monitors, optimizations, head, force feedback, network modes, and more. I had to delete the scene capture object (the camera for the mirror) to get this to run at 90fps.
 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/ml2xgiQ41BY?rel=0" frameborder="0" allowfullscreen></iframe>
 
-- [Here](https://bitbucket.org/mordentral/vrexpansionplugin) is an alternative VR plugin for Unreal that provides a huge range of different features. 
+- **Moredentral**: [Here](https://bitbucket.org/mordentral/vrexpansionplugin) is an alternative VR plugin for Unreal that provides a huge range of different features. This requires a bit more work to get installed, as it uses a C++ plugin. You'll need Visual Studio 2015 Community installed (it's free), and follow the instructions at [this link](https://bitbucket.org/mordentral/vrexppluginexample), after hitting the Downloads link on that page to get the project.
 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/pCuRWdLsCYE?rel=0" frameborder="0" allowfullscreen></iframe>
 
