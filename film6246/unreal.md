@@ -717,6 +717,20 @@ Because of various factors (including specific rendering settings) it makes more
 
 > For example, it *is* possible to migrate player pawns between VR and FPS template projects, in the same way as migrating other assets. However they won't work until the Input mappings are copied too, which has to be done manually in the project settings. Moreover, for the First Person Character, you may also need to set the Default Game Mode to First Person Game Mode (either in Project Settings or your level's World Settings). Then you can drop "HMD Locomotion Pawn" and "First Person Character" into the same world, just make sure that only one of them has the "Auto Possess Player" set to "Player 0" in the details pane. 
 
+### Final touches
+
+You may gain some improvements (in performance and visual output) by trying the experimental forward renderer, [as described here](https://docs.unrealengine.com/latest/INT/Engine/Performance/ForwardRenderer/):
+
+1. In the Edit menu, open the Project Settings.
+2. Select the Rendering tab on the left and locate the Forward Shading category.
+3. Enable Forward Shading.
+4. The editor will restart.
+5. In the Edit menu, open the Project Settings.
+6. Select the Rendering tab on the left and locate the Default Settings category.
+7. Set the Anti-Aliasing Method property to MSAA.
+
+If the result is worse, repeat these steps but disabling Forward Shading.
+
 ### Other VR plugins/templates
 
 There are other VR templates and plugins available for Unreal, that may also be worth looking into:
