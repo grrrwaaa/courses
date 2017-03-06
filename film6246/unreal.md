@@ -258,7 +258,10 @@ Make sure that your Player Start object (if you have one) is above your terrain 
 
 [See tutorial](https://docs.unrealengine.com/latest/INT/Engine/Landscape/Custom/index.html)
 
-A new landscape can be created from an existing height map image by choosing "Import from File" instead of "Create New" when creating a landscape.
+A new landscape can be created from an existing height map image by choosing "Import from File" instead of "Create New" when creating a landscape. The file needs to be in a specific format, which you can achieve via PhotoShop:
+- set Image/Mode/16-bit
+- set Image/Mode/Greyscale
+- Export as PNG
 
 Any landscape layer can be exported to a file, edited, and re-imported.
 
