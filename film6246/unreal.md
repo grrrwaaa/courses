@@ -714,25 +714,24 @@ However... [are Behaviour Trees a thing of the past?](http://www.gamasutra.com/b
 
 Unreal's VR template offers support for both gamepad (e.g. Xbox controller) and motion controllers (e.g. Oculus Touch or HTC Vive wands). The template comes with a number of rendering optimizations for VR. [The template is described in detail here, including how to navigate it](http://www.tomlooman.com/vrtemplate/).
 
+### Converting your world to a VR project
+
+For teleport to work, your world requires a Nav Mesh Bounds Volume. If you don't already have one of these in your world, drag one in from placement mode's Volumes, and scale it up to your world. You can verify what locations are viable to teleport to by clicking in the viewport and pressing the P key (it will toggle the nav mesh visualization -- the teleportable areas will be highlighted green.)
+
+To turn a Mesh into something that can be picked up and thrown around, it needs to be a blueprint. The easiest way is like this:
+- Create a new Blueprint (right click in Content Browser, New Blueprint)
+- under All Classes, type "static" and select StaticMeshActor; save in a sensible location.
+- Now in the blueprint editor click Class Settings to show the class settings details pane. Under Interfaces, click Add, and choose PickupActorInterface from the drop-down.
+- Now copy the entire Event Graph from BP_Pickup_Cube into your new blueprint.
+- Now in the Static Mesh Component details, choose which mesh to use. Make sure that your mesh has a collision profile applied to it.
+- Also in the details, enable Physics/Simulate Physics, Collision/Simulation Generates Hit Events, and Collision/Generate Overlap Events
+
+
 ### Getting an existing world into a VR project
 
 Because of various factors (including specific rendering settings) it makes more sense to create a new project based on the VR template, and migrate your existing world's content into it. So long as you are careful in how you organize your content, it should be possible. It's often a good idea therefore to keep the number of files/folders at the top-level of your Content to a minimum. Bear in mind that not all of a project can be migrated; things like project settings need to be manually duplicated if needed. 
 
 > For example, it *is* possible to migrate player pawns between VR and FPS template projects, in the same way as migrating other assets. However they won't work until the Input mappings are copied too, which has to be done manually in the project settings. Moreover, for the First Person Character, you may also need to set the Default Game Mode to First Person Game Mode (either in Project Settings or your level's World Settings). Then you can drop "HMD Locomotion Pawn" and "First Person Character" into the same world, just make sure that only one of them has the "Auto Possess Player" set to "Player 0" in the details pane. 
-
-### Final touches
-
-You may gain some improvements (in performance and visual output) by trying the experimental forward renderer, [as described here](https://docs.unrealengine.com/latest/INT/Engine/Performance/ForwardRenderer/):
-
-1. In the Edit menu, open the Project Settings.
-2. Select the Rendering tab on the left and locate the Forward Shading category.
-3. Enable Forward Shading.
-4. The editor will restart.
-5. In the Edit menu, open the Project Settings.
-6. Select the Rendering tab on the left and locate the Default Settings category.
-7. Set the Anti-Aliasing Method property to MSAA.
-
-If the result is worse, repeat these steps but disabling Forward Shading.
 
 ### Other VR plugins/templates
 
