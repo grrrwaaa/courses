@@ -216,7 +216,12 @@ Assassin&#39;s Creed, Batman, Bioshock, Borderlands, Eve: Valkyrie, Final Fantas
 <p>Make sure that your Player Start object (if you have one) is above your terrain or else you will fall through the world. If this does happen, drag the player to start up on top of the terrain and hit the End key for it to start on the ground. Bear in mind that if a slope is too steep, the character will not be able walk up it.</p>
 <h3 id="creating-landscape-from-existing-data">Creating landscape from existing data</h3>
 <p><a href="https://docs.unrealengine.com/latest/INT/Engine/Landscape/Custom/index.html">See tutorial</a></p>
-<p>A new landscape can be created from an existing height map image by choosing &quot;Import from File&quot; instead of &quot;Create New&quot; when creating a landscape.</p>
+<p>A new landscape can be created from an existing height map image by choosing &quot;Import from File&quot; instead of &quot;Create New&quot; when creating a landscape. The file needs to be in a specific format, which you can achieve via PhotoShop:</p>
+<ul>
+<li>set Image/Mode/16-bit</li>
+<li>set Image/Mode/Greyscale</li>
+<li>Export as PNG</li>
+</ul>
 <p>Any landscape layer can be exported to a file, edited, and re-imported.</p>
 <p>In Sculpt mode, right-click on Heightmap and choose Export to File. Once you have done this, you can edit the PNG elsewhere. Then right-click on the Heightmap and choose Reimport or Import to bring the new data back in.</p>
 <p>In Paint mode, this method can also be used to define the regions of each paint layer of a landscape.</p>
@@ -592,6 +597,17 @@ Then choose what kinds of constraints you want to apply (see <a href="https://do
 <hr>
 <h2 id="vr-notes">VR notes</h2>
 <p>Unreal&#39;s VR template offers support for both gamepad (e.g. Xbox controller) and motion controllers (e.g. Oculus Touch or HTC Vive wands). The template comes with a number of rendering optimizations for VR. <a href="http://www.tomlooman.com/vrtemplate/">The template is described in detail here, including how to navigate it</a>.</p>
+<h3 id="converting-your-world-to-a-vr-project">Converting your world to a VR project</h3>
+<p>For teleport to work, your world requires a Nav Mesh Bounds Volume. If you don&#39;t already have one of these in your world, drag one in from placement mode&#39;s Volumes, and scale it up to your world. You can verify what locations are viable to teleport to by clicking in the viewport and pressing the P key (it will toggle the nav mesh visualization -- the teleportable areas will be highlighted green.)</p>
+<p>To turn a Mesh into something that can be picked up and thrown around, it needs to be a blueprint. The easiest way is like this:</p>
+<ul>
+<li>Create a new Blueprint (right click in Content Browser, New Blueprint)</li>
+<li>under All Classes, type &quot;static&quot; and select StaticMeshActor; save in a sensible location.</li>
+<li>Now in the blueprint editor click Class Settings to show the class settings details pane. Under Interfaces, click Add, and choose PickupActorInterface from the drop-down.</li>
+<li>Now copy the entire Event Graph from BP_Pickup_Cube into your new blueprint.</li>
+<li>Now in the Static Mesh Component details, choose which mesh to use. Make sure that your mesh has a collision profile applied to it.</li>
+<li>Also in the details, enable Physics/Simulate Physics, Collision/Simulation Generates Hit Events, and Collision/Generate Overlap Events</li>
+</ul>
 <h3 id="getting-an-existing-world-into-a-vr-project">Getting an existing world into a VR project</h3>
 <p>Because of various factors (including specific rendering settings) it makes more sense to create a new project based on the VR template, and migrate your existing world&#39;s content into it. So long as you are careful in how you organize your content, it should be possible. It&#39;s often a good idea therefore to keep the number of files/folders at the top-level of your Content to a minimum. Bear in mind that not all of a project can be migrated; things like project settings need to be manually duplicated if needed. </p>
 <blockquote>
