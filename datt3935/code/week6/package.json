@@ -1,9 +1,0 @@
-{
-	"name": "week6server",
-	"version": "0.0.0",
-	"description": "an example for the class",
-	"dependencies": {
-		"express": "4.x",
-		"xmlhttprequest": "*"
-	}
-}
