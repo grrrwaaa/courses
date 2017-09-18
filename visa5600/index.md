@@ -51,17 +51,23 @@ The seed for the conversations of CTVA this year is "life as it could be". Here 
 - Introductions 
 - Presentation
 
+**Week 2 (Oct 18):** 
+
 Readings: The first set begin in the earth, roaming far and wide:
 
-- John Durham Peters. Understanding Media. In The Marvelous Clouds: Toward a philosophy of elemental media. University of Chicago Press, 2015.
-- Manuel Delanda. Nonorganic Life. In Incorporations. New York: Zone Books 29 (1992).
+- John Durham Peters. Understanding Media. In The Marvelous Clouds: Toward a philosophy of elemental media. University of Chicago Press, 2015. *Led by Laurie-Lynn.*
+- Manuel Delanda. Nonorganic Life. In Incorporations. New York: Zone Books 29 (1992). *Led by Miles*
 
 [Look here](https://www.dropbox.com/sh/wmrop5yicmbb82w/AAAjX7i9AMeLoCOFUswkd_WNa?dl=0)
 
-**Week 2 (Oct 18):** 
-
 **Week 3 (Oct 25):** 
- 
+
+Readings: Turtles all the way around (Cybernetics)
+
+- Johnston, John. The allure of machinic life: cybernetics, artificial life, and the new AI. MIT Press, 2008.
+- Papert, Seymour. Mindstorms: Children, computers, and powerful ideas. Basic Books, Inc., 1980.
+- Braitenberg, Valentino. Vehicles: Experiments in synthetic psychology. MIT press, 1986.
+
 **Week 4 (Oct 2):** 
 
 (Oct 9: University Closed)
