@@ -64,9 +64,9 @@ Readings: The first set begin in the earth, roaming far and wide:
 
 Readings: Turtles all the way around (Cybernetics)
 
-- Johnston, John. The allure of machinic life: cybernetics, artificial life, and the new AI. MIT Press, 2008.
-- Papert, Seymour. Mindstorms: Children, computers, and powerful ideas. Basic Books, Inc., 1980.
-- Braitenberg, Valentino. Vehicles: Experiments in synthetic psychology. MIT press, 1986.
+- Johnston, John. The allure of machinic life: cybernetics, artificial life, and the new AI. MIT Press, 2008. *Led by Shaughna*
+- Papert, Seymour. Mindstorms: Children, computers, and powerful ideas. Basic Books, Inc., 1980. *Led by Zhaoyue*
+- Braitenberg, Valentino. Vehicles: Experiments in synthetic psychology. MIT press, 1986. *Led by Katika*
 
 **Week 4 (Oct 2):** 
 
