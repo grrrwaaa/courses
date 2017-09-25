@@ -70,9 +70,9 @@ Readings: Turtles all the way around (Cybernetics)
 
 Readings: Umwelten
 
-- Jakob von Uexküll. A Foray Into the Worlds of Animals and Humans: With a Theory of Meaning. Springer, 1934.
-- Rodney Brooks. What Is It Like to Be a Robot? [online](https://rodneybrooks.com/what-is-it-like-to-be-a-robot/), 2017.
-- Brian Massumi. Strange Horizons. In Parables for the Virtual. Duke University Press, 2002.
+- Jakob von Uexküll. A Foray Into the Worlds of Animals and Humans: With a Theory of Meaning. Springer, 1934. *Led by Naz*
+- Rodney Brooks. What Is It Like to Be a Robot? [online](https://rodneybrooks.com/what-is-it-like-to-be-a-robot/), 2017. *Led by Monica*
+- Brian Massumi. Strange Horizons. In Parables for the Virtual. Duke University Press, 2002. *Led by Linda*
 
 [Look here](https://www.dropbox.com/sh/wmrop5yicmbb82w/AAAjX7i9AMeLoCOFUswkd_WNa?dl=0)
 
