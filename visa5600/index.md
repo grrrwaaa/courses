@@ -58,8 +58,6 @@ Readings: The first set begin in the earth, roaming far and wide:
 - John Durham Peters. Understanding Media. In The Marvelous Clouds: Toward a philosophy of elemental media. University of Chicago Press, 2015. *Led by Laurie-Lynn.*
 - Manuel Delanda. Nonorganic Life. In Incorporations. New York: Zone Books 29 (1992). *Led by Miles*
 
-[Look here](https://www.dropbox.com/sh/wmrop5yicmbb82w/AAAjX7i9AMeLoCOFUswkd_WNa?dl=0)
-
 **Week 3 (Oct 25):** 
 
 Readings: Turtles all the way around (Cybernetics)
@@ -69,6 +67,14 @@ Readings: Turtles all the way around (Cybernetics)
 - Braitenberg, Valentino. Vehicles: Experiments in synthetic psychology. MIT press, 1986. *Led by Katika*
 
 **Week 4 (Oct 2):** 
+
+Readings: Umwelten
+
+- Jakob von Uexküll. A Foray Into the Worlds of Animals and Humans: With a Theory of Meaning. Springer, 1934.
+- Rodney Brooks. What Is It Like to Be a Robot? [online](https://rodneybrooks.com/what-is-it-like-to-be-a-robot/), 2017.
+- Brian Massumi. Strange Horizons. In Parables for the Virtual. Duke University Press, 2002.
+
+[Look here](https://www.dropbox.com/sh/wmrop5yicmbb82w/AAAjX7i9AMeLoCOFUswkd_WNa?dl=0)
 
 (Oct 9: University Closed)
 
@@ -95,6 +101,27 @@ Readings: Turtles all the way around (Cybernetics)
 ----
 
 
+<iframe width="720" height="540" src="https://www.youtube.com/embed/lLULRlmXkKo?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+[Logo in the browser](http://www.calormen.com/jslogo/)
+
+<p data-height="720" data-theme-id="18447" data-slug-hash="RLoaaP" data-default-tab="js,result" data-user="grrrwaaa" data-embed-version="2" data-pen-title="Agent-environment: 4 kinds of two eye vehicles" data-preview="true" class="codepen">See the Pen <a href="https://codepen.io/grrrwaaa/pen/RLoaaP/">Agent-environment: 4 kinds of two eye vehicles</a> by Graham (<a href="https://codepen.io/grrrwaaa">@grrrwaaa</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+![Reas' Tissue](http://reas.com/tissue_p/reas_tissue_p_13.jpg)
+
+Casey Reas (co-author of the Processing creative coding environment), and many others, have used populations of Braitenberg-inspired vehicles to create artworks based on their combined paths.
+
+![Fish school](fishschool.gif)
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/QOCaacO8wus?rel=0" frameborder="0" allowfullscreen></iframe>
+
+[The WaitButWhy follow-up](http://waitbutwhy.com/2014/12/what-makes-you-you.html?doing_wp_cron=1418415874.1286160945892333984375)
+
+<iframe src="https://player.vimeo.com/video/196269431" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+![haraway](haraway.jpg)
 
 <!--
 
