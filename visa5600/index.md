@@ -51,14 +51,14 @@ The seed for the conversations of CTVA this year is "life as it could be". Here 
 - Introductions 
 - Presentation
 
-**Week 2 (Oct 18):** 
+**Week 2 (Sep 18):** 
 
 Readings: The first set begin in the earth, roaming far and wide:
 
 - John Durham Peters. Understanding Media. In The Marvelous Clouds: Toward a philosophy of elemental media. University of Chicago Press, 2015. *Led by Laurie-Lynn.*
 - Manuel Delanda. Nonorganic Life. In Incorporations. New York: Zone Books 29 (1992). *Led by Miles*
 
-**Week 3 (Oct 25):** 
+**Week 3 (Sep 25):** 
 
 Readings: Turtles all the way around (Cybernetics)
 
