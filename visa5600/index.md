@@ -74,8 +74,6 @@ Readings: Umwelten
 - Rodney Brooks. What Is It Like to Be a Robot? [online](https://rodneybrooks.com/what-is-it-like-to-be-a-robot/), 2017. *Led by Monica*
 - Brian Massumi. Strange Horizons. In Parables for the Virtual. Duke University Press, 2002. *Led by Linda*
 
-[Look here](https://www.dropbox.com/sh/wmrop5yicmbb82w/AAAjX7i9AMeLoCOFUswkd_WNa?dl=0)
-
 (Oct 9: University Closed)
 
 **Week 5 (Oct 16):** 
@@ -90,6 +88,8 @@ Readings: Artists' visions of cyberspace in the first wave of VR.
 - Char Davies. [Virtual Space.](http://www.immersence.com/publications/char/2004-CD-Space.html) In “Space: In Science, Art and Society”, François Penz, Gregory Radick and Robert Howell, eds. Cambridge University Press. 2004.
 	- And: [Rethinking VR: Key Concepts and Concerns.](http://www.immersence.com/publications/char/2003-CD-VSSM.html) In Hybrid Reality: Art, Technology and the Human Factor
 Hal Thwaites, ed. International Society on Virtual Systems and Multimedia. 2003.
+
+[Look here](https://www.dropbox.com/sh/wmrop5yicmbb82w/AAAjX7i9AMeLoCOFUswkd_WNa?dl=0)
 
 **Week 6 (Oct 23):** 
 
