@@ -68,6 +68,10 @@ Readings: Turtles all the way around (Cybernetics)
 
 **Week 4 (Oct 2):** 
 
+- Announcement: [CVR Talk, Friday.](https://calendar.google.com/calendar/render?eid=XzZsMGthYzlpOG9wNDRiOWc2OHBqMGI5azhjcTQyYmExNmgzMzRiOWw2aDIzaWdwbzYwcGowZTFsNmcgY3ZyLnNlbWluYXJzQG0&ctz=America/Toronto&sf=true&output=xml#eventpage_6) (How scientists observe how artists observe how people observe...)
+
+- Taking stock.
+
 Readings: Umwelten
 
 - Jakob von Uexküll. A Foray Into the Worlds of Animals and Humans: With a Theory of Meaning. Springer, 1934. *Led by Naz*
