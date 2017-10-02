@@ -128,17 +128,19 @@ Hal Thwaites, ed. International Society on Virtual Systems and Multimedia. 2003.
 
 Casey Reas (co-author of the Processing creative coding environment), and many others, have used populations of Braitenberg-inspired vehicles to create artworks based on their combined paths.
 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HdJk8ROpuEo" frameborder="0" allowfullscreen></iframe>
+
 ![Fish school](fishschool.gif)
 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/QOCaacO8wus?rel=0" frameborder="0" allowfullscreen></iframe>
 
-[The WaitButWhy follow-up](http://waitbutwhy.com/2014/12/what-makes-you-you.html?doing_wp_cron=1418415874.1286160945892333984375)
-
 <iframe src="https://player.vimeo.com/video/196269431" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/HdJk8ROpuEo" frameborder="0" allowfullscreen></iframe>
-
 <!--
+
+
+[The WaitButWhy follow-up](http://waitbutwhy.com/2014/12/what-makes-you-you.html?doing_wp_cron=1418415874.1286160945892333984375)
 
 
 ![haraway](haraway.jpg)
