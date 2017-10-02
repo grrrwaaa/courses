@@ -80,6 +80,17 @@ Readings: Umwelten
 
 **Week 5 (Oct 16):** 
 
+Readings: Artists' visions of cyberspace in the first wave of VR.
+
+- Marcos Novak. Liquid Architectures in Cyberspace. In Cyberspace: First Steps, ed. M Benedikt. 1991. 
+	- And: [Transmitting architecture: the transphysical city](http://www.ctheory.net/articles.aspx?id=76). CTheory.net. 1996. 
+
+- Simon Penny. "Virtual Reality as the End of the Enlightenment Project" In Culture on the Brink: the Ideologies of Technology. Virtual Reality Casebook, Eds Anderson and Loeffler, Van Nostrand, 1994
+
+- Char Davies. [Virtual Space.](http://www.immersence.com/publications/char/2004-CD-Space.html) In “Space: In Science, Art and Society”, François Penz, Gregory Radick and Robert Howell, eds. Cambridge University Press. 2004.
+	- And: [Rethinking VR: Key Concepts and Concerns.](http://www.immersence.com/publications/char/2003-CD-VSSM.html) In Hybrid Reality: Art, Technology and the Human Factor
+Hal Thwaites, ed. International Society on Virtual Systems and Multimedia. 2003.
+
 **Week 6 (Oct 23):** 
 
 **Week 7 (Oct 30):** 
@@ -121,18 +132,12 @@ Casey Reas (co-author of the Processing creative coding environment), and many o
 
 <iframe src="https://player.vimeo.com/video/196269431" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
-![haraway](haraway.jpg)
-
 <!--
 
 
+![haraway](haraway.jpg)
 
 
-
-The Body
-
-- Brian Massumi. Concrete is as Concrete Does. Parables for the Virtual. Duke University Press, 2002.
-Hayles
 
 
 

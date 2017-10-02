@@ -252,6 +252,8 @@ There is [a wonderful archive of this model at this webpage](http://mrob.com/pub
 
 ![The Gray-Scott parameter map](img/xmorphia-parameter-map.jpg)
 
+[Here is this model at a lower resolution using our starter kit](https://codepen.io/grrrwaaa/pen/RLgwWb?editors=001)
+
 Some of these systems share resemblance with analog video feedback ([example](http://www.youtube.com/watch?v=hDYEVv9t32U), [example](http://www.youtube.com/watch?v=Uw5onuS2_mw)), which has been exploited by earlier media artists (notably the Steiner and Woody Vasulka). 
 
 ## Spatial transformation systems 

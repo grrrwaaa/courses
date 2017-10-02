@@ -63,6 +63,7 @@ function draw() {
 	- [Langton's Ant](http://codepen.io/grrrwaaa/pen/RWrdoq)
 	- [Multiple ants](http://codepen.io/grrrwaaa/pen/MaKxJb)
 	- [Block rules](http://codepen.io/grrrwaaa/pen/NGxJpP)
+	- [Reaction Diffusion](http://codepen.io/grrrwaaa/pen/RLgwWb)
 	- [Ising model](http://codepen.io/grrrwaaa/pen/dGzORw)
 	- [Hodgepodge](http://codepen.io/grrrwaaa/pen/LpGaxm)
 	- [Semi-continuous game of life](http://codepen.io/grrrwaaa/pen/RrZgxo)
