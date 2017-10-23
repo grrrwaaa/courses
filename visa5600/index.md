@@ -80,7 +80,7 @@ Readings: Umwelten
 
 (Oct 9: University Closed)
 
-**Week 5 (Oct 16):** 
+**Week 6 (Oct 23):** 
 
 Readings: Are we there yet? Cybervisions from artists in the first wave of VR.
 
@@ -97,9 +97,13 @@ Hal Thwaites, ed. International Society on Virtual Systems and Multimedia. 2003.
 
 [Look here](https://www.dropbox.com/sh/wmrop5yicmbb82w/AAAjX7i9AMeLoCOFUswkd_WNa?dl=0)
 
-**Week 6 (Oct 23):** 
-
 **Week 7 (Oct 30):** 
+
+- Donna Haraway: The Cyborg Manifesto (1985)
+
+- Donna Haraway: The Companion Species Manifesto (2003)
+
+![haraway](haraway.jpg)
 
 **Week 8 (Nov 6):** 
 
@@ -135,22 +139,30 @@ Casey Reas (co-author of the Processing creative coding environment), and many o
 
 <iframe src="https://player.vimeo.com/video/196269431" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
+![Fish school](fishschool.gif)
+
+---
+
+Char Davies' *Osmose*, exhibited (and recorded) at Musee d'Art Contemparain de Montreal:
+
+<iframe width="640" height="480" src="http://www.youtube.com/embed/54O4VP3tCoY?rel=0" frameborder="0" allowfullscreen></iframe>
+
+[A mini documentary](http://youtu.be/bsT59fp8LpY)
+
+Ephemere, 1998:
+
+<iframe width="640" height="480" src="https://www.youtube.com/embed/XCWaMll0leI?rel=0" frameborder="0" allowfullscreen></iframe>
+
+---
+
+
 <!--
 
 
-![Fish school](fishschool.gif)
 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/QOCaacO8wus?rel=0" frameborder="0" allowfullscreen></iframe>
 
 [The WaitButWhy follow-up](http://waitbutwhy.com/2014/12/what-makes-you-you.html?doing_wp_cron=1418415874.1286160945892333984375)
-
-
-![haraway](haraway.jpg)
-
-
-
-
-
 
 Living Architectures
 
