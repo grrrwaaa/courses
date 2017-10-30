@@ -114,24 +114,24 @@ Games of Simulation
 		- Extra credit: [Some responses](https://kotaku.com/will-the-21st-century-be-defined-by-games-1293867009)
 	- [Harvey, Auriea, and Michaël Samyn. "Realtime art manifesto." Gaming realities: the challenge of digital culture, mediaterra festival of Art and Technology, Athens (2006).](http://tale-of-tales.com/tales/RAM.html)
 
+- Whitelaw, Mitchell. "System stories and model worlds: A critical approach to generative art." Readme 100 (2005): 135-154.
+	- and Whitelaw, Mitchell, Mark Guglielmetti, and Troy Innocent. "Strange ontologies in digital culture." Computers in Entertainment (CIE) 7.1 (2009): 4.
+
 - [Bogost, Ian.](http://bogost.com) [Unit operations: An approach to videogame criticism. MIT press, 2008.](http://bogost.com/books/unit_operations/) 
 	- Chapter 2: Structuralism & Computation
 	- Chapter 7: Cellular Automata & Simulation
-
-- Whitelaw, Mitchell. "System stories and model worlds: A critical approach to generative art." Readme 100 (2005): 135-154.
-	- and Whitelaw, Mitchell, Mark Guglielmetti, and Troy Innocent. "Strange ontologies in digital culture." Computers in Entertainment (CIE) 7.1 (2009): 4.
 
 **Week 9 (Nov 13):** 
 
 Games of Simulation and Society
 
+- Rogers, Kenneth. The Attention Complex: Media, Archeology, Method. Springer, 2014.
+	- Last chapter: Game of Life.
+
 - [Chip Morningstar and F. Randall Farmer. Lessons from Lucasfilm’s Habitat. The First International Conference on Cyberspace, 1990.](http://www.fudco.com/chip/lessons.html)
 
 - Paolo Pedercini (
 [Molleindustria](http://www.molleindustria.org)). [SimCities and SimCrises. International City Gaming Conference, Rotterdam, 2017](http://molleindustria.org/GamesForCities/)
-
-- Rogers, Kenneth. The Attention Complex: Media, Archeology, Method. Springer, 2014.
-	- Last chapter: Game of Life.
 
 **Week 10 (Nov 20):** 
 
