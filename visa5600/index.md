@@ -106,7 +106,6 @@ Hal Thwaites, ed. International Society on Virtual Systems and Multimedia. 2003.
 ![haraway](haraway.jpg)
 
 **Week 8 (Nov 6):** 
-**Week 9 (Nov 13):** 
 
 Games of Simulation
 
@@ -122,7 +121,7 @@ Games of Simulation
 - Whitelaw, Mitchell. "System stories and model worlds: A critical approach to generative art." Readme 100 (2005): 135-154.
 	- and Whitelaw, Mitchell, Mark Guglielmetti, and Troy Innocent. "Strange ontologies in digital culture." Computers in Entertainment (CIE) 7.1 (2009): 4.
 
-**Week 10 (Nov 20):** 
+**Week 9 (Nov 13):** 
 
 Games of Simulation and Society
 
@@ -133,6 +132,8 @@ Games of Simulation and Society
 
 - Rogers, Kenneth. The Attention Complex: Media, Archeology, Method. Springer, 2014.
 	- Last chapter: Game of Life.
+
+**Week 10 (Nov 20):** 
 
 **Week 11 (Nov 27):** 
 
