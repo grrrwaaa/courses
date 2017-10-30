@@ -99,9 +99,9 @@ Hal Thwaites, ed. International Society on Virtual Systems and Multimedia. 2003.
 
 **Week 7 (Oct 30):** 
 
-- Donna Haraway: The Cyborg Manifesto (1985)
+- Donna Haraway: The Cyborg Manifesto (1985). *Led by Linda*
 
-- Donna Haraway: The Companion Species Manifesto (2003)
+- Donna Haraway: The Companion Species Manifesto (2003). *Led by Katika*
 
 ![haraway](haraway.jpg)
 
