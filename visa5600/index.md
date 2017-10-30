@@ -107,7 +107,7 @@ Hal Thwaites, ed. International Society on Virtual Systems and Multimedia. 2003.
 
 **Week 8 (Nov 6):** 
 
-Games of Simulation
+Simulation at Play...
 
 - Games & manifestoes:
 	- [Zimmerman, Eric, and Heather Chaplin. "Manifesto: The 21st century will be defined by games." Kotaku.com (2013).](https://kotaku.com/manifesto-the-21st-century-will-be-defined-by-games-1275355204) 
@@ -123,7 +123,7 @@ Games of Simulation
 
 **Week 9 (Nov 13):** 
 
-Games of Simulation and Society
+...and Society
 
 - Rogers, Kenneth. The Attention Complex: Media, Archeology, Method. Springer, 2014.
 	- Last chapter: Game of Life.
