@@ -114,7 +114,7 @@ Simulation at play...
 		- Extra credit: [Some responses](https://kotaku.com/will-the-21st-century-be-defined-by-games-1293867009)
 	- [Harvey, Auriea, and Michaël Samyn. "Realtime art manifesto." Gaming realities: the challenge of digital culture, mediaterra festival of Art and Technology, Athens (2006).](http://tale-of-tales.com/tales/RAM.html)
 
-- Generative art:
+- Generative art, *led by Ester*:
 	- Whitelaw, Mitchell. "System stories and model worlds: A critical approach to generative art." Readme 100 (2005): 135-154.
 	- and Whitelaw, Mitchell, Mark Guglielmetti, and Troy Innocent. "Strange ontologies in digital culture." Computers in Entertainment (CIE) 7.1 (2009): 4.
 
