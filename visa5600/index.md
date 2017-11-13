@@ -136,7 +136,23 @@ Simulation at play...
 
 **Week 10 (Nov 20):** 
 
+Subjects to the Invisible
+
+- Stafford, Barbara Maria. Echo objects: The cognitive work of images. University of Chicago Press, 2007. Closing chapter: *Impossible Will? Unconscious Organization, Conscious Focus.*
+
+- Brigham, Linda. "Cinema and the Paralysis of Perception." In Reading Matters: Narrative in the New Media Ecology (1997).
+
+- Hayles, N. Katherine. How we became posthuman: Virtual bodies in cybernetics, literature, and informatics. University of Chicago Press, 2008. Closing chapter: *What does it mean to be posthuman?*
+
 **Week 11 (Nov 27):** 
+
+- Past futures of living art
+	- Flusser, Vilem. ["Curie’s Children."](http://90.146.8.18/en/archives/festival_archive/festival_catalogs/festival_artikel.asp?iProjectID=8335) In Art Forum, vol. 26, no. 7, p. 15. 1988.
+	- Pickering, Andrew. "Beyond design: cybernetics, biological computers and hylozoism." Synthese 168, no. 3 (2009): 469-491.
+
+- Data Analysis
+	- Rule, Alix, and David Levine. ["International Art English."](https://www.canopycanopycanopy.com/contents/international_art_english) Triple Canopy 16 (2012).
+	- Any reading from the University of Washington course INFO 198 / BIOL 106B [Data Reasoning for the Digital Age](http://callingbullshit.org/syllabus.html)
 
 **Week 12 (Dec 4):** 
 
