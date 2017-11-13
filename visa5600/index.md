@@ -29,7 +29,7 @@ A healthy conversation requires rigour as well as open-ness. A willingness to gi
 - Final Symposium Presentation: 25%
 - Final Written Document: 25%
 
-The final project will consist in a 30-minute presentation, functioning at once as a speculative proposal for a future art project while being grounded in at least two of the assigned readings (and attendant associations which these will inevitably entail). Given that this project does not require (immediate) actualization, speculation can be allowed a wide berth.
+The final project will consist in a 20-minute presentation + discussion, functioning at once as a speculative proposal for a future art project while being grounded in at least two of the assigned readings (and attendant associations which these will inevitably entail). Given that this project does not require (immediate) actualization, speculation can be allowed a wide berth.
 
 <!--These presentations will take place on a day-long Symposium on Art and Speculation (provisional title), which will be open to the public.-->
 
@@ -138,19 +138,19 @@ Simulation at play...
 
 Subjects to the Invisible
 
-- Stafford, Barbara Maria. Echo objects: The cognitive work of images. University of Chicago Press, 2007. Closing chapter: *Impossible Will? Unconscious Organization, Conscious Focus.*
+- Stafford, Barbara Maria. Echo objects: The cognitive work of images. University of Chicago Press, 2007. Closing chapter: *Impossible Will? Unconscious Organization, Conscious Focus.* *Led by Naz*
 
-- Brigham, Linda. "Cinema and the Paralysis of Perception." In Reading Matters: Narrative in the New Media Ecology (1997).
+- Brigham, Linda. "Cinema and the Paralysis of Perception." In Reading Matters: Narrative in the New Media Ecology (1997).  *Led by Katika*
 
-- Hayles, N. Katherine. How we became posthuman: Virtual bodies in cybernetics, literature, and informatics. University of Chicago Press, 2008. Closing chapter: *What does it mean to be posthuman?*
+- Hayles, N. Katherine. How we became posthuman: Virtual bodies in cybernetics, literature, and informatics. University of Chicago Press, 2008. Closing chapter: *What does it mean to be posthuman?* *Led by Zhaoyue*
 
 **Week 11 (Nov 27):** 
 
-- Past futures of living art
+- Past futures of living art: *Led by Zhaoyue*
 	- Flusser, Vilem. ["Curie’s Children."](http://90.146.8.18/en/archives/festival_archive/festival_catalogs/festival_artikel.asp?iProjectID=8335) In Art Forum, vol. 26, no. 7, p. 15. 1988.
 	- Pickering, Andrew. "Beyond design: cybernetics, biological computers and hylozoism." Synthese 168, no. 3 (2009): 469-491.
 
-- Data Analysis
+- Data Analysis: *Led by Ester*
 	- Rule, Alix, and David Levine. ["International Art English."](https://www.canopycanopycanopy.com/contents/international_art_english) Triple Canopy 16 (2012).
 	- Any reading from the University of Washington course INFO 198 / BIOL 106B [Data Reasoning for the Digital Age](http://callingbullshit.org/syllabus.html)
 
