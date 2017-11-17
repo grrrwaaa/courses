@@ -6,11 +6,10 @@ importance: 10
 # Contemporary Theory and the Visual Arts
 
 **Course:** VISA 5600   
-<!--**Class/lab time:** Monday 10:00am - 1:00pm   
-**Location:** 309 GCFA
--->
-**Course director:** Graham Wakefield   
-**Office:** 303C GCFA    
+**Class/lab time:** Monday 10:30am - 1:30pm     
+**Location:** GCFA 338     
+**Course director:** Graham Wakefield     
+**Office:** GCFA 303C       
 **Email:** grrrwaaa at yorku dot ca  
 
 [OFFICIAL YORK OUTLINE HERE](http://xenopraxis.net/readings/5600_13.pdf)
@@ -172,7 +171,17 @@ Readings: Data Analysis: *Led by Ester*
 
 **Week 12 (Dec 4):** 
 
-- Final Presentations
+Final Presentations:
+
+- 10:30: Zhaoyue
+- 10:50: Shaughna
+- 11:10: Ilze
+- 11:30: Monica
+- 11:50: Miles
+- 12:10: Linda
+- 12:30: Katika
+- 12:50: Ilze
+- 13:10: Ester
 
 
 
