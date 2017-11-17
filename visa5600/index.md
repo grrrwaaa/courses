@@ -162,12 +162,12 @@ Tuesday, November 28th from 2:30-6:30pm.
 **Week 11 (Nov 27):** 
 
 Readings: Past futures of living art: *Led by Zhaoyue*
-	- Flusser, Vilem. ["Curie’s Children."](http://90.146.8.18/en/archives/festival_archive/festival_catalogs/festival_artikel.asp?iProjectID=8335) In Art Forum, vol. 26, no. 7, p. 15. 1988.
-	- Pickering, Andrew. "Beyond design: cybernetics, biological computers and hylozoism." Synthese 168, no. 3 (2009): 469-491.
+- Flusser, Vilem. ["Curie’s Children."](http://90.146.8.18/en/archives/festival_archive/festival_catalogs/festival_artikel.asp?iProjectID=8335) In Art Forum, vol. 26, no. 7, p. 15. 1988.
+- Pickering, Andrew. "Beyond design: cybernetics, biological computers and hylozoism." Synthese 168, no. 3 (2009): 469-491.
 
 Readings: Data Analysis: *Led by Ester*
-	- Rule, Alix, and David Levine. ["International Art English."](https://www.canopycanopycanopy.com/contents/international_art_english) Triple Canopy 16 (2012).
-	- Any reading from the University of Washington course INFO 198 / BIOL 106B [Data Reasoning for the Digital Age](http://callingbullshit.org/syllabus.html)
+- Rule, Alix, and David Levine. ["International Art English."](https://www.canopycanopycanopy.com/contents/international_art_english) Triple Canopy 16 (2012).
+- Any reading from the University of Washington course INFO 198 / BIOL 106B [Data Reasoning for the Digital Age](http://callingbullshit.org/syllabus.html)
 
 **Week 12 (Dec 4):** 
 
