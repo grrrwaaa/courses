@@ -98,15 +98,17 @@ Hal Thwaites, ed. International Society on Virtual Systems and Multimedia. 2003.
 
 **Week 7 (Oct 30):** 
 
+Readings: Manifestoes of the Other
+
 - Donna Haraway: The Cyborg Manifesto (1985). *Led by Linda*
 
 - Donna Haraway: The Companion Species Manifesto (2003). *Led by Katika*
 
-![haraway](haraway.jpg)
+<!-- ![haraway](haraway.jpg) -->
 
 **Week 8 (Nov 6):** 
 
-Simulation at play...
+Readings: Simulation at play...
 
 - Games & manifestoes, *led by Linda*:
 	- [Zimmerman, Eric, and Heather Chaplin. "Manifesto: The 21st century will be defined by games." Kotaku.com (2013).](https://kotaku.com/manifesto-the-21st-century-will-be-defined-by-games-1275355204) 
@@ -124,7 +126,7 @@ Simulation at play...
 
 **Week 9 (Nov 13):** 
 
-...in society
+Readings: Simulation in society
 
 - Rogers, Kenneth. The Attention Complex: Media, Archeology, Method. Springer, 2014. Last chapter: Game of Life, *led by Monica*
 
@@ -143,7 +145,7 @@ Array Space, 155 Walnut Avenue
 
 **Week 10 (Nov 20):** 
 
-Subjects to the Invisible
+Readings: Subjects to the Invisible
 
 - Stafford, Barbara Maria. Echo objects: The cognitive work of images. University of Chicago Press, 2007. Closing chapter: *Impossible Will? Unconscious Organization, Conscious Focus.* *Led by Naz*
 
@@ -160,11 +162,11 @@ Tuesday, November 28th from 2:30-6:30pm.
 
 **Week 11 (Nov 27):** 
 
-- Past futures of living art: *Led by Zhaoyue*
+Readings: Past futures of living art: *Led by Zhaoyue*
 	- Flusser, Vilem. ["Curie’s Children."](http://90.146.8.18/en/archives/festival_archive/festival_catalogs/festival_artikel.asp?iProjectID=8335) In Art Forum, vol. 26, no. 7, p. 15. 1988.
 	- Pickering, Andrew. "Beyond design: cybernetics, biological computers and hylozoism." Synthese 168, no. 3 (2009): 469-491.
 
-- Data Analysis: *Led by Ester*
+Readings: Data Analysis: *Led by Ester*
 	- Rule, Alix, and David Levine. ["International Art English."](https://www.canopycanopycanopy.com/contents/international_art_english) Triple Canopy 16 (2012).
 	- Any reading from the University of Washington course INFO 198 / BIOL 106B [Data Reasoning for the Digital Age](http://callingbullshit.org/syllabus.html)
 
