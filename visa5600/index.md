@@ -95,7 +95,7 @@ Readings: Are we there yet? Cybervisions from artists in the first wave of VR.
 Hal Thwaites, ed. International Society on Virtual Systems and Multimedia. 2003.
 	- *Led by Ester*
 
-[Look here](https://www.dropbox.com/sh/wmrop5yicmbb82w/AAAjX7i9AMeLoCOFUswkd_WNa?dl=0)
+<!--[Look here](https://www.dropbox.com/sh/wmrop5yicmbb82w/AAAjX7i9AMeLoCOFUswkd_WNa?dl=0) -->
 
 **Week 7 (Oct 30):** 
 
@@ -160,6 +160,8 @@ Subjects to the Invisible
 
 
 
+<!--
+
 ----
 
 
@@ -197,19 +199,6 @@ Ephemere, 1998:
 ---
 
 
-<!--
-
-
-
-<iframe width="640" height="360" src="https://www.youtube.com/embed/QOCaacO8wus?rel=0" frameborder="0" allowfullscreen></iframe>
-
-[The WaitButWhy follow-up](http://waitbutwhy.com/2014/12/what-makes-you-you.html?doing_wp_cron=1418415874.1286160945892333984375)
-
-Living Architectures
-
-The research area of *living architecture* is predicated around the question of whether our lived environment can integrate living or near-living functions. This question has attracted quite significant support. Primarily based in Ontario, the [Living Architecture Systems Group (LASG)](http://livingarchitecturesystems.com), led by architect and artist Philip Beesley, received a 6-year, $2.5m Partnership grant from the Social Sciences and Humanities Research Council. York is among its partners, along with many national and international researchers, designers, and artists. In Europe, LASG parter Rachel Armstrong's own Living Architecture research project received [€3.2m of funding](https://www.interaliamag.org/interviews/rachel-armstrong-living-architecture/) from the European Union’s Horizon 2020 Research and Innovation Programme. 
-
-As a playful counterfoil to the position papers by these two immense figures, let's also look at a very short but provocative Artforum column by Vilém Flusser. Flusser was a philosopher and journalist shaped by Heideggerian existential phenomenology who later focused on the philosophy of communication and art practice, particularly photography.
 
 -->
 
