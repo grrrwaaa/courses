@@ -175,7 +175,7 @@ Final Presentations:
 
 - 10:30: Zhaoyue
 - 10:50: Shaughna
-- 11:10: Ilze
+- 11:10: Nazanin
 - 11:30: Monica
 - 11:50: Miles
 - 12:10: Linda
