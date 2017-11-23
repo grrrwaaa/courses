@@ -161,6 +161,8 @@ Tuesday, November 28th from 2:30-6:30pm.
 
 **Week 11 (Nov 27):** 
 
+[Course evaluations](http://courseevaluations.yorku.ca) - 10 minutes
+
 Readings: Past futures of living art: *Led by Zhaoyue*
 - Flusser, Vilem. ["Curie’s Children."](http://90.146.8.18/en/archives/festival_archive/festival_catalogs/festival_artikel.asp?iProjectID=8335) In Art Forum, vol. 26, no. 7, p. 15. 1988.
 - Pickering, Andrew. "Beyond design: cybernetics, biological computers and hylozoism." Synthese 168, no. 3 (2009): 469-491.
