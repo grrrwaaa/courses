@@ -168,8 +168,8 @@ Catching up on past weeks:
 - Stafford, Barbara Maria. Echo objects: Impossible Will? *Led by Naz* (11:20)
 
 Readings: Past futures of living art: *Led by Zhaoyue* (12:00)
-- Flusser, Vilem. ["Curie’s Children."](http://90.146.8.18/en/archives/festival_archive/festival_catalogs/festival_artikel.asp?iProjectID=8335) In Art Forum, vol. 26, no. 7, p. 15. 1988.
 - Pickering, Andrew. "Beyond design: cybernetics, biological computers and hylozoism." Synthese 168, no. 3 (2009): 469-491.
+- Flusser, Vilem. ["Curie’s Children."](http://90.146.8.18/en/archives/festival_archive/festival_catalogs/festival_artikel.asp?iProjectID=8335) In Art Forum, vol. 26, no. 7, p. 15. 1988.
 
 Readings: Data Analysis: *Led by Ester* (12:45)
 - Rule, Alix, and David Levine. ["International Art English."](https://www.canopycanopycanopy.com/contents/international_art_english) Triple Canopy 16 (2012).
