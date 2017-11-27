@@ -173,7 +173,7 @@ Readings: Past futures of living art: *Led by Zhaoyue* (12:00)
 
 Readings: Data Analysis: *Led by Ester* (12:45)
 - Rule, Alix, and David Levine. ["International Art English."](https://www.canopycanopycanopy.com/contents/international_art_english) Triple Canopy 16 (2012).
-- Any reading from the University of Washington course INFO 198 / BIOL 106B [Data Reasoning for the Digital Age](http://callingbullshit.org/syllabus.html)
+- Sagan, Carl. "The fine art of baloney detection." Paranormal Claims: A Critical Analysis 1 (2007). [See also here](http://callingbullshit.org/syllabus.html)
 
 **Week 12 (Dec 4):** 
 
