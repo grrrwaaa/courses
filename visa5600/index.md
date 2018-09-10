@@ -7,7 +7,7 @@ importance: 10
 
 **Course:** VISA 5600   
 **Class/lab time:** Monday 10:30am - 1:30pm     
-**Location:** GCFA 338     
+**Location:** GCFA 257    
 **Course director:** Graham Wakefield     
 **Office:** GCFA 303C       
 **Email:** grrrwaaa at yorku dot ca  
@@ -29,6 +29,8 @@ A healthy conversation requires rigour as well as open-ness. A willingness to gi
 The final project will consist in a 20-minute presentation + discussion, functioning at once as a speculative proposal for a future art project while being grounded in at least two of the assigned readings (and attendant associations which these will inevitably entail). Given that this project does not require (immediate) actualization, speculation can be allowed a wide berth. Some students have found it productive to organize their paper as a manifesto.
 
 This presentation will be distilled into a 5000 (PhD) or 3500-word (MA/MFA) written document to be handed in one week after the public presentation. Documents received later than the due date will be penalized three grade points per day that assignment is late. Exceptions to the lateness penalty for valid reasons such as illness, compassionate grounds, etc., may be entertained by the Course Instructor but will require supporting documentation (e.g., a doctor’s letter).
+
+- Shared document for discussion etc: is [here](https://docs.google.com/document/d/1MFOVuxIoc9iXwsFj63pcSvhZAUcRUnIl0nctBUPR6Ak/edit?usp=sharing)
 
 ----------------------------
 
