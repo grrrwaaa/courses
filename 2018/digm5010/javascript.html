@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>JavaScript</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+  </head>
+  <body>
+  	<nav>
+	<ul>
+	<li><a href="browser.html" alt="The web browser as a platform">The web browser as a platform</a></li>
+<li><a href="index.html" alt="index">index</a></li>
+<li><a href="main.html" alt="Foundations of Digital Media">Foundations of Digital Media</a></li>
+<li><a href="javascript.html" alt="JavaScript">JavaScript</a></li>
+<li><a href="nn.html" alt="Nn">Nn</a></li>
+<li><a href="wiener.html" alt="Norbert Wiener. Men, Machines, and the World About. 1954.">Norbert Wiener. Men, Machines, and the World About. 1954.</a></li>
+<li><a href="math.html" alt="Quaternions">Quaternions</a></li>
+<li><a href="tools.html" alt="Tools">Tools</a></li>
+<li><a href="research.html" alt="What is research?">What is research?</a></li>
+	</ul>
+	</nav>	
+	<div id="main">
+	<h1 id="javascript">JavaScript</h1>
+<p>JavaScript is a lightweight programming language that is perhaps the most widely-used programming language today. It became known as a scripting language for web pages, and is now the de facto &#39;language of the web&#39;, having evolved from lightweight scripting roots to a full-fledged application language with powerful capabilities. But it is also widely used as an embedded language for server runtimes and desktop applications. </p>
+<p>It now is a language of growing importance at the intersection of media/culture technology. Processing, a tool taught in many media arts and design programmes, has been rewritten for Javascript as <code>p5.js</code>. Javascript is embedded in Max/MSP (and with Max 8, this will include Node.js).</p>
+<p>Note: Despite having &quot;Java&quot; in the name, JS has <strong>nothing</strong> to do with the Java language. </p>
+<h2 id="why-js-">Why JS?</h2>
+<ul>
+<li>Arguably the most widely-used programming language today.</li>
+<li>It is multi-paradigm, supporting imperative, functional, declarative, object-oriented etc. styles.</li>
+<li>It has become the de facto &#39;language of the web&#39;. JS <em>looks</em> like an imperative, procedural language, however it also supports functional programming features such as first-class functions. It has been described as Lisp in C&#39;s clothing.</li>
+<li>Although it is a dynamic language, modern implementations can achieve remarkably high performance through implicit Just-In-Time (JIT) compilation to machine code.  </li>
+<li>Multi-platform: A browser-based JS application will run on Windows, OSX, Linux, Android, iOS etc, without having to rewrite or rebuild anything. Sharing is as simple as a URL. </li>
+<li>The JS community is vast, and the available libraries, modules, frameworks, extensions, etc. are correspondingly huge (over half a million!)</li>
+<li>Web-based apps can easily connect with vast audiences and connect to social and other media networks, to explore collaborative interfaces, to interact with the increasing number of devices supporting HTTP and WebSocket APIs, etc.</li>
+<li>Stackoverflow&#39;s founder famously said (and it seems to be true): <em>&quot;Any application that can be written in JavaScript will eventually be written in JavaScript.&quot;</em></li>
+<li>Examples:<ul>
+<li><a href="http://gibber.mat.ucsb.edu/">Live coding audio (and graphics)</a></li>
+<li><a href="https://www.shadertoy.com/">Shadertoy</a></li>
+<li><a href="http://aleksandarrodic.com/p/jellyfish/">Jellyfish</a> and <a href="http://webglsamples.org/fishtank/fishtank.html">Fish</a> and <a href="http://empaempa.github.io/GLOW/examples/complicated/">Horses</a> and <a href="http://alteredqualia.com/three/examples/webgl_cars.html">Cars</a> and <a href="http://cake23.de/turing-fluid.html">Reaction Diffusion</a></li>
+<li><a href="http://globe.chromeexperiments.com/">World population globe</a>; the globe itself is <a href="http://www.chromeexperiments.com/globe">open source</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="learning-the-js-language-">Learning the JS language:</h2>
+<ul>
+<li><a href="http://eloquentjavascript.net">Eloquent JavaScript</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide">Mozilla JavaScript Guide</a></li>
+</ul>
+<h2 id="what-version-of-javascript-">What version of JavaScript?</h2>
+<p>At the time of writing, it seems that for the most part it is safe to assume the <code>ES6</code> version is safe to use. ES6, also known as Ecmascript2015, was a new specification of the JavaScript language that added many valuable new features, making it a significantly more compelling language for general use than it had been before. Originally released in 2015, now <a href="http://kangax.github.io/compat-table/es6/">most of these features are supported by most browsers</a>, as well as server runtimes such as Node.js. </p>
+<h2 id="js-cheat-sheet">JS cheat sheet</h2>
+<h3 id="strings">Strings</h3>
+<p>Make a string by bounding with matching quote marks (either single or double):</p>
+<pre><code class="lang-javascript">s = <span class="hljs-string">'a string'</span>;
+s = <span class="hljs-comment">"a string"</span>;
+
+// <span class="hljs-type">Special</span> characters like newlines, tabs, have to be <span class="hljs-comment">"escaped"</span>. <span class="hljs-type">Here</span> are the most typical ones:
+s = <span class="hljs-comment">"a string with a \"</span>quote\<span class="hljs-comment">" in it, a newline: \n, a tab: \t, two slashes: \\ \/, and the character code for A: \u0041 "</span>;
+</code></pre>
+<p>Strings defined in back-tick quotes are different; these are called <strong>template strings</strong>, because they can embed bits of javascript code to define their content (this is called &quot;string interpolation&quot;). They can also embed formatting like newlines and tabs. </p>
+<pre><code class="lang-javascript">lang = <span class="hljs-string">"javascript"</span>;
+// produces: this <span class="hljs-keyword">is</span> a <span class="hljs-keyword">template</span> <span class="hljs-built_in">string</span> <span class="hljs-keyword">in</span> javascript
+s = `this <span class="hljs-keyword">is</span> a <span class="hljs-keyword">template</span> <span class="hljs-built_in">string</span> <span class="hljs-keyword">in</span> ${lang}`;
+</code></pre>
+<p>Strings are immutable but can be concatenated with <code>+</code> and manipulated through methods.</p>
+<pre><code class="lang-javascript">s = <span class="hljs-string">"hello "</span> + <span class="hljs-string">"world"</span><span class="hljs-comment">; // see also String.concat(...), </span>
+<span class="hljs-string">"seven"</span>.<span class="hljs-keyword">length</span> === <span class="hljs-number">5</span><span class="hljs-comment">; </span>
+s = <span class="hljs-string">"a"</span>.<span class="hljs-keyword">repeat</span>(<span class="hljs-number">5</span>) === <span class="hljs-string">"aaaaa"</span><span class="hljs-comment">; // see also padEnd()/padStart(), </span>
+<span class="hljs-string">'cat'</span>.toUpperCase() === <span class="hljs-string">'CAT'</span><span class="hljs-comment">;  // also toLowerCase()</span>
+
+<span class="hljs-comment">// substrings:</span>
+<span class="hljs-string">"hello"</span>.slice(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>) === <span class="hljs-string">"el"</span>  
+<span class="hljs-string">"hello"</span>.slice(<span class="hljs-number">-3</span>, <span class="hljs-number">-1</span>) === <span class="hljs-string">"ll"</span> <span class="hljs-comment">// i.e. counting back from the end</span>
+<span class="hljs-string">"hello"</span>.charAt(<span class="hljs-number">4</span>) === <span class="hljs-string">"o"</span><span class="hljs-comment">; // remember, count from 0, 1, 2, 3, 4.</span>
+<span class="hljs-comment">// why "char"? a character is a string of length 1. </span>
+<span class="hljs-string">"  zzz  "</span>.trim() === <span class="hljs-string">"zzz"</span><span class="hljs-comment">;    // also trimStart(), trimEnd()</span>
+
+<span class="hljs-comment">// searching:</span>
+<span class="hljs-string">"hello"</span>.indexOf(s, i) <span class="hljs-comment">/// returns the first index of s, starting at position i. If not found, it returns -1. See also lastIndexOf(), which searches backwards</span>
+<span class="hljs-string">"hello"</span>.endsWith(<span class="hljs-string">"lo"</span>) === true<span class="hljs-comment">; // also .startsWith()</span>
+<span class="hljs-string">"hello"</span>.includes(<span class="hljs-string">"hell"</span>) === true<span class="hljs-comment">;</span>
+<span class="hljs-comment">// for more complex searching, see RegExp methods like match(), search(), replace()</span>
+
+<span class="hljs-comment">// string to array:</span>
+<span class="hljs-string">"hello"</span>.<span class="hljs-keyword">split</span>(<span class="hljs-string">""</span>) <span class="hljs-comment">// returns ["h", "e", "l", "l", "o"]</span>
+<span class="hljs-string">"bananas"</span>.<span class="hljs-keyword">split</span>(<span class="hljs-string">"a"</span>) <span class="hljs-comment">// returns ["b", "n", "n", "s"]</span>
+<span class="hljs-string">"bananas"</span>.<span class="hljs-keyword">split</span>(<span class="hljs-string">"a"</span>, <span class="hljs-number">2</span>) <span class="hljs-comment">// returns ["b", "n"]</span>
+</code></pre>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">More string methods</a></p>
+<h3 id="numbers">Numbers</h3>
+<p>There is no integer type, all numbers are floats. <code>10</code> is the same as <code>10.0</code> is the same as <code>1e1</code>. </p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// working with whole numbers:</span>
+<span class="hljs-built_in">Math</span>.floor(<span class="hljs-number">0.5</span>) <span class="hljs-comment">// 0.0</span>
+<span class="hljs-built_in">Math</span>.ceil(<span class="hljs-number">0.5</span>)  <span class="hljs-comment">// 1.0</span>
+<span class="hljs-built_in">Number</span>.isInteger(<span class="hljs-built_in">Math</span>.ceil(x)) === <span class="hljs-literal">true</span>;
+
+<span class="hljs-comment">// strange numbers:</span>
+<span class="hljs-number">1</span>/<span class="hljs-number">0</span> === <span class="hljs-literal">Infinity</span>
+<span class="hljs-built_in">Number</span>.isFinite(<span class="hljs-number">1</span>/<span class="hljs-number">0</span>) === <span class="hljs-literal">false</span>;
+x = <span class="hljs-built_in">Math</span>.sqrt(<span class="hljs-number">-1</span>) <span class="hljs-comment">// returns NaN, which means "Not a Number"</span>
+<span class="hljs-built_in">Number</span>.isNaN(x) === <span class="hljs-literal">true</span>; <span class="hljs-comment">// this is the safest way to test for NaN</span>
+
+<span class="hljs-comment">// string &lt;-&gt; number</span>
+<span class="hljs-built_in">Number</span>.parseFloat(<span class="hljs-string">"27"</span>) === <span class="hljs-number">27</span>  <span class="hljs-comment">// returns NaN on failure to parse the string into a number</span>
+<span class="hljs-built_in">Number</span>.parseInt(<span class="hljs-string">"5"</span>, <span class="hljs-number">10</span>) === <span class="hljs-built_in">Number</span>.parseInt(<span class="hljs-string">"0101"</span>, <span class="hljs-number">2</span>) === <span class="hljs-number">5</span> <span class="hljs-comment">// the 2nd argument is the base; base 2 means binary. returns NaN on failure to parse.</span>
+<span class="hljs-built_in">Math</span>.PI.toString() === <span class="hljs-string">"3.141592653589793"</span>
+<span class="hljs-built_in">Math</span>.PI.toFixed(<span class="hljs-number">2</span>) === <span class="hljs-string">"3.14"</span>
+<span class="hljs-built_in">Math</span>.PI.toPrecision(<span class="hljs-number">2</span>) === <span class="hljs-string">"3.1"</span>
+<span class="hljs-built_in">Math</span>.PI.toExponential(<span class="hljs-number">2</span>) === <span class="hljs-string">"3.14e+0"</span>
+</code></pre>
+<h2 id="the-bad-parts">The bad parts</h2>
+<p>Some of the older features of JS still exist, for backward compatibility, but are highly discouraged. Others simply can&#39;t be avoided, but should be borne in mind, as they can be the cause of bugs.</p>
+<p><strong>Use <code>const</code> whwere possible, and <code>let</code> otherwise. Never use <code>var</code>.</strong></p>
+<p>A <code>const</code> cannot be re-assigned to a new value; this can make understanding/debugging code easier. A <code>let</code> or <code>const</code> exists only within the {curly brackets} it is defined in, which is usually what you want; a <code>var</code> exists everywhere within the function it is defined in, which is just weird. </p>
+<p><strong>True and false are approximate. Use <code>===</code> not <code>==</code>, <code>!==</code> not <code>!=</code> etc.</strong></p>
+<p>JS has &quot;truthy&quot; and &quot;falsy&quot; values. Falsy values include the number <code>0</code>, the string <code>&quot;&quot;</code>, the values <code>null</code> and <code>undefined</code> and <code>NaN</code>, as well as the value <code>false</code>. Everything else is truthy. Also, the string <code>&quot;7&quot;</code> is equal to the number <code>7</code> in JS&#39;s approximate sense, so <code>(7 == &quot;7&quot;)</code> returns true, whereas it is false in the strict equality test of <code>(7 === &quot;7&quot;)</code>. </p>
+<p><strong>Types are weird</strong></p>
+<p>JavaScript primitive types are: number, string, true, false, null, undefined, and object. The object type includes Function, Array, RegExp, user-defined classes, etc. The weirdness is that <code>typeof x</code> might return &quot;object&quot; for things like an array. To detect if an object is an array, use <code>Array.isArray(x)</code>.  </p>
+<p><strong>Floating point numbers are weird</strong></p>
+<p>All kinds of unexpected fun can happen from the fact that floats cannot accurately represent many numbers. This isn&#39;t a JS problem as much an IEEE problem, and affects most programming languages used today.</p>
+<p>But it can be surprising, e.g. <code>0.1 + 0.2 === 0.3</code> returns false. (To test things like this, consider looking for small differences, e.g. <code>Math.abs(0.1 + 0.2 - 0.3) &lt; 0.0001</code>. Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER  return the smallest and largest whole numbers that can be represented. Number.MIN_VALUE, Number.MAX_VALUE is the smallest and largest float numbers that can be represented. </p>
+<p>Also because of IEEE, <code>NaN !== NaN</code>, which is really weird.</p>
+
+	</div>
+	<footer>&copy; 2017 Graham Wakefield</footer>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Quaternions</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+  </head>
+  <body>
+  	<nav>
+	<ul>
+	<li><a href="browser.html" alt="The web browser as a platform">The web browser as a platform</a></li>
+<li><a href="index.html" alt="index">index</a></li>
+<li><a href="main.html" alt="Foundations of Digital Media">Foundations of Digital Media</a></li>
+<li><a href="javascript.html" alt="JavaScript">JavaScript</a></li>
+<li><a href="nn.html" alt="Nn">Nn</a></li>
+<li><a href="wiener.html" alt="Norbert Wiener. Men, Machines, and the World About. 1954.">Norbert Wiener. Men, Machines, and the World About. 1954.</a></li>
+<li><a href="math.html" alt="Quaternions">Quaternions</a></li>
+<li><a href="tools.html" alt="Tools">Tools</a></li>
+<li><a href="research.html" alt="What is research?">What is research?</a></li>
+	</ul>
+	</nav>	
+	<div id="main">
+	<h2 id="quaternions">Quaternions</h2>
+<p>Quaternions are widely-used to represent rotations (and orientations) in computer graphics, computer vision, avionics, etc. -- and they are also widely used in quantum physics. One very obvious advantage over using matrices is that they are more compact and efficient (four numbers vs. sixteen!), and do not suffer from singularities like the &quot;Gimbal Lock&quot; problem of polar coordinates (Euler) angles, for example. They are also one of the fundamental number systems in mathematics.</p>
+<p>What are quaternions, and how do you visualize them? A story of four dimensions (including a good explanation of complex geometry first!):</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/d4EgbgTm0Bg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<p>Just as complex multiplication can represent a 2D scaling &amp; rotation, quaternion multiplication can represent &quot;4D&quot; scaling &amp; rotation. One way of thinking what a 4D rotation is, is to think of an oriented point on the surface of a sphere. Wherever I am on the earth, I can also turn and face different directions on the horizon.</p>
+<p>A complex multiplier applied repeatedly may thus describe an oscillator, or phasor. However, to prevent this oscillator blowing up or fading away, it&#39;s magnitude should be <em>normalized</em> to 1. Normalization removes the scalar transform, leaving only rotation.</p>
+<p>Similarly, quaternion multiplication is spatial transformation; normalized (&quot;unit&quot;) quaternion multiplication umambiguously describes a change in orientation.</p>
+<p>As well as a 2D transformation, a complex value can also describe a specific point around the origin of some coordinate system. And in the same way, a quaternion can describe an orientation around some coordinate system. Think of it simply as the rotation of the coordinate system itself.</p>
+<p>Non-commutative: the order of quaternion multiplication matters. With quaternions, a <em> b is different to b </em> a, just as facing left then up is different to facing up then left. The same applies to matrix multiplication. </p>
+<p>SLERP: &quot;Spherical linear interpolation&quot;. An operation to smoothly blend between two orientations, taking the shortest curve on the surface of the unit sphere. Using SLERP gives us smooth and continuous rotations, where LERP would have given uneven rotations, as it &#39;cuts through&#39; the sphere to take the shortest linear path.</p>
+<h2 id="fourier-transform">Fourier transform</h2>
+<p>An ubiquitous concept, used in audio processing, image processing, data analysis, physics, ... </p>
+<p>The core idea is that one can, in theory, represent any signal (continuous function) as a sum of weighted (and phase-shifted) cosine waves. This is built upon the mathematical notion that a complex number can describe a rotation, and thus an oscillation; what we see as a sine wave can be thought of as the real part of a complex oscillator. (For a swinging pendulum, the real part might be the kinetic energy, the imaginary part the potential energy; or simply position and momentum.) </p>
+<p>A Fourier transform is thus a way of breaking up a signal into its component cosines; &quot;Unmixing a mixed bucket of paint&quot;. </p>
+<p>It does this by computing how similar the source signal is with a number of different basis cosine waves, or frequency &quot;bands&quot;. These similarity measures-per-band together make up the signal&#39;s &quot;spectrum&quot;. Where the signals are more similar, the spectrum will have a high magnitude, and low elsewhere. And, for each band of the spectrum, the transform reports the angular difference with the band&#39;s cosine, which means, how much it is in or out of &quot;phase&quot;. </p>
+<p>So given a signal, of for example, amplitude against time, the result is a spectrum of magnitudes and phases against frequency. </p>
+<p>The X axis is not always time: one can look at amplitude against space, resulting in a spectrum of <em>spatial frequencies</em>. Image analysis often makes use of 2D Fourier transforms to find recurrent spatial patterns (JPEG compression does this to reconstruct an image from a sum of spatial sines).</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Dctjpeg.png" alt="Image DCT components"></p>
+<p>The <em>inverse</em> Fourier Transform takes a spectrum and reconstructs the original signal, and works in a very similar way. Or, more interestingly, one might apply modifications to the spectrum before reconstructing, opening up a whole interesting space of <em>spectral transformations</em>.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/spUNpyF58BY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<p>How this relates to the Uncertainty Principle:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MBnnXbOM5S4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
+<p>Note that the Fourier transform is not the only way to break up a signal into component parts (or &quot;basis functions&quot; of cosine shape). Wavelet analysis is a more general class of such transforms, with many differently-shaped basis functions. Over-complete &quot;dictionary&quot; based methods are having wide applications today, for example.</p>
+<!-- The Fast Fourier Transform (FFT) is a method of applying fourier -->
+<h2 id="delving-deeper">Delving deeper</h2>
+<p><a href="http://immersivemath.com/ila/tableofcontents.html?">Immersive Linear Algebra</a></p>
+<h2 id="recommended-libraries">Recommended libraries</h2>
+<ul>
+<li>C++: <ul>
+<li><a href="https://github.com/g-truc/glm">glm</a> -- vectors, matrices, quaternions. The <a href="https://github.com/g-truc/glm/blob/master/manual.md">manual</a>. As used by OpenFrameworks and LibCinder, for example.</li>
+</ul>
+</li>
+<li>JS: <ul>
+<li><a href="http://glmatrix.net">glmatrix</a> -- vectors, matrices, quaternions. The <a href="http://glmatrix.net/docs/">manual</a>.</li>
+</ul>
+</li>
+</ul>
+<p>Often a specific library may export its own vector, matrix, quaternion etc. classes and types. To keep re-using your existing code, it can be helpful to write converters between these and the general-purpose libraries you wish to use -- usually simply a case of knowing what the component memory layout should be. </p>
+
+	</div>
+	<footer>&copy; 2017 Graham Wakefield</footer>
+  </body>
+</html>
