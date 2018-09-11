@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>JavaScript</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+  </head>
+  <body>
+  	<nav>
+	<ul>
+	<li><a href="index.html" alt="Foundations of Digital Media">Foundations of Digital Media</a></li>
+<li><a href="javascript.html" alt="JavaScript">JavaScript</a></li>
+<li><a href="mindstorms.html" alt="Mindstorms (1980)">Mindstorms (1980)</a></li>
+<li><a href="cybernetics.html" alt="Norbert Wiener. Men, Machines, and the World About. 1954.">Norbert Wiener. Men, Machines, and the World About. 1954.</a></li>
+<li><a href="research.html" alt="What is research?">What is research?</a></li>
+	</ul>
+	</nav>	
+	<div id="main">
+	<h1 id="javascript">JavaScript</h1>
+<p>JavaScript is a lightweight programming language that is perhaps the most widely-used programming language today. It became known as a scripting language for web pages, and is now the de facto &#39;language of the web&#39;, having evolved from lightweight scripting roots to a full-fledged application language with powerful capabilities. But it is also widely used as an embedded language for server runtimes and desktop applications. </p>
+<p>It now is a language of growing importance at the intersection of media/culture technology. Processing, a tool taught in many media arts and design programmes, has been rewritten for Javascript as <code>p5.js</code>. Javascript is embedded in Max/MSP (and with Max 8, this will include Node.js).</p>
+<p>Note: Despite having &quot;Java&quot; in the name, JS has <strong>nothing</strong> to do with the Java language. </p>
+<h2 id="why-js-">Why JS?</h2>
+<ul>
+<li>Arguably the most widely-used programming language today.</li>
+<li>It is multi-paradigm, supporting imperative, functional, declarative, object-oriented etc. styles.</li>
+<li>It has become the de facto &#39;language of the web&#39;. JS <em>looks</em> like an imperative, procedural language, however it also supports functional programming features such as first-class functions. It has been described as Lisp in C&#39;s clothing.</li>
+<li>Although it is a dynamic language, modern implementations can achieve remarkably high performance through implicit Just-In-Time (JIT) compilation to machine code.  </li>
+<li>Multi-platform: A browser-based JS application will run on Windows, OSX, Linux, Android, iOS etc, without having to rewrite or rebuild anything. Sharing is as simple as a URL. </li>
+<li>The JS community is vast, and the available libraries, modules, frameworks, extensions, etc. are correspondingly huge (over half a million!)</li>
+<li>Web-based apps can easily connect with vast audiences and connect to social and other media networks, to explore collaborative interfaces, to interact with the increasing number of devices supporting HTTP and WebSocket APIs, etc.</li>
+<li>Stackoverflow&#39;s founder famously said (and it seems to be true): <em>&quot;Any application that can be written in JavaScript will eventually be written in JavaScript.&quot;</em></li>
+<li>Examples:<ul>
+<li><a href="http://gibber.mat.ucsb.edu/">Live coding audio (and graphics)</a></li>
+<li><a href="https://www.shadertoy.com/">Shadertoy</a></li>
+<li><a href="http://aleksandarrodic.com/p/jellyfish/">Jellyfish</a> and <a href="http://webglsamples.org/fishtank/fishtank.html">Fish</a> and <a href="http://empaempa.github.io/GLOW/examples/complicated/">Horses</a> and <a href="http://alteredqualia.com/three/examples/webgl_cars.html">Cars</a> and <a href="http://cake23.de/turing-fluid.html">Reaction Diffusion</a></li>
+<li><a href="http://globe.chromeexperiments.com/">World population globe</a>; the globe itself is <a href="http://www.chromeexperiments.com/globe">open source</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="tools">Tools</h2>
+<p>All you need to play with JS is:</p>
+<h3 id="a-good-modern-web-browser">A good modern web browser</h3>
+<p>Of all the browser options, Chrome and Firefox are usually at the forefront of developing web technology, such as having support for things like audio signal processing, 3D graphics, VR. </p>
+<p><a href="https://www.mozilla.org/en-US/firefox/new/">Here&#39;s Firefox</a>; made by the not-for-profit Mozilla Foundation. </p>
+<p><a href="https://www.google.ca/chrome">Here&#39;s Chrome</a>, and here&#39;s the near-identical open-source alternative, <a href="https://www.chromium.org/getting-involved/download-chromium">Chromium</a>, both made by Google.</p>
+<p>Learn how to open the browser&#39;s developer tools console, where JavaScript errors will be posted, where new javascript statements can be immediately written and evaluated, where the HTML DOM can be inspected, etc.</p>
+<h3 id="the-web-browser-as-a-platform">The web browser as a platform</h3>
+<p>Why code for the browser?</p>
+<ul>
+<li>The same code can run almost everywhere, without needing to rebuild: Windows, OSX, Linux, iOS, Android, and several others. </li>
+<li>Through online editors such as Codepen or jsFiddle, you can develop <em>in</em> the browser too, sharing through the cloud.</li>
+<li>These days, the capabilities of browsers have grown immensely, adding things like audio signal processing, MIDI, high-performance 3D graphics, AR and VR, etc. -- there&#39;s not a lot you can&#39;t do in the browser. </li>
+</ul>
+<h3 id="codepen-jsfiddle-etc-">Codepen / jsFiddle / etc.</h3>
+<p>Like having a development environment in the cloud, these websites allow you to quickly code up HTML/CSS/Javascript browser code and see the results immediately. </p>
+<p><a href="https://codepen.io/">Here&#39;s codepen</a> -- Sign up (for free) to be able to save and share sketches.</p>
+<h2 id="learning-the-js-language-">Learning the JS language:</h2>
+<ul>
+<li><a href="http://eloquentjavascript.net">Eloquent JavaScript</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide">Mozilla JavaScript Guide</a></li>
+</ul>
+<h2 id="what-version-of-javascript-">What version of JavaScript?</h2>
+<p>At the time of writing, it seems that for the most part it is safe to assume the <code>ES6</code> version is safe to use. ES6, also known as Ecmascript2015, was a new specification of the JavaScript language that added many valuable new features, making it a significantly more compelling language for general use than it had been before. Originally released in 2015, now <a href="http://kangax.github.io/compat-table/es6/">most of these features are supported by most browsers</a>, as well as server runtimes such as Node.js. </p>
+<h3 id="evolving-browser-standards-and-new-features-can-i-use-them-">Evolving browser standards and new features -- can I use them?</h3>
+<p><a href="https://caniuse.com/">Can I use feature X?</a> <a href="https://caniuse.com/#search=es6">For example, what ES6 features are supported by different browsers?</a></p>
+<h2 id="js-cheat-sheet">JS cheat sheet</h2>
+<h3 id="strings">Strings</h3>
+<p>Make a string by bounding with matching quote marks (either single or double):</p>
+<pre><code class="lang-javascript">s = <span class="hljs-string">'a string'</span>;
+s = <span class="hljs-comment">"a string"</span>;
+
+// <span class="hljs-type">Special</span> characters like newlines, tabs, have to be <span class="hljs-comment">"escaped"</span>. <span class="hljs-type">Here</span> are the most typical ones:
+s = <span class="hljs-comment">"a string with a \"</span>quote\<span class="hljs-comment">" in it, a newline: \n, a tab: \t, two slashes: \\ \/, and the character code for A: \u0041 "</span>;
+</code></pre>
+<p>Strings defined in back-tick quotes are different; these are called <strong>template strings</strong>, because they can embed bits of javascript code to define their content (this is called &quot;string interpolation&quot;). They can also embed formatting like newlines and tabs. </p>
+<pre><code class="lang-javascript">lang = <span class="hljs-string">"javascript"</span>;
+// produces: this <span class="hljs-keyword">is</span> a <span class="hljs-keyword">template</span> <span class="hljs-built_in">string</span> <span class="hljs-keyword">in</span> javascript
+s = `this <span class="hljs-keyword">is</span> a <span class="hljs-keyword">template</span> <span class="hljs-built_in">string</span> <span class="hljs-keyword">in</span> ${lang}`;
+</code></pre>
+<p>Strings are immutable but can be concatenated with <code>+</code> and manipulated through methods.</p>
+<pre><code class="lang-javascript">s = <span class="hljs-string">"hello "</span> + <span class="hljs-string">"world"</span><span class="hljs-comment">; // see also String.concat(...), </span>
+<span class="hljs-string">"seven"</span>.<span class="hljs-keyword">length</span> === <span class="hljs-number">5</span><span class="hljs-comment">; </span>
+s = <span class="hljs-string">"a"</span>.<span class="hljs-keyword">repeat</span>(<span class="hljs-number">5</span>) === <span class="hljs-string">"aaaaa"</span><span class="hljs-comment">; // see also padEnd()/padStart(), </span>
+<span class="hljs-string">'cat'</span>.toUpperCase() === <span class="hljs-string">'CAT'</span><span class="hljs-comment">;  // also toLowerCase()</span>
+
+<span class="hljs-comment">// substrings:</span>
+<span class="hljs-string">"hello"</span>.slice(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>) === <span class="hljs-string">"el"</span>  
+<span class="hljs-string">"hello"</span>.slice(<span class="hljs-number">-3</span>, <span class="hljs-number">-1</span>) === <span class="hljs-string">"ll"</span> <span class="hljs-comment">// i.e. counting back from the end</span>
+<span class="hljs-string">"hello"</span>.charAt(<span class="hljs-number">4</span>) === <span class="hljs-string">"o"</span><span class="hljs-comment">; // remember, count from 0, 1, 2, 3, 4.</span>
+<span class="hljs-comment">// why "char"? a character is a string of length 1. </span>
+<span class="hljs-string">"  zzz  "</span>.trim() === <span class="hljs-string">"zzz"</span><span class="hljs-comment">;    // also trimStart(), trimEnd()</span>
+
+<span class="hljs-comment">// searching:</span>
+<span class="hljs-string">"hello"</span>.indexOf(s, i) <span class="hljs-comment">/// returns the first index of s, starting at position i. If not found, it returns -1. See also lastIndexOf(), which searches backwards</span>
+<span class="hljs-string">"hello"</span>.endsWith(<span class="hljs-string">"lo"</span>) === true<span class="hljs-comment">; // also .startsWith()</span>
+<span class="hljs-string">"hello"</span>.includes(<span class="hljs-string">"hell"</span>) === true<span class="hljs-comment">;</span>
+<span class="hljs-comment">// for more complex searching, see RegExp methods like match(), search(), replace()</span>
+
+<span class="hljs-comment">// string to array:</span>
+<span class="hljs-string">"hello"</span>.<span class="hljs-keyword">split</span>(<span class="hljs-string">""</span>) <span class="hljs-comment">// returns ["h", "e", "l", "l", "o"]</span>
+<span class="hljs-string">"bananas"</span>.<span class="hljs-keyword">split</span>(<span class="hljs-string">"a"</span>) <span class="hljs-comment">// returns ["b", "n", "n", "s"]</span>
+<span class="hljs-string">"bananas"</span>.<span class="hljs-keyword">split</span>(<span class="hljs-string">"a"</span>, <span class="hljs-number">2</span>) <span class="hljs-comment">// returns ["b", "n"]</span>
+</code></pre>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">More string methods</a></p>
+<h3 id="numbers">Numbers</h3>
+<p>There is no integer type, all numbers are floats. <code>10</code> is the same as <code>10.0</code> is the same as <code>1e1</code>. </p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// working with whole numbers:</span>
+<span class="hljs-built_in">Math</span>.floor(<span class="hljs-number">0.5</span>) <span class="hljs-comment">// 0.0</span>
+<span class="hljs-built_in">Math</span>.ceil(<span class="hljs-number">0.5</span>)  <span class="hljs-comment">// 1.0</span>
+<span class="hljs-built_in">Number</span>.isInteger(<span class="hljs-built_in">Math</span>.ceil(x)) === <span class="hljs-literal">true</span>;
+
+<span class="hljs-comment">// strange numbers:</span>
+<span class="hljs-number">1</span>/<span class="hljs-number">0</span> === <span class="hljs-literal">Infinity</span>
+<span class="hljs-built_in">Number</span>.isFinite(<span class="hljs-number">1</span>/<span class="hljs-number">0</span>) === <span class="hljs-literal">false</span>;
+x = <span class="hljs-built_in">Math</span>.sqrt(<span class="hljs-number">-1</span>) <span class="hljs-comment">// returns NaN, which means "Not a Number"</span>
+<span class="hljs-built_in">Number</span>.isNaN(x) === <span class="hljs-literal">true</span>; <span class="hljs-comment">// this is the safest way to test for NaN</span>
+
+<span class="hljs-comment">// string &lt;-&gt; number</span>
+<span class="hljs-built_in">Number</span>.parseFloat(<span class="hljs-string">"27"</span>) === <span class="hljs-number">27</span>  <span class="hljs-comment">// returns NaN on failure to parse the string into a number</span>
+<span class="hljs-built_in">Number</span>.parseInt(<span class="hljs-string">"5"</span>, <span class="hljs-number">10</span>) === <span class="hljs-built_in">Number</span>.parseInt(<span class="hljs-string">"0101"</span>, <span class="hljs-number">2</span>) === <span class="hljs-number">5</span> <span class="hljs-comment">// the 2nd argument is the base; base 2 means binary. returns NaN on failure to parse.</span>
+<span class="hljs-built_in">Math</span>.PI.toString() === <span class="hljs-string">"3.141592653589793"</span>
+<span class="hljs-built_in">Math</span>.PI.toFixed(<span class="hljs-number">2</span>) === <span class="hljs-string">"3.14"</span>
+<span class="hljs-built_in">Math</span>.PI.toPrecision(<span class="hljs-number">2</span>) === <span class="hljs-string">"3.1"</span>
+<span class="hljs-built_in">Math</span>.PI.toExponential(<span class="hljs-number">2</span>) === <span class="hljs-string">"3.14e+0"</span>
+</code></pre>
+<h3 id="booleans-truthiness">Booleans &amp; truthiness</h3>
+<p><code>true</code> and <code>false</code> are the only boolean values, but in most cases JavaScript uses a more permissive sense of truthiness/falsyness, because of automatic type coercion.</p>
+<p><strong>falsy</strong> values are <code>false, null, undefined, &#39;&#39;, 0, NaN</code>; all other values are <strong>truthy</strong>. An <code>if</code> condition will test for truthiness, not truth. The <code>!</code> unary operator uses truthiness (not truth), and the boolean operators <code>&amp;&amp;, ||</code> also use truthiness. </p>
+<p>To explicitly use truth (not truthiness), use the <code>===</code> comparators.</p>
+<h3 id="control-flow">Control flow</h3>
+<p>The common forms:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">if</span> (&lt;cond&gt;) {
+    <span class="hljs-comment">// "then" clause</span>
+} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (&lt;cond2&gt;) {
+    <span class="hljs-comment">// alternate then</span>
+} <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// all other cases</span>
+}
+
+<span class="hljs-keyword">for</span> (&lt;init&gt;; &lt;cond&gt;; &lt;increment&gt;) {
+    <span class="hljs-comment">// body</span>
+}
+
+<span class="hljs-comment">// <span class="hljs-doctag">note:</span> the order is unpredictable.</span>
+<span class="hljs-keyword">for</span> (&lt;<span class="hljs-built_in">name</span>&gt; <span class="hljs-built_in">in</span> &lt;obj&gt;) {
+    <span class="hljs-comment">// body</span>
+}
+
+<span class="hljs-keyword">while</span> (&lt;expr&gt;) {
+    <span class="hljs-comment">// until expr is falsy</span>
+}
+</code></pre>
+<h3 id="objects">Objects</h3>
+<p>An object maps keys (strings, including &#39;&#39;) to values (anything at all except <code>undefined</code>). A key only appears once. Objects collect &amp; organize data. Keys can be added, modified and removed.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> emptyobj = {};
+<span class="hljs-keyword">var</span> binarytree = {
+    <span class="hljs-string">"left"</span>: {        <span class="hljs-comment">// <span class="hljs-doctag">note:</span> quotes around keys are optional</span>
+        <span class="hljs-string">"left"</span>: <span class="hljs-number">10</span>,    <span class="hljs-comment">// so long as key name is valid syntax</span>
+        <span class="hljs-string">"right"</span>: <span class="hljs-number">20</span>    <span class="hljs-comment">// for a JavaScript variable name</span>
+    },
+    <span class="hljs-string">"right"</span>: {
+        <span class="hljs-string">"left"</span>: <span class="hljs-number">5</span>,
+        <span class="hljs-string">"right"</span>: <span class="hljs-number">13</span>
+    }
+}
+
+<span class="hljs-comment">// indexing objects:</span>
+binarytree[<span class="hljs-string">"left"</span>][<span class="hljs-string">"left"</span>];     <span class="hljs-comment">// 10</span>
+binarytree.<span class="hljs-keyword">left</span>.<span class="hljs-keyword">left</span>;     <span class="hljs-comment">// 10</span>
+binarytree.middle;        <span class="hljs-comment">// undefined</span>
+binarytree.middle || <span class="hljs-number">7</span>;    <span class="hljs-comment">// 7</span>
+binarytree.middle.middle;    <span class="hljs-comment">// throw TypeError</span>
+
+<span class="hljs-comment">// Warning: indexing will also check methods and prototypes:</span>
+binarytree.<span class="hljs-built_in">toString</span>;    <span class="hljs-comment">// returns a function</span>
+
+<span class="hljs-comment">// adding &amp; removing keys:</span>
+emptyobj.x = <span class="hljs-number">10</span>;
+emptyobj.x;    <span class="hljs-comment">// 10</span>
+delete emptyobj.x;
+emptyobj.x;    <span class="hljs-comment">// undefined</span>
+
+<span class="hljs-comment">// objects are passed by reference (i.e. they are not copied):</span>
+z = binarytree.<span class="hljs-keyword">left</span>;
+z.<span class="hljs-keyword">right</span> = <span class="hljs-number">999</span>;
+binarytree.<span class="hljs-keyword">left</span>.<span class="hljs-keyword">right</span>;    <span class="hljs-comment">// 999</span>
+</code></pre>
+<h3 id="arrays">Arrays</h3>
+<p>JavaScript arrays are objects, with a few special features, and are intended to be indexed by numeric keys. Like objects, array values need not be the same type. Values can be of any type, and arrays can grow and shrink in size (very different to C/C++ arrays).</p>
+<pre><code class="lang-javascript">var emptyarray = [];
+var myarray = [
+    <span class="hljs-string">"zero"</span>, <span class="hljs-string">"one"</span>, <span class="hljs-string">"two"</span>, <span class="hljs-string">"three"</span>, <span class="hljs-string">"four"</span>
+];
+emptyarray[<span class="hljs-number">1</span>];         <span class="hljs-regexp">//</span> undefined
+myarray[<span class="hljs-string">"1"</span>];         <span class="hljs-regexp">//</span> <span class="hljs-string">"one"</span>
+myarray[<span class="hljs-number">1</span>];         <span class="hljs-regexp">//</span> <span class="hljs-string">"one"</span>
+emptyarray.<span class="hljs-keyword">length</span>;    <span class="hljs-regexp">//</span> <span class="hljs-number">0</span>
+myarray.<span class="hljs-keyword">length</span>;        <span class="hljs-regexp">//</span> <span class="hljs-number">5</span>
+
+<span class="hljs-keyword">for</span> (var i=<span class="hljs-number">0</span>; i &lt; myarray.<span class="hljs-keyword">length</span>; i++) {
+    console.<span class="hljs-keyword">log</span>(i, myarray[i]);
+}
+
+// grow:
+myarray[myarray.<span class="hljs-keyword">length</span>] = <span class="hljs-string">"five"</span>;
+myarray.<span class="hljs-keyword">push</span>(<span class="hljs-string">"six"</span>);     <span class="hljs-regexp">//</span> myarray is now: 
+<span class="hljs-regexp">//</span> [<span class="hljs-string">"zero"</span>, <span class="hljs-string">"one"</span>, <span class="hljs-string">"two"</span>, <span class="hljs-string">"three"</span>, <span class="hljs-string">"four"</span>, <span class="hljs-string">"five"</span>, <span class="hljs-string">"six"</span>]
+myarray.<span class="hljs-keyword">length</span>;        <span class="hljs-regexp">//</span> <span class="hljs-number">7</span>
+
+// shrink:
+myarray.<span class="hljs-keyword">pop</span>();    <span class="hljs-regexp">//</span> returns <span class="hljs-string">"six"</span>, myarray is now:
+<span class="hljs-regexp">//</span> [<span class="hljs-string">"zero"</span>, <span class="hljs-string">"one"</span>, <span class="hljs-string">"two"</span>, <span class="hljs-string">"three"</span>, <span class="hljs-string">"four"</span>, <span class="hljs-string">"five"</span>
+myarray.<span class="hljs-keyword">length</span> = <span class="hljs-number">3</span>;
+<span class="hljs-regexp">//</span> myarray is now [<span class="hljs-string">"zero"</span>, <span class="hljs-string">"one"</span>, <span class="hljs-string">"two"</span>]
+
+// .<span class="hljs-keyword">length</span> is <span class="hljs-keyword">not</span> necessarily to be trusted:
+emptyarray[<span class="hljs-number">1000</span>] = <span class="hljs-number">1</span>;    
+emptyarray.<span class="hljs-keyword">length</span>;    <span class="hljs-regexp">//</span> <span class="hljs-number">1001</span>
+</code></pre>
+<p>Because arrays are really objects, we can add non-numeric properties and methods to individual arrays. </p>
+<p>Don&#39;t use <code>delete</code> on arrays; it will leave <code>undefined</code> holes in them. Instead use <code>.splice(index, elements_to_remove, elements_to_add)</code>:</p>
+<pre><code class="lang-javascript">[<span class="hljs-string">"a"</span>, <span class="hljs-string">"p"</span>, <span class="hljs-string">"q"</span>, <span class="hljs-string">"c"</span>].splice(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-string">"b"</span>);    // [<span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span>, <span class="hljs-string">"c"</span>]
+</code></pre>
+<p>Some common methods of arrays:</p>
+<p><code>array.concat(items...)</code> will create a new array (a shallow copy) and push items onto the end. <code>array.slice(start, end)</code> will create a shallow copy from a sub-section of the array. Do not confuse <code>slice</code> with <code>splice</code>.</p>
+<p><code>array.join(separator)</code> will turn the array into a string.</p>
+<p><code>array.shift()</code> removes and returns the first element, <code>array.pop()</code> removes and returns the last element. <code>array.unshift(item)</code> prepends to the start of the array, <code>array.push(item)</code> appends to the end. </p>
+<p><code>array.sort(comparefunc)</code>. The default comparefunc is alphabetic, so it will sort numbers incorrectly. Provide your own comparefunc, which takes two arguments and returns negative if the first item is lower, positive if the second item is lower, and zero if they are equal. E.g.:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// sort numbers properly:</span>
+<span class="hljs-keyword">array</span>.sort(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span> <span class="hljs-comment">{ return a - b; }</span>);</span>
+</code></pre>
+<p>Multidimensional arrays are just arrays whose values are arrays. E.g. to create a 3x3 array of zeroes:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> z = [
+    [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>],
+    [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>],
+    [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>]
+];
+<span class="hljs-comment">// or</span>
+<span class="hljs-keyword">var</span> z = [];
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> r=<span class="hljs-number">0</span>; r&lt;<span class="hljs-number">3</span>; r++) {
+    z[r] = [];
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> <span class="hljs-built_in">c</span>=<span class="hljs-number">0</span>; <span class="hljs-built_in">c</span>&lt;<span class="hljs-number">3</span>; <span class="hljs-built_in">c</span>++) {
+        z[r][<span class="hljs-built_in">c</span>] = <span class="hljs-number">0</span>;
+    }
+}
+</code></pre>
+<p>Note, since arrays <em>are</em> objects, testing for an array needs a different method:</p>
+<pre><code class="lang-javascript">arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+<span class="hljs-built_in">typeof</span> arr; <span class="hljs-comment">// "object"</span>
+<span class="hljs-built_in">Array</span>.<span class="hljs-built_in">isArray</span>(arr); <span class="hljs-comment">// true</span>
+</code></pre>
+<h3 id="functions">Functions</h3>
+<ul>
+<li>Functions are <em>first-class</em> objects</li>
+<li>Functions provide scope</li>
+</ul>
+<p>Functions are objects; they can have properties. Functions also store their context. As objects, they can be stored in variables, objects, arrays etc, and passed around as arguments &amp; return values of other functions. For example, passing a function as an argument is commonly done when specifying callbacks. </p>
+<p>If a function is a property of another object, it is called a <strong>method</strong>. Functions themselves can also have methods.</p>
+<pre><code class="lang-javascript">&lt;<span class="hljs-keyword">name</span>&gt; = <span class="hljs-function"><span class="hljs-keyword">function</span></span> &lt;<span class="hljs-keyword">optional</span> <span class="hljs-keyword">name</span>&gt;(&lt;argument list&gt;) {
+    &lt;body&gt;
+}
+
+add = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span></span> {
+    <span class="hljs-keyword">return</span> a + b;
+}
+</code></pre>
+<p>A function can be invoked with more or less values than specified in its definition. Extra arguments are ignored, missing arguments are <code>undefined</code>. When invoked, functions also receive hidden variables <code>this</code> and <code>arguments</code>.  </p>
+<p><code>arguments</code> is an array-like object of all the arguments passed to the function, including excess arguments. It is not really an array, and only has the .length property and support for <code>[]</code> indexing. It is there to allow functions with variable numbers of arguments:</p>
+<pre><code class="lang-javascript">sum = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    var <span class="hljs-built_in">i</span>, sum = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">i</span>=<span class="hljs-number">0</span>; <span class="hljs-built_in">i</span>&lt;arguments.<span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span>++) {
+        sum += arguments[i];
+    }
+    <span class="hljs-keyword">return</span> sum;
+}
+</code></pre>
+<h3 id="variable-scope">Variable scope</h3>
+<p>Javascript has three ways to declare a variable (<code>const, let, &amp; var</code>). Rule of thumb: <strong>Use <code>const</code> whwere possible, and <code>let</code> otherwise. Never use <code>var</code>.</strong></p>
+<p>A <code>const</code> cannot be re-assigned to a new value; this can make understanding/debugging code easier. A <code>let</code> or <code>const</code> exists only within the {curly bracket} block scope it is defined in, which is usually what you want; a <code>var</code> exists everywhere within the function it is defined in, which is just weird. </p>
+<p>What does block scope mean? Within any {block}, code can read and modify variables within its block, as well as any defined above it in outer blocks. Even nested inner functions can access and modify variables defined their outer function block scope -- even if the inner function has a longer lifetime (by being returned).</p>
+<h3 id="exceptions">Exceptions</h3>
+<p>Throw exceptions with <code>throw &lt;exception-object&gt;;</code>, and catch with the <code>try...catch</code> control flow. A throw will immediately exit the current flow. The exception-object can be anything, but typically an object with <code>.name</code> and <code>.message</code> properties for the <code>catch</code> to deal with:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">throw</span> { <span class="hljs-string">name:</span> <span class="hljs-string">"MyError"</span>, <span class="hljs-string">message:</span> <span class="hljs-string">"It all went horribly wrong"</span> };
+} <span class="hljs-keyword">catch</span> (e) {
+    console.log(<span class="hljs-string">"error "</span> + e.name + <span class="hljs-string">": "</span> + e.message);
+}
+</code></pre>
+<h3 id="dynamic-evaluation">Dynamic evaluation</h3>
+<p><code>eval()</code> takes a string, parses it as JavaScript, and runs it. <code>setTimeout</code> and <code>setInterval</code> can also take string arguments and use eval. <code>new Function</code> similarly compiles arbitrary code. This capability is extremely powerful, but very very dangerous and difficult to debug.</p>
+<h3 id="json">JSON</h3>
+<p>JSON (Javascript object notation) is a widely-used text format for storing and streaming data, and is a sub-set of the notation used to declare objects in Javascript. However, it is less permissive, for example object key names must be quoted:</p>
+<pre><code class="lang-javascript">{ "<span class="hljs-attr">one</span>": <span class="hljs-number">1</span> }
+</code></pre>
+<p>Most JS environments now provide <code>JSON.parse()</code> and <code>JSON.stringify()</code> wich convert between JSON strings and Javascript objects, and vice versa.</p>
+<h3 id="the-weird-this-">The weird <code>this</code></h3>
+<p>What <code>this</code> refers to depends on how the function was invoked:</p>
+<ul>
+<li>as a method: <code>this</code> refers to the object invoking its method.</li>
+<li>as a constructor (using <code>new</code>): <code>this</code> refers to the new object being created.</li>
+<li>via function<code>.apply()</code>: <code>this</code> is the first argument of apply (the second argument is a list of arguments passed to the function)</li>
+<li>via function<code>.call()</code>: <code>this</code> is the first argument of call (the remaining arguments are passed to the function)</li>
+<li>as a function: <code>this</code> refers to the global object. <strong>This is a major cause of bugs!</strong> In particular, calling a constructor without using <code>new</code> is a common mistake that leads to a terrible mess.</li>
+</ul>
+<p>Functions can be defined anywhere an expression can appear, even inside other functions (in which case they can access private variables of the outer function). However, because of the way <code>this</code> is defined, inner functions do not inherit <code>this</code> from the outer function. The usual workaround is as follows:</p>
+<pre><code>myobj.<span class="hljs-keyword">outer</span> = <span class="hljs-keyword">function</span>() {
+    <span class="hljs-keyword">let</span> that = <span class="hljs-keyword">this</span>;    <span class="hljs-comment">// make a local reference</span>
+    <span class="hljs-keyword">let</span> inner = <span class="hljs-keyword">function</span>() {
+        <span class="hljs-comment">// can't use "this" here, as it would refer to the global object</span>
+        that.<span class="hljs-keyword">value</span> = that.<span class="hljs-keyword">value</span> + that.<span class="hljs-keyword">value</span>;
+    }
+
+    inner();
+}
+</code></pre><p>If you can understand this, then you have mastered one half of JavaScript&#39;s complexity. </p>
+<h3 id="regular-expressions">Regular Expressions</h3>
+<p>A <em>regular expression</em> specifies the syntax of a simple (type-3) language. They are used to search and replace information from strings. RegExps are usually fast, but are difficult to write (and read!), which means they are common sources of bugs.</p>
+<p>A <em>pattern</em> is a template for text that may have fixed and optional or variable components. Patterns either match a strong, or they don&#39;t. A <em>capture</em> within a pattern identifies the part of the pattern that we want to return. </p>
+<p>Regular expressions are denoted with <code>/</code> delimiters:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> r = <span class="hljs-regexp">/pattern/</span>;
+</code></pre>
+<ul>
+<li>anchors:<ul>
+<li><code>^</code> at the start anchors the pattern at the beginning of the string. Without it, the pattern can skip characters until it finds a matching start point.</li>
+<li><code>$</code> at the end anchors the pattern at the end of the string</li>
+</ul>
+</li>
+<li>character classes:<ul>
+<li><code>.</code> matches any character</li>
+<li><code>[...]</code> describes a set, range or both of characters. E.g. [A-Za-z] matches all alphabetic characters.</li>
+<li><code>[^...]</code> as above, but negative: matches any character not in the set described by ...</li>
+<li><code>\...</code> is an escape: it is used to match literals such as /, \, ^, $, +, -, *, |, ?, ., {, }, [, ], (, ),  etc. that would otherwise be interpreted as regular expression syntax</li>
+<li><code>\d</code> matches any digit, i.e. the same as <code>[0-9]</code></li>
+<li><code>\n</code> matches a newline, <code>\t</code> matches tab, <code>\u0041</code> matches &quot;A&quot;, etc.</li>
+<li><code>\s</code> matches most whitespace characters</li>
+<li><code>\w</code> matches alphabetic and numeric characters</li>
+<li><code>\1</code> matches whatever was captured in group 1, etc.</li>
+<li>any other characters are literals -- the same character must appear in sequence in the input</li>
+</ul>
+</li>
+<li>modifiers:<ul>
+<li><code>?</code> as a suffix means the preceding pattern is optional</li>
+<li><code>*</code> as a suffix matches the preceding pattern zero or more times</li>
+<li><code>+</code> as a suffix matches the preceding pattern one or more times</li>
+<li><code>{3}</code> as a suffix matches the preceding pattern a specific number of times, in this case 3 times.</li>
+<li><code>{0,3}</code> as a suffix matches the preceding pattern a specific number of times, in this case 0, 1, 2, or 3 times.</li>
+<li><code>a|b</code> the vertical bar | means either a or b will match</li>
+</ul>
+</li>
+<li>captures &amp; groups:<ul>
+<li><code>(...)</code> means the pattern in ... should be captured.</li>
+<li><code>(?:...)</code> means the pattern in ... is a non-capturing group. It is useful for applying prefix/suffix modifiers to a group without capturing them. </li>
+</ul>
+</li>
+<li>flags (placed after the final <code>/</code>):<ul>
+<li>i: ignore case throughout, i.e. <code>e</code> matches both e and E.</li>
+<li>m: multi-line, ^ and $ can match line-end characters</li>
+<li>g: global, can match multiple times  </li>
+</ul>
+</li>
+</ul>
+<p>Use <code>regex.exec(string)</code> to apply the pattern to a string; it will return an array of captures. </p>
+<p>Use <code>regex.test(string)</code> to simply test for matches; it will return true or false.</p>
+<p><code>string.match(regexp)</code> applies a regular expression to a string. If the g flag is given, it produces an array of all the matches (instead of an array of captures). Otherwise it is the same as <code>regex.exec</code>.</p>
+<p><code>string.replace(s, v)</code> replaces all instances of s with v. s can be a regular expression. If s is a string, it only replaces once. v can be a string or a function; if it is a function, it is called for each match and the result used as the replacement. If it is a string, the &quot;$&quot; character has special meaning:</p>
+<ul>
+<li><code>$&amp;</code> the matched text</li>
+<li><code>$1</code> capture group 1</li>
+<li><code>$$</code> the &quot;$&quot; character</li>
+</ul>
+<p><code>string.search(regex)</code>: like <code>string.indexOf</code>. </p>
+<hr>
+<h2 id="the-bad-parts">The bad parts</h2>
+<p>Some of the older features of JS still exist, for backward compatibility, but are highly discouraged. Others simply can&#39;t be avoided, but should be borne in mind, as they can be the cause of bugs.</p>
+<p><strong>True and false are approximate. Use <code>===</code> not <code>==</code>, <code>!==</code> not <code>!=</code> etc.</strong></p>
+<p>JS has &quot;truthy&quot; and &quot;falsy&quot; values. Falsy values include the number <code>0</code>, the string <code>&quot;&quot;</code>, the values <code>null</code> and <code>undefined</code> and <code>NaN</code>, as well as the value <code>false</code>. Everything else is truthy. </p>
+<p>Also, the string <code>&quot;7&quot;</code> is equal to the number <code>7</code> in JS&#39;s approximate sense, so <code>(7 == &quot;7&quot;)</code> returns true, whereas it is false in the strict equality test of <code>(7 === &quot;7&quot;)</code>. </p>
+<p><strong>Types are weird</strong></p>
+<p>JavaScript primitive types are: number, string, true, false, null, undefined, and object. The object type includes Function, Array, RegExp, user-defined classes, etc. The weirdness is that <code>typeof x</code> might return &quot;object&quot; for things like an array. To detect if an object is an array, use <code>Array.isArray(x)</code>.  </p>
+<p><strong>Floating point numbers are weird</strong></p>
+<p>All kinds of unexpected fun can happen from the fact that floats cannot accurately represent many numbers. This isn&#39;t a JS problem as much an IEEE problem, and affects most programming languages used today.</p>
+<p>But it can be surprising, e.g. <code>0.1 + 0.2 === 0.3</code> returns false. (To test things like this, consider looking for small differences, e.g. <code>Math.abs(0.1 + 0.2 - 0.3) &lt; 0.0001</code>. Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER  return the smallest and largest whole numbers that can be represented. Number.MIN_VALUE, Number.MAX_VALUE is the smallest and largest float numbers that can be represented. </p>
+<p>Also because of IEEE, <code>NaN !== NaN</code>, which is really weird.</p>
+<h2 id="browser-apis-canvas">Browser APIs: Canvas</h2>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial">MDN tutorial here</a></p>
+
+	</div>
+	<footer>&copy; 2018 Graham Wakefield</footer>
+  </body>
+</html>
