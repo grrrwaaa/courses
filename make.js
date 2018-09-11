@@ -120,12 +120,12 @@ var md_partials = {
 
 };
 
-//console.log(sitetree);
+console.log(sitetree);
 
 function parse_meta(fileobj, nav) {
 	if (fileobj.ext == ".md") {
 	
-		//console.log("read", fileobj);
+		console.log("read", fileobj);
 	
 		var data = fs.readFileSync(fileobj.path, "utf-8");
 		if (!data) {
