@@ -55,16 +55,29 @@ A working hypothesis we begin from therefore is a continuum or flat ontology of 
 
 **Week 2 (Sep 17):** 
 
-Readings: The first set begin in the earth, roaming far and wide:
+Readings: The first set begin between the earth and the clouds:
 
 - John Durham Peters. Understanding Media. In The Marvelous Clouds: Toward a philosophy of elemental media. University of Chicago Press, 2015. 
 
-- Manuel Delanda. Nonorganic Life. In Incorporations. New York: Zone Books 29 (1992). 
+- Manuel Delanda. Nonorganic Life. In Incorporations. New York: Zone Books 29 (1992).
+
+Announcement: [Book launch, "Worldmaking as Techné", Weds Sep 26th @7pm, Toronto Media Arts Centre, 32 Lisgar St](http://worldmakingastechne.net)
 
 **Week 3 (Sep 24):** 
 
+Readings: Building vehicles
+
+- Brian Massumi. Strange Horizons. In Parables for the Virtual. Duke University Press, 2002.
+
+- Braitenberg, Valentino. Vehicles: Experiments in synthetic psychology. MIT press, 1986.
 
 **Week 4 (Oct 1):** 
+
+Readings: Walks in nature
+
+- Jakob von Uexküll. A Foray Into the Worlds of Animals and Humans: With a Theory of Meaning. Springer, 1934.
+
+- Pickering, Andrew. "Beyond design: cybernetics, biological computers and hylozoism." Synthese 168, no. 3 (2009): 469-491.
 
 (Oct 8: University Closed)
 
