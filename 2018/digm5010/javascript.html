@@ -502,6 +502,32 @@ Also because of IEEE, ```NaN !== NaN```, which is really weird.
 
 [MDN tutorial here](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial)
 
+```
+// getting elements
+let element = document.getElementById('name');
+
+// adding elements
+canvas = document.createElement("canvas");
+canvas.width = 100;
+canvas.style.cursor = 'crosshair';
+element.appendChild(canvas);
+
+// add a click handler:
+element.addEventListener('click', function() {...}, false);
+// for example:
+canvas.addEventListener('mousemove', function(event) {
+	let x = e.clientX;
+	let y = e.clientY;
+	// store or do something with x, y...
+}, false);
+
+// call a function repeatedly (for animation):
+function update() {
+	//...
+	window.requestAnimationFrame(update);
+}
+```
+
 </script>
 <script src="page.js"></script>
 
