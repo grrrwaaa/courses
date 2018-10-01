@@ -83,25 +83,50 @@ Readings: Walks in nature
 
 **Week 5 (Oct 15):** 
 
+Readings: Two Other Manifestoes
+
+- Donna Haraway: The Cyborg Manifesto (1985).
+
+- Donna Haraway: The Companion Species Manifesto (2003).
 
 **Week 6 (Oct 22):** 
 
+- Char Davies. [Virtual Space.](http://www.immersence.com/publications/char/2004-CD-Space.html) In “Space: In Science, Art and Society”, François Penz, Gregory Radick and Robert Howell, eds. Cambridge University Press. 2004.
+	- And: [Rethinking VR: Key Concepts and Concerns.](http://www.immersence.com/publications/char/2003-CD-VSSM.html) In Hybrid Reality: Art, Technology and the Human Factor
+Hal Thwaites, ed. International Society on Virtual Systems and Multimedia. 2003.
+
+- Heinz von Foerster. Two lectures:
+	- Perception of the Future and the Future of Perception. 1971.
+	- On Constructing a Reality. 1973.
 
 **Week 7 (Oct 29):** 
+
+- Paolo Pedercini (
+[Molleindustria](http://www.molleindustria.org)). [SimCities and SimCrises. International City Gaming Conference, Rotterdam, 2017](http://molleindustria.org/GamesForCities/)
+
+- Rodney Brooks. What Is It Like to Be a Robot? [online](https://rodneybrooks.com/what-is-it-like-to-be-a-robot/), 2017.
 
 
 **Week 8 (Nov 5):** 
 
+- Plant, Sadie. "On the matrix: Cyberfeminist simulations." The cybercultures reader (2000): 325-336.
+
+- Shuja Haider. [The Darkness at the End of the Tunnel: Artificial Intelligence and Neoreaction.](https://www.viewpointmag.com/2017/03/28/the-darkness-at-the-end-of-the-tunnel-artificial-intelligence-and-neoreaction/) 2017.
 
 **Week 9 (Nov 12):** 
 
-
 **Week 10 (Nov 19):** 
+
+
 
 
 **Week 11 (Nov 26):** 
 
 Last discussion session; [course evaluations due](http://courseevaluations.yorku.ca).
+
+Readings: on language
+
+
 
 **Week 12 (Dec 3):** 
 
@@ -110,7 +135,28 @@ Final Presentations
 (Week 13: final papers due.)
 
 
+<!--
 
+Readings: What is it like to be?
+
+- Stafford, Barbara Maria. Echo objects: The cognitive work of images. University of Chicago Press, 2007. Closing chapter: *Impossible Will? Unconscious Organization, Conscious Focus.*
+
+
+
+
+- Ed Finn. Algorithmc Imagination, in What Algorithms Want. 2017.
+
+
+
+
+- Hayles, N. Katherine. How we became posthuman: Virtual bodies in cybernetics, literature, and informatics. University of Chicago Press, 2008. Closing chapter: *What does it mean to be posthuman?*
+
+
+
+- Rule, Alix, and David Levine. ["International Art English."](https://www.canopycanopycanopy.com/contents/international_art_english) Triple Canopy 16 (2012).
+
+- Nick Sousanis. Unflattening. 2015.
+-->
 
 
 
