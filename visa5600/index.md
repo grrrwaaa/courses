@@ -91,6 +91,8 @@ Readings: Two Other Manifestoes
 
 **Week 6 (Oct 22):** 
 
+Readings: Constructing realities
+
 - Char Davies. [Virtual Space.](http://www.immersence.com/publications/char/2004-CD-Space.html) In “Space: In Science, Art and Society”, François Penz, Gregory Radick and Robert Howell, eds. Cambridge University Press. 2004.
 	- And: [Rethinking VR: Key Concepts and Concerns.](http://www.immersence.com/publications/char/2003-CD-VSSM.html) In Hybrid Reality: Art, Technology and the Human Factor
 Hal Thwaites, ed. International Society on Virtual Systems and Multimedia. 2003.
@@ -101,19 +103,24 @@ Hal Thwaites, ed. International Society on Virtual Systems and Multimedia. 2003.
 
 **Week 7 (Oct 29):** 
 
+Readings: Machines in the wild
+
 - Paolo Pedercini (
 [Molleindustria](http://www.molleindustria.org)). [SimCities and SimCrises. International City Gaming Conference, Rotterdam, 2017](http://molleindustria.org/GamesForCities/)
 
 - Rodney Brooks. What Is It Like to Be a Robot? [online](https://rodneybrooks.com/what-is-it-like-to-be-a-robot/), 2017.
 
-
 **Week 8 (Nov 5):** 
+
+Readings: From cyberfeminism through AI to neoreactionism
 
 - Plant, Sadie. "On the matrix: Cyberfeminist simulations." The cybercultures reader (2000): 325-336.
 
 - Shuja Haider. [The Darkness at the End of the Tunnel: Artificial Intelligence and Neoreaction.](https://www.viewpointmag.com/2017/03/28/the-darkness-at-the-end-of-the-tunnel-artificial-intelligence-and-neoreaction/) 2017.
 
 **Week 9 (Nov 12):** 
+
+
 
 **Week 10 (Nov 19):** 
 
