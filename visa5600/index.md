@@ -139,7 +139,7 @@ Readings: on language
 
 Final Presentations
 
-(Week 13: final papers due.)
+(Week 13: final papers due Dec 10)
 
 
 <!--
