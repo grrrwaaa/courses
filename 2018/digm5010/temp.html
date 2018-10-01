@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  border: 0;
+  overflow: hidden; /*  Disable scrollbars */
+  display: block; /* No floating content on sides */
+}
+</style>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
+// let it always fill the page:
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize, false);
+
+let mouse = {
+	x: canvas.width/2,
+	y: canvas.height/2,
+	
+  state: "up"
+};
+
+let brush = {
+	x: canvas.width/2,
+	y: canvas.height/2,
+	// velocity:
+	dx: 0,
+	dy: 0,
+};
+
+// handle mouse events:
+canvas.addEventListener("pointermove", function(event) {
+    let mx = event.clientX;
+	let my = event.clientY;
+	mouse.dx = mx-mouse.x;
+	mouse.dy = my-mouse.y;
+	mouse.x = mx;
+    mouse.y = my;
+  }, false
+);
+
+canvas.addEventListener("pointerdown", function(event) {
+    let mx = event.clientX;
+	let my = event.clientY;
+	mouse.dx = 0;
+	mouse.dy = 0;
+	mouse.x = mx;
+    mouse.y = my;
+    mouse.state = "down";
+  }, false
+);
+
+canvas.addEventListener("pointerup", function(event) {
+    let mx = event.clientX;
+	let my = event.clientY;
+	mouse.dx = mx-mouse.x;
+	mouse.dy = my-mouse.y;
+	mouse.x = mx;
+    mouse.y = my;
+    mouse.state = "up";
+  }, false
+);
+
+let path;
+
+// render:
+function update() {
+  //ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
+  let rate = 0.1;
+  let relx = mouse.x - brush.x;
+  let rely = mouse.y - brush.y;
+
+  let ddx = rate * (relx - brush.dx);
+  let ddy = rate * (rely - brush.dy);
+
+  // integrate acceleration to velocity:
+  brush.dx += ddx;
+  brush.dy += ddy;
+  // apply friction:
+  let friction = 0.95;
+  brush.dx *= friction;
+  brush.dy *= friction;
+
+  // integrate velocity to position:
+  brush.x += brush.dx;
+  brush.y += brush.dy;
+
+  
+
+  // animate
+  if (mouse.state == "down") {
+	if (!path) {
+		path = {
+			x: mouse.x,
+			y: mouse.y,
+			segments: [],
+		};
+	} else {
+		path.segments.push({
+			dx: brush.dx,
+			dy: brush.dy
+		});
+	}
+  } 
+
+  // draw
+  if (path) {
+  	ctx.save();
+		ctx.translate(path.x, path.y);
+		let x = 0;
+		let y = 0;
+		for (let i=0; i<path.segments.length; i++) {
+			let p = path.segments[i];
+			ctx.beginPath();
+			ctx.moveTo(x, y);
+			x += p.dx;
+			y += p.dy;
+			ctx.lineTo(x, y);
+			ctx.stroke();
+		}
+		ctx.fillRect(-5, -5, 10, 10);
+  	ctx.restore();
+  }
+  requestAnimationFrame(update);
+}
+update();
+</script>
+</body>
+</html>
