@@ -515,7 +515,7 @@ element.appendChild(canvas);
 // add a click handler:
 element.addEventListener('click', function() {...}, false);
 // for example:
-canvas.addEventListener('mousemove', function(event) {
+canvas.addEventListener('pointermove', function(event) {
 	let x = e.clientX;
 	let y = e.clientY;
 	// store or do something with x, y...
@@ -526,6 +526,172 @@ function update() {
 	//...
 	window.requestAnimationFrame(update);
 }
+```
+
+## For vectors, matrices, quanterions
+
+[glMatrix](http://glmatrix.net) is one of the most widely-used. You can embed this in a web page from `https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.7.1/gl-matrix-min.js`. 
+
+Cheatsheet:
+
+### vec2 for 2D points and vectors
+
+```javascript
+// create
+v1 = vec2.create(); // [0, 0]
+v2 = vec2.fromValues(x, y); // [x, y]
+v3 = vec2.clone(v1); // [ v1[0], v1[1] ]
+
+// most operations have an "out" argument first
+v3 = vec2.create();
+vec2.add(v3, v1, v2); // v3 = v1 + v2
+// or simply:
+v3 = vec2.add(vec2.create(), v1, v2);
+vec2.sub(out, a, b); // out = a - b
+vec2.mul(out, a, b);
+vec2.div(out, a, b);
+vec2.scale(out, a, n); // out[0] = n * a[0]; out[1] = n * a[1]
+vec2.negate(out, a); // out[0] = -a[0]; out[1] = -a[1]
+
+vec2.set(out, x, y); // out[0] = x; out[1] = y
+vec2.copy(out, a); // out[0] = a[0]; out[1] = a[1]
+
+// whether two vectors are approximately equal
+let b = vec2.equals(a, b); 
+
+// length of vector:
+let d = vec2.length(a);
+// distance between two points
+let d = vec2.distance(a, b); 
+// returns dot project of two vectors
+// (related to the similarity of direction and angle between)
+let d = vec2.dot(a, b);
+// cross product; gives orthogonal vector with length = area of parallelogram of a & b
+// note that "out" here is a vec3!
+vec2.cross(out, a, b);
+
+// set "out" to rotation of "a" by "angle" around "origin":
+vec2.rotate(out, a, origin, angle);
+// matrix transformation. 
+// mat2 can encode scale & rotation; mat2d and mat3 can also encode translation
+vec2.transformMat2(out, a, m2);
+vec2.transformMat2d(out, a, m2d); 
+vec2.transformMat3(out, a, m3); 
+
+// make vector length equal 1, no change of direction
+vec2.normalize(out, a);
+// linear interpolation, a mix or blend along line between a (when t=0) and b (when t=1)
+vec2.lerp(out, a, b, t); 
+// place "out" at a random point on a circle of radius "r"
+vec2.random(out, r)
+```
+
+### mat2 / mat2d / mat3 for 2D transformations
+
+mat2 is a 2x2 matrix, which can represent 2D scale & rotation
+mat2d is a 3x2 matrix, which can also represent translation
+(mat3 is a 3x3 matrix that can also represent translation)
+
+The APIs are very similar:
+
+```javascript
+// mat2 data layout is:
+// [a, c
+//  b, d]
+
+// mat2d data layout is:
+// [a, c, tx
+//  b, d, ty]
+
+let m1 = mat2.create(); // creates an identity matrix [1, 0, 0, 1]
+let m1 = mat2.fromValues(a, b, c, d);
+let m2 = mat2.clone(m1);
+mat2.copy(m2, m1); 
+
+let m1 = mat2d.create(); // creates an identity matrix [1, 0, 0, 1, 0, 0]
+let m1 = mat2d.fromValues(a, b, c, d, tx, ty);
+let m2 = mat2d.clone(m1);
+mat2d.copy(m2, m1); 
+
+// set "out" a rotation matrix of rotation by "rad" radians
+mat2.fromRotation(out, rad);
+// set "out" a scaling matrix of scaling by vec2 "s"
+mat2.fromScaling(out, s);
+
+// set "out" a rotation matrix of rotation by "rad" radians
+mat2d.fromRotation(out, rad);
+// set "out" a scaling matrix of scaling by vec2 "s"
+mat2d.fromScaling(out, s);
+// set "out" a translation matrix by translation of vec2 "v"
+mat2d.fromTranslation(out, v);
+
+
+// multiply two mat2d's. Effectively transforms b by a. 
+mat2.mul(out, a, b); 
+
+// multiply two mat2d's. Effectively transforms b by a. 
+mat2d.mul(out, a, b); 
+
+// set "out" to inverse transformation of "m"
+mat2.invert(out, m);
+mat2.identity(out); // reset to identity matrix [1, 0, 0, 1]
+mat2.set(a, b, c, d);
+
+// set "out" to inverse transformation of "m"
+mat2d.invert(out, m);
+mat2d.identity(out); // reset to identity matrix [1, 0, 0, 1, 0, 0]
+mat2d.set(a, b, c, d, tx, ty);
+
+// further transform existing matrix:
+// (equivalent to creating transformation & multiplying)
+mat2.rotate(out, m, rad);
+mat2.scale(out, m, s);
+
+// further transform existing matrix:
+// (equivalent to creating transformation & multiplying)
+mat2d.rotate(out, m, rad);
+mat2d.scale(out, m, s);
+mat2d.translate(out, m, v);
+```
+
+### Converting between local & global coordinate frames:
+
+```javascript
+// create a local-to-global (agent-to-world) transform
+// by combining the global components of an "agent"
+// the order to combine them is important! Translate, Rotate, then Scale
+let m2world = mat2d.create();
+mat2d.fromTranslation(m2world, agent.world_position);
+mat2d.rotate(m2world, m2world, agent.world_orientation);
+mat2d.scale(m2world, m2world, agent.world_scale);
+
+// this would be the inverse transform, 
+// which turns global world-space vectors into agent-local space:
+let m2local = mat2d.invert(mat2d.create(), m2world);
+
+// e.g. convert a world-location "target" into agent-relative space:
+let relTarget = vec2.transformMat2d(vec2.create(), target, m2local);
+
+// e.g. convert a local-space direction vector into world-space:
+// (notice we use transformMat2, not transformMat2d, 
+// since we don't want the vector to include translation effects)
+let worldVel = vec2.transformMat2(vec2.create(), localVel, m2world); 
+```
+
+### Combining with Canvas 2D
+
+Instead of ctx.translate, ctx.rotate, etc. we can use ctx.transform():
+
+```javascript
+// change context to agent's coordinate frame
+// notice we use the local-to-world matrix here;
+// this means drawing commands in local space have their effects in global space
+ctx.save()
+ctx.transform(m2world[0], m2world[1], m2world[2], m2world[3], m2world[4], m2world[5])
+// draw here in agent-local space, where the origin [0,0] is at the agent's centre
+// ...
+// go back to the coordinate system saved in the last ctx.save():
+ctx.restore() 
 ```
 
 </script>

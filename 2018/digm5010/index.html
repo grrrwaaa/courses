@@ -75,9 +75,7 @@ This is the first year of the program, the first course of the program. It is th
 
 What is *your* research?
 
-![questions](img/questions.png)
-
-On the left; the culture, history, context of what we do. On the right, our personal trajectory, our development as researchers and creators. 
+On the on hand; the culture, history, context of what we do. On the other, our personal trajectory, our development as researchers and creators. 
 
 A futorologist said: to understand the future, we must go much further into the past; to see patterns that recur and trajectories behind the present. However this doesn't mean entering the future through a rear-view mirror (McLuhan's warning); it is to understand the language and concepts we see the world in today, and see their gaps and limitations.
 
@@ -91,8 +89,8 @@ Be comfortable to get out of your comfort zone. Learn from each other. It's OK t
 
 Introductions, overview, 
 
-- [Mindstorms?](mindstorms.html)
-- [JavaScript?](javascript.html)
+- [Mindstorms](mindstorms.html)
+- [JavaScript](javascript.html)
 
 Making: an unusual drawing app in Codepen
 
@@ -106,9 +104,6 @@ Sharing making...
 
 Discussion thoughts
 
-Reproducing
-
-- [Golan Levin](http://www.flong.com)'s [Yellowtail](http://www.flong.com/texts/reports/report_yellowtail/)
 - [Paul Haeberli's "Dynadraw"](http://www.graficaobscura.com/dyna/)
 - [John Whitney digital harmony](https://archive.org/details/DigitalHarmony_201611) -- see [DataIsNature blog post here](http://www.dataisnature.com/?p=2274)
 - Something else?
@@ -127,16 +122,82 @@ Resources: Linear Algebra (i.e. vectors) and basic forces
 
 ### Week 3: Sep 25
 
+Reproducing [Golan Levin](http://www.flong.com)'s [Yellowtail](http://www.flong.com/texts/reports/report_yellowtail/)
+
 <p data-height="265" data-theme-id="dark" data-slug-hash="aagQzY" data-default-tab="js,result" data-user="grrrwaaa" data-pen-title="week3 cur.ly" data-preview="true" class="codepen">See the Pen <a href="https://codepen.io/grrrwaaa/pen/aagQzY/">week3 cur.ly</a> by Graham (<a href="https://codepen.io/grrrwaaa">@grrrwaaa</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 
+### Week 4: Oct 2
+
+Some upcoming submission deadlines:
+
+- [Currents Santa Fe](https://currentsnewmedia.org/guidelines-2019/) - Nov 5
+- [ISEA Gwangju](http://isea2019.isea-international.org/) - Oct 31 / Nov 30
+- [xCoAx Milan](http://xcoax.org) - Jan 31
+
+---
+
+Here's a 2D template we can Fork to create new sketches:
+[https://codepen.io/grrrwaaa/pen/GXbdwy](https://codepen.io/grrrwaaa/pen/GXbdwy?editors=0010)
+
+Adding sounds -- try one of these libraries:
+- [Tone.js](https://tonejs.github.io/)
+- [Gibberish.js](http://www.charlie-roberts.com/gibberish/)
+
+[Here's last week's Curly with Tone.js added](https://codepen.io/grrrwaaa/pen/PyPXxv)
+
+---
+
+Creating mobile agents. 
+
+![Fish school](http://underthecblog.files.wordpress.com/2014/02/fishschool.gif)
+
+Some of the most beautiful, fascinating or strange phenomena of nature can be understood as emerging from the behaviors of interacting agents. Widely acknowledged examples include the murmuration of birds (or swarming insects, schools of fish), and the societal 'superorganisms' of ant colonies. We have come to understand that despite the obvious organization that we see at the macro-scale, there is no hierarchical center of coordination, but rather the whole emerges from simple interactions at local levels. These have been suggested as examples of emergence, or of self-organization. Which is to say, the whole is greater than a naive sum of its parts. 
+
+Agent-based models, or multi-agent systems, attempt to understand how non-trivial organized macro-behavior emerges from typically mobile individuals that interact primarily at a local-level. These individuals are called **agents**. Besides modeling flocks and colonies, agent-based modeling has applications from microbiology to sociology, as well as video games and computer graphics. As a biological approximation, an agent could refer to anything from an individual protein, virus, cell, bacterium, organism, or deme (a population group). Agent systems also share many features with particle systems, and the two are sometimes conflated.
+
+The definition of an agent can vary widely, but in most cases, **an autonomous agent interacts within an environment populated by other agents, but behaves independently without taking direct commands from other agents nor a global planner or leader.** Agent-based models consist of **populations** that typically operate in parallel, typically within a spatial world, often mobile. At times, the self-organizing behavior of systems of even relatively simple agents can be unpredictable, complex, and generate new emergent structures of order. 
+
+In addition to whatever the environment provides, agents may have:
+
+- **Properties**: Persistent but variable features of an agent, such as size, color, speed, direction, energy level, and so on. 
+- **Input**: Limited capabilities of sensing (or receiving messages from) the environment
+- **Output**: Limited capabilities of performing actions on (or sending messages to) the environment, or its own properties, such as orientation and speed.
+- **Processing**: An information processing capacity to select actions in response to inputs. This capacity may also include information storage (memory).
+
+#### Tortoises and Vehicles
+
+![Machina Speculatrix](http://www.rutherfordjournal.org/images/020101-05.jpg) 
+
+In the late 1940's and early 1950's, Cyberneticist Grey Walter pioneered the engineering of autonomous agents, as early examples of self-directed robots, with his series of *"tortoises"*. 
+
+<iframe width="720" height="540" src="https://www.youtube.com/embed/lLULRlmXkKo?rel=0" frameborder="0" allowfullscreen></iframe>
+
+Remarkably, this direction of research was largely forgotten as efforts in artificial intelligence concentrated on symbolic thinking. A brief history [can be read here](http://www.rutherfordjournal.org/article020101.html) -- but the story of Walter and other British Cyberneticians is truly fascinating; I highly recommend Andrew Pickering's account in [The Cybernetic Brain](http://press.uchicago.edu/ucp/books/book/chicago/C/bo8169881.html). Walter's tortoises have inspired many great research products of the last century, including the turtle graphics of Logo, the situated robotics of Rodney Brooks, the flocking behaviors of Craig Reynolds, and Valentino Braitenberg's Vehicles.
+
+#### Boids & steering behaviours:
+
+[Craig W. Reynolds. Steering Behaviors For Autonomous Characters. In Game developers conference (Vol. 1999, pp. 763-782).](http://www.red3d.com/cwr/steer/gdc99/)
+
+Craig Reynolds' work with robotics is strongly inspired by Braitenberg's and Walter's vehicles. In the late 1980s Reynolds proposed a model of animal motion that has been very influential in robotics, game design, special effects and simulation. It breaks agent movement in general into three layers:
+
+- **Action Selection**: selecting actions to perform according to environmental input and goals to achieve. 
+- **Steering**: path determination according to the action selected. Many different behaviors can be used; the essential strategy is ```steering force = desired_velocity - current_velocity```.
+- **Locomotion**: mechanisms of conversion of steering into actual movement.
+
+His paper concentrates on the steering layer, presenting a catalogue of behaviours. One of the most celebrated outcomes is a model to model flocks, herds and schools, which he named *boids*. Reynolds' paper covers boids as an aggregate of other steering behaviours (cohesion, avoidance, alignment). 
+
+Crucially, the steering behavior of a boid depends on properties of other agents that it can perceive (its *neighborhood*). The simplest way to detect nearby agents is to simply iterate all agents and test to see if they are near. This isn't especially efficient, but for small populations it is quite reasonable. Apart from a local distance condition, we might also want to have a local angle condition -- e.g. agents that can only see things in front of them. Thus we need an agent-centric (egocentric, rather than exocentric) way of thinking and working (remember Mindstorms...). 
+
+To simulate agent's *point of view* , it helps to think of coordinate frames centred on the agent. Coordinate frames can be represented by matrices in linear algebra; for this  let's use [glMatrix](http://glmatrix.net). There is a quick intro/cheatsheet on this on our [Javascript](javascript.html) page.
+
+---
 
 <!--
 - [What is research?](research.html)
 - [Cybernetics?](cybernetics.html)
 
-### Week 4: Oct 2
 ### Week 5: Oct 9
 ### Week 6: Oct 16
 ### Week 7: Oct 23
