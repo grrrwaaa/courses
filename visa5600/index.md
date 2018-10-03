@@ -120,20 +120,17 @@ Readings: From cyberfeminism through AI to neoreactionism
 
 **Week 9 (Nov 12):** 
 
-
+Readings: TBD
 
 **Week 10 (Nov 19):** 
 
-
-
+Readings: TBD
 
 **Week 11 (Nov 26):** 
 
 Last discussion session; [course evaluations due](http://courseevaluations.yorku.ca).
 
-Readings: on language
-
-
+Readings: TBD
 
 **Week 12 (Dec 3):** 
 
