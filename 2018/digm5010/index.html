@@ -201,11 +201,49 @@ To simulate agent's *point of view* , it helps to think of coordinate frames cen
 	- Perception of the Future and the Future of Perception. 1971.
 	- On Constructing a Reality. 1973.
 
+---
+
+### Week 5: Oct 9
+
+- Continuing with agents and boids
+	- Agents using ES6 classes
+	- Separate update & draw
+	- Separate agent "update" and "move"
+	- For "move":
+		- If mass==1, force==acceleration
+		- add acceleration to velocity, zero acceleration after
+		- get orientation from velocity (Math.atan2)
+		- simplest friction by scaling velocity
+		- boundary: wrap, clamp, reset?
+	- Agent "update" combines multiple influences into the vec2 "force" (each influence may need a scaling factor)
+		- random wander
+			- velocity as seeking a point roughly ahead of agent (distance implies speed)
+			- Reynold's seek: force = desired - current velocity
+		- separation
+			- consider all agents below critical distance
+			- scale relative position by inverse square distance, as force
+		- attraction
+			- consider all agents below attraction range
+			- get average relative position as force
+		- alignment 
+			- consider all agents in visible field
+			- get average velocity minus own velocity as force
+	- Extensions: 
+		- let agents communicate (e.g. colour infections)
+		- have different agent types in same space
+		- let space have static obstacles
+		- vary size (including mass?)
+		- vary sensitivities? evolve them
+		- sharks & fish?
+
+[Reading matter](https://www.dropbox.com/sh/yl0rgicmin1cuya/AAAn_-Ia0XyzHDoJGtwkEZ2_a?dl=0): 
+- Whitelaw, Mitchell. "System stories and model worlds: A critical approach to generative art." Readme 100 (2005): 135-154.
+- Whitelaw, Mitchell, Mark Guglielmetti, and Troy Innocent. "Strange ontologies in digital culture." Computers in Entertainment (CIE) 7.1 (2009): 4.
+
 <!--
 - [What is research?](research.html)
 - [Cybernetics?](cybernetics.html)
 
-### Week 5: Oct 9
 ### Week 6: Oct 16
 ### Week 7: Oct 23
 ### Week 8: Oct 30
