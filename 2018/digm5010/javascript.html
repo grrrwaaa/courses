@@ -363,6 +363,114 @@ A `const` cannot be re-assigned to a new value; this can make understanding/debu
 
 What does block scope mean? Within any {block}, code can read and modify variables within its block, as well as any defined above it in outer blocks. Even nested inner functions can access and modify variables defined their outer function block scope -- even if the inner function has a longer lifetime (by being returned).
 
+
+### classes
+
+Javascript ES6 provides a standardized way to work with classes. A **class** is a kind of template from which many **instances** can be constructed; all instances share the same implementation, but have their own unique identity and data. An instance is also an object, so it can have properties inside (these are sometimes called fields or data members). A class can have functions defined inside it, which are known as "methods", which can be called by instances. The unique identity of an instance is referred to via `this` in the method bodies. A special method name of `constructor` defines how an instance is created:
+
+```javascript
+
+class Agent {
+
+	// `constructor` defines what happens whenever `let a = new Agent(x, y)` is called
+	constructor(x, y) {
+		// store data members under the instance by assinging to `this`:
+		this.x = x;
+		this.y = y;
+		this.radius = Math.random();
+	}
+
+	// other methods can be called on instances, e.g. a.move()
+	move() {
+		this.x += 1;
+	}
+
+};
+
+let a = new Agent(10, 10);
+let b = new Agent(20, 20);
+a.move();
+b.move();
+```
+
+Getters & setters are special methods that can be used like instance properties. Static methods are special methods that belong to the class, rather than to the instance:
+
+```javascript
+class Rect {
+	constructor(w, h) {
+		this.width = w;
+		this.height = h;
+	}
+
+	// define methods to implement special behaviours for property access:
+	get area() { return this.width * this.height; }
+	set area(n) { this.width = n / this.height; }
+
+	// define a function within a class; it is not an instance method, but can be used by other methods
+	static whatIsThis() {
+		return "a rectangle";
+	}
+}
+
+let r = new Rect(10, 10);
+console.log(r.area); // 100
+r.area = 20;
+console.log(r.width); // 2
+// note that static method is called from the class, not from the instances:
+console.log(Rect.whatIsThis()) // "a rectangle"
+```
+
+By the way, `get` and `set` can also be applied to plain objects too, not just classes/instances.
+
+Classes can extend ("sub-class") another class; inheriting the methods of the parent. Be sure to call `super(...)` in the `constructor`. 
+
+```javascript
+class Animal { 
+  constructor(name) {
+    this.name = name;
+  }
+  speak() { console.log("zzz"); }
+  isAnimal() { return true; }
+};
+
+class Dog extends Animal {
+	constructor(name) {
+		super(name);	// run the Animal constructor
+	}
+
+	speak() { 
+		console.log("woof"); 
+		super.speak(); // call a super-class method
+	}
+}
+
+let a = new Dog();
+console.log(a.isAnimal());  // true
+a.speak(); // "woof", "zzz"
+```
+
+Classes can also inherit from functions (simply, the function becomes the `super` constructor of the new class). This is good because lots of older pre-ES6 code uses function-based classes. 
+
+More weird stuff:
+
+```javascript
+
+function nameGenerator() {
+	return "zap";
+}
+
+class Foo {
+
+	// i.e., the same way we can generate property names in regular objects
+	[ nameGenerator() ] () {
+		console.log("this is a method whose name was generated programmatically!");
+	}
+}
+
+let f = new Foo();
+foo.zap(); // this is a method whose name was generated programmatically!
+```
+
 ### Exceptions
 
 Throw exceptions with ```throw <exception-object>;```, and catch with the ```try...catch``` control flow. A throw will immediately exit the current flow. The exception-object can be anything, but typically an object with ```.name``` and ```.message``` properties for the ```catch``` to deal with:
