@@ -120,7 +120,17 @@ Readings: From cyberfeminism through AI to neoreactionism
 
 **Week 9 (Nov 12):** 
 
-Readings: TBD
+Readings: Monstrous Life. 
+
+Selections from Tsing, Anna Lowenhaupt, et al. Arts of living on a damaged planet: Ghosts and monsters of the Anthropocene. University of Minnesota Press, 2017.
+
+*This week's readings draw biological focus from the entanged intrapenetrations of symbiosis and holobionts; against the individual. As such, let's have a monstrous group rather than humanly individual presentations!*
+
+- Margaret McFall-Ngai. Noticing Microbial Worlds: The Postmodern Synthesis in Biology
+- Scott Gilbert. Holobiont by Birth: Multilineage Individuals
+
+- Karen Barad. No Small Matter: Mushroom Clouds, Ecologies of Nothingness, and Strange Topologies of Spacetimemattering
+- Dorion Sagan. Beautiful Monsters: Terra in the Cyanocene
 
 **Week 10 (Nov 19):** 
 
