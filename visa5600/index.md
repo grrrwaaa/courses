@@ -134,7 +134,13 @@ Selections from Tsing, Anna Lowenhaupt, et al. Arts of living on a damaged plane
 
 **Week 10 (Nov 19):** 
 
-Readings: TBD
+Readings: Just be cause
+
+- Barad, Karen. "Posthumanist performativity: Toward an understanding of how matter comes to matter." Signs: Journal of women in culture and society 28.3 (2003): 801-831.
+
+- Morton, Timothy. 
+	- Realist magic: Objects, ontology, causality. Open Humanities Press, 2014. (Introduction)
+	- Hyperobjects: Philosophy and Ecology after the End of the World. U of Minnesota Press, 2013. (Introduction)
 
 **Week 11 (Nov 26):** 
 
