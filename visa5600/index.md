@@ -146,7 +146,16 @@ Readings: Just be cause
 
 Last discussion session; [course evaluations due](http://courseevaluations.yorku.ca).
 
-Readings: TBD
+Readings: Last words
+
+- Rule, Alix, and David Levine. ["International Art English."](https://www.canopycanopycanopy.com/contents/international_art_english) Triple Canopy 16 (2012).
+
+- Nick Sousanis. Unflattening. 2015. (Excerpts)
+
+- Parsons, Michael (director). "25 Years from Scratch: The Scratch Orchestra." London Musician's Collective, 1997. (Excerpts)
+
+- Lem, Stanislaw. "The cyberiad: fables for the cybernetic age." ACM SIGART Bulletin 47 (1974)
+
 
 **Week 12 (Dec 3):** 
 
@@ -172,10 +181,6 @@ Readings: What is it like to be?
 - Hayles, N. Katherine. How we became posthuman: Virtual bodies in cybernetics, literature, and informatics. University of Chicago Press, 2008. Closing chapter: *What does it mean to be posthuman?*
 
 
-
-- Rule, Alix, and David Levine. ["International Art English."](https://www.canopycanopycanopy.com/contents/international_art_english) Triple Canopy 16 (2012).
-
-- Nick Sousanis. Unflattening. 2015.
 -->
 
 
