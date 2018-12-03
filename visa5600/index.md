@@ -157,9 +157,12 @@ Readings: Last words
 - Lem, Stanislaw. "The cyberiad: fables for the cybernetic age." ACM SIGART Bulletin 47 (1974)
 
 
+
 **Week 12 (Dec 3):** 
 
 Final Presentations
+
+Make-up class for week 11: Thu 12pm-2pm.
 
 (Week 13: final papers due Dec 10)
 
