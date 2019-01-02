@@ -61,7 +61,7 @@ Content may vary from this plan according to needs and interests of students.
 ### 1. Jan 3
 
 **Course overview**. Introduction to the field(s), and the coding environment used in lectures & labs.    
-**Cellular Automata**, classes of behaviour, Game of Life.
+**[Cellular Automata](cellular.html)**, classes of behaviour, Game of Life.
 
 ### 2. Jan 10
 
