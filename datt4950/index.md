@@ -5,10 +5,10 @@ importance: 10
 
 # Artificial Life, Generative Art and Creative Code
 
-**Code:** DATT4950   
+**Code:** DATT4950 / DIGM5950   
 **Title:** Artificial Life, Generative Art and Creative Code   
 **Credit:** (3.00 Units)   
-**When:** Fall 2016, Mondays 10:00 - 13:30    
+**When:** Winter 2018, Thursdays 12:30 - 3:30    
 **Where:** GCFA, ACW 103   
 **Instructor:** Graham Wakefield    
 **Email:** grrrwaaa at yorku dot ca
@@ -36,11 +36,21 @@ The course is focused on practice in the arts, interactive media, and design: in
 
 **Contact hours:** 3.5 per week, split between lectures and lab work. Lectures focus on the introduction of theoretical, aesthetic and conceptual content of the course. Labs focus on the application of lecture material in the form of instructor-led reconstructions, excercises/studies, and larger projects, and will include time for one-on-one meetings. 
 
-**Assessment:** Assignments, projects, quizzes, readings and participation, with the following weighting for the final grade:
+**Assessment:** Assignments, projects, quizzes, readings and participation, with the following weighting for the final grade. Graduate students are expected to achieve a higher calibre of work and depth of research underlying the realization of the assignments and project. 
 
-- 45% Assignments: Exercises and readings are assigned throughout the course. Exercises develop essential practice-informed critique and experiential learning.
-- 40% Final Project: Realized individually or in groups, demonstrate the effective application of understanding through the course in novel expressions of adaptive media and art. Projects will be presented to the class at the end of the term and will be in the form of a critical discussion that reflects on the results of the experience gained over duration of the course.
-- 15% Quizzes, readings and participation. Quizzes are given periodically through the course. Readings are short selections from books or landmark papers, chosen to directly support the assignments and tutorial discussion. Participation incorporates contributions to tutorial discussions, awareness of issues in readings, and the ability to relate tutorial issues to the broader concerns of the course.
+- Assignments: 40%. Exercises and readings are assigned throughout the course. Exercises develop essential practice-informed critique and experiential learning.
+
+- Final Project: 30%. Realized individually or in groups, demonstrate the effective application of understanding through the course in novel expressions of adaptive media and art. Projects will be presented to the class at the end of the term and will be in the form of a critical discussion that reflects on the results of the experience gained over duration of the course.
+- Final project report: 20% (graduate students only).
+
+- Quizzes, readings and participation: 30% (undergraduate) / 10% (graduate). Quizzes are given periodically through the course. Readings are short selections from books or landmark papers, chosen to directly support the assignments and tutorial discussion. Participation incorporates contributions to tutorial discussions, awareness of issues in readings, and the ability to relate tutorial issues to the broader concerns of the course.
+
+Assignments/projects are assessed by the following criteria:
+
+1. Execution: How well instructions were followed and conceptual goals of the assignment were met. 
+2. Aesthetic qualities: The clear and consistent articulation and composition of a creative whole, and the experiential and/or conceptual depth thereof, within the frame of the given assignment and context of the course.
+3. Technical completeness: Functionality, accuracy, efficiency, creativity, and clear structure in the development and in the results.
+4. Novel contribution: Ingenuity in response to unanticipated challenges, comprehension and creativity beyond what is demonstrated in labs, and vision in further extension.
 
 ---
 
@@ -48,97 +58,50 @@ The course is focused on practice in the arts, interactive media, and design: in
 
 Content may vary from this plan according to needs and interests of students.
 
-### 1. Sep 12
+### 1. Jan 3
 
 **Course overview**. Introduction to the field(s), and the coding environment used in lectures & labs.    
 **Cellular Automata**, classes of behaviour, Game of Life.
 
-### 2. Sep 19
+### 2. Jan 10
 
 CA variations: non-homogeneity, stochastics, asynchrony, unbounded states. Continuous, reaction-diffusion. Particle/block rule. Multi-scale systems.
 
-### 3. Sep 26
+### 3. Jan 17
 
-CA variations: non-homogeneity, stochastics, asynchrony, unbounded states. Continuous, reaction-diffusion. Particle/block rule. Multi-scale systems.
+### 4. Jan 24
 
-### 4. Oct 3
+**Due in class:** Assignment 1
 
-**Due:** [Assignment I (15%)](due.html#assignment-i)
+### 5. Jan 31
 
-**Quiz I** (5%)
+### 6. Feb 7
 
-**Agent-based modelling**. Turtles and tortoises, vehicles, steering models, random walks.
+### 7. Feb 14
 
-### 5. Oct 17
+**Due in class:** Assignment 2
 
-Boids, subsumption architectures.   
-Agents and fields. Chemotaxis, stigmergy, social models. 
+(Feb 21 READING WEEK)
 
-### 6. Oct 24
+### 8. Feb 28
 
-More on agents and environment. Vehicles again; stigmergy; life, death & resources.
+### 9. Mar 7
 
-http://codepen.io/grrrwaaa/pen/Zpwkxw?editors=0010
+**Due in class:** Assignment 3
 
-http://codepen.io/grrrwaaa/pen/pEGXNE?editors=0010
+### 10. Mar 14
 
-http://codepen.io/grrrwaaa/pen/EgrYgV?editors=0010
+### 11. Mar 21
 
-### 7. Oct 31 
-
-**Quiz II** (5%)
-
-**Due:** [Assignment II (15%)](due.html#assignment-ii)
-
-**Evolution** (natural and artificial). Selection models, mutation models, population models. 
-
-### 8. Nov 7 
-
-Evolution continued; ecology and ecosystem, aesthetic selection & biomorphs.
-Genetic programming.
-
-[Biomorphs created in the lab today](http://codepen.io/grrrwaaa/pen/PbqYOX?editors=0010) 
-
-### 9. Nov 14
-
-**Quiz III** (5%)
-
-Assignment III discussion/assistance.
-
-### 10. Nov 21
+**Due in class:** [Work-in-progress of final project](due.html#final-project)
 
 [Course evaluation](http://courseevaluations.yorku.ca)
 
-**Due:** [Assignment III (15%)](due.html#assignment-iii)
-
-Special topic: [beyond the lab environment.](https://github.com/grrrwaaa/courses/tree/gh-pages/code)
-
-Final project/portfolio discussion.
-
-**Quiz III** (5%)
-
-### 11. Nov 28
-
-**Due (in class):** [Work-in-progress of final project](due.html#final-project)
-
-**Rewriting systems and artificial chemistries**. Tierra, Alchemy.
-
 Final project/portfolio assistance.
 
-### 12. Dec 5
+### 12. Apr 4
 
-**Due:** [Final project (40%)](due.html#final-project)
-
-The 40% is broken into:
-
-- 15/40% Final project presentation (Dec 5th), in which you must be able to show both concept and some working prototypes of progress. Also feel free to make use of prior assignments in making your presentation.
-- 25/40% final project file submission, including code, paper, and video (extensions will be granted up to Dec 19th but absolutely no further), of which:
-	- 7/40%: Technical completeness
-	- 7/40%: Aesthetic qualities
-	- 7/40%: Novel contribution
-	- 4/40%: Execution & effort
-
-(See [the deliverables page](due.html) for more details).
+**Due:** [Final project](due.html#final-project)
 
 ---
 
