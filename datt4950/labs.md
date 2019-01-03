@@ -11,16 +11,35 @@ Most of the examples we will work though in the labs will use the JavaScript pro
 
 ---
 
-To start a new script, [open the following link and then press the "Fork" button to create a new copy](http://codepen.io/grrrwaaa/pen/qObgdb?editors=001)
+## Scripting with Codepen
+
+Before anything, make sure you have a recent version of Chrome or Firefox to work with.
+
+Then, make sure you have signed up for a (free) account on [Codepen](https://codepen.io).
+
+### Starting a new script
+
+To start a new script, [open the following link and then press the "Fork" button to create a new copy](https://codepen.io/grrrwaaa/pen/YdYMwB?editors=001)
 
 Alternatively, click the button below, then close the CSS and HTML tabs:
 
 <form action="http://codepen.io/pen/define" method="POST" target="_blank">
-<input id="data-input" type="hidden" name="data" value="{&amp;quot;title&amp;quot;:&amp;quot;DATT4950&amp;quot;,&amp;quot;description&amp;quot;:&amp;quot;Artificial Life&amp;quot;,&amp;quot;css_external&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js_external&amp;quot;:&amp;quot;https://grrrwaaa.github.io/courses/code/al.min.js&amp;quot;,&amp;quot;html&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js&amp;quot;:&amp;quot;// see https://grrrwaaa.github.io/courses/datt4950/labs.html for available methods\n\n// initialization code here\n\nfunction update() {\n  // simulation code here\n}\n\nfunction draw() {\n  // rendering code here\n}&amp;quot;,&amp;quot;html_pre_processor&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_pre_processor&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_starter&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_prefix&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js_library&amp;quot;:&amp;quot;&amp;quot;}">
+<input id="data-input" type="hidden" name="data" value="{&amp;quot;title&amp;quot;:&amp;quot;DATT4950&amp;quot;,&amp;quot;description&amp;quot;:&amp;quot;Artificial Life&amp;quot;,&amp;quot;css_external&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js_external&amp;quot;:&amp;quot;https://worldmaking.github.io/code/al2019.js&amp;quot;,&amp;quot;html&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js&amp;quot;:&amp;quot;// see https://grrrwaaa.github.io/courses/datt4950/labs.html for available methods\n\n// initialization code here\n\nfunction update() {\n  // simulation code here\n}\n\nfunction draw() {\n  // rendering code here\n}&amp;quot;,&amp;quot;html_pre_processor&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_pre_processor&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_starter&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_prefix&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js_library&amp;quot;:&amp;quot;&amp;quot;}">
 <input type="submit" value="Create a new Codepen editor">
 </form> 
 
-Alternatively, if you want to edit offline, download the library from [here](http://grrrwaaa.github.io/courses/code/al.min.js), saving it as "al.min.js" in a local folder, and put your code into an ```html``` file in the same folder starting from this template:
+### Opening the javascript console
+
+Codepen includes a console, but I don't recommend it; the browser's built in developer consoles are far better. Instead, learn how to find the javascript console for your browser of choice:
+
+- Chrome: View > Developer > JavaScript Console
+- Firefox: Tools > Web Developer > Web Console
+
+### Offline / saving from Codepen
+
+You can export from Codepen to static HTML files using the Export (export as zip) button, which can be useful for keeping copies of your work. 
+
+Alternatively you can build a fully offline local file by downloading our library from [here](https://worldmaking.github.io/code/al2019.js), saving it as "al2019.js" in a local folder, and putting your code into an ```html``` file in the same folder starting from this template:
 
 ```
 <!doctype html>
@@ -29,7 +48,7 @@ Alternatively, if you want to edit offline, download the library from [here](htt
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="al.min.js"></script>
+<script src="al2019.js"></script>
 </head>
 <body>
 <script>
@@ -52,7 +71,10 @@ function draw() {
 </html>
 ```
 
+<!-- 
 ---
+
+### Examples
 
 - Cellular systems
 	- [1D automata](http://codepen.io/grrrwaaa/pen/meVoMo)
@@ -93,29 +115,33 @@ function draw() {
 	- [Evolving chemotaxis agents](http://codepen.io/grrrwaaa/pen/amgjbb?editors=0010)
 	- [Evolving images](http://codepen.io/grrrwaaa/pen/YwmerM?editors=001)
 	- [Random video feedback](http://codepen.io/grrrwaaa/pen/pyzJLe?editors=001)	
-	
+	-->
 ---
 
 > If you haven't used JavaScript before, I've provided a [quick introduction here](js.html)
 
+<!-- 
 Here's an example:
 
 <p data-height="480" data-theme-id="0" data-slug-hash="EVPGOB" data-preview ="true" data-default-tab="result" data-user="grrrwaaa" class='codepen'>See the Pen <a href='http://codepen.io/grrrwaaa/pen/EVPGOB/'>Game of Life</a> by Graham (<a href='http://codepen.io/grrrwaaa'>@grrrwaaa</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 <script async src="http://assets.codepen.io/assets/embed/ei.js"></script>
 
 If the example above doesn't work, it might be that you are among the [~10% of users](http://webglstats.com) whose browsers don't yet support WebGL. You can check support [here](http://www.doesmybrowsersupportwebgl.com), and compare browser support [here](http://caniuse.com/#feat=webgl). Note that IE users need to have version 11, or use Edge. Chrome has had good support for a long time. Safari has supported WebGL since version 8. Firefox has partial support. 
+-->
 
 ## Overview
 
-Graphics rendering uses the HTML5 Canvas and WebGL, which is supported on most computers with recent versions of Chrome, Firefox or Safari. The starter-kit uses WebGL technology for performance, but for simplicity's sake examples will be confined to a 2D world, and coded through simplified abstractions. This world has coordinates ranging from (0,0) in the bottom-left corner to (1,1) in the top right corner -- i.e. it assumes the world to be square shaped and unit length. 
+Graphics rendering uses the HTML5 Canvas, which is supported on most computers with recent versions of Chrome, Firefox or Safari. For simplicity's sake examples will be confined to a 2D world, and coded through simplified abstractions. This world has coordinates ranging from (0,0) in the top-left corner to (1,1) in the bottom right corner -- i.e. it assumes the world to be square shaped and unit length. 
 
 ## Callbacks
 
 The kit provides an event-based callback system, in which you implement specially-named functions to handle specific events.
 
-For simulation updates, implement a function called ```update()```. 
+For simulation updates, implement a function called ```update(dt)```. The `dt` argument gives the delta time between updates (in seconds). Simulation can be paused and un-paused using the `Space` key.
 
-To define how the canvas renders, implement a function called ```draw()```. All graphics code should go into this callback.
+To define how the canvas renders, implement a function called ```draw(ctx)```. All graphics code should go into this callback. The `ctx` argument is the [Canvas 2d context](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D) which you can use for general 2D drawing.  Rendering can toggle fullscreen mode using the `Escape` key.
+
+For simulation restarts, implement a function called ```reset()```. This will be fired whenever you press the `Enter` key.
 
 ### Interaction
 
@@ -123,11 +149,7 @@ Additional callbacks exist to detect mouse/touch and keyboard interaction respec
 
 ```javascript
 function mouse(event, point, id) {
-	write(event, point, id);
-}
-
-function touch(event, point, id) {
-	write(event, point, id);
+	console.log(event, point, id);
 }
 
 function key(event, key) {
@@ -141,7 +163,7 @@ The events details are:
 	- "down": a button was pressed. 
 	- "up": a button was pressed. 
 	- "move": mouse was moved (or dragged).
-	- the ```point``` argument is a vec2 in the range 0,0 to 1,1 
+	- the ```point``` argument is an array of two coordinates, in the range 0,0 to 1,1 
 	- the ```id``` argument identifies which the button(s) pressed
 - touch (for touch-screen devices):
 	- "start": a touch started 
@@ -153,9 +175,8 @@ The events details are:
 	- "down": a key was pressed.
 	- "up": a key was released.
 	- the ```key``` argument can be a string representation of the character pressed, such as "a", "2", "Z", ">" etc., or special strings such as "Shift", "Control", "Alt", "Meta", "Enter", "Backspace" etc.
-	
-There are also some global key bindings: The Spacebar will pause or resume simulation (the update() callback). The Escape key will toggle fullscreen view.
 
+<!-- 
 ### Persistence
 
 Sometimes you want state of a simulation to persist between edits, so the world doesn't always begin from scratch. We have two more callbacks to help with this. 
@@ -191,11 +212,11 @@ That means, you need to design your persistent state in ```save()``` in a way th
 - Data is stored in a persistent localStorage linked to the URL and the browser, which means:
 	- Loading in a different browser, or using http instead of http for example, will not restore the same data.
 
-
+-->
 
 ## Globals
 
-The starter-kit provides a few extra global functions that are frequently needed:
+The library provides a few extra global functions that are frequently needed:
 
 ```random()``` can be used to generate random numbers. Without an argument it returns rational numbers between 0 and 1; with a numeric argument it returns integers in the given range (e.g. useful for picking within an array).
 
@@ -210,7 +231,7 @@ wrap(-1, 4);	// returns 3 (whereas -1 % 4 would return -1)
 shuffle([a, b, c]); // returns [b, a, c] or [c, b, a] or [a, b, c] etc.
 ```
 
-The ```write()``` function will output text above the main canvas. It can be more useful than calling ```console.log()``` in certain situations, since the text will reset on each frame. 
+The ```write()``` function will output text above the main canvas. It may be more useful than calling ```console.log()``` in certain situations. 
 
 There are also a couple of global variables, used to measure time:
 
@@ -224,7 +245,7 @@ console.log(dt);	// the delta time in seconds between each update()
 The ```field2D``` type represents a dense grids of cells of floating point numbers (typically but not necessarily in the range of zero to one). You can create a field like this:
 
 ```javascript
-var field = new field2D(width, height);
+var field = new field2D(10);  // creates a 10 x 10 grid of cells
 ```
 
 Typically we will render a field in the ```draw()``` callback by calling the field's draw method:
@@ -259,7 +280,7 @@ field.set(function(x, y) {
 });
 ```
 
-Note that ```field.set``` returns the field itself, so it can be chained.`
+Note that ```field.set``` returns the field itself, so it can be chained.
 
 More useful methods:
 
@@ -268,12 +289,14 @@ field.clear(); 		// set all field cells to zero, faster than field.set(0)
 field.normalize();	 // re-scales the field into a 0..1 range
 
 field.clone(); 	// create a duplicate copy of the field
+field.copy(another); // copy the values of `another` field (must have the same size)
 
 field.min();	// returns the lowest cell value in the array
 field.max();	// returns the highest cell value in the array
 field.sum();	// adds up all cell values and returns the total
 
 field.scale(n); // multiply all cells by n; AKA field.mul(n);
+field.add(n); // add `n` to all cells
 ```
 
 Normally fields render their cells with hard edges, but you can render the field more smoothly by setting:
@@ -281,6 +304,7 @@ Normally fields render their cells with hard edges, but you can render the field
 ```javascript
 field.smooth = true;
 ```
+
 
 ### Normalized sampling
 
@@ -366,7 +390,7 @@ field.deposit([1, 0.5, 0.1], agent.position);
 You can also load PNG images into a field2D. 
 
 ```javascript
-field.png("https://upload.wikimedia.org/wikipedia/commons/1/17/ArtificialFictionBrain.png");
+field.loadImage("https://upload.wikimedia.org/wikipedia/commons/1/17/ArtificialFictionBrain.png");
 ```
 
 Note: images will be resized to fit the field, not vice versa. Transparent PNGs are supported (the opacity information is in channel 4 of the field).
@@ -374,13 +398,12 @@ Note: images will be resized to fit the field, not vice versa. Transparent PNGs 
 Note: images can take a little time to load. If you want something to happen only after the image is loaded, add a callback:
 
 ```javascript
-field.png("https://upload.wikimedia.org/wikipedia/commons/1/17/ArtificialFictionBrain.png", function() {
+field.loadImage("https://upload.wikimedia.org/wikipedia/commons/1/17/ArtificialFictionBrain.png", function() {
 	write("image is loaded!");
 });
 ```
 
-[See this demo in the editor](http://codepen.io/grrrwaaa/pen/gLLjXW?editors=0010)
-
+<!-- 
 ## vec2
 
 The ```vec2``` type gives us a useful abstraction of two-component vectors. Here are some ways of creating a vec2:
@@ -654,20 +677,10 @@ draw2D.blend(false); // replace previous drawings
 > Note: The draw2D transform and color are reset before each ```draw()``` call.
 
 
-<!--
-
-Shape API
-
 -->
 
 ----
 
 ## Under the hood
 
-The library code is in [GitHub here](http://github.com/grrrwaaa/courses/blob/master/code/al.js).
-
-----
-
-## Random intereresting links
-
-[Math as code](https://github.com/Jam3/math-as-code/blob/master/README.md). "This is a reference to ease developers into mathematical notation by showing comparisons with JavaScript code. Motivation: Academic papers can be intimidating for self-taught game and graphics programmers." It also includes helpful links to various JavaScript libraries we can use for mathematics.
+The library code is in [GitHub here](https://worldmaking.github.io/code/al2019.js).
