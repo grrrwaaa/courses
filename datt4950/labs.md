@@ -72,54 +72,6 @@ function draw() {
 ```
 
 
-
-<!-- 
-### Examples
-
-- Cellular systems
-	- [1D automata](http://codepen.io/grrrwaaa/pen/meVoMo)
-	- [Game of Life](http://codepen.io/grrrwaaa/pen/EVPGOB)
-	- [Brian's brain](http://codepen.io/grrrwaaa/pen/WQrmGb)
-	- [Forest fire](http://codepen.io/grrrwaaa/pen/xwZBRP)
-	- [Forest fire in colour](http://codepen.io/grrrwaaa/pen/pgrrpo)
-	- [Langton's Ant](http://codepen.io/grrrwaaa/pen/RWrdoq)
-	- [Multiple ants](http://codepen.io/grrrwaaa/pen/MaKxJb)
-	- [Block rules](http://codepen.io/grrrwaaa/pen/NGxJpP)
-	- [Reaction Diffusion](http://codepen.io/grrrwaaa/pen/RLgwWb)
-	- [Ising model](http://codepen.io/grrrwaaa/pen/dGzORw)
-	- [Hodgepodge](http://codepen.io/grrrwaaa/pen/LpGaxm)
-	- [Semi-continuous game of life](http://codepen.io/grrrwaaa/pen/RrZgxo)
-	- [Game of life + sweeper](http://codepen.io/grrrwaaa/pen/eJEegQ)
-	- [Week 2 lab](http://codepen.io/grrrwaaa/pen/wMqpME)
-- Agent systems
-	- [Random walker](http://codepen.io/grrrwaaa/pen/mVBBPQ)
-	- [Flockers](http://codepen.io/grrrwaaa/pen/LGzgpO)
-	- [Flockers + obstacles](http://codepen.io/grrrwaaa/pen/XXevBb)
-	- [Flockers with obstacles and predator](http://codepen.io/grrrwaaa/pen/RGXyVB?editors=0010)
-	- [Simple seek/flee vehicle](http://codepen.io/grrrwaaa/pen/xZPeNV)
-	- [Two-eye vehicles + environment](http://codepen.io/grrrwaaa/pen/yeKWax)
-	- [As above, but with inverted speed, and collision avoidance](http://codepen.io/grrrwaaa/pen/ameRER?editors=0010)
-	- [Week 3 lab](http://codepen.io/grrrwaaa/pen/LGebzj)
-	- [Chemotaxis](http://codepen.io/grrrwaaa/pen/yepmvq)
-	- [Chemotaxis + mouse](http://codepen.io/grrrwaaa/pen/mVxowj)
-	- [Stigmergy](http://codepen.io/grrrwaaa/pen/OMvYRg)
-	- [Ants (work in progress)](http://codepen.io/grrrwaaa/pen/pgVEdP)
-	- [Birth & death](http://codepen.io/grrrwaaa/pen/PZxrbo)
-	- [Birth & death + chemotaxis](http://codepen.io/grrrwaaa/pen/QKXaGb?editors=0010)
-- Rewriting & evolutionary systems
-	- [Koch curve](http://codepen.io/grrrwaaa/pen/xVVpea?editors=001)
-	- [Evolving sentences](http://codepen.io/grrrwaaa/pen/yeqMYy)
-	- [Evolving math](http://codepen.io/grrrwaaa/pen/zrLZvK)
-	- [Evolving biomorphs](http://codepen.io/grrrwaaa/pen/yadVLP?editors=001)
-	- [Evolving biomorphs (3x3)](http://codepen.io/grrrwaaa/pen/dGwWOz?editors=001)
-	- [Evolving chemotaxis agents](http://codepen.io/grrrwaaa/pen/amgjbb?editors=0010)
-	- [Evolving images](http://codepen.io/grrrwaaa/pen/YwmerM?editors=001)
-	- [Random video feedback](http://codepen.io/grrrwaaa/pen/pyzJLe?editors=001)	
-	-->
----
-
-> If you haven't used JavaScript before, I've provided a [quick introduction here](js.html)
-
 <!-- 
 Here's an example:
 
@@ -677,6 +629,51 @@ draw2D.blend(false); // replace previous drawings
 > Note: The draw2D transform and color are reset before each ```draw()``` call.
 
 
+-->
+
+
+<!-- 
+### Examples
+
+- Cellular systems
+	- [1D automata](http://codepen.io/grrrwaaa/pen/meVoMo)
+	- [Game of Life](http://codepen.io/grrrwaaa/pen/EVPGOB)
+	- [Brian's brain](http://codepen.io/grrrwaaa/pen/WQrmGb)
+	- [Forest fire](http://codepen.io/grrrwaaa/pen/xwZBRP)
+	- [Forest fire in colour](http://codepen.io/grrrwaaa/pen/pgrrpo)
+	- [Langton's Ant](http://codepen.io/grrrwaaa/pen/RWrdoq)
+	- [Multiple ants](http://codepen.io/grrrwaaa/pen/MaKxJb)
+	- [Block rules](http://codepen.io/grrrwaaa/pen/NGxJpP)
+	- [Reaction Diffusion](http://codepen.io/grrrwaaa/pen/RLgwWb)
+	- [Ising model](http://codepen.io/grrrwaaa/pen/dGzORw)
+	- [Hodgepodge](http://codepen.io/grrrwaaa/pen/LpGaxm)
+	- [Semi-continuous game of life](http://codepen.io/grrrwaaa/pen/RrZgxo)
+	- [Game of life + sweeper](http://codepen.io/grrrwaaa/pen/eJEegQ)
+	- [Week 2 lab](http://codepen.io/grrrwaaa/pen/wMqpME)
+- Agent systems
+	- [Random walker](http://codepen.io/grrrwaaa/pen/mVBBPQ)
+	- [Flockers](http://codepen.io/grrrwaaa/pen/LGzgpO)
+	- [Flockers + obstacles](http://codepen.io/grrrwaaa/pen/XXevBb)
+	- [Flockers with obstacles and predator](http://codepen.io/grrrwaaa/pen/RGXyVB?editors=0010)
+	- [Simple seek/flee vehicle](http://codepen.io/grrrwaaa/pen/xZPeNV)
+	- [Two-eye vehicles + environment](http://codepen.io/grrrwaaa/pen/yeKWax)
+	- [As above, but with inverted speed, and collision avoidance](http://codepen.io/grrrwaaa/pen/ameRER?editors=0010)
+	- [Week 3 lab](http://codepen.io/grrrwaaa/pen/LGebzj)
+	- [Chemotaxis](http://codepen.io/grrrwaaa/pen/yepmvq)
+	- [Chemotaxis + mouse](http://codepen.io/grrrwaaa/pen/mVxowj)
+	- [Stigmergy](http://codepen.io/grrrwaaa/pen/OMvYRg)
+	- [Ants (work in progress)](http://codepen.io/grrrwaaa/pen/pgVEdP)
+	- [Birth & death](http://codepen.io/grrrwaaa/pen/PZxrbo)
+	- [Birth & death + chemotaxis](http://codepen.io/grrrwaaa/pen/QKXaGb?editors=0010)
+- Rewriting & evolutionary systems
+	- [Koch curve](http://codepen.io/grrrwaaa/pen/xVVpea?editors=001)
+	- [Evolving sentences](http://codepen.io/grrrwaaa/pen/yeqMYy)
+	- [Evolving math](http://codepen.io/grrrwaaa/pen/zrLZvK)
+	- [Evolving biomorphs](http://codepen.io/grrrwaaa/pen/yadVLP?editors=001)
+	- [Evolving biomorphs (3x3)](http://codepen.io/grrrwaaa/pen/dGwWOz?editors=001)
+	- [Evolving chemotaxis agents](http://codepen.io/grrrwaaa/pen/amgjbb?editors=0010)
+	- [Evolving images](http://codepen.io/grrrwaaa/pen/YwmerM?editors=001)
+	- [Random video feedback](http://codepen.io/grrrwaaa/pen/pyzJLe?editors=001)	
 -->
 
 ----
