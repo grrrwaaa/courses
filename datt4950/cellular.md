@@ -56,7 +56,7 @@ Wolfram divided CA into four classes, according to their long-term behavior:
 
 ### Conway's Game of Life
 
-The most famous CA is probably the [*Game of Life*](http://codepen.io/grrrwaaa/pen/EVPGOB). It is a 2D, class 4 automata, which uses the Moore neighbourhood (8 neighbours), and synchronous update. The transition rule can be stated as follows:
+The most famous CA is probably the **Game of Life**. It is a 2D, class 4 automata, which uses the Moore neighbourhood (8 neighbours), and synchronous update. The transition rule can be stated as follows:
 
 - If the current state is 1 ("alive"):
 	- If the neighbor total is less than 2: New state is 0 ("death by loneliness")
