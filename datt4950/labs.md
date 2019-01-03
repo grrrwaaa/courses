@@ -21,12 +21,9 @@ Then, make sure you have signed up for a (free) account on [Codepen](https://cod
 
 To start a new script, [open the following link and then press the "Fork" button to create a new copy](https://codepen.io/grrrwaaa/pen/YdYMwB?editors=001)
 
-Alternatively, click the button below, then close the CSS and HTML tabs:
+Alternatively, create a new pen on Codepen, open up the JS settings, and add paste the following into the External Scripts list:
 
-<form action="http://codepen.io/pen/define" method="POST" target="_blank">
-<input id="data-input" type="hidden" name="data" value="{&amp;quot;title&amp;quot;:&amp;quot;DATT4950&amp;quot;,&amp;quot;description&amp;quot;:&amp;quot;Artificial Life&amp;quot;,&amp;quot;css_external&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js_external&amp;quot;:&amp;quot;https://worldmaking.github.io/code/al2019.js&amp;quot;,&amp;quot;html&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js&amp;quot;:&amp;quot;// see https://grrrwaaa.github.io/courses/datt4950/labs.html for available methods\n\n// initialization code here\n\nfunction update() {\n  // simulation code here\n}\n\nfunction draw() {\n  // rendering code here\n}&amp;quot;,&amp;quot;html_pre_processor&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_pre_processor&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_starter&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;css_prefix&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;js_library&amp;quot;:&amp;quot;&amp;quot;}">
-<input type="submit" value="Create a new Codepen editor">
-</form> 
+	https://worldmaking.github.io/code/al2019.js
 
 ### Opening the javascript console
 
