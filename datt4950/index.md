@@ -62,6 +62,8 @@ Content may vary from this plan according to needs and interests of students.
 **Course overview**. Introduction to the field(s), and the coding environment used in lectures & labs.    
 **[Cellular Automata](cellular.html)**, classes of behaviour, Game of Life.
 
+Lab script: [Game of Life](https://codepen.io/grrrwaaa/pen/JwprVG?editors=0010)
+
 ### 2. Jan 10
 
 CA variations: non-homogeneity, stochastics, asynchrony, unbounded states. Continuous, reaction-diffusion. Particle/block rule. Multi-scale systems.
