@@ -64,45 +64,55 @@ Content may vary from this plan according to needs and interests of students.
 
 Lab script: [Game of Life](https://codepen.io/grrrwaaa/pen/JwprVG?editors=0010)
 
+[Lab video](https://drive.google.com/drive/u/2/folders/1ugOFYW7sSkKypBPf_m7uCXDhz0GX8Cg8)
+
 ### 2. Jan 10
 
 CA variations: non-homogeneity, stochastics, asynchrony, unbounded states. Continuous, reaction-diffusion. Particle/block rule. Multi-scale systems.
 
 ### 3. Jan 17
 
-### 4. Jan 24
-
 **Due in class:** Assignment 1
+
+### 4. Jan 24
 
 ### 5. Jan 31
 
 ### 6. Feb 7
 
-### 7. Feb 14
-
 **Due in class:** Assignment 2
+
+### 7. Feb 14
 
 (Feb 21 READING WEEK)
 
 ### 8. Feb 28
 
+**Due in class:** Assignment 3
+
 ### 9. Mar 7
 
-**Due in class:** Assignment 3
+**Due in class:** Proposals for final projects / exhibitions.
 
 ### 10. Mar 14
 
-### 11. Mar 21
-
 **Due in class:** [Work-in-progress of final project](due.html#final-project)
+
+Curation of works for the OCADU exhibition.
+
+### 11. Mar 21
 
 [Course evaluation](http://courseevaluations.yorku.ca)
 
 Final project/portfolio assistance.
 
+April 1-14: Joint exhibit with OCAD U Digital Futures course "Research & Innovation Special Focus: Artificial Natures" [led by Haru Ji](https://www2.ocadu.ca/bio/haru-hyunkyung-ji), at the OCAD U campus, 49 McCaul St. 
+
 ### 12. Apr 4
 
-**Due:** [Final project](due.html#final-project)
+**Due:** [Final presentation, project files & documentation](due.html#final-project)
+
+Curation of works for the DM exhibition.
 
 ---
 

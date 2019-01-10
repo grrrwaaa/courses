@@ -628,25 +628,26 @@ draw2D.blend(false); // replace previous drawings
 
 -->
 
-
-<!-- 
 ### Examples
 
 - Cellular systems
-	- [1D automata](http://codepen.io/grrrwaaa/pen/meVoMo)
-	- [Game of Life](http://codepen.io/grrrwaaa/pen/EVPGOB)
-	- [Brian's brain](http://codepen.io/grrrwaaa/pen/WQrmGb)
-	- [Forest fire](http://codepen.io/grrrwaaa/pen/xwZBRP)
+	- [1D automata](https://codepen.io/grrrwaaa/pen/NeLQvY)
+	- [Game of Life](https://codepen.io/grrrwaaa/pen/JwprVG/)
+	- [Brian's brain](https://codepen.io/grrrwaaa/pen/JwaQqV)
+	- [Forest fire](https://codepen.io/grrrwaaa/pen/OroeKW)
+	- [Block rules](https://codepen.io/grrrwaaa/pen/NGxJpP)
+	- [Langton's Ant](https://codepen.io/grrrwaaa/pen/RWrdoq)
+	- [Multiple ants](https://codepen.io/grrrwaaa/pen/LMJwVP)
+	- [Ising model](https://codepen.io/grrrwaaa/pen/wREVKe)
+	- [Hodgepodge](https://codepen.io/grrrwaaa/pen/bOxXEo)
+	- [Reaction Diffusion](https://codepen.io/grrrwaaa/pen/roZXmR)
+
+<!-- 
 	- [Forest fire in colour](http://codepen.io/grrrwaaa/pen/pgrrpo)
-	- [Langton's Ant](http://codepen.io/grrrwaaa/pen/RWrdoq)
-	- [Multiple ants](http://codepen.io/grrrwaaa/pen/MaKxJb)
-	- [Block rules](http://codepen.io/grrrwaaa/pen/NGxJpP)
-	- [Reaction Diffusion](http://codepen.io/grrrwaaa/pen/RLgwWb)
-	- [Ising model](http://codepen.io/grrrwaaa/pen/dGzORw)
-	- [Hodgepodge](http://codepen.io/grrrwaaa/pen/LpGaxm)
 	- [Semi-continuous game of life](http://codepen.io/grrrwaaa/pen/RrZgxo)
 	- [Game of life + sweeper](http://codepen.io/grrrwaaa/pen/eJEegQ)
 	- [Week 2 lab](http://codepen.io/grrrwaaa/pen/wMqpME)
+	
 - Agent systems
 	- [Random walker](http://codepen.io/grrrwaaa/pen/mVBBPQ)
 	- [Flockers](http://codepen.io/grrrwaaa/pen/LGzgpO)
