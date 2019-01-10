@@ -13,13 +13,14 @@ Most of the examples we will work though in the labs will use the JavaScript pro
 
 ## Scripting with Codepen
 
-Before anything, make sure you have a recent version of Chrome or Firefox to work with.
-
-Then, make sure you have signed up for a (free) account on [Codepen](https://codepen.io).
+Before anything, make sure you have a recent version of Chrome or Firefox to work with. Then, make sure you have signed up for a (free) account on [Codepen](https://codepen.io).
 
 ### Starting a new script
 
-To start a new script, [open the following link and then press the "Fork" button to create a new copy](https://codepen.io/grrrwaaa/pen/YdYMwB?editors=001)
+**To start a new script, open the following codepen and press the "Fork" button to create a new copy:**
+
+<p data-height="300" data-theme-id="18447" data-slug-hash="YdYMwB" data-default-tab="js,result" data-user="grrrwaaa" data-pen-title="2019 DATT4950 Template" class="codepen">See the Pen <a href="https://codepen.io/grrrwaaa/pen/YdYMwB/">2019 DATT4950 Template</a> by Graham (<a href="https://codepen.io/grrrwaaa">@grrrwaaa</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 Alternatively, create a new pen on Codepen, open up the JS settings, and add paste the following into the External Scripts list:
 
@@ -647,7 +648,7 @@ draw2D.blend(false); // replace previous drawings
 	- [Semi-continuous game of life](http://codepen.io/grrrwaaa/pen/RrZgxo)
 	- [Game of life + sweeper](http://codepen.io/grrrwaaa/pen/eJEegQ)
 	- [Week 2 lab](http://codepen.io/grrrwaaa/pen/wMqpME)
-	
+
 - Agent systems
 	- [Random walker](http://codepen.io/grrrwaaa/pen/mVBBPQ)
 	- [Flockers](http://codepen.io/grrrwaaa/pen/LGzgpO)
