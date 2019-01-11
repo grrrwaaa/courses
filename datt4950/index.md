@@ -53,6 +53,8 @@ Assignments/projects are assessed by the following criteria:
 
 ---
 
+[Lab videos](https://drive.google.com/drive/u/2/folders/1ugOFYW7sSkKypBPf_m7uCXDhz0GX8Cg8)
+
 ## Schedule
 
 Content may vary from this plan according to needs and interests of students.
@@ -64,17 +66,21 @@ Content may vary from this plan according to needs and interests of students.
 
 Lab script: [Game of Life](https://codepen.io/grrrwaaa/pen/JwprVG?editors=0010)
 
-[Lab video](https://drive.google.com/drive/u/2/folders/1ugOFYW7sSkKypBPf_m7uCXDhz0GX8Cg8)
-
 ### 2. Jan 10
 
-CA variations: non-homogeneity, stochastics, asynchrony, unbounded states. Continuous, reaction-diffusion. Particle/block rule. Multi-scale systems.
+CA variations: non-homogeneity, stochastics, asynchrony; Ants, Particle/block rules. 
+
+Student work: Amir, Andrew.
 
 ### 3. Jan 17
 
-**Due in class:** Assignment 1
+Student work.
+
+CA variations: unbounded states. Continuous, reaction-diffusion, multi-scale systems.
 
 ### 4. Jan 24
+
+**Due in class:** Assignment 1
 
 ### 5. Jan 31
 
