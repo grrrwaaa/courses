@@ -53,7 +53,9 @@ Assignments/projects are assessed by the following criteria:
 
 ---
 
-[Lab videos](https://drive.google.com/drive/u/2/folders/1ugOFYW7sSkKypBPf_m7uCXDhz0GX8Cg8)
+## Class / lab videos
+
+[Class videos](https://drive.google.com/drive/u/2/folders/1ugOFYW7sSkKypBPf_m7uCXDhz0GX8Cg8)
 
 ## Schedule
 
@@ -74,7 +76,7 @@ Student work: Amir, Andrew.
 
 ### 3. Jan 17
 
-Student work.
+Student work. Jeremy, Erik, Nicole.
 
 CA variations: unbounded states. Continuous, reaction-diffusion, multi-scale systems.
 

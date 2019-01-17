@@ -26,6 +26,14 @@ Alternatively, create a new pen on Codepen, open up the JS settings, and add pas
 
 	https://worldmaking.github.io/code/al2019.js
 
+### What happens if my pen crashes or goes into an infinite loop?
+
+On any page that displays a grid of Pens as live previews, or in the editor itself, you can disable the JavaScript with this query parameter at the end of the URL:
+
+```?turn_off_js=true```
+
+Tip: when adding any kind of `for` loop, write the loop condition etc. in comments first, and uncomment once it is complete, so that you don't accidentally cause an infinite loop. Or, just turn live updates off in the codepen settings.
+
 ### Opening the javascript console
 
 Codepen includes a console, but I don't recommend it; the browser's built in developer consoles are far better. Instead, learn how to find the javascript console for your browser of choice:
