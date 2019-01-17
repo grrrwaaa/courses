@@ -29,50 +29,62 @@
 
 <p>Alternatively, create a new pen on Codepen, open up the JS settings, and add paste the following into the External Scripts list:</p>
 <pre><code><span class="hljs-string">https:</span><span class="hljs-comment">//worldmaking.github.io/code/al2019.js</span>
-</code></pre><h3 id="opening-the-javascript-console">Opening the javascript console</h3>
-<p>Codepen includes a console, but I don&#39;t recommend it; the browser&#39;s built in developer consoles are far better. Instead, learn how to find the javascript console for your browser of choice:</p>
-<ul>
-<li>Chrome: View &gt; Developer &gt; JavaScript Console</li>
-<li>Firefox: Tools &gt; Web Developer &gt; Web Console</li>
-</ul>
-<h3 id="offline-saving-from-codepen">Offline / saving from Codepen</h3>
-<p>You can export from Codepen to static HTML files using the Export (export as zip) button, which can be useful for keeping copies of your work. </p>
-<p>Alternatively you can build a fully offline local file by downloading our library from <a href="https://worldmaking.github.io/code/al2019.js">here</a>, saving it as &quot;al2019.js&quot; in a local folder, and putting your code into an <code>html</code> file in the same folder starting from this template:</p>
-<pre><code><span class="hljs-meta">&lt;!doctype html&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"X-UA-Compatible"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"IE=edge"</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"al2019.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="actionscript">
+</code></pre><h3 id="what-happens-if-my-pen-crashes-or-goes-into-an-infinite-loop-">What happens if my pen crashes or goes into an infinite loop?</h3>
+<p>On any page that displays a grid of Pens as live previews, or in the editor itself, you can disable the JavaScript with this query parameter at the end of the URL:</p>
+<pre><code class="lang-?turn_off_js=true```">
+<span class="hljs-attribute">Tip</span>: when adding any kind of `for` loop, write the loop condition etc. in comments first, and uncomment once it is complete, so that you don't accidentally cause an infinite loop. Or, just turn live updates off in the codepen settings.
 
-<span class="hljs-comment">// Your code goes here</span>
-<span class="hljs-comment">// see http://grrrwaaa.github.io/courses/datt4950/labs.html for available methods</span>
+<span class="livecodeserver"><span class="hljs-comment">### Opening the javascript console</span>
 
-<span class="hljs-comment">// initialization code here</span>
+Codepen includes <span class="hljs-keyword">a</span> console, but I don<span class="hljs-string">'t recommend it; the browser'</span>s built <span class="hljs-keyword">in</span> developer consoles are far better. Instead, learn how <span class="hljs-built_in">to</span> find <span class="hljs-keyword">the</span> javascript console <span class="hljs-keyword">for</span> your browser <span class="hljs-keyword">of</span> choice:
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">update</span><span class="hljs-params">()</span> </span>{
-    <span class="hljs-comment">// simulation code here</span>
+- Chrome: View &gt; Developer &gt; JavaScript Console
+- Firefox: Tools &gt; Web Developer &gt; Web Console
+
+<span class="hljs-comment">### Offline / saving from Codepen</span>
+
+You can export <span class="hljs-built_in">from</span> Codepen <span class="hljs-built_in">to</span> static HTML <span class="hljs-built_in">files</span> <span class="hljs-keyword">using</span> <span class="hljs-keyword">the</span> Export (export <span class="hljs-keyword">as</span> zip) button, which can be useful <span class="hljs-keyword">for</span> keeping copies <span class="hljs-keyword">of</span> your work. 
+
+Alternatively you can build <span class="hljs-keyword">a</span> fully offline <span class="hljs-built_in">local</span> <span class="hljs-built_in">file</span> <span class="hljs-keyword">by</span> downloading our library <span class="hljs-built_in">from</span> [here](<span class="hljs-keyword">https</span>://worldmaking.github.io/code/al2019.js), saving <span class="hljs-keyword">it</span> <span class="hljs-keyword">as</span> <span class="hljs-string">"al2019.js"</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">a</span> <span class="hljs-built_in">local</span> <span class="hljs-built_in">folder</span>, <span class="hljs-keyword">and</span> putting your code <span class="hljs-keyword">into</span> <span class="hljs-keyword">an</span> ```html``` <span class="hljs-built_in">file</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> same <span class="hljs-built_in">folder</span> starting <span class="hljs-built_in">from</span> this template:</span>
+</code></pre>
+<p>&lt;!doctype html&gt;</p>
+<p><html></p>
+<p><head></p>
+<p><meta charset="utf-8"></p>
+<p><meta http-equiv="X-UA-Compatible" content="IE=edge"></p>
+<p><meta name="viewport" content="width=device-width, initial-scale=1.0"></p>
+<script src="al2019.js"></script>
+</head>
+<body>
+<script>
+
+// Your code goes here
+// see http://grrrwaaa.github.io/courses/datt4950/labs.html for available methods
+
+// initialization code here
+
+function update() {
+    // simulation code here
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> </span>{
-    <span class="hljs-comment">// rendering code here</span>
+function draw() {
+    // rendering code here
 }
 
-</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
-</code></pre><!-- 
+</script>
+</body>
+</html>
+```
+
+
+<!-- 
 Here's an example:
 
 <p data-height="480" data-theme-id="0" data-slug-hash="EVPGOB" data-preview ="true" data-default-tab="result" data-user="grrrwaaa" class='codepen'>See the Pen <a href='http://codepen.io/grrrwaaa/pen/EVPGOB/'>Game of Life</a> by Graham (<a href='http://codepen.io/grrrwaaa'>@grrrwaaa</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 <script async src="http://assets.codepen.io/assets/embed/ei.js"></script>
 
-If the example above doesn't work, it might be that you are among the [~10% of users](http://webglstats.com) whose browsers don't yet support WebGL. You can check support [here](http://www.doesmybrowsersupportwebgl.com), and compare browser support [here](http://caniuse.com/#feat=webgl). Note that IE users need to have version 11, or use Edge. Chrome has had good support for a long time. Safari has supported WebGL since version 8. Firefox has partial support. 
--->
+<p>If the example above doesn&#39;t work, it might be that you are among the <a href="http://webglstats.com">~10% of users</a> whose browsers don&#39;t yet support WebGL. You can check support <a href="http://www.doesmybrowsersupportwebgl.com">here</a>, and compare browser support <a href="http://caniuse.com/#feat=webgl">here</a>. Note that IE users need to have version 11, or use Edge. Chrome has had good support for a long time. Safari has supported WebGL since version 8. Firefox has partial support. 
+--&gt;</p>
 <h2 id="overview">Overview</h2>
 <p>Graphics rendering uses the HTML5 Canvas, which is supported on most computers with recent versions of Chrome, Firefox or Safari. For simplicity&#39;s sake examples will be confined to a 2D world, and coded through simplified abstractions. This world has coordinates ranging from (0,0) in the top-left corner to (1,1) in the bottom right corner -- i.e. it assumes the world to be square shaped and unit length. </p>
 <h2 id="callbacks">Callbacks</h2>
