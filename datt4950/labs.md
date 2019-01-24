@@ -28,9 +28,7 @@ Alternatively, create a new pen on Codepen, open up the JS settings, and add pas
 
 ### What happens if my pen crashes or goes into an infinite loop?
 
-On any page that displays a grid of Pens as live previews, or in the editor itself, you can disable the JavaScript with this query parameter at the end of the URL:
-
-```?turn_off_js=true```
+On any page that displays a grid of Pens as live previews, or in the editor itself, you can disable the JavaScript with this query parameter at the end of the URL: `?turn_off_js=true`
 
 Tip: when adding any kind of `for` loop, write the loop condition etc. in comments first, and uncomment once it is complete, so that you don't accidentally cause an infinite loop. Or, just turn live updates off in the codepen settings.
 
@@ -59,18 +57,49 @@ Alternatively you can build a fully offline local file by downloading our librar
 <body>
 <script>
 
-// Your code goes here
-// see http://grrrwaaa.github.io/courses/datt4950/labs.html for available methods
+// Template page for developing minimal artificial life simulations
+// see http://artificialnature.net/courses/datt4950/labs.html for more documentation
 
-// initialization code here
+// global declarations here
 
-function update() {
+// called at start, and whenever Enter key is pressed:
+function reset() {
+	// (re)initialization here
+}
+
+// called before rendering each frame
+// dt is the time in seconds since the last update()
+// (the global variable `now` gives the time since start in seconds)
+// updates can be 'paused' using the spacebar
+function update(dt) {
 	// simulation code here
 }
   
-function draw() {
+// called to render graphics
+// ctx is an HTML5 canvas 2D rendering context
+function draw(ctx) {
 	// rendering code here
 }
+
+
+// called when any mouse (or touch) events happen
+// kind is the event type (down, up, move, etc.)
+// pt is a normalized mouse coordinate
+// id refers to any button pressed/released
+function mouse(kind, pt, id) {
+  
+}
+
+// called when any key events happen
+// kind is the event type (down, up, etc.)
+// key is the key (or keycode) pressed/released
+function key(kind, key) {
+  // run one frame only if the "f" key is pressed:
+  if (kind == "down" && key == "f") {
+    update();
+  }
+}
+
 
 </script>
 </body>
@@ -118,21 +147,15 @@ function key(event, key) {
 The events details are:
 
 - mouse:
-	- "down": a button was pressed. 
-	- "up": a button was pressed. 
-	- "move": mouse was moved (or dragged).
-	- the ```point``` argument is an array of two coordinates, in the range 0,0 to 1,1 
-	- the ```id``` argument identifies which the button(s) pressed
-- touch (for touch-screen devices):
-	- "start": a touch started 
-	- "end" or "cancel": a touch was released
-	- "move": a touch moved
-	- the ```point``` argument is a vec2 in the range 0,0 to 1,1 
-	- the ```id``` argument identifies touches in the case of multitouch
+	- event == "down": a button was pressed / touch began 
+	- event == "up": a button was pressed / touch ended
+	- event == "move": mouse/touch was moved (or dragged).
+	- the `point` argument is an array of two coordinates, in the range 0,0 to 1,1 
+	- the `id` argument identifies which the button(s) pressed, or touch id in the case of multitouch
 - key:
-	- "down": a key was pressed.
-	- "up": a key was released.
-	- the ```key``` argument can be a string representation of the character pressed, such as "a", "2", "Z", ">" etc., or special strings such as "Shift", "Control", "Alt", "Meta", "Enter", "Backspace" etc.
+	- `event` == "down": a key was pressed.
+	- `event` == "up": a key was released.
+	- the `key` argument can be a string representation of the character pressed, such as "a", "2", "Z", ">" etc., or special strings such as "Shift", "Control", "Alt", "Meta", "Enter", "Backspace" etc.
 
 <!-- 
 ### Persistence
@@ -174,7 +197,9 @@ That means, you need to design your persistent state in ```save()``` in a way th
 
 ## Globals
 
-The library provides a few extra global functions that are frequently needed:
+The library provides a few extra global variables and functions that are frequently needed:
+
+```now``` is a global variable representing seconds since the script began
 
 ```random()``` can be used to generate random numbers. Without an argument it returns rational numbers between 0 and 1; with a numeric argument it returns integers in the given range (e.g. useful for picking within an array).
 
@@ -198,12 +223,107 @@ console.log(now);	// the time in seconds since the script started
 console.log(dt);	// the delta time in seconds between each update()
 ```
 
+
+## 2D drawing
+
+The `draw` function's `ctx` argument is an HTML5 [2D canvas drawing](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial) context, offering all the standard drawing capabilities of that API. 
+
+Alternatively, the ```draw2D``` namespace provides simpler interface for drawing 2D primitives.
+
+### Shapes
+
+Basic shapes are as follows:
+
+```javascript 
+// many different ways to call this function using different arguments
+// default center is 0,0, default diameter is 1:
+draw2D.circle([center_x, center_y], diameter_x, diameter_y);
+draw2D.circle([center_x, center_y], diameter);
+draw2D.circle([center_x, center_y])
+draw2D.circle(diameter_x, diameter_y);
+draw2D.circle(diameter);
+draw2D.circle()
+
+draw2D.rect([center_x, center_y], diameter_x, diameter_y);
+draw2D.rect([center_x, center_y], diameter);
+draw2D.rect([center_x, center_y])
+draw2D.rect(diameter_x, diameter_y);
+draw2D.rect(diameter);
+draw2D.rect()
+
+// triangle points toward positive X direction
+draw2D.triangle([center_x, center_y], diameter_x, diameter_y);
+draw2D.triangle([center_x, center_y], diameter);
+draw2D.triangle([center_x, center_y])
+draw2D.triangle(diameter_x, diameter_y);
+draw2D.triangle(diameter);
+draw2D.triangle()
+```
+
+### Colors
+
+Graphics are drawn using whatever color is currently set. The current drawing colour can be set by assigning to [`ctx.fillStyle`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle), or using these helpers:
+
+```javascript
+draw2D.color("red") 
+draw2D.color("#ff3399")
+draw2D.color(1, 1, 1, 0.5) // rgb+alpha
+draw2D.color(1, 1, 1) // rgb
+draw2D.color(1, 0.5) // greyscale+alpha
+draw2D.color(0.5);  // greyscale
+
+draw2D.hsl(0, 0.5, 0.5, 0.5) // hue, saturation, luma, alpha
+draw2D.hsl(0, 0.5, 0.5) // hue, saturation, luma
+draw2D.hsl(0, 0.5) // hue, alpha
+draw2D.hsl(0.5);  // hue
+```
+
+The full list of named colors is [here](http://www.w3schools.com/colors/colors_hex.asp).
+
+### Transformations (coordinate spaces)
+
+The coordinate system ranges from [0, 0] in the top left to [1, 1] in the bottom-right, but it is easy and useful to set up different coordinate systems, e.g. for drawing from an agent's point of view. ```draw2D``` uses a stack-based coordinate transform system. Push the context, apply transforms, then return back to the previous coordinate system by popping the context again:
+
+
+```javascript
+// create a local coordinate system:
+draw2D.push();
+	draw2D.translate(x, y); // or a position vec2
+	draw2D.rotate(angle_in_radians);  // or a direction vec2
+	draw2D.scale(sizex, sizey); // or a size vec2
+	
+	// draw in local coordinate system
+	//...
+
+// return to global coordinate system:
+draw2D.pop();
+```
+
+Most calls to draw2D can be chained together, since they return the ```draw2D``` object itself. Now typically, to move into an agent's coordinate system, operate in the order "translate, rotate, scale". So since most draw2D methods can also accept vec2 arguments, a common idiom is:
+
+```javascript
+// push into agent's local coordinate system:
+draw2D.push()	
+	.translate(agent.position)
+	.rotate(agent.velocity)
+	.scale(agent.size);
+	
+	// draw agent body -- the X axis is agent's forward direction
+	draw2D.rect()
+		.circle([0.5,  0.5], 0.5)
+		.circle([0.5, -0.5], 0.5);
+
+// done drawing agent
+draw2D.pop();  
+```
+
+
 ## field2D
 
 The ```field2D``` type represents a dense grids of cells of floating point numbers (typically but not necessarily in the range of zero to one). You can create a field like this:
 
 ```javascript
-var field = new field2D(10);  // creates a 10 x 10 grid of cells
+let field = new field2D(10);  // creates a 10 x 10 grid of cells
 ```
 
 Typically we will render a field in the ```draw()``` callback by calling the field's draw method:
@@ -217,7 +337,7 @@ function draw() {
 By default field cells will be zero, which looks black. You can get and set individual field cells this way:
 
 ```javascript
-var value = field.get(x, y);
+let value = field.get(x, y);
 field.set(value, x, y);
 ```
 
@@ -270,9 +390,9 @@ There are some methods for interpolated reading/writing/modifying fields. These 
 
 ```javascript
 // returns interpolated value at the normalized position x,y
-var value = field.sample(x, y);		
+let value = field.sample(x, y);		
 // or, using a vec2:
-var value = field.sample(agent.position);	
+let value = field.sample(agent.position);	
 
 // adds v to a field at position x, y
 // (interpolated addition to nearest four cells)
@@ -305,7 +425,7 @@ The ```reduce(function, initial)``` method is used to reduce a field to a single
 field.map(function(value, x, y) { return value * 2; });
 
 // find the sum total of all cell values:
-var total = field.reduce(function(sum, value, x, y) {
+let total = field.reduce(function(sum, value, x, y) {
 	return sum + value;
 }, 0);
 ```
@@ -318,7 +438,7 @@ Whereas ```field.get``` returns a single number (the red-channel value), ```fiel
 
 ```javascript
 // turn a cell red:
-var cell = field.cell(x, y);
+let cell = field.cell(x, y);
 cell[0] = 1;
 cell[1] = 0;
 cell[2] = 0;
@@ -361,36 +481,35 @@ field.loadImage("https://upload.wikimedia.org/wikipedia/commons/1/17/ArtificialF
 });
 ```
 
-<!-- 
 ## vec2
 
-The ```vec2``` type gives us a useful abstraction of two-component vectors. Here are some ways of creating a vec2:
+The ```vec2``` type gives us a useful abstraction of two-component vectors. It is simply an array of two numbers, ```[x, y]```, but also has many useful methods available to it. Here are some ways of creating a vec2:
 
 ```javascript
-var v0 = new vec2(x, y);
-var v1 = new vec2(); 	// x and y components default to zero
+let v0 = new vec2(x, y);
+let v1 = new vec2(); 	// x and y components default to zero
 
 v0 = vec2.create(x, y); // equivalent to above
 v1 = vec2.create();
 
-var v2 = v0.clone();	// remember, v2 = v0 would not make a new copy
+let v2 = v0.clone();	// remember, v2 = v0 would not make a new copy
 
-var v3 = vec2.random(); // a vector with unit length but random direction
-var v4 = vec2.random(0.1); // as above, but length is 0.1
+let v3 = vec2.random(); // a vector with unit length but random direction
+let v4 = vec2.random(0.1); // as above, but length is 0.1
 
-var v5 = vec2.fromPolar(len, angle_in_radians);
-var v6 = vec2.fromPolar(angle_in_radians);	// length is 1
+let v5 = vec2.fromPolar(len, angle_in_radians);
+let v6 = vec2.fromPolar(angle_in_radians);	// length is 1
 ```
 
 Getting some useful properties:
 
 ```javascript
-var d = v0.len();		// get the magnitude of the vector
-var a = v0.angle(); 	// get the direction of the vector (in radians)
-var d = v0.distance(v1);	// distance between two vectors
-var a = v0.anglebetween(v1);	// angle between two vectors
-var b = v0.equals(v1);  // true if both components are equal
-var n = v0.dot(v1);		// dot product of two vectors (related to similarity)
+let d = v0.len();		// get the magnitude of the vector
+let a = v0.angle(); 	// get the direction of the vector (in radians)
+let d = v0.distance(v1);	// distance between two vectors
+let a = v0.anglebetween(v1);	// angle between two vectors
+let b = v0.equals(v1);  // true if both components are equal
+let n = v0.dot(v1);		// dot product of two vectors (related to similarity)
 ```
 
 There are many methods available to call on a vec2. Some basic setters:
@@ -408,15 +527,24 @@ v0.normalize(); // set's a vector's length to 1
 v0.negate(); // reverses a vector
 v0.angle(a); // set a vector's direction (in radians)
 v0.rotate(a); // rotates a vector's direction (by radians)
+
+// converting to whole number (integer) elements, e.g. for indexing a field2D by cell:
+v0.floor(); // turns vector components into whole numbers by rounding down
+v0.ceil(); // turns vector components into whole numbers by rounding up
+v0.round(); // turns vector components into whole numbers by rounding to nearest
 ```
 
-Almost all methods have both an in-place version and a standalone version. The in-place version is a method called on a vec2 object, which it will probably modify as a result. The standalone version is a method called on ```vec2``` itself, and requires an argument for the result.
+Almost all methods have both an in-place version and a standalone version. The in-place version is a method called on a vec2 object, which it will probably modify as a result. 
+
+The standalone version is a method called on ```vec2``` itself, and requires an argument for the result. Usefully, this argument doesn't need to be a ```vec2``` itself, it can simply be any array with two components.
 
 ```javascript
 // standalone:
 // vout is modified; v0 and v1 are not changed
+let v0 = vec2.create(1, 2);
+let v1 = [3, 4]; 
 vout = new vec2();
-vec2.add(vout, v0, v1);	
+vec2.add(vout, v0, v1);	 // vout is now [4, 6]
 
 // in-place:
 // v0 is modified; like the scalar equivalent s0 += s1
@@ -483,61 +611,8 @@ v0.wrap(d);
 vec2.relativewrap(vout, v0, v1);	
 ```
 
-## draw2D
-
-The ```draw2D``` namespace provides a very simple interface for drawing 2D primitives.
-
-It uses a stack-based coordinate transform system. Push the context, apply transforms, then return back to the previous coordinate system by popping the context again:
-
+<!-- 
 ```javascript
-// create a local coordinate system:
-draw2D.push();
-	draw2D.translate(x, y);
-	draw2D.rotate(angle_in_radians);  // or a direction vector
-	draw2D.scale(sizex, sizey);
-	
-	// draw in local coordinate system
-	//...
-	
-// return to global coordinate system:
-draw2D.pop();
-```
-
-Most calls to draw2D can be chained together, since they return the ```draw2D``` object itself. Now typically, to move into an agent's coordinate system, operate in the order "translate, rotate, scale". So since most draw2D methods can also accept vec2 arguments, a common idiom is:
-
-```javascript
-// push into agent's local coordinate system:
-draw2D.push()	
-	.translate(agent.position)
-	.rotate(agent.direction)
-	.scale(agent.size);
-	
-	// draw agent body -- the X axis is agent's forward direction
-	draw2D.rect();
-	draw2D.circle([0.5,  0.5], 0.5);
-	draw2D.circle([0.5, -0.5], 0.5);
-
-draw2D.pop();  // done drawing agent
-```
-
-Basic shapes are as follows:
-
-```javascript
-draw2D.circle([center_x, center_y], diameter);
-draw2D.circle(center_x, center_y, diameter);
-draw2D.circle([center_x, center_y], diameter_x, diameter_y);
-draw2D.circle(center_x, center_y, diameter_x, diameter_y);
-
-draw2D.rect([center_x, center_y], diameter);
-draw2D.rect(center_x, center_y, diameter);
-draw2D.rect([center_x, center_y], diameter_x, diameter_y);
-draw2D.rect(center_x, center_y, diameter_x, diameter_y);
-
-draw2D.triangle([center_x, center_y], diameter);
-draw2D.triangle(center_x, center_y, diameter);
-draw2D.triangle([center_x, center_y], diameter_x, diameter_y);
-draw2D.triangle(center_x, center_y, diameter_x, diameter_y);
-
 draw2D.line([x1, y1], [x2, y2]);	// default thickness is 1 pixel
 draw2D.line([x1, y1], [x2, y2], thickness);		
 ```
@@ -559,7 +634,7 @@ If you need a different shape, there's a method for defining new ones. But this 
 // in the main body of the script (not in update() or draw()!)
 // construct a new shape
 // normally vertices range between -1 and 1
-var rightangletriangle = draw2D.shape([ 
+let rightangletriangle = draw2D.shape([ 
 	new vec2(-1, -1), new vec2(1, -1), new vec2(1, 1)
 ]);
 
@@ -574,24 +649,7 @@ function draw() {
 }
 ```
 
-Graphics are drawn using whatever color is currently set, via ```draw2D.color()```. 
-
-```javascript
-draw2D.color(1, 0, 0); // red
-draw2D.color(0, 1, 0); // green
-draw2D.color(0, 0, 1); // blue
-draw2D.color(1, 1, 1, 0.5); // semi-transparent white
-
-// set via hue, saturation, and lightness (instead of red, green, blue)
-draw2D.hsl(0.5, 0.5, 0.5);
-draw2D.hsl(0.5, 0.5, 0.5, 0.5);	// semi-opaque
-
-// you can also use standard CSS colors:
-draw2D.color("#ff3399"); 
-draw2D.color("red");
-```
-
-The full list of named colors is [here](http://www.w3schools.com/colors/colors_hex.asp). More color methods modify the current color:
+More color methods modify the current color:
 
 ```javascript
 // set opacity (0..1):
@@ -615,7 +673,7 @@ draw2D.desaturate();
 It is also possible to cover the shape with a field2D, by setting it as a texture. To stop using the texture, call ```draw2D.texture()``` (with no arguments), or wrap the use of textures with ```draw2D.push()``` and ```draw2D.pop()```:
 
 ```javascript
-var field = field2D(16);
+let field = field2D(16);
 field.set(function() { return random(); });
 
 // in draw():
