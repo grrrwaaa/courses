@@ -11,6 +11,7 @@
 <li><a href="gallery.html" alt="Gallery">Gallery</a></li>
 <li><a href="themes.html" alt="Themes">Themes</a></li>
 <li><a href="cellular.html" alt="Cellular Systems">Cellular Systems</a></li>
+<li><a href="agent.html" alt="Agent-Based Systems">Agent-Based Systems</a></li>
 <li><a href="labs.html" alt="Labs">Labs</a></li>
 <li><a href="js.html" alt="JavaScript">JavaScript</a></li>
 	</ul>
@@ -30,61 +31,83 @@
 <p>Alternatively, create a new pen on Codepen, open up the JS settings, and add paste the following into the External Scripts list:</p>
 <pre><code><span class="hljs-string">https:</span><span class="hljs-comment">//worldmaking.github.io/code/al2019.js</span>
 </code></pre><h3 id="what-happens-if-my-pen-crashes-or-goes-into-an-infinite-loop-">What happens if my pen crashes or goes into an infinite loop?</h3>
-<p>On any page that displays a grid of Pens as live previews, or in the editor itself, you can disable the JavaScript with this query parameter at the end of the URL:</p>
-<pre><code class="lang-?turn_off_js=true```">
-<span class="hljs-attribute">Tip</span>: when adding any kind of `for` loop, write the loop condition etc. in comments first, and uncomment once it is complete, so that you don't accidentally cause an infinite loop. Or, just turn live updates off in the codepen settings.
+<p>On any page that displays a grid of Pens as live previews, or in the editor itself, you can disable the JavaScript with this query parameter at the end of the URL: <code>?turn_off_js=true</code></p>
+<p>Tip: when adding any kind of <code>for</code> loop, write the loop condition etc. in comments first, and uncomment once it is complete, so that you don&#39;t accidentally cause an infinite loop. Or, just turn live updates off in the codepen settings.</p>
+<h3 id="opening-the-javascript-console">Opening the javascript console</h3>
+<p>Codepen includes a console, but I don&#39;t recommend it; the browser&#39;s built in developer consoles are far better. Instead, learn how to find the javascript console for your browser of choice:</p>
+<ul>
+<li>Chrome: View &gt; Developer &gt; JavaScript Console</li>
+<li>Firefox: Tools &gt; Web Developer &gt; Web Console</li>
+</ul>
+<h3 id="offline-saving-from-codepen">Offline / saving from Codepen</h3>
+<p>You can export from Codepen to static HTML files using the Export (export as zip) button, which can be useful for keeping copies of your work. </p>
+<p>Alternatively you can build a fully offline local file by downloading our library from <a href="https://worldmaking.github.io/code/al2019.js">here</a>, saving it as &quot;al2019.js&quot; in a local folder, and putting your code into an <code>html</code> file in the same folder starting from this template:</p>
+<pre><code><span class="hljs-meta">&lt;!doctype html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"X-UA-Compatible"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"IE=edge"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"al2019.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="actionscript">
 
-<span class="livecodeserver"><span class="hljs-comment">### Opening the javascript console</span>
+<span class="hljs-comment">// Template page for developing minimal artificial life simulations</span>
+<span class="hljs-comment">// see http://artificialnature.net/courses/datt4950/labs.html for more documentation</span>
 
-Codepen includes <span class="hljs-keyword">a</span> console, but I don<span class="hljs-string">'t recommend it; the browser'</span>s built <span class="hljs-keyword">in</span> developer consoles are far better. Instead, learn how <span class="hljs-built_in">to</span> find <span class="hljs-keyword">the</span> javascript console <span class="hljs-keyword">for</span> your browser <span class="hljs-keyword">of</span> choice:
+<span class="hljs-comment">// global declarations here</span>
 
-- Chrome: View &gt; Developer &gt; JavaScript Console
-- Firefox: Tools &gt; Web Developer &gt; Web Console
-
-<span class="hljs-comment">### Offline / saving from Codepen</span>
-
-You can export <span class="hljs-built_in">from</span> Codepen <span class="hljs-built_in">to</span> static HTML <span class="hljs-built_in">files</span> <span class="hljs-keyword">using</span> <span class="hljs-keyword">the</span> Export (export <span class="hljs-keyword">as</span> zip) button, which can be useful <span class="hljs-keyword">for</span> keeping copies <span class="hljs-keyword">of</span> your work. 
-
-Alternatively you can build <span class="hljs-keyword">a</span> fully offline <span class="hljs-built_in">local</span> <span class="hljs-built_in">file</span> <span class="hljs-keyword">by</span> downloading our library <span class="hljs-built_in">from</span> [here](<span class="hljs-keyword">https</span>://worldmaking.github.io/code/al2019.js), saving <span class="hljs-keyword">it</span> <span class="hljs-keyword">as</span> <span class="hljs-string">"al2019.js"</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">a</span> <span class="hljs-built_in">local</span> <span class="hljs-built_in">folder</span>, <span class="hljs-keyword">and</span> putting your code <span class="hljs-keyword">into</span> <span class="hljs-keyword">an</span> ```html``` <span class="hljs-built_in">file</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> same <span class="hljs-built_in">folder</span> starting <span class="hljs-built_in">from</span> this template:</span>
-</code></pre>
-<p>&lt;!doctype html&gt;</p>
-<p><html></p>
-<p><head></p>
-<p><meta charset="utf-8"></p>
-<p><meta http-equiv="X-UA-Compatible" content="IE=edge"></p>
-<p><meta name="viewport" content="width=device-width, initial-scale=1.0"></p>
-<script src="al2019.js"></script>
-</head>
-<body>
-<script>
-
-// Your code goes here
-// see http://grrrwaaa.github.io/courses/datt4950/labs.html for available methods
-
-// initialization code here
-
-function update() {
-    // simulation code here
+<span class="hljs-comment">// called at start, and whenever Enter key is pressed:</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reset</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// (re)initialization here</span>
 }
 
-function draw() {
-    // rendering code here
+<span class="hljs-comment">// called before rendering each frame</span>
+<span class="hljs-comment">// dt is the time in seconds since the last update()</span>
+<span class="hljs-comment">// (the global variable `now` gives the time since start in seconds)</span>
+<span class="hljs-comment">// updates can be 'paused' using the spacebar</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">update</span><span class="hljs-params">(dt)</span> </span>{
+    <span class="hljs-comment">// simulation code here</span>
 }
 
-</script>
-</body>
-</html>
-```
+<span class="hljs-comment">// called to render graphics</span>
+<span class="hljs-comment">// ctx is an HTML5 canvas 2D rendering context</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">draw</span><span class="hljs-params">(ctx)</span> </span>{
+    <span class="hljs-comment">// rendering code here</span>
+}
 
 
-<!-- 
+<span class="hljs-comment">// called when any mouse (or touch) events happen</span>
+<span class="hljs-comment">// kind is the event type (down, up, move, etc.)</span>
+<span class="hljs-comment">// pt is a normalized mouse coordinate</span>
+<span class="hljs-comment">// id refers to any button pressed/released</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mouse</span><span class="hljs-params">(kind, pt, id)</span> </span>{
+
+}
+
+<span class="hljs-comment">// called when any key events happen</span>
+<span class="hljs-comment">// kind is the event type (down, up, etc.)</span>
+<span class="hljs-comment">// key is the key (or keycode) pressed/released</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">key</span><span class="hljs-params">(kind, key)</span> </span>{
+  <span class="hljs-comment">// run one frame only if the "f" key is pressed:</span>
+  <span class="hljs-keyword">if</span> (kind == <span class="hljs-string">"down"</span> &amp;&amp; key == <span class="hljs-string">"f"</span>) {
+    update();
+  }
+}
+
+
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre><!-- 
 Here's an example:
 
 <p data-height="480" data-theme-id="0" data-slug-hash="EVPGOB" data-preview ="true" data-default-tab="result" data-user="grrrwaaa" class='codepen'>See the Pen <a href='http://codepen.io/grrrwaaa/pen/EVPGOB/'>Game of Life</a> by Graham (<a href='http://codepen.io/grrrwaaa'>@grrrwaaa</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 <script async src="http://assets.codepen.io/assets/embed/ei.js"></script>
 
-<p>If the example above doesn&#39;t work, it might be that you are among the <a href="http://webglstats.com">~10% of users</a> whose browsers don&#39;t yet support WebGL. You can check support <a href="http://www.doesmybrowsersupportwebgl.com">here</a>, and compare browser support <a href="http://caniuse.com/#feat=webgl">here</a>. Note that IE users need to have version 11, or use Edge. Chrome has had good support for a long time. Safari has supported WebGL since version 8. Firefox has partial support. 
---&gt;</p>
+If the example above doesn't work, it might be that you are among the [~10% of users](http://webglstats.com) whose browsers don't yet support WebGL. You can check support [here](http://www.doesmybrowsersupportwebgl.com), and compare browser support [here](http://caniuse.com/#feat=webgl). Note that IE users need to have version 11, or use Edge. Chrome has had good support for a long time. Safari has supported WebGL since version 8. Firefox has partial support. 
+-->
 <h2 id="overview">Overview</h2>
 <p>Graphics rendering uses the HTML5 Canvas, which is supported on most computers with recent versions of Chrome, Firefox or Safari. For simplicity&#39;s sake examples will be confined to a 2D world, and coded through simplified abstractions. This world has coordinates ranging from (0,0) in the top-left corner to (1,1) in the bottom right corner -- i.e. it assumes the world to be square shaped and unit length. </p>
 <h2 id="callbacks">Callbacks</h2>
@@ -105,24 +128,16 @@ Here's an example:
 <p>The events details are:</p>
 <ul>
 <li>mouse:<ul>
-<li>&quot;down&quot;: a button was pressed. </li>
-<li>&quot;up&quot;: a button was pressed. </li>
-<li>&quot;move&quot;: mouse was moved (or dragged).</li>
+<li>event == &quot;down&quot;: a button was pressed / touch began </li>
+<li>event == &quot;up&quot;: a button was pressed / touch ended</li>
+<li>event == &quot;move&quot;: mouse/touch was moved (or dragged).</li>
 <li>the <code>point</code> argument is an array of two coordinates, in the range 0,0 to 1,1 </li>
-<li>the <code>id</code> argument identifies which the button(s) pressed</li>
-</ul>
-</li>
-<li>touch (for touch-screen devices):<ul>
-<li>&quot;start&quot;: a touch started </li>
-<li>&quot;end&quot; or &quot;cancel&quot;: a touch was released</li>
-<li>&quot;move&quot;: a touch moved</li>
-<li>the <code>point</code> argument is a vec2 in the range 0,0 to 1,1 </li>
-<li>the <code>id</code> argument identifies touches in the case of multitouch</li>
+<li>the <code>id</code> argument identifies which the button(s) pressed, or touch id in the case of multitouch</li>
 </ul>
 </li>
 <li>key:<ul>
-<li>&quot;down&quot;: a key was pressed.</li>
-<li>&quot;up&quot;: a key was released.</li>
+<li><code>event</code> == &quot;down&quot;: a key was pressed.</li>
+<li><code>event</code> == &quot;up&quot;: a key was released.</li>
 <li>the <code>key</code> argument can be a string representation of the character pressed, such as &quot;a&quot;, &quot;2&quot;, &quot;Z&quot;, &quot;&gt;&quot; etc., or special strings such as &quot;Shift&quot;, &quot;Control&quot;, &quot;Alt&quot;, &quot;Meta&quot;, &quot;Enter&quot;, &quot;Backspace&quot; etc.</li>
 </ul>
 </li>
@@ -165,7 +180,8 @@ That means, you need to design your persistent state in ```save()``` in a way th
 
 -->
 <h2 id="globals">Globals</h2>
-<p>The library provides a few extra global functions that are frequently needed:</p>
+<p>The library provides a few extra global variables and functions that are frequently needed:</p>
+<p><code>now</code> is a global variable representing seconds since the script began</p>
 <p><code>random()</code> can be used to generate random numbers. Without an argument it returns rational numbers between 0 and 1; with a numeric argument it returns integers in the given range (e.g. useful for picking within an array).</p>
 <p><code>wrap()</code> applies a Euclidean modulo (remainder after division) in such a way that the result is always positive and without reflections.</p>
 <p><code>shuffle(arr)</code> randomly re-orders the array &#39;arr&#39;. It modifies the array in-place, and also returns it.</p>
@@ -179,9 +195,82 @@ shuffle([<span class="hljs-keyword">a</span>, b, c]);<span class="hljs-comment">
 <pre><code class="lang-javascript">console.<span class="hljs-built_in">log</span>(now);    <span class="hljs-comment">// the time in seconds since the script started</span>
 console.<span class="hljs-built_in">log</span>(dt);    <span class="hljs-comment">// the delta time in seconds between each update()</span>
 </code></pre>
+<h2 id="2d-drawing">2D drawing</h2>
+<p>The <code>draw</code> function&#39;s <code>ctx</code> argument is an HTML5 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial">2D canvas drawing</a> context, offering all the standard drawing capabilities of that API. </p>
+<p>Alternatively, the <code>draw2D</code> namespace provides simpler interface for drawing 2D primitives.</p>
+<h3 id="shapes">Shapes</h3>
+<p>Basic shapes are as follows:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// many different ways to call this function using different arguments</span>
+<span class="hljs-comment">// default center is 0,0, default diameter is 1:</span>
+draw2D.<span class="hljs-keyword">circle</span>([center_x, center_y], diameter_x, diameter_y)<span class="hljs-comment">;</span>
+draw2D.<span class="hljs-keyword">circle</span>([center_x, center_y], diameter)<span class="hljs-comment">;</span>
+draw2D.<span class="hljs-keyword">circle</span>([center_x, center_y])
+draw2D.<span class="hljs-keyword">circle</span>(diameter_x, diameter_y)<span class="hljs-comment">;</span>
+draw2D.<span class="hljs-keyword">circle</span>(diameter)<span class="hljs-comment">;</span>
+draw2D.<span class="hljs-keyword">circle</span>()
+
+draw2D.rect([center_x, center_y], diameter_x, diameter_y)<span class="hljs-comment">;</span>
+draw2D.rect([center_x, center_y], diameter)<span class="hljs-comment">;</span>
+draw2D.rect([center_x, center_y])
+draw2D.rect(diameter_x, diameter_y)<span class="hljs-comment">;</span>
+draw2D.rect(diameter)<span class="hljs-comment">;</span>
+draw2D.rect()
+
+<span class="hljs-comment">// triangle points toward positive X direction</span>
+draw2D.triangle([center_x, center_y], diameter_x, diameter_y)<span class="hljs-comment">;</span>
+draw2D.triangle([center_x, center_y], diameter)<span class="hljs-comment">;</span>
+draw2D.triangle([center_x, center_y])
+draw2D.triangle(diameter_x, diameter_y)<span class="hljs-comment">;</span>
+draw2D.triangle(diameter)<span class="hljs-comment">;</span>
+draw2D.triangle()
+</code></pre>
+<h3 id="colors">Colors</h3>
+<p>Graphics are drawn using whatever color is currently set. The current drawing colour can be set by assigning to <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle"><code>ctx.fillStyle</code></a>, or using these helpers:</p>
+<pre><code class="lang-javascript">draw<span class="hljs-number">2</span>D.color<span class="hljs-comment">("red")</span> 
+draw<span class="hljs-number">2</span>D.color<span class="hljs-comment">("#ff3399")</span>
+draw<span class="hljs-number">2</span>D.color<span class="hljs-comment">(1, 1, 1, 0.5)</span> <span class="hljs-comment">// rgb+alpha</span>
+draw<span class="hljs-number">2</span>D.color<span class="hljs-comment">(1, 1, 1)</span> <span class="hljs-comment">// rgb</span>
+draw<span class="hljs-number">2</span>D.color<span class="hljs-comment">(1, 0.5)</span> <span class="hljs-comment">// greyscale+alpha</span>
+draw<span class="hljs-number">2</span>D.color<span class="hljs-comment">(0.5)</span>;  <span class="hljs-comment">// greyscale</span>
+
+draw<span class="hljs-number">2</span>D.hsl<span class="hljs-comment">(0, 0.5, 0.5, 0.5)</span> <span class="hljs-comment">// hue, saturation, luma, alpha</span>
+draw<span class="hljs-number">2</span>D.hsl<span class="hljs-comment">(0, 0.5, 0.5)</span> <span class="hljs-comment">// hue, saturation, luma</span>
+draw<span class="hljs-number">2</span>D.hsl<span class="hljs-comment">(0, 0.5)</span> <span class="hljs-comment">// hue, alpha</span>
+draw<span class="hljs-number">2</span>D.hsl<span class="hljs-comment">(0.5)</span>;  <span class="hljs-comment">// hue</span>
+</code></pre>
+<p>The full list of named colors is <a href="http://www.w3schools.com/colors/colors_hex.asp">here</a>.</p>
+<h3 id="transformations-coordinate-spaces-">Transformations (coordinate spaces)</h3>
+<p>The coordinate system ranges from [0, 0] in the top left to [1, 1] in the bottom-right, but it is easy and useful to set up different coordinate systems, e.g. for drawing from an agent&#39;s point of view. <code>draw2D</code> uses a stack-based coordinate transform system. Push the context, apply transforms, then return back to the previous coordinate system by popping the context again:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// create a local coordinate system:</span>
+draw2D.push();
+    draw2D.<span class="hljs-built_in">translate</span>(x, y); <span class="hljs-comment">// or a position vec2</span>
+    draw2D.<span class="hljs-built_in">rotate</span>(angle_in_radians);  <span class="hljs-comment">// or a direction vec2</span>
+    draw2D.<span class="hljs-built_in">scale</span>(sizex, sizey); <span class="hljs-comment">// or a size vec2</span>
+
+    <span class="hljs-comment">// draw in local coordinate system</span>
+    <span class="hljs-comment">//...</span>
+
+<span class="hljs-comment">// return to global coordinate system:</span>
+draw2D.pop();
+</code></pre>
+<p>Most calls to draw2D can be chained together, since they return the <code>draw2D</code> object itself. Now typically, to move into an agent&#39;s coordinate system, operate in the order &quot;translate, rotate, scale&quot;. So since most draw2D methods can also accept vec2 arguments, a common idiom is:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// push into agent's local coordinate system:</span>
+draw2D.push()    
+    .translate(<span class="hljs-built_in">agent</span>.<span class="hljs-built_in">position</span>)
+    .rotate(<span class="hljs-built_in">agent</span>.<span class="hljs-built_in">velocity</span>)
+    .scale(<span class="hljs-built_in">agent</span>.<span class="hljs-built_in">size</span>);
+
+    <span class="hljs-comment">// draw agent body -- the X axis is agent's forward direction</span>
+    draw2D.rect()
+        .circle([<span class="hljs-number">0.5</span>,  <span class="hljs-number">0.5</span>], <span class="hljs-number">0.5</span>)
+        .circle([<span class="hljs-number">0.5</span>, -<span class="hljs-number">0.5</span>], <span class="hljs-number">0.5</span>);
+
+<span class="hljs-comment">// done drawing agent</span>
+draw2D.pop();
+</code></pre>
 <h2 id="field2d">field2D</h2>
 <p>The <code>field2D</code> type represents a dense grids of cells of floating point numbers (typically but not necessarily in the range of zero to one). You can create a field like this:</p>
-<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> field = <span class="hljs-keyword">new</span> field2D(<span class="hljs-number">10</span>);  <span class="hljs-comment">// creates a 10 x 10 grid of cells</span>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> field = <span class="hljs-keyword">new</span> field<span class="hljs-number">2</span>D(<span class="hljs-number">10</span>);  <span class="hljs-comment">// creates a 10 x 10 grid of cells</span>
 </code></pre>
 <p>Typically we will render a field in the <code>draw()</code> callback by calling the field&#39;s draw method:</p>
 <pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> </span>{
@@ -189,7 +278,7 @@ console.<span class="hljs-built_in">log</span>(dt);    <span class="hljs-comment
 }
 </code></pre>
 <p>By default field cells will be zero, which looks black. You can get and set individual field cells this way:</p>
-<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> <span class="hljs-keyword">value</span> = field.<span class="hljs-keyword">get</span>(x, y);
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> <span class="hljs-keyword">value</span> = field.<span class="hljs-keyword">get</span>(x, y);
 field.<span class="hljs-keyword">set</span>(<span class="hljs-keyword">value</span>, x, y);
 </code></pre>
 <p>Note that if x or y is out of bounds for the field, it will wrap around from the other side. So you are always guaranteed it will return or set a value. </p>
@@ -223,9 +312,9 @@ field.add(<span class="hljs-keyword">n</span>); <span class="hljs-comment">// ad
 <h3 id="normalized-sampling">Normalized sampling</h3>
 <p>There are some methods for interpolated reading/writing/modifying fields. These methods use x and y indices in a normalized 0..1 floating-point range rather than 0..width or 0..height integer range:</p>
 <pre><code class="lang-javascript"><span class="hljs-comment">// returns interpolated value at the normalized position x,y</span>
-var value = field.sample<span class="hljs-comment">(x, y)</span>;        
+let value = field.sample<span class="hljs-comment">(x, y)</span>;        
 <span class="hljs-comment">// or, using a vec2:</span>
-var value = field.sample<span class="hljs-comment">(agent.position)</span>;    
+let value = field.sample<span class="hljs-comment">(agent.position)</span>;    
 
 <span class="hljs-comment">// adds v to a field at position x, y</span>
 <span class="hljs-comment">// (interpolated addition to nearest four cells)</span>
@@ -250,7 +339,7 @@ field.diffuse(field_previous, diffusion_rate, accuracy);
 field.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value, x, y)</span></span> { <span class="hljs-keyword">return</span> <span class="hljs-keyword">value</span> * <span class="hljs-number">2</span>; });
 
 // find the <span class="hljs-built_in">sum</span> total of <span class="hljs-built_in">all</span> cell values:
-var total = field.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(sum, value, x, y)</span></span> {
+let total = field.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(sum, value, x, y)</span></span> {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">sum</span> + <span class="hljs-keyword">value</span>;
 }, <span class="hljs-number">0</span>);
 </code></pre>
@@ -258,7 +347,7 @@ var total = field.reduce(<span class="hljs-function"><span class="hljs-keyword">
 <p>Field cells are in fact 4-channel vectors, mapping to red, green, blue and alpha channels when rendered; however the methods described above are designed to simulate single-channel (greyscale) semantics.</p>
 <p>Whereas <code>field.get</code> returns a single number (the red-channel value), <code>field.cell</code> returns the entire 4-plane vector as an array, which you can modify in-place to set a particular color:</p>
 <pre><code class="lang-javascript"><span class="hljs-comment">// turn a cell red:</span>
-var cell = field.cell(x, y)<span class="hljs-comment">;</span>
+let cell = field.cell(x, y)<span class="hljs-comment">;</span>
 cell[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
 cell[<span class="hljs-number">1</span>] = <span class="hljs-number">0</span><span class="hljs-comment">;</span>
 cell[<span class="hljs-number">2</span>] = <span class="hljs-number">0</span><span class="hljs-comment">;</span>
@@ -286,183 +375,112 @@ field.deposit([<span class="hljs-number">1</span>, <span class="hljs-number">0.5
     write(<span class="hljs-string">"image is loaded!"</span>);
 });
 </code></pre>
-<!-- 
-## vec2
+<h2 id="vec2">vec2</h2>
+<p>The <code>vec2</code> type gives us a useful abstraction of two-component vectors. It is simply an array of two numbers, <code>[x, y]</code>, but also has many useful methods available to it. Here are some ways of creating a vec2:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> v<span class="hljs-number">0</span> = <span class="hljs-keyword">new</span> vec<span class="hljs-number">2</span>(x, y);
+<span class="hljs-keyword">let</span> v<span class="hljs-number">1</span> = <span class="hljs-keyword">new</span> vec<span class="hljs-number">2</span>();     <span class="hljs-comment">// x and y components default to zero</span>
 
-The ```vec2``` type gives us a useful abstraction of two-component vectors. Here are some ways of creating a vec2:
+v<span class="hljs-number">0</span> = vec<span class="hljs-number">2</span>.create(x, y); <span class="hljs-comment">// equivalent to above</span>
+v<span class="hljs-number">1</span> = vec<span class="hljs-number">2</span>.create();
 
-```javascript
-var v0 = new vec2(x, y);
-var v1 = new vec2();     // x and y components default to zero
+<span class="hljs-keyword">let</span> v<span class="hljs-number">2</span> = v<span class="hljs-number">0</span>.clone();    <span class="hljs-comment">// remember, v2 = v0 would not make a new copy</span>
 
-v0 = vec2.create(x, y); // equivalent to above
-v1 = vec2.create();
+<span class="hljs-keyword">let</span> v<span class="hljs-number">3</span> = vec<span class="hljs-number">2</span>.random(); <span class="hljs-comment">// a vector with unit length but random direction</span>
+<span class="hljs-keyword">let</span> v<span class="hljs-number">4</span> = vec<span class="hljs-number">2</span>.random(<span class="hljs-number">0.1</span>); <span class="hljs-comment">// as above, but length is 0.1</span>
 
-var v2 = v0.clone();    // remember, v2 = v0 would not make a new copy
+<span class="hljs-keyword">let</span> v<span class="hljs-number">5</span> = vec<span class="hljs-number">2</span>.fromPolar(len, angle<span class="hljs-number">_</span><span class="hljs-keyword">in</span><span class="hljs-number">_</span>radians);
+<span class="hljs-keyword">let</span> v<span class="hljs-number">6</span> = vec<span class="hljs-number">2</span>.fromPolar(angle<span class="hljs-number">_</span><span class="hljs-keyword">in</span><span class="hljs-number">_</span>radians);    <span class="hljs-comment">// length is 1</span>
+</code></pre>
+<p>Getting some useful properties:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> d = v0.len();        <span class="hljs-comment">// get the magnitude of the vector</span>
+<span class="hljs-keyword">let</span> a = v0.angle();     <span class="hljs-comment">// get the direction of the vector (in radians)</span>
+<span class="hljs-keyword">let</span> d = v0.distance(v1);    <span class="hljs-comment">// distance between two vectors</span>
+<span class="hljs-keyword">let</span> a = v0.anglebetween(v1);    <span class="hljs-comment">// angle between two vectors</span>
+<span class="hljs-keyword">let</span> b = v0.<span class="hljs-keyword">equals</span>(v1);  <span class="hljs-comment">// true if both components are equal</span>
+<span class="hljs-keyword">let</span> n = v0.dot(v1);        <span class="hljs-comment">// dot product of two vectors (related to similarity)</span>
+</code></pre>
+<p>There are many methods available to call on a vec2. Some basic setters:</p>
+<pre><code class="lang-javascript">v0.<span class="hljs-keyword">set</span>(x, y);    <span class="hljs-comment">// update a vector's values</span>
+v0.<span class="hljs-keyword">set</span>(v1);        <span class="hljs-comment">// update by copying from another vector</span>
 
-var v3 = vec2.random(); // a vector with unit length but random direction
-var v4 = vec2.random(0.1); // as above, but length is 0.1
+<span class="hljs-comment">// changing the length (magnitude) of a vector:</span>
+v0.len(<span class="hljs-keyword">n</span>);    <span class="hljs-comment">// update a vector's length</span>
+v0.limit(<span class="hljs-keyword">n</span>);    <span class="hljs-comment">// shortens a vector to length n if it was longer</span>
+v0.normalize(); <span class="hljs-comment">// set's a vector's length to 1</span>
 
-var v5 = vec2.fromPolar(len, angle_in_radians);
-var v6 = vec2.fromPolar(angle_in_radians);    // length is 1
-```
+<span class="hljs-comment">// changing the orientation of a vector:</span>
+v0.negate(); <span class="hljs-comment">// reverses a vector</span>
+v0.angle(a); <span class="hljs-comment">// set a vector's direction (in radians)</span>
+v0.<span class="hljs-keyword">rotate</span>(a); <span class="hljs-comment">// rotates a vector's direction (by radians)</span>
 
-Getting some useful properties:
-
-```javascript
-var d = v0.len();        // get the magnitude of the vector
-var a = v0.angle();     // get the direction of the vector (in radians)
-var d = v0.distance(v1);    // distance between two vectors
-var a = v0.anglebetween(v1);    // angle between two vectors
-var b = v0.equals(v1);  // true if both components are equal
-var n = v0.dot(v1);        // dot product of two vectors (related to similarity)
-```
-
-There are many methods available to call on a vec2. Some basic setters:
-
-```javascript
-v0.set(x, y);    // update a vector's values
-v0.set(v1);        // update by copying from another vector
-
-// changing the length (magnitude) of a vector:
-v0.len(n);    // update a vector's length
-v0.limit(n);    // shortens a vector to length n if it was longer
-v0.normalize(); // set's a vector's length to 1
-
-// changing the orientation of a vector:
-v0.negate(); // reverses a vector
-v0.angle(a); // set a vector's direction (in radians)
-v0.rotate(a); // rotates a vector's direction (by radians)
-```
-
-Almost all methods have both an in-place version and a standalone version. The in-place version is a method called on a vec2 object, which it will probably modify as a result. The standalone version is a method called on ```vec2``` itself, and requires an argument for the result.
-
-```javascript
-// standalone:
-// vout is modified; v0 and v1 are not changed
-vout = new vec2();
-vec2.add(vout, v0, v1);    
+<span class="hljs-comment">// converting to whole number (integer) elements, e.g. for indexing a field2D by cell:</span>
+v0.<span class="hljs-built_in">floor</span>(); <span class="hljs-comment">// turns vector components into whole numbers by rounding down</span>
+v0.<span class="hljs-built_in">ceil</span>(); <span class="hljs-comment">// turns vector components into whole numbers by rounding up</span>
+v0.<span class="hljs-built_in">round</span>(); <span class="hljs-comment">// turns vector components into whole numbers by rounding to nearest</span>
+</code></pre>
+<p>Almost all methods have both an in-place version and a standalone version. The in-place version is a method called on a vec2 object, which it will probably modify as a result. </p>
+<p>The standalone version is a method called on <code>vec2</code> itself, and requires an argument for the result. Usefully, this argument doesn&#39;t need to be a <code>vec2</code> itself, it can simply be any array with two components.</p>
+<pre><code class="lang-javascript">// standalone:
+// vout is modified; v0<span class="hljs-built_in"> and </span>v1 are<span class="hljs-built_in"> not </span>changed
+let v0 = vec2.create(1, 2);
+let v1 = [3, 4]; 
+vout =<span class="hljs-built_in"> new </span>vec2();
+vec2.add(vout, v0, v1);     // vout is now [4, 6]
 
 // in-place:
 // v0 is modified; like the scalar equivalent s0 += s1
 v0.add(v1); 
 
-// Since in-place methods return themselves, they can be chained:
+// Since in-place methods<span class="hljs-built_in"> return </span>themselves, they can be chained:
 v0.add(v1).sub(v1).mul(v1).div(v1); // etc.
-```
-
-Note that most method arguments will accept a number (i.e. a scalar), or an array, in place of a vector: So you can say ```v0.pow(2)``` rather than ```v0.pow(new vec2(2, 2))```. 
-
-```javascript
-// These are all equivalent:
-v0.pow(new vec2(2, 2));
-v0.pow([2, 2]);
-v0.pow(2);
-```
-
-Here are some basic algebraic methods, which operate on each component of a vector:
-
-```javascript
-// component-wise math:
+</code></pre>
+<p>Note that most method arguments will accept a number (i.e. a scalar), or an array, in place of a vector: So you can say <code>v0.pow(2)</code> rather than <code>v0.pow(new vec2(2, 2))</code>. </p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// These are all equivalent:</span>
+v0.<span class="hljs-built_in">pow</span>(<span class="hljs-keyword">new</span> vec2(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>));
+v0.<span class="hljs-built_in">pow</span>([<span class="hljs-number">2</span>, <span class="hljs-number">2</span>]);
+v0.<span class="hljs-built_in">pow</span>(<span class="hljs-number">2</span>);
+</code></pre>
+<p>Here are some basic algebraic methods, which operate on each component of a vector:</p>
+<pre><code class="lang-javascript">// component-wise math:
 v0.add(v1);
 v0.sub(v1);     // aka v0.subtract(v1)
 v0.absdiff(v1); // the absolute difference between two vectors (always positive)
 v0.mul(v1);     // aka v0.multiply(v1)
 v0.div(v1);     // aka v0.divide(v1)
 v0.pow(v1);        // raise v0 to the power of v1
-```
-
-There is a utility to perform linear interpolation between two vectors:
-
-```javascript
-// a linear interpolation between v0 and v1
-// if t == 0, result is v0; 
-// if t == 1, result is v1; 
-// if t == 0.5, result is the average of v0 and v1; 
-// etc. for other values of t
+</code></pre>
+<p>There is a utility to perform linear interpolation between two vectors:</p>
+<pre><code class="lang-javascript">// a linear interpolation between v0 <span class="hljs-keyword">and</span> v1
+// <span class="hljs-keyword">if</span> t == <span class="hljs-number">0</span>, <span class="hljs-literal">result</span> <span class="hljs-keyword">is</span> v0; 
+// <span class="hljs-keyword">if</span> t == <span class="hljs-number">1</span>, <span class="hljs-literal">result</span> <span class="hljs-keyword">is</span> v1; 
+// <span class="hljs-keyword">if</span> t == <span class="hljs-number">0</span>.<span class="hljs-number">5</span>, <span class="hljs-literal">result</span> <span class="hljs-keyword">is</span> the average <span class="hljs-keyword">of</span> v0 <span class="hljs-keyword">and</span> v1; 
+// etc. <span class="hljs-keyword">for</span> other values <span class="hljs-keyword">of</span> t
 vec2.mix(vout, v0, v1, t);
-```
+</code></pre>
+<p>There are also several useful methods for keeping vectors within bounds:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// max retains the values that are closer to Infinity</span>
+<span class="hljs-type">vec2</span>.<span class="hljs-built_in">max</span>(vout, v0, v1);
+<span class="hljs-comment">// min retains the values that are closer to -Infinity</span>
+<span class="hljs-type">vec2</span>.<span class="hljs-built_in">min</span>(vout, v0, v1);
 
-There are also several useful methods for keeping vectors within bounds:
+<span class="hljs-comment">// lesser retains the values that are closer to zero</span>
+<span class="hljs-type">vec2</span>.lesser(vout, v0, v1);
+<span class="hljs-comment">// greater retains the values that are further from zero    </span>
+<span class="hljs-type">vec2</span>.greater(vout, v0, v1);
 
-```javascript
-// max retains the values that are closer to Infinity
-vec2.max(vout, v0, v1);
-// min retains the values that are closer to -Infinity
-vec2.min(vout, v0, v1);
+<span class="hljs-comment">// aka clip: keeps v0 within the bounds of vlo and vhi</span>
+v0.<span class="hljs-built_in">clamp</span>(vlo, vhi);    
 
-// lesser retains the values that are closer to zero
-vec2.lesser(vout, v0, v1);
-// greater retains the values that are further from zero    
-vec2.greater(vout, v0, v1);
-
-// aka clip: keeps v0 within the bounds of vlo and vhi
-v0.clamp(vlo, vhi);    
-
-// like wrap(), it gives the remainder after division
-// it uses Euclidean modulo, which handles negative numbers well for toroidal space
+<span class="hljs-comment">// like wrap(), it gives the remainder after division</span>
+<span class="hljs-comment">// it uses Euclidean modulo, which handles negative numbers well for toroidal space</span>
 v0.wrap(d);    
 
-// applies wrap in a relative range, up to +d/2 and down to -d/2
-// this can be useful e.g. for calculating the shortest distance between two points in toroidal space
-vec2.relativewrap(vout, v0, v1);    
-```
-
-## draw2D
-
-The ```draw2D``` namespace provides a very simple interface for drawing 2D primitives.
-
-It uses a stack-based coordinate transform system. Push the context, apply transforms, then return back to the previous coordinate system by popping the context again:
-
+<span class="hljs-comment">// applies wrap in a relative range, up to +d/2 and down to -d/2</span>
+<span class="hljs-comment">// this can be useful e.g. for calculating the shortest distance between two points in toroidal space</span>
+<span class="hljs-type">vec2</span>.relativewrap(vout, v0, v1);
+</code></pre>
+<!-- 
 ```javascript
-// create a local coordinate system:
-draw2D.push();
-    draw2D.translate(x, y);
-    draw2D.rotate(angle_in_radians);  // or a direction vector
-    draw2D.scale(sizex, sizey);
-
-    // draw in local coordinate system
-    //...
-
-// return to global coordinate system:
-draw2D.pop();
-```
-
-Most calls to draw2D can be chained together, since they return the ```draw2D``` object itself. Now typically, to move into an agent's coordinate system, operate in the order "translate, rotate, scale". So since most draw2D methods can also accept vec2 arguments, a common idiom is:
-
-```javascript
-// push into agent's local coordinate system:
-draw2D.push()    
-    .translate(agent.position)
-    .rotate(agent.direction)
-    .scale(agent.size);
-
-    // draw agent body -- the X axis is agent's forward direction
-    draw2D.rect();
-    draw2D.circle([0.5,  0.5], 0.5);
-    draw2D.circle([0.5, -0.5], 0.5);
-
-draw2D.pop();  // done drawing agent
-```
-
-Basic shapes are as follows:
-
-```javascript
-draw2D.circle([center_x, center_y], diameter);
-draw2D.circle(center_x, center_y, diameter);
-draw2D.circle([center_x, center_y], diameter_x, diameter_y);
-draw2D.circle(center_x, center_y, diameter_x, diameter_y);
-
-draw2D.rect([center_x, center_y], diameter);
-draw2D.rect(center_x, center_y, diameter);
-draw2D.rect([center_x, center_y], diameter_x, diameter_y);
-draw2D.rect(center_x, center_y, diameter_x, diameter_y);
-
-draw2D.triangle([center_x, center_y], diameter);
-draw2D.triangle(center_x, center_y, diameter);
-draw2D.triangle([center_x, center_y], diameter_x, diameter_y);
-draw2D.triangle(center_x, center_y, diameter_x, diameter_y);
-
 draw2D.line([x1, y1], [x2, y2]);    // default thickness is 1 pixel
 draw2D.line([x1, y1], [x2, y2], thickness);        
 ```
@@ -484,7 +502,7 @@ If you need a different shape, there's a method for defining new ones. But this 
 // in the main body of the script (not in update() or draw()!)
 // construct a new shape
 // normally vertices range between -1 and 1
-var rightangletriangle = draw2D.shape([ 
+let rightangletriangle = draw2D.shape([ 
     new vec2(-1, -1), new vec2(1, -1), new vec2(1, 1)
 ]);
 
@@ -499,24 +517,7 @@ function draw() {
 }
 ```
 
-Graphics are drawn using whatever color is currently set, via ```draw2D.color()```. 
-
-```javascript
-draw2D.color(1, 0, 0); // red
-draw2D.color(0, 1, 0); // green
-draw2D.color(0, 0, 1); // blue
-draw2D.color(1, 1, 1, 0.5); // semi-transparent white
-
-// set via hue, saturation, and lightness (instead of red, green, blue)
-draw2D.hsl(0.5, 0.5, 0.5);
-draw2D.hsl(0.5, 0.5, 0.5, 0.5);    // semi-opaque
-
-// you can also use standard CSS colors:
-draw2D.color("#ff3399"); 
-draw2D.color("red");
-```
-
-The full list of named colors is [here](http://www.w3schools.com/colors/colors_hex.asp). More color methods modify the current color:
+More color methods modify the current color:
 
 ```javascript
 // set opacity (0..1):
@@ -540,7 +541,7 @@ draw2D.desaturate();
 It is also possible to cover the shape with a field2D, by setting it as a texture. To stop using the texture, call ```draw2D.texture()``` (with no arguments), or wrap the use of textures with ```draw2D.push()``` and ```draw2D.pop()```:
 
 ```javascript
-var field = field2D(16);
+let field = field2D(16);
 field.set(function() { return random(); });
 
 // in draw():
