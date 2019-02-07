@@ -8,7 +8,7 @@ importance: 10
 **Code:** DATT4950 / DIGM5950   
 **Title:** Artificial Life, Generative Art and Creative Code   
 **Credit:** (3.00 Units)   
-**When:** Winter 2018, Thursdays 12:30 - 3:30    
+**When:** Winter 2019, Thursdays 12:30 - 3:30    
 **Where:** GCFA, ACW 103   
 **Instructor:** Graham Wakefield    
 **Email:** grrrwaaa at yorku dot ca
@@ -88,11 +88,15 @@ Agent-based models: agents, random walks, environmental fields, chemotaxis.
 
 ### 5. Jan 31
 
-**Due in class:** Assignment 1 and Assignment 2
+**Due in class:** Assignment 1
 
 Lab session -- looking at assignments one-by-one.
 
 ### 6. Feb 7
+
+*What does it mean to be interesting?*
+
+Agent-based models techniques: paths, neighbours, life & death, populations, ...
 
 **Due in class:** Assignment 2
 

@@ -1,4 +1,4 @@
-title: Cellular Systems
+title: Cellular Automata
 importance: 7
 
 ---

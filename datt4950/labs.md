@@ -611,6 +611,60 @@ v0.wrap(d);
 vec2.relativewrap(vout, v0, v1);	
 ```
 
+
+
+## hashspace2D
+
+In general, a naive but effective approach to detect nearby objects is to iterate over all objects and compute the relative distances. For example: 
+
+```javascript
+for (let a of agents) {
+	for (let n of agents) {
+		let rel = vec2.distance(a.pos, n.pos);
+		if (rel < (a.size + n.size)) {
+			// they are overlapping 
+		}
+	}
+}
+```
+
+This approach, while effective, is a little inefficient. The ```hashspace2D``` type offers a more efficient way of detecting neighbours:
+
+```javascript
+let space = new hashspace2D();
+
+space.clear(); // remove all objects from the space
+
+// hashspace2D keeps track of objects that have a position and size
+// (with .pos and .size properties)
+let obj = {
+	pos: [0.5, 0.5],
+	size: 0.1,
+};
+
+// add an object to the space:
+space.insert(obj);	
+// move an object in the space:
+space.update(obj);
+// remove an object from the space:
+space.remove(obj);
+
+// search for any other objects within 0.1 distance of "obj"
+// returns an array
+let near = space.search(obj, 0.1);
+
+// search for any other objects within 0.1 distance of the world center
+// returns an array
+let near = space.search([0.5, 0.5], 0.1);
+```
+
+<p class="codepen" data-height="300" data-theme-id="18447" data-default-tab="html,result" data-user="grrrwaaa" data-slug-hash="PVJPEJ" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="2019 DATT4950 Template">
+  <span>See the Pen <a href="https://codepen.io/grrrwaaa/pen/PVJPEJ/">
+  2019 DATT4950 Template</a> by Graham (<a href="https://codepen.io/grrrwaaa">@grrrwaaa</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 <!-- 
 ```javascript
 draw2D.line([x1, y1], [x2, y2]);	// default thickness is 1 pixel
@@ -708,6 +762,11 @@ draw2D.blend(false); // replace previous drawings
 	- [Ising model](https://codepen.io/grrrwaaa/pen/wREVKe)
 	- [Hodgepodge](https://codepen.io/grrrwaaa/pen/bOxXEo)
 	- [Reaction Diffusion](https://codepen.io/grrrwaaa/pen/roZXmR)
+- Agents
+	- [Chemotaxis](https://codepen.io/grrrwaaa/pen/QYjpKb)
+	- [Path following](https://codepen.io/grrrwaaa/pen/qgPZBK?editors=0010)
+	- [Path creating & following](https://codepen.io/grrrwaaa/pen/pGWbWx?editors=0010)
+
 
 <!-- 
 	- [Forest fire in colour](http://codepen.io/grrrwaaa/pen/pgrrpo)
