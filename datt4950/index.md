@@ -94,15 +94,19 @@ Lab session -- looking at assignments one-by-one.
 
 ### 6. Feb 7
 
-*What does it mean to be interesting?*
+Agent-based techniques: paths, life & death, populations, ...
 
-Agent-based models techniques: paths, neighbours, life & death, populations, ...
+Lab scripts: 
+- [Path followers](https://codepen.io/grrrwaaa/pen/gqowoo?editors=0010)
+- [River trails](https://codepen.io/grrrwaaa/pen/daJvZN?editors=0010)
 
 **Due in class:** Assignment 2
 
 ### 7. Feb 14
 
-(Feb 21 READING WEEK)
+Evolution
+
+*(Feb 21 READING WEEK)*
 
 ### 8. Feb 28
 

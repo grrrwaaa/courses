@@ -766,6 +766,7 @@ draw2D.blend(false); // replace previous drawings
 	- [Chemotaxis](https://codepen.io/grrrwaaa/pen/QYjpKb)
 	- [Path following](https://codepen.io/grrrwaaa/pen/qgPZBK?editors=0010)
 	- [Path creating & following](https://codepen.io/grrrwaaa/pen/pGWbWx?editors=0010)
+	- [River trails](https://codepen.io/grrrwaaa/pen/daJvZN?editors=0010)
 
 
 <!-- 
