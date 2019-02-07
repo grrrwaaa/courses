@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-	<title>Agent-Based Systems</title>
+	<title>Agents</title>
 	<link rel="stylesheet" href="style.css" type="text/css" />
   </head>
   <body>
@@ -10,8 +10,9 @@
 	<li><a href="index.html" alt="DATT4950">DATT4950</a></li>
 <li><a href="gallery.html" alt="Gallery">Gallery</a></li>
 <li><a href="themes.html" alt="Themes">Themes</a></li>
-<li><a href="cellular.html" alt="Cellular Systems">Cellular Systems</a></li>
-<li><a href="agent.html" alt="Agent-Based Systems">Agent-Based Systems</a></li>
+<li><a href="cellular.html" alt="Cellular Automata">Cellular Automata</a></li>
+<li><a href="agent.html" alt="Agents">Agents</a></li>
+<li><a href="evo.html" alt="Evolutionary Systems">Evolutionary Systems</a></li>
 <li><a href="labs.html" alt="Labs">Labs</a></li>
 <li><a href="js.html" alt="JavaScript">JavaScript</a></li>
 	</ul>
@@ -281,6 +282,13 @@ agent.vel.<span class="hljs-built_in">rotate</span>((<span class="hljs-built_in"
 <blockquote>
 <p>Obviously there&#39;s a hint here of how it might be interesting to pair our agents with some other CAs for field processes... perhaps the Forest Fire model, for example.</p>
 </blockquote>
+<p><p class="codepen" data-height="300" data-theme-id="18447" data-default-tab="js,result" data-user="grrrwaaa" data-slug-hash="QYjpKb" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="2019 DATT4950 week 4: Agents">
+  <span>See the Pen <a href="https://codepen.io/grrrwaaa/pen/QYjpKb/">
+  2019 DATT4950 week 4: Agents</a> by Graham (<a href="https://codepen.io/grrrwaaa">@grrrwaaa</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 <h2 id="the-model-so-far-">The model so far:</h2>
 <p>An agent-based system can comprise:</p>
 <ul>
@@ -326,7 +334,165 @@ Or continue at Birth & Death?
 
 Some of the most beautiful, fascinating or strange phenomena of nature can be understood as emerging from the behaviors of interacting agents. Widely acknowledged examples include the murmuration of birds (or swarming insects, schools of fish), and the societal 'superorganisms' of ant colonies. We have come to understand that despite the obvious organization that we see at the macro-scale, there is no hierarchical center of coordination, but rather the whole emerges from simple interactions at local levels. These have been suggested as examples of emergence, or of self-organization. Which is to say, the whole is greater than a naive sum of its parts. 
 -->
+<hr>
+<h2 id="path-following">Path following</h2>
+<p>Another simple form of chemotactic behavior is to align movement along given &quot;trails&quot; -- paths of more intense chemical markers, such as the pheromone trails laid down by ants. Again, this can be achieved by a relatively simple mechanism. In this case, agents need two sensors, both ahead of the agent (to draw movement forward) and to the left and right of the agent (to discriminate which direction is better to turn). </p>
+<p>Let&#39;s call these sensors &quot;antennae&quot;. A bit of math is needed to compute where each antenna is located in the world. Starting from a basic vector representing the antenna relative to tha agent, we can then scale, rotate, and translate the location, resulting in a location relative to the world:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// antenna is 50% forward and 50% to the left of the agent:</span>
+let antennaleft = <span class="hljs-keyword">new</span> vec2(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>);
+<span class="hljs-comment">// compute what this is as a world location:</span>
+antennaleft
+    .mul(agent.<span class="hljs-built_in">size</span>) <span class="hljs-comment">// scale to agent size</span>
+    .<span class="hljs-built_in">rotate</span>(agent.vel.angle()) <span class="hljs-comment">// rotate to agent direction</span>
+    .<span class="hljs-built_in">add</span>(agent.pos); <span class="hljs-comment">// move to agent location</span>
+</code></pre>
+<p>With this, and of course also <code>antennaright</code>, we can sample the environmental field at both locations to get two sensor values:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> <span class="hljs-attr">smellleft</span> = sugar.sample(antennaleft);
+<span class="hljs-keyword">let</span> <span class="hljs-attr">smellright</span> = sugar.sample(antennaright);
+</code></pre>
+<p>Now the decision-making can respond to these values. We might consider which direction has a better smell (left or right), we might consider the difference between the smells, we might consider the total of the smells too, in order to determine which way to turn, and how much to turn:</p>
+<p><p class="codepen" data-height="300" data-theme-id="18447" data-default-tab="js,result" data-user="grrrwaaa" data-slug-hash="qgPZBK" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="line following agents">
+  <span>See the Pen <a href="https://codepen.io/grrrwaaa/pen/qgPZBK/">
+  line following agents</a> by Graham (<a href="https://codepen.io/grrrwaaa">@grrrwaaa</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
+<p>From here it is relatively trivial to let the agents also <em>create</em> the trails, as well as following them:</p>
+<p><p class="codepen" data-height="300" data-theme-id="18447" data-default-tab="js,result" data-user="grrrwaaa" data-slug-hash="pGWbWx" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="trailblazing agents">
+  <span>See the Pen <a href="https://codepen.io/grrrwaaa/pen/pGWbWx/">
+  trailblazing agents</a> by Graham (<a href="https://codepen.io/grrrwaaa">@grrrwaaa</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<hr>
+<h2 id="neighbours">Neighbours</h2>
+<p>Agents might also be sensitive to each other directly -- as well as, or instead of, through fields. Since agents are mobile, the set of agents that are close neighbours to another can change over time. We thus need to add routines to maintain lists of near-neighbours on each frame.  </p>
+<p>The simplest method is to compare each agent against each other and check the relative distance. (This method can be refined in many ways). </p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> visible<span class="hljs-number">_</span>range = <span class="hljs-number">0.1</span>;
+<span class="hljs-comment">// find neighbours:</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> a <span class="hljs-keyword">of</span> agents) {
+    <span class="hljs-comment">// clear the neighbour list:</span>
+    a.neighbours = [];
+    <span class="hljs-comment">// consider all possible agents:</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> b <span class="hljs-keyword">of</span> agents) {
+        <span class="hljs-keyword">if</span> (a == b) <span class="hljs-keyword">continue</span>; <span class="hljs-comment">// don't count self</span>
+        <span class="hljs-comment">// consider if we are close enough:</span>
+        <span class="hljs-keyword">let</span> dist = vec<span class="hljs-number">2</span>.distance(a.pos, b.pos) - a.size - b.size;
+        <span class="hljs-keyword">if</span> (dist &lt; visible<span class="hljs-number">_</span>range) {
+            <span class="hljs-comment">// add to list:</span>
+            a.neighbours.push(b);
+        }      
+    }
+}
+</code></pre>
+<p>Notice how:</p>
+<ul>
+<li>we reset the <code>a.neighbours</code> list on each frame -- otherwise it would grow infinitely!  </li>
+<li>we make sure not to count ourselves (<code>if (a == b) continue</code>)</li>
+<li>we take into account the sizes of agents in computing the distance, so that it is distance between their edges rather than distance between their centres</li>
+</ul>
+<p><p class="codepen" data-height="300" data-theme-id="18447" data-default-tab="js,result" data-user="grrrwaaa" data-slug-hash="VgrYXr" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="neighbours">
+  <span>See the Pen <a href="https://codepen.io/grrrwaaa/pen/VgrYXr/">
+  neighbours</a> by Graham (<a href="https://codepen.io/grrrwaaa">@grrrwaaa</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<hr>
+<h2 id="death-note-adding-removing-agents-from-an-array">Death Note: adding/removing agents from an array</h2>
+<p>If we want to extend our model to support death, such as being eaten by a predator, infected by a disease, starvation, poison, fire, etc., we will need a way to remove items from our array of agents. Assuming that we can mark death by some property (such as <code>a.dead = true</code>), you might expect to remove it from the <code>agents</code> array as follows:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">if</span> (<span class="hljs-built_in">agents</span>[n].dead) {
+    <span class="hljs-built_in">agents</span>.splice(n, <span class="hljs-number">1</span>);
+}
+</code></pre>
+<blockquote>
+<p>(Note that <code>delete agents[n]</code> won&#39;t work at all, it doesn&#39;t reshuffle the array to accommodate the gap, it just leaves the gap right there.)</p>
+</blockquote>
+<p>Similarly, if an agent gives birth, you might expect to add the child as follows:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">if</span> (child) {
+    agents.<span class="hljs-keyword">push</span>(child);
+}
+</code></pre>
+<p>But in general, <strong>adding to or removing from an array is not safe while iterating the array</strong>, which is almost certainly the time that you would want to do it. The reason is that you may end up skipping an item, or trying to iterate over an item that no longer exists, or visiting an item twice, because the exact positions of items and the array length have changed. This is one of the classic problems commonly encountered in many imperative programming languages (e.g. C++ too). </p>
+<p>Here are two suggested solutions:</p>
+<p><strong>Iterate backwards</strong></p>
+<p>It is safe to splice and push while iterating backwards, because reshuffling an array only affects later items:</p>
+<pre><code class="lang-javascript">let i = agents.<span class="hljs-keyword">length</span><span class="hljs-comment">;</span>
+<span class="hljs-keyword">while</span> (i--) {
+    let a = agents[i]<span class="hljs-comment">;</span>
+
+    <span class="hljs-comment">//.. do stuff, </span>
+    <span class="hljs-comment">// possibly setting dead = true </span>
+    <span class="hljs-comment">// or creating a chil</span>
+
+    <span class="hljs-keyword">if</span> (dead) {
+        <span class="hljs-comment">// remove safely:</span>
+        agents.splice(i, <span class="hljs-number">1</span>)<span class="hljs-comment">;</span>
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (child) {
+        <span class="hljs-comment">// add a child:</span>
+        agents.push(child)<span class="hljs-comment">;</span>
+    }
+}
+</code></pre>
+<p>Note that in this case, new births will not be visited until the next frame. This is probably what you want, since otherwise you might end up creating an infinite loop!</p>
+<p><p class="codepen" data-height="300" data-theme-id="18447" data-default-tab="js,result" data-user="grrrwaaa" data-slug-hash="xMPbqE" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="birth and death">
+  <span>See the Pen <a href="https://codepen.io/grrrwaaa/pen/xMPbqE/">
+  birth and death</a> by Graham (<a href="https://codepen.io/grrrwaaa">@grrrwaaa</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<p><strong>Double-buffer</strong></p>
+<p>Rather than modifying the array in-place, we build a new array on each iteration, and replace the original when done. This has the advantage of working with for-of loops:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// create new array for the next frame's population:</span>
+<span class="hljs-keyword">let</span> <span class="hljs-keyword">new</span><span class="hljs-number">_p</span>opulation = [];
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> a <span class="hljs-keyword">of</span> agents) {
+
+    <span class="hljs-comment">//.. do stuff, </span>
+    <span class="hljs-comment">// possibly setting dead = true </span>
+    <span class="hljs-comment">// or creating a child</span>
+
+    <span class="hljs-comment">// preserve only living agents:</span>
+    <span class="hljs-keyword">if</span> (!dead) <span class="hljs-keyword">new</span><span class="hljs-number">_p</span>opulation.push(a);
+    <span class="hljs-comment">// add a child?</span>
+    <span class="hljs-keyword">if</span> (child) <span class="hljs-keyword">new</span><span class="hljs-number">_p</span>opulation.push(child);        
+}
+<span class="hljs-comment">// replace original</span>
+agents = <span class="hljs-keyword">new</span><span class="hljs-number">_p</span>opulation;
+</code></pre>
+<p>Note that new children are added to <code>newagents</code>, ensuring they are visited next frame. If we added them to <code>agents</code>, they would also be included in the iterating for loop on the current frame, which could potentially lead to an infinite loop. </p>
+<p><p class="codepen" data-height="300" data-theme-id="18447" data-default-tab="js,result" data-user="grrrwaaa" data-slug-hash="RvjPMm" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="birth and death">
+  <span>See the Pen <a href="https://codepen.io/grrrwaaa/pen/RvjPMm/">
+  birth and death</a> by Graham (<a href="https://codepen.io/grrrwaaa">@grrrwaaa</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="practical-limits-of-population-sizes">Practical limits of population sizes</h2>
+<p>Clearly if a population ever drops to zero, we will never see any organisms again. This may be problematic for an ongoing exhibition! Methods to overcome this include preventing death of the last (few?) creatures, or introducing new randomly seeded organisms (perhaps out of view) at low population sizes. </p>
+<p>At the other end, a population that grows excessively large can slow down the simulation, perhaps even crash it. Again, this is problematic for an ongoing exhibition. It may be necessary to set an absolute population size limit (preventing new agents from being added at this point). </p>
+<p>It would be preferable if a simulation didn&#39;t hit these externally-imposed limits; or at least, not very often. It would be preferable if some kind of <em>endogenous</em> forces, some processes that are part of the world itself, automatically avoid these events. Perhaps an overly-large population is sporadically decimated by extreme weather events, or a mass infection, for example. Whatever the solution, it involves macroscopic behaviour (population size) affecting microscopic behaviour (individual agents reproduction/death).</p>
+<h3 id="energy-dynamics">Energy dynamics</h3>
+<p>If we are careful to apply an energetic cost to every agent activity, and energetic gain through eating/respiration/metabolism, we can count the total energy balance over the entire system on each frame. We can then apply that energy deficit/surplus back into the system in an environmental way, ensuring that the total energy of the system remains constant. </p>
+<ul>
+<li>Each agent needs a representation of its currently available potential energy. </li>
+<li>Each activity of an agent: metabolism, moving, eating, growing, reproducing, etc., has some energetic cost that reduces the agent&#39;s store.</li>
+<li>Certain activities (eating, respiring, etc.) may increase the he agent&#39;s energy store.</li>
+<li>Total energy in a population can be computed by summing the store of each member agent</li>
+</ul>
+<p>This is the population&#39;s <strong>total energy expenditure</strong> (which incidentally may also be a useful indicator of the liveliness of a system).</p>
+<ul>
+<li>Total energy in the environment (such as a &#39;sugar&#39; field2D) by adding up the total in each field cell (by <code>sugar.sum()</code>)</li>
+</ul>
+<p>Adding together the population and environmental totals gives is the measure of the <strong>total available energy</strong> in the world. The goal is for this total available energy to remain fairly constant, at an <strong>ideal energetic carrying capacity</strong>. Compute the difference of <code>available - ideal</code>: if there is surplus, remove it from the environment; if there is deficit, distribute new energy to the environment. So, if this total energy level is below the chosen carrying capacity for the world, we can then introduce energy back in, to ensure that the whole system doesn&#39;t wind down to zero. Re-introducing energy could be done by distributing it somewhat randomly in the space, or by probabilistic expansion of a current growth area, etc. Similarly, if it somehow exceeds the capacity, it can be randomly or gradually removed from the environment. </p>
+<p>Energy dynamics should help keep a population size in reasonable ranges, however it may still be necessary to also implement the hard limit cases.</p>
+<!--
+[Example](http://codepen.io/grrrwaaa/pen/PZxrbo?editors=0010)
+
+[And here's that example combined with the chemotaxis model](http://codepen.io/grrrwaaa/pen/QKXaGb?editors=0010)
+-->
 	</div>
 	<footer>&copy; 2018 Graham Wakefield</footer>
   </body>

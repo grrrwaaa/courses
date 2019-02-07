@@ -10,8 +10,9 @@
 	<li><a href="index.html" alt="DATT4950">DATT4950</a></li>
 <li><a href="gallery.html" alt="Gallery">Gallery</a></li>
 <li><a href="themes.html" alt="Themes">Themes</a></li>
-<li><a href="cellular.html" alt="Cellular Systems">Cellular Systems</a></li>
-<li><a href="agent.html" alt="Agent-Based Systems">Agent-Based Systems</a></li>
+<li><a href="cellular.html" alt="Cellular Automata">Cellular Automata</a></li>
+<li><a href="agent.html" alt="Agents">Agents</a></li>
+<li><a href="evo.html" alt="Evolutionary Systems">Evolutionary Systems</a></li>
 <li><a href="labs.html" alt="Labs">Labs</a></li>
 <li><a href="js.html" alt="JavaScript">JavaScript</a></li>
 	</ul>
@@ -479,6 +480,51 @@ v0.wrap(d);
 <span class="hljs-comment">// this can be useful e.g. for calculating the shortest distance between two points in toroidal space</span>
 <span class="hljs-type">vec2</span>.relativewrap(vout, v0, v1);
 </code></pre>
+<h2 id="hashspace2d">hashspace2D</h2>
+<p>In general, a naive but effective approach to detect nearby objects is to iterate over all objects and compute the relative distances. For example: </p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> a <span class="hljs-keyword">of</span> agents) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> n <span class="hljs-keyword">of</span> agents) {
+        <span class="hljs-keyword">let</span> rel = vec<span class="hljs-number">2</span>.distance(a.pos, n.pos);
+        <span class="hljs-keyword">if</span> (rel &lt; (a.size + n.size)) {
+            <span class="hljs-comment">// they are overlapping </span>
+        }
+    }
+}
+</code></pre>
+<p>This approach, while effective, is a little inefficient. The <code>hashspace2D</code> type offers a more efficient way of detecting neighbours:</p>
+<pre><code class="lang-javascript">let space = new hashspace2D()<span class="hljs-comment">;</span>
+
+space.clear()<span class="hljs-comment">; // remove all objects from the space</span>
+
+<span class="hljs-comment">// hashspace2D keeps track of objects that have a position and size</span>
+<span class="hljs-comment">// (with .pos and .size properties)</span>
+let obj = {
+    <span class="hljs-keyword">pos</span>: [<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>],
+    size: <span class="hljs-number">0.1</span>,
+}<span class="hljs-comment">;</span>
+
+<span class="hljs-comment">// add an object to the space:</span>
+space.insert(obj)<span class="hljs-comment">;    </span>
+<span class="hljs-comment">// move an object in the space:</span>
+space.update(obj)<span class="hljs-comment">;</span>
+<span class="hljs-comment">// remove an object from the space:</span>
+space.remove(obj)<span class="hljs-comment">;</span>
+
+<span class="hljs-comment">// search for any other objects within 0.1 distance of "obj"</span>
+<span class="hljs-comment">// returns an array</span>
+let near = space.search(obj, <span class="hljs-number">0.1</span>)<span class="hljs-comment">;</span>
+
+<span class="hljs-comment">// search for any other objects within 0.1 distance of the world center</span>
+<span class="hljs-comment">// returns an array</span>
+let near = space.search([<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>], <span class="hljs-number">0.1</span>)<span class="hljs-comment">;</span>
+</code></pre>
+<p><p class="codepen" data-height="300" data-theme-id="18447" data-default-tab="html,result" data-user="grrrwaaa" data-slug-hash="PVJPEJ" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="2019 DATT4950 Template">
+  <span>See the Pen <a href="https://codepen.io/grrrwaaa/pen/PVJPEJ/">
+  2019 DATT4950 Template</a> by Graham (<a href="https://codepen.io/grrrwaaa">@grrrwaaa</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 <!-- 
 ```javascript
 draw2D.line([x1, y1], [x2, y2]);    // default thickness is 1 pixel
@@ -575,6 +621,12 @@ draw2D.blend(false); // replace previous drawings
 <li><a href="https://codepen.io/grrrwaaa/pen/wREVKe">Ising model</a></li>
 <li><a href="https://codepen.io/grrrwaaa/pen/bOxXEo">Hodgepodge</a></li>
 <li><a href="https://codepen.io/grrrwaaa/pen/roZXmR">Reaction Diffusion</a></li>
+</ul>
+</li>
+<li>Agents<ul>
+<li><a href="https://codepen.io/grrrwaaa/pen/QYjpKb">Chemotaxis</a></li>
+<li><a href="https://codepen.io/grrrwaaa/pen/qgPZBK?editors=0010">Path following</a></li>
+<li><a href="https://codepen.io/grrrwaaa/pen/pGWbWx?editors=0010">Path creating &amp; following</a></li>
 </ul>
 </li>
 </ul>
