@@ -137,6 +137,72 @@ Evolving neural networks to play Mario:
 </blockquote>
 <p>As with temperature-like parameters we saw in CA, a crucial factor in evolution is the rate or probability of variation. Too much, and the population may never significantly diverge from a randomly initialized one; too little, and it may find itself stuck on the first solution it finds, with a largely homogenous population. It may be wise to have different mutation rates for different genes, or for different members of a population, or by fitness rank etc. It is likely desirable to gradually reduce mutation rates over time, unless the population appears to be stagnating. (See also simulated annealing.)</p>
 <hr>
+<hr>
+<h2 id="a-trivial-string-generator">A trivial string generator</h2>
+<p>Just to practice the mechanics, we can start by evolving sentences toward a desired result. Each gene is an integer, which is mapped to a word from a predefined list:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// the desired result:</span>
+var target = <span class="hljs-string">"the quick brown fox jumped over the lazy dog"</span><span class="hljs-comment">;</span>
+
+<span class="hljs-comment">// the set of components:</span>
+var dictionary = [<span class="hljs-string">"I"</span>, <span class="hljs-string">"a"</span>, <span class="hljs-string">"an"</span>, <span class="hljs-string">"bleep"</span>, <span class="hljs-string">"blown"</span>, <span class="hljs-string">"bog"</span>, <span class="hljs-string">"box"</span>, <span class="hljs-string">"broad"</span>, <span class="hljs-string">"brown"</span>, <span class="hljs-string">"bumped"</span>, 
+    <span class="hljs-string">"cat"</span>, <span class="hljs-string">"cog"</span>, <span class="hljs-string">"coloured"</span>, <span class="hljs-string">"colourful"</span>, <span class="hljs-string">"colourless"</span>, <span class="hljs-string">"crazy"</span>, <span class="hljs-string">"creep"</span>, <span class="hljs-string">"crown"</span>, <span class="hljs-string">"dig"</span>, 
+    <span class="hljs-string">"do"</span>, <span class="hljs-string">"dog"</span>, <span class="hljs-string">"door"</span>, <span class="hljs-string">"dot"</span>, <span class="hljs-string">"ever"</span>, <span class="hljs-string">"fit"</span>, <span class="hljs-string">"fix"</span>, <span class="hljs-string">"flick"</span>, <span class="hljs-string">"for"</span>, <span class="hljs-string">"fox"</span>, <span class="hljs-string">"frown"</span>, 
+    <span class="hljs-string">"glean"</span>, <span class="hljs-string">"great"</span>, <span class="hljs-string">"greed"</span>, <span class="hljs-string">"green"</span>, <span class="hljs-string">"greet"</span>, <span class="hljs-string">"hazy"</span>, <span class="hljs-string">"he"</span>, <span class="hljs-string">"hog"</span>, <span class="hljs-string">"ideas"</span>, <span class="hljs-string">"idols"</span>, 
+    <span class="hljs-string">"in"</span>, <span class="hljs-string">"it"</span>, <span class="hljs-string">"jumble"</span>, <span class="hljs-string">"jumped"</span>, <span class="hljs-string">"jumper"</span>, <span class="hljs-string">"jumps"</span>, <span class="hljs-string">"last"</span>, <span class="hljs-string">"lazy"</span>, <span class="hljs-string">"leaped"</span>, <span class="hljs-string">"lumped"</span>, 
+    <span class="hljs-string">"maze"</span>, <span class="hljs-string">"of"</span>, <span class="hljs-string">"offer"</span>, <span class="hljs-string">"ogre"</span>, <span class="hljs-string">"older"</span>, <span class="hljs-string">"on"</span>, <span class="hljs-string">"or"</span>, <span class="hljs-string">"over"</span>, <span class="hljs-string">"quick"</span>, <span class="hljs-string">"quite"</span>, <span class="hljs-string">"rapid"</span>, 
+    <span class="hljs-string">"she"</span>, <span class="hljs-string">"sheen"</span>, <span class="hljs-string">"sheep"</span>, <span class="hljs-string">"sick"</span>, <span class="hljs-string">"sleep"</span>, <span class="hljs-string">"slept"</span>, <span class="hljs-string">"slow"</span>, <span class="hljs-string">"spelt"</span>, <span class="hljs-string">"spilt"</span>, <span class="hljs-string">"the"</span>, 
+    <span class="hljs-string">"town"</span>, <span class="hljs-string">"under"</span>]<span class="hljs-comment">;</span>
+
+<span class="hljs-comment">// initial:</span>
+var geno = []<span class="hljs-comment">;</span>
+<span class="hljs-keyword">for</span> (var i=<span class="hljs-number">0</span><span class="hljs-comment">; i &lt; 9; i++) {</span>
+    geno[i] = random(dictionary.<span class="hljs-keyword">length</span>)<span class="hljs-comment">;</span>
+}
+<span class="hljs-comment">// develop:</span>
+var pheno = []<span class="hljs-comment">;</span>
+<span class="hljs-keyword">for</span> (var i=<span class="hljs-number">0</span><span class="hljs-comment">; i &lt; geno.length; i++) {</span>
+    pheno[i] = dictionary[ geno[i] ]<span class="hljs-comment">;</span>
+}
+pheno = pheno.join(<span class="hljs-string">" "</span>)<span class="hljs-comment">;</span>
+</code></pre>
+<p>To evaluate, we could compare how many of the right characters are in the right places:</p>
+<pre><code class="lang-javascript">var <span class="hljs-keyword">err</span> = <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+<span class="hljs-keyword">for</span> (var i=<span class="hljs-number">0</span><span class="hljs-comment">; i &lt; pheno.length; i++) {</span>
+    <span class="hljs-keyword">if</span> (pheno.substr(i, <span class="hljs-number">1</span>) != target.substr(i, <span class="hljs-number">1</span>)) {
+        <span class="hljs-keyword">err</span>++<span class="hljs-comment">;</span>
+    }
+}
+<span class="hljs-comment">// make it fair between long &amp; short strings:</span>
+<span class="hljs-keyword">err</span> /= pheno.<span class="hljs-keyword">length</span><span class="hljs-comment">;</span>
+</code></pre>
+<p>To convert this error into a fitness, where fittest is 1 and least fit is zero, we could apply a <code>1/(1+n)</code> mapping:</p>
+<pre><code class="lang-javascript">var fitness = <span class="hljs-number">1</span> / (<span class="hljs-number">1</span> + <span class="hljs-keyword">err</span>)<span class="hljs-comment">;</span>
+</code></pre>
+<p>This gives us all the basic components we need to generate a random population as genotypes. We already know how to develop and evaluate such a genotype, and storing several in a population is trivial. </p>
+<p>It is generally useful to sort a population by fitness, which can be done like so:</p>
+<pre><code class="lang-javascript">// sort the population by comparing pairs
+// <span class="hljs-keyword">as</span> a <span class="hljs-literal">result</span>, the fittest candidate will be <span class="hljs-keyword">in</span> population[<span class="hljs-number">0</span>]
+population.sort(function(a, b) { <span class="hljs-keyword">return</span> b.fitness - a.fitness; });
+</code></pre>
+<blockquote>
+<p>After sorting it is convenient to print out the candidates, their fitness, etc, so we can see how the evolution proceeds.</p>
+</blockquote>
+<p>After evaluating, we create a new generation of candidates, broadly derived from the previous, but with fitter candidates being more likely to be progenitors. The simplest method is to pick a parent at random, but biasing toward the lower indices. (A simple trick to do this is for the nth child to use a the parent at index <code>random(n)</code>.)</p>
+<blockquote>
+<p>This is called <em>stochastic universal sampling</em>: it draws samples from the entire range, but selects fitter individuals more often than less-fit candidates.</p>
+</blockquote>
+<p>We must also introduce some variation (mutations) while generating new genotypes at this point. The simplest method is to introduce a branch with a predetermined probability to randomize a gene rather than copy from the parent, e.g.:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// copy or mutate genes:</span>
+<span class="hljs-keyword">for</span> (var <span class="hljs-keyword">j</span> = <span class="hljs-number">0</span>; <span class="hljs-keyword">j</span> &lt; gene_size; <span class="hljs-keyword">j</span>++) {
+    <span class="hljs-comment">// mutate?</span>
+    <span class="hljs-keyword">if</span> (random() &lt; mutability) {
+        child[<span class="hljs-keyword">j</span>] = random(gene_range); 
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// copy:</span>
+        child[<span class="hljs-keyword">j</span>] = parent[<span class="hljs-keyword">j</span>];
+    }
+}
+</code></pre>
 
 	</div>
 	<footer>&copy; 2018 Graham Wakefield</footer>
