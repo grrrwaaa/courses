@@ -203,6 +203,90 @@ population.sort(function(a, b) { <span class="hljs-keyword">return</span> b.fitn
     }
 }
 </code></pre>
+<p>Does it work? If not, can you think of ideas why -- and any ideas to improve it?</p>
+<blockquote>
+<p>Does it sometimes seem to get stuck? Can you suggest why? Can you think of any way to modify the mutation, evaluation, or even the genetic representation to overcome this?</p>
+</blockquote>
+<p>As a variant, we could evaluate success based on the concept of the <em>longest common substring</em>:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// an algorithm to return the longest common substring of two strings</span>
+<span class="hljs-comment">// transcribed from https://en.wikipedia.org/wiki/Longest_common_substring_problem</span>
+function longest_common_substring(<span class="hljs-keyword">s</span>, t) {
+  var <span class="hljs-keyword">L</span> = <span class="hljs-keyword">new</span> Array(<span class="hljs-keyword">s</span>.length);
+  var z = <span class="hljs-number">0</span>; <span class="hljs-comment">// length of the longest common fragment so far</span>
+  var ret = <span class="hljs-string">""</span>;
+  <span class="hljs-keyword">for</span> (var i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-keyword">s</span>.length; i++) {
+    <span class="hljs-keyword">L</span>[i] = <span class="hljs-keyword">new</span> Array(t.length);
+    <span class="hljs-keyword">for</span> (var <span class="hljs-keyword">j</span> = <span class="hljs-number">0</span>; <span class="hljs-keyword">j</span> &lt; t.length; <span class="hljs-keyword">j</span>++) {
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">s</span>[i] == t[<span class="hljs-keyword">j</span>]) {
+        var v = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-keyword">j</span> &gt; <span class="hljs-number">0</span>) {
+          v = <span class="hljs-keyword">L</span>[i - <span class="hljs-number">1</span>][<span class="hljs-keyword">j</span> - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;
+        }
+        <span class="hljs-keyword">L</span>[i][<span class="hljs-keyword">j</span>] = v;
+        <span class="hljs-comment">// is this the longest we found yet?</span>
+        <span class="hljs-keyword">if</span> (v &gt; z) {
+          ret = <span class="hljs-keyword">s</span>.substring(i - v + <span class="hljs-number">1</span>, i + <span class="hljs-number">1</span>);
+          z = v;
+        }
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">L</span>[i][<span class="hljs-keyword">j</span>] = <span class="hljs-number">0</span>;
+      }
+    }
+  }
+  <span class="hljs-keyword">return</span> ret;
+}
+</code></pre>
+<blockquote>
+<p>As an extension, can you imagine working from a much larger lexicon of words, and coming up with a fitness measure that evaluates according to how much sense a randomized sentence makes? Perhaps take a look at n-grams, and/or grammar parsing, and/or methods used in <a href="https://en.wikipedia.org/wiki/Natural_language_generation">natural language generation</a>. </p>
+</blockquote>
+<p>Or, since English syntax and semantics are pretty hard, how about generating random but syntactically correct programs?</p>
+<hr>
+<h2 id="a-simple-math-solver">A simple math solver</h2>
+<p>The string example was a little silly, but let&#39;s say we want to write a program (the phenotype) that can solve math problems. To start as simple as possible, we can restrict our programs to numerals and symbols of basic arithmetic:</p>
+<pre><code class="lang-javascript"><span class="hljs-variable"><span class="hljs-keyword">var</span> symbols</span> = [<span class="hljs-string">"+"</span>, <span class="hljs-string">"-"</span>, <span class="hljs-string">"*"</span>, <span class="hljs-string">"/"</span>, <span class="hljs-string">"1"</span>, <span class="hljs-string">"2"</span>, <span class="hljs-string">"3"</span>, <span class="hljs-string">"4"</span>, <span class="hljs-string">"5"</span>, <span class="hljs-string">"6"</span>, <span class="hljs-string">"7"</span>, <span class="hljs-string">"8"</span>, <span class="hljs-string">"9"</span>, <span class="hljs-string">"0"</span>];
+</code></pre>
+<p>To generate a random program, of say, length 10 characters, and run it, we would do something like this:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// fill an array:</span>
+var arr = []<span class="hljs-comment">;</span>
+<span class="hljs-keyword">for</span> (var i=<span class="hljs-number">0</span><span class="hljs-comment">; i&lt;10; i++) {</span>
+    <span class="hljs-comment">// pick a symbol at random to add:</span>
+    arr[i] = symbols[random(symbols.<span class="hljs-keyword">length</span>)]<span class="hljs-comment">;</span>
+}
+<span class="hljs-comment">// convert the array of symbols to a string of code:</span>
+var code = <span class="hljs-string">"return "</span> + arr.join(<span class="hljs-string">""</span>)<span class="hljs-comment">;</span>
+<span class="hljs-comment">// convert to an executable function:</span>
+var f = new Function(code)<span class="hljs-comment">;</span>
+<span class="hljs-comment">// run it to get the result</span>
+console.log(f())<span class="hljs-comment">;</span>
+</code></pre>
+<p>The chances are, the generated code is garbage, and might well throw an error, or return a meaningless result such as <code>Infinity</code> or <code>NaN</code>. These errors could break or throw off our simulation, but we can trap them safely as follows:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">try</span> {
+    // convert to an executable function:
+    <span class="hljs-keyword">var</span> f = new <span class="hljs-type">Function</span>(code);
+    // run it to get the <span class="hljs-literal">result</span>
+    <span class="hljs-keyword">var</span> <span class="hljs-literal">result</span> = f();
+    <span class="hljs-keyword">if</span> (<span class="hljs-literal">result</span> != <span class="hljs-type">Infinity</span> &amp;&amp; <span class="hljs-literal">result</span> != -<span class="hljs-type">Infinity</span> &amp;&amp; <span class="hljs-literal">result</span> == <span class="hljs-literal">result</span>) {
+        console.log(<span class="hljs-literal">result</span>);
+    }
+}
+</code></pre>
+<p>Now we can evaluate the fitness of our result, relative to a target number. We can take the absolute difference, and then put this through a <code>1/(1+n)</code> mapping as before. This mapping is somewhat arbitrary, but works for our purposes here:</p>
+<pre><code class="lang-javascript">fitness = <span class="hljs-number">1</span> / <span class="hljs-number">1</span> + (<span class="hljs-type">Math</span>.abs(<span class="hljs-literal">result</span> - target));
+</code></pre>
+<p>With this in play, we should already see some clear evolutionary behaviour. You may notice punctuated equilibria. Run the simulation many times, and you may notice that the fittest candidate is not always converging to the same result. There are clearly multiple distant fitness peaks here. </p>
+<p>You may notice that the code generated sometimes looks odd -- and that the evolution has discovered tricks such as adding numbers multiplied by zero, prefixing zeroes to numbers, and even placing two slashes to create a comment (followed by &quot;junk DNA&quot;), in order to get a result with the specific gene length. We could easily prevent this by turning our <code>&quot;/&quot;</code> symbol into a <code>&quot; / &quot;</code> symbol, but perhaps there is an advantage not to?</p>
+<p>Try changing the genome size, the population size, and the mutation rates, to see how it changes. </p>
+<p>Try playing with the symbol list. What happens if you add the &quot;.&quot; character? How about &quot;(&quot; and &quot;)&quot;?</p>
+<p>The mutation rate acts a bit like a temperature control -- too high and good results can&#39;t remain viable, too low and it takes to long to get anywhere. Larger populations help to generate more chances of leaping off a local peak. Too short genome sizes can be a tough challenge, but too long genomes make it less likely to find a result quickly -- and add more noise. Is there a way to make genome size variable, and give shorter results higher fitness? What other mutation methods could help? What other developmental models could be tried? Is there a better way to pick parents?</p>
+<p>Generally, by observing the behaviour, what insights can you draw, and what ideas have you for improving it?</p>
+<p>How would you be able to add operators such as <code>Math.sin()</code>?  </p>
+<p>What other problems could you imagine addressing, other than calculating numbers? (What kinds of problems is this method suited for?)</p>
+<h3 id="tournament-selection">Tournament Selection</h3>
+<p>We can continue using the <em>fitness-proportionate</em> selection as before, via stochastic universal sampling, however many systems use a different form of selection known as <strong>tournament selection</strong>, in which a number of individuals are chosen at random from the population to create a temporary neighbourhood set, and the fittest of this neighbourhood set is chosen as parent to create a new individual. (Or sometimes, a weighted probability veering toward the fittest in the neighbourhood set, to make it less deterministic.)</p>
+<p>In part this helps to mirror the spatial/network effects of populations, in that it is unlikely for every member of a population to meet every other; selection is made on the somewhat random subset of the population that is encountered.</p>
+<p>Selection pressure is easily adjusted by changing the tournament neighbourhood set size. If the size is larger, weak individuals have a smaller chance to be selected. </p>
+<!--[Here's the Pi hunting example modified to use probabilistic tournament selection](http://codepen.io/grrrwaaa/pen/zrLZvK?editors=001)-->
+<hr>
 
 	</div>
 	<footer>&copy; 2018 Graham Wakefield</footer>
