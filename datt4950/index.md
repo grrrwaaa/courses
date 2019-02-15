@@ -104,7 +104,11 @@ Lab scripts:
 
 ### 7. Feb 14
 
-Evolution
+Natural & artificial evolution
+
+Lab scripts:
+- [Evolving strings](https://codepen.io/grrrwaaa/pen/OdByPp?editors=0010)
+- [Evolving code (as math expressions)](https://codepen.io/grrrwaaa/pen/JxmRGE?editors=0010)
 
 *(Feb 21 READING WEEK)*
 
