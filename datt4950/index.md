@@ -120,9 +120,10 @@ Lab scripts:
 
 Announcements for upcoming schedule
 
-Evolutionary programming continued: aesthetic selection, biomorphs, cross-over, ecosystemic evolution
+Evolutionary programming continued: aesthetic selection, biomorphs
 
 - [Biomorphs lab code](https://codepen.io/grrrwaaa/pen/rRygjM?editors=0010)
+- [Biomorphs with selection](https://codepen.io/grrrwaaa/pen/vPxoLX?editors=0010)
 
 ### 10. Mar 14
 
