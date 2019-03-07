@@ -269,6 +269,11 @@ console.log(f())<span class="hljs-comment">;</span>
 <p><strong>For art, music, and other less formalized domains</strong> we may need to consider other methods of selection, since a formal measure may not be possible, or the problem may not be clearly statable in advance. E.g. can we measure aesthetic quality in formal terms?</p>
 <ul>
 <li>Interactive selection. Pioneered by Dawkins&#39; Biomorphs program and Karl Sims&#39; evolved images, in which several candidates are presented to human observers, who apply the selection manually. Also known as aesthetic selection. A problem here is that the human becomes the bottleneck of evolution, constraining population sizes and rates of evolution to very small scales. It may arguably also tend toward selecting for the aesthetic average rather than the remarkable.<ul>
+<li>Examples of aesthetic selection from previous classes<ul>
+<li><a href="http://codepen.io/grrrwaaa/pen/mrZqoK?editors=0010">Malevich Generator by Sophie Roginsky</a></li>
+<li><a href="http://codepen.io/grrrwaaa/pen/vXqWwj?editors=0010">Strange Attractor by Rose Zhou</a></li>
+</ul>
+</li>
 <li>An interesting variation is to make the selection continuous and implicit. Jon McCormack&#39;s Eden measured fitness globally according to how long gallery visitors remained in front of a particular evolving sub-population.</li>
 </ul>
 </li>
@@ -287,7 +292,211 @@ console.log(f())<span class="hljs-comment">;</span>
 </blockquote>
 <p>As with temperature-like parameters we saw in CA, a crucial factor in evolution is the rate or probability of variation. Too much, and the population may never significantly diverge from a randomly initialized one; too little, and it may find itself stuck on the first solution it finds, with a largely homogenous population. It may be wise to have different mutation rates for different genes, or for different members of a population, or by fitness rank etc. It is likely desirable to gradually reduce mutation rates over time, unless the population appears to be stagnating. (See also simulated annealing.)</p>
 <hr>
+<h2 id="aesthetic-selection-of-biomorphs">Aesthetic selection of biomorphs</h2>
+<p>Biomorphs are virtual entities that were devised by Richard Dawkins in his book <a href="https://en.wikipedia.org/wiki/The_Blind_Watchmaker">The Blind Watchmaker</a> as a way to visualize the power of evolution. Dawkins used a simple symbolic rendering of lines at fixed angles, grown in a kind of tree structure, as his phenotypes. Of a given generation, he selected the biomorph he found most aesthetically pleasing, making this the parent of the next generation.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/f/fc/BiomorphBounce.png" alt="biomorph"></p>
+<blockquote>
+<p>Adding new lines (or removing them) based on simple developmental rules offered a discrete set of possible new shapes (mutations), which were displayed on screen so that the user could choose between them. The chosen mutation would then be the basis for another generation of biomorph mutants to be chosen from, and so on. Thus, the user, by selection, could steer the evolution of biomorphs. This process often produced images which were reminiscent of real organisms for instance beetles, bats, or trees. Dawkins speculated that the unnatural selection role played by the user in this program could be replaced by a more natural agent if, for example, colourful biomorphs could be selected by butterflies or other insects, via a touch sensitive display set up in a garden.</p>
+</blockquote>
+<hr>
+<h3 id="aside-turtle-graphics">Aside: Turtle graphics</h3>
+<p>We&#39;d like to generate biomorphs in a similar way. What we want to create is a function that maps genome strings into biomorph shapes. The genotype is a string of symbols, the phenotype is the graphics that result. </p>
+<p>The biomorphs are all made out of simple line drawings. For efficiency, we can use the <code>draw2D.lines()</code> method to draw a list of lines at once. Here&#39;s how it works:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// draws a plus (two pairs of points for each line)</span>
+draw2D.<span class="hljs-keyword">lines</span>([
+    [<span class="hljs-number">0.2</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">0.8</span>, <span class="hljs-number">0</span>], <span class="hljs-comment">// the horizontal line</span>
+    [<span class="hljs-number">0</span>, <span class="hljs-number">0.2</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">0.8</span>], <span class="hljs-comment">// the vertical line</span>
+]);
+</code></pre>
+<p>The classic example is using the genotype strings as instructions for a &quot;turtle graphics&quot; interpreter. A minimal alphabet &amp; semantics could be something like this:</p>
+<ul>
+<li><strong>F</strong>: move forward one unit, drawing a line.</li>
+<li><strong>+</strong>: turn a certain amount to the left.</li>
+<li><strong>-</strong>: turn a certain amount to the right.</li>
+</ul>
+<p>To draw in the Turtle style, we need to represent a turtle&#39;s properties, which are a position and a direction. Then, we can manipulate these properties to capture the turtle&#39;s movement, collecting points of a line as it moves. </p>
+<p>We can start by building a function that creates a turtle, and uses it to collect points to draw a specific shape, such as a square.</p>
+<p>Be careful to insert copies of the turtle location into the list of line points, rather than insert a reference. If we didn&#39;t clone a copy of the point, we would end up with many references to the same <code>vec2</code> object in the list.</p>
+<p>It should be apparent that the code is highly repetitive. Conceptually, we could instead represent this as a data structure: a list of commands such as &quot;forward, turn, forward, turn, forward, turn, forward&quot;. Let us rewrite our function as an <strong>interpreter</strong> of such a list of commands. This becomes powerful as it would allow us to generate different shapes in a data-driven way, simply by passing in a list of <strong>commands</strong>. We could even compress these commands to simple turtle mnemonics, of <code>&quot;F+F+F+F&quot;</code>.</p>
+<p>Once we have an interpreter, we could go one step further and turn into a <strong>compiler</strong>; a compiler is just an interpreter that <em>generates executable code</em> rather than <em>executes code</em>. We can take our interpreter and change all of its actions into the generation of strings of code, collecting all these lines of code into a big list. Finally, we join all those strings together (with newlines between) and convert them into a <code>new Function</code>. With this we can generate any arbitrary string of commands and turn it into a re-usable graphics function!</p>
+<p>And, of course, since these functions are generated from strings, they can be generated from string genomes!</p>
+<hr>
+<p>With this in place, we could now expand our vocabulary of actions in our mini-language, to include things like these:</p>
+<ul>
+<li><strong>f</strong>: move forward half a unit, drawing a line.</li>
+<li><strong>&gt;</strong>: turn a different amount to the left.</li>
+<li><strong>&lt;</strong>: turn a different amount to the right.</li>
+<li><strong>(</strong>: &quot;push&quot;: spawn a clone of the turtle and continue interpreting</li>
+<li><strong>)</strong>: &quot;pop&quot;: stop interpreting with the current turtle and return to its parent turtle</li>
+<li><strong>=</strong>: face the opposite direction; (possibly also push with a copy of the remaining code for symmetry)</li>
+<li><strong>|</strong>: swap left/right chirality; (possibly also push with a copy of the remaining code for symmetry)</li>
+<li><strong>.</strong>: do nothing</li>
+<li>etc.</li>
+</ul>
+<p>We could also make our shapes more dynamic. For example, we could generate rotation angles in the function according to the current time (e.g. <code>let a = Math.sin(now)</code>). </p>
+<p>One of the advantages of using strings of symbols as genotypes is their readability, but another is the flexibility to perform different kinds of mutations:</p>
+<ul>
+<li>Replace a symbol with another randomly chosen from the alphabet</li>
+<li>At a random location, remove a symbol</li>
+<li>At a random location, insert a symbol randomly chosen from the alphabet</li>
+<li>Split the string into two parts, and join them the other way around</li>
+<li>Repeat a subsection of the string</li>
+<li>Reverse, or shuffle, a subsection of the string</li>
+</ul>
+<blockquote>
+<p>Some of these mutations can change the length of the string. It may be advisable to add limits on the minimum or maximum length of the string mutations can produce.</p>
+</blockquote>
+<p>Now we can show all members of a generation side-by-side, and use the mouse to choose the member we prefer to form the parent of the next generation.</p>
+<p>Possible extensions:</p>
+<ul>
+<li>Make the fixed amounts (segment angles, lengths) variable over time, for animated biomorphs</li>
+<li>Extend the alphabet with more drawing components</li>
+<li>Show the creatures growth by interpreting less than the whole string during a childhood period</li>
+<li>Extend into more complex <a href="code.html"><em>rewriting systems</em>, such as L-systems, by embedding <em>production rules</em></a>, to create evolutionary-developmental systems! I.e., the genome isn&#39;t interpreted immediately into graphics, but instead/also into the production of more code for interpreting. </li>
+</ul>
+<p>The past point is important to consider. A convincing form of bilateral symmetry (something found in many organisms) can be achieved by L-system production rules, rather than by embedding this into the interpreter. </p>
+<!--
 
+
+---
+
+To draw in the Turtle style, we need to represent a turtle's properties, which are a position and a direction. Then, we can manipulate these properties to capture the turtle's movement, collecting points of a line as it moves. For example, here's a turtle drawing a square:
+
+```javascript
+function square() {
+    // turtle start state:
+    let p = new vec2(0.5, 0.5);
+    let dir = new vec2(0, 0.1);
+    let lines = [];
+
+    // move forward, drawing a line:
+    lines.push(p.clone());  
+    p.add(dir) // move
+    lines.push(p.clone());
+
+    // rotate 90 degrees:
+    dir.rotate(Math.PI/2)
+
+    // move forward, drawing a line:
+    lines.push(p.clone());  
+    p.add(dir) // move
+    lines.push(p.clone());
+
+    // rotate 90 degrees:
+    dir.rotate(Math.PI/2)
+
+    // move forward, drawing a line:
+    lines.push(p.clone());  
+    p.add(dir) // move
+    lines.push(p.clone());
+
+    // rotate 90 degrees:
+    dir.rotate(Math.PI/2)
+
+    // move forward, drawing a line:
+    lines.push(p.clone());  
+    p.add(dir) // move
+    lines.push(p.clone());
+
+    return lines;
+}
+
+let lines = square();
+draw2D.lines(lines);
+```
+
+```javascript
+
+// this is what we want:
+let lines = interpret("F+F+F+F"); 
+draw2D.lines(lines);
+
+// this is how to do it:
+function interpret(encoded) {
+    // convert encoded input into a list of commands
+    // e.g. "F+F+F+F" => ["F", "+", "F", "+", "F", "+", "F"]
+    let commands = encoded.split(""); 
+
+    // turtle start state:
+    let p = new vec2(0.5, 0.5);
+    let dir = new vec2(0, 0.1);
+    let lines = [];
+
+    for (let i=0; i<commands.length; i++) {
+        let cmd = commands[i];
+
+        if (cmd == "F") {
+            // move forward, drawing a line:
+            lines.push(p.clone());  
+            p.add(dir) // move
+            lines.push(p.clone());
+        } else if (cmd == "+") {
+            // rotate 90 degrees:
+              dir.rotate(Math.PI/2)
+        } else if (cmd == "-") {
+            // rotate -90 degrees:
+              dir.rotate(-Math.PI/2)
+        }
+    }
+
+    return lines;
+}
+```
+
+```javascript
+
+// this is what we want to do:
+let square = compile("F+F+F+F");
+let lines = square(); 
+draw2D.lines(lines);
+
+// this is how to do it:
+function compile(encoded) {
+    let commands = encoded.split("")
+
+    // a list to collect code as it is being generated:
+    let code = [
+        "// turtle start state:",
+        "let p = new vec2(0.5, 0.5);",
+        "let dir = new vec2(0, 0.1);",
+        "let lines = [];"
+    ]
+
+    // for each command, add more code:
+    for (let i=0; i<commands.length; i++) {
+        let cmd = commands[i];
+
+        if (cmd == "F") {
+            code.push(
+                "// move forward, drawing a line:",
+                "lines.push(p.clone());",  
+                "p.add(dir) // move",
+                "lines.push(p.clone());"
+            );
+        } else if (cmd == "+") {
+            code.push(
+                "// rotate 90 degrees:",
+                  "dir.rotate(Math.PI/2)"
+            );
+        } else if (cmd == "-") {
+            code.push(
+                "// rotate 90 degrees:",
+                  "dir.rotate(-Math.PI/2)"
+            );
+        }
+    }
+
+    code.push("return lines;");
+
+    // convert the resulting code into a string (with newlines)
+    let finalcode = code.join("\n");
+    // convert this into a Javascript Function:
+    let fun = new Function(finalcode);
+    return fun;
+}
+```
+
+-->
 	</div>
 	<footer>&copy; 2018 Graham Wakefield</footer>
   </body>
