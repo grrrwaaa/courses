@@ -114,31 +114,39 @@ Lab scripts:
 
 ### 8. Feb 28
 
-**Due in class:** Assignment 3
+*Class postponed*
 
 ### 9. Mar 7
 
-**Due in class:** Proposals for final projects / exhibitions.
+Announcements for upcoming schedule
+
+Evolutionary programming continued: aesthetic selection, biomorphs, cross-over, ecosystemic evolution
 
 ### 10. Mar 14
+
+**Due in class:** Proposals for final projects (and for exhibition).
+
+### 11. Mar 21
 
 **Due in class:** [Work-in-progress of final project](due.html#final-project)
 
 Curation of works for the OCADU exhibition.
 
-### 11. Mar 21
-
 [Course evaluation](http://courseevaluations.yorku.ca)
 
 Final project/portfolio assistance.
 
-April 1-14: Joint exhibit with OCAD U Digital Futures course "Research & Innovation Special Focus: Artificial Natures" [led by Haru Ji](https://www2.ocadu.ca/bio/haru-hyunkyung-ji), at the OCAD U campus, 49 McCaul St. 
+### 12. Mar 28
 
-### 12. Apr 4
+**Due:** [Final presentation](due.html#final-project)
 
-**Due:** [Final presentation, project files & documentation](due.html#final-project)
+### Early April
 
-Curation of works for the DM exhibition.
+Opportunity to exhibit collaborations with OCADU Digital Futures graduates taking the course "Research & Innovation Special Focus: Artificial Natures" [led by Haru Ji](https://www2.ocadu.ca/bio/haru-hyunkyung-ji), at the OCAD U campus, 49 McCaul St. 
+
+### Apr 4
+
+**Due:** [Final presentation files, project files & other documentation](due.html#final-project)
 
 ---
 
