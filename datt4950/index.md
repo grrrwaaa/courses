@@ -130,9 +130,9 @@ Evolutionary programming continued: aesthetic selection, biomorphs, cross-over, 
 
 **Due in class:** [Work-in-progress of final project](due.html#final-project)
 
-Curation of works for the OCADU exhibition.
-
 [Course evaluation](http://courseevaluations.yorku.ca)
+
+Curation of works for the exhibition.
 
 Final project/portfolio assistance.
 
