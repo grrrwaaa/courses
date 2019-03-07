@@ -122,6 +122,8 @@ Announcements for upcoming schedule
 
 Evolutionary programming continued: aesthetic selection, biomorphs, cross-over, ecosystemic evolution
 
+- [Biomorphs lab code](https://codepen.io/grrrwaaa/pen/rRygjM?editors=0010)
+
 ### 10. Mar 14
 
 **Due in class:** Proposals for final projects (and for exhibition).
