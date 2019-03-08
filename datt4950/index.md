@@ -131,7 +131,7 @@ Evolutionary programming continued: aesthetic selection, biomorphs
 
 ### 11. Mar 21
 
-**Due in class:** [Work-in-progress of final project](due.html#final-project)
+**Due in class:** [Work-in-progress of final project](#final-project)
 
 [Course evaluation](http://courseevaluations.yorku.ca)
 
@@ -141,7 +141,7 @@ Final project/portfolio assistance.
 
 ### 12. Mar 28
 
-**Due:** [Final presentation](due.html#final-project)
+**Due:** [Final presentation](#final-project)
 
 ### Early April
 
@@ -149,7 +149,7 @@ Opportunity to exhibit collaborations with OCADU Digital Futures graduates takin
 
 ### Apr 4
 
-**Due:** [Final presentation files, project files & other documentation](due.html#final-project)
+**Due:** [Final presentation files, project files & other documentation](#final-project)
 
 ---
 
@@ -176,7 +176,7 @@ It will ask for:
 
 ## Assignment 2
 
-**Cellular automata**
+**Cellular automata and agents**
 
 The second assignment is to take on of your cellular automata from Assignment 1 as an environment for agents. There should be a population of agents in the system. Agents should sense the environment and respond to it in some way. They may also modify the environment. You are welcome to change features of your CA to make the overall behaviour more interesting.
 
@@ -196,6 +196,33 @@ It will ask for:
 - A description of any **interactions** it supports, or interesting variations of global parameters.
 - A description of the **technical realization**. (Perhaps you tried a few different algorithms until it worked as expected?) If you were inspired by another system, mention it.
 - Ideas for possible **future extensions** of the project.
+
+---
+
+## Final project
+
+Your final project should incorporate more than one class of system, building upon previous assignments, ideas we have worked through in labs, or models that you independently researched from the reading matter or online. You are also encouraged to integrate the systems we have explored with other media systems or research-creation projects you are using from outside the class. You are encouraged to move beyond the lab starter kit and integrate your project into a more general platform if this will improve your result. You may work in teams, but roles and expectations must be clearly explained. 
+
+We will develop projects over the last few weeks of class, in order to result in significant and original pieces of work suitable for public exhibition or presentation. 
+
+In the first phase, establish your groups and project concept, outline the design and produce initial sketches (at least two). I will visit each of you during the class to discuss the proposal and assist with progress. At this point you should have:
+- You should have an overall design document, outlining the motivations and inspirations, the primary goal or problem, the methods you are choosing to address them, the technologies and platforms to use, and how you will evaluate its success or failure. 
+- You should also have working prototypes of some of the components, as proofs-of-concept through which any unexpected challenges will be revealed.
+- If the project is team-based, you should identify specifically your roles. 
+
+You will also be required to submit a short paper description (2 pages) as well as an edited video excerpt (around 1 minute length). 
+
+Course grade contribution: 40%
+
+---
+
+# Assignment/project grading criteria
+
+1. Execution: How well instructions were followed and conceptual goals of the assignment were met.
+2. Aesthetic qualities: The clear and consistent articulation and composition of a creative whole, and the experiential and/or conceptual depth thereof, within the frame of the given assignment and context of the course.
+3. Technical completeness: Functionality, accuracy, efficiency, creativity, and clear structure in the development and in the results.
+4. Novel contribution: Ingenuity in response to unanticipated challenges, comprehension and creativity beyond what is demonstrated in labs, and vision in further extension. 
+
 
 ---
 
