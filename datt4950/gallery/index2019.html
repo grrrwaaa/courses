@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+<title>DATT4950 Gallery</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css" type="text/css" />
+<style>
+#title {
+	color: white;
+	font-size: 1.5em;
+	/*
+	writing-mode: vertical-rl;
+	text-orientation: sideways-right;
+	*/
+	position: absolute;
+	top: 1.0em;
+	left: 1.5em;
+	
+	transform: rotate(90deg);
+	transform-origin: left top 0;
+}
+#course {
+	color: white;
+	font-size: 1.5em;
+	/*
+	writing-mode: vertical-rl;
+	text-orientation: sideways-right;
+	*/
+	position: absolute;
+	top: 0.0em;
+	right: 0.5em;
+	
+	transform: rotate(270deg);
+	transform-origin: right bottom 0;
+}
+
+body {	
+    background-color: #000;
+}
+</style>
+</head>
+<body>
+<!--<script src="al.min.js"></script>
+<div id="course">DATT4950: Artificial Life, Generative Art and Creative Code</div>-->
+<script src="al2019.js"></script>
+<div id="title"></div>
+<script>
+
+// Find the right method, call on correct element
+var requestFullscreen = function(element) {
+  if(element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if(element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if(element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  } else if(element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  }
+};
+
+title = "";
+author = "";
+var url = new URL(window.location.href);
+var id = url.searchParams.get("id");
+
+console.log("id", id);
+
+if (id === null || id === undefined) newid();
+
+function newid() {
+	id = 56 + random(16);
+	return id;
+}
+
+function retitle() {
+	document.getElementById('title').innerText = title + " (" + author + ", 2019)";
+}
+
+function load() {
+	
+	{
+	
+		document.getElementById('title').innerText = "";
+		write(" ");
+		author = "";
+		title = "";
+
+		console.log(id);
+
+		var fileref = document.createElement('script');
+		fileref.setAttribute("type","text/javascript");
+		fileref.setAttribute("src", id + ".js");
+		
+		// document.documentElement.addEventListener('click', event => {
+// 		  console.log("mouse FS")
+// 			//if (e == "down") {
+// 				requestFullscreen(document.documentElement);
+// 			//}
+// 		});
+			
+		// chrome.windows.getCurrent(null, function(window) {
+//     		chrome.windows.update(window.id, {state: "fullscreen"});
+//   		})
+			
+		mouse = function(e, p) {
+				
+		}
+	
+		if (typeof fileref!="undefined") {
+			document.getElementsByTagName("head")[0].appendChild(fileref);
+		}
+		
+		
+	}
+	
+	
+	// recursion:
+	setTimeout(function() {
+		retitle();
+		//if (window.reset !== undefined) reset();
+	}, 200);
+	
+	// recursion:
+	setTimeout(function() {
+		window.location.href = url.protocol + "//" + url.pathname + "?id=" + newid();
+	}, 60 *  1000);
+}
+
+load();
+
+</script>
+<body>
