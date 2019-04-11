@@ -125,7 +125,7 @@ function load() {
 	
 	// recursion:
 	setTimeout(function() {
-		window.location.href = url.protocol + "//" + url.pathname + "?id=" + newid();
+		window.location.href = url.protocol + "//" + url.hostname + "/" + url.pathname + "?id=" + newid();
 	}, 60 *  1000);
 }
 
