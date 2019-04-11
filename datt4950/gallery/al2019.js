@@ -168,7 +168,7 @@ onresize = function() {
 	canvas.style.left = 0 + "px";
 	canvas.style.right = 0 + "px";
 	canvas.style.margin = "auto";
-	canvas.style.cursor = "crosshair";
+	canvas.style.cursor = "none";
   // emable 
   canvas.tabindex="0";
   canvas.contentEditable = true;
